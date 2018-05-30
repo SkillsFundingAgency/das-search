@@ -35,6 +35,11 @@ namespace Sfa.Das.Sas.Web
                 defaults: new { controller = "Provider", action = "Detail" });
 
             routes.MapRoute(
+                name: "ApprenticeshipOrProvider",
+                url: "ApprenticeshipOrProvider",
+                defaults: new { controller = "Apprenticeship", action = "ApprenticeshipOrProvider" });
+
+            routes.MapRoute(
                 name: "FrameworkProvider",
                 url: "Provider/FrameworkResults",
                 defaults: new { controller = "Provider", action = "FrameworkResults" });

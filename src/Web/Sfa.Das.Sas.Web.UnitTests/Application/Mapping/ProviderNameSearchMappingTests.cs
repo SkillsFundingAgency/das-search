@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Mapping
         [OneTimeSetUp]
         public void Setup()
         {
-                  }
+        }
 
         [TestCase("college", 11112222, "university of life", "Fire Colleges, Air collegiate, college of water", "Fire Colleges,college of water")]
         [TestCase("college", 11112222, "university of life", "Air collegiate , Fire Colleges , college of water  ", "Fire Colleges,college of water")]

@@ -60,9 +60,8 @@
       <HintPath>..\packages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=0.10.131.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.10.131\lib\net45\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.29\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.10.110.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.AssessmentOrgs.Api.Client.0.10.110\lib\net45\SFA.DAS.AssessmentOrgs.Api.Client.dll</HintPath>
@@ -135,7 +134,7 @@
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\PaginationOrientationDetails.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
-    <Compile Include="Models\ProviderNameSearchResultsAndPagination.cs" />
+    <Compile Include="Models\ProviderNameSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultItem.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
@@ -174,8 +173,8 @@
     <Compile Include="Queries\ProviderSearchQuery.cs" />
     <Compile Include="Responses\PostCodeResponseCodes.cs" />
     <Compile Include="Responses\ProviderDetailResponse.cs" />
-    <Compile Include="Responses\ProviderNameSearchResponse.cs" />
     <Compile Include="Responses\ProviderNameSearchResponseCodes.cs" />
+    <Compile Include="Responses\ProviderSearchNameResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
     <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />

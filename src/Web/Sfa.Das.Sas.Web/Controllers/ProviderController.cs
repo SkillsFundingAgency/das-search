@@ -14,6 +14,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
@@ -59,7 +60,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { standardId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                        new { standardId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria?.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
                 case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(
@@ -70,12 +71,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
-                    .AfterMap((src, dest) =>
-                    {
-                        dest.AbsolutePath = Request?.Url?.AbsolutePath;
-                        dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
+                .AfterMap((src, dest) =>
+                {
+                    dest.AbsolutePath = Request?.Url?.AbsolutePath;
+                    dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                     dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
-                    }));
+                }));
 
             return View(viewModel);
         }
@@ -105,7 +106,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var postCodeUrl = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { frameworkId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                        new { frameworkId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria?.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
                 case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(
@@ -152,7 +153,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, message);
             }
 
-            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider, response.ApprenticeshipTrainingSummary);
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider,response.ApprenticeshipTrainingSummary,_settings.HideAboutProviderForUkprns);
 
             return View(viewModel);
         }
@@ -190,14 +191,14 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
 
             var viewModel = _mappingService.Map<ApprenticeshipProviderDetailResponse, ApprenticeshipDetailsViewModel>(response, opt => opt
-                                .AfterMap((src, dest) =>
-                                {
-                                    dest.SurveyUrl = _settings.SurveyUrl.ToString();
-                                    dest.SatisfactionSourceUrl = _settings.SatisfactionSourceUrl.ToString();
-                                    dest.AchievementRateSourceUrl = _settings.AchievementRateUrl.ToString();
-                                    dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
-                                    dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
-                                }));
+                .AfterMap((src, dest) =>
+                {
+                    dest.SurveyUrl = _settings.SurveyUrl.ToString();
+                    dest.SatisfactionSourceUrl = _settings.SatisfactionSourceUrl.ToString();
+                    dest.AchievementRateSourceUrl = _settings.AchievementRateUrl.ToString();
+                    dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
+                    dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
+                }));
 
             return View(viewModel);
         }

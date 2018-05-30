@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [SetUp]
         public void Setup()
         {
-             _mockProviderNameSearchService = new Mock<IProviderNameSearchService>();
+            _mockProviderNameSearchService = new Mock<IProviderNameSearchService>();
             _actualPage = 1;
             _lastPage = 2;
             _resultsToTake = 20;
@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var providerNameSearchResults = new ProviderNameSearchResultsAndPagination
             {
-               ActualPage = _actualPage,
+                ActualPage = _actualPage,
                 HasError = false,
                 LastPage = _lastPage,
                 ResponseCode = _responseCode,
@@ -60,8 +60,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                     x => x.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(Task.FromResult(providerNameSearchResults));
 
-             _handler = new ProviderNameSearchHandler(
-                 _mockProviderNameSearchService.Object);
+            _handler = new ProviderNameSearchHandler(
+                _mockProviderNameSearchService.Object);
         }
 
         [Test]

@@ -49,7 +49,20 @@
                 AssessmentOrganisations = new List<Organisation>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#no-assessment-organisations").Should().Contain("There are no end point assessment");
+            GetPartial(html, "#no-assessment-organisations").Should().Contain("There are no end-point assessment");
+        }
+
+        [Test]
+        public void ShouldShowMoreInformation()
+        {
+            var detail = new Standard();
+            var model = new StandardViewModel
+            {
+                Level = 6,
+                AssessmentOrganisations = new List<Organisation>()
+            };
+            var html = detail.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#more-information").Should().Contain("The Institute for Apprenticeships has more detailed information");
         }
 
         [Test]

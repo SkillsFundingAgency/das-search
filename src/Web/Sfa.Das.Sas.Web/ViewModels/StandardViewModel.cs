@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
 namespace Sfa.Das.Sas.Web.ViewModels
@@ -32,6 +33,10 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string SearchTerm { get; set; }
 
         public List<Organisation> AssessmentOrganisations { get; set; }
+
+        public string StandardPageUri { get; set; }
+
+        public string FindApprenticeshipTrainingText { get; set; }
 
     }
 }

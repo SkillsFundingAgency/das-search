@@ -4,7 +4,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
 {
     public class PaginationOrientationService : IPaginationOrientationService
     {
-        public PaginationOrientationDetails GeneratePaginationDetails(int page, int take,  long totalHits)
+        public PaginationOrientationDetails GeneratePaginationDetails(int page, int take, long totalHits)
         {
             var pageNumber = page <= 0 ? 1 : page;
 

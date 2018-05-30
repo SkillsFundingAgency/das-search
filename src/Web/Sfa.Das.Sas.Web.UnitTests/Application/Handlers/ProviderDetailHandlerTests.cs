@@ -29,7 +29,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var provider = new Provider();
             var apprenticeshipTrainingSummary = new ApprenticeshipTrainingSummary
             {
-                Count = 1,
                 Ukprn = 42,
                 ApprenticeshipTrainingItems = new List<ApprenticeshipTraining>
                 {
