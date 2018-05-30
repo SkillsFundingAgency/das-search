@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5AC470B5-B07F-487E-9781-A01BD746221F}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Resources", "Sf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Web", "Sfa.Das.Sas.Web\Sfa.Das.Sas.Web.csproj", "{E288C11D-B65E-4FD4-9C8D-7D734A7E947D}"
 EndProject
-Project("{BB40F520-413E-3EBA-ABD4-2177801094F0}") = "Sfa.Das.Sas.Web.CloudService", "Sfa.Das.Sas.Web.CloudService\Sfa.Das.Sas.Web.CloudService.ccproj", "{F638FB0D-3A54-48A3-B04B-52E45341891E}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Sfa.Das.Sas.Web.CloudService", "Sfa.Das.Sas.Web.CloudService\Sfa.Das.Sas.Web.CloudService.ccproj", "{F638FB0D-3A54-48A3-B04B-52E45341891E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Web.UnitTests", "Sfa.Das.Sas.Web.UnitTests\Sfa.Das.Sas.Web.UnitTests.csproj", "{FA064318-8BC8-4589-AF79-10C2A8572808}"
 EndProject
@@ -218,5 +218,8 @@ Global
 		{C3395D58-2E04-4B28-857B-A0E27C312C1F} = {D6916AC5-37E3-46D5-AB05-2F32E6EF5D0C}
 		{AEE71FBD-1A83-458F-80DE-9F9D16867F2C} = {8F14D1D9-4F35-4C1D-A606-F0B2F9BE20B6}
 		{CA4508B5-BC8B-4106-A6FD-16DA1DE825F8} = {8F14D1D9-4F35-4C1D-A606-F0B2F9BE20B6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC1C21AE-4498-49EB-A015-36CD53F8B5BE}
 	EndGlobalSection
 EndGlobal
