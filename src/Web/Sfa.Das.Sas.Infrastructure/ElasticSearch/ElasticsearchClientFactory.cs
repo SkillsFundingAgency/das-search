@@ -21,40 +21,40 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         public IElasticClient Create()
         {
-	        if (Is<IgnoreSslCertificateFeature>.Enabled)
-	        {
-		        using (var settings = new ConnectionSettings(
+            if (Is<IgnoreSslCertificateFeature>.Enabled)
+            {
+                using (var settings = new ConnectionSettings(
 					new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault()),
-					new MyCertificateIgnoringHttpConnection()))
-		        {
-					SetDefaultSettings(settings);
+                    new MyCertificateIgnoringHttpConnection()))
+                {
+                    SetDefaultSettings(settings);
 
-			        return new ElasticClient(settings);
-				}
-			}
+                    return new ElasticClient(settings);
+                }
+            }
 
 			using (var settings = new ConnectionSettings(new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault())))
-	        {
-		        SetDefaultSettings(settings);
+            {
+                SetDefaultSettings(settings);
 
-		        return new ElasticClient(settings);
-	        }
+                return new ElasticClient(settings);
+            }
         }
 
-	    private void SetDefaultSettings(ConnectionSettings settings)
-	    {
-		    if (Is<Elk5Feature>.Enabled)
-		    {
-			    settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
-		    }
+        private void SetDefaultSettings(ConnectionSettings settings)
+        {
+            if (Is<Elk5Feature>.Enabled)
+            {
+                settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
+            }
 
 	        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             settings.DisableDirectStreaming();
-		    settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
-		    settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkSearchResultsItem), "frameworkdocument"));
-		    settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));
-		    settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkProviderSearchResultsItem), "frameworkprovider"));
-	    }
+            settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
+            settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkSearchResultsItem), "frameworkdocument"));
+            settings.MapDefaultTypeNames(d => d.Add(typeof(StandardProviderSearchResultsItem), "standardprovider"));
+            settings.MapDefaultTypeNames(d => d.Add(typeof(FrameworkProviderSearchResultsItem), "frameworkprovider"));
+        }
     }
 }

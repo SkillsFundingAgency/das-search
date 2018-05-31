@@ -37,6 +37,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
 
             For<IValidation>().Use<Validation>();
+            For<IButtonTextService>().Use<ButtonTextService>();
         }
     }
 }

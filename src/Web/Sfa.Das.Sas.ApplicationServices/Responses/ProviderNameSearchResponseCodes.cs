@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
-   public enum ProviderNameSearchResponseCodes
+    public enum ProviderNameSearchResponseCodes
     {
         Success,
         SearchFailed,

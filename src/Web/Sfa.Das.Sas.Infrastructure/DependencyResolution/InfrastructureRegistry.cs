@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
                 x.ParentType,
                 x.GetInstance<SFA.DAS.NLog.Logger.IRequestContext>(),
                 GetProperties()
-                )).AlwaysUnique();
+            )).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();

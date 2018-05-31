@@ -108,27 +108,27 @@
                     }
                 </ul>
             </nav>
-          </div>
-      </div>
+        </div>
+    </div>
 </main>
 
 
 
 
 @helper GetProviderDetailItem(string title, List<string> aliases, string ukprn)
-    {
-        <a href="../Provider/@ukprn">@title</a> 
+{
+    <a href="../Provider/@ukprn">@title</a> 
        
-            if (aliases != null && aliases.Count > 0)
-            {
+    if (aliases != null && aliases.Count > 0)
+    {
 
-            foreach (var alias in aliases)
-            {
+        foreach (var alias in aliases)
+        {
             <span class="sublist">
                 ...<a href="../Provider/@ukprn">@alias</a>
             </span>
-            }
+        }
 
-            }
+    }
       
 }

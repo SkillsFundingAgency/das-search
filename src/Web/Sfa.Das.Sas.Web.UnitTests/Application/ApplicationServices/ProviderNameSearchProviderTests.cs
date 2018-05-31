@@ -67,7 +67,7 @@
                 _mockProviderNameSearchMapping.Object,
                 _mockPaginationOrientationService.Object,
                 _mockProviderQuery.Object
-                );
+            );
 
             var result = provider.SearchByTerm(searchTerm, pageNumber, take);
             var logInfo1Expected = $"Provider Name Search provider formatting query: SearchTerm: [{searchTerm}] formatted to: [{formattedTerm}]";
@@ -76,7 +76,7 @@
 
             _mockProviderQuery.Verify(x => x.GetTotalMatches(It.IsAny<string>()), Times.Once);
             _mockProviderQuery.Verify(x => x.GetResults(wildcardTerm, take, paginationOrientationDetails), Times.Once);
-       
+
             Assert.AreEqual(ProviderNameSearchResponseCodes.Success, result.Result.ResponseCode);
             Assert.AreEqual(pageNumber, result.Result.ActualPage);
             Assert.AreEqual(lastPage, result.Result.LastPage);
@@ -115,7 +115,7 @@
                 _mockProviderNameSearchMapping.Object,
                 _mockPaginationOrientationService.Object,
                 _mockProviderQuery.Object
-                );
+            );
 
             var result = provider.SearchByTerm(searchTerm, pageNumber, take);
             var logInfo1Expected = $"Provider Name Search provider formatting query: SearchTerm: [{searchTerm}] formatted to: [{formattedTerm}]";
@@ -148,7 +148,7 @@
                 _mockProviderNameSearchMapping.Object,
                 _mockPaginationOrientationService.Object,
                 _mockProviderQuery.Object
-                );
+            );
 
             var result = provider.SearchByTerm(searchTerm, pageNumber, take);
             var logInfo1Expected = $"Formatted search term causing SearchTermTooShort: [{formattedTerm}]";

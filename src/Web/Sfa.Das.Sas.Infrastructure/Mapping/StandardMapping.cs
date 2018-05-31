@@ -28,7 +28,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 OverviewOfRole = document.OverviewOfRole,
                 EffectiveFrom = document.EffectiveFrom,
                 EffectiveTo = document.EffectiveTo,
-                IsActiveStandard = document.IsActiveStandard
+                IsActiveStandard = document.IsActiveStandard,
+                StandardPageUri = document.StandardPageUri
             };
         }
 

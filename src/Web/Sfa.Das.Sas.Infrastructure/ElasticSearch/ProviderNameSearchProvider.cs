@@ -14,8 +14,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
     public class ProviderNameSearchProvider : IProviderNameSearchProvider
     {
-         private readonly ILog _logger;
-         private readonly IProviderNameSearchMapping _nameSearchMapping;
+        private readonly ILog _logger;
+        private readonly IProviderNameSearchMapping _nameSearchMapping;
         private readonly IPaginationOrientationService _paginationOrientationService;
         private readonly IProviderNameSearchProviderQuery _providerNameSearchProviderQuery;
 

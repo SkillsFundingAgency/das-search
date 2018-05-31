@@ -7,6 +7,7 @@
 *.sln.docstates
 .vs/
 
+
 # Orig files from merge conflicts
 *.orig
 
@@ -18,6 +19,10 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+src/web/Tools/Nunit.Console/
+src/web/Tools/PhantomJS/
+src/web/Tools/xunit.runner.console/
+
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
@@ -33,6 +38,7 @@ npm-debug*
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+[Tt]est[Rr]esult.*
 
 *_i.c
 *_p.c
