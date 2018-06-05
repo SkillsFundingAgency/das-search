@@ -26,9 +26,9 @@
                 <div class="form-group @(Model.HasError ? "error" : "")">
                     <fieldset>
                         <legend>
-                            <span class="form-label-bold">
+                            <h2 class="heading-small">
                                 Search by apprenticeships or named training provider
-                            </span>
+                            </h2>
                             @if (Model.HasError)
                             {
                                 <span class="error-message" id="error-selecting-options">
@@ -38,10 +38,10 @@
                         </legend>
                         <div class="multiple-choice">
                             <label for="search-apprenticeships" class="block-label selection-button-radio">
-                                apprenticeships
+                                apprenticeships 
                                 <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value)" value="true" id="search-apprenticeships">
-
                             </label>
+                           
                         </div>
                         <div class="multiple-choice">
                             <label for="search-Training-provider" class="block-label selection-button-radio">
