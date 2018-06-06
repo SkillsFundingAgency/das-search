@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
                                        Title = GetName(item.Key),
                                        Count = item.Value ?? 0L,
                                        Checked = selectedTrainingOptions?.Contains(item.Key.ToLower()) ?? false,
-                                       Value = item.Key
+                                       Value = item.Key.ToLower()
                                    });
             }
 
