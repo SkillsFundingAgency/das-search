@@ -34,6 +34,7 @@
       <Setting name="BuildId" />
       <Setting name="LoggingRedisConnectionString" />
       <Setting name="LoggingRedisKey" />
+      <Setting name="InstrumentationKey" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" loadBalancer="das-fatweb-ilb"/>
