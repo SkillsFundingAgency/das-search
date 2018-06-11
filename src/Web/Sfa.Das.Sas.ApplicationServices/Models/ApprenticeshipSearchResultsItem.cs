@@ -35,5 +35,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public DateTime? EffectiveFrom { get; set; }
 
         public DateTime? EffectiveTo { get; set; }
+
+        public DateTime? LastDateForNewStarts { get; set; }
     }
 }
