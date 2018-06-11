@@ -27,6 +27,7 @@
       <Setting name="BuildId" value="__Build.BuildNumber__" />
       <Setting name="LoggingRedisConnectionString" value="__LoggingRedisConnectionString__" />
       <Setting name="LoggingRedisKey" value="__LoggingRedisKey__" />
+      <Setting name="InstrumentationKey" value="__InstrumentationKey__" />
     </ConfigurationSettings>
     <Certificates>
       <Certificate name="WebSslCert" thumbprint="6208004D8038A731478EA1F9BD6EC58961DD23F2" thumbprintAlgorithm="sha1" />
