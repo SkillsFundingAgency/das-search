@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="Sfa.Das.Sas.Web.CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2015-04.2.6">
+  <WebRole name="Sfa.Das.Sas.Web" vmsize="Small">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+          <Binding name="Endpoint2" endpointName="Endpoint2" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="PostcodeUrl" />
+      <Setting name="SurveyUrl" />
+      <Setting name="ElasticServerUrls" />
+      <Setting name="SatisfactionSourceUrl" />
+      <Setting name="CookieGoogleUrl" />
+      <Setting name="CookieImprovementUrl" />
+      <Setting name="CookieApplicationInsightsUrl" />
+      <Setting name="CookieAboutUrl" />
+      <Setting name="AchievementRateUrl" />
+      <Setting name="ManageApprenticeshipFundsUrl" />
+      <Setting name="EnvironmentName" />
+      <Setting name="ApprenticeshipIndexAlias" />
+      <Setting name="ProviderIndexAlias" />
+      <Setting name="ApprenticeshipApiBaseUrl" />
+      <Setting name="ElasticsearchUsername" />
+      <Setting name="ElasticsearchPassword" />
+      <Setting name="FeatureToggle.IgnoreSslCertificateFeature" />
+      <Setting name="FeatureToggle.Elk5Feature" />
+      <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" />
+      <Setting name="FeatureToggle.RoatpProviderFlagsFeature" />
+      <Setting name="BuildId" />
+      <Setting name="LoggingRedisConnectionString" />
+      <Setting name="LoggingRedisKey" />
+      <Setting name="InstrumentationKey" />
+    </ConfigurationSettings>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="80" />
+      <InputEndpoint name="Endpoint2" protocol="https" port="443" certificate="WebSslCert" />
+    </Endpoints>
+    <Certificates>
+      <Certificate name="WebSslCert" storeLocation="LocalMachine" storeName="My" />
+    </Certificates>
+  </WebRole>
+</ServiceDefinition>

@@ -1,23 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Infrastructure.Repositories;
-using SFA.DAS.AssessmentOrgs.Api.Client;
+﻿using Sfa.Das.Sas.ApplicationServices.Services;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Reflection;
+    using ApplicationServices;
+    using ApplicationServices.FeatureToggles;
+    using ApplicationServices.Interfaces;
+    using ApplicationServices.Settings;
+    using Core.Configuration;
+    using Core.Domain.Repositories;
+    using Core.Domain.Services;
+    using Elasticsearch;
     using FeatureToggle.Core.Fluent;
+    using Mapping;
+    using PostCodeIo;
+    using Repositories;
+    using Settings;
     using SFA.DAS.Apprenticeships.Api.Client;
-    using Sfa.Das.Sas.ApplicationServices;
-    using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
-    using Sfa.Das.Sas.ApplicationServices.Settings;
-    using Sfa.Das.Sas.Core.Configuration;
-    using Sfa.Das.Sas.Core.Domain.Services;
-    using Sfa.Das.Sas.Infrastructure.Elasticsearch;
-    using Sfa.Das.Sas.Infrastructure.Mapping;
-    using Sfa.Das.Sas.Infrastructure.PostCodeIo;
-    using Sfa.Das.Sas.Infrastructure.Settings;
+    using SFA.DAS.AssessmentOrgs.Api.Client;
     using StructureMap;
 
     public sealed class InfrastructureRegistry : Registry
@@ -28,7 +30,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
                 x.ParentType,
                 x.GetInstance<SFA.DAS.NLog.Logger.IRequestContext>(),
                 GetProperties()
-                )).AlwaysUnique();
+            )).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
@@ -60,7 +62,11 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
+            For<IProviderNameSearchMapping>().Use<ProviderNameSearchMapping>();
             For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
+            For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
+            For<IPaginationOrientationService>().Use<PaginationOrientationService>();
+            For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
         }
 
         private IDictionary<string, object> GetProperties()

@@ -6,14 +6,19 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     {
         internal static string FormatQuery(string query, bool toLower = true)
         {
-            if (string.IsNullOrEmpty(query))
-            {
-                return "*";
-            }
+            return string.IsNullOrEmpty(query) ? "*" : ReplaceUnacceptableCharacters(query, toLower);
+        }
 
-            var queryformated = Regex.Replace(query, @"[+\-&|!(){}\[\]^""~?:\\/]", @" ");
+        internal static string FormatQueryReturningEmptyStringIfEmptyOrNull(string query, bool toLower = true)
+        {
+            return string.IsNullOrEmpty(query) ? string.Empty : ReplaceUnacceptableCharacters(query, toLower);
+        }
 
-            return toLower ? queryformated.ToLowerInvariant() : queryformated;
+        private static string ReplaceUnacceptableCharacters(string query, bool toLower)
+        {
+            var queryformatted = Regex.Replace(query, @"[+\-&|!(){}\[\]^""~?:\\/]", @" ");
+
+            return toLower ? queryformatted.ToLowerInvariant() : queryformatted;
         }
     }
 }

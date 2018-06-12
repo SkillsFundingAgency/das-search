@@ -25,8 +25,6 @@ namespace Sfa.Das.Sas.Core.Configuration
 
         string EnvironmentName { get; }
 
-        string ApplicationName { get; }
-
         Uri SatisfactionSourceUrl { get; }
 
         Uri CookieImprovementUrl { get; }
@@ -44,6 +42,8 @@ namespace Sfa.Das.Sas.Core.Configuration
         string ElasticsearchUsername { get; }
 
         string ElasticsearchPassword { get; }
+
+        IEnumerable<long> HideAboutProviderForUkprns { get; }
 
         Uri ManageApprenticeshipFundsUrl
         {

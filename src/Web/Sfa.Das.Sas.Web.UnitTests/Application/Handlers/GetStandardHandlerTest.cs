@@ -15,6 +15,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     using Sas.ApplicationServices.Queries;
     using Sas.ApplicationServices.Responses;
     using SFA.DAS.AssessmentOrgs.Api.Client;
+    using SFA.DAS.NLog.Logger;
 
     [TestFixture]
     public sealed class GetStandardHandlerTest
@@ -28,7 +29,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockGetStandards = new Mock<IGetStandards>();
             _mockAssessmentOrgsClient = new Mock<IAssessmentOrgsApiClient>();
 
-            _sut = new GetStandardHandler(_mockGetStandards.Object, _mockAssessmentOrgsClient.Object);
+            _sut = new GetStandardHandler(_mockGetStandards.Object, _mockAssessmentOrgsClient.Object, Mock.Of<ILog>());
         }
 
         [Test]

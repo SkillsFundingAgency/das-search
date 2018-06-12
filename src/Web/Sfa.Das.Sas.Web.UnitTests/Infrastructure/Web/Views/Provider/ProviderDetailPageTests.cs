@@ -139,34 +139,10 @@
             var providerDetails = new ProviderDetail();
             var model = GetProvider();
             model.TradingNames = string.Empty;
-            model.HasMoreThanOneTradingName = false;
+            model.DisplayAboutThisProvider = true;
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#about-this-provider").Should().Contain("About this Provider");
-        }
-
-        [Test]
-        public void ShouldNotShowAboutThisProviderIfOneAndOnlyOneTradingNamesIsSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-            model.TradingNames = "here is a trading name";
-            model.HasMoreThanOneTradingName = false;
-
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#about-this-provider").Should().Contain("About this Provider");
-        }
-
-        [Test]
-        public void ShouldNotShowAboutThisProviderIfMoreThanOneTradingNamesIsSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-            model.TradingNames = "here is a trading name, here is another tradingname";
-            model.HasMoreThanOneTradingName = true;
-
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#about-this-provider").Should().Be(string.Empty);
         }
 
         [Test]

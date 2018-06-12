@@ -14,6 +14,7 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
+
     [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public sealed class ProviderController : Controller
     {
@@ -59,7 +60,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { standardId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                        new { standardId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria?.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
                 case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(
@@ -105,7 +106,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var postCodeUrl = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { frameworkId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                        new { frameworkId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria?.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
                 case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(
@@ -152,7 +153,23 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, message);
             }
 
-            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider, response.ApprenticeshipTrainingSummary);
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider,response.ApprenticeshipTrainingSummary,_settings.HideAboutProviderForUkprns);
+
+            return View(viewModel);
+        }
+
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult SearchResults(ProviderNameSearchQuery query)
+        {
+            var response = _mediator.SendAsync(query);
+
+            var viewModel = _mappingService.Map<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>(response.Result);
 
             return View(viewModel);
         }

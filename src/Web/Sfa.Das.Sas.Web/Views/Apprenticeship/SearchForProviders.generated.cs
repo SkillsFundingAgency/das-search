@@ -195,8 +195,16 @@ WriteLiteral(">\r\n                                <legend>\r\n                 
 
 WriteLiteral(" class=\"form-label-bold\"");
 
-WriteLiteral(">Is your organisation\'s annual pay bill more than £3 million?</span>\r\n           " +
-"                         <span");
+WriteLiteral(">Is your organisation a <a");
+
+WriteLiteral(" href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
+"-work/apprenticeship-levy-how-it-will-work#pay-apprenticeship-levy\"");
+
+WriteLiteral(" target=\"_blank\"");
+
+WriteLiteral(">levy-payer</a> or are you going to receive a transfer of funds from another empl" +
+"oyer to pay for this apprenticeship?</span>\r\n                                   " +
+" <span");
 
 WriteLiteral(" class=\"form-hint\"");
 
@@ -219,14 +227,14 @@ WriteLiteral(" type=\"radio\"");
 
 WriteLiteral(" name=\"IsLevyPayingEmployer\"");
 
-WriteAttribute("checked", Tuple.Create(" checked=\"", 2686), Tuple.Create("\"", 2770)
+WriteAttribute("checked", Tuple.Create(" checked=\"", 2932), Tuple.Create("\"", 3016)
             
             #line 50 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-              , Tuple.Create(Tuple.Create("", 2696), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value
+              , Tuple.Create(Tuple.Create("", 2942), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value
             
             #line default
             #line hidden
-, 2696), false)
+, 2942), false)
 );
 
 WriteLiteral(" value=\"true\"");
@@ -244,14 +252,14 @@ WriteLiteral(" type=\"radio\"");
 
 WriteLiteral(" name=\"IsLevyPayingEmployer\"");
 
-WriteAttribute("checked", Tuple.Create(" checked=\"", 3058), Tuple.Create("\"", 3151)
+WriteAttribute("checked", Tuple.Create(" checked=\"", 3304), Tuple.Create("\"", 3397)
             
             #line 54 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-              , Tuple.Create(Tuple.Create("", 3068), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false
+              , Tuple.Create(Tuple.Create("", 3314), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false
             
             #line default
             #line hidden
-, 3068), false)
+, 3314), false)
 );
 
 WriteLiteral(" value=\"false\"");
@@ -270,14 +278,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 3519), Tuple.Create("\"", 3550)
+WriteAttribute("value", Tuple.Create(" value=\"", 3765), Tuple.Create("\"", 3796)
             
             #line 62 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                          , Tuple.Create(Tuple.Create("", 3527), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
+                          , Tuple.Create(Tuple.Create("", 3773), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
             
             #line default
             #line hidden
-, 3527), false)
+, 3773), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -288,14 +296,14 @@ WriteLiteral(" name=\"keywords\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 3644), Tuple.Create("\"", 3670)
+WriteAttribute("value", Tuple.Create(" value=\"", 3890), Tuple.Create("\"", 3916)
             
             #line 63 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                  , Tuple.Create(Tuple.Create("", 3652), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+                  , Tuple.Create(Tuple.Create("", 3898), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
             
             #line default
             #line hidden
-, 3652), false)
+, 3898), false)
 );
 
 WriteLiteral(">\r\n                        <input");

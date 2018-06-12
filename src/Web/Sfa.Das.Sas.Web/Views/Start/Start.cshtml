@@ -17,9 +17,11 @@
             <ul class="list list-bullet">
                 <li>search for apprenticeship training by job role or keyword</li>
                 <li>find training providers who offer the apprenticeship training you choose</li>
+                <li>find a named training provider you want to use</li>
+            
             </ul>
             
-            @Html.ActionLink("Start", "Search", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" })
+            @Html.ActionLink("Start", "ApprenticeshipOrProvider", "Apprenticeship", null, new { id = "start-button", @class = "button margin-top-x2 button-start" })
 
             <h2 class="heading-medium">Help</h2>
             <p>You can contact the National Apprenticeship Service for advice or help using the service.</p>

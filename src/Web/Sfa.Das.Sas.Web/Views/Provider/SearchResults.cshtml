@@ -1,0 +1,134 @@
+﻿@using Sfa.Das.Sas.Web.Extensions
+@model Sfa.Das.Sas.Web.ViewModels.ProviderNameSearchResultViewModel
+
+@{
+    ViewBag.Title = "Search Results";
+    ViewBag.PageID = "search-provider-results";
+}
+<main id="content" role="main">
+    <div class="breadcrumbs">
+        <a href="/" class="link-back">Back</a>
+    </div>
+    <input type="hidden" value="@Model.SearchTerm" id="ga-search-term" />
+    <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
+
+    <div class="grid-row notification-wrapper">
+        <div class="column-two-thirds">
+            @{
+                if (Model != null && Model.ShortSearchTerm)
+                {
+                    <div tabindex="-1" role="group" class="error-summary">
+                        <h1 id="error-summary" class="heading-medium error-summary-heading">
+                            Errors to fix
+                        </h1>
+                        <p>Check the following details:</p>
+                        <ul class="error-summary-list">
+                            <li><a href="#searchTerm">Type at least 3 characters</a></li>
+                        </ul>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <h1 class="heading-xlarge">
+                Find a training provider by name
+            </h1>
+
+
+
+            @if (Model.TotalResults == 0)
+            {
+                Html.RenderPartial("_SearchProviderName");
+            }
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @if (Model.TotalResults > 0)
+            {
+                Html.RenderPartial("_SearchProviderName");
+            }
+        </div>
+    </div>
+
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @if (!Model.HasError && !Model.ShortSearchTerm && Model.TotalResults > 0)
+            {
+                <div id="provider-search-results">
+
+                    <p class="form-label-bold"> @Model.TotalResults results found</p>
+                    <ul>
+                        @foreach (var item in Model.Results)
+                        {
+                            <li class="results">
+                                @GetProviderDetailItem(item.ProviderName, item.Aliases, item.UkPrn.ToString())
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            else
+            {
+                Html.RenderPartial("_SearchResultMessage");
+            }
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <nav role="navigation">
+                <ul class="previous-next-navigation">
+                    @if (Model.ActualPage > 1)
+                    {
+                        var pageBefore = Model.ActualPage - 1;
+
+                        <li class="previous" id="previous-nav">
+                            <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageBefore">
+                                Previous <span class="visuallyhidden">page</span>
+                                <span class="page-numbers">Previous page @pageBefore of @Model.LastPage</span>
+                            </a>
+                        </li>
+                    }
+                    @if (Model.ActualPage < Model.LastPage)
+                    {
+                        var pageAfter = Model.ActualPage + 1;
+
+                        <li class="next" id="next-nav">
+                            <a href="../provider/searchResults?SearchTerm=@Model.SearchTerm&Page=@pageAfter">
+                                Next <span class="visuallyhidden">page</span>
+                                <span class="page-numbers">Next page @pageAfter of @Model.LastPage</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</main>
+
+
+
+
+@helper GetProviderDetailItem(string title, List<string> aliases, string ukprn)
+{
+    <a href="../Provider/@ukprn">@title</a> 
+       
+    if (aliases != null && aliases.Count > 0)
+    {
+
+        foreach (var alias in aliases)
+        {
+            <span class="sublist">
+                ...<a href="../Provider/@ukprn">@alias</a>
+            </span>
+        }
+
+    }
+      
+}
