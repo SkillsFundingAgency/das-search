@@ -60,7 +60,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var postCodeUrl = Url.Action(
                         "SearchForStandardProviders",
                         "Apprenticeship",
-                        new { standardId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                        new { standardId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria?.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
                 case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(
@@ -106,7 +106,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     var postCodeUrl = Url.Action(
                         "SearchForFrameworkProviders",
                         "Apprenticeship",
-                        new { frameworkId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria.PostCode, isLevyPayingEmployer = criteria.IsLevyPayingEmployer });
+                        new { frameworkId = criteria?.ApprenticeshipId, statusCode = response.StatusCode, postCode = criteria?.PostCode, isLevyPayingEmployer = criteria?.IsLevyPayingEmployer });
                     return new RedirectResult(postCodeUrl);
                 case ProviderSearchResponseCodes.PageNumberOutOfUpperBound:
                     var url = Url.Action(

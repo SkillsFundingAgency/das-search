@@ -85,6 +85,7 @@
         // GET: Standard
         public ActionResult Standard(string id, string keywords)
         {
+            _logger.Info($"Getting strandard {id}");
             var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
 
             string message;
@@ -128,6 +129,7 @@
                 }
             }
 
+            _logger.Info($"Mapping Standard {id}");
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
             viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
 
@@ -136,6 +138,7 @@
 
         public ActionResult Framework(string id, string keywords)
         {
+            _logger.Info($"Getting framework {id}");
             var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
 
             string message;
@@ -162,6 +165,7 @@
                     return new HttpStatusCodeResult(HttpStatusCode.Gone);
 
                 case GetFrameworkResponse.ResponseCodes.Success:
+                    _logger.Info($"Mapping Framework {id}");
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
                     viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
                     return View(viewModel);

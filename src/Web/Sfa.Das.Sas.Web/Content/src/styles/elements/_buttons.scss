@@ -49,3 +49,12 @@
     background-image: file-url("icon-pointer-2x.png");
   }
 }
+
+.multiple-choice {
+    float: left;
+    display: block;
+    clear: left;
+    position: relative;
+    padding: 0;
+    margin-bottom: 10px;
+}

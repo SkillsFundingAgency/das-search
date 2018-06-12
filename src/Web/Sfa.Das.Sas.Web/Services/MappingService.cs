@@ -303,6 +303,18 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.TotalResults))
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerm));
 
+            // Provider Name Search
+            cfg.CreateMap<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>()
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerm))
+                .ForMember(x => x.ActualPage, y => y.MapFrom(z => z.ActualPage))
+                .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasError))
+                .ForMember(x => x.LastPage, y => y.MapFrom(z => z.LastPage))
+                .ForMember(x => x.Results, y => y.MapFrom(z => z.Results))
+                .ForMember(x => x.ShortSearchTerm, y => y.MapFrom(z => z.StatusCode == ProviderNameSearchResponseCodes.SearchTermTooShort))
+                .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.TotalResults))
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerm));
+
+
             // ToDo: CF ->  Rename models?
             cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
                 .ForMember(x => x.AbsolutePath, y => y.Ignore())

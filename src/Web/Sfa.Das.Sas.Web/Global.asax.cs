@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Web.Configuration;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.ApplicationInsights.Extensibility;
-
+using Microsoft.Azure;
 using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web
 {
-    using System.Linq;
-    using System.Web;
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -89,7 +87,7 @@ namespace Sfa.Das.Sas.Web
 
         private void SetupApplicationInsights()
         {
-            TelemetryConfiguration.Active.InstrumentationKey = WebConfigurationManager.AppSettings["iKey"];
+            TelemetryConfiguration.Active.InstrumentationKey = CloudConfigurationManager.GetSetting("InstrumentationKey");
 
             TelemetryConfiguration.Active.TelemetryInitializers.Add(new ApplicationInsightsInitializer());
         }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using Elasticsearch.Net;
 using FeatureToggle.Core.Fluent;
 using Nest;
@@ -23,7 +24,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             if (Is<IgnoreSslCertificateFeature>.Enabled)
             {
                 using (var settings = new ConnectionSettings(
-                    new StaticConnectionPool(_applicationSettings.ElasticServerUrls),
+					new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault()),
                     new MyCertificateIgnoringHttpConnection()))
                 {
                     SetDefaultSettings(settings);
@@ -32,7 +33,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 }
             }
 
-            using (var settings = new ConnectionSettings(new StaticConnectionPool(_applicationSettings.ElasticServerUrls)))
+			using (var settings = new ConnectionSettings(new SingleNodeConnectionPool(_applicationSettings.ElasticServerUrls.FirstOrDefault())))
             {
                 SetDefaultSettings(settings);
 
@@ -46,6 +47,8 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             {
                 settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
             }
+
+	        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             settings.DisableDirectStreaming();
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));
