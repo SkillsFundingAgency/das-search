@@ -49,6 +49,9 @@
       <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -58,7 +61,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.29\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.37\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.10.110.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.AssessmentOrgs.Api.Client.0.10.110\lib\net45\SFA.DAS.AssessmentOrgs.Api.Client.dll</HintPath>
@@ -83,21 +86,37 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ApprenticeshipServiceApiFeature.cs" />
+    <Compile Include="FeatureToggles\CloudConfigToggleValueProvider.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
     <Compile Include="Handlers\IXmlDocumentSerialiser.cs" />
     <Compile Include="Handlers\ProviderDetailHandler.cs" />
+    <Compile Include="Handlers\ProviderNameSearchHandler.cs" />
     <Compile Include="Handlers\SitemapHandler.cs" />
     <Compile Include="Handlers\StatsHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
@@ -111,6 +130,8 @@
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
+    <Compile Include="Interfaces\IProviderNameSearchProvider.cs" />
+    <Compile Include="Interfaces\IProviderNameSearchService.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProviderSearchService.cs" />
@@ -125,7 +146,9 @@
     <Compile Include="Models\DeliveryMode.cs" />
     <Compile Include="Models\IApprenticeshipProviderSearchResultsItem.cs" />
     <Compile Include="Models\Pagination.cs" />
+    <Compile Include="Models\PaginationOrientationDetails.cs" />
     <Compile Include="Models\PostCodeResponse.cs" />
+    <Compile Include="Models\ProviderNameSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultItem.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
@@ -140,9 +163,11 @@
     <Compile Include="Models\StandardSearchResultsItem.cs" />
     <Compile Include="Models\TrainingLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderNameSearchService.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
     <Compile Include="Queries\ProviderDetailQuery.cs" />
+    <Compile Include="Queries\ProviderNameSearchQuery.cs" />
     <Compile Include="Queries\SitemapQuery.cs" />
     <Compile Include="Queries\StatsQuery.cs" />
     <Compile Include="Queries\ApprenticeshipSearchQuery.cs" />
@@ -162,12 +187,16 @@
     <Compile Include="Queries\ProviderSearchQuery.cs" />
     <Compile Include="Responses\PostCodeResponseCodes.cs" />
     <Compile Include="Responses\ProviderDetailResponse.cs" />
+    <Compile Include="Responses\ProviderNameSearchResponseCodes.cs" />
+    <Compile Include="Responses\ProviderSearchNameResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
     <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />
     <Compile Include="Responses\StandardProviderSearchResponse.cs" />
     <Compile Include="Responses\StatsResponse.cs" />
+    <Compile Include="Services\IPaginationOrientationService.cs" />
     <Compile Include="Services\IPostcodeIoService.cs" />
+    <Compile Include="Services\PaginationOrientationService.cs" />
     <Compile Include="Services\PostcodeIoService.cs" />
     <Compile Include="Settings\ICookieSettings.cs" />
     <Compile Include="Settings\IPaginationSettings.cs" />

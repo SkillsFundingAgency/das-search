@@ -1,7 +1,9 @@
 ﻿namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     using System;
+    using System.IO;
     using System.Linq;
+    using System.Security.Policy;
     using ApplicationServices.Http;
     using ApplicationServices.Models;
     using Core.Configuration;
@@ -9,6 +11,7 @@
     using Core.Domain.Repositories;
     using Elasticsearch;
     using Newtonsoft.Json;
+    using Sfa.Das.Sas.Core;
     using SFA.DAS.NLog.Logger;
 
     public sealed class ApprenticeshipProviderApiRepository : IApprenticeshipProviderRepository
@@ -33,7 +36,7 @@
         {
             var url = string.Format(
                 "{0}standards/{1}/providers?ukprn={2}&location={3}",
-                _applicationSettings.ApprenticeshipApiBaseUrl,
+                _applicationSettings.ApprenticeshipApiBaseUrl.AddSlash(),
                 standardCode,
                 ukprn,
                 locationId);
@@ -52,7 +55,7 @@
         {
             var url = string.Format(
                 "{0}frameworks/{1}/providers?ukprn={2}&location={3}",
-                _applicationSettings.ApprenticeshipApiBaseUrl,
+                _applicationSettings.ApprenticeshipApiBaseUrl.AddSlash(),
                 frameworkId,
                 ukprn,
                 locationId);

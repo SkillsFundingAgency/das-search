@@ -1,0 +1,23 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.ProviderNameSearchResultViewModel
+@if (Model.HasError)
+{
+    @RenderErrorMessage()
+}
+else if (Model.TotalResults == 0 && !Model.ShortSearchTerm)
+{
+    @RenderZeroResult()
+}
+
+@helper  RenderErrorMessage()
+    {
+        <p id="result-summary" class="results-error">
+            There was a problem performing a search. Try again later.
+        </p>
+}
+
+@helper RenderZeroResult()
+    {
+        <p id="result-summary" class="results-empty">
+            Sorry, there are currently no providers for '<b>@Model.SearchTerm</b>'.
+        </p>
+}

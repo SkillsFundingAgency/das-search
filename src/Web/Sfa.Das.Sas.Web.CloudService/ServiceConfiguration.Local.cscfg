@@ -3,7 +3,7 @@
   <Role name="Sfa.Das.Sas.Web">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="#{StorageConnectionString}" />
       <Setting name="PostcodeUrl" value="http://dashttpstatuscodefake.azurewebsites.net/api/status/500/" />
       <Setting name="SurveyUrl" value="https://www.surveymonkey.co.uk/r/F3LCBG6" />
       <Setting name="ElasticServerUrls" value="http://127.0.0.1:9200,http://192.168.99.100:9200,http://docker.local:9200" />
@@ -13,9 +13,24 @@
       <Setting name="CookieApplicationInsightsUrl" value="https://azure.microsoft.com/en-us/documentation/articles/app-insights-data-retention-privacy/" />
       <Setting name="CookieAboutUrl" value="http://www.aboutcookies.org/" />
       <Setting name="AchievementRateUrl" value="https://www.gov.uk/government/collections/sfa-national-success-rates-tables" />
-      <Setting name="ManageApprenticeshipFundsUrl" value="https://www.gov.uk/guidance/manage-apprenticeship-funds"/>
+      <Setting name="ManageApprenticeshipFundsUrl" value="https://www.gov.uk/guidance/manage-apprenticeship-funds" />
+      <Setting name="EnvironmentName" value="" />
+      <Setting name="ApprenticeshipIndexAlias" value="" />
+      <Setting name="ProviderIndexAlias" value="" />
+      <Setting name="ApprenticeshipApiBaseUrl" value="" />
+      <Setting name="ElasticsearchUsername" value="" />
+      <Setting name="ElasticsearchPassword" value="" />
+      <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="" />
+      <Setting name="FeatureToggle.Elk5Feature" value="" />
+      <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="" />
+      <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="" />
+      <Setting name="BuildId" value="" />
+      <Setting name="LoggingRedisConnectionString" value="" />
+      <Setting name="LoggingRedisKey" value="" />
+      <Setting name="InstrumentationKey" value="" />
     </ConfigurationSettings>
     <Certificates>
+      <Certificate name="WebSslCert" thumbprint="E280E23D933FE3A62AF335BE9768A2C9D65CCC9A" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
 </ServiceConfiguration>

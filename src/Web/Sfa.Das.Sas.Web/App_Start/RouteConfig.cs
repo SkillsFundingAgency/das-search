@@ -35,6 +35,11 @@ namespace Sfa.Das.Sas.Web
                 defaults: new { controller = "Provider", action = "Detail" });
 
             routes.MapRoute(
+                name: "ApprenticeshipOrProvider",
+                url: "ApprenticeshipOrProvider",
+                defaults: new { controller = "Apprenticeship", action = "ApprenticeshipOrProvider" });
+
+            routes.MapRoute(
                 name: "FrameworkProvider",
                 url: "Provider/FrameworkResults",
                 defaults: new { controller = "Provider", action = "FrameworkResults" });
@@ -43,6 +48,16 @@ namespace Sfa.Das.Sas.Web
                 name: "StandardProvider",
                 url: "Provider/StandardResults",
                 defaults: new { controller = "Provider", action = "StandardResults" });
+
+            routes.MapRoute(
+                name: "ProviderNameSearch",
+                url: "provider/search",
+                defaults: new { controller = "Provider", action = "Search" });
+
+            routes.MapRoute(
+                name: "ProviderNameSearchResultsAndPagination",
+                url: "provider/searchResults",
+                defaults: new { controller = "Provider", action = "SearchResults" });
 
             routes.MapRoute(
                 name: "ProviderWithName",

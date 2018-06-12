@@ -229,7 +229,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Standard.Duration))
                 .ForMember(x => x.WhatApprenticesWillLearn, y => y.MapFrom(z => z.Standard.WhatApprenticesWillLearn))
                 .ForMember(x => x.AssessmentOrganisations, y => y.MapFrom(z => z.AssessmentOrganisations))
-                .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri));
+                .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri))
+                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
 
             // Framework detail page
             cfg.CreateMap<GetFrameworkResponse, FrameworkViewModel>()
@@ -248,7 +249,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Framework.Duration))
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Framework.Title)))
-                ;
+                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
         }
 
         private static void CreateProviderSearchMappings(IMapperConfiguration cfg)
@@ -290,6 +291,29 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore());
+
+            // Provider Name Search
+            cfg.CreateMap<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>()
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerm))
+                .ForMember(x => x.ActualPage, y => y.MapFrom(z => z.ActualPage))
+                .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasError))
+                .ForMember(x => x.LastPage, y => y.MapFrom(z => z.LastPage))
+                .ForMember(x => x.Results, y => y.MapFrom(z => z.Results))
+                .ForMember(x => x.ShortSearchTerm, y => y.MapFrom(z => z.StatusCode == ProviderNameSearchResponseCodes.SearchTermTooShort))
+                .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.TotalResults))
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerm));
+
+            // Provider Name Search
+            cfg.CreateMap<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>()
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerm))
+                .ForMember(x => x.ActualPage, y => y.MapFrom(z => z.ActualPage))
+                .ForMember(x => x.HasError, y => y.MapFrom(z => z.HasError))
+                .ForMember(x => x.LastPage, y => y.MapFrom(z => z.LastPage))
+                .ForMember(x => x.Results, y => y.MapFrom(z => z.Results))
+                .ForMember(x => x.ShortSearchTerm, y => y.MapFrom(z => z.StatusCode == ProviderNameSearchResponseCodes.SearchTermTooShort))
+                .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.TotalResults))
+                .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerm));
+
 
             // ToDo: CF ->  Rename models?
             cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()

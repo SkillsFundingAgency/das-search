@@ -142,16 +142,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                 .Skip(skip)
                 .Take(take)
                 .Query(q => q
-                    .QueryString(qs => qs
-                        .Fields(fs => fs
-                            .Field(f => f.Title)
-                            .Field(p => p.JobRoles)
-                            .Field(p => p.Keywords)
-                            .Field(p => p.FrameworkName)
-                            .Field(p => p.PathwayName)
-                            .Field(p => p.JobRoleItems.First().Title)
-                            .Field(p => p.JobRoleItems.First().Description))
-                        .Query(formattedKeywords)))
+                    .Bool(b => b
+                        .Filter(PublishedApprenticeship())
+                        .Must(
+                            MustBeStartedApprenticeship(),
+                            MustBeNonExpiredApprenticceship(),
+                            m => m
+                                .QueryString(qs => qs
+                                    .Fields(fs => fs
+                                        .Field(f => f.Title)
+                                        .Field(p => p.JobRoles)
+                                        .Field(p => p.Keywords)
+                                        .Field(p => p.FrameworkName)
+                                        .Field(p => p.PathwayName)
+                                        .Field(p => p.JobRoleItems.First().Title)
+                                        .Field(p => p.JobRoleItems.First().Description))
+                                    .Query(formattedKeywords)))))
                 .PostFilter(GetPostFilter(selectedLevels))
                 .Aggregations(agg => agg
                     .Terms(LevelAggregateName, t => t

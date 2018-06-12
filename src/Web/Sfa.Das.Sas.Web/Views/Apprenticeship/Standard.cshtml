@@ -6,7 +6,6 @@
     ViewBag.Title = Model.Title + " - Apprenticeship Standard";
     ViewBag.Description = Model.OverviewOfRole;
     var areOrganisationsPresent = Model.AssessmentOrganisations != null && Model.AssessmentOrganisations.Any();
-
 }
 
 <main id="content" class="standard-detail">
@@ -22,8 +21,8 @@
         <div class="column-third">
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
-                    <a class="button ui-find-training-providers" rel="nofollow" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                        Find training providers
+                    <a class="button ui-find-training-providers" rel="nofollow" target="find-training-providers" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                        @Model.FindApprenticeshipTrainingText
                     </a>
                 </aside>
             </div>
@@ -98,8 +97,8 @@
         
 
         <div id="bottom-actions">
-            <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                Find training providers
+            <a class="button btn-find-trng-prov" rel="nofollow"  target="find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
+                @Model.FindApprenticeshipTrainingText
             </a>
         </div>
     </section>
