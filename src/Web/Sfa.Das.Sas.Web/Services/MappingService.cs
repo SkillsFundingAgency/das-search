@@ -216,7 +216,6 @@ namespace Sfa.Das.Sas.Web.Services
             // Standard detail page
             cfg.CreateMap<GetStandardResponse, StandardViewModel>()
                 .ForMember(x => x.StandardId, y => y.MapFrom(z => z.Standard.StandardId))
-                .ForMember(x => x.AssessmentPlanPdf, y => y.MapFrom(z => z.Standard.AssessmentPlanPdf))
                 .ForMember(x => x.EntryRequirements, y => y.MapFrom(z => z.Standard.EntryRequirements))
                 .ForMember(x => x.Level, y => y.MapFrom(z => z.Standard.Level))
                 .ForMember(x => x.MaxFunding, y => y.MapFrom(z => z.Standard.MaxFunding))
@@ -224,7 +223,6 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.ProfessionalRegistration, y => y.MapFrom(z => z.Standard.ProfessionalRegistration))
                 .ForMember(x => x.Qualifications, y => y.MapFrom(z => z.Standard.Qualifications))
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
-                .ForMember(x => x.StandardPdf, y => y.MapFrom(z => z.Standard.StandardPdf))
                 .ForMember(x => x.Title, y => y.MapFrom(z => z.Standard.Title))
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Standard.Duration))
                 .ForMember(x => x.WhatApprenticesWillLearn, y => y.MapFrom(z => z.Standard.WhatApprenticesWillLearn))

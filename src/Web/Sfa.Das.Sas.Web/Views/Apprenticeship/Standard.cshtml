@@ -146,15 +146,3 @@
         <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank" rel="external">More information about funding</a>
     </dd>
 }
-
-@helper GetDocumentItem(string pdfUrl, string title)
-{
-    if (!string.IsNullOrEmpty(title))
-    {
-        <li>
-            <a href="@pdfUrl" target="_blank">
-                @title
-            </a>
-        </li>
-    }
-}

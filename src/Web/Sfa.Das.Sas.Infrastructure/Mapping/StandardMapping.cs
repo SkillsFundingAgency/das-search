@@ -13,8 +13,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             {
                 StandardId = document.StandardId,
                 Title = document.Title,
-                StandardPdf = document.StandardPdf,
-                AssessmentPlanPdf = document.AssessmentPlanPdf,
                 Level = document.Level,
                 JobRoles = document.JobRoles.ToList(),
                 Keywords = document.Keywords.ToList(),
@@ -39,8 +37,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             {
                 StandardId = document.StandardId,
                 Title = document.Title,
-                StandardPdf = document.StandardPdf,
-                AssessmentPlanPdf = document.AssessmentPlanPdf,
                 Level = document.Level,
                 IsPublished = document.Published,
                 JobRoles = document.JobRoles,
