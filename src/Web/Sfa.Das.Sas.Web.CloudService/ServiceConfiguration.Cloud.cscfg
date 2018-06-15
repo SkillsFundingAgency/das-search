@@ -5,7 +5,7 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="__StorageConnectionString__" />
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
-      <Setting name="SurveyUrl" value="https://www.surveymonkey.co.uk/r/F3LCBG6" />
+      <Setting name="SurveyUrl" value="__SurveyUrl__" />
       <Setting name="ElasticServerUrls" value="__ElasticServerUrls__" />
       <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" />
       <Setting name="CookieGoogleUrl" value="https://tools.google.com/dlpage/gaoptout" />
