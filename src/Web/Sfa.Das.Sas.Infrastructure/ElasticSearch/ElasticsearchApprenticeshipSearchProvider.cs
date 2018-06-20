@@ -183,6 +183,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
                             .Must(
                                 MustBeStartedApprenticeship(),
                                 MustBeNonExpiredApprenticceship(),
+                                MustBeNotPastLastDateForNewStartsApprenticceship(),
                                 m => m
                                     .Bool(mb => mb
                                         .Should(
@@ -221,6 +222,22 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             return f => f
                 .Term(t => t
                     .Field(fi => fi.Published).Value(true));
+        }
+
+        private static Func<QueryContainerDescriptor<ApprenticeshipSearchResultsItem>, QueryContainer> MustBeNotPastLastDateForNewStartsApprenticceship()
+        {
+            return m1 => m1
+                .Bool(mb1 => mb1
+                    .Should(
+                        bs1 => bs1
+                                   .DateRange(r => r
+                                       .GreaterThanOrEquals(DateTime.Today)
+                                       .Field(f => f.LastDateForNewStarts))
+                               || bs1
+                                   .Bool(bsb1 => bsb1
+                                       .MustNot(mn => mn
+                                           .Exists(e => e
+                                               .Field(f => f.LastDateForNewStarts))))));
         }
 
         private static Func<QueryContainerDescriptor<ApprenticeshipSearchResultsItem>, QueryContainer> MustBeNonExpiredApprenticceship()
