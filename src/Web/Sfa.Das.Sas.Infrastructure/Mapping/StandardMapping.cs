@@ -29,7 +29,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 EffectiveFrom = document.EffectiveFrom,
                 EffectiveTo = document.EffectiveTo,
                 IsActiveStandard = document.IsActiveStandard,
-                StandardPageUri = document.StandardPageUri
+                StandardPageUri = document.StandardPageUri,
+                LastDateForNewStarts = document.LastDateForNewStarts
             };
         }
 

@@ -36,7 +36,10 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string StandardPageUri { get; set; }
 
+        public DateTime? LastDateForNewStarts { get; set; }
         public string FindApprenticeshipTrainingText { get; set; }
+
+        public string DayAfterLastDateForNewStartsFormatted => LastDateForNewStarts?.AddDays(1).ToString("dd MMMM yyyy") ?? string.Empty;
 
     }
 }
