@@ -230,6 +230,7 @@
     <Compile Include="Infrastructure\Web\Services\ButtonTextServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderSearchResponseToViewModel.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderToProviderDetailViewModelTests.cs" />
+    <Compile Include="Infrastructure\Web\Services\FundingBandServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\MappingServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ProviderSearchMapperTests.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ForProviderMappingHelper.cs" />

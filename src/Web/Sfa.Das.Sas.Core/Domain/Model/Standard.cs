@@ -46,5 +46,6 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public bool IsActiveStandard { get; set; }
 
         public string StandardPageUri { get; set; }
+        public List<FundingPeriod> FundingPeriods { get; set; }
     }
 }

@@ -21,6 +21,7 @@
         private readonly IMappingService _mappingService;
         private readonly IMediator _mediator;
         private readonly IButtonTextService _buttonTextService;
+        // MFCMFC private readonly IFundingBandService _fundingBandService;
 
         public ApprenticeshipController(ILog logger, IMappingService mappingService, IMediator mediator, IButtonTextService buttonTextService)
         {
@@ -168,6 +169,7 @@
                     _logger.Info($"Mapping Framework {id}");
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
                     viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
+
                     return View(viewModel);
 
                 default:

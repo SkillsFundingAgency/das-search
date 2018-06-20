@@ -48,5 +48,7 @@
         public int Duration { get; set; }
 
         public bool IsActiveFramework { get; set; }
+
+        public List<FundingPeriod> FundingPeriods { get; set; }
     }
 }

@@ -135,6 +135,7 @@
     <Compile Include="Domain\Model\ApprenticeshipProduct.cs" />
     <Compile Include="Domain\Model\ContactInformation.cs" />
     <Compile Include="Domain\Model\CoordinateResponse.cs" />
+    <Compile Include="Domain\Model\FundingPeriod.cs" />
     <Compile Include="Domain\Model\IApprenticeshipProduct.cs" />
     <Compile Include="Domain\Model\JobRoleItem.cs" />
     <Compile Include="Domain\Model\Location.cs" />
