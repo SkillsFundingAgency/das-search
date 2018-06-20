@@ -66,7 +66,7 @@
       <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Client.0.11.37\lib\net462\SFA.DAS.Apprenticeships.Api.Client.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.51\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.56\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

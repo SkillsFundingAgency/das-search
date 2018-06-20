@@ -54,7 +54,7 @@
       <HintPath>..\packages\Polly.4.3.0\lib\net45\Polly.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.51\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.56\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

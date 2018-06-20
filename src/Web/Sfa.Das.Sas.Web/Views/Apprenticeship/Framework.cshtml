@@ -3,7 +3,7 @@
 @model Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel
 
 @{
-    ViewBag.Title = @Model.Title + " - Apprenticeship Framework";
+    ViewBag.Title =@Model.Title + " - Apprenticeship Framework";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 
@@ -35,7 +35,7 @@
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
 
-                    <a class="button ui-find-training-providers"  target="find-training-providers" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+                    <a class="button ui-find-training-providers" target="find-training-providers" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
                         @Model.FindApprenticeshipTrainingText
                     </a>
                 </aside>
@@ -53,41 +53,47 @@
 
         <dl class="data-list">
             @if (!string.IsNullOrEmpty(Model.FrameworkOverview))
-            {
-                <dt class="overviewTitle">Overview of role</dt>
-                <dd class="overviewText">@Model.FrameworkOverview </dd>
-            }
+    {
+        <dt class="overviewTitle">Overview of role</dt>
+        <dd class="overviewText">@Model.FrameworkOverview </dd>
+}
             @GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
             @GetDurationProperty("Typical length", "length", Model.Duration.ToString())
-            @GetFundingBandProperty(Model.MaxFunding)
+            
+            <dt>Current funding band</dt>
+            <dd id="funding-cap">
+                Up to @GetFundingCapFormatted(Model.MaxFunding) per apprentice.<br />
+                @GetNextFundingMessage(Model.NextEffectiveFrom, Model.NextFundingCap)
+                <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank">More information about funding</a>
+            </dd>
             <dt>Entry requirements</dt>
             <dd class="entry-requirements">
                 @if (!string.IsNullOrEmpty(Model.EntryRequirements))
-                {
-                    <div>@Model.EntryRequirements</div>
-                }
+        {
+            <div>@Model.EntryRequirements</div>
+}
                 <div>Your chosen training provider can advise you about entry requirements for apprentices.</div>
             </dd>
 
             <dt>Suitable roles for apprentices</dt>
             <dd class="job-roles">
                 @if (Model.JobRoles != null && Model.JobRoles.Any())
-                {
-                    <ul>
-                        @foreach (var jobRole in Model.JobRoles.Take(5))
-                        {
-                            <li>@jobRole</li>
-                        }
-                        @if (Model.JobRoles.Count() > 5)
-                        {
-                            foreach (var jobRole in Model.JobRoles.Skip(5))
-                            {
-                                <li class="default-hidden">@jobRole</li>
-                            }
-                            <a href="#" class="showmore hidden">Show more</a>
-                        }
-                    </ul>
-                }
+        {
+            <ul>
+                @foreach (var jobRole in Model.JobRoles.Take(5))
+        {
+            <li>@jobRole</li>
+}
+                @if (Model.JobRoles.Count() > 5)
+        {
+            foreach (var jobRole in Model.JobRoles.Skip(5))
+            {
+                <li class="default-hidden">@jobRole</li>
+    }
+        <a href="#" class="showmore hidden">Show more</a>
+}
+            </ul>
+}
 
                 <div>
                     Your chosen training provider can advise you about the kinds of skills apprentices will learn.
@@ -97,76 +103,76 @@
             <dd>
                 <div class="qualifications">
                     @if (Model.CompetencyQualification != null && Model.CompetencyQualification.Any())
-                    {
-                        <div class="competencyQualifications">
-                            <p>Apprentices will achieve a practical (or 'competence') qualification:</p>
-                            <ul>
-                                @foreach (var qualification in Model.CompetencyQualification.Take(3))
-                                {
-                                    <li>@qualification</li>
-                                }
+            {
+                <div class="competencyQualifications">
+                    <p>Apprentices will achieve a practical (or 'competence') qualification:</p>
+                    <ul>
+                        @foreach (var qualification in Model.CompetencyQualification.Take(3))
+                {
+                    <li>@qualification</li>
+        }
 
-                                @if (Model.CompetencyQualification.Count() > 3)
-                                {
-                                    foreach (var qualification in Model.CompetencyQualification.Skip(3))
-                                    {
-                                        <li class="default-hidden">@qualification</li>
-                                    }
-                                    <a href="#" class="showmore hidden">Show more</a>
-                                }
-                            </ul>
-                        </div>
-                    }
+                        @if (Model.CompetencyQualification.Count() > 3)
+                {
+                    foreach (var qualification in Model.CompetencyQualification.Skip(3))
+                    {
+                        <li class="default-hidden">@qualification</li>
+            }
+            <a href="#" class="showmore hidden">Show more</a>
+}
+                    </ul>
+                </div>
+    }
 
                     @if (Model.KnowledgeQualification != null && Model.KnowledgeQualification.Any())
-                    {
-                        <div class="knowledgeQualifications">
-                            <p>Apprentices will also achieve a theory-based (or 'knowledge') qualification:</p>
-                            <ul>
-                                @foreach (var qualification in Model.KnowledgeQualification.Take(3))
-                                {
-                                    <li>@qualification</li>
-                                }
+            {
+                <div class="knowledgeQualifications">
+                    <p>Apprentices will also achieve a theory-based (or 'knowledge') qualification:</p>
+                    <ul>
+                        @foreach (var qualification in Model.KnowledgeQualification.Take(3))
+                {
+                    <li>@qualification</li>
+        }
 
-                                @if (Model.KnowledgeQualification.Count() > 3)
-                                {
-                                    foreach (var qualification in Model.KnowledgeQualification.Skip(3))
-                                    {
-                                        <li class="default-hidden">@qualification</li>
-                                    }
-                                    <a href="#" class="showmore hidden">Show more</a>
-                                }
-                            </ul>
-                        </div>
-                    }
+                        @if (Model.KnowledgeQualification.Count() > 3)
+                {
+                    foreach (var qualification in Model.KnowledgeQualification.Skip(3))
+                    {
+                        <li class="default-hidden">@qualification</li>
+            }
+            <a href="#" class="showmore hidden">Show more</a>
+}
+                    </ul>
+                </div>
+    }
 
                     @if (Model.CombinedQualificiation != null && Model.CombinedQualificiation.Any())
-                    {
-                        <div class="combinedQualification">
-                            <p>Apprentices will achieve a practical and theory-based (or 'combined') qualification:</p>
-                            <ul>
-                                @foreach (var qualification in Model.CombinedQualificiation.Take(3))
-                                {
-                                    <li>@qualification</li>
-                                }
+            {
+                <div class="combinedQualification">
+                    <p>Apprentices will achieve a practical and theory-based (or 'combined') qualification:</p>
+                    <ul>
+                        @foreach (var qualification in Model.CombinedQualificiation.Take(3))
+                {
+                    <li>@qualification</li>
+        }
 
-                                @if (Model.CombinedQualificiation.Count() > 3)
-                                {
-                                    foreach (var qualification in Model.CombinedQualificiation.Skip(3))
-                                    {
-                                        <li class="default-hidden">@qualification</li>
-                                    }
-                                    <a href="#" class="showmore hidden">Show more</a>
-                                }
-                            </ul>
-                        </div>
-                    }
+                        @if (Model.CombinedQualificiation.Count() > 3)
+                {
+                    foreach (var qualification in Model.CombinedQualificiation.Skip(3))
+                    {
+                        <li class="default-hidden">@qualification</li>
+            }
+            <a href="#" class="showmore hidden">Show more</a>
+}
+                    </ul>
+                </div>
+    }
                 </div>
 
                 @if (Model.CompletionQualifications != string.Empty)
-                {
-                    <p class="completionQualifications">@Model.CompletionQualifications</p>
-                }
+        {
+            <p class="completionQualifications">@Model.CompletionQualifications</p>
+}
                 <p class="qualificationsStatic">Your chosen training provider can advise you about the qualifications open to apprentices as they can change depending on individual and other circumstances.</p>
             </dd>
 
@@ -175,7 +181,7 @@
         </dl>
 
         <div id="bottom-actions">
-            <a class="button btn-find-trng-prov" rel="nofollow"  target="find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
+            <a class="button btn-find-trng-prov" rel="nofollow" target="find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
                 @Model.FindApprenticeshipTrainingText
             </a>
         </div>
@@ -200,13 +206,32 @@
         }
 }
 
-@helper GetFundingBandProperty(int value)
+@helper GetNextFundingMessage(DateTime? nextEffectiveFrom, int? nextFundingCap)
     {
-        var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
+    
+    if (nextEffectiveFrom == null || nextFundingCap == null) {return;}
 
-        <dt>Current funding band</dt>
-        <dd id="funding-cap">
-            Up to @fundingCapFormatted per apprentice.<br />
-            <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank">More information about funding</a>
-        </dd>
+    var nextFundingCapFormatted = GetFundingCapFormatted(nextFundingCap.Value);
+    var nextEffectiveFromFormatted = nextEffectiveFrom.Value.ToString("dd MMMM yyyy");
+
+    <div class='notice'>
+        <i class='icon icon-important'>
+            <span class='visuallyhidden'>
+                Warning
+            </span>
+        </i>
+        <strong class='bold-small'>
+                The funding band maximum for this apprenticeship will change to @nextFundingCapFormatted from @nextEffectiveFromFormatted
+        </strong>
+    </div>
 }
+
+@functions {
+
+    private string GetFundingCapFormatted(int value)
+    {
+        return value.ToString("C0", new CultureInfo("en-GB"));
+    }
+}
+
+
