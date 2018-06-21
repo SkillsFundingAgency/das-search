@@ -5,7 +5,7 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="__StorageConnectionString__" />
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
-      <Setting name="SurveyUrl" value="https://www.surveymonkey.co.uk/r/F3LCBG6" />
+      <Setting name="SurveyUrl" value="__SurveyUrl__" />
       <Setting name="ElasticServerUrls" value="__ElasticServerUrls__" />
       <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" />
       <Setting name="CookieGoogleUrl" value="https://tools.google.com/dlpage/gaoptout" />
@@ -30,7 +30,7 @@
       <Setting name="InstrumentationKey" value="__InstrumentationKey__" />
     </ConfigurationSettings>
     <Certificates>
-      <Certificate name="WebSslCert" thumbprint="E280E23D933FE3A62AF335BE9768A2C9D65CCC9A" thumbprintAlgorithm="sha1" />
+      <Certificate name="WebSslCert" thumbprint="7A1BC8263B7CBAA2B355934D0BB8031B469C1AE1" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
 </ServiceConfiguration>

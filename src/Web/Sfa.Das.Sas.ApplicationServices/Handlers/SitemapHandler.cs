@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.Core.Domain.Model;
+﻿using System;
+using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -37,10 +38,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             switch (message.SitemapRequest)
             {
                 case SitemapType.Standards:
-                    identifiers = GetStandardDetailsInSeoFormat();
+                    identifiers = GetActiveStandardDetailsInSeoFormat();
                     break;
                 case SitemapType.Frameworks:
-                    identifiers = GetFrameworkDetailsInSeoFormat();
+                    identifiers = GetActiveFrameworkDetailsInSeoFormat();
                     break;
                 case SitemapType.Providers:
                     identifiers = GetProviderDetailsInSeoFormat();
@@ -55,16 +56,16 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             };
         }
 
-        private IEnumerable<string> GetFrameworkDetailsInSeoFormat()
+        private IEnumerable<string> GetActiveFrameworkDetailsInSeoFormat()
         {
-            var frameworks = _getFrameworks.GetAllFrameworks();
+            var frameworks = _getFrameworks.GetAllFrameworks().Where(s => CheckActive(s.EffectiveFrom, s.EffectiveTo));
 
             return BuildFrameworkSitemap(frameworks);
         }
 
-        private IEnumerable<string> GetStandardDetailsInSeoFormat()
+        private IEnumerable<string> GetActiveStandardDetailsInSeoFormat()
         {
-            var standards = _getStandards.GetAllStandards().Where(s => s.IsPublished);
+            var standards = _getStandards.GetAllStandards().Where(s => s.IsPublished && CheckActive(s.EffectiveFrom, s.EffectiveTo));
 
             return BuildStandardSitemap(standards);
         }
@@ -111,6 +112,14 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private string EncodeTitle(IApprenticeshipProduct product)
         {
             return _urlEncoder.EncodeTextForUri(product.Title);
+        }
+
+        private static bool CheckActive(DateTime? effectiveFrom, DateTime? effectiveTo)
+        {
+            var effectiveFromInThePast = effectiveFrom.HasValue && effectiveFrom.Value <= DateTime.Now;
+            var effectiveToIntheFuture = !effectiveTo.HasValue || effectiveTo.Value > DateTime.Now;
+
+            return effectiveFromInThePast && effectiveToIntheFuture;
         }
     }
 }

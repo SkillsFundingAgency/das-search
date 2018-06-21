@@ -228,6 +228,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.WhatApprenticesWillLearn, y => y.MapFrom(z => z.Standard.WhatApprenticesWillLearn))
                 .ForMember(x => x.AssessmentOrganisations, y => y.MapFrom(z => z.AssessmentOrganisations))
                 .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri))
+                .ForMember(x => x.LastDateForNewStarts, y => y.MapFrom(z => z.Standard.LastDateForNewStarts))
                 .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
 
             // Framework detail page

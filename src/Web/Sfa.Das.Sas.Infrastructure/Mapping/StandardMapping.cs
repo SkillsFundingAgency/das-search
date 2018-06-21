@@ -27,7 +27,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 EffectiveFrom = document.EffectiveFrom,
                 EffectiveTo = document.EffectiveTo,
                 IsActiveStandard = document.IsActiveStandard,
-                StandardPageUri = document.StandardPageUri
+                StandardPageUri = document.StandardPageUri,
+                LastDateForNewStarts = document.LastDateForNewStarts
             };
         }
 
@@ -47,7 +48,9 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
                 Qualifications = document.Qualifications,
                 ProfessionalRegistration = document.ProfessionalRegistration,
-                OverviewOfRole = document.OverviewOfRole
+                OverviewOfRole = document.OverviewOfRole,
+                EffectiveFrom = document.EffectiveFrom,
+                EffectiveTo = document.EffectiveTo
             };
         }
     }
