@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Web
                 var statusCode = ((HttpException)ex).GetHttpCode();
                 if (statusCode == 404 || ex.Message.Contains("Request.Path"))
                 {
-                    logger.Warn(ex, ex.Message);
+                    logger.Info(ex.Message);
                 }
                 else
                 {
