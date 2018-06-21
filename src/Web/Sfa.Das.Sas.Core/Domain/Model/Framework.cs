@@ -50,5 +50,9 @@
         public bool IsActiveFramework { get; set; }
 
         public List<FundingPeriod> FundingPeriods { get; set; }
+
+        public DateTime? NextEffectiveFrom { get; set; }
+
+        public int? NextFundingCap { get; set; }
     }
 }

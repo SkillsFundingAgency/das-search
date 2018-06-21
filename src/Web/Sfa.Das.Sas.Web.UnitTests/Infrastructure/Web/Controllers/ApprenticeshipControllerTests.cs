@@ -32,7 +32,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 _mockLogger.Object,
                 _mockMappingService.Object,
                 _mockMediator.Object,
-                Mock.Of<IButtonTextService>());
+                Mock.Of<IButtonTextService>(),
+                Mock.Of<IFundingBandService>());
         }
 
         [Test]

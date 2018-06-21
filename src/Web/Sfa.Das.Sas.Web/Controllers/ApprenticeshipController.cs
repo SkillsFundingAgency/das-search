@@ -21,14 +21,15 @@
         private readonly IMappingService _mappingService;
         private readonly IMediator _mediator;
         private readonly IButtonTextService _buttonTextService;
-        // MFCMFC private readonly IFundingBandService _fundingBandService;
+        private readonly IFundingBandService _fundingBandService;
 
-        public ApprenticeshipController(ILog logger, IMappingService mappingService, IMediator mediator, IButtonTextService buttonTextService)
+        public ApprenticeshipController(ILog logger, IMappingService mappingService, IMediator mediator, IButtonTextService buttonTextService, IFundingBandService fundingBandService)
         {
             _logger = logger;
             _mappingService = mappingService;
             _mediator = mediator;
             _buttonTextService = buttonTextService;
+            _fundingBandService = fundingBandService;
         }
 
         public ActionResult Search()
@@ -133,6 +134,10 @@
             _logger.Info($"Mapping Standard {id}");
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
             viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
+            var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(response.Standard.FundingPeriods, response.Standard.EffectiveFrom, 3);
+            viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
+            viewModel.NextFundingCap = nextFundingCap?.FundingCap;
+
 
             return View(viewModel);
         }
@@ -169,6 +174,10 @@
                     _logger.Info($"Mapping Framework {id}");
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
                     viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
+
+                    var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(response.Framework.FundingPeriods, response.Framework.EffectiveFrom, 3);
+                    viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
+                    viewModel.NextFundingCap = nextFundingCap?.FundingCap;
 
                     return View(viewModel);
 

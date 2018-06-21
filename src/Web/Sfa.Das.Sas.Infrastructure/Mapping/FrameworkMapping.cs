@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Mapping
+﻿using System;
+
+namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -62,7 +64,9 @@
                 CombinedQualification = document.CombinedQualification?.OrderBy(x => x),
                 EffectiveFrom = document.EffectiveFrom,
                 EffectiveTo = document.EffectiveTo,
-                IsActiveFramework = document.IsActiveFramework
+                IsActiveFramework = document.IsActiveFramework,
+                //FundingPeriods = null //MFCMFCMFC
+                FundingPeriods = new List<FundingPeriod> { new FundingPeriod { EffectiveFrom = new DateTime(2018, 08, 30), FundingCap = 1450 } }
             };
         }
 
