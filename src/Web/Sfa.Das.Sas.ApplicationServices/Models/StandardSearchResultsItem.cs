@@ -14,10 +14,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
         public bool Published { get; set; }
 
-        public string StandardPdf { get; set; }
-
-        public string AssessmentPlanPdf { get; set; }
-
         public List<string> JobRoles { get; set; }
 
         public List<string> Keywords { get; set; }

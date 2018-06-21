@@ -302,62 +302,6 @@ WriteLiteralTo(__razor_helper_writer, ">More information about funding</a>\r\n  
 #line default
 #line hidden
 
-#line 163 "..\..\Views\Apprenticeship\Standard.cshtml"
-public System.Web.WebPages.HelperResult GetDocumentItem(string pdfUrl, string title)
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-#line 164 "..\..\Views\Apprenticeship\Standard.cshtml"
- 
-    if (!string.IsNullOrEmpty(title))
-    {
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "        <li>\r\n            <a");
-
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 8260), Tuple.Create("\"", 8274)
-
-#line 168 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 8267), Tuple.Create<System.Object, System.Int32>(pdfUrl
-
-#line default
-#line hidden
-, 8267), false)
-);
-
-WriteLiteralTo(__razor_helper_writer, " target=\"_blank\"");
-
-WriteLiteralTo(__razor_helper_writer, ">\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "                ");
-
-
-#line 169 "..\..\Views\Apprenticeship\Standard.cshtml"
-WriteTo(__razor_helper_writer, title);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n            </a>\r\n        </li>\r\n");
-
-
-#line 172 "..\..\Views\Apprenticeship\Standard.cshtml"
-    }
-
-
-#line default
-#line hidden
-});
-
-#line 173 "..\..\Views\Apprenticeship\Standard.cshtml"
-}
-#line default
-#line hidden
-
         public Standard()
         {
         }
@@ -887,8 +831,6 @@ WriteLiteral("                ");
             #line default
             #line hidden
 WriteLiteral("\r\n            </a>\r\n        </div>\r\n    </section>\r\n</main>\r\n\r\n");
-
-WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 
