@@ -15,11 +15,7 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public int MaxFunding { get; set; }
 
         public bool IsPublished { get; set; }
-
-        public string StandardPdf { get; set; }
-
-        public string AssessmentPlanPdf { get; set; }
-
+        
         public List<string> JobRoles { get; set; }
 
         public List<string> Keywords { get; set; }

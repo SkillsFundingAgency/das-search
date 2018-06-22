@@ -14,10 +14,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public int Level { get; set; }
 
-        public string StandardPdf { get; set; }
-
-        public string AssessmentPlanPdf { get; set; }
-
         public int Duration { get; set; }
 
         public string EntryRequirements { get; set; }

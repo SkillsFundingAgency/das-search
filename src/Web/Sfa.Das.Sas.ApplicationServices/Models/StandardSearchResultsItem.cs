@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
@@ -12,10 +13,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public int Level { get; set; }
 
         public bool Published { get; set; }
-
-        public string StandardPdf { get; set; }
-
-        public string AssessmentPlanPdf { get; set; }
 
         public List<string> JobRoles { get; set; }
 
@@ -34,5 +31,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public string ProfessionalRegistration { get; set; }
 
         public string OverviewOfRole { get; set; }
+
+        public DateTime? EffectiveFrom { get; set; }
+
+        public DateTime? EffectiveTo { get; set; }
     }
 }

@@ -15,8 +15,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             {
                 StandardId = document.StandardId,
                 Title = document.Title,
-                StandardPdf = document.StandardPdf,
-                AssessmentPlanPdf = document.AssessmentPlanPdf,
                 Level = document.Level,
                 JobRoles = document.JobRoles.ToList(),
                 Keywords = document.Keywords.ToList(),
@@ -43,8 +41,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             {
                 StandardId = document.StandardId,
                 Title = document.Title,
-                StandardPdf = document.StandardPdf,
-                AssessmentPlanPdf = document.AssessmentPlanPdf,
                 Level = document.Level,
                 IsPublished = document.Published,
                 JobRoles = document.JobRoles,
@@ -55,7 +51,9 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 WhatApprenticesWillLearn = document.WhatApprenticesWillLearn,
                 Qualifications = document.Qualifications,
                 ProfessionalRegistration = document.ProfessionalRegistration,
-                OverviewOfRole = document.OverviewOfRole
+                OverviewOfRole = document.OverviewOfRole,
+                EffectiveFrom = document.EffectiveFrom,
+                EffectiveTo = document.EffectiveTo
             };
         }
     }

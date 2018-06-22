@@ -155,15 +155,6 @@
     }
 }
 
-@helper GetDocumentItem(string pdfUrl, string title)
-{
-    if (!string.IsNullOrEmpty(title))
-    {
-        <li>
-            <a href="@pdfUrl" target="_blank">
-                @title
-            </a>
-        </li>
     }
 }
 
@@ -192,5 +183,3 @@
     private string GetFundingCapFormatted(int value)
     {
         return value.ToString("C0", new CultureInfo("en-GB"));
-    }
-}
