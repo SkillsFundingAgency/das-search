@@ -176,10 +176,13 @@
             The funding band maximum for this apprenticeship will change to @nextFundingCapFormatted from @nextEffectiveFromFormatted
         </strong>
     </div>
-}
+    }
 
-@functions {
+@functions
+    {
 
     private string GetFundingCapFormatted(int value)
-    {
-        return value.ToString("C0", new CultureInfo("en-GB"));
+        {
+            return value.ToString("C0", new CultureInfo("en-GB"));
+        }
+    }
