@@ -65,8 +65,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 EffectiveFrom = document.EffectiveFrom,
                 EffectiveTo = document.EffectiveTo,
                 IsActiveFramework = document.IsActiveFramework,
-                //FundingPeriods = null //MFCMFCMFC
-                FundingPeriods = new List<FundingPeriod> { new FundingPeriod { EffectiveFrom = new DateTime(2018, 08, 30), FundingCap = 1450 } }
+                FundingPeriods = document.FundingPeriods
             };
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Core.Domain.Model
 {

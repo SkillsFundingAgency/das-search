@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Core.Domain.Model
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.Sas.Core.Domain.Model
 {
     using System;
     using System.Collections.Generic;

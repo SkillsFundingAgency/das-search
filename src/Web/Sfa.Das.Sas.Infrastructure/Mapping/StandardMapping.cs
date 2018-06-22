@@ -33,8 +33,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 IsActiveStandard = document.IsActiveStandard,
                 StandardPageUri = document.StandardPageUri,
                 LastDateForNewStarts = document.LastDateForNewStarts,
-                //FundingPeriods = null //MFCMFCMFC
-                FundingPeriods = new List<FundingPeriod> { new FundingPeriod { EffectiveFrom = new DateTime(2018,07,30), FundingCap = 1400} }
+                FundingPeriods = document.FundingPeriods
             };
         }
 

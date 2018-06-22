@@ -4,6 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Web.Services;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 {

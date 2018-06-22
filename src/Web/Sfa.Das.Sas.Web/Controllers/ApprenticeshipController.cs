@@ -1,4 +1,8 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using System.Collections.Generic;
+using Sfa.Das.Sas.Core.Domain.Model;
+using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -22,6 +26,7 @@
         private readonly IMediator _mediator;
         private readonly IButtonTextService _buttonTextService;
         private readonly IFundingBandService _fundingBandService;
+        private readonly int _nextFundingPeriodMessageCutoffMonths = 3;
 
         public ApprenticeshipController(ILog logger, IMappingService mappingService, IMediator mediator, IButtonTextService buttonTextService, IFundingBandService fundingBandService)
         {
@@ -133,15 +138,11 @@
 
             _logger.Info($"Mapping Standard {id}");
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
-            viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
-            var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(response.Standard.FundingPeriods, response.Standard.EffectiveFrom, 3);
-            viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
-            viewModel.NextFundingCap = nextFundingCap?.FundingCap;
-
+            ProcessViewModel(viewModel, response.Standard?.FundingPeriods, response.Standard?.EffectiveFrom);
 
             return View(viewModel);
         }
-
+        
         public ActionResult Framework(string id, string keywords)
         {
             _logger.Info($"Getting framework {id}");
@@ -173,11 +174,7 @@
                 case GetFrameworkResponse.ResponseCodes.Success:
                     _logger.Info($"Mapping Framework {id}");
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
-                    viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
-
-                    var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(response.Framework.FundingPeriods, response.Framework.EffectiveFrom, 3);
-                    viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
-                    viewModel.NextFundingCap = nextFundingCap?.FundingCap;
+                    ProcessViewModel(viewModel, response.Framework?.FundingPeriods, response.Framework?.EffectiveFrom);
 
                     return View(viewModel);
 
@@ -255,6 +252,22 @@
             }
 
             return rv;
+        }
+
+        private void ProcessViewModel(StandardViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom)
+        {
+            viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
+            var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(fundingPeriods, effectiveFrom, _nextFundingPeriodMessageCutoffMonths);
+            viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
+            viewModel.NextFundingCap = nextFundingCap?.FundingCap;
+        }
+
+        private void ProcessViewModel(FrameworkViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom)
+        {
+            viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
+            var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(fundingPeriods, effectiveFrom, _nextFundingPeriodMessageCutoffMonths);
+            viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
+            viewModel.NextFundingCap = nextFundingCap?.FundingCap;
         }
     }
 }
