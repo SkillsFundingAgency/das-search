@@ -37,5 +37,9 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public IEnumerable<string> CombinedQualificiation { get; set; }
 
         public string FindApprenticeshipTrainingText { get; set; }
+
+        public DateTime? NextEffectiveFrom { get; set; }
+
+        public int? NextFundingCap { get; set; }
     }
 }

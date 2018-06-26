@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Domain.Model;
 using ApiStandard = SFA.DAS.Apprenticeships.Api.Types.Standard;
@@ -28,7 +30,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 EffectiveTo = document.EffectiveTo,
                 IsActiveStandard = document.IsActiveStandard,
                 StandardPageUri = document.StandardPageUri,
-                LastDateForNewStarts = document.LastDateForNewStarts
+                LastDateForNewStarts = document.LastDateForNewStarts,
+                FundingPeriods = document.FundingPeriods
             };
         }
 

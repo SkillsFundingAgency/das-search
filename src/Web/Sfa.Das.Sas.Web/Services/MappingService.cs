@@ -229,6 +229,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.AssessmentOrganisations, y => y.MapFrom(z => z.AssessmentOrganisations))
                 .ForMember(x => x.StandardPageUri, y => y.MapFrom(z => z.Standard.StandardPageUri))
                 .ForMember(x => x.LastDateForNewStarts, y => y.MapFrom(z => z.Standard.LastDateForNewStarts))
+                .ForMember(x => x.NextEffectiveFrom, y => y.Ignore())
+                .ForMember(x => x.NextFundingCap, y => y.Ignore())
                 .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
 
             // Framework detail page
@@ -248,6 +250,8 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerm, y => y.MapFrom(z => z.SearchTerms))
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Framework.Duration))
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Framework.Title)))
+                .ForMember(x => x.NextEffectiveFrom, y => y.Ignore())
+                .ForMember(x => x.NextFundingCap, y => y.Ignore())
                 .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
         }
 

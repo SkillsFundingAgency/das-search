@@ -1,10 +1,8 @@
 using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.Core.Domain.Helpers;
-using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Infrastructure.Settings;
-using Sfa.Das.Sas.Web.Helpers;
 
 namespace Sfa.Das.Sas.Web.DependencyResolution
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Core.Domain.Model
 {
@@ -42,5 +43,10 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public bool IsActiveStandard { get; set; }
 
         public string StandardPageUri { get; set; }
+        public List<FundingPeriod> FundingPeriods { get; set; }
+
+        public DateTime? NextEffectiveFrom { get; set; }
+
+        public int? NextFundingCap { get; set; }
     }
 }

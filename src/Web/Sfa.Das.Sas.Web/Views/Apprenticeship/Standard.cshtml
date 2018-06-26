@@ -50,7 +50,13 @@
         <dl class="data-list">
             @GetStandardProperty("Level", "level", $"{@Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})")
             @GetDurationProperty("Typical length", "length", Model.Duration.ToString())
-            @GetFundingBandProperty(Model.MaxFunding)
+            <dt>Current funding band</dt>
+            <dd id="funding-cap">
+                Up to @GetFundingCapFormatted(Model.MaxFunding) per apprentice.<br />
+                @GetNextFundingMessage(Model.NextEffectiveFrom, Model.NextFundingCap)
+                <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank" rel="external">More information about funding</a>
+            </dd>
+
             @GetStandardProperty("Entry requirements", "entry-requirements", Model.EntryRequirements)
             @GetStandardProperty("What apprentices will learn", "will-learn", Model.WhatApprenticesWillLearn)
             @GetStandardProperty("Qualifications", "qualifications", Model.Qualifications)
@@ -149,13 +155,34 @@
     }
 }
 
-@helper GetFundingBandProperty(int value)
-{
-    var fundingCapFormatted = value.ToString("C0", new CultureInfo("en-GB"));
-
-    <dt>Current funding band</dt>
-    <dd id="funding-cap">
-        Up to @fundingCapFormatted per apprentice.<br />
-        <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank" rel="external">More information about funding</a>
-    </dd>
+    }
 }
+
+@helper GetNextFundingMessage(DateTime? nextEffectiveFrom, int? nextFundingCap)
+{
+    
+    if (nextEffectiveFrom == null || nextFundingCap == null) {return;}
+
+    var nextFundingCapFormatted = GetFundingCapFormatted(nextFundingCap.Value);
+    var nextEffectiveFromFormatted = nextEffectiveFrom.Value.ToString("dd MMMM yyyy");
+
+    <div class='notice'>
+        <i class='icon icon-important'>
+            <span class='visuallyhidden'>
+                Warning
+            </span>
+        </i>
+        <strong class='bold-small'>
+            The funding band maximum for this apprenticeship will change to @nextFundingCapFormatted from @nextEffectiveFromFormatted
+        </strong>
+    </div>
+    }
+
+@functions
+    {
+
+    private string GetFundingCapFormatted(int value)
+        {
+            return value.ToString("C0", new CultureInfo("en-GB"));
+        }
+    }

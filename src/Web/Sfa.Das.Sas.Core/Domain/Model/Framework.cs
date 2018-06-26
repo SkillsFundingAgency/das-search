@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Core.Domain.Model
+﻿using SFA.DAS.Apprenticeships.Api.Types;
+
+namespace Sfa.Das.Sas.Core.Domain.Model
 {
     using System;
     using System.Collections.Generic;
@@ -48,5 +50,11 @@
         public int Duration { get; set; }
 
         public bool IsActiveFramework { get; set; }
+
+        public List<FundingPeriod> FundingPeriods { get; set; }
+
+        public DateTime? NextEffectiveFrom { get; set; }
+
+        public int? NextFundingCap { get; set; }
     }
 }

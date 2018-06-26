@@ -119,20 +119,21 @@
       <HintPath>..\packages\ReflectionMagic.2.1.0\lib\net40\ReflectionMagic.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.51\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Client.0.11.60\lib\net462\SFA.DAS.Apprenticeships.Api.Client.dll</HintPath>
     </Reference>
-    <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.10.110.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.AssessmentOrgs.Api.Client.0.10.110\lib\net45\SFA.DAS.AssessmentOrgs.Api.Client.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.60\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.11.60.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.AssessmentOrgs.Api.Client.0.11.60\lib\net45\SFA.DAS.AssessmentOrgs.Api.Client.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.NLog.Logger, Version=1.0.0.26805, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.NLog.Logger.1.0.0.26805\lib\net45\SFA.DAS.NLog.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SFA.DAS.Providers.Api.Client, Version=0.10.131.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.10.131-prerelease\lib\net45\SFA.DAS.Providers.Api.Client.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SFA.DAS.Providers.Api.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.11.60\lib\net462\SFA.DAS.Providers.Api.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -230,6 +231,7 @@
     <Compile Include="Infrastructure\Web\Services\ButtonTextServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderSearchResponseToViewModel.cs" />
     <Compile Include="Infrastructure\Web\Services\ForMappingProviderToProviderDetailViewModelTests.cs" />
+    <Compile Include="Infrastructure\Web\Services\FundingBandServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\MappingServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ProviderSearchMapperTests.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ForProviderMappingHelper.cs" />
