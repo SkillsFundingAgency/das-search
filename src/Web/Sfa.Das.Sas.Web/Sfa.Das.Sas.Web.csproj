@@ -523,6 +523,8 @@
     <Content Include="Content\dist\images\govuk-crest.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\govuk_logotype_crown.png" />
+    <Content Include="Content\dist\images\govuk_logotype_crown_invert_trans.png" />
     <Content Include="Content\dist\images\icons\status\green_16.png" />
     <Content Include="Content\dist\images\icons\icon-important-2x.png" />
     <Content Include="Content\dist\images\icons\icon-important.png" />

@@ -797,3 +797,37 @@ aside h2:first-child {
         }
     }
 }
+
+/*Beta Banner Header & Footer */
+
+#global-header {
+    .global-header__wrapper {
+        width: 100%;
+    }
+
+    .header-global {
+    }
+
+    .global-header__title {
+        height: auto;
+        @include media(tablet) {
+         width:43%;
+        }
+    }
+
+    .header-logo {
+        #logo {
+            background: url('/Content/dist/images/govuk_logotype_crown.png') no-repeat;
+            background-size: 35px 31px;
+            background-position: 0 0;
+        }
+    }
+}
+
+
+#global-header-bar {
+    background-color: #005ea5;
+}
+
+
+
