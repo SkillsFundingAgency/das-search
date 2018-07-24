@@ -407,11 +407,6 @@
     <Compile Include="ViewModels\FrameworkViewModel.cs" />
     <Compile Include="ViewModels\StandardViewModel.cs" />
     <Compile Include="ViewModels\VersionInformation.cs" />
-    <Compile Include="Views\Apprenticeship\Framework.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Framework.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Apprenticeship\Search.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -669,6 +664,7 @@
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Apprenticeship\Search.cshtml">
       <Generator>RazorGenerator</Generator>

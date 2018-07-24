@@ -121,11 +121,13 @@ namespace Sfa.Das.Sas.Web.Controllers
                 }
 
                 case GetStandardResponse.ResponseCodes.Gone:
+                {
                     message = $"Expired standard request: {id}";
 
                     _logger.Warn($"410 - {message}");
 
                     return new HttpStatusCodeResult(HttpStatusCode.Gone);
+                }
 
                 case GetStandardResponse.ResponseCodes.HttpRequestException:
                 {
