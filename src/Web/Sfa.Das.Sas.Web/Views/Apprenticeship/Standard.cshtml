@@ -160,8 +160,11 @@
 
 @helper GetNextFundingMessage(DateTime? nextEffectiveFrom, int? nextFundingCap)
 {
-    
-    if (nextEffectiveFrom == null || nextFundingCap == null) {return;}
+
+    if (nextEffectiveFrom == null || nextFundingCap == null || nextFundingCap == Model.MaxFunding)
+    {
+        return;
+    }
 
     var nextFundingCapFormatted = GetFundingCapFormatted(nextFundingCap.Value);
     var nextEffectiveFromFormatted = nextEffectiveFrom.Value.ToString("dd MMMM yyyy");

@@ -257,8 +257,11 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 162 "..\..\Views\Apprenticeship\Standard.cshtml"
  
-    
-    if (nextEffectiveFrom == null || nextFundingCap == null) {return;}
+
+    if (nextEffectiveFrom == null || nextFundingCap == null || nextFundingCap == Model.MaxFunding)
+    {
+        return;
+    }
 
     var nextFundingCapFormatted = GetFundingCapFormatted(nextFundingCap.Value);
     var nextEffectiveFromFormatted = nextEffectiveFrom.Value.ToString("dd MMMM yyyy");
@@ -286,7 +289,7 @@ WriteLiteralTo(__razor_helper_writer, " class=\'bold-small\'");
 WriteLiteralTo(__razor_helper_writer, ">\r\n            The funding band maximum for this apprenticeship will change to ");
 
 
-#line 176 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 179 "..\..\Views\Apprenticeship\Standard.cshtml"
                                               WriteTo(__razor_helper_writer, nextFundingCapFormatted);
 
 
@@ -295,7 +298,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            The funding band maximum
 WriteLiteralTo(__razor_helper_writer, " from ");
 
 
-#line 176 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 179 "..\..\Views\Apprenticeship\Standard.cshtml"
                                                                             WriteTo(__razor_helper_writer, nextEffectiveFromFormatted);
 
 
@@ -304,19 +307,19 @@ WriteLiteralTo(__razor_helper_writer, " from ");
 WriteLiteralTo(__razor_helper_writer, "\r\n        </strong>\r\n    </div>\r\n");
 
 
-#line 179 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 182 "..\..\Views\Apprenticeship\Standard.cshtml"
     
 
 #line default
 #line hidden
 });
 
-#line 179 "..\..\Views\Apprenticeship\Standard.cshtml"
+#line 182 "..\..\Views\Apprenticeship\Standard.cshtml"
 }
 #line default
 #line hidden
 
-        #line 182 "..\..\Views\Apprenticeship\Standard.cshtml"
+        #line 185 "..\..\Views\Apprenticeship\Standard.cshtml"
      
 
     private string GetFundingCapFormatted(int value)

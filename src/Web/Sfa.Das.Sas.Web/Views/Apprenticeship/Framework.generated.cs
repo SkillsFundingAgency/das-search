@@ -174,15 +174,17 @@ WriteLiteralTo(__razor_helper_writer, " months</dd>\r\n");
 
 #line 209 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult GetNextFundingMessage(DateTime? nextEffectiveFrom, int? nextFundingCap)
-    {
+{
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 210 "..\..\Views\Apprenticeship\Framework.cshtml"
-     
-    
-    if (nextEffectiveFrom == null || nextFundingCap == null) {return;}
+ 
+    if (nextEffectiveFrom == null || nextFundingCap == null || nextFundingCap == Model.MaxFunding)
+    {
+        return;
+    }
 
     var nextFundingCapFormatted = GetFundingCapFormatted(nextFundingCap.Value);
     var nextEffectiveFromFormatted = nextEffectiveFrom.Value.ToString("dd MMMM yyyy");
@@ -211,7 +213,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                The funding band max
 "o ");
 
 
-#line 224 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 226 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                   WriteTo(__razor_helper_writer, nextFundingCapFormatted);
 
 
@@ -220,7 +222,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                The funding band max
 WriteLiteralTo(__razor_helper_writer, " from ");
 
 
-#line 224 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 226 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                                 WriteTo(__razor_helper_writer, nextEffectiveFromFormatted);
 
 
@@ -229,19 +231,19 @@ WriteLiteralTo(__razor_helper_writer, " from ");
 WriteLiteralTo(__razor_helper_writer, "\r\n        </strong>\r\n    </div>\r\n");
 
 
-#line 227 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 229 "..\..\Views\Apprenticeship\Framework.cshtml"
     
 
 #line default
 #line hidden
 });
 
-#line 227 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 229 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
 
-        #line 229 "..\..\Views\Apprenticeship\Framework.cshtml"
+        #line 231 "..\..\Views\Apprenticeship\Framework.cshtml"
             
 
     private string GetFundingCapFormatted(int value)
