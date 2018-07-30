@@ -23,6 +23,11 @@
         </header>
 
         <dl class="result-data-list">
+            @if (item.CurrentlyNotStartingNewApprentices)
+            {
+                <dd>This provider is not currently starting new apprentices</dd>
+            }
+
             @RenderProviderDetails(item)
 
             <dt><b>Employer satisfaction:</b></dt>

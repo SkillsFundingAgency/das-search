@@ -22,14 +22,20 @@
             </header>
 
             <dl class="result-data-list">
+                
+                @if (item.CurrentlyNotStartingNewApprentices)
+                {
+                    <dd>This provider is not currently starting new apprentices</dd>
+                }
+
                 <dt><b>Distance:</b></dt>
                 <dd class="distance">@item.Distance @(item.Distance == 1 ? "mile" : "miles") away</dd>
                 @if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
                 {
                     if (@item.Address != null)
-                     {
+                    {
                         <dd class="address">@item.LocationAddressLine</dd>
-                     }
+                    }
                 }
 
                 @RenderDeliveryOptions(item)

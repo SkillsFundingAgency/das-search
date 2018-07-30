@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using Elasticsearch.Net;
 using FeatureToggle.Core.Fluent;
@@ -43,7 +44,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         private void SetDefaultSettings(ConnectionSettings settings)
         {
-            if (Is<Elk5Feature>.Enabled)
+            if (!Debugger.IsAttached)
             {
                 settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
             }

@@ -132,6 +132,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LocationId, y => y.Ignore())
                 .ForMember(x => x.LocationName, y => y.Ignore())
                 .ForMember(x => x.Address, y => y.Ignore())
+                .ForMember(x => x.CurrentlyNotStartingNewApprentices, y => y.Ignore())
                 ;
 
             cfg.CreateMap<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>()

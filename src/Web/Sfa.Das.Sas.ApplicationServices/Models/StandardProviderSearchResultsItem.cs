@@ -57,5 +57,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public bool HasParentCompanyGuarantee { get; set; }
 
         public bool IsNew { get; set; }
+
+		public bool CurrentlyNotStartingNewApprentices { get; set; }
     }
 }
