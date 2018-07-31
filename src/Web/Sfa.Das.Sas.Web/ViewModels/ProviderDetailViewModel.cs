@@ -23,5 +23,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool IsNew { get; set; }
         public bool IsLevyPayerOnly { get; set; }
         public bool DisplayAboutThisProvider { get; set; }
-    }
+		public bool CurrentlyNotStartingNewApprentices { get; set; }
+   }
 }

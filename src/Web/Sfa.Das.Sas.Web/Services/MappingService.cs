@@ -73,6 +73,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location.Address))
                 .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.Apprenticeship))
                 .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.ContactInformation))
+                .ForMember(dest => dest.CurrentlyNotStartingNewApprentices, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.CurrentlyNotStartingNewApprentices))
                 .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Product.DeliveryModes))
                 .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Location))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.ApprenticeshipDetails.Provider.Name))
@@ -132,6 +133,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LocationId, y => y.Ignore())
                 .ForMember(x => x.LocationName, y => y.Ignore())
                 .ForMember(x => x.Address, y => y.Ignore())
+                .ForMember(x => x.CurrentlyNotStartingNewApprentices, y => y.Ignore())
                 ;
 
             cfg.CreateMap<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -164,6 +166,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
                 .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
                 .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.Provider.ContactInformation))
+                .ForMember(dest => dest.CurrentlyNotStartingNewApprentices, opt => opt.MapFrom(source => source.Provider.CurrentlyNotStartingNewApprentices))
                 .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.Product.DeliveryModes))
                 .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.Location))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Provider.Name))

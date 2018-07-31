@@ -364,3 +364,17 @@ only screen and (min-resolution: 2dppx) {
         }
     }
 }
+
+.error-summary.warning {
+    margin: 0 0 15px;
+    p.error-message {
+        margin: -5px 0;
+        @media (min-width: 641px) {
+            margin-bottom: -3px;
+        }
+    }
+}
+
+.result .error-summary.warning {
+    margin: 15px 0;
+}

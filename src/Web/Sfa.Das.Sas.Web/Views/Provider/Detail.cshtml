@@ -25,6 +25,7 @@
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
                 <dl>
+                 
                     @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, Model.Name + " website")
                     @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
                     @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
@@ -34,6 +35,13 @@
             </div>
         </div>
         <div class="column-two-thirds">
+
+            @if (Model.CurrentlyNotStartingNewApprentices)
+            {
+                <div class="error-summary warning">
+                    <p class="error-message">This provider is not currently starting new apprentices</p>
+                </div>
+            }
 
             <section>
 

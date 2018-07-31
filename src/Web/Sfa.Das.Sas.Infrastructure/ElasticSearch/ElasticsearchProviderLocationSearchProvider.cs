@@ -63,8 +63,9 @@
                 MatchingLocationId = hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId,
                 NationalProvider = hit.Source.NationalProvider,
                 IsHigherEducationInstitute = hit.Source.IsHigherEducationInstitute,
-                HasNonLevyContract = hit.Source.HasNonLevyContract
-            };
+                HasNonLevyContract = hit.Source.HasNonLevyContract,
+	            CurrentlyNotStartingNewApprentices = hit.Source.CurrentlyNotStartingNewApprentices
+			};
         }
 
         private static FrameworkProviderSearchResultsItem MapToFrameworkProviderSearhResultsItem(IHit<FrameworkProviderSearchResultsItem> hit)
@@ -92,8 +93,9 @@
                 TrainingLocations = hit.Source.TrainingLocations,
                 MatchingLocationId = hit?.InnerHits != null ? hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId : (int?)null,
                 NationalProvider = hit.Source.NationalProvider,
-                HasNonLevyContract = hit.Source.HasNonLevyContract
-            };
+                HasNonLevyContract = hit.Source.HasNonLevyContract,
+	            CurrentlyNotStartingNewApprentices = hit.Source.CurrentlyNotStartingNewApprentices
+			};
         }
 
         private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByLocation<T>(Coordinate location)
@@ -124,7 +126,7 @@
 
             return descriptor
                 .Terms(t => t
-                    .Field(x => x.DeliveryModes)
+                    .Field(x => x.DeliveryModesKeywords)
                     .Terms(deliveryModes));
         }
 
@@ -324,15 +326,8 @@
         private Func<AggregationContainerDescriptor<T>, IAggregationContainer> GetProviderSearchAggregationsSelector<T>()
             where T : class, IApprenticeshipProviderSearchResultsItem
         {
-            if (Is<Elk5Feature>.Enabled)
-            {
-                return aggs => aggs
-                    .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
-                    .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider));
-            }
-
             return aggs => aggs
-                .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModes).MinimumDocumentCount(0))
+                .Terms(TrainingTypeAggregateName, tt => tt.Field(fi => fi.DeliveryModesKeywords).MinimumDocumentCount(0))
                 .Terms(NationalProviderAggregateName, tt => tt.Field(fi => fi.NationalProvider));
         }
 

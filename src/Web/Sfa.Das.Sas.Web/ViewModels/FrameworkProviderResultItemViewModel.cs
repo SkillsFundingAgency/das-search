@@ -54,5 +54,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string FrameworkId { get; set; }
 
         public string LocationAddressLine { get; set; }
+
+		public bool CurrentlyNotStartingNewApprentices { get; set; }
     }
 }

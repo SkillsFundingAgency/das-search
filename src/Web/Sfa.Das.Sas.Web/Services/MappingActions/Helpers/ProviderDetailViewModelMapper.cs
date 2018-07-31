@@ -25,7 +25,8 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
             var viewModel = new ProviderDetailViewModel {
                 DisplayAboutThisProvider = !hideAboutThisProviderForUlns.Contains(provider.Ukprn),
                 Email = provider.Email,
-                IsEmployerProvider = provider.IsEmployerProvider,
+	            CurrentlyNotStartingNewApprentices = provider.CurrentlyNotStartingNewApprentices,
+				IsEmployerProvider = provider.IsEmployerProvider,
                 EmployerSatisfaction = provider.EmployerSatisfaction,
                 EmployerSatisfactionMessage = employerSatisfationMessage,
                 IsHigherEducationInstitute = provider.IsHigherEducationInstitute,
