@@ -75,5 +75,7 @@
             get;
             set;
         }
+
+	    public bool CurrentlyNotStartingNewApprentices { get; set; }
     }
 }

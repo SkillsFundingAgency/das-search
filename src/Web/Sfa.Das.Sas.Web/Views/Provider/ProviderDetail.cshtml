@@ -24,6 +24,12 @@
     <div class="grid-row">
         <div class="column-two-thirds">
             <dl class="data-list--provider data-list--compact">
+                
+                @if (Model.CurrentlyNotStartingNewApprentices)
+                {
+                    <dd>This provider is not currently starting new apprentices</dd>
+                }
+
                 @if (!string.IsNullOrEmpty(Model.TradingNames))
                 {
                     <dt>Trading names:</dt>
