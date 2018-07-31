@@ -166,6 +166,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
                 .ForMember(dest => dest.Apprenticeship, opt => opt.MapFrom(source => source.Product.Apprenticeship))
                 .ForMember(dest => dest.ContactInformation, opt => opt.MapFrom(source => source.Provider.ContactInformation))
+                .ForMember(dest => dest.CurrentlyNotStartingNewApprentices, opt => opt.MapFrom(source => source.Provider.CurrentlyNotStartingNewApprentices))
                 .ForMember(dest => dest.DeliveryModes, opt => opt.MapFrom(source => source.Product.DeliveryModes))
                 .ForMember(dest => dest.Location, opt => opt.MapFrom(source => source.Location))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Provider.Name))
