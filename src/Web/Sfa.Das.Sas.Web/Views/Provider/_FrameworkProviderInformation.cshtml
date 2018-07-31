@@ -21,12 +21,14 @@
                 </h2>
             </header>
 
+            @if (item.CurrentlyNotStartingNewApprentices)
+            {
+                <div class="error-summary warning">
+                    <p class="error-message">This provider is not currently starting new apprentices</p>
+                </div>
+            }
+
             <dl class="result-data-list">
-                
-                @if (item.CurrentlyNotStartingNewApprentices)
-                {
-                    <dd>This provider is not currently starting new apprentices</dd>
-                }
 
                 <dt><b>Distance:</b></dt>
                 <dd class="distance">@item.Distance @(item.Distance == 1 ? "mile" : "miles") away</dd>
