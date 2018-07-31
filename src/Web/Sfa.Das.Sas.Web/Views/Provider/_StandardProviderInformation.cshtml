@@ -25,7 +25,9 @@
         <dl class="result-data-list">
             @if (item.CurrentlyNotStartingNewApprentices)
             {
-                <dd>This provider is not currently starting new apprentices</dd>
+                <div class="error-summary warning">
+                    <p class="error-message">This provider is not currently starting new apprentices</p>
+                </div>
             }
 
             @RenderProviderDetails(item)
