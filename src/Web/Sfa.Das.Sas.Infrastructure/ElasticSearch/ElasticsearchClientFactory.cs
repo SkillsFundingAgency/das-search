@@ -44,12 +44,17 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
         private void SetDefaultSettings(ConnectionSettings settings)
         {
-            if (!Debugger.IsAttached)
+            if (!Debugger.IsAttached || !Is<IgnoreSslCertificateFeature>.Enabled)
             {
                 settings.BasicAuthentication(_applicationSettings.ElasticsearchUsername, _applicationSettings.ElasticsearchPassword);
             }
 
-	        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            if (Debugger.IsAttached)
+            {
+                ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            }
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
             settings.DisableDirectStreaming();
             settings.MapDefaultTypeNames(d => d.Add(typeof(StandardSearchResultsItem), "standarddocument"));

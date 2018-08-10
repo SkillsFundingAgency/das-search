@@ -4,10 +4,9 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="PostcodeUrl" value="http://dashttpstatuscodefake.azurewebsites.net/api/status/500/" />
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
       <Setting name="SurveyUrl" value="https://www.surveymonkey.co.uk/r/F3LCBG6" />
-      <Setting name="ElasticServerUrls" value="http://127.0.0.1:9200,http://192.168.99.100:9200,http://docker.local:9200" />
+      <Setting name="ElasticServerUrls" value="https://276a75aff62742f080cfc473765e3f14.eu-west-1.aws.found.io:9243" />
       <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" />
       <Setting name="CookieGoogleUrl" value="https://tools.google.com/dlpage/gaoptout" />
       <Setting name="CookieImprovementUrl" value="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/" />
@@ -16,13 +15,13 @@
       <Setting name="AchievementRateUrl" value="https://www.gov.uk/government/collections/sfa-national-success-rates-tables" />
       <Setting name="ManageApprenticeshipFundsUrl" value="https://www.gov.uk/guidance/manage-apprenticeship-funds" />
       <Setting name="EnvironmentName" value="" />
-      <Setting name="ApprenticeshipIndexAlias" value="" />
-      <Setting name="ProviderIndexAlias" value="" />
-      <Setting name="ApprenticeshipApiBaseUrl" value="" />
-      <Setting name="ElasticsearchUsername" value="" />
-      <Setting name="ElasticsearchPassword" value="" />
-      <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="" />
-      <Setting name="FeatureToggle.Elk5Feature" value="" />
+      <Setting name="ApprenticeshipIndexAlias" value="localapprenticeshipindexalias" />
+      <Setting name="ProviderIndexAlias" value="localproviderindexalias" />
+      <Setting name="ApprenticeshipApiBaseUrl" value="https://localhost/" />
+      <Setting name="ElasticsearchUsername" value="elastic" />
+      <Setting name="ElasticsearchPassword" value="fk2JQQbPAxDz2TGHlNsg2Ak6" />
+      <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="false" />
+      <Setting name="FeatureToggle.Elk5Feature" value="true" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="" />
       <Setting name="BuildId" value="" />
