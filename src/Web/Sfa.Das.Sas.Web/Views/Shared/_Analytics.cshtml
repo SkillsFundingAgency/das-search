@@ -1,4 +1,4 @@
-﻿@{var gtmTrackingId = System.Configuration.ConfigurationManager.AppSettings["ga.gtm.trackingid"];}
+﻿@{var gtmTrackingId = System.Configuration.ConfigurationManager.AppSettings["GaGtmTrackingid"];}
 @if (!string.IsNullOrEmpty(gtmTrackingId))
 {
     <!-- Google Tag Manager -->
@@ -35,7 +35,7 @@
         appInsights.trackPageView();
     </script>
 }
-@{var trackingId = System.Configuration.ConfigurationManager.AppSettings["ga.trackingid"];}
+@{var trackingId = System.Configuration.ConfigurationManager.AppSettings["GaTrackingid"];}
 @if (!string.IsNullOrEmpty(trackingId))
 {
  <script>

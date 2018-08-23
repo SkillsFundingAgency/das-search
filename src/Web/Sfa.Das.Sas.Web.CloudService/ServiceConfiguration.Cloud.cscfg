@@ -28,6 +28,8 @@
       <Setting name="LoggingRedisConnectionString" value="__LoggingRedisConnectionString__" />
       <Setting name="LoggingRedisKey" value="__LoggingRedisKey__" />
       <Setting name="InstrumentationKey" value="__InstrumentationKey__" />
+      <Setting name="GaGtmTrackingid" value="__GaGtmTrackingid__" />
+      <Setting name="GaTrackingid" value="__GaTrackingid__" />
     </ConfigurationSettings>
     <Certificates>
       <Certificate name="WebSslCert" thumbprint="7A1BC8263B7CBAA2B355934D0BB8031B469C1AE1" thumbprintAlgorithm="sha1" />

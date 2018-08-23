@@ -1,15 +1,13 @@
-﻿using System;
-using System.Configuration;
-
-namespace Sfa.Das.Sas.Web.Services
+﻿namespace Sfa.Das.Sas.Web.Services
 {
     using Extensions;
+    using Microsoft.Azure;
 
     public static class SettingsFinder
     {
         public static bool IsNullOrEmpty(string settingsKey)
         {
-            return ConfigurationManager.AppSettings[settingsKey].IsNullOrEmpty();
+            return CloudConfigurationManager.GetSetting(settingsKey).IsNullOrEmpty();
         }
     }
 }

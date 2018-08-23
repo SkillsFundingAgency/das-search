@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                                 {
                                     SurveyUrl = _surveyUrl,
                                     ShowCookieBanner = _cookieService.ShowCookieForBanner(Request?.RequestContext?.HttpContext),
-                                    ShowGoogleTagManager = !SettingsFinder.IsNullOrEmpty("ga.gtm.trackingid")
+                                    ShowGoogleTagManager = !SettingsFinder.IsNullOrEmpty("GaGtmTrackingid")
                                 };
 
             return PartialView("_Header", viewModel);
