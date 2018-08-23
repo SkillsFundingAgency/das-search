@@ -1,4 +1,4 @@
-﻿@{var gtmTrackingId = System.Configuration.ConfigurationManager.AppSettings["GaGtmTrackingid"];}
+﻿@{var gtmTrackingId = Microsoft.Azure.CloudConfigurationManager.GetSetting("GaGtmTrackingid");}
 @if (!string.IsNullOrEmpty(gtmTrackingId))
 {
     <!-- Google Tag Manager -->
@@ -35,7 +35,7 @@
         appInsights.trackPageView();
     </script>
 }
-@{var trackingId = System.Configuration.ConfigurationManager.AppSettings["GaTrackingid"];}
+@{var trackingId = Microsoft.Azure.CloudConfigurationManager.GetSetting("GaTrackingid");}
 @if (!string.IsNullOrEmpty(trackingId))
 {
  <script>
