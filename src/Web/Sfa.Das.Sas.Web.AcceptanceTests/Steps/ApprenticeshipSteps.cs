@@ -11,7 +11,7 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests
         [When(@"I chooes the first result")]
         public void WhenIChooesTheFirstResult()
         {
-            var searchResultPage = Get<SearchResultPage>();
+            var searchResultPage = Get<ApprenticeshipSearchResultPage>();
             var apprenticeshipPage = searchResultPage.ClickOnResult(1);
             Set(apprenticeshipPage);
         }
