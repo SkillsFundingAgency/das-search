@@ -11,6 +11,7 @@ using Sfa.Das.Sas.Web.Extensions;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 using Sfa.Das.Sas.Web.ViewModels;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Web.Controllers
 {
@@ -128,7 +129,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> ProviderDetail(long ukprn, string providerName = "", string pageNumber = "")
+        public async Task<ActionResult> ProviderDetail(long ukprn, string providerName = "", string pageNumber = "", string keyword = "")
         {
             int page;
             if (!int.TryParse(pageNumber, out page))
@@ -153,7 +154,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, message);
             }
 
-            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider,response.ApprenticeshipTrainingSummary,_settings.HideAboutProviderForUkprns);
+            var viewModel = ProviderDetailViewModelMapper.GetProviderDetailViewModel(response.Provider,response.ApprenticeshipTrainingSummary,_settings.HideAboutProviderForUkprns,keyword);
 
             return View(viewModel);
         }
@@ -198,6 +199,9 @@ namespace Sfa.Das.Sas.Web.Controllers
                     dest.AchievementRateSourceUrl = _settings.AchievementRateUrl.ToString();
                     dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                     dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
+                    dest.SearchTerm = criteria.Keyword;
+                    dest.ApprenticeshipId = dest.ApprenticeshipType == ApprenticeshipTrainingType.Framework ? criteria.FrameworkId : criteria.StandardCode;
+                    dest.Postcode = criteria.Postcode.Replace(" ","+");
                 }));
 
             return View(viewModel);

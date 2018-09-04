@@ -90,7 +90,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(string id, string keywords)
+        public ActionResult Standard(string id, string keywords, bool apprenticeshipSearch = false, string ukprn = null)
         {
             _logger.Info($"Getting strandard {id}");
             var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
@@ -140,12 +140,12 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             _logger.Info($"Mapping Standard {id}");
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
-            ProcessViewModel(viewModel, response.Standard?.FundingPeriods, response.Standard?.EffectiveFrom);
+            ProcessViewModel(viewModel, response.Standard?.FundingPeriods, response.Standard?.EffectiveFrom, apprenticeshipSearch, ukprn);
 
             return View(viewModel);
         }
         
-        public ActionResult Framework(string id, string keywords)
+        public ActionResult Framework(string id, string keywords, bool apprenticeshipSearch = false, string ukprn = null)
         {
             _logger.Info($"Getting framework {id}");
             var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
@@ -176,7 +176,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 case GetFrameworkResponse.ResponseCodes.Success:
                     _logger.Info($"Mapping Framework {id}");
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
-                    ProcessViewModel(viewModel, response.Framework?.FundingPeriods, response.Framework?.EffectiveFrom);
+                    ProcessViewModel(viewModel, response.Framework?.FundingPeriods, response.Framework?.EffectiveFrom,apprenticeshipSearch, ukprn);
 
                     return View(viewModel);
 
@@ -256,20 +256,24 @@ namespace Sfa.Das.Sas.Web.Controllers
             return rv;
         }
 
-        private void ProcessViewModel(StandardViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom)
+        private void ProcessViewModel(StandardViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom, bool apprenticeshipSearch, string ukprn)
         {
             viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
             var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(fundingPeriods, effectiveFrom, _nextFundingPeriodMessageCutoffMonths);
             viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
             viewModel.NextFundingCap = nextFundingCap?.FundingCap;
+            viewModel.ReturnToApprenticeshipSearch = apprenticeshipSearch;
+            viewModel.Ukprn = ukprn;
         }
 
-        private void ProcessViewModel(FrameworkViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom)
+        private void ProcessViewModel(FrameworkViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom, bool apprenticeshipSearch, string ukprn)
         {
             viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
             var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(fundingPeriods, effectiveFrom, _nextFundingPeriodMessageCutoffMonths);
             viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
             viewModel.NextFundingCap = nextFundingCap?.FundingCap;
+            viewModel.ReturnToApprenticeshipSearch = apprenticeshipSearch;
+            viewModel.Ukprn = ukprn;
         }
     }
 }

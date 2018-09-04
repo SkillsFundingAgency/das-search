@@ -1,3 +1,5 @@
+using SFA.DAS.Apprenticeships.Api.Types;
+
 namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderSearchViewModel
@@ -9,6 +11,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public string PostUrl { get; set; }
 
         public string ApprenticeshipId { get; set; }
+
+        public ApprenticeshipTrainingType ApprenticeshipType { get; set; }
 
         public string PostCode { get; set; }
 

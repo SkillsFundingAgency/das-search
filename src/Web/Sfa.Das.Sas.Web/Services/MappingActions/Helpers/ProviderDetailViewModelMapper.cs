@@ -8,7 +8,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
     public static class ProviderDetailViewModelMapper
     {
-        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary, IEnumerable<long> hideAboutThisProviderForUlns = null)
+        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary, IEnumerable<long> hideAboutThisProviderForUlns = null, string searchTerm = null)
         {
             hideAboutThisProviderForUlns = hideAboutThisProviderForUlns ?? new List<long>();
 
@@ -41,7 +41,8 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 ApprenticeshipTrainingSummary = apprenticeshipTrainingSummary,
                 HasParentCompanyGuarantee = provider.HasParentCompanyGuarantee,
                 IsNew = provider.IsNew,
-                IsLevyPayerOnly = provider.IsLevyPayerOnly
+                IsLevyPayerOnly = provider.IsLevyPayerOnly,
+                SearchTerm = searchTerm
                 };
 
             if (provider.Aliases != null && provider.Aliases.Any())
