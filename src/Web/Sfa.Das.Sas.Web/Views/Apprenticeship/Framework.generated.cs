@@ -46,14 +46,14 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     public partial class Framework : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.FrameworkViewModel>
     {
 
-#line 191 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 196 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult GetStandardProperty(string title, string id, string item, bool hideIfEmpty = false)
     {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 192 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 197 "..\..\Views\Apprenticeship\Framework.cshtml"
      
         if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
         {
@@ -64,7 +64,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "            <dt>");
 
 
-#line 195 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 200 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, title);
 
 
@@ -74,20 +74,20 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9794), Tuple.Create("\"", 9802)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9677), Tuple.Create("\"", 9685)
 
-#line 196 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 9799), Tuple.Create<System.Object, System.Int32>(id
+#line 201 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create("", 9682), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 9799), false)
+, 9682), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 196 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 201 "..\..\Views\Apprenticeship\Framework.cshtml"
 WriteTo(__razor_helper_writer, item);
 
 
@@ -96,7 +96,7 @@ WriteTo(__razor_helper_writer, item);
 WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 
 
-#line 197 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 202 "..\..\Views\Apprenticeship\Framework.cshtml"
         }
 
 
@@ -104,19 +104,19 @@ WriteLiteralTo(__razor_helper_writer, "</dd>\r\n");
 #line hidden
 });
 
-#line 198 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 203 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
 
-#line 200 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 205 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult GetDurationProperty(string title, string id, string item, bool hideIfEmpty = false)
                 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 201 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 206 "..\..\Views\Apprenticeship\Framework.cshtml"
                  
                     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
                         {
@@ -127,7 +127,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WriteLiteralTo(__razor_helper_writer, "                            <dt>");
 
 
-#line 204 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 209 "..\..\Views\Apprenticeship\Framework.cshtml"
   WriteTo(__razor_helper_writer, title);
 
 
@@ -137,20 +137,20 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 10117), Tuple.Create("\"", 10125)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 10000), Tuple.Create("\"", 10008)
 
-#line 205 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 10122), Tuple.Create<System.Object, System.Int32>(id
+#line 210 "..\..\Views\Apprenticeship\Framework.cshtml"
+, Tuple.Create(Tuple.Create("", 10005), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 10122), false)
+, 10005), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
 
 
-#line 205 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 210 "..\..\Views\Apprenticeship\Framework.cshtml"
            WriteTo(__razor_helper_writer, item);
 
 
@@ -159,7 +159,7 @@ WriteLiteralTo(__razor_helper_writer, ">");
 WriteLiteralTo(__razor_helper_writer, " months</dd>\r\n");
 
 
-#line 206 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 211 "..\..\Views\Apprenticeship\Framework.cshtml"
                         }
                 
 
@@ -167,19 +167,19 @@ WriteLiteralTo(__razor_helper_writer, " months</dd>\r\n");
 #line hidden
 });
 
-#line 207 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 212 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
 
-#line 209 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 214 "..\..\Views\Apprenticeship\Framework.cshtml"
 public System.Web.WebPages.HelperResult GetNextFundingMessage(DateTime? nextEffectiveFrom, int? nextFundingCap)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 210 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 215 "..\..\Views\Apprenticeship\Framework.cshtml"
  
     if (nextEffectiveFrom == null || nextFundingCap == null || nextFundingCap == Model.MaxFunding)
     {
@@ -213,7 +213,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                The funding band max
 "o ");
 
 
-#line 226 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 231 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                   WriteTo(__razor_helper_writer, nextFundingCapFormatted);
 
 
@@ -222,7 +222,7 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n                The funding band max
 WriteLiteralTo(__razor_helper_writer, " from ");
 
 
-#line 226 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 231 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                                 WriteTo(__razor_helper_writer, nextEffectiveFromFormatted);
 
 
@@ -231,19 +231,76 @@ WriteLiteralTo(__razor_helper_writer, " from ");
 WriteLiteralTo(__razor_helper_writer, "\r\n        </strong>\r\n    </div>\r\n");
 
 
-#line 229 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 234 "..\..\Views\Apprenticeship\Framework.cshtml"
     
 
 #line default
 #line hidden
 });
 
-#line 229 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 234 "..\..\Views\Apprenticeship\Framework.cshtml"
 }
 #line default
 #line hidden
 
-        #line 231 "..\..\Views\Apprenticeship\Framework.cshtml"
+#line 236 "..\..\Views\Apprenticeship\Framework.cshtml"
+public System.Web.WebPages.HelperResult getFindTrainingProviderButton(string frameworkId, string searchTerm)
+{
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 237 "..\..\Views\Apprenticeship\Framework.cshtml"
+ 
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "    <a");
+
+WriteLiteralTo(__razor_helper_writer, " class=\"button btn-find-trng-prov\"");
+
+WriteLiteralTo(__razor_helper_writer, " rel=\"nofollow\"");
+
+WriteLiteralTo(__razor_helper_writer, " id=\"ga-find-provider-bottom\"");
+
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 11016), Tuple.Create("\"", 11139)
+
+#line 238 "..\..\Views\Apprenticeship\Framework.cshtml"
+          , Tuple.Create(Tuple.Create("", 11023), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = frameworkId, keywords = searchTerm})
+
+#line default
+#line hidden
+, 11023), false)
+);
+
+WriteLiteralTo(__razor_helper_writer, ">\r\n");
+
+WriteLiteralTo(__razor_helper_writer, "        ");
+
+
+#line 239 "..\..\Views\Apprenticeship\Framework.cshtml"
+WriteTo(__razor_helper_writer, Model.FindApprenticeshipTrainingText);
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "\r\n    </a>\r\n");
+
+
+#line 241 "..\..\Views\Apprenticeship\Framework.cshtml"
+
+
+#line default
+#line hidden
+});
+
+#line 241 "..\..\Views\Apprenticeship\Framework.cshtml"
+}
+#line default
+#line hidden
+
+        #line 243 "..\..\Views\Apprenticeship\Framework.cshtml"
             
 
     private string GetFundingCapFormatted(int value)
@@ -282,7 +339,55 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n            <h1");
+WriteLiteral(">\r\n");
+
+            
+            #line 13 "..\..\Views\Apprenticeship\Framework.cshtml"
+            
+            
+            #line default
+            #line hidden
+            
+            #line 13 "..\..\Views\Apprenticeship\Framework.cshtml"
+             if (Model.ReturnToApprenticeshipSearch)
+            {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 15 "..\..\Views\Apprenticeship\Framework.cshtml"
+           Write(Html.ActionLink("Back", "SearchResults", new { @keywords = Model.SearchTerm }, new { @class = "link-back" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 15 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                                                                                             
+            }
+            else
+            {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 19 "..\..\Views\Apprenticeship\Framework.cshtml"
+           Write(Html.ActionLink("Back", Model.Ukprn,"Provider", new { @keywords = Model.SearchTerm }, new { @class = "link-back" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 19 "..\..\Views\Apprenticeship\Framework.cshtml"
+                                                                                                                                    
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
@@ -291,7 +396,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 14 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 23 "..\..\Views\Apprenticeship\Framework.cshtml"
            Write(Model.Title);
 
             
@@ -302,13 +407,13 @@ WriteLiteral("\r\n            </h1>\r\n            <p>\r\n                This i
 "can achieve.\r\n            </p>\r\n");
 
             
-            #line 19 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 28 "..\..\Views\Apprenticeship\Framework.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 19 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 28 "..\..\Views\Apprenticeship\Framework.cshtml"
              if (Model.ExpiryDateString != null)
             {
 
@@ -335,7 +440,7 @@ WriteLiteral(" class=\"bold-small\"");
 WriteLiteral(">\r\n                        This apprenticeship is closed to new starters from ");
 
             
-            #line 27 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 36 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                       Write(Model.ExpiryDateString);
 
             
@@ -344,7 +449,7 @@ WriteLiteral(">\r\n                        This apprenticeship is closed to new 
 WriteLiteral("\r\n                    </strong>\r\n                </div>\r\n");
 
             
-            #line 30 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 39 "..\..\Views\Apprenticeship\Framework.cshtml"
 
             }
 
@@ -363,37 +468,19 @@ WriteLiteral(">\r\n                <aside");
 
 WriteLiteral(" class=\"hidden-for-mobile-tablet\"");
 
-WriteLiteral(">\r\n\r\n                    <a");
+WriteLiteral(">\r\n\r\n");
 
-WriteLiteral(" class=\"button ui-find-training-providers\"");
-
-WriteLiteral(" target=\"find-training-providers\"");
-
-WriteLiteral(" rel=\"nofollow\"");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 1503), Tuple.Create("\"", 1638)
-            
-            #line 38 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                       , Tuple.Create(Tuple.Create("", 1510), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
-            
-            #line default
-            #line hidden
-, 1510), false)
-);
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                        ");
+WriteLiteral("                ");
 
             
-            #line 39 "..\..\Views\Apprenticeship\Framework.cshtml"
-                   Write(Model.FindApprenticeshipTrainingText);
+            #line 47 "..\..\Views\Apprenticeship\Framework.cshtml"
+           Write(getFindTrainingProviderButton(Model.FrameworkId, Model.SearchTerm));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                    </a>\r\n                </aside>\r\n            </div>\r\n\r\n     " +
-"   </div>\r\n    </div>\r\n\r\n    <section>\r\n        <header>\r\n            <h2");
+WriteLiteral("\r\n                </aside>\r\n            </div>\r\n\r\n        </div>\r\n    </div>\r\n\r\n " +
+"   <section>\r\n        <header>\r\n            <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
@@ -405,13 +492,13 @@ WriteLiteral(" class=\"data-list\"");
 WriteLiteral(">\r\n");
 
             
-            #line 55 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 62 "..\..\Views\Apprenticeship\Framework.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 55 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 62 "..\..\Views\Apprenticeship\Framework.cshtml"
              if (!string.IsNullOrEmpty(Model.FrameworkOverview))
                 {
 
@@ -431,7 +518,7 @@ WriteLiteral(" class=\"overviewText\"");
 WriteLiteral(">");
 
             
-            #line 58 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 65 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         Write(Model.FrameworkOverview);
 
             
@@ -440,7 +527,7 @@ WriteLiteral(">");
 WriteLiteral(" </dd>\r\n");
 
             
-            #line 59 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 66 "..\..\Views\Apprenticeship\Framework.cshtml"
                 }
 
             
@@ -449,7 +536,7 @@ WriteLiteral(" </dd>\r\n");
 WriteLiteral("            ");
 
             
-            #line 60 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 67 "..\..\Views\Apprenticeship\Framework.cshtml"
        Write(GetStandardProperty("Level", "level", $"{Model.Level} (equivalent to {EquivalenceLevelService.GetApprenticeshipLevel(Model.Level.ToString())})"));
 
             
@@ -460,7 +547,7 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 61 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 68 "..\..\Views\Apprenticeship\Framework.cshtml"
        Write(GetDurationProperty("Typical length", "length", Model.Duration.ToString()));
 
             
@@ -473,7 +560,7 @@ WriteLiteral(" id=\"funding-cap\"");
 WriteLiteral(">\r\n                Up to ");
 
             
-            #line 65 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 72 "..\..\Views\Apprenticeship\Framework.cshtml"
                  Write(GetFundingCapFormatted(Model.MaxFunding));
 
             
@@ -484,7 +571,7 @@ WriteLiteral(" per apprentice.<br />\r\n");
 WriteLiteral("                ");
 
             
-            #line 66 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 73 "..\..\Views\Apprenticeship\Framework.cshtml"
            Write(GetNextFundingMessage(Model.NextEffectiveFrom, Model.NextFundingCap));
 
             
@@ -505,13 +592,13 @@ WriteLiteral(" class=\"entry-requirements\"");
 WriteLiteral(">\r\n");
 
             
-            #line 71 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 78 "..\..\Views\Apprenticeship\Framework.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 71 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 78 "..\..\Views\Apprenticeship\Framework.cshtml"
                  if (!string.IsNullOrEmpty(Model.EntryRequirements))
                     {
 
@@ -521,7 +608,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        <div>");
 
             
-            #line 73 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 80 "..\..\Views\Apprenticeship\Framework.cshtml"
                         Write(Model.EntryRequirements);
 
             
@@ -530,7 +617,7 @@ WriteLiteral("                        <div>");
 WriteLiteral("</div>\r\n");
 
             
-            #line 74 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 81 "..\..\Views\Apprenticeship\Framework.cshtml"
                     }
 
             
@@ -545,13 +632,13 @@ WriteLiteral(" class=\"job-roles\"");
 WriteLiteral(">\r\n");
 
             
-            #line 80 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 87 "..\..\Views\Apprenticeship\Framework.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 80 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 87 "..\..\Views\Apprenticeship\Framework.cshtml"
                  if (Model.JobRoles != null && Model.JobRoles.Any())
                     {
 
@@ -561,13 +648,13 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        <ul>\r\n");
 
             
-            #line 83 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 90 "..\..\Views\Apprenticeship\Framework.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 83 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 90 "..\..\Views\Apprenticeship\Framework.cshtml"
                              foreach (var jobRole in Model.JobRoles.Take(5))
                                 {
 
@@ -577,7 +664,7 @@ WriteLiteral("                        <ul>\r\n");
 WriteLiteral("                                    <li>");
 
             
-            #line 85 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 92 "..\..\Views\Apprenticeship\Framework.cshtml"
                                    Write(jobRole);
 
             
@@ -586,7 +673,7 @@ WriteLiteral("                                    <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 86 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 93 "..\..\Views\Apprenticeship\Framework.cshtml"
                                 }
 
             
@@ -595,7 +682,7 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 87 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 94 "..\..\Views\Apprenticeship\Framework.cshtml"
                              if (Model.JobRoles.Count() > 5)
                                 {
                                     foreach (var jobRole in Model.JobRoles.Skip(5))
@@ -611,7 +698,7 @@ WriteLiteral(" class=\"default-hidden\"");
 WriteLiteral(">");
 
             
-            #line 91 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 98 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                           Write(jobRole);
 
             
@@ -620,7 +707,7 @@ WriteLiteral(">");
 WriteLiteral("</li>\r\n");
 
             
-            #line 92 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 99 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                 }
 
             
@@ -635,7 +722,7 @@ WriteLiteral(" class=\"showmore hidden\"");
 WriteLiteral(">Show more</a>\r\n");
 
             
-            #line 94 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 101 "..\..\Views\Apprenticeship\Framework.cshtml"
                                 }
 
             
@@ -644,7 +731,7 @@ WriteLiteral(">Show more</a>\r\n");
 WriteLiteral("                        </ul>\r\n");
 
             
-            #line 96 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 103 "..\..\Views\Apprenticeship\Framework.cshtml"
                     }
 
             
@@ -664,13 +751,13 @@ WriteLiteral(" class=\"qualifications\"");
 WriteLiteral(">\r\n");
 
             
-            #line 105 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 112 "..\..\Views\Apprenticeship\Framework.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 105 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 112 "..\..\Views\Apprenticeship\Framework.cshtml"
                      if (Model.CompetencyQualification != null && Model.CompetencyQualification.Any())
                         {
 
@@ -685,13 +772,13 @@ WriteLiteral(">\r\n                                <p>Apprentices will achieve a
 "ompetence\') qualification:</p>\r\n                                <ul>\r\n");
 
             
-            #line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 117 "..\..\Views\Apprenticeship\Framework.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 110 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 117 "..\..\Views\Apprenticeship\Framework.cshtml"
                                      foreach (var qualification in Model.CompetencyQualification.Take(3))
                                         {
 
@@ -701,7 +788,7 @@ WriteLiteral(">\r\n                                <p>Apprentices will achieve a
 WriteLiteral("                                            <li>");
 
             
-            #line 112 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 119 "..\..\Views\Apprenticeship\Framework.cshtml"
                                            Write(qualification);
 
             
@@ -710,7 +797,7 @@ WriteLiteral("                                            <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 113 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 120 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         }
 
             
@@ -719,13 +806,13 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 115 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 122 "..\..\Views\Apprenticeship\Framework.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 115 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 122 "..\..\Views\Apprenticeship\Framework.cshtml"
                                      if (Model.CompetencyQualification.Count() > 3)
                                         {
                                             foreach (var qualification in Model.CompetencyQualification.Skip(3))
@@ -741,7 +828,7 @@ WriteLiteral(" class=\"default-hidden\"");
 WriteLiteral(">");
 
             
-            #line 119 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 126 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                       Write(qualification);
 
             
@@ -750,7 +837,7 @@ WriteLiteral(">");
 WriteLiteral("</li>\r\n");
 
             
-            #line 120 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 127 "..\..\Views\Apprenticeship\Framework.cshtml"
                                             }
 
             
@@ -765,7 +852,7 @@ WriteLiteral(" class=\"showmore hidden\"");
 WriteLiteral(">Show more</a>\r\n");
 
             
-            #line 122 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 129 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         }
 
             
@@ -774,7 +861,7 @@ WriteLiteral(">Show more</a>\r\n");
 WriteLiteral("                                </ul>\r\n                            </div>\r\n");
 
             
-            #line 125 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 132 "..\..\Views\Apprenticeship\Framework.cshtml"
                         }       
 
             
@@ -783,13 +870,13 @@ WriteLiteral("                                </ul>\r\n                         
 WriteLiteral("\r\n");
 
             
-            #line 127 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 134 "..\..\Views\Apprenticeship\Framework.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 127 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 134 "..\..\Views\Apprenticeship\Framework.cshtml"
                      if (Model.KnowledgeQualification != null && Model.KnowledgeQualification.Any())
                         {
 
@@ -804,13 +891,13 @@ WriteLiteral(">\r\n                                <p>Apprentices will also achi
 "d (or \'knowledge\') qualification:</p>\r\n                                <ul>\r\n");
 
             
-            #line 132 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 139 "..\..\Views\Apprenticeship\Framework.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 132 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 139 "..\..\Views\Apprenticeship\Framework.cshtml"
                                      foreach (var qualification in Model.KnowledgeQualification.Take(3))
                                         {
 
@@ -820,7 +907,7 @@ WriteLiteral(">\r\n                                <p>Apprentices will also achi
 WriteLiteral("                                            <li>");
 
             
-            #line 134 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 141 "..\..\Views\Apprenticeship\Framework.cshtml"
                                            Write(qualification);
 
             
@@ -829,7 +916,7 @@ WriteLiteral("                                            <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 135 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 142 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         }
 
             
@@ -838,13 +925,13 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 137 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 144 "..\..\Views\Apprenticeship\Framework.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 137 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 144 "..\..\Views\Apprenticeship\Framework.cshtml"
                                      if (Model.KnowledgeQualification.Count() > 3)
                                         {
                                             foreach (var qualification in Model.KnowledgeQualification.Skip(3))
@@ -860,7 +947,7 @@ WriteLiteral(" class=\"default-hidden\"");
 WriteLiteral(">");
 
             
-            #line 141 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 148 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                       Write(qualification);
 
             
@@ -869,7 +956,7 @@ WriteLiteral(">");
 WriteLiteral("</li>\r\n");
 
             
-            #line 142 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 149 "..\..\Views\Apprenticeship\Framework.cshtml"
                                             }
 
             
@@ -884,7 +971,7 @@ WriteLiteral(" class=\"showmore hidden\"");
 WriteLiteral(">Show more</a>\r\n");
 
             
-            #line 144 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 151 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         }
 
             
@@ -893,7 +980,7 @@ WriteLiteral(">Show more</a>\r\n");
 WriteLiteral("                                </ul>\r\n                            </div>\r\n");
 
             
-            #line 147 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 154 "..\..\Views\Apprenticeship\Framework.cshtml"
                         }
 
             
@@ -902,13 +989,13 @@ WriteLiteral("                                </ul>\r\n                         
 WriteLiteral("\r\n");
 
             
-            #line 149 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 156 "..\..\Views\Apprenticeship\Framework.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 149 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 156 "..\..\Views\Apprenticeship\Framework.cshtml"
                      if (Model.CombinedQualificiation != null && Model.CombinedQualificiation.Any())
                             {
 
@@ -924,13 +1011,13 @@ WriteLiteral(">\r\n                                    <p>Apprentices will achie
 "       <ul>\r\n");
 
             
-            #line 154 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 161 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 154 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 161 "..\..\Views\Apprenticeship\Framework.cshtml"
                                          foreach (var qualification in Model.CombinedQualificiation.Take(3))
                                             {
 
@@ -940,7 +1027,7 @@ WriteLiteral(">\r\n                                    <p>Apprentices will achie
 WriteLiteral("                                                <li>");
 
             
-            #line 156 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 163 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                Write(qualification);
 
             
@@ -949,7 +1036,7 @@ WriteLiteral("                                                <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 157 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 164 "..\..\Views\Apprenticeship\Framework.cshtml"
                                             }
 
             
@@ -958,13 +1045,13 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 159 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 166 "..\..\Views\Apprenticeship\Framework.cshtml"
                                         
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 166 "..\..\Views\Apprenticeship\Framework.cshtml"
                                          if (Model.CombinedQualificiation.Count() > 3)
                                             {
                                                 foreach (var qualification in Model.CombinedQualificiation.Skip(3))
@@ -980,7 +1067,7 @@ WriteLiteral(" class=\"default-hidden\"");
 WriteLiteral(">");
 
             
-            #line 163 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 170 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                                           Write(qualification);
 
             
@@ -989,7 +1076,7 @@ WriteLiteral(">");
 WriteLiteral("</li>\r\n");
 
             
-            #line 164 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 171 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                 }
 
             
@@ -1004,7 +1091,7 @@ WriteLiteral(" class=\"showmore hidden\"");
 WriteLiteral(">Show more</a>\r\n");
 
             
-            #line 166 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 173 "..\..\Views\Apprenticeship\Framework.cshtml"
                                             }
 
             
@@ -1014,7 +1101,7 @@ WriteLiteral("                                    </ul>\r\n                     
 "\r\n");
 
             
-            #line 169 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 176 "..\..\Views\Apprenticeship\Framework.cshtml"
                             }
 
             
@@ -1023,13 +1110,13 @@ WriteLiteral("                                    </ul>\r\n                     
 WriteLiteral("                        </div>\r\n\r\n");
 
             
-            #line 172 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 179 "..\..\Views\Apprenticeship\Framework.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 172 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 179 "..\..\Views\Apprenticeship\Framework.cshtml"
                  if (Model.CompletionQualifications != string.Empty)
                     {
 
@@ -1043,7 +1130,7 @@ WriteLiteral(" class=\"completionQualifications\"");
 WriteLiteral(">");
 
             
-            #line 174 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 181 "..\..\Views\Apprenticeship\Framework.cshtml"
                                                        Write(Model.CompletionQualifications);
 
             
@@ -1052,7 +1139,7 @@ WriteLiteral(">");
 WriteLiteral("</p>\r\n");
 
             
-            #line 175 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 182 "..\..\Views\Apprenticeship\Framework.cshtml"
                     }
 
             
@@ -1068,7 +1155,7 @@ WriteLiteral(">Your chosen training provider can advise you about the qualificat
 "    <dd>");
 
             
-            #line 180 "..\..\Views\Apprenticeship\Framework.cshtml"
+            #line 187 "..\..\Views\Apprenticeship\Framework.cshtml"
            Write(Model.ProfessionalRegistration);
 
             
@@ -1078,38 +1165,20 @@ WriteLiteral("</dd>\r\n        </dl>\r\n\r\n        <div");
 
 WriteLiteral(" id=\"bottom-actions\"");
 
-WriteLiteral(">\r\n            <a");
-
-WriteLiteral(" class=\"button btn-find-trng-prov\"");
-
-WriteLiteral(" rel=\"nofollow\"");
-
-WriteLiteral(" target=\"find-training-providers\"");
-
-WriteLiteral(" id=\"ga-find-provider-bottom\"");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 9326), Tuple.Create("\"", 9461)
-            
-            #line 184 "..\..\Views\Apprenticeship\Framework.cshtml"
-                                                    , Tuple.Create(Tuple.Create("", 9333), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})
-            
-            #line default
-            #line hidden
-, 9333), false)
-);
-
 WriteLiteral(">\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("           ");
 
             
-            #line 185 "..\..\Views\Apprenticeship\Framework.cshtml"
-           Write(Model.FindApprenticeshipTrainingText);
+            #line 191 "..\..\Views\Apprenticeship\Framework.cshtml"
+      Write(getFindTrainingProviderButton(Model.FrameworkId, Model.SearchTerm));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </a>\r\n        </div>\r\n    </section>\r\n</main>\r\n\r\n");
+WriteLiteral("\r\n        </div>\r\n    </section>\r\n</main>\r\n\r\n");
+
+WriteLiteral("\r\n");
 
 WriteLiteral("\r\n");
 

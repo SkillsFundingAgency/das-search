@@ -11,6 +11,11 @@
 <main id="content" class="provider-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
+            @if (Model.ShowBackLink)
+            {
+                @Html.ActionLink("Back", "SearchResults", "Provider", new {@SearchTerm = Model.SearchTerm}, new {@class= "link-back" })
+            }
+          
             <h1 class="heading-xlarge" id="provider-name">
                 @Model.ProviderName
                 @if (@Model.NationalProvider)
@@ -65,7 +70,7 @@
 
             @if (Model.DisplayAboutThisProvider)
             {
-                <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
+                <p id="aout-this-provider" class="markdown-header-text">About this Provider</p>
                 if (string.IsNullOrEmpty(Model.MarketingInfo))
                 {
                     <span>There is no marketing information available about this provider.</span>
@@ -98,7 +103,7 @@
                             <td>@item.Name</td>
                             <td>@item.Type</td>
                             <td>@item.Level</td>
-                            <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
+                            <td><a href="/Apprenticeship/@item.Type/@item.Identifier?keyword=@Model.SearchTerm&UkPrn=@Model.UkPrn">Details</a></td>
                         </tr>
                     }
                     </tbody>

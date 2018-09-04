@@ -11,6 +11,16 @@
 <main id="content" class="standard-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
+            
+
+            @if (Model.ReturnToApprenticeshipSearch)
+            {
+                @Html.ActionLink("Back", "SearchResults", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
+            }
+            else
+            {
+                @Html.ActionLink("Back", Model.Ukprn,"Provider", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
+            }
             <div>
                 <h1 class="heading-xlarge">
                     @Model.Title

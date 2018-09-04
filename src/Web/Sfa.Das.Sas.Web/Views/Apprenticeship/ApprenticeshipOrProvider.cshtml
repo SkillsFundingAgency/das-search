@@ -8,7 +8,7 @@
     <div class="grid-row">
         <div class="column-two-thirds">
             @if (Model.HasError)
-            { 
+            {
 
                 <div class="error-summary" role="alert" aria-labelledby="error-search-options" tabindex="-1">
                     <h2 class="heading-medium error-summary-heading" id="error-search-options">
@@ -38,10 +38,10 @@
                         </legend>
                         <div class="multiple-choice">
                             <label for="search-apprenticeships" class="block-label selection-button-radio">
-                                apprenticeships 
+                                apprenticeships
                                 <input type="radio" name="IsApprenticeship" checked="@(Model.IsApprenticeship.HasValue && Model.IsApprenticeship.Value)" value="true" id="search-apprenticeships">
                             </label>
-                           
+
                         </div>
                         <div class="multiple-choice">
                             <label for="search-Training-provider" class="block-label selection-button-radio">
@@ -52,7 +52,7 @@
                         </div>
                     </fieldset>
                 </div>
-                <input hidden name="retry" id="retry" value ="true" />
+                <input hidden name="retry" id="retry" value="true"/>
                 <input class="button" type="submit" value="Continue">
             </form>
         </div>
