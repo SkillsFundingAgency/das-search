@@ -797,3 +797,10 @@ aside h2:first-child {
         }
     }
 }
+
+.panel-filled-purple {
+    border-color: $purple;
+    background: mix(white,$purple,90%);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
