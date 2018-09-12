@@ -31,7 +31,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 IsActiveStandard = document.IsActiveStandard,
                 StandardPageUri = document.StandardPageUri,
                 LastDateForNewStarts = document.LastDateForNewStarts,
-                FundingPeriods = document.FundingPeriods
+                FundingPeriods = document.FundingPeriods,
+                RegulatedStandard = document.RegulatedStandard
             };
         }
 

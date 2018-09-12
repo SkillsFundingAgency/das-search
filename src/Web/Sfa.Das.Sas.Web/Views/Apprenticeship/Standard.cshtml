@@ -16,9 +16,20 @@
                     @Model.Title
                 </h1>
                 <p class="lede">@Model.OverviewOfRole</p>
+                @if (Model.RegulatedStandard)
+                {
+                    <br />
+                    <div class="notice">
+                        <p>Regulated standard</p>
+                        <strong id="apprenticeship-closed-message" class="bold-small">
+                            This standard needs a training provider who is recognised by the associated approval body. Please check with the training provider for further details.
+
+                        </strong>
+                    </div>
+                }
                 @if (Model.LastDateForNewStarts.HasValue && Model.LastDateForNewStarts.Value <= DateTime.Today.AddYears(1))
                 {
-                    <br/>
+                    <br />
                     <div class="notice">
                         <i class="icon icon-important">
                             <span class="visuallyhidden">Warning</span>

@@ -52,6 +52,16 @@
                     <dd>@Model.ApprenticeshipName</dd>
                     <dt>Level: </dt>
                     <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(Model.ApprenticeshipLevel))</dd>
+                    
+                    @if (Model.RegulatedApprenticeship)
+                    {
+                        <dt>Regulated standard: </dt>
+                        <dd>
+                            <p>This is a regulated standard</p>
+                            <p>What does this mean?</p>
+                            <p>This standard needs a training provider who is recognised bu the associated approval body. Please check with the training provider for futher details.</p>
+                        </dd>
+                    }
 
                     @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
 

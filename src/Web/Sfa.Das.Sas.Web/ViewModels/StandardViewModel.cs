@@ -35,8 +35,13 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public DateTime? LastDateForNewStarts { get; set; }
 
         public string DayAfterLastDateForNewStartsFormatted => LastDateForNewStarts?.AddDays(1).ToString("dd MMMM yyyy") ?? string.Empty;
+
         public string FindApprenticeshipTrainingText { get; set; }
+
         public DateTime? NextEffectiveFrom { get; set; }
+
         public int? NextFundingCap { get; set; }
+
+        public bool RegulatedStandard { get; set; }
     }
 }

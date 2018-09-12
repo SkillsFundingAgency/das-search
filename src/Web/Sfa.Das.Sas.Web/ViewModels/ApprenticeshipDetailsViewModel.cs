@@ -76,6 +76,8 @@
             set;
         }
 
-	    public bool CurrentlyNotStartingNewApprentices { get; set; }
+        public bool CurrentlyNotStartingNewApprentices { get; set; }
+
+        public bool RegulatedApprenticeship { get; set; }
     }
 }

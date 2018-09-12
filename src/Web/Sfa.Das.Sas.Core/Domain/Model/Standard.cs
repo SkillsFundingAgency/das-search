@@ -48,5 +48,7 @@ namespace Sfa.Das.Sas.Core.Domain.Model
         public DateTime? NextEffectiveFrom { get; set; }
 
         public int? NextFundingCap { get; set; }
+
+        public bool RegulatedStandard { get; set; }
     }
 }
