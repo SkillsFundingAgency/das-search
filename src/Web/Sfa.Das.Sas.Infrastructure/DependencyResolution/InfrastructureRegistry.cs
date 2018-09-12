@@ -41,19 +41,10 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 
             For<IElasticsearchHelper>().Use<ElasticsearchHelper>();
 
-            if (Is<ApprenticeshipServiceApiFeature>.Enabled)
-            {
-                For<IGetFrameworks>().Use<FrameworkApiRepository>();
-                For<IGetStandards>().Use<StandardApiRepository>();
-                For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderApiRepository>();
-            }
-            else
-            {
-                For<IGetFrameworks>().Use<FrameworkElasticRepository>();
-                For<IGetStandards>().Use<StandardElasticRepository>();
-                For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderRepository>();
-            }
-
+            For<IGetFrameworks>().Use<FrameworkApiRepository>();
+            For<IGetStandards>().Use<StandardApiRepository>();
+            For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderApiRepository>();
+    
             For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
             For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
             For<IAssessmentOrgsApiClient>().Use<AssessmentOrgsApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);

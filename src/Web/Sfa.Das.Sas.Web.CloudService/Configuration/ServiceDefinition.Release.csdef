@@ -28,7 +28,6 @@
       <Setting name="ElasticsearchUsername" />
       <Setting name="ElasticsearchPassword" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" />
-      <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" />
       <Setting name="BuildId" />
       <Setting name="LoggingRedisConnectionString" />
