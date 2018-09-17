@@ -137,8 +137,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     return new HttpNotFoundResult(message);
                 }
             }
-	        //TODO: Remove this
-			response.Standard.RegulatedStandard = true;
+
             _logger.Info($"Mapping Standard {id}");
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
             ProcessViewModel(viewModel, response.Standard?.FundingPeriods, response.Standard?.EffectiveFrom);

@@ -66,7 +66,12 @@
             var apprenticeshipData = _getStandards.GetStandardById(message.StandardCode);
 
             var response = CreateResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
-            response.RegulatedApprenticeship = apprenticeshipData.RegulatedStandard;
+
+            if (apprenticeshipData != null)
+            {
+                response.RegulatedApprenticeship = apprenticeshipData.RegulatedStandard;
+            }
+
             return response;
         }
 

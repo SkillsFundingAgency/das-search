@@ -199,8 +199,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                     dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
                 }));
-			//TODO: Remove this
-	        viewModel.RegulatedApprenticeship = true;
+
             return View(viewModel);
         }
 
