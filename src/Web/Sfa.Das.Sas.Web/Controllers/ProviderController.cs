@@ -215,6 +215,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 .AddValue("apprenticeshipId", criteria?.ApprenticeshipId)
                 .AddValue("showall", criteria?.ShowAll)
                 .AddValue("isLevyPayingEmployer", criteria?.IsLevyPayingEmployer)
+                .AddValue("keywords", criteria?.Keywords ?? string.Empty)
                 .AddList("deliverymodes", criteria?.DeliveryModes);
         }
     }
