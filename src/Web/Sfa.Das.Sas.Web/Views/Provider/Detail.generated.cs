@@ -1010,7 +1010,7 @@ WriteLiteral(">What does this mean?</span></summary>\r\n                        
 WriteLiteral(" class=\"panel panel-border-narrow\"");
 
 WriteLiteral(@">
-                                    <p>This standard needs a training provider who is recognised bu the associated approval body. Please check with the training provider for futher details.</p>
+                                    <p>This standard needs a training provider who is recognised by the associated approval body. Please check with the training provider for futher details.</p>
                                 </div>
                             </details>
                         </dd>
