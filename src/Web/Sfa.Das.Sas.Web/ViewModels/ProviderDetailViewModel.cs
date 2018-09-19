@@ -3,7 +3,7 @@
 namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderDetailViewModel
-   {
+    {
         public string TradingNames { get; set; }
         public string Email { get; set; }
         public double EmployerSatisfaction { get; set; }
@@ -23,6 +23,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool IsNew { get; set; }
         public bool IsLevyPayerOnly { get; set; }
         public bool DisplayAboutThisProvider { get; set; }
-		public bool CurrentlyNotStartingNewApprentices { get; set; }
-   }
+        public bool CurrentlyNotStartingNewApprentices { get; set; }
+        public FeedbackViewModel ProviderFeedback { get; internal set; }
+    }
 }
