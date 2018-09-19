@@ -76,20 +76,18 @@
                 }
             }
 
-<p>prov</p>
             <div class="graph-heading-group">
                 <h2 class="heading-medium">What employers are saying</h2>
                 <p class="meta">Based on 27 reviews from 5 employers over the last 6 months</p>
             </div>
 
             <h3 class="heading-small">Training quality from March 2018 to now</h3>
-            <p>wimble</p>
             <ul class="graph-list">
                 <li class="level-1">
                     <span class="label">Excellent</span>
                     <span class="chart">
                         <span class="graph">
-                            <span class="bar" style="width: 44.44%"></span>
+                            <span class="bar" style="width: @Model.ProviderFeedback.ExcellentFeedbackPercentage%"></span>
                         </span>
                     </span>
                     <span class="figure">@Model.ProviderFeedback.ExcellentFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
@@ -98,28 +96,28 @@
                     <span class="label">Good</span>
                     <span class="chart">
                         <span class="graph">
-                            <span class="bar" style="width: 29.63%"></span>
+                            <span class="bar" style="width: @Model.ProviderFeedback.GoodFeedbackPercentage%"></span>
                         </span>
                     </span>
-                    <span class="figure">8 <span class="visually-hidden">out of 27 </span>reviews</span>
+                    <span class="figure">@Model.ProviderFeedback.GoodFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
                 </li>
                 <li class="level-3">
                     <span class="label">Poor</span>
                     <span class="chart">
                         <span class="graph">
-                            <span class="bar" style="width: 18.51%"></span>
+                            <span class="bar" style="width: @Model.ProviderFeedback.PoorFeedbackPercentage%"></span>
                         </span>
                     </span>
-                    <span class="figure">5 <span class="visually-hidden">out of 27 </span>reviews</span>
+                    <span class="figure">@Model.ProviderFeedback.PoorFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
                 </li>
                 <li class="level-4">
                     <span class="label">Very poor</span>
                     <span class="chart">
                         <span class="graph">
-                            <span class="bar" style="width: 7.4%"></span>
+                            <span class="bar" style="width: @Model.ProviderFeedback.VeryPoorFeedbackPercentage%"></span>
                         </span>
                     </span>
-                    <span class="figure">2 <span class="visually-hidden">out of 27 </span>reviews</span>
+                    <span class="figure">@Model.ProviderFeedback.VeryPoorFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
                 </li>
             </ul>
 
