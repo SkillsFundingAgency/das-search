@@ -23,7 +23,6 @@
 
     <div class="grid-row">
         <div class="column-two-thirds">
-
             @if (Model.CurrentlyNotStartingNewApprentices)
             {
                 <div class="error-summary warning">
@@ -31,7 +30,7 @@
                 </div>
             }
 
-            <dl class="data-list--provider data-list--compact">        
+            <dl class="data-list--provider data-list--compact">
 
                 @if (!string.IsNullOrEmpty(Model.TradingNames))
                 {
@@ -50,22 +49,22 @@
                 }
                 if (Model.HasParentCompanyGuarantee)
                 {
-                        <p id="parent-company-guarantee" class="detail-highlight">
-                            Provider is supported by a parent company guarantee
-                        </p>
+                    <p id="parent-company-guarantee" class="detail-highlight">
+                        Provider is supported by a parent company guarantee
+                    </p>
                 }
 
                 if (Model.IsNew)
                 {
-                        <p id="is-new-provider" class="detail-highlight">
-                            New organisation with no financial track record
-                        </p>
+                    <p id="is-new-provider" class="detail-highlight">
+                        New organisation with no financial track record
+                    </p>
                 }
             }
 
             @if (Model.DisplayAboutThisProvider)
             {
-                <p id="about-this-provider" class="markdown-header-text">About this Provider</p>
+                <p id="about-this-provider" class="markdown-header-text">About this provider</p>
                 if (string.IsNullOrEmpty(Model.MarketingInfo))
                 {
                     <span>There is no marketing information available about this provider.</span>
@@ -75,6 +74,75 @@
                     @Html.MarkdownToHtml(Model.MarketingInfo)
                 }
             }
+
+            @if (Model.ProviderFeedback != null)
+            {
+            <div id="feedback-heading" class="graph-heading-group">
+                <h2 class="heading-medium">What employers are saying</h2>
+                <p class="meta">Based on @Model.ProviderFeedback.TotalFeedbackCount reviews.</p>
+            </div>
+
+            <h3 class="heading-small">Feedback from September 2018 to now</h3>
+            <ul class="graph-list">
+                <li class="level-1">
+                    <span class="label">Excellent</span>
+                    <span class="chart">
+                        <span class="graph">
+                            <span class="bar" style="width: @Model.ProviderFeedback.ExcellentFeedbackPercentage%"></span>
+                        </span>
+                    </span>
+                    <span class="figure">@Model.ProviderFeedback.ExcellentFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
+                </li>
+                <li class="level-2">
+                    <span class="label">Good</span>
+                    <span class="chart">
+                        <span class="graph">
+                            <span class="bar" style="width: @Model.ProviderFeedback.GoodFeedbackPercentage%"></span>
+                        </span>
+                    </span>
+                    <span class="figure">@Model.ProviderFeedback.GoodFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
+                </li>
+                <li class="level-3">
+                    <span class="label">Poor</span>
+                    <span class="chart">
+                        <span class="graph">
+                            <span class="bar" style="width: @Model.ProviderFeedback.PoorFeedbackPercentage%"></span>
+                        </span>
+                    </span>
+                    <span class="figure">@Model.ProviderFeedback.PoorFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
+                </li>
+                <li class="level-4">
+                    <span class="label">Very poor</span>
+                    <span class="chart">
+                        <span class="graph">
+                            <span class="bar" style="width: @Model.ProviderFeedback.VeryPoorFeedbackPercentage%"></span>
+                        </span>
+                    </span>
+                    <span class="figure">@Model.ProviderFeedback.VeryPoorFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
+                </li>
+            </ul>
+            <div class="grid-row">
+                <div class="column-half">
+                    <h4 class="heading-small">Strengths</h4>
+                    <ul class="list">
+                        @foreach (var strength in Model.ProviderFeedback.Strengths)
+                        {
+                            <li>@strength.Name (@strength.Count)</li>
+                        }
+                    </ul>
+                </div>
+                <div class="column-half">
+                    <h4 class="heading-small">Things to improve</h4>
+                    <ul class="list">
+                        @foreach (var toImprove in Model.ProviderFeedback.Weaknesses)
+                        {
+                            <li>@toImprove.Name (@toImprove.Count)</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+
             @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
             {
                 <div id="search-app-offered">
@@ -92,42 +160,42 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
-                    {
-                        <tr>
-                            <td>@item.Name</td>
-                            <td>@item.Type</td>
-                            <td>@item.Level</td>
-                            <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
-                        </tr>
-                    }
+                        @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Type</td>
+                                <td>@item.Level</td>
+                                <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             }
             <nav role="navigation">
                 <ul class="previous-next-navigation">
-                 @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
-                 {
-                     var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
+                    @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page > 1)
+                    {
+                        var pageBefore = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page - 1;
 
-                     <li class="previous" id="previous-nav">
-                         <a href="/provider/@Model.UkPrn/page/@pageBefore">
-                             Previous <span class="visuallyhidden">page</span>
-                             <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
-                         </a>
-                     </li>
-                 }
-                @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
-                {
-                    var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
+                        <li class="previous" id="previous-nav">
+                            <a href="/provider/@Model.UkPrn/page/@pageBefore">
+                                Previous <span class="visuallyhidden">page</span>
+                                <span class="page-numbers">Previous page @pageBefore of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                            </a>
+                        </li>
+                    }
+                    @if (Model?.ApprenticeshipTrainingSummary?.PaginationDetails?.Page != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.Page < Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage)
+                    {
+                        var pageAfter = Model.ApprenticeshipTrainingSummary.PaginationDetails.Page + 1;
 
-                    <li class="next" id="next-nav">
-                        <a href="/provider/@Model.UkPrn/page/@pageAfter">
-                            Next <span class="visuallyhidden">page</span>
-                            <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
-                        </a>
-                    </li>
-                }
+                        <li class="next" id="next-nav">
+                            <a href="/provider/@Model.UkPrn/page/@pageAfter">
+                                Next <span class="visuallyhidden">page</span>
+                                <span class="page-numbers">Next page @pageAfter of @Model.ApprenticeshipTrainingSummary.PaginationDetails.LastPage</span>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </nav>
         </div>
@@ -149,7 +217,7 @@
                         }
 
                     }
-                    
+
 
                     @{
                         if (!string.IsNullOrEmpty(Model.Phone))
@@ -199,25 +267,25 @@
             <div class="panel-disclaimer">
                 <h4>Content disclaimer</h4>
                 <p>
-                    Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes 
-                    no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency 
-                    is not liable for any losses suffered as a result of any party relying on the course information 
+                    Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes
+                    no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency
+                    is not liable for any losses suffered as a result of any party relying on the course information
                     provided.
                 </p>
             </div>
             <div id="expand-collapse">
-                    <details>
-                            <summary>Explain levels</summary>
-                            <div class="panel panel-border-narrow">
-                                    <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
-                                    <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
-                                </div>
-                        </details>
-                </div>
+                <details>
+                    <summary>Explain levels</summary>
+                    <div class="panel panel-border-narrow">
+                        <p>Apprenticeships are set at different levels of difficulty from the equivalent of GCSE (level 2) up to postgraduate (level 7)</p>
+                        <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
+                    </div>
+                </details>
             </div>
         </div>
-    </main>
-     
+    </div>
+</main>
+
 
 @helper CreateProgressBar(string message, int progress)
 {
