@@ -21,5 +21,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool? IsLevyPayingEmployer { get; set; }
 
         public string ErrorMessage { get; set; }
+        public string Ukprn { get; set; }
     }
 }

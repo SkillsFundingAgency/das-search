@@ -10,7 +10,7 @@
 <main id="content" class="framework-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
-            @if (Model.ReturnToApprenticeshipSearch)
+            @if (string.IsNullOrWhiteSpace(Model.Ukprn))
             {
                 @Html.ActionLink("Back", "SearchResults", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
             }

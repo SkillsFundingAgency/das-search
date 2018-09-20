@@ -88,14 +88,14 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 14 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-       Write(Html.ActionLink("Back", "Framework", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId }, new { @class = "link-back" }));
+       Write(Html.ActionLink("Back", "Framework", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" }));
 
             
             #line default
             #line hidden
             
             #line 14 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                                                                                                                                                    
+                                                                                                                                                                          
             break;
         case ApprenticeshipTrainingType.Standard:
             
@@ -104,14 +104,14 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 17 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-       Write(Html.ActionLink("Back", "Standard", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId }, new { @class = "link-back" }));
+       Write(Html.ActionLink("Back", "Standard", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" }));
 
             
             #line default
             #line hidden
             
             #line 17 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                                                                                                                                                   
+                                                                                                                                                                         
             break;
     }
 
@@ -145,14 +145,14 @@ WriteLiteral(" class=\"column-two-thirds\"");
 
 WriteLiteral(">\r\n\r\n\r\n            <form");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 1178), Tuple.Create("\"", 1201)
+WriteAttribute("action", Tuple.Create(" action=\"", 1222), Tuple.Create("\"", 1245)
             
             #line 31 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 1187), Tuple.Create<System.Object, System.Int32>(Model.PostUrl
+, Tuple.Create(Tuple.Create("", 1231), Tuple.Create<System.Object, System.Int32>(Model.PostUrl
             
             #line default
             #line hidden
-, 1187), false)
+, 1231), false)
 );
 
 WriteLiteral(" method=\"get\"");
@@ -170,15 +170,15 @@ WriteLiteral(" class=\"heading-medium\"");
 WriteLiteral(">\r\n                        Enter a postcode\r\n                    </h2>\r\n         " +
 "           <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1434), Tuple.Create("\"", 1485)
-, Tuple.Create(Tuple.Create("", 1442), Tuple.Create("form-group", 1442), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1478), Tuple.Create("\"", 1529)
+, Tuple.Create(Tuple.Create("", 1486), Tuple.Create("form-group", 1486), true)
             
             #line 36 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1452), Tuple.Create<System.Object, System.Int32>(Model.HasError ? "error" : ""
+, Tuple.Create(Tuple.Create(" ", 1496), Tuple.Create<System.Object, System.Int32>(Model.HasError ? "error" : ""
             
             #line default
             #line hidden
-, 1453), false)
+, 1497), false)
 );
 
 WriteLiteral(" data-validation=\"You must enter a full and valid postcode\"");
@@ -222,14 +222,14 @@ WriteLiteral(" type=\"search\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2173), Tuple.Create("\"", 2213)
+WriteAttribute("value", Tuple.Create(" value=\"", 2217), Tuple.Create("\"", 2257)
             
             #line 48 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 2181), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
+, Tuple.Create(Tuple.Create("", 2225), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
             
             #line default
             #line hidden
-, 2181), false)
+, 2225), false)
 );
 
 WriteLiteral(" id=\"search-box\"");
@@ -288,14 +288,14 @@ WriteLiteral(" type=\"radio\"");
 
 WriteLiteral(" name=\"IsLevyPayingEmployer\"");
 
-WriteAttribute("checked", Tuple.Create(" checked=\"", 3484), Tuple.Create("\"", 3568)
+WriteAttribute("checked", Tuple.Create(" checked=\"", 3528), Tuple.Create("\"", 3612)
             
             #line 62 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-              , Tuple.Create(Tuple.Create("", 3494), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value
+              , Tuple.Create(Tuple.Create("", 3538), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value
             
             #line default
             #line hidden
-, 3494), false)
+, 3538), false)
 );
 
 WriteLiteral(" value=\"true\"");
@@ -313,14 +313,14 @@ WriteLiteral(" type=\"radio\"");
 
 WriteLiteral(" name=\"IsLevyPayingEmployer\"");
 
-WriteAttribute("checked", Tuple.Create(" checked=\"", 3856), Tuple.Create("\"", 3949)
+WriteAttribute("checked", Tuple.Create(" checked=\"", 3900), Tuple.Create("\"", 3993)
             
             #line 66 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-              , Tuple.Create(Tuple.Create("", 3866), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false
+              , Tuple.Create(Tuple.Create("", 3910), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false
             
             #line default
             #line hidden
-, 3866), false)
+, 3910), false)
 );
 
 WriteLiteral(" value=\"false\"");
@@ -339,14 +339,14 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 4298), Tuple.Create("\"", 4329)
+WriteAttribute("value", Tuple.Create(" value=\"", 4342), Tuple.Create("\"", 4373)
             
             #line 74 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                          , Tuple.Create(Tuple.Create("", 4306), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
+                          , Tuple.Create(Tuple.Create("", 4350), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
             
             #line default
             #line hidden
-, 4306), false)
+, 4350), false)
 );
 
 WriteLiteral(">\r\n                        <input");
@@ -357,14 +357,32 @@ WriteLiteral(" name=\"keywords\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 4423), Tuple.Create("\"", 4449)
+WriteAttribute("value", Tuple.Create(" value=\"", 4467), Tuple.Create("\"", 4493)
             
             #line 75 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                  , Tuple.Create(Tuple.Create("", 4431), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+                  , Tuple.Create(Tuple.Create("", 4475), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
             
             #line default
             #line hidden
-, 4431), false)
+, 4475), false)
+);
+
+WriteLiteral(">\r\n                        <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"ukprn\"");
+
+WriteLiteral(" class=\"text-box form-control\"");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 4584), Tuple.Create("\"", 4604)
+            
+            #line 76 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+               , Tuple.Create(Tuple.Create("", 4592), Tuple.Create<System.Object, System.Int32>(Model.Ukprn
+            
+            #line default
+            #line hidden
+, 4592), false)
 );
 
 WriteLiteral(">\r\n                        <input");

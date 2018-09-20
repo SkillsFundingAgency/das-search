@@ -11,15 +11,15 @@
 <main id="content" class="standard-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
-            
 
-            @if (Model.ReturnToApprenticeshipSearch)
+
+            @if (string.IsNullOrWhiteSpace(Model.Ukprn))
             {
                 @Html.ActionLink("Back", "SearchResults", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
             }
             else
             {
-                @Html.ActionLink("Back", Model.Ukprn,"Provider", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
+                @Html.ActionLink("Back", Model.Ukprn, "Provider", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
             }
             <div>
                 <h1 class="heading-xlarge">
@@ -28,7 +28,7 @@
                 <p class="lede">@Model.OverviewOfRole</p>
                 @if (Model.LastDateForNewStarts.HasValue && Model.LastDateForNewStarts.Value <= DateTime.Today.AddYears(1))
                 {
-                    <br/>
+                    <br />
                     <div class="notice">
                         <i class="icon icon-important">
                             <span class="visuallyhidden">Warning</span>
@@ -44,9 +44,7 @@
         <div class="column-third">
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
-                    <a class="button ui-find-training-providers" rel="nofollow" target="find-training-providers" id="ga-find-provider-top" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                        @Model.FindApprenticeshipTrainingText
-                    </a>
+                    @getFindTrainingProviderButton(Model.StandardId, Model.SearchTerm, Model.Ukprn)
                 </aside>
             </div>
         </div>
@@ -90,31 +88,31 @@
                         <summary><span class="summary" style="text-decoration: none">View a list of end point assessment organisations for this standard</span></summary>
                         <table class="responsive">
                             <thead>
-                            <tr>
-                                <th scope="col">Organisation</th>
-                                <th scope="col">Phone Number</th>
-                                <th scope="col">Email</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">Organisation</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Email</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach (var organisation in Model.AssessmentOrganisations)
-                            {
-                                <tr>
-                                    <td class="organisation-name" data-label="organisation">
-                                        @if (string.IsNullOrEmpty(organisation.Website))
-                                        {
-                                            @organisation.Name
-                                        }
-                                        else
-                                        {
-                                            var linkProtocol = organisation.Website.StartsWith("http") ? string.Empty : "http://";
-                                            <a href="@linkProtocol@organisation.Website" target="_blank">@organisation.Name</a>
-                                        }
-                                    </td>
-                                    <td class="phone-number" data-label="phone-number">@organisation.Phone</td>
-                                    <td class="email" data-label="email"><a href="mailto:@organisation.Email" target="_blank">@organisation.Email</a></td>
-                                </tr>
-                            }
+                                @foreach (var organisation in Model.AssessmentOrganisations)
+                                {
+                                    <tr>
+                                        <td class="organisation-name" data-label="organisation">
+                                            @if (string.IsNullOrEmpty(organisation.Website))
+                                            {
+                                                @organisation.Name
+                                            }
+                                            else
+                                            {
+                                                var linkProtocol = organisation.Website.StartsWith("http") ? string.Empty : "http://";
+                                                <a href="@linkProtocol@organisation.Website" target="_blank">@organisation.Name</a>
+                                            }
+                                        </td>
+                                        <td class="phone-number" data-label="phone-number">@organisation.Phone</td>
+                                        <td class="email" data-label="email"><a href="mailto:@organisation.Email" target="_blank">@organisation.Email</a></td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </details>
@@ -123,12 +121,10 @@
 
             @GetMoreInformationProperty(Model.StandardPageUri)
         </dl>
-        
+
 
         <div id="bottom-actions">
-            <a class="button btn-find-trng-prov" rel="nofollow"  target="find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new { standardId = Model.StandardId, keywords = Model.SearchTerm })">
-                @Model.FindApprenticeshipTrainingText
-            </a>
+            @getFindTrainingProviderButton(Model.StandardId, Model.SearchTerm, Model.Ukprn)
         </div>
     </section>
 </main>
@@ -138,7 +134,10 @@
     if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
     {
         <dt>@title</dt>
-        <dd id="@id">@Html.MarkdownToHtml(item)@if (item == null){ @Html.Raw("&nbsp;") }</dd>
+        <dd id="@id">
+            @Html.MarkdownToHtml(item)@if (item == null)
+        {@Html.Raw("&nbsp;")}
+        </dd>
     }
 }
 
@@ -146,7 +145,7 @@
 {
     {
         var details = "The Institute for Apprenticeships has more detailed information about this apprenticeship.";
-        if (link!=null && link.Trim() != string.Empty)
+        if (link != null && link.Trim() != string.Empty)
         {
             details = @"The Institute for Apprenticeships has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
         }
@@ -189,13 +188,19 @@
             The funding band maximum for this apprenticeship will change to @nextFundingCapFormatted from @nextEffectiveFromFormatted
         </strong>
     </div>
-    }
+}
 
+@helper getFindTrainingProviderButton(string standardId, string searchTerm, string ukprn)
+{
+    <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForStandardProviders", "Apprenticeship", new {standardId = standardId, keywords = searchTerm, ukprn = ukprn})">
+        @Model.FindApprenticeshipTrainingText
+    </a>
+}
 @functions
     {
 
     private string GetFundingCapFormatted(int value)
-        {
-            return value.ToString("C0", new CultureInfo("en-GB"));
-        }
+    {
+        return value.ToString("C0", new CultureInfo("en-GB"));
     }
+}

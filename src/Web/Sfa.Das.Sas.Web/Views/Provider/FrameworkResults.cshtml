@@ -15,7 +15,7 @@
     <p class="small-btm-margin">
         @if (Model.Hits.Count() != 0)
         {
-            @Html.ActionLink("Back", "SearchForFrameworkProviders", "Apprenticeship", new { @frameworkId = Model.FrameworkId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { @class = "link-back new-postcode-search" })
+            @Html.ActionLink("Back", "SearchForFrameworkProviders", "Apprenticeship", new { @frameworkId = Model.FrameworkId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer, Ukprn = Model.Ukprn }, new { @class = "link-back new-postcode-search" })
         }
         
         @{ Html.RenderPartial("_ManageApprenticeshipFunds", Model.ManageApprenticeshipFunds); }

@@ -11,10 +11,10 @@
     @switch (Model.ApprenticeshipType)
     {
         case ApprenticeshipTrainingType.Framework:
-            @Html.ActionLink("Back", "Framework", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId }, new { @class = "link-back" })
+            @Html.ActionLink("Back", "Framework", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" })
             break;
         case ApprenticeshipTrainingType.Standard:
-            @Html.ActionLink("Back", "Standard", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId }, new { @class = "link-back" })
+            @Html.ActionLink("Back", "Standard", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" })
             break;
     }
     <h1 class="heading-xlarge">
@@ -73,6 +73,7 @@
                     <div class="form-group">
                         <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
                         <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
+                        <input type="hidden" name="ukprn" class="text-box form-control" value="@Model.Ukprn">
                         <input class="button postcode-search-button" type="submit" value="Search">
                     </div>
                 </div>

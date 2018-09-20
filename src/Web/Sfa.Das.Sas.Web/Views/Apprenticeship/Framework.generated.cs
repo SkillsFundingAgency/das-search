@@ -74,14 +74,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9677), Tuple.Create("\"", 9685)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 9681), Tuple.Create("\"", 9689)
 
 #line 201 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 9682), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 9686), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 9682), false)
+, 9686), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -137,14 +137,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "                            <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 10000), Tuple.Create("\"", 10008)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 10004), Tuple.Create("\"", 10012)
 
 #line 210 "..\..\Views\Apprenticeship\Framework.cshtml"
-, Tuple.Create(Tuple.Create("", 10005), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 10009), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 10005), false)
+, 10009), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -264,14 +264,14 @@ WriteLiteralTo(__razor_helper_writer, " rel=\"nofollow\"");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"ga-find-provider-bottom\"");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 11016), Tuple.Create("\"", 11139)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 11020), Tuple.Create("\"", 11143)
 
 #line 238 "..\..\Views\Apprenticeship\Framework.cshtml"
-          , Tuple.Create(Tuple.Create("", 11023), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = frameworkId, keywords = searchTerm})
+          , Tuple.Create(Tuple.Create("", 11027), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = frameworkId, keywords = searchTerm})
 
 #line default
 #line hidden
-, 11023), false)
+, 11027), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -349,7 +349,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 13 "..\..\Views\Apprenticeship\Framework.cshtml"
-             if (Model.ReturnToApprenticeshipSearch)
+             if (string.IsNullOrWhiteSpace(Model.Ukprn))
             {
                 
             

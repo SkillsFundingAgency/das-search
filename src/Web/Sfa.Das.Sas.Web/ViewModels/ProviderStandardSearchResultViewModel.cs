@@ -12,6 +12,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public int ActualPage { get; set; }
 
         public int LastPage { get; set; }
+        public string Ukprn { get; set; }
 
         public string StandardId { get; set; }
 
