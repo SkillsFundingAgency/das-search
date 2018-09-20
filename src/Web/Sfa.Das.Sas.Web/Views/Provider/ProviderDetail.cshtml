@@ -78,7 +78,7 @@
 
             <div class="graph-heading-group">
                 <h2 class="heading-medium">What employers are saying</h2>
-                <p class="meta">Based on 27 reviews from 5 employers over the last 6 months</p>
+                <p class="meta">Based on @Model.ProviderFeedback.TotalFeedbackCount reviews.</p>
             </div>
 
             <h3 class="heading-small">Training quality from March 2018 to now</h3>
@@ -120,32 +120,27 @@
                     <span class="figure">@Model.ProviderFeedback.VeryPoorFeedbackCount <span class="visually-hidden">out of @Model.ProviderFeedback.TotalFeedbackCount </span>reviews</span>
                 </li>
             </ul>
-
-            @if (1 == 2)
-            {
-                <div class="grid-row">
-                    <div class="column-half">
-                        <h4 class="heading-small">Strengths</h4>
-                        <ul class="list">
-                            <li>Training quality (12)</li>
-                            <li>Assessing apprentice progress (9)</li>
-                            <li>Onboarding new apprentices (9)</li>
-                            <li>Improving apprentice skills (8)</li>
-                            <li>Improving business outcomes (6)</li>
-                            <li>Design of training (6)</li>
-                            <li>Delivery of training (5)</li>
-                        </ul>
-                    </div>
-                    <div class="column-half">
-                        <h4 class="heading-small">Things to improve</h4>
-                        <ul class="list">
-                            <li>Assessing apprentice progress (3)</li>
-                            <li>Onboarding new apprentices (3)</li>
-                            <li>Adapting to my needs (1)</li>
-                        </ul>
-                    </div>
+            <div class="grid-row">
+                <div class="column-half">
+                    <h4 class="heading-small">Strengths</h4>
+                    <ul class="list">
+                        @foreach (var strength in Model.ProviderFeedback.Strengths)
+                        {
+                            <li>@strength.Name (@strength.Count)</li>
+                        }
+                    </ul>
                 </div>
-            }
+                <p>something</p>
+                <div class="column-half">
+                    <h4 class="heading-small">Things to improve</h4>
+                    <ul class="list">
+                        @foreach (var toImprove in Model.ProviderFeedback.Weaknesses)
+                        {
+                            <li>@toImprove.Name (@toImprove.Count)</li>
+                        }
+                    </ul>
+                </div>
+            </div>
 
             @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
             {
