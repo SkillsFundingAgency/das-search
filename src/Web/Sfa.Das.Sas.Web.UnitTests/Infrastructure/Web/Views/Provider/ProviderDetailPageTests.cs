@@ -1,6 +1,5 @@
 ﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
 {
-    using System;
     using System.Collections.Generic;
     using ExtensionHelpers;
     using FluentAssertions;
