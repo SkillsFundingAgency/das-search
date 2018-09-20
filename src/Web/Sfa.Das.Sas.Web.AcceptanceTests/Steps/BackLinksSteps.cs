@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests
         [Given(@"I'm on the Apprenticeship summary page")]
         public void GivenThatIMOnTheApprenticeshipSummaryPage()
         {
-            WebSite.PageFactory.ApprenticeshipSummaryPage.NavigateToFramework(WebSite.BaseUrl, "454-2-1","northampton", "10007455");
+            WebSite.PageFactory.ApprenticeshipSummaryPage.NavigateToFramework(WebSite.BaseUrl, "454-2-1","northampton", null);
         }
         
        

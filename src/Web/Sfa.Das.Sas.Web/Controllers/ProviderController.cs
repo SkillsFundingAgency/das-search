@@ -201,7 +201,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
                     dest.SearchTerm = criteria.Keyword;
                     dest.ApprenticeshipId = dest.ApprenticeshipType == ApprenticeshipTrainingType.Framework ? criteria.FrameworkId : criteria.StandardCode;
-                    dest.Postcode = criteria.Postcode.Replace(" ","+");
+                    dest.Postcode = criteria.Postcode;
                 }));
 
             return View(viewModel);

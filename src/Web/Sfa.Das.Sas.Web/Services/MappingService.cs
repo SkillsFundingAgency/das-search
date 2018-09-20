@@ -280,6 +280,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                 .ForMember(x => x.ErrorMessage, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
                 .ForMember(x => x.ApprenticeshipType, y => y.MapFrom(z => ApprenticeshipTrainingType.Framework));
 
             cfg.CreateMap<GetStandardProvidersResponse, ProviderSearchViewModel>()
@@ -289,6 +290,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                 .ForMember(x => x.ErrorMessage, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
                 .ForMember(x => x.ApprenticeshipType, y => y.MapFrom(z => ApprenticeshipTrainingType.Standard));
 
             // Provider search
@@ -310,6 +312,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore());
 
             // Provider Name Search
@@ -358,6 +361,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore());
         }
 

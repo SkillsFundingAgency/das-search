@@ -16,11 +16,11 @@
         switch (Model.ApprenticeshipType)
         {
             case ApprenticeshipTrainingType.Framework:
-                @Html.ActionLink("Back", "FrameworkResults", "Provider", new {@keyword = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
+                @Html.ActionLink("Back", "FrameworkResults", "Provider", new {@keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
 
                 break;
             case ApprenticeshipTrainingType.Standard:
-                @Html.ActionLink("Back", "StandardResults", "Provider", new {@keyword = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
+                @Html.ActionLink("Back", "StandardResults", "Provider", new {@keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
 
                 break;
             default:
