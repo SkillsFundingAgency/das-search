@@ -75,7 +75,7 @@
 
             <div id="apprenticeship-results" class="column-two-thirds">
                 <form method="GET" id="search-results-order">
-                    <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                    <input type="hidden" name="Keyword" value="@Model.SearchTerm" />
                     <input type="hidden" name="page" value="@Model.ActualPage" />
                     @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
                     {
@@ -173,7 +173,7 @@
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Standard", "Apprenticeship", 
-            new { @id = item.StandardId, @keywords = Model.SearchTerm}, 
+            new { @id = item.StandardId, @keyword = Model.SearchTerm}, 
             new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) } )
         <span class="tag tag-new">New</span>
     </h2>
@@ -183,7 +183,7 @@
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Framework", "Apprenticeship",
-            new { @id = item.FrameworkId, @keywords = Model.SearchTerm },
+            new { @id = item.FrameworkId, @keyword = Model.SearchTerm },
             new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
     </h2>
 }
