@@ -23,7 +23,6 @@
 
     <div class="grid-row">
         <div class="column-two-thirds">
-
             @if (Model.CurrentlyNotStartingNewApprentices)
             {
                 <div class="error-summary warning">
@@ -78,7 +77,7 @@
 
             @if (Model.ProviderFeedback != null)
             {
-            <div class="graph-heading-group">
+            <div id="feedback-heading" class="graph-heading-group">
                 <h2 class="heading-medium">What employers are saying</h2>
                 <p class="meta">Based on @Model.ProviderFeedback.TotalFeedbackCount reviews.</p>
             </div>

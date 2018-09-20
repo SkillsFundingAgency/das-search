@@ -5,6 +5,9 @@ namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class FeedbackViewModel : Feedback
     {
+        public FeedbackViewModel()
+        {
+        }
 
         public FeedbackViewModel(Feedback providerFeedback)
         {
