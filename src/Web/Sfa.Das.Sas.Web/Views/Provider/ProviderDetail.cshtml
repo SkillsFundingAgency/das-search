@@ -76,6 +76,8 @@
                 }
             }
 
+            @if (Model.ProviderFeedback != null)
+            {
             <div class="graph-heading-group">
                 <h2 class="heading-medium">What employers are saying</h2>
                 <p class="meta">Based on @Model.ProviderFeedback.TotalFeedbackCount reviews.</p>
@@ -140,6 +142,7 @@
                     </ul>
                 </div>
             </div>
+            }
 
             @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
             {
