@@ -90,10 +90,10 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(string id, string keywords, string ukprn = null)
+        public ActionResult Standard(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting strandard {id}");
-            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
+            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keyword});
 
             string message;
 
@@ -145,10 +145,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
         
-        public ActionResult Framework(string id, string keywords, string ukprn = null)
+        public ActionResult Framework(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting framework {id}");
-            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
+            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword });
 
             string message;
 
