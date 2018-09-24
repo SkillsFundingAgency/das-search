@@ -75,7 +75,7 @@
                 }
             }
 
-            @if (Model.ProviderFeedback != null)
+            @if (Model.ProviderFeedback != null && Model.ProviderFeedback.TotalFeedbackCount > 0)
             {
             <div id="feedback-heading" class="graph-heading-group">
                 <h2 class="heading-medium">What employers are saying</h2>
