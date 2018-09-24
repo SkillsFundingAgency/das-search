@@ -3,7 +3,9 @@ using System.Collections.Generic;
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
     using System.Linq;
+    using FeatureToggle.Core.Fluent;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
+    using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
     using ViewModels;
 
     public static class ProviderDetailViewModelMapper
@@ -22,11 +24,12 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                     ? ProviderMappingHelper.GetPercentageText(provider.LearnerSatisfaction)
                     : ProviderMappingHelper.GetPercentageText(null);
 
-            var viewModel = new ProviderDetailViewModel {
+            var viewModel = new ProviderDetailViewModel
+            {
                 DisplayAboutThisProvider = !hideAboutThisProviderForUlns.Contains(provider.Ukprn),
                 Email = provider.Email,
-	            CurrentlyNotStartingNewApprentices = provider.CurrentlyNotStartingNewApprentices,
-				IsEmployerProvider = provider.IsEmployerProvider,
+                CurrentlyNotStartingNewApprentices = provider.CurrentlyNotStartingNewApprentices,
+                IsEmployerProvider = provider.IsEmployerProvider,
                 EmployerSatisfaction = provider.EmployerSatisfaction,
                 EmployerSatisfactionMessage = employerSatisfationMessage,
                 IsHigherEducationInstitute = provider.IsHigherEducationInstitute,
@@ -43,13 +46,13 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 IsNew = provider.IsNew,
                 IsLevyPayerOnly = provider.IsLevyPayerOnly,
                 SearchTerm = searchTerm
-                };
+                ProviderFeedback = Is<ProviderFeedbackFeature>.Enabled ? new FeedbackViewModel(provider.ProviderFeedback) : (FeedbackViewModel)null
+            };
 
             if (provider.Aliases != null && provider.Aliases.Any())
-                {
-                viewModel.TradingNames = provider.Aliases.Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " +  aliasToAdd);
-
-                }
+            {
+                viewModel.TradingNames = provider.Aliases.Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " + aliasToAdd);
+            }
 
             return viewModel;
         }

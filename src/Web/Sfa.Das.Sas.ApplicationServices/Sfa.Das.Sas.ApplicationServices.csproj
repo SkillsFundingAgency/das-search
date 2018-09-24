@@ -61,7 +61,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.82\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.95\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.11.60.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.AssessmentOrgs.Api.Client.0.11.60\lib\net45\SFA.DAS.AssessmentOrgs.Api.Client.dll</HintPath>
@@ -71,7 +71,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SFA.DAS.Providers.Api.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.11.80\lib\net462\SFA.DAS.Providers.Api.Client.dll</HintPath>
+      <HintPath>..\packages\SFA.DAS.Providers.Api.Client.0.11.95\lib\net462\SFA.DAS.Providers.Api.Client.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=4.2.0.402, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.4.2.0.402\lib\net40\StructureMap.dll</HintPath>
@@ -111,6 +111,7 @@
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ApprenticeshipServiceApiFeature.cs" />
     <Compile Include="FeatureToggles\CloudConfigToggleValueProvider.cs" />
+    <Compile Include="FeatureToggles\ProviderFeedbackFeature.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
     <Compile Include="Handlers\IXmlDocumentSerialiser.cs" />
     <Compile Include="Handlers\ProviderDetailHandler.cs" />

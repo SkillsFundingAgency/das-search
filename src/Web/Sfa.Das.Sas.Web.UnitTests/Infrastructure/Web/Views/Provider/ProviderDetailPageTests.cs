@@ -27,6 +27,7 @@
         internal const string ParentCompanyGuaranteeMessage = "Provider is supported by a parent company guarantee";
         internal const string IsNewProviderMessage = "New organisation with no financial track record";
         internal const string IsLevyPayerOnlyMessage = "Only levy paying employers can work with this provider";
+        private static FeedbackViewModel _providerFeedback = GetProviderFeedback();
 
         [Test]
         public void ShouldShowFieldsAsExpected()
@@ -142,7 +143,7 @@
             model.DisplayAboutThisProvider = true;
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#about-this-provider").Should().Contain("About this Provider");
+            GetPartial(html, "#about-this-provider").Should().Contain("About this provider");
         }
 
         [Test]
@@ -230,6 +231,40 @@
             GetPartial(html, "#next-nav").Should().Be(string.Empty);
         }
 
+        [Test]
+        public void ShoulNotShowFeedbackIfNotSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ProviderFeedback = null;
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#feedback-heading").Should().Be(string.Empty);
+        }
+
+        [Test]
+        public void ShoulShowFeedbackRatingsIfFeedbackSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#feedback-heading").Should().Contain("Based on 34 reviews");
+        }
+
+        private static FeedbackViewModel GetProviderFeedback()
+        {
+            return new FeedbackViewModel
+            {
+                ExcellentFeedbackCount = 10,
+                GoodFeedbackCount = 9,
+                PoorFeedbackCount = 8,
+                VeryPoorFeedbackCount = 7,
+                Strengths = new List<ProviderAttribute> { new ProviderAttribute { Name = "Strenght", Count = 6 } },
+                Weaknesses = new List<ProviderAttribute> { new ProviderAttribute { Name = "Weaknesss", Count = 4 } }
+            };
+        }
+
         private static ProviderDetailViewModel GetProvider()
         {
             return new ProviderDetailViewModel
@@ -260,7 +295,8 @@
                         }
                     },
                     PaginationDetails = new PaginationDetails { LastPage = 1, NumberOfRecordsToSkip = 0, NumberPerPage = 20, TotalCount = 1, Page = 1 }
-                }
+                },
+                ProviderFeedback = _providerFeedback
             };
         }
     }
