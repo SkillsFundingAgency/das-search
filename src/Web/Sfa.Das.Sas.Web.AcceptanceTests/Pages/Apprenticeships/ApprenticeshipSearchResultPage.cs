@@ -4,15 +4,22 @@ using Sfa.Das.Sas.Web.AcceptanceTests.Pages.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sfa.Automation.Framework.Extensions;
+using Sfa.Das.Sas.Web.AcceptanceTests.Helpers;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
 {
-    internal class SearchResultPage : FatBasePage
+    internal class ApprenticeshipSearchResultPage : FatBasePage
     {
         protected override string PageTitle => "Search Results - Find apprenticeship training";
 
-        public SearchResultPage(IWebDriver webDriver) : base(webDriver)
+        public ApprenticeshipSearchResultPage(IWebDriver webDriver) : base(webDriver)
         {
+        }
+
+        public override bool Verify()
+        {
+           return PageInteractionHelper.VerifyPageHeading(Driver.Title, PageTitle);
         }
 
         public IWebElement Heading => GetByClass("h1.heading-xlarge");
@@ -21,6 +28,12 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
         public IWebElement SortingDropdown => GetById("select-order");
         public IWebElement FilterBlock => GetByClass("filters-block");
         public IWebElement FilterBlockButton => GetByCss(".filter-box .button");
+
+        public void Navigate(Uri baseUrl, string keywords)
+        {
+            Driver.Navigate().GoToUrl(baseUrl.Combine($"Apprenticeship/SearchResults?Keywords={keywords}"));
+        }
+
 
         internal void SelectLevel(int level)
         {

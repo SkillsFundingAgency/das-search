@@ -15,7 +15,7 @@
     <p class="small-btm-margin">
         @if (Model.Hits.Count() != 0)
         {
-            @Html.ActionLink("Find providers for a different postcode", "SearchForStandardProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer }, new { @class = "link-back new-postcode-search" })
+            @Html.ActionLink("Back", "SearchForStandardProviders", "Apprenticeship", new { @standardId = Model.StandardId, @keywords = Model.SearchTerms, isLevyPayingEmployer = Model.IsLevyPayingEmployer, ukprn = Model.Ukprn }, new { @class = "link-back new-postcode-search" })
 
         }
 

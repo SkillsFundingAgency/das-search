@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Sfa.Das.Sas.Web.AcceptanceTests.Helpers;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
 {
@@ -6,21 +7,24 @@ namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
     {
         protected override string PageTitle => "Home Page - Find apprenticeship training";
 
+        public override bool Verify()
+        {
+           return PageInteractionHelper.VerifyPageHeading(Driver.Title, PageTitle);
+        }
+
         public SearchApprenticeshipPage(IWebDriver webDriver) : base(webDriver)
         {
         }
 
         public IWebElement SearchButton => GetById("submit-keywords");
-
-        public IWebElement Heading => GetByCss("h1.heading-xlarge");
-
+        
         public IWebElement SearchBox => GetById("keywords");
 
-        public SearchResultPage SearchFor(string v)
+        public ApprenticeshipSearchResultPage SearchFor(string v)
         {
             SearchBox.SendKeys(v);
             SearchButton.Click();
-            return new SearchResultPage(Driver);
+            return new ApprenticeshipSearchResultPage(Driver);
         }
     }
 }

@@ -90,10 +90,10 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(string id, string keywords)
+        public ActionResult Standard(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting strandard {id}");
-            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keywords});
+            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keyword});
 
             string message;
 
@@ -140,15 +140,15 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             _logger.Info($"Mapping Standard {id}");
             var viewModel = _mappingService.Map<GetStandardResponse, StandardViewModel>(response);
-            ProcessViewModel(viewModel, response.Standard?.FundingPeriods, response.Standard?.EffectiveFrom);
+            ProcessViewModel(viewModel, response.Standard?.FundingPeriods, response.Standard?.EffectiveFrom, ukprn);
 
             return View(viewModel);
         }
         
-        public ActionResult Framework(string id, string keywords)
+        public ActionResult Framework(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting framework {id}");
-            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keywords });
+            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword });
 
             string message;
 
@@ -176,7 +176,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 case GetFrameworkResponse.ResponseCodes.Success:
                     _logger.Info($"Mapping Framework {id}");
                     var viewModel = _mappingService.Map<GetFrameworkResponse, FrameworkViewModel>(response);
-                    ProcessViewModel(viewModel, response.Framework?.FundingPeriods, response.Framework?.EffectiveFrom);
+                    ProcessViewModel(viewModel, response.Framework?.FundingPeriods, response.Framework?.EffectiveFrom, ukprn);
 
                     return View(viewModel);
 
@@ -185,7 +185,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string postcodeCountry, bool? isLevyPayingEmployer)
+        public ActionResult SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords,string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetStandardProvidersQuery
             {
@@ -207,11 +207,12 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.HasError = statusCode.HasValue && statusCode.Value != ProviderSearchResponseCodes.Success;
             viewModel.ErrorMessage = ProviderSearchMapper.CreateErrorMessage(statusCode);
             viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
+            viewModel.Ukprn = ukprn;
 
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(string frameworkId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string postcodeCountry, bool? isLevyPayingEmployer)
+        public ActionResult SearchForFrameworkProviders(string frameworkId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetFrameworkProvidersQuery
             {
@@ -233,6 +234,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             viewModel.HasError = statusCode.HasValue && statusCode.Value != ProviderSearchResponseCodes.Success;
             viewModel.ErrorMessage = ProviderSearchMapper.CreateErrorMessage(statusCode);
             viewModel.IsLevyPayingEmployer = isLevyPayingEmployer;
+            viewModel.Ukprn = ukprn;
 
             return View("SearchForProviders", viewModel);
         }
@@ -256,20 +258,22 @@ namespace Sfa.Das.Sas.Web.Controllers
             return rv;
         }
 
-        private void ProcessViewModel(StandardViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom)
+        private void ProcessViewModel(StandardViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom, string ukprn)
         {
             viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
             var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(fundingPeriods, effectiveFrom, _nextFundingPeriodMessageCutoffMonths);
             viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
             viewModel.NextFundingCap = nextFundingCap?.FundingCap;
+            viewModel.Ukprn = ukprn;
         }
 
-        private void ProcessViewModel(FrameworkViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom)
+        private void ProcessViewModel(FrameworkViewModel viewModel, List<FundingPeriod> fundingPeriods, DateTime? effectiveFrom, string ukprn)
         {
             viewModel.FindApprenticeshipTrainingText = _buttonTextService.GetFindTrainingProvidersText(HttpContext);
             var nextFundingCap = _fundingBandService.GetNextFundingPeriodWithinTimePeriod(fundingPeriods, effectiveFrom, _nextFundingPeriodMessageCutoffMonths);
             viewModel.NextEffectiveFrom = nextFundingCap?.EffectiveFrom;
             viewModel.NextFundingCap = nextFundingCap?.FundingCap;
+            viewModel.Ukprn = ukprn;
         }
     }
 }

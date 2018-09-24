@@ -14,6 +14,7 @@
     
     <div class="grid-row">
         <div class="column-full">
+            <a class="link-back" href="/Apprenticeship/Search">Back</a>
             <hgroup class="hgroup">
                 <h1 class="heading-xlarge">
                     Search results
@@ -25,7 +26,7 @@
 
             @if (Model.TotalResults == 0)
             {
-                using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
+                using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
                 {
                     <div class="form-group">
                         <label for="keywords">
@@ -35,10 +36,10 @@
                         <span class="error-message"></span>
                         <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
                     </div>
-                    <input class="button" id="submit-keywords" type="submit" value="Search" />
+                    <input class="button" id="submit-keywords" type="submit" value="Search"/>
                 }
             }
-            </div>
+        </div>
         </div>
     
     <div class="grid-row">
@@ -74,7 +75,7 @@
 
             <div id="apprenticeship-results" class="column-two-thirds">
                 <form method="GET" id="search-results-order">
-                    <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
+                    <input type="hidden" name="Keyword" value="@Model.SearchTerm" />
                     <input type="hidden" name="page" value="@Model.ActualPage" />
                     @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
                     {
@@ -172,7 +173,7 @@
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Standard", "Apprenticeship", 
-            new { @id = item.StandardId, @keywords = Model.SearchTerm}, 
+            new { @id = item.StandardId, @keyword = Model.SearchTerm}, 
             new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) } )
         <span class="tag tag-new">New</span>
     </h2>
@@ -181,8 +182,8 @@
 @helper GetFrameworkTitle(ApprenticeshipSearchResultItemViewModel item, int index)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Framework", "Apprenticeship", 
-            new { @id = item.FrameworkId, @keywords = Model.SearchTerm }, 
+        @Html.ActionLink(item.Title, "Framework", "Apprenticeship",
+            new { @id = item.FrameworkId, @keyword = Model.SearchTerm },
             new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
     </h2>
 }

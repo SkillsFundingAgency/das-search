@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 
     public static class ProviderDetailViewModelMapper
     {
-        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary, IEnumerable<long> hideAboutThisProviderForUlns = null)
+        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary, IEnumerable<long> hideAboutThisProviderForUlns = null, string searchTerm = null)
         {
             hideAboutThisProviderForUlns = hideAboutThisProviderForUlns ?? new List<long>();
 
@@ -45,6 +45,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 HasParentCompanyGuarantee = provider.HasParentCompanyGuarantee,
                 IsNew = provider.IsNew,
                 IsLevyPayerOnly = provider.IsLevyPayerOnly,
+                SearchTerm = searchTerm,
                 ProviderFeedback = Is<ProviderFeedbackFeature>.Enabled ? new FeedbackViewModel(provider.ProviderFeedback) : (FeedbackViewModel)null
             };
 
