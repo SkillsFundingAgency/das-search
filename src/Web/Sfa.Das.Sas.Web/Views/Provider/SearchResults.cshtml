@@ -7,7 +7,7 @@
 }
 <main id="content" role="main">
     <div class="breadcrumbs">
-        <a href="/" class="link-back">Back</a>
+        <a href="/Provider/Search" class="link-back">Back</a>
     </div>
     <input type="hidden" value="@Model.SearchTerm" id="ga-search-term" />
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
@@ -117,15 +117,15 @@
 
 @helper GetProviderDetailItem(string title, List<string> aliases, string ukprn)
 {
-    <a href="../Provider/@ukprn">@title</a> 
-       
+    <a href="../Provider/@ukprn?keyword=@Model.SearchTerm">@title</a> 
+
     if (aliases != null && aliases.Count > 0)
     {
 
         foreach (var alias in aliases)
         {
             <span class="sublist">
-                ...<a href="../Provider/@ukprn">@alias</a>
+                ...<a href="../Provider/@ukprn?keyword=@Model.SearchTerm">@alias</a>
             </span>
         }
 

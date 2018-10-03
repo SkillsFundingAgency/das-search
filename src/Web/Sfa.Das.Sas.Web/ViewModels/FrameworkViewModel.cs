@@ -20,6 +20,10 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string SearchTerm { get; set; }
 
+        public bool ShowBackLink => string.IsNullOrWhiteSpace(SearchTerm) == false;
+
+        public bool ReturnToApprenticeshipSearch { get; set; }
+
         public string CompletionQualifications { get; set; }
 
         public string FrameworkOverview { get; set; }
@@ -41,5 +45,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public DateTime? NextEffectiveFrom { get; set; }
 
         public int? NextFundingCap { get; set; }
+        public string Ukprn { get; set; }
     }
 }

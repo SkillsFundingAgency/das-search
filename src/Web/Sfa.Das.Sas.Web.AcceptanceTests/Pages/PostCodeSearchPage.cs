@@ -1,14 +1,20 @@
 ﻿using OpenQA.Selenium;
+using Sfa.Das.Sas.Web.AcceptanceTests.Helpers;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
 {
     internal class PostCodeSearchPage : FatBasePage
     {
         protected override string PageTitle => "Search for providers - Find apprenticeship training";
+        public override bool Verify()
+        {
+            return PageInteractionHelper.VerifyPageHeading(Driver.Title, PageTitle);
+        }
 
         public PostCodeSearchPage(IWebDriver webDriver) : base(webDriver)
         {
         }
+
 
         public IWebElement Lede => GetByCss("p.lede");
 

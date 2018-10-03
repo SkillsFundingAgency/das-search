@@ -10,6 +10,15 @@
 <main id="content" class="framework-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
+            @if (string.IsNullOrWhiteSpace(Model.Ukprn))
+            {
+                @Html.ActionLink("Back", "SearchResults", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
+            }
+            else
+            {
+                @Html.ActionLink("Back", Model.Ukprn,"Provider", new { @keywords = Model.SearchTerm }, new { @class = "link-back" })
+            }
+
             <h1 class="heading-xlarge">
                 @Model.Title
             </h1>
@@ -35,9 +44,7 @@
             <div class="related-container">
                 <aside class="hidden-for-mobile-tablet">
 
-                    <a class="button ui-find-training-providers" target="find-training-providers" rel="nofollow" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
-                        @Model.FindApprenticeshipTrainingText
-                    </a>
+                @getFindTrainingProviderButton(Model.FrameworkId, Model.SearchTerm)
                 </aside>
             </div>
 
@@ -181,9 +188,7 @@
         </dl>
 
         <div id="bottom-actions">
-            <a class="button btn-find-trng-prov" rel="nofollow" target="find-training-providers" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = Model.FrameworkId, keywords = Model.SearchTerm})">
-                @Model.FindApprenticeshipTrainingText
-            </a>
+           @getFindTrainingProviderButton(Model.FrameworkId, Model.SearchTerm)
         </div>
     </section>
 </main>
@@ -227,6 +232,13 @@
         </strong>
     </div>
     }
+
+@helper getFindTrainingProviderButton(string frameworkId, string searchTerm)
+{
+    <a class="button btn-find-trng-prov" rel="nofollow" id="ga-find-provider-bottom" href="@Url.Action("SearchForFrameworkProviders", "Apprenticeship", new {frameworkId = frameworkId, keywords = searchTerm})">
+        @Model.FindApprenticeshipTrainingText
+    </a>
+}
 
 @functions {
 

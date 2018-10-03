@@ -847,7 +847,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var html = detail.RenderAsHtml(model).ToAngleSharp();
 
             GetHtmlElement(html, ".new-postcode-search").Should().NotBeNull();
-            GetPartial(html, ".new-postcode-search").Should().Be("Find providers for a different postcode");
+            GetPartial(html, ".new-postcode-search").Should().Be("Back");
         }
 
         [Test]

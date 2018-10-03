@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Web.Services
 {
@@ -103,6 +104,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasNonLevyContract, y => y.MapFrom(z => z.ApprenticeshipDetails.Provider.HasNonLevyContract))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore())
+                .ForMember(dest => dest.SearchTerm, opt => opt.Ignore())
+                .ForMember(dest => dest.ApprenticeshipId, opt => opt.Ignore())
+                .ForMember(dest => dest.Postcode, opt => opt.Ignore())
                 ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -198,6 +202,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasNonLevyContract, y => y.MapFrom(z => z.Provider.HasNonLevyContract))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore())
+                .ForMember(x => x.SearchTerm, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipId, y => y.Ignore())
+                .ForMember(x => x.Postcode, y => y.Ignore())
                 .AfterMap<ProviderViewModelMappingAction>();
         }
 
@@ -234,7 +241,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LastDateForNewStarts, y => y.MapFrom(z => z.Standard.LastDateForNewStarts))
                 .ForMember(x => x.NextEffectiveFrom, y => y.Ignore())
                 .ForMember(x => x.NextFundingCap, y => y.Ignore())
-                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
+                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore())
+                .ForMember(x => x.ReturnToApprenticeshipSearch, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore());
 
             // Framework detail page
             cfg.CreateMap<GetFrameworkResponse, FrameworkViewModel>()
@@ -255,7 +264,10 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Framework.Title)))
                 .ForMember(x => x.NextEffectiveFrom, y => y.Ignore())
                 .ForMember(x => x.NextFundingCap, y => y.Ignore())
-                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore());
+                .ForMember(x => x.FindApprenticeshipTrainingText, y => y.Ignore())
+                .ForMember(x => x.ReturnToApprenticeshipSearch, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
+                ;
         }
 
         private static void CreateProviderSearchMappings(IMapperConfiguration cfg)
@@ -267,7 +279,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.Ignore())
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
-                .ForMember(x => x.ErrorMessage, y => y.Ignore());
+                .ForMember(x => x.ErrorMessage, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipType, y => y.MapFrom(z => ApprenticeshipTrainingType.Framework));
 
             cfg.CreateMap<GetStandardProvidersResponse, ProviderSearchViewModel>()
                 .ForMember(x => x.ApprenticeshipId, y => y.MapFrom(z => z.StandardId))
@@ -275,7 +289,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.HasError, y => y.Ignore())
                 .ForMember(x => x.PostUrl, y => y.Ignore())
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
-                .ForMember(x => x.ErrorMessage, y => y.Ignore());
+                .ForMember(x => x.ErrorMessage, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipType, y => y.MapFrom(z => ApprenticeshipTrainingType.Standard));
 
             // Provider search
             cfg.CreateMap<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>()
@@ -296,6 +312,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore());
 
             // Provider Name Search
@@ -344,6 +361,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.NationalProviders, opt => opt.ResolveUsing<NationalProvidersValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
+                .ForMember(x => x.Ukprn, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore());
         }
 

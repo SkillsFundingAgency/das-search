@@ -3,6 +3,7 @@
 @using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.ApplicationServices.FeatureToggles
 @using FeatureToggle.Core.Fluent
+@using SFA.DAS.Apprenticeships.Api.Types
 @model ApprenticeshipDetailsViewModel
 
 @{
@@ -10,6 +11,22 @@
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 <main id="content" class="provider-detail">
+    @if (Model.ShowBackLink)
+    {
+        switch (Model.ApprenticeshipType)
+        {
+            case ApprenticeshipTrainingType.Framework:
+                @Html.ActionLink("Back", "FrameworkResults", "Provider", new {@keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
+
+                break;
+            case ApprenticeshipTrainingType.Standard:
+                @Html.ActionLink("Back", "StandardResults", "Provider", new {@keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
+
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
     <p class="small-btm-margin">
         @{ Html.RenderPartial("_ManageApprenticeshipFunds", Model.ManageApprenticeshipFunds); }
     </p>
@@ -25,7 +42,7 @@
             <div class="panel--contact">
                 <h2 class="heading-medium">Contact details</h2>
                 <dl>
-                 
+
                     @GetStandardPropertyAsLinkHtml("Website:", "course-link", "apprenticeshipContactTitle", "apprenticeshipContact", Model.Apprenticeship.ApprenticeshipInfoUrl, Model.Name + " website")
                     @GetStandardPropertyHtml("Phone number:", "phone", Model.ContactInformation.Phone)
                     @GetEmailPropertyHtml("Email:", "email", Model.ContactInformation.Email)
@@ -117,7 +134,7 @@
                             <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
                                 @Model.EmployerSatisfactionMessage
                             </span>
-                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int) Model.EmployerSatisfaction)
                         </div>
                     </dd>
                     <dt>Learner satisfaction:</dt>
@@ -126,7 +143,7 @@
                             <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
                                 @Model.LearnerSatisfactionMessage
                             </span>
-                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction)
                         </div>
                         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
                         {
@@ -179,7 +196,7 @@
                     Give us your feedback
                 </h2>
                 <p>
-                    This is a new service and your feedback will help us improve it.<br />
+                    This is a new service and your feedback will help us improve it.<br/>
                     Use the link below to take part in a short survey.
                 </p>
                 <a href="@Model.SurveyUrl" target="_blank" class="button">Take the survey</a>
@@ -187,7 +204,7 @@
             <div class="provider-disclaimer">
                 <h3 class="heading-small">Content disclaimer</h3>
                 <p>
-                    Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site.  Education and Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
+                    Education and Skills Funding Agency cannot guarantee the accuracy of course information on this site and makes no representations about the quality of any courses which appear on the site. Education and Skills Funding Agency is not liable for any losses suffered as a result of any party relying on the course information provided.
                 </p>
             </div>
         </div>

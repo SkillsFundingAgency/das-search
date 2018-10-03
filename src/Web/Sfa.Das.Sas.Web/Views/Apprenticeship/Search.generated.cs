@@ -43,6 +43,7 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
   
     ViewBag.Title = "Home Page";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
+    ViewBag.PageID = "search-provider-home";
 
             
             #line default
@@ -61,21 +62,27 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n            <h1");
+WriteLiteral(">\r\n            <a");
+
+WriteLiteral(" class=\"link-back\"");
+
+WriteLiteral(" href=\"/Apprenticeship/ApprenticeshipOrProvider\"");
+
+WriteLiteral(">Back</a>\r\n            <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
 WriteLiteral(">\r\n                Find apprenticeship training\r\n            </h1>\r\n");
 
             
-            #line 12 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 14 "..\..\Views\Apprenticeship\Search.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 12 "..\..\Views\Apprenticeship\Search.cshtml"
-             using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
+            #line 14 "..\..\Views\Apprenticeship\Search.cshtml"
+             using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
             {
 
             
@@ -126,10 +133,10 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" value=\"Search\"");
 
-WriteLiteral("/>\r\n");
+WriteLiteral(" />\r\n");
 
             
-            #line 23 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 25 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             

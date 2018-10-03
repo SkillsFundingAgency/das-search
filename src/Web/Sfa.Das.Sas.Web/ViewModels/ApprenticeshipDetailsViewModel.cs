@@ -8,6 +8,10 @@
     {
         public string Ukprn { get; set; }
 
+        public string SearchTerm { get; set; }
+
+        public bool ShowBackLink => !string.IsNullOrWhiteSpace(SearchTerm);
+
         public bool IsHigherEducationInstitute { get; set; }
 
         public string Name { get; set; }
@@ -77,5 +81,7 @@
         }
 
 	    public bool CurrentlyNotStartingNewApprentices { get; set; }
+        public string ApprenticeshipId { get; internal set; }
+        public string Postcode { get; internal set; }
     }
 }

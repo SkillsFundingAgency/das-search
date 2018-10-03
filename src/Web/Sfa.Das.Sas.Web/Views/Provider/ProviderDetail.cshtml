@@ -11,6 +11,11 @@
 <main id="content" class="provider-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
+            @if (Model.ShowBackLink)
+            {
+                @Html.ActionLink("Back", "SearchResults", "Provider", new {@SearchTerm = Model.SearchTerm}, new {@class= "link-back" })
+            }
+          
             <h1 class="heading-xlarge" id="provider-name">
                 @Model.ProviderName
                 @if (@Model.NationalProvider)
@@ -160,15 +165,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
-                        {
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>@item.Type</td>
-                                <td>@item.Level</td>
-                                <td><a href="/Apprenticeship/@item.Type/@item.Identifier">Details</a></td>
-                            </tr>
-                        }
+                    @foreach (var item in Model.ApprenticeshipTrainingSummary.ApprenticeshipTrainingItems)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Type</td>
+                            <td>@item.Level</td>
+                            <td><a href="/Apprenticeship/@item.Type/@item.Identifier?keyword=@Model.SearchTerm&UkPrn=@Model.UkPrn">Details</a></td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             }

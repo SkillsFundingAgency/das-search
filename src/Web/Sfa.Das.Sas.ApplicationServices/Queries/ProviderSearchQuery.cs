@@ -25,5 +25,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
         public string Keywords { get; set; }
 
         public string ApprenticeshipId { get; set; }
+        public string Ukprn { get; set; }
     }
 }
