@@ -46,7 +46,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 IsNew = provider.IsNew,
                 IsLevyPayerOnly = provider.IsLevyPayerOnly,
                 SearchTerm = searchTerm,
-                ProviderFeedback = Is<ProviderFeedbackFeature>.Enabled ? new FeedbackViewModel(provider.ProviderFeedback) : (FeedbackViewModel)null
+                ProviderFeedback = Is<ProviderFeedbackFeature>.Enabled && provider.ProviderFeedback != null ? new FeedbackViewModel(provider.ProviderFeedback) : (FeedbackViewModel)null
             };
 
             if (provider.Aliases != null && provider.Aliases.Any())
