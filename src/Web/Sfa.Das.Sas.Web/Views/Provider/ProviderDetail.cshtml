@@ -11,6 +11,11 @@
 <main id="content" class="provider-detail">
     <div class="grid-row">
         <div class="column-two-thirds">
+            @if (Model.ShowBackLink)
+            {
+                @Html.ActionLink("Back", "SearchResults", "Provider", new { @SearchTerm = Model.SearchTerm }, new { @class = "link-back" })
+            }
+
             <h1 class="heading-xlarge" id="provider-name">
                 @Model.ProviderName
                 @if (@Model.NationalProvider)
