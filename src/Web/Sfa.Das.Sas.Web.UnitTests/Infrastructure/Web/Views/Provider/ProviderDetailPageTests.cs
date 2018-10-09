@@ -27,7 +27,13 @@
         internal const string ParentCompanyGuaranteeMessage = "Provider is supported by a parent company guarantee";
         internal const string IsNewProviderMessage = "New organisation with no financial track record";
         internal const string IsLevyPayerOnlyMessage = "Only levy paying employers can work with this provider";
-        private static FeedbackViewModel _providerFeedback = GetProviderFeedback();
+        private static FeedbackViewModel _providerFeedback;
+
+        [SetUp]
+        public void Setup()
+        {
+            _providerFeedback = GetProviderFeedback();
+        }
 
         [Test]
         public void ShouldShowFieldsAsExpected()
@@ -250,6 +256,30 @@
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#feedback-heading").Should().Contain("Based on 34 reviews");
+            GetPartial(html, "#strengths").Should().Contain("Strengths");
+            GetPartial(html, "#weaknesses").Should().Contain("Things to improve");
+        }
+
+        [Test]
+        public void ShoulNotShowStrengthsIfNoStrengthsSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ProviderFeedback.Strengths.Clear();
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#strengths").Should().NotContain("Strengths");
+        }
+
+        [Test]
+        public void ShoulNotShowWeaknessesIfNoWeaknessesSet()
+        {
+            var providerDetails = new ProviderDetail();
+            var model = GetProvider();
+            model.ProviderFeedback.Weaknesses.Clear();
+
+            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
+            GetPartial(html, "#weaknesses").Should().NotContain("Things to improve");
         }
 
         private static FeedbackViewModel GetProviderFeedback()
@@ -260,7 +290,7 @@
                 GoodFeedbackCount = 9,
                 PoorFeedbackCount = 8,
                 VeryPoorFeedbackCount = 7,
-                Strengths = new List<ProviderAttribute> { new ProviderAttribute { Name = "Strenght", Count = 6 } },
+                Strengths = new List<ProviderAttribute> { new ProviderAttribute { Name = "Strength", Count = 6 } },
                 Weaknesses = new List<ProviderAttribute> { new ProviderAttribute { Name = "Weaknesss", Count = 4 } }
             };
         }

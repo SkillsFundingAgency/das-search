@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.Web.ViewModels
@@ -15,8 +16,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
             GoodFeedbackCount = providerFeedback.GoodFeedbackCount;
             PoorFeedbackCount = providerFeedback.PoorFeedbackCount;
             VeryPoorFeedbackCount = providerFeedback.VeryPoorFeedbackCount;
-            Strengths = providerFeedback.Strengths;
-            Weaknesses = providerFeedback.Weaknesses;
+            Strengths = providerFeedback.Strengths.OrderByDescending(str => str.Count).ToList();
+            Weaknesses = providerFeedback.Weaknesses.OrderByDescending(str => str.Count).ToList();
         }
 
         public int TotalFeedbackCount => ExcellentFeedbackCount + GoodFeedbackCount + PoorFeedbackCount + VeryPoorFeedbackCount;
