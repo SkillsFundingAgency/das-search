@@ -168,8 +168,6 @@
     @include core-14();
 }
 
-
-
 .graph-list {
     li {
         display: table-row;
@@ -233,4 +231,9 @@
             font-size: 16px;
         }
     }
+}
+
+.provider-list-details {
+    margin-top: 20px;
+    margin-bottom: 60px;
 }
