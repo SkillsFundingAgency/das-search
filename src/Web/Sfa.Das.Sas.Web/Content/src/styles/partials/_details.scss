@@ -167,3 +167,73 @@
     }
     @include core-14();
 }
+
+.graph-list {
+    li {
+        display: table-row;
+
+        .label, .chart, .figure {
+            display: table-cell;
+            white-space: nowrap;
+            vertical-align: middle;
+            padding: 5px 0;
+        }
+
+        .chart {
+            width: 100%;
+
+            .bar, .graph {
+                display: block;
+                height: 24px;
+            }
+
+            .graph {
+                background: $grey-4;
+                border: 2px solid #ccc;
+                margin: 3px 10px;
+            }
+
+            .bar {
+                background: $govuk-blue;
+            }
+        }
+    }
+
+    li.level-1 .bar {
+        background: $green;
+    }
+
+    li.level-2 .bar {
+        background: $grass-green;
+    }
+
+    li.level-3 .bar {
+        background: $orange;
+    }
+
+    li.level-4 .bar {
+        background: $mellow-red;
+    }
+}
+
+.graph-heading-group {
+    margin-bottom: 30px;
+
+    h2.heading-medium {
+        margin-bottom: 0;
+    }
+
+    p.meta {
+        font-size: 14px;
+        margin-top: 0;
+
+        @include media(tablet) {
+            font-size: 16px;
+        }
+    }
+}
+
+.provider-list-details {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}

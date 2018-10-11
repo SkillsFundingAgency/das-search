@@ -28,6 +28,10 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string SearchTerm { get; set; }
 
+        public bool ShowBackLink => string.IsNullOrWhiteSpace(SearchTerm) == false;
+
+        public bool ReturnToApprenticeshipSearch { get; set; }
+
         public List<Organisation> AssessmentOrganisations { get; set; }
 
         public string StandardPageUri { get; set; }
@@ -43,5 +47,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public int? NextFundingCap { get; set; }
 
         public bool RegulatedStandard { get; set; }
+
+		public string Ukprn { get; set; }
     }
 }

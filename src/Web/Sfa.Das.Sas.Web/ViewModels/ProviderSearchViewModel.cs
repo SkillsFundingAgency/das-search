@@ -1,3 +1,5 @@
+using SFA.DAS.Apprenticeships.Api.Types;
+
 namespace Sfa.Das.Sas.Web.ViewModels
 {
     public class ProviderSearchViewModel
@@ -10,6 +12,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public string ApprenticeshipId { get; set; }
 
+        public ApprenticeshipTrainingType ApprenticeshipType { get; set; }
+
         public string PostCode { get; set; }
 
         public string SearchTerms { get; set; }
@@ -17,5 +21,6 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool? IsLevyPayingEmployer { get; set; }
 
         public string ErrorMessage { get; set; }
+        public string Ukprn { get; set; }
     }
 }

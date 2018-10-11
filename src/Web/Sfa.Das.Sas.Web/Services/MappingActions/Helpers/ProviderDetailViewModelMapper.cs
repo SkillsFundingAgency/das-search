@@ -3,12 +3,14 @@ using System.Collections.Generic;
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
     using System.Linq;
+    using FeatureToggle.Core.Fluent;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
+    using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
     using ViewModels;
 
     public static class ProviderDetailViewModelMapper
     {
-        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary, IEnumerable<long> hideAboutThisProviderForUlns = null)
+        public static ProviderDetailViewModel GetProviderDetailViewModel(Provider provider, ApprenticeshipTrainingSummary apprenticeshipTrainingSummary, IEnumerable<long> hideAboutThisProviderForUlns = null, string searchTerm = null)
         {
             hideAboutThisProviderForUlns = hideAboutThisProviderForUlns ?? new List<long>();
 
@@ -22,11 +24,12 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                     ? ProviderMappingHelper.GetPercentageText(provider.LearnerSatisfaction)
                     : ProviderMappingHelper.GetPercentageText(null);
 
-            var viewModel = new ProviderDetailViewModel {
+            var viewModel = new ProviderDetailViewModel
+            {
                 DisplayAboutThisProvider = !hideAboutThisProviderForUlns.Contains(provider.Ukprn),
                 Email = provider.Email,
-	            CurrentlyNotStartingNewApprentices = provider.CurrentlyNotStartingNewApprentices,
-				IsEmployerProvider = provider.IsEmployerProvider,
+                CurrentlyNotStartingNewApprentices = provider.CurrentlyNotStartingNewApprentices,
+                IsEmployerProvider = provider.IsEmployerProvider,
                 EmployerSatisfaction = provider.EmployerSatisfaction,
                 EmployerSatisfactionMessage = employerSatisfationMessage,
                 IsHigherEducationInstitute = provider.IsHigherEducationInstitute,
@@ -41,14 +44,15 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 ApprenticeshipTrainingSummary = apprenticeshipTrainingSummary,
                 HasParentCompanyGuarantee = provider.HasParentCompanyGuarantee,
                 IsNew = provider.IsNew,
-                IsLevyPayerOnly = provider.IsLevyPayerOnly
-                };
+                IsLevyPayerOnly = provider.IsLevyPayerOnly,
+                SearchTerm = searchTerm,
+                ProviderFeedback = Is<ProviderFeedbackFeature>.Enabled && provider.ProviderFeedback != null ? new FeedbackViewModel(provider.ProviderFeedback) : (FeedbackViewModel)null
+            };
 
             if (provider.Aliases != null && provider.Aliases.Any())
-                {
-                viewModel.TradingNames = provider.Aliases.Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " +  aliasToAdd);
-
-                }
+            {
+                viewModel.TradingNames = provider.Aliases.Aggregate((aggregatingTradingNames, aliasToAdd) => aggregatingTradingNames + ", " + aliasToAdd);
+            }
 
             return viewModel;
         }

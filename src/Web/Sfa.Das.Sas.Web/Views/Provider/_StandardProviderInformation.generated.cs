@@ -203,7 +203,7 @@ WriteLiteral("                ");
             
             #line 15 "..\..\Views\Provider\_StandardProviderInformation.cshtml"
            Write(Html.ActionLink(item.ProviderName, "Detail", "Provider",
-                    new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode, isLevyPayingEmployer = Model.IsLevyPayingEmployer },
+                    new { @ukprn = item.UkPrn, @locationId = item.LocationId, @standardCode = item.StandardCode, isLevyPayingEmployer = Model.IsLevyPayingEmployer, Postcode = Model.PostCode, Keyword = Model.SearchTerms },
                     new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) }));
 
             

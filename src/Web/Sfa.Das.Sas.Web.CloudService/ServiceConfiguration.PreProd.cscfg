@@ -24,6 +24,7 @@
       <Setting name="FeatureToggle.Elk5Feature" value="__FeatureToggle.Elk5Feature__" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="__FeatureToggle.ApprenticeshipServiceApiFeature__" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="__FeatureToggle.RoatpProviderFlagsFeature__" />
+      <Setting name="FeatureToggle.ProviderFeedbackFeature" value="__FeatureToggle.ProviderFeedbackFeature__"/>
       <Setting name="BuildId" value="__Build.BuildNumber__" />
       <Setting name="LoggingRedisConnectionString" value="__LoggingRedisConnectionString__" />
       <Setting name="LoggingRedisKey" value="__LoggingRedisKey__" />
