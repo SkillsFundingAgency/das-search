@@ -363,6 +363,11 @@
         {
             var response = new List<string>();
 
+            if (deliveryModes == null)
+            {
+                return response;
+            }
+
             foreach (var deliveryMode in deliveryModes)
             {
                 switch (deliveryMode.ToLower())
