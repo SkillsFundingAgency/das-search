@@ -26,6 +26,15 @@
                     @Model.Title
                 </h1>
                 <p class="lede">@Model.OverviewOfRole</p>
+                @if (Model.RegulatedStandard)
+                {
+                    
+                <div class="panel panel-border-wide panel-filled-purple">
+                    <h2 class="heading-small">Regulated standard</h2>
+                    <p>This standard needs a training provider who is recognised by the associated approval body. Please check with the training provider for further details.</p>
+                </div>
+
+                }
                 @if (Model.LastDateForNewStarts.HasValue && Model.LastDateForNewStarts.Value <= DateTime.Today.AddYears(1))
                 {
                     <br />
@@ -161,9 +170,6 @@
     {
         <dt>@title</dt>
         <dd id="@id">@item months</dd>
-    }
-}
-
     }
 }
 

@@ -65,7 +65,14 @@
 
             var apprenticeshipData = _getStandards.GetStandardById(message.StandardCode);
 
-            return CreateResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
+            var response = CreateResponse(model, apprenticeshipData, ApprenticeshipTrainingType.Standard);
+
+            if (apprenticeshipData != null)
+            {
+                response.RegulatedApprenticeship = apprenticeshipData.RegulatedStandard;
+            }
+
+            return response;
         }
 
         private ApprenticeshipProviderDetailResponse GetFramework(ApprenticeshipProviderDetailQuery message)
@@ -77,7 +84,9 @@
 
             var apprenticeshipProduct = _getFrameworks.GetFrameworkById(message.FrameworkId);
 
-            return CreateResponse(model, apprenticeshipProduct, ApprenticeshipTrainingType.Framework);
+            var response = CreateResponse(model, apprenticeshipProduct, ApprenticeshipTrainingType.Framework);
+            response.RegulatedApprenticeship = false;
+            return response;
         }
 
         private ApprenticeshipProviderDetailResponse CreateResponse(ApprenticeshipDetails model, IApprenticeshipProduct apprenticeshipProduct, ApprenticeshipTrainingType apprenticeshipProductType)

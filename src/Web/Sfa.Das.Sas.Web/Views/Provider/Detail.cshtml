@@ -69,6 +69,20 @@
                     <dd>@Model.ApprenticeshipName</dd>
                     <dt>Level: </dt>
                     <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(Model.ApprenticeshipLevel))</dd>
+                    
+                    @if (Model.RegulatedApprenticeship)
+                    {
+                        <dt>Regulated standard: </dt>
+                        <dd>
+                            This is a regulated standard
+                            <details>
+                                <summary><span class="summary">What does this mean?</span></summary>
+                                <div class="panel panel-border-narrow">
+                                    <p>This standard needs a training provider who is recognised by the associated approval body. Please check with the training provider for futher details.</p>
+                                </div>
+                            </details>
+                        </dd>
+                    }
 
                     @GetDeliveryModesHtml("Training options:", Model.DeliveryModes)
 
@@ -104,7 +118,7 @@
                         @if (Model.AchievementRateMessage != "no data available")
                         {
                             <details class="more-information">
-                                <summary>Explain achievement rate</summary>
+                                <summary><span class="summary">Explain achievement rate</span></summary>
                                 <div class="panel panel-border-narrow">
                                     <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
                                     <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
@@ -337,7 +351,7 @@ if (items != null)
                 }
             </ul>
             <details>
-                <summary>Explain training options</summary>
+                <summary><span class="summary">Explain training options</span></summary>
                 <div class="panel panel-border-narrow">
                     <p>
                         <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.

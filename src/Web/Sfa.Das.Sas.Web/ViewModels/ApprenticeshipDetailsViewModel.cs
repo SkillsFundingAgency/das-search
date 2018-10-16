@@ -80,8 +80,12 @@
             set;
         }
 
-	    public bool CurrentlyNotStartingNewApprentices { get; set; }
-        public string ApprenticeshipId { get; internal set; }
-        public string Postcode { get; internal set; }
+        public bool CurrentlyNotStartingNewApprentices { get; set; }
+
+        public bool RegulatedApprenticeship { get; set; }
+
+		public string ApprenticeshipId { get; internal set; }
+
+		public string Postcode { get; internal set; }
     }
 }

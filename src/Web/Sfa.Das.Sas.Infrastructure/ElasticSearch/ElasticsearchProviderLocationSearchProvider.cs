@@ -18,6 +18,10 @@
     {
         private const string TrainingTypeAggregateName = "training_type";
         private const string NationalProviderAggregateName = "national_provider";
+        private const string BlockRelease = "BlockRelease";
+        private const string DayRelease = "DayRelease";
+        private const string HundredPercentEmployer = "100PercentEmployer";
+
         private readonly IElasticsearchCustomClient _elasticsearchCustomClient;
         private readonly ILog _logger;
         private readonly IConfigurationSettings _applicationSettings;
@@ -64,8 +68,8 @@
                 NationalProvider = hit.Source.NationalProvider,
                 IsHigherEducationInstitute = hit.Source.IsHigherEducationInstitute,
                 HasNonLevyContract = hit.Source.HasNonLevyContract,
-	            CurrentlyNotStartingNewApprentices = hit.Source.CurrentlyNotStartingNewApprentices
-			};
+                CurrentlyNotStartingNewApprentices = hit.Source.CurrentlyNotStartingNewApprentices
+            };
         }
 
         private static FrameworkProviderSearchResultsItem MapToFrameworkProviderSearhResultsItem(IHit<FrameworkProviderSearchResultsItem> hit)
@@ -94,8 +98,8 @@
                 MatchingLocationId = hit?.InnerHits != null ? hit.InnerHits.First().Value.Hits.Hits.First().Source.As<TrainingLocation>().LocationId : (int?)null,
                 NationalProvider = hit.Source.NationalProvider,
                 HasNonLevyContract = hit.Source.HasNonLevyContract,
-	            CurrentlyNotStartingNewApprentices = hit.Source.CurrentlyNotStartingNewApprentices
-			};
+                CurrentlyNotStartingNewApprentices = hit.Source.CurrentlyNotStartingNewApprentices
+            };
         }
 
         private static Func<QueryContainerDescriptor<T>, QueryContainer> FilterByLocation<T>(Coordinate location)
@@ -171,13 +175,13 @@
             switch (filter.SearchOption)
             {
                 case ProviderFilterOptions.ApprenticeshipId:
-                    return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQueryWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProvider<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQueryWithNationalProvider<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
                 default:
-                    return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQuery<StandardProviderSearchResultsItem>(x => x.StandardCode, standardId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
             }
         }
 
@@ -186,13 +190,13 @@
             switch (filter.SearchOption)
             {
                 case ProviderFilterOptions.ApprenticeshipId:
-                    return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQueryWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipLocationWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProvider<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQueryWithNationalProvider<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
                 case ProviderFilterOptions.ApprenticeshipIdWithNationalProviderOnly:
-                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQueryWithNationalProviderWithoutLocationLimit<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
                 default:
-                    return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, filter.DeliveryModes, filter.HasNonLevyContract);
+                    return CreateProviderQuery<FrameworkProviderSearchResultsItem>(x => x.FrameworkId, frameworkId, coordinates, MapDeliveryModes(filter.DeliveryModes), filter.HasNonLevyContract);
             }
         }
 
@@ -353,6 +357,36 @@
                     .Sort(NestedSortByDistanceFromGivenLocation<T>(location)))
                 .Path(p => p.TrainingLocations)
                 .Query(q => q.MatchAll()));
+        }
+
+        private IEnumerable<string> MapDeliveryModes(IEnumerable<string> deliveryModes)
+        {
+            var response = new List<string>();
+
+            if (deliveryModes == null)
+            {
+                return response;
+            }
+
+            foreach (var deliveryMode in deliveryModes)
+            {
+                switch (deliveryMode.ToLower())
+                {
+                    case "blockrelease":
+                        response.Add(BlockRelease);
+                        break;
+                    case "dayrelease":
+                        response.Add(DayRelease);
+                        break;
+                    case "100percentemployer":
+                        response.Add(HundredPercentEmployer);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return response;
         }
 
         private int CalculateSkip(int page, int take)

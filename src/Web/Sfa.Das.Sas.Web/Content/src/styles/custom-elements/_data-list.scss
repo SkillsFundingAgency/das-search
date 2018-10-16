@@ -30,10 +30,10 @@ $module: 'data-list';
     dt, dd {
         float: left;
         box-sizing: border-box;
+
         @if($flatten == false) {
             padding-bottom: $gutter-one-quarter;
         }
-
         //Force empty elements to follow document flow
         &:empty::after {
             content: '.';
@@ -51,17 +51,21 @@ $module: 'data-list';
 
     dd {
         #{$widthType}width: $dataWidth;
-
         //In the cases where child elements have additional bottom spacing we remove it for consistency
-        & >:first-child, p:first-child {
+        & > :first-child, p:first-child {
             margin-top: 0;
             padding-top: 0;
         }
-        //In the cases where child elements have additional top spacing we remove it for consistency
-        & >:last-child {
-//            margin-bottom: 0;
-//            padding-bottom: 0;
+
+        & > details:first-child, details {
+            margin-top: 10px;
         }
+        //In the cases where child elements have additional top spacing we remove it for consistency
+        & > :last-child {
+            //            margin-bottom: 0;
+            //            padding-bottom: 0;
+        }
+
         margin-bottom: 1em;
     }
 
@@ -70,7 +74,6 @@ $module: 'data-list';
             margin-bottom: 0;
         }
     }
-
     //Mobile considerations
     @include media(mobile) {
         dt, dd {
@@ -91,7 +94,6 @@ $module: 'data-list';
             }
         }
     }
-
 }
 
 //Apply styles to '.data-list'

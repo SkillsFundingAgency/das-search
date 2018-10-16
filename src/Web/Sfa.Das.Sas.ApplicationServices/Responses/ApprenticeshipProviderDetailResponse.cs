@@ -21,5 +21,7 @@
         public string ApprenticeshipName { get; set; }
 
         public string ApprenticeshipLevel { get; set; }
+
+		public bool RegulatedApprenticeship { get; set; }
     }
 }
