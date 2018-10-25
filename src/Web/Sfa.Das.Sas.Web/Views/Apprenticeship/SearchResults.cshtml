@@ -75,7 +75,7 @@
 
             <div id="apprenticeship-results" class="column-two-thirds">
                 <form method="GET" id="search-results-order">
-                    <input type="hidden" name="Keyword" value="@Model.SearchTerm" />
+                    <input type="hidden" name="Keywords" value="@Model.SearchTerm" />
                     <input type="hidden" name="page" value="@Model.ActualPage" />
                     @foreach (var level in Model.AggregationLevel.Where(level => level.Checked))
                     {
