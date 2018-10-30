@@ -16,8 +16,8 @@ namespace Sfa.Das.Sas.Web.ViewModels
             GoodFeedbackCount = providerFeedback.GoodFeedbackCount;
             PoorFeedbackCount = providerFeedback.PoorFeedbackCount;
             VeryPoorFeedbackCount = providerFeedback.VeryPoorFeedbackCount;
-            Strengths = providerFeedback.Strengths.OrderByDescending(str => str.Count).ToList();
-            Weaknesses = providerFeedback.Weaknesses.OrderByDescending(str => str.Count).ToList();
+            Strengths = providerFeedback.Strengths.OrderByDescending(str => str.Count).ThenBy(str => str.Name).ToList();
+            Weaknesses = providerFeedback.Weaknesses.OrderByDescending(wk => wk.Count).ThenBy(wk => wk.Name).ToList();
         }
 
         public int TotalFeedbackCount => ExcellentFeedbackCount + GoodFeedbackCount + PoorFeedbackCount + VeryPoorFeedbackCount;
