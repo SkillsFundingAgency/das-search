@@ -46,14 +46,14 @@ namespace Sfa.Das.Sas.Web.Views.Provider
     public partial class ProviderDetail : System.Web.Mvc.WebViewPage<ProviderDetailViewModel>
     {
 
-#line 301 "..\..\Views\Provider\ProviderDetail.cshtml"
+#line 302 "..\..\Views\Provider\ProviderDetail.cshtml"
 public System.Web.WebPages.HelperResult CreateProgressBar(string message, int progress)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 302 "..\..\Views\Provider\ProviderDetail.cshtml"
+#line 303 "..\..\Views\Provider\ProviderDetail.cshtml"
  
     if (progress > 0)
     {
@@ -69,22 +69,22 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 15165), Tuple.Create("\"", 15190)
-, Tuple.Create(Tuple.Create("", 15173), Tuple.Create("width:", 15173), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 15238), Tuple.Create("\"", 15263)
+, Tuple.Create(Tuple.Create("", 15246), Tuple.Create("width:", 15246), true)
 
-#line 306 "..\..\Views\Provider\ProviderDetail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 15179), Tuple.Create<System.Object, System.Int32>(progress
+#line 307 "..\..\Views\Provider\ProviderDetail.cshtml"
+, Tuple.Create(Tuple.Create(" ", 15252), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 15180), false)
-, Tuple.Create(Tuple.Create("", 15189), Tuple.Create("%", 15189), true)
+, 15253), false)
+, Tuple.Create(Tuple.Create("", 15262), Tuple.Create("%", 15262), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
 
 
-#line 308 "..\..\Views\Provider\ProviderDetail.cshtml"
+#line 309 "..\..\Views\Provider\ProviderDetail.cshtml"
     }
 
 
@@ -92,7 +92,7 @@ WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
 #line hidden
 });
 
-#line 309 "..\..\Views\Provider\ProviderDetail.cshtml"
+#line 310 "..\..\Views\Provider\ProviderDetail.cshtml"
 }
 #line default
 #line hidden
@@ -1401,8 +1401,12 @@ WriteLiteral("\r\n\r\n                </dl>\r\n            </div>\r\n           
 
 WriteLiteral(" class=\"panel--contact panel--satisfaction\"");
 
-WriteLiteral(">\r\n                <dl>\r\n                    <dt>Employer satisfaction:</dt>\r\n   " +
-"                 <dd>\r\n                        <div");
+WriteLiteral(">\r\n                <h2");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(">Annual survey results</h2>\r\n                <dl>\r\n                    <dt>Employ" +
+"er satisfaction:</dt>\r\n                    <dd>\r\n                        <div");
 
 WriteLiteral(" class=\"rating rating--inline\"");
 
@@ -1410,15 +1414,15 @@ WriteLiteral(">\r\n                            <span");
 
 WriteLiteral(" id=\"employer-satisfaction\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 12413), Tuple.Create("\"", 12455)
-, Tuple.Create(Tuple.Create("", 12421), Tuple.Create("rating-", 12421), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 12484), Tuple.Create("\"", 12526)
+, Tuple.Create(Tuple.Create("", 12492), Tuple.Create("rating-", 12492), true)
             
-            #line 255 "..\..\Views\Provider\ProviderDetail.cshtml"
-, Tuple.Create(Tuple.Create("", 12428), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
+            #line 256 "..\..\Views\Provider\ProviderDetail.cshtml"
+, Tuple.Create(Tuple.Create("", 12499), Tuple.Create<System.Object, System.Int32>(Model.EmployerSatisfaction
             
             #line default
             #line hidden
-, 12428), false)
+, 12499), false)
 );
 
 WriteLiteral(">\r\n");
@@ -1426,7 +1430,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 256 "..\..\Views\Provider\ProviderDetail.cshtml"
+            #line 257 "..\..\Views\Provider\ProviderDetail.cshtml"
                            Write(Model.EmployerSatisfactionMessage);
 
             
@@ -1437,8 +1441,8 @@ WriteLiteral("\r\n                            </span>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 258 "..\..\Views\Provider\ProviderDetail.cshtml"
-                       Write(CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction));
+            #line 259 "..\..\Views\Provider\ProviderDetail.cshtml"
+                       Write(CreateProgressBar(Model.EmployerSatisfactionMessage, (int) Model.EmployerSatisfaction));
 
             
             #line default
@@ -1453,15 +1457,15 @@ WriteLiteral(">\r\n                            <span");
 
 WriteLiteral(" id=\"learner-satisfaction\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 12937), Tuple.Create("\"", 12978)
-, Tuple.Create(Tuple.Create("", 12945), Tuple.Create("rating-", 12945), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 13009), Tuple.Create("\"", 13050)
+, Tuple.Create(Tuple.Create("", 13017), Tuple.Create("rating-", 13017), true)
             
-            #line 264 "..\..\Views\Provider\ProviderDetail.cshtml"
-, Tuple.Create(Tuple.Create("", 12952), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
+            #line 265 "..\..\Views\Provider\ProviderDetail.cshtml"
+, Tuple.Create(Tuple.Create("", 13024), Tuple.Create<System.Object, System.Int32>(Model.LearnerSatisfaction
             
             #line default
             #line hidden
-, 12952), false)
+, 13024), false)
 );
 
 WriteLiteral(">\r\n");
@@ -1469,7 +1473,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 265 "..\..\Views\Provider\ProviderDetail.cshtml"
+            #line 266 "..\..\Views\Provider\ProviderDetail.cshtml"
                            Write(Model.LearnerSatisfactionMessage);
 
             
@@ -1480,8 +1484,8 @@ WriteLiteral("\r\n                            </span>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 267 "..\..\Views\Provider\ProviderDetail.cshtml"
-                       Write(CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction));
+            #line 268 "..\..\Views\Provider\ProviderDetail.cshtml"
+                       Write(CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction));
 
             
             #line default
@@ -1489,13 +1493,13 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n                        </div>\r\n");
 
             
-            #line 269 "..\..\Views\Provider\ProviderDetail.cshtml"
+            #line 270 "..\..\Views\Provider\ProviderDetail.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 269 "..\..\Views\Provider\ProviderDetail.cshtml"
+            #line 270 "..\..\Views\Provider\ProviderDetail.cshtml"
                          if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
                         {
 
@@ -1516,7 +1520,7 @@ WriteLiteral(" target=\"_blank\"");
 WriteLiteral(">Skills Funding Agency FE Choices</a>\r\n                            </span>\r\n");
 
             
-            #line 274 "..\..\Views\Provider\ProviderDetail.cshtml"
+            #line 275 "..\..\Views\Provider\ProviderDetail.cshtml"
                         }
 
             

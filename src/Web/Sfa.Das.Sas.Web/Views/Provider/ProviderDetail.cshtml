@@ -248,6 +248,7 @@
                 </dl>
             </div>
             <div class="panel--contact panel--satisfaction">
+                <h2 class="heading-medium">Annual survey results</h2>
                 <dl>
                     <dt>Employer satisfaction:</dt>
                     <dd>
@@ -255,7 +256,7 @@
                             <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
                                 @Model.EmployerSatisfactionMessage
                             </span>
-                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int) Model.EmployerSatisfaction)
                         </div>
                     </dd>
                     <dt>Learner satisfaction:</dt>
@@ -264,7 +265,7 @@
                             <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
                                 @Model.LearnerSatisfactionMessage
                             </span>
-                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction)
                         </div>
                         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
                         {
