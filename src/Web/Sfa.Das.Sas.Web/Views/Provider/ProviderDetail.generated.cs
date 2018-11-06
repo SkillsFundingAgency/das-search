@@ -69,16 +69,16 @@ WriteLiteralTo(__razor_helper_writer, ">\r\n            <div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"progressbar\"");
 
-WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 15238), Tuple.Create("\"", 15263)
-, Tuple.Create(Tuple.Create("", 15246), Tuple.Create("width:", 15246), true)
+WriteAttributeTo(__razor_helper_writer, "style", Tuple.Create(" style=\"", 15183), Tuple.Create("\"", 15208)
+, Tuple.Create(Tuple.Create("", 15191), Tuple.Create("width:", 15191), true)
 
 #line 307 "..\..\Views\Provider\ProviderDetail.cshtml"
-, Tuple.Create(Tuple.Create(" ", 15252), Tuple.Create<System.Object, System.Int32>(progress
+, Tuple.Create(Tuple.Create(" ", 15197), Tuple.Create<System.Object, System.Int32>(progress
 
 #line default
 #line hidden
-, 15253), false)
-, Tuple.Create(Tuple.Create("", 15262), Tuple.Create("%", 15262), true)
+, 15198), false)
+, Tuple.Create(Tuple.Create("", 15207), Tuple.Create("%", 15207), true)
 );
 
 WriteLiteralTo(__razor_helper_writer, "></div>\r\n        </div>\r\n");
@@ -1512,12 +1512,11 @@ WriteLiteral(" class=\"satisfaction-source font-small\"");
 
 WriteLiteral(">\r\n                                Source: <a");
 
-WriteLiteral(" href=\"https://www.gov.uk/government/statistical-data-sets/fe-choices-performance" +
-"-indicators\"");
+WriteLiteral(" href=\"https://www.gov.uk/government/collections/fe-choices\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(">Skills Funding Agency FE Choices</a>\r\n                            </span>\r\n");
+WriteLiteral(">FE Choices</a>\r\n                            </span>\r\n");
 
             
             #line 275 "..\..\Views\Provider\ProviderDetail.cshtml"
