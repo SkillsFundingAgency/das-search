@@ -1406,8 +1406,12 @@ WriteLiteral("\r\n\r\n                </dl>\r\n            </div>\r\n           
 
 WriteLiteral(" class=\"panel--contact panel--satisfaction\"");
 
-WriteLiteral(">\r\n                <dl>\r\n                    <dt>Employer satisfaction:</dt>\r\n   " +
-"                 <dd>\r\n                        <div");
+WriteLiteral(">\r\n                <h2");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(">Annual survey results</h2>\r\n                <dl>\r\n                    <dt>Employ" +
+"er satisfaction:</dt>\r\n                    <dd>\r\n                        <div");
 
 WriteLiteral(" class=\"rating rating--inline\"");
 
@@ -1513,12 +1517,11 @@ WriteLiteral(" class=\"satisfaction-source font-small\"");
 
 WriteLiteral(">\r\n                                Source: <a");
 
-WriteLiteral(" href=\"https://www.gov.uk/government/statistical-data-sets/fe-choices-performance" +
-"-indicators\"");
+WriteLiteral(" href=\"https://www.gov.uk/government/collections/fe-choices\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteLiteral(">Skills Funding Agency FE Choices</a>\r\n                            </span>\r\n");
+WriteLiteral(">FE Choices</a>\r\n                            </span>\r\n");
 
             
             #line 275 "..\..\Views\Provider\ProviderDetail.cshtml"
