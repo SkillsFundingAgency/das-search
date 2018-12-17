@@ -10,17 +10,20 @@
     using Sfa.Das.Sas.Web.ViewModels;
     using Sfa.Das.Sas.Web.Views.Provider;
 
+    [TestFixture]
+    [Parallelizable]
     public class WhatEmployersAreSayingPartialTests : ViewTestBase
     {
         private static FeedbackViewModel _providerFeedback;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             _providerFeedback = GetProviderFeedback();
         }
 
         [Test]
+        [Order(1)]
         public void ShoulNotShowFeedbackIfNotSet()
         {
             var providerDetails = new WhatEmployersAreSaying();
@@ -30,6 +33,7 @@
         }
 
         [Test]
+        [Order(1)]
         public void ShouldShowFeedbackRatingsIfFeedbackSet()
         {
             var providerDetails = new WhatEmployersAreSaying();
@@ -41,6 +45,7 @@
         }
 
         [Test]
+        [Order(1)]
         public void ShoulShowStrengthsIfStrengthsSet()
         {
             var providerDetails = new WhatEmployersAreSaying();
@@ -50,6 +55,7 @@
         }
 
         [Test]
+        [Order(2)]
         public void ShoulNotShowStrengthsIfNoStrengthsSet()
         {
             var providerDetails = new WhatEmployersAreSaying();
@@ -60,6 +66,7 @@
         }
 
         [Test]
+        [Order(1)]
         public void ShoulShowWeaknessesIfWeaknessesSet()
         {
             var providerDetails = new WhatEmployersAreSaying();
@@ -69,6 +76,7 @@
         }
 
         [Test]
+        [Order(2)]
         public void ShoulNotShowWeaknessesIfNoWeaknessesSet()
         {
             var providerDetails = new WhatEmployersAreSaying();
