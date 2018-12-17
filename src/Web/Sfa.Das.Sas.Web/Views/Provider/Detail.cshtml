@@ -141,34 +141,6 @@
                 <div class="provider-marketing-info">
                     @Html.MarkdownToHtml(Model.ProviderMarketingInfo)
                 </div>
-                <dl class="data-list--provider data-list--compact">
-                    <dt>Employer satisfaction:</dt>
-                    <dd>
-                        <div class="rating rating--inline">
-                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
-                                @Model.EmployerSatisfactionMessage
-                            </span>
-                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int) Model.EmployerSatisfaction)
-                        </div>
-                    </dd>
-                    <dt>Learner satisfaction:</dt>
-                    <dd>
-                        <div class="rating rating--inline">
-                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
-                                @Model.LearnerSatisfactionMessage
-                            </span>
-                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int) Model.LearnerSatisfaction)
-                        </div>
-                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
-                        {
-                            <span class="satisfaction-source font-small">
-                                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
-                            </span>
-                        }
-                    </dd>
-
-                    @GetStandardPropertyHtml("Legal name:", "legal-name", Model.LegalName)
-                </dl>
 
                 @if (Model.NationalProvider)
                 {
@@ -199,11 +171,46 @@
                         </p>
                     }
                 }
+                
+            </section>
+
+            <section>
+                @{ Html.RenderPartial("_WhatEmployersAreSaying", Model.Feedback); }
+            </section>
+
+            <section>
+                <dl class="data-list--provider data-list--compact">
+                    <dt>Employer satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="employer-satisfaction" class="rating-@Model.EmployerSatisfaction">
+                                @Model.EmployerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.EmployerSatisfactionMessage, (int)Model.EmployerSatisfaction)
+                        </div>
+                    </dd>
+                    <dt>Learner satisfaction:</dt>
+                    <dd>
+                        <div class="rating rating--inline">
+                            <span id="learner-satisfaction" class="rating-@Model.LearnerSatisfaction">
+                                @Model.LearnerSatisfactionMessage
+                            </span>
+                            @CreateProgressBar(Model.LearnerSatisfactionMessage, (int)Model.LearnerSatisfaction)
+                        </div>
+                        @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
+                        {
+                            <span class="satisfaction-source font-small">
+                                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">Skills Funding Agency FE Choices</a>
+                            </span>
+                        }
+                    </dd>
+
+                    @GetStandardPropertyHtml("Legal name:", "legal-name", Model.LegalName)
+                </dl>
                 <p class="content-source">
                     Content maintained by @Model.Name
                 </p>
             </section>
-
 
             <div class="survey">
                 <h2 class="heading-small">

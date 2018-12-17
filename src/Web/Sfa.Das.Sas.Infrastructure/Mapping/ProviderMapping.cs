@@ -71,6 +71,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                         Website = item.Website,
                         ContactUsUrl = item.ContactUsUrl
                     },
+                    ProviderFeedback = item.ProviderFeedback
                 }
             };
         }

@@ -414,6 +414,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
         public void ShouldShowNationalProviderMessageWhenThatProviderIsAvailableAroundTheCountry()
         {
             var details = new Detail();
+            
             var model = new ApprenticeshipDetailsViewModel
             {
                 Name = "Test name",

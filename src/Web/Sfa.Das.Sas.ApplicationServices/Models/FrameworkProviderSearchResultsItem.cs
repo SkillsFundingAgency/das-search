@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
@@ -11,7 +12,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public string ProviderName { get; set; }
 
         public string LegalName { get; set; }
-        
+
         public string FrameworkId { get; set; }
 
         public int FrameworkCode { get; set; }
@@ -59,11 +60,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public string OverallCohort { get; set; }
 
         public bool HasNonLevyContract { get; set; }
-        
+
         public bool HasParentCompanyGuarantee { get; set; }
 
         public bool IsNew { get; set; }
 
-	    public bool CurrentlyNotStartingNewApprentices { get; set; }
+        public bool CurrentlyNotStartingNewApprentices { get; set; }
+
+        public Feedback ProviderFeedback { get; set; }
     }
 }

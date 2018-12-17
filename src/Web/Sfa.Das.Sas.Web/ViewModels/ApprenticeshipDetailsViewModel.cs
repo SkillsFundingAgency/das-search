@@ -87,5 +87,7 @@
 		public string ApprenticeshipId { get; internal set; }
 
 		public string Postcode { get; internal set; }
+
+        public FeedbackViewModel Feedback { get; internal set; }
     }
 }
