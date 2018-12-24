@@ -56,7 +56,7 @@ WriteLiteral(" role=\"main\"");
 
 WriteLiteral(">\r\n    <div");
 
-WriteLiteral(" class=\"grid-row\"");
+WriteLiteral(" class=\"grid-row apprenticeship-search\"");
 
 WriteLiteral(">\r\n        <div");
 
@@ -66,7 +66,7 @@ WriteLiteral(">\r\n            <a");
 
 WriteLiteral(" class=\"link-back\"");
 
-WriteLiteral(" href=\"/Apprenticeship/ApprenticeshipOrProvider\"");
+WriteLiteral(" href=\"/\"");
 
 WriteLiteral(">Back</a>\r\n            <h1");
 
@@ -82,7 +82,7 @@ WriteLiteral(">\r\n                Find apprenticeship training\r\n            <
             #line hidden
             
             #line 14 "..\..\Views\Apprenticeship\Search.cshtml"
-             using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box" }))
+             using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box apprenticeship-search-form" }))
             {
 
             
@@ -98,14 +98,10 @@ WriteLiteral(" for=\"keywords\"");
 
 WriteLiteral(">\r\n                        <span");
 
-WriteLiteral(" class=\"form-label-bold\"");
+WriteLiteral(" class=\"form-label\"");
 
-WriteLiteral(">Search by keywords</span>\r\n                        <span");
-
-WriteLiteral(" class=\"form-hint\"");
-
-WriteLiteral(">Can include job title or apprenticeship</span>\r\n                    </label>\r\n  " +
-"                  <span");
+WriteLiteral(">Apprenticeship name or job role</span>\r\n                    </label>\r\n          " +
+"          <span");
 
 WriteLiteral(" class=\"error-message\"");
 
@@ -131,18 +127,31 @@ WriteLiteral(" id=\"submit-keywords\"");
 
 WriteLiteral(" type=\"submit\"");
 
-WriteLiteral(" value=\"Search\"");
+WriteLiteral(" value=\"Search Apprenticeship Training\"");
 
 WriteLiteral(" />\r\n");
 
             
-            #line 25 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 24 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </div>\r\n    </div>\r\n</main>");
+WriteLiteral("\r\n            <span");
+
+WriteLiteral(" id=\"search-training-provider\"");
+
+WriteLiteral(">You can also ");
+
+            
+            #line 26 "..\..\Views\Apprenticeship\Search.cshtml"
+                                                        Write(Html.ActionLink("search for a training provider", "Search", "Provider"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n        </div>\r\n    </div>\r\n</main>");
 
         }
     }
