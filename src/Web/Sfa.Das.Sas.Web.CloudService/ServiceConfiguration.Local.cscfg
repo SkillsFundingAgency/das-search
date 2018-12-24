@@ -7,7 +7,7 @@
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
       <Setting name="SurveyUrl" value="https://www.surveymonkey.co.uk/r/F3LCBG6" />
       <Setting name="ElasticServerUrls" value="http://127.0.0.1:9200,http://192.168.99.100:9200,http://docker.local:9200" />
-      <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" />
+      <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/collections/fe-choices" />
       <Setting name="CookieGoogleUrl" value="https://tools.google.com/dlpage/gaoptout" />
       <Setting name="CookieImprovementUrl" value="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/" />
       <Setting name="CookieApplicationInsightsUrl" value="https://azure.microsoft.com/en-us/documentation/articles/app-insights-data-retention-privacy/" />
