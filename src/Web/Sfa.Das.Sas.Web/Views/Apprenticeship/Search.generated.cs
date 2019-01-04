@@ -127,7 +127,7 @@ WriteLiteral(" id=\"submit-keywords\"");
 
 WriteLiteral(" type=\"submit\"");
 
-WriteLiteral(" value=\"Search Apprenticeship Training\"");
+WriteLiteral(" value=\"Search apprenticeship training\"");
 
 WriteLiteral(" />\r\n");
 
