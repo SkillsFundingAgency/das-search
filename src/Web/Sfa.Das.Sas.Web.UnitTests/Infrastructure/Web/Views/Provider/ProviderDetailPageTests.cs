@@ -178,7 +178,7 @@
         }
 
         [Test]
-        public void ShoulShowOnlyNextNavigationDetailsIfMoreThanOnePageAndOnFirstPage()
+        public void ShouldShowOnlyNextNavigationDetailsIfMoreThanOnePageAndOnFirstPage()
         {
             var providerDetails = new ProviderDetail();
             var model = GetProvider();
@@ -198,7 +198,7 @@
         }
 
         [Test]
-        public void ShoulShowBothNavigationDetailsIfSecondPageOfFour()
+        public void ShouldShowBothNavigationDetailsIfSecondPageOfFour()
         {
             var providerDetails = new ProviderDetail();
             var model = GetProvider();
@@ -218,7 +218,7 @@
         }
 
         [Test]
-        public void ShoulShowOnlyPreviousNavigationDetailsIfLastPage()
+        public void ShouldShowOnlyPreviousNavigationDetailsIfLastPage()
         {
             var providerDetails = new ProviderDetail();
             var model = GetProvider();
@@ -237,50 +237,7 @@
             GetPartial(html, "#next-nav").Should().Be(string.Empty);
         }
 
-        [Test]
-        public void ShoulNotShowFeedbackIfNotSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-            model.ProviderFeedback = null;
 
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#feedback-heading").Should().Be(string.Empty);
-        }
-
-        [Test]
-        public void ShoulShowFeedbackRatingsIfFeedbackSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#feedback-heading").Should().Contain("Based on 34 reviews");
-            GetPartial(html, "#strengths").Should().Contain("Strengths");
-            GetPartial(html, "#weaknesses").Should().Contain("Things to improve");
-        }
-
-        [Test]
-        public void ShoulNotShowStrengthsIfNoStrengthsSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-            model.ProviderFeedback.Strengths.Clear();
-
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#strengths").Should().NotContain("Strengths");
-        }
-
-        [Test]
-        public void ShoulNotShowWeaknessesIfNoWeaknessesSet()
-        {
-            var providerDetails = new ProviderDetail();
-            var model = GetProvider();
-            model.ProviderFeedback.Weaknesses.Clear();
-
-            var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#weaknesses").Should().NotContain("Things to improve");
-        }
 
         private static FeedbackViewModel GetProviderFeedback()
         {

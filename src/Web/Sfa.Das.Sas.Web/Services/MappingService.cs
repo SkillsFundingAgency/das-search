@@ -108,6 +108,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(dest => dest.SearchTerm, opt => opt.Ignore())
                 .ForMember(dest => dest.ApprenticeshipId, opt => opt.Ignore())
                 .ForMember(dest => dest.Postcode, opt => opt.Ignore())
+                .ForMember(dest => dest.Feedback, y => y.MapFrom(z => new FeedbackViewModel(z.ApprenticeshipDetails.Provider.ProviderFeedback)))
                 ;
 
             cfg.CreateMap<IApprenticeshipProviderSearchResultsItem, StandardProviderResultItemViewModel>()
@@ -207,6 +208,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.SearchTerm, y => y.Ignore())
                 .ForMember(x => x.ApprenticeshipId, y => y.Ignore())
                 .ForMember(x => x.Postcode, y => y.Ignore())
+                .ForMember(x => x.Feedback, y => y.MapFrom(z => new FeedbackViewModel(z.Provider.ProviderFeedback)))
                 .AfterMap<ProviderViewModelMappingAction>();
         }
 

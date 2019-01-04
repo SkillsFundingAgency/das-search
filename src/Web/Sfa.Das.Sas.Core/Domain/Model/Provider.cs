@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Core.Domain.Model
+﻿using SFA.DAS.Apprenticeships.Api.Types.Providers;
+
+namespace Sfa.Das.Sas.Core.Domain.Model
 {
     public sealed class Provider
     {
@@ -23,5 +25,7 @@
         public bool IsLevyPayerOnly { get; set; }
 
 	    public bool CurrentlyNotStartingNewApprentices { get; set; }
+
+        public Feedback ProviderFeedback { get; set; }
     }
 }

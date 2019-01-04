@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
@@ -38,5 +39,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
 		bool CurrentlyNotStartingNewApprentices { get; set; }
 
-	}
+        Feedback ProviderFeedback { get; set; }
+    }
 }

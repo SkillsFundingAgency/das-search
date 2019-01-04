@@ -504,6 +504,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_StandardSearchResultMessage.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Provider\_WhatEmployersAreSaying.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_WhatEmployersAreSaying.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Start\Cookies.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -803,6 +808,10 @@
     </Content>
     <Content Include="Views\Provider\_SearchResultMessage.cshtml" />
     <Content Include="Views\Provider\_SearchProviderName.cshtml" />
+    <Content Include="Views\Provider\_WhatEmployersAreSaying.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_WhatEmployersAreSaying.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
