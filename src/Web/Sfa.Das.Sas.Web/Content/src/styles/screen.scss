@@ -144,6 +144,18 @@ aside h2:first-child {
 }
 
 /* Temp css for Dashboard */
+
+
+#search-training-provider {
+    position: relative;
+    top: 30px;
+}
+
+.apprenticeship-search-form {
+    padding-bottom: 65px;
+    border-bottom: 1px solid #bfc1c3;
+}
+
 .apprenticeship-items {
     border-top: 1px solid gray;
     li {
