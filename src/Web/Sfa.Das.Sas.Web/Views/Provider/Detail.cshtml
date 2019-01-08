@@ -16,11 +16,11 @@
         switch (Model.ApprenticeshipType)
         {
             case ApprenticeshipTrainingType.Framework:
-                @Html.ActionLink("Back", "FrameworkResults", "Provider", new {@keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
+                @Html.ActionLink("Back", "FrameworkResults", "Provider", new { @keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId }, new { @class = "link-back" })
 
                 break;
             case ApprenticeshipTrainingType.Standard:
-                @Html.ActionLink("Back", "StandardResults", "Provider", new {@keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId}, new {@class= "link-back" })
+                @Html.ActionLink("Back", "StandardResults", "Provider", new { @keywords = Model.SearchTerm, @Postcode = Model.Postcode, @isLevyPayingEmployer = Model.IsLevyPayingEmployer, @ApprenticeshipId = Model.ApprenticeshipId }, new { @class = "link-back" })
 
                 break;
             default:
@@ -69,7 +69,7 @@
                     <dd>@Model.ApprenticeshipName</dd>
                     <dt>Level: </dt>
                     <dd>@Model.ApprenticeshipLevel (equivalent to @EquivalenceLevelService.GetApprenticeshipLevel(Model.ApprenticeshipLevel))</dd>
-                    
+
                     @if (Model.RegulatedApprenticeship)
                     {
                         <dt>Regulated standard: </dt>
@@ -171,11 +171,11 @@
                         </p>
                     }
                 }
-                
+
             </section>
 
             <section>
-                @{ Html.RenderPartial("_WhatEmployersAreSaying", Model.Feedback); }
+                @{ Html.RenderPartial("_WhatEmployersAreSaying", Model.Feedback, new ViewDataDictionary()); }
             </section>
 
             <section>
@@ -199,9 +199,9 @@
                         </div>
                         @if (!(Model.EmployerSatisfactionMessage == "no data available" && Model.LearnerSatisfactionMessage == "no data available"))
                         {
-                        <span class="satisfaction-source font-small">
-                            Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">FE Choices</a>
-                        </span>
+                            <span class="satisfaction-source font-small">
+                                Source: <a href="@Model.SatisfactionSourceUrl" target="_blank">FE Choices</a>
+                            </span>
                         }
                     </dd>
 
@@ -217,7 +217,7 @@
                     Give us your feedback
                 </h2>
                 <p>
-                    This is a new service and your feedback will help us improve it.<br/>
+                    This is a new service and your feedback will help us improve it.<br />
                     Use the link below to take part in a short survey.
                 </p>
                 <a href="@Model.SurveyUrl" target="_blank" class="button">Take the survey</a>
@@ -237,48 +237,48 @@
 
 @helper ShowTrainingLocation(string title)
 {
-if (@Model != null)
-{
+    if (@Model != null)
+    {
         <dt class="training-location-title">@title</dt>
 
-    if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
-    {
+        if (@Model.DeliveryModes.Count == 1 && @Model.DeliveryModes.Contains("100PercentEmployer"))
+        {
             <dd id="training-location" class="training-location">
                 Training takes place at your location
             </dd>
-    }
-    else
-    {
+        }
+        else
+        {
             <dd id="training-location" class="training-location">
                 @Model.LocationAddressLine
             </dd>
+        }
     }
-}
 }
 
 @helper GetStandardPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
         <dt class="@id-title">@title</dt>
         <dd id="@id" class="@id">@Html.Raw(item)</dd>
-}
+    }
 }
 
 @helper GetEmailPropertyHtml(string title, string id, string item, bool hideIfEmpty = false)
 {
-if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
-{
+    if (!string.IsNullOrEmpty(item) || !hideIfEmpty)
+    {
         <dt class="email-title">@title</dt>
         <dd id="@id" class="email"><a href="mailto:@Html.Raw(item)">@Html.Raw(item)</a></dd>
-}
+    }
 }
 
 @helper GetStandardPropertyAsLinkHtml(string title, string cssClass, string classTitle, string classIdentifier, string url, string urlTitle = "")
 {
-if (!string.IsNullOrEmpty(url))
-{
-    var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
+    if (!string.IsNullOrEmpty(url))
+    {
+        var linkProtocol = url.StartsWith("http") ? string.Empty : "http://";
         <dt class="@classTitle">@title</dt>
         <dd>
             <a href="@linkProtocol@url" rel="external" target="_blank" class="@cssClass @classIdentifier">
@@ -297,64 +297,64 @@ if (!string.IsNullOrEmpty(url))
 
 @helper CreateProgressBar(string message, int progress)
 {
-if (progress > 0)
-{
+    if (progress > 0)
+    {
         <div class="progress-container">
             <div class="progressbar" style="width: @progress%"></div>
         </div>
-}
+    }
 }
 
 @helper GetDeliveryModesHtml(string title, List<string> items, bool hideIfEmpty = false)
 {
-if (items != null)
-{
-    <dt class="training-structure">@title</dt>
-    <dd id="delivery-modes" class="icon-alerts">
-        <ul>
-            @if (items.Exists(m => m.Equals("dayrelease", StringComparison.OrdinalIgnoreCase)))
-            {
-                <li class="day-release icon-right">
-                    <span class="icon-content">day release</span>
-                    <span class="green-tick"></span>
-                </li>
+    if (items != null)
+    {
+        <dt class="training-structure">@title</dt>
+        <dd id="delivery-modes" class="icon-alerts">
+            <ul>
+                @if (items.Exists(m => m.Equals("dayrelease", StringComparison.OrdinalIgnoreCase)))
+                {
+                    <li class="day-release icon-right">
+                        <span class="icon-content">day release</span>
+                        <span class="green-tick"></span>
+                    </li>
                 }
-            else
-            {
-                <li class="day-release-absent icon-right">
-                    <span class="icon-content">day release</span>
-                    <span class="red-cross"></span>
-                </li>
-            }
+                else
+                {
+                    <li class="day-release-absent icon-right">
+                        <span class="icon-content">day release</span>
+                        <span class="red-cross"></span>
+                    </li>
+                }
 
                 @if (items.Exists(m => m.Equals("blockrelease", StringComparison.OrdinalIgnoreCase)))
                 {
                     <li class="block-release icon-right">
-                    <span class="icon-content">block release</span>
-                    <span class="green-tick"></span>
-                </li>
-            }
-            else
-            {
-                <li class="block-release-absent icon-right">
-                    <span class="icon-content">block release</span>
-                    <span class="red-cross"></span>
-                </li>
+                        <span class="icon-content">block release</span>
+                        <span class="green-tick"></span>
+                    </li>
+                }
+                else
+                {
+                    <li class="block-release-absent icon-right">
+                        <span class="icon-content">block release</span>
+                        <span class="red-cross"></span>
+                    </li>
                 }
 
                 @if (items.Exists(m => m.Equals("100percentemployer", StringComparison.OrdinalIgnoreCase)))
                 {
-                <li class="hundred-percent-employer icon-right">
-                    <span class="icon-content">at your location</span>
-                    <span class="green-tick"></span>
-                </li>
-            }
-            else
-            {
-                <li class="hundred-percent-employer-absent icon-right">
-                    <span class="icon-content">at your location</span>
-                    <span class="red-cross"></span>
-                </li>
+                    <li class="hundred-percent-employer icon-right">
+                        <span class="icon-content">at your location</span>
+                        <span class="green-tick"></span>
+                    </li>
+                }
+                else
+                {
+                    <li class="hundred-percent-employer-absent icon-right">
+                        <span class="icon-content">at your location</span>
+                        <span class="red-cross"></span>
+                    </li>
                 }
             </ul>
             <details>
@@ -372,5 +372,5 @@ if (items != null)
                 </div>
             </details>
         </dd>
-}
+    }
 }

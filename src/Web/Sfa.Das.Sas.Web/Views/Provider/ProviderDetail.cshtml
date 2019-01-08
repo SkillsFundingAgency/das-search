@@ -80,7 +80,7 @@
                 }
             }
 
-            @{ Html.RenderPartial("_WhatEmployersAreSaying", Model.ProviderFeedback); }
+            @{ Html.RenderPartial("_WhatEmployersAreSaying", Model.ProviderFeedback, new ViewDataDictionary()); }
 
             @if (Model.ApprenticeshipTrainingSummary?.PaginationDetails != null && Model.ApprenticeshipTrainingSummary.PaginationDetails.TotalCount > 0)
             {
