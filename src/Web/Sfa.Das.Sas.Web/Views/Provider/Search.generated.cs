@@ -60,7 +60,7 @@ WriteLiteral(" class=\"breadcrumbs\"");
 
 WriteLiteral(">\r\n        <a");
 
-WriteLiteral(" href=\"/Apprenticeship/ApprenticeshipOrProvider\"");
+WriteLiteral(" href=\"/Apprenticeship/Search\"");
 
 WriteLiteral(" class=\"link-back\"");
 
