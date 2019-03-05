@@ -33,7 +33,7 @@
       <Setting name="GaTrackingid" value="__GaTrackingid__" />
     </ConfigurationSettings>
     <Certificates>
-      <Certificate name="WebSslCert" thumbprint="6208004D8038A731478EA1F9BD6EC58961DD23F2" thumbprintAlgorithm="sha1" />
+      <Certificate name="WebSslCert" thumbprint="D4B7EBCE1013CBB10A6DD74D1A20E2C9A69107A2" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
     <NetworkConfiguration>
