@@ -31,6 +31,7 @@ namespace test_site
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped<IGenerateSearchResults, SearchResultsGenerator>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

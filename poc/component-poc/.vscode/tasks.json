@@ -7,7 +7,8 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/component-poc.sln"
+                "${workspaceFolder}/component-poc.sln",
+                "/p:GenerateFullPaths=true"
             ],
             "problemMatcher": "$msCompile"
         }

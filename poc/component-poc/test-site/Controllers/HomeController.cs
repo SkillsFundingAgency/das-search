@@ -10,8 +10,16 @@ namespace test_site.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IGenerateSearchResults _generator;
+
+        public HomeController(IGenerateSearchResults generator)
+        {
+            _generator = generator;
+        }
+        
         public IActionResult Index()
         {
+            var results = _generator.Generate();
             return View();
         }
 
