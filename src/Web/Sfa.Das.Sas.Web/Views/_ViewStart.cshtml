@@ -1,3 +1,17 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var domain = this.Context.Request.UserHostName;
+
+    if (domain.Contains("apprenticeships.gov.uk") || Request.QueryString["campaign"] == "true")
+    {
+        Layout = "~/Views/Shared/Campaign/_Layout-campaign.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+
 }

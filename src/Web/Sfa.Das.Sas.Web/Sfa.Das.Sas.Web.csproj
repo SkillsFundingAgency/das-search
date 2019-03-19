@@ -812,6 +812,41 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_WhatEmployersAreSaying.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Shared\Campaign\Components\Button\Anchor.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Button\Button.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Button\Input.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Cta\_Contact-phoneNumber-Apprentice.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Cta\_Contact-phoneNumber.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Cta\_find-an-apprenticeship.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Form\cookieSettings.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Form\faa-search.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Form\faa-update-results.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Form\Register-Thanks.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Form\RegisterInterest.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\GoogleMaps\Default.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\HeroHeading\Default.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\HeroHeading\FAA.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\HeroHeading\GoogleMaps.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Modal\Modal.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Resources\_employer.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Sidebar\Default.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Sidebar\DefaultNew.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\Sidebar\FormSidebar.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\_cookieBanner.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\_Footer.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\_Header.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\_HeroHeader.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\_Navigation.cshtml" />
+    <Content Include="Views\Shared\Campaign\Components\_Sidebar.cshtml" />
+    <Content Include="Views\Shared\Campaign\Sidebar\_apprentice.cshtml" />
+    <Content Include="Views\Shared\Campaign\Sidebar\_employer.cshtml" />
+    <Content Include="Views\Shared\Campaign\_Layout-campaign.cshtml" />
+    <Content Include="Views\Shared\Campaign\_Layout.cshtml" />
+    <Content Include="Views\Shared\Campaign\_LayoutContent.cshtml" />
+    <Content Include="Views\Shared\Campaign\_LayoutContentFull.cshtml" />
+    <Content Include="Views\Shared\Campaign\_LayoutContentSidebar.cshtml" />
+    <Content Include="Views\Shared\Campaign\_LayoutIndustry.cshtml" />
+    <Content Include="Views\Shared\Campaign\_MapsInfobox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
