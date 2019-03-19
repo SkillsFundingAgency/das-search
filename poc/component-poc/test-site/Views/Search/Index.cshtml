@@ -1,0 +1,64 @@
+@model SearchResults
+
+@{
+    ViewData["Title"] = "Built-in Search Page";
+}
+
+
+<div>
+<form asp-route="default-search" method="GET">
+    <input type="text" id="keywords" name="q" />
+    <input type="submit" id="submit" value="Search" />
+</form>
+</div>
+
+@if(Model.ShowSearchResults)
+{
+    <div>
+        You searched for: @Model.Keywords
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                @foreach(var item in Model.Hits)
+                {
+                    <div>
+                        <article>
+                            <header>
+                                <h2>
+                                    <a href="/">@item.Title</a>
+                                </h2>
+                            </header>
+                            <dl>
+                                <dt>Level:</dt><dd>@item.Level</dd>
+                                <dt>Duration</dt><dd>@item.Duration</dd>
+                            </dl>
+                        </article>
+                    </div>
+                }
+            </div>
+            <div class="col-4">
+                <form method="get">
+                    <input type="hidden" name="q" value=@Model.Keywords>
+
+                    <fieldset>
+                        <h2>Apprenticeship level</h2>
+                        <div>
+                            <ul>
+                                @foreach (var item in Model.LevelAggregation)
+                                {
+                                    <li>
+                                        <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox">
+                                        <label for="SelectedLevels_@item.Value" class="">level @item.Value (@item.Count)</label>
+                                    </li>
+                                }
+                                
+                            </ul>
+                        </div>
+                    </fieldset>
+                    <input type="submit" class="button" value="Update results">
+                </form>
+            </div>
+        </div>
+    </div>
+}
