@@ -1,1 +1,14 @@
-<h1>Partial Comp</h1>
+@model SearchCriteria
+
+@await Component.InvokeAsync("SearchBox", new { keywords = Model.Keywords, selectedLevels = Model.SelectedLevels, searchRouteName = Model.SearchRouteName })    
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            @await Component.InvokeAsync("SearchResults", new { keywords = Model.Keywords, selectedLevels = Model.SelectedLevels, searchRouteName = Model.SearchRouteName })    
+        </div>
+        <div class="col-4">
+            @await Component.InvokeAsync("SearchFilter", new { keywords = Model.Keywords, selectedLevels = Model.SelectedLevels, searchRouteName = Model.SearchRouteName })    
+        </div>
+    </div>
+</div>

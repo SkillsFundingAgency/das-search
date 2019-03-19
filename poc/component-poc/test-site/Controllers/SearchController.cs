@@ -36,21 +36,19 @@ namespace test_site.Controllers
                 Keywords = q,
                 SelectedLevels = selectedLevels
             };
-            
+
             return View(model);
         }
 
         [Route("search/partial-comp", Name="partial-comp-search")]
         public IActionResult PartialComp(string q = null, List<int> selectedLevels = null)
         {
-            var model = new SearchResults() { Keywords = q };
-
-            if (q == null) return View(model);
+            var model = new SearchCriteria
+            {
+                Keywords = q,
+                SelectedLevels = selectedLevels
+            };
             
-            var hits = _generator.Generate().ToList();
-            model.Hits = hits;
-            model.LevelAggregation = BuildAggregationModels(hits);
-
             return View(model);
         }
 
