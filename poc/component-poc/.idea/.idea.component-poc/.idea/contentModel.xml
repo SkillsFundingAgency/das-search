@@ -21,11 +21,15 @@
           </e>
         </e>
         <e p="PocComponents" t="Include">
+          <e p="FullPageSearchViewComponent.cs" t="Include" />
           <e p="WelcomeViewComponent.cs" t="Include" />
         </e>
         <e p="Views" t="Include">
           <e p="Shared" t="Include">
             <e p="Components" t="Include">
+              <e p="FullPageSearch" t="Include">
+                <e p="Default.cshtml" t="Include" />
+              </e>
               <e p="Welcome" t="Include">
                 <e p="Default.cshtml" t="Include" />
               </e>
@@ -35,6 +39,24 @@
       </e>
       <e p="component-poc.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="shared-lib" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="IGenerateSearchResults.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="LevelAggregationViewModel.cs" t="Include" />
+          <e p="SearchResultItem.cs" t="Include" />
+          <e p="SearchResults.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="shared-lib.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="SearchResultsGenerator.cs" t="Include" />
+        <e p="shared-lib.csproj" t="IncludeRecursive" />
+      </e>
       <e p="test-site" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
@@ -43,12 +65,8 @@
           <e p="HomeController.cs" t="Include" />
           <e p="SearchController.cs" t="Include" />
         </e>
-        <e p="IGenerateSearchResults.cs" t="Include" />
         <e p="Models" t="Include">
           <e p="ErrorViewModel.cs" t="Include" />
-          <e p="LevelAggregationViewModel.cs" t="Include" />
-          <e p="SearchResultItem.cs" t="Include" />
-          <e p="SearchResults.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -61,7 +79,6 @@
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
-        <e p="SearchResultsGenerator.cs" t="Include" />
         <e p="Startup.cs" t="Include" />
         <e p="test-site.csproj" t="IncludeRecursive" />
         <e p="ViewComponent" t="Include">
@@ -75,7 +92,9 @@
             <e p="Privacy.cshtml" t="Include" />
           </e>
           <e p="Search" t="Include">
+            <e p="FullComp.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="PartialComp.cshtml" t="Include" />
           </e>
           <e p="Shared" t="Include">
             <e p="_CookieConsentPartial.cshtml" t="Include" />

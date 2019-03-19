@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-site", "test-site\test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "component-lib", "component-lib\component-lib.csproj", "{06E669B3-8CED-491D-B3AA-6BDA4C8FC66E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shared-lib", "shared-lib\shared-lib.csproj", "{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{06E669B3-8CED-491D-B3AA-6BDA4C8FC66E}.Release|x64.Build.0 = Release|Any CPU
 		{06E669B3-8CED-491D-B3AA-6BDA4C8FC66E}.Release|x86.ActiveCfg = Release|Any CPU
 		{06E669B3-8CED-491D-B3AA-6BDA4C8FC66E}.Release|x86.Build.0 = Release|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Release|x64.Build.0 = Release|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A96BBEA-BBDB-42B4-AD6A-209F7D2AC37C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

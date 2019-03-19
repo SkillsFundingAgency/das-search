@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Bogus;
-using test_site.Models;
+using shared_lib.Models;
 
-namespace test_site
+namespace shared_lib
 {
     public class SearchResultsGenerator : IGenerateSearchResults
     {

@@ -1,0 +1,5 @@
+@model SearchCriteria
+
+<div>
+    @await Component.InvokeAsync("FullPageSearch", new { keywords = Model.Keywords, selectedLevels = Model.SelectedLevels, searchRouteName = Model.SearchRouteName })    
+</div>

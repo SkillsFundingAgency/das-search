@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace test_site.Models
+namespace shared_lib.Models
 {
     public class SearchResults
     {

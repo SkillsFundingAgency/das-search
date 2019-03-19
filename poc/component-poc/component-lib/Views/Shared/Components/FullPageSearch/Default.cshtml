@@ -1,12 +1,8 @@
-@using shared_lib.Models
-@model SearchResults
-
-@{
-    ViewData["Title"] = "Built-in Search Page";
-}
+@using component_lib.Models
+@model FullPageSearch
 
 <div>
-<form asp-route="default-search" method="GET">
+<form asp-route="@Model.SearchRouteName" method="GET">
     <input type="text" id="keywords" name="q" />
     <input type="submit" id="submit" value="Search" />
 </form>
@@ -38,7 +34,7 @@
                 }
             </div>
             <div class="col-4">
-                <form method="get">
+                <form method="get" asp-route="@Model.SearchRouteName">
                     <input type="hidden" name="q" value=@Model.Keywords>
 
                     <fieldset>
