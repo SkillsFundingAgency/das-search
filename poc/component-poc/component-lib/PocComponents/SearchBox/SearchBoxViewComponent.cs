@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using component_lib;
+using component_lib.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using shared_lib;
@@ -18,11 +19,11 @@ namespace component_lib
             _generator = generator;
         }
 
-        public IViewComponentResult Invoke(string keywords, string searchRouteName)
+        public IViewComponentResult Invoke(string searchRouteName, QueryModel q)
         {
             var model = new SearchBoxModel
             {
-                Keywords = keywords,
+                Keywords = q.Keywords,
                 SearchRouteName = searchRouteName
             };
 

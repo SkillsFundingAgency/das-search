@@ -1,15 +1,19 @@
+@using component_lib.Models
 @model SearchCriteria
 
+@{
+    var query = new QueryModel { Keywords = Model.Keywords, SelectedLevels = Model.SelectedLevels };
+}
 
 <div class="container">
     <div class="row">
         <div class="col-4">
-            @await Component.InvokeAsync("SearchFilter", new { keywords = Model.Keywords, selectedLevels = Model.SelectedLevels, searchRouteName = Model.SearchRouteName })    
+            @await Component.InvokeAsync("SearchFilter", new { searchRouteName = Model.SearchRouteName, q = query })    
         </div>
         <div class="col-8">
-            @await Component.InvokeAsync("SearchResults", new { keywords = Model.Keywords, selectedLevels = Model.SelectedLevels, searchRouteName = Model.SearchRouteName })    
+            @await Component.InvokeAsync("SearchResults", new { searchRouteName = Model.SearchRouteName, q = query })    
         </div>
     </div>
 </div>
-@await Component.InvokeAsync("SearchBox", new { keywords = Model.Keywords, selectedLevels = Model.SelectedLevels, searchRouteName = Model.SearchRouteName })    
+@await Component.InvokeAsync("SearchBox", new { searchRouteName = Model.SearchRouteName, q = query })    
 

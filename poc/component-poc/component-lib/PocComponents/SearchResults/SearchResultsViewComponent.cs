@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using component_lib.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using shared_lib;
@@ -17,17 +18,17 @@ namespace component_lib
             _generator = generator;
         }
 
-        public IViewComponentResult Invoke(string keywords, string searchRouteName, List<int> selectedLevels)
+        public IViewComponentResult Invoke(string searchRouteName, QueryModel q)
         {
             var model = new SearchResultsModel
             {
-                Keywords = keywords,
+                Keywords = q.Keywords,
             };
 
             if (model.Keywords == null) return View(model);
             
             var hits = _generator.Generate().ToList();
-            model.Hits = ApplyFilter(hits, selectedLevels);
+            model.Hits = ApplyFilter(hits, q.SelectedLevels);
 
             return View(model);
         }
