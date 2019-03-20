@@ -1,36 +1,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using component_lib.Models;
+using component_lib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using shared_lib;
 using shared_lib.Models;
 
-namespace test_site
+namespace component_lib
 {
-    public class SearchFilterViewComponent : ViewComponent
+    public class SearchBoxViewComponent : ViewComponent
     {
         private readonly IGenerateSearchResults _generator;
 
-        public SearchFilterViewComponent(IGenerateSearchResults generator)
+        public SearchBoxViewComponent(IGenerateSearchResults generator)
         {
             _generator = generator;
         }
 
-        public IViewComponentResult Invoke(string keywords, string searchRouteName, List<int> selectedLevels)
+        public IViewComponentResult Invoke(string keywords, string searchRouteName)
         {
-            var model = new FullPageSearch
+            var model = new SearchBoxModel
             {
                 Keywords = keywords,
                 SearchRouteName = searchRouteName
             };
-
-            if (model.Keywords == null) return View(model);
-            
-            var hits = _generator.Generate().ToList();
-            model.Hits = ApplyFilter(hits, selectedLevels);
-            model.LevelAggregation = BuildAggregationModels(hits);
 
             return View(model);
         }

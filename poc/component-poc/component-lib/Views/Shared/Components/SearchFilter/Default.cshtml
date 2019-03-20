@@ -1,1 +1,26 @@
-<h1>SearchFilter</h1>
+@using component_lib
+@model SearchFilterModel
+
+@if (Model.ShowSearchFilter)
+{
+    <form method="get" asp-route="@Model.SearchRouteName">
+        <input type="hidden" name="q" value=@Model.Keywords>
+
+        <fieldset>
+            <h2>Apprenticeship level</h2>
+            <div>
+                <ul>
+                    @foreach (var item in Model.LevelAggregation)
+                    {
+                        <li>
+                            <input value="@item.Value" id="SelectedLevels_@item.Value" name="SelectedLevels" type="checkbox">
+                            <label for="SelectedLevels_@item.Value" class="">level @item.Value (@item.Count)</label>
+                        </li>
+                    }
+                    
+                </ul>
+            </div>
+        </fieldset>
+        <input type="submit" class="button" value="Update results">
+    </form>
+}

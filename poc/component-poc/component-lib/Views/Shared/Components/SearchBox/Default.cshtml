@@ -1,1 +1,15 @@
-<h1>SearchBox</h1>
+@using component_lib
+@model SearchBoxModel
+
+<div>
+    <form asp-route="@Model.SearchRouteName" method="GET">
+        <input type="text" id="keywords" name="q" />
+        <input type="submit" id="submit" value="Search" />
+    </form>
+</div>
+@if(Model.Keywords != null)
+{
+    <div>
+        You searched for: @Model.Keywords
+    </div>
+}

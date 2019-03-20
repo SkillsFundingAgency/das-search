@@ -1,19 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using component_lib.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using shared_lib;
 using shared_lib.Models;
 
-namespace test_site
+namespace component_lib
 {
-    public class SearchResultsViewComponent : ViewComponent
+    public class FullPageSearchViewComponent : ViewComponent
     {
         private readonly IGenerateSearchResults _generator;
 
-        public SearchResultsViewComponent(IGenerateSearchResults generator)
+        public FullPageSearchViewComponent(IGenerateSearchResults generator)
         {
             _generator = generator;
         }

@@ -46,7 +46,21 @@ namespace test_site.Controllers
             var model = new SearchCriteria
             {
                 Keywords = q,
-                SelectedLevels = selectedLevels
+                SelectedLevels = selectedLevels,
+                SearchRouteName = "partial-comp-search"
+            };
+            
+            return View(model);
+        }
+
+        [Route("search/partial-comp2", Name="partial-comp-search2")]
+        public IActionResult PartialComp2(string q = null, List<int> selectedLevels = null)
+        {
+            var model = new SearchCriteria
+            {
+                Keywords = q,
+                SelectedLevels = selectedLevels,
+                SearchRouteName = "partial-comp-search2"
             };
             
             return View(model);

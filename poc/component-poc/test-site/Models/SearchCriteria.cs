@@ -6,6 +6,6 @@ namespace test_site.Models
     {
         public string Keywords { get; set; }
         public List<int> SelectedLevels { get; set; }
-        public string SearchRouteName => "full-comp-search";
+        public string SearchRouteName { get; set; }
     }
 }

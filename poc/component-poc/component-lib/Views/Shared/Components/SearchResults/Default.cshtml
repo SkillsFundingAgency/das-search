@@ -1,1 +1,22 @@
-<h1>SearchResults</h1>
+@using component_lib
+@model SearchResultsModel
+
+@if (Model.ShowSearchResults)
+{
+    @foreach(var item in Model.Hits)
+    {
+        <div>
+            <article>
+                <header>
+                    <h2>
+                        <a href="/">@item.Title</a>
+                    </h2>
+                </header>
+                <dl>
+                    <dt>Level:</dt><dd>@item.Level</dd>
+                    <dt>Duration</dt><dd>@item.Duration</dd>
+                </dl>
+            </article>
+        </div>
+    }
+}
