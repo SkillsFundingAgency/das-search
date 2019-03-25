@@ -1,4 +1,7 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Linq;
     using Core.Domain.Model;
@@ -34,7 +37,7 @@
             _logger = logger;
         }
 
-        public ApprenticeshipProviderDetailResponse Handle(ApprenticeshipProviderDetailQuery message)
+        public async Task<ApprenticeshipProviderDetailResponse> Handle(ApprenticeshipProviderDetailQuery message, CancellationToken cancellationToken)
         {
             var result = _validator.Validate(message);
 

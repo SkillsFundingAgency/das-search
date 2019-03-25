@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 using SFA.DAS.NLog.Logger;
@@ -26,7 +28,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _logger = logger;
         }
 
-        public GetFrameworkResponse Handle(GetFrameworkQuery message)
+        public async Task<GetFrameworkResponse> Handle(GetFrameworkQuery message, CancellationToken cancellationToken)
         {
             var result = _validator.Validate(message);
             var response = new GetFrameworkResponse();

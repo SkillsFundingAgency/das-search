@@ -20,8 +20,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
     {
         public WebRegistry()
         {
-            For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
-            For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+            For<ServiceFactory>().Use<ServiceFactory>(ctx => ctx.GetInstance);
             For<IMediator>().Use<Mediator>();
             For<IRequestContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
 

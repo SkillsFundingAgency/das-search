@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Services;
@@ -14,7 +16,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _getFrameworks = getFrameworks;
         }
 
-        public GetFrameworkProvidersResponse Handle(GetFrameworkProvidersQuery message)
+        public async Task<GetFrameworkProvidersResponse> Handle(GetFrameworkProvidersQuery message, CancellationToken cancellationToken)
         {
             var framework = _getFrameworks.GetFrameworkById(message.FrameworkId);
 

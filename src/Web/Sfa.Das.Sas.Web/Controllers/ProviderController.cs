@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> StandardResults(StandardProviderSearchQuery criteria)
         {
-            var response = await _mediator.SendAsync(criteria);
+            var response = await _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {
@@ -85,7 +85,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> FrameworkResults(FrameworkProviderSearchQuery criteria)
         {
-            var response = await _mediator.SendAsync(criteria);
+            var response = await _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {
@@ -137,7 +137,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 page = 1;
             }
 
-            var response = await _mediator.SendAsync(new ProviderDetailQuery { UkPrn = ukprn, Page = page });
+            var response = await _mediator.Send(new ProviderDetailQuery { UkPrn = ukprn, Page = page });
 
             if (response.StatusCode == ProviderDetailResponse.ResponseCodes.ProviderNotFound)
             {
@@ -168,9 +168,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(ProviderNameSearchQuery query)
         {
-            var response = _mediator.SendAsync(query);
+            var response = _mediator.Send(query).Result;
 
-            var viewModel = _mappingService.Map<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>(response.Result);
+            var viewModel = _mappingService.Map<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>(response);
 
             return View(viewModel);
         }
@@ -178,7 +178,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult Detail(ApprenticeshipProviderDetailQuery criteria)
         {
-            var response = _mediator.Send(criteria);
+            var response = _mediator.Send(criteria).Result;
 
             switch (response.StatusCode)
             {

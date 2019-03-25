@@ -44,7 +44,7 @@
             {
                 UrlPlaceholder = urlPrefix,
                 SitemapRequest = SitemapType.Standards
-            });
+            }).Result;
 
             return Content(resp.Content, "text/xml");
         }
@@ -60,7 +60,7 @@
             {
                 UrlPlaceholder = urlPrefix,
                 SitemapRequest = SitemapType.Frameworks
-            });
+            }).Result;
 
             return Content(resp.Content, "text/xml");
         }
@@ -76,7 +76,7 @@
             {
                 UrlPlaceholder = urlPrefix,
                 SitemapRequest = SitemapType.Providers
-            });
+            }).Result;
 
             return Content(resp.Content, "text/xml");
         }

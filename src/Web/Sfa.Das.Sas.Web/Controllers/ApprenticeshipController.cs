@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public ActionResult SearchResults(ApprenticeshipSearchQuery query)
         {
-            var response = _mediator.Send(query);
+            var response = _mediator.Send(query).Result;
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
 
@@ -93,7 +93,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult Standard(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting strandard {id}");
-            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keyword});
+            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keyword}).Result;
 
             string message;
 
@@ -148,7 +148,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         public ActionResult Framework(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting framework {id}");
-            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword });
+            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword }).Result;
 
             string message;
 
@@ -194,7 +194,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Keywords = keywords
             };
 
-            var response = _mediator.Send(query);
+            var response = _mediator.Send(query).Result;
 
             if (response.StatusCode.Equals(GetStandardProvidersResponse.ResponseCodes.NoStandardFound))
             {
@@ -221,7 +221,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Keywords = keywords
             };
 
-            var response = _mediator.Send(query);
+            var response = _mediator.Send(query).Result;
 
             if (response.StatusCode.Equals(GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound))
             {

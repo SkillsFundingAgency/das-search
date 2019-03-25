@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
@@ -69,7 +70,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new ProviderNameSearchQuery { SearchTerm = "test", Page = 1 };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.StatusCode.Should().Be(ProviderNameSearchResponseCodes.Success);
         }
@@ -79,7 +80,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new ProviderNameSearchQuery { SearchTerm = _searchTerm, Page = 1 };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.ActualPage.Should().Be(_actualPage);
             response.HasError.Should().BeFalse();
