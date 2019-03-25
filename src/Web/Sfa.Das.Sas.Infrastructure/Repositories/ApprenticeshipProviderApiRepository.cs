@@ -19,17 +19,14 @@
         private readonly ILog _applicationLogger;
         private readonly IConfigurationSettings _applicationSettings;
         private readonly IHttpGet _httpService;
-        private readonly IElasticsearchHelper _elasticsearchHelper;
 
         public ApprenticeshipProviderApiRepository(ILog applicationLogger,
             IConfigurationSettings applicationSettings,
-            IHttpGet httpService,
-            IElasticsearchHelper elasticsearchHelper)
+            IHttpGet httpService)
         {
             _applicationLogger = applicationLogger;
             _applicationSettings = applicationSettings;
             _httpService = httpService;
-            _elasticsearchHelper = elasticsearchHelper;
         }
 
         public ApprenticeshipDetails GetCourseByStandardCode(int ukprn, int locationId, string standardCode)
@@ -79,44 +76,12 @@
 
         public int GetFrameworksAmountWithProviders()
         {
-            try
-            {
-                var providerFrameworksList = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkProviderSearchResultsItem>(
-                    _applicationSettings.ProviderIndexAlias,
-                    "frameworkprovider").Select(x => x.FrameworkId).Distinct();
-
-                var activeFrameworks = _elasticsearchHelper.GetAllDocumentsFromIndex<FrameworkSearchResultsItem>(
-                    _applicationSettings.ApprenticeshipIndexAlias,
-                    "frameworkdocument").Select(x => x.FrameworkId).Distinct();
-
-                return providerFrameworksList.Count(providerFramework => activeFrameworks.Contains(providerFramework));
-            }
-            catch (Exception ex)
-            {
-                _applicationLogger.Error(
-                    ex,
-                    $"Error retrieving amount of frameworks with provider");
-                throw;
-            }
+           throw new NotImplementedException();
         }
 
         public int GetStandardsAmountWithProviders()
         {
-            try
-            {
-                var documents = _elasticsearchHelper.GetAllDocumentsFromIndex<StandardProviderSearchResultsItem>(
-                    _applicationSettings.ProviderIndexAlias,
-                    "standardprovider");
-
-                return documents.GroupBy(x => x.StandardCode).Count();
-            }
-            catch (Exception ex)
-            {
-                _applicationLogger.Error(
-                    ex,
-                    $"Error retrieving amount of standards with provider");
-                throw;
-            }
+           throw new NotImplementedException();
         }
     }
 }
