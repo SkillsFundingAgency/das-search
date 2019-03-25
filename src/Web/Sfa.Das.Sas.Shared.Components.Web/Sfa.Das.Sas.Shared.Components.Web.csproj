@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\Components\Fat\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj" />
+    <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj" />
+    <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj" />
+    <ProjectReference Include="..\Sfa.Das.Sas.Shared.Components\Sfa.Das.Sas.Shared.Components.csproj" />
+  </ItemGroup>
+
+</Project>
