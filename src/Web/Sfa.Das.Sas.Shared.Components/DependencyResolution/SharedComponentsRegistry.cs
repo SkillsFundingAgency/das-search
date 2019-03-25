@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>( x => new NLogLogger());
 
             var fatConfig = new FatSharedComponentsConfiguration();
-            fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["aaa"];
+            fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["FatApiBaseUrl"];
             
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
 
