@@ -18,6 +18,7 @@ using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Infrastructure.Settings;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
@@ -32,7 +33,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>( x => new NLogLogger());
 
-
+            var fatConfig = new FatSharedComponentsConfiguration();
+            fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["aaa"];
+            
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
 
 
@@ -40,7 +43,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             AddApplicationServices(services);
 
             //Infrastructure DI
-            AddInfrastructureServices(services, configuration);
+            AddInfrastructureServices(services, fatConfig);
 
             if (useElastic)
             {
@@ -60,7 +63,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
         }
 
-        private static void AddInfrastructureServices(IServiceCollection services, IConfiguration configuration)
+        private static void AddInfrastructureServices(IServiceCollection services, FatSharedComponentsConfiguration sharedComponentsConfiguration)
         {
            // services.AddTransient<IConfigurationSettings, ApplicationSettings>();
 
@@ -72,9 +75,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddTransient<IProviderNameSearchProvider,ProviderNameSearchProvider>();
 
-            services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(configuration["FatApiBaseUrl"]));
-            services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(configuration["FatApiBaseUrl"]));
-            services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(configuration["FatApiBaseUrl"]));
+            services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
 
             services.AddTransient<IStandardMapping, StandardMapping>();
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();
