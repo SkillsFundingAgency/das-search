@@ -128,6 +128,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\IApiConfigurationSettings.cs" />
     <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="DependencyResolution\CoreRegistry.cs" />
     <Compile Include="Domain\Helpers\IUrlEncoder.cs" />

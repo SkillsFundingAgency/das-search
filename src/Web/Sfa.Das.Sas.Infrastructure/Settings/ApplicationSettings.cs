@@ -15,8 +15,6 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
         public string ProviderIndexAlias => CloudConfigurationManager.GetSetting("ProviderIndexAlias");
 
-        public string ApprenticeshipApiBaseUrl => CloudConfigurationManager.GetSetting("ApprenticeshipApiBaseUrl");
-
         public string BuildId => CloudConfigurationManager.GetSetting("BuildId");
 
         public IEnumerable<Uri> ElasticServerUrls => GetElasticSearchIps();

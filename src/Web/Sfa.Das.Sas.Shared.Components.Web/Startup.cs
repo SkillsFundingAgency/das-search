@@ -32,7 +32,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddFatSharedComponents();
+            services.AddFatSharedComponents(Configuration);
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<IUrlEncoder>().Use<UrlEncoder>();
             For<IXmlDocumentSerialiser>().Use<XmlDocumentSerialiser>();
 
-            For<IProviderApiClient>().Use(x => new ProviderApiClient(new ApplicationSettings().ApprenticeshipApiBaseUrl));
+            For<IProviderApiClient>().Use(x => new ProviderApiClient(new ApiSettings().ApprenticeshipApiBaseUrl));
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
 
             For<IValidation>().Use<Validation>();

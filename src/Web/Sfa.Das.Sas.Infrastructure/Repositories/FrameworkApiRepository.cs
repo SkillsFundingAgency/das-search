@@ -15,17 +15,15 @@
 
     public sealed class FrameworkApiRepository : IGetFrameworks
     {
-        private readonly IConfigurationSettings _applicationSettings;
         private readonly IFrameworkMapping _frameworkMapping;
         private readonly ILog _applicationLogger;
         private readonly IFrameworkApiClient _frameworkApiClient;
 
-        public FrameworkApiRepository(IConfigurationSettings applicationSettings,
+        public FrameworkApiRepository(
             IFrameworkMapping frameworkMapping,
             ILog applicationLogger,
             IFrameworkApiClient frameworkApiClient)
         {
-            _applicationSettings = applicationSettings;
             _frameworkMapping = frameworkMapping;
             _applicationLogger = applicationLogger;
             _frameworkApiClient = frameworkApiClient;

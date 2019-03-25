@@ -1,5 +1,7 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Http;
@@ -18,14 +20,18 @@ using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Infrastructure.Settings;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 {
     public static class SharedComponentsRegistry
     {
-        public static void AddFatSharedComponents(this IServiceCollection services, bool useElastic = false)
+        public static void AddFatSharedComponents(this IServiceCollection services, IConfiguration configuration, bool useElastic = false)
         {
             //   services.AddTransient<IMyService, MyService>();
+
+            services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>( x => new NLogLogger());
+
 
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
 
@@ -34,14 +40,12 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             AddApplicationServices(services);
 
             //Infrastructure DI
-            AddInfrastructureServices(services);
+            AddInfrastructureServices(services, configuration);
 
             if (useElastic)
             {
                 AddElasticSearchServices(services);
             }
-
-
         }
 
         private static void AddApplicationServices(IServiceCollection services)
@@ -56,9 +60,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
         }
 
-        private static void AddInfrastructureServices(IServiceCollection services)
+        private static void AddInfrastructureServices(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IConfigurationSettings, ApplicationSettings>();
+           // services.AddTransient<IConfigurationSettings, ApplicationSettings>();
 
             services.AddTransient<ILookupLocations, PostCodesIoLocator>();
 
@@ -68,9 +72,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddTransient<IProviderNameSearchProvider,ProviderNameSearchProvider>();
 
-            services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(new ApplicationSettings().ApprenticeshipApiBaseUrl));
-            services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(new ApplicationSettings().ApprenticeshipApiBaseUrl));
-            services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(new ApplicationSettings().ApprenticeshipApiBaseUrl));
+            services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(configuration["FatApiBaseUrl"]));
+            services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(configuration["FatApiBaseUrl"]));
+            services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(configuration["FatApiBaseUrl"]));
 
             services.AddTransient<IStandardMapping, StandardMapping>();
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();

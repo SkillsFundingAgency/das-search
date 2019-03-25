@@ -14,18 +14,15 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     public sealed class StandardApiRepository : IGetStandards
     {
-        private readonly IConfigurationSettings _applicationSettings;
         private readonly IStandardMapping _standardMapping;
         private readonly IStandardApiClient _standardApiClient;
         private readonly ILog _applicationLogger;
 
         public StandardApiRepository(
-            IConfigurationSettings applicationSettings,
             IStandardMapping standardMapping,
             IStandardApiClient standardApiClient,
             ILog applicationLogger)
         {
-            _applicationSettings = applicationSettings;
             _standardMapping = standardMapping;
             _standardApiClient = standardApiClient;
             _applicationLogger = applicationLogger;
