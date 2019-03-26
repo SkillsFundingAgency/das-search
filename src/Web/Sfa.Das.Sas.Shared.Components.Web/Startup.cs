@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Infrastructure.Settings;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
 
 namespace Sfa.Das.Sas.Shared.Components.Web
@@ -32,8 +34,13 @@ namespace Sfa.Das.Sas.Shared.Components.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddFatSharedComponents(Configuration);
 
+            IFatConfigurationSettings fatConfig = new FatSettings();
+            Configuration.Bind("fatSharedComponents", fatConfig);
+            services.AddSingleton(fs => fatConfig);
+
+
+            services.AddFatSharedComponents(fatConfig);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
