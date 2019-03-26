@@ -27,14 +27,14 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 {
     public static class SharedComponentsRegistry
     {
-        public static void AddFatSharedComponents(this IServiceCollection services, IConfiguration configuration, bool useElastic = false)
+        public static void AddFatSharedComponents(this IServiceCollection services, IFatConfigurationSettings configuration, bool useElastic = false)
         {
             //   services.AddTransient<IMyService, MyService>();
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>( x => new NLogLogger());
 
-            var fatConfig = new FatSharedComponentsConfiguration();
-            fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["FatApiBaseUrl"];
+            //var fatConfig = new FatSharedComponentsConfiguration();
+            //fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["FatApiBaseUrl"];
             
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
 
@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             AddApplicationServices(services);
 
             //Infrastructure DI
-            AddInfrastructureServices(services, fatConfig);
+            AddInfrastructureServices(services, configuration);
 
             if (useElastic)
             {
@@ -63,7 +63,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
         }
 
-        private static void AddInfrastructureServices(IServiceCollection services, FatSharedComponentsConfiguration sharedComponentsConfiguration)
+        private static void AddInfrastructureServices(IServiceCollection services, IFatConfigurationSettings sharedComponentsConfiguration)
         {
            // services.AddTransient<IConfigurationSettings, ApplicationSettings>();
 

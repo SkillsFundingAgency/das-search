@@ -163,6 +163,7 @@
     <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
     <Compile Include="Mapping\IProviderNameSearchMapping.cs" />
     <Compile Include="Mapping\ProviderNameSearchMapping.cs" />
+    <Compile Include="Providers\ApiApprenticeshipsSearchProvider.cs" />
     <Compile Include="Repositories\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
     <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Logging\ElasticSearchLogEntry.cs" />
     <Compile Include="Repositories\ProviderApiRepository.cs" />
-    <Compile Include="Settings\ApiSettings.cs" />
+    <Compile Include="Settings\FatSettings.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
     <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
@@ -221,7 +222,6 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

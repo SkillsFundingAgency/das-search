@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Sfa.Das.Sas.Core.Configuration
 {
-    public interface IApiConfigurationSettings
+    public interface IFatConfigurationSettings
     {
 
-        string ApprenticeshipApiBaseUrl { get; }
+        string FatApiBaseUrl { get; }
     }
 }

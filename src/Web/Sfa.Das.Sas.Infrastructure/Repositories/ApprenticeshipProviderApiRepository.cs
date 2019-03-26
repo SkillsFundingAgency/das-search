@@ -17,15 +17,15 @@
     public sealed class ApprenticeshipProviderApiRepository : IApprenticeshipProviderRepository
     {
         private readonly ILog _applicationLogger;
-        private readonly IApiConfigurationSettings _apiSettings;
+        private readonly IFatConfigurationSettings _fatSettings;
         private readonly IHttpGet _httpService;
 
         public ApprenticeshipProviderApiRepository(ILog applicationLogger,
-            IApiConfigurationSettings apiSettings,
+            IFatConfigurationSettings fatSettings,
             IHttpGet httpService)
         {
             _applicationLogger = applicationLogger;
-            _apiSettings = apiSettings;
+            _fatSettings = fatSettings;
             _httpService = httpService;
         }
 
@@ -33,7 +33,7 @@
         {
             var url = string.Format(
                 "{0}standards/{1}/providers?ukprn={2}&location={3}",
-                _apiSettings.ApprenticeshipApiBaseUrl.AddSlash(),
+                _fatSettings.FatApiBaseUrl.AddSlash(),
                 standardCode,
                 ukprn,
                 locationId);
@@ -52,7 +52,7 @@
         {
             var url = string.Format(
                 "{0}frameworks/{1}/providers?ukprn={2}&location={3}",
-                _apiSettings.ApprenticeshipApiBaseUrl.AddSlash(),
+                _fatSettings.FatApiBaseUrl.AddSlash(),
                 frameworkId,
                 ukprn,
                 locationId);
