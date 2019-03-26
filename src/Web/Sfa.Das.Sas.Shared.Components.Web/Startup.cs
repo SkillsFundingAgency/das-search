@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Infrastructure.Settings;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
 
 namespace Sfa.Das.Sas.Shared.Components.Web
@@ -35,7 +36,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web
             });
 
 
-            IFatConfigurationSettings fatConfig = new FatSettings();
+            IFatConfigurationSettings fatConfig = new FatSharedComponentsConfiguration();
             Configuration.Bind("fatSharedComponents", fatConfig);
             services.AddSingleton(fs => fatConfig);
 
