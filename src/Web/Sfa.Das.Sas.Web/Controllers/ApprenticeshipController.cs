@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Sfa.Das.Sas.Core.Domain.Model;
 using SFA.DAS.Apprenticeships.Api.Types;
 
@@ -71,9 +72,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchResults(ApprenticeshipSearchQuery query)
+        public async Task<ActionResult> SearchResults(ApprenticeshipSearchQuery query)
         {
-            var response = _mediator.Send(query).Result;
+            var response = await _mediator.Send(query);
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
 
@@ -90,10 +91,10 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         // GET: Standard
-        public ActionResult Standard(string id, string keyword, string ukprn = null)
+        public async Task<ActionResult> Standard(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting strandard {id}");
-            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keyword}).Result;
+            var response = await _mediator.Send(new GetStandardQuery {Id = id, Keywords = keyword});
 
             string message;
 
@@ -145,10 +146,10 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View(viewModel);
         }
         
-        public ActionResult Framework(string id, string keyword, string ukprn = null)
+        public async Task<ActionResult> Framework(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting framework {id}");
-            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword }).Result;
+            var response = await _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword });
 
             string message;
 
@@ -185,7 +186,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords,string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
+        public async Task<ActionResult> SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords,string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetStandardProvidersQuery
             {
@@ -194,7 +195,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Keywords = keywords
             };
 
-            var response = _mediator.Send(query).Result;
+            var response = await _mediator.Send(query);
 
             if (response.StatusCode.Equals(GetStandardProvidersResponse.ResponseCodes.NoStandardFound))
             {
@@ -212,7 +213,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(string frameworkId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
+        public async Task<ActionResult> SearchForFrameworkProviders(string frameworkId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetFrameworkProvidersQuery
             {
@@ -221,7 +222,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                 Keywords = keywords
             };
 
-            var response = _mediator.Send(query).Result;
+            var response = await _mediator.Send(query);
 
             if (response.StatusCode.Equals(GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound))
             {

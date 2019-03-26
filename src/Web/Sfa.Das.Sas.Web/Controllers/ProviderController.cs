@@ -166,9 +166,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchResults(ProviderNameSearchQuery query)
+        public async Task<ActionResult> SearchResults(ProviderNameSearchQuery query)
         {
-            var response = _mediator.Send(query).Result;
+            var response = await _mediator.Send(query);
 
             var viewModel = _mappingService.Map<ProviderNameSearchResponse, ProviderNameSearchResultViewModel>(response);
 
@@ -176,9 +176,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detail(ApprenticeshipProviderDetailQuery criteria)
+        public async Task<ActionResult> Detail(ApprenticeshipProviderDetailQuery criteria)
         {
-            var response = _mediator.Send(criteria).Result;
+            var response = await _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {

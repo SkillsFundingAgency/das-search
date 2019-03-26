@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
     public class ProviderControllerTests
     {
         [Test]
-        public void DetailShouldReturnNotFoundResultIfApprenticeshipProviderNotFound()
+        public async Task DetailShouldReturnNotFoundResultIfApprenticeshipProviderNotFound()
         {
             var searchCriteria = new ApprenticeshipProviderDetailQuery();
             var stubSearchResponse = Task.FromResult(new ApprenticeshipProviderDetailResponse { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound });
@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
             ProviderController controller = new ProviderControllerBuilder()
                 .SetupMediator(x => x.Send(It.IsAny<ApprenticeshipProviderDetailQuery>(), default(CancellationToken)), stubSearchResponse);
 
-            var result = controller.Detail(searchCriteria);
+            var result = controller.Detail(searchCriteria).Result;
 
             result.Should().BeOfType<HttpStatusCodeResult>();
 
@@ -93,7 +93,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                 .SetupMappingService(x => x.Map(It.IsAny<ApprenticeshipProviderDetailResponse>(), It.IsAny<Action<IMappingOperationOptions<ApprenticeshipProviderDetailResponse, ApprenticeshipDetailsViewModel>>>()), stubProviderViewModel)
                 .WithUrl(urlHelperMock.Object);
 
-            var result = controller.Detail(searchCriteria);
+            var result = controller.Detail(searchCriteria).Result;
 
             result.Should().BeOfType<ViewResult>();
 
