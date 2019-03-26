@@ -218,6 +218,7 @@
     <Compile Include="Application\Handlers\XmlDocumentSerialiserTests.cs" />
     <Compile Include="Application\Mapping\ProviderNameSearchMappingTests.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
+    <Compile Include="Infrastructure\Providers\Api\UnitTest1.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
