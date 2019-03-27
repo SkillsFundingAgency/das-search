@@ -20,8 +20,8 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
 
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
-        throw new NotImplementedException();
+            var results = _apprenticeshipSearchResultsMapping.Map(_apprenticeshipProgrammeApiClient.Search(keywords, page));
+            return results;
         }
-
     }
 }
