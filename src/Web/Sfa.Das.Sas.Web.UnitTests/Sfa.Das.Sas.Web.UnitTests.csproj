@@ -246,6 +246,8 @@
     <Compile Include="Application\Handlers\XmlDocumentSerialiserTests.cs" />
     <Compile Include="Application\Mapping\ProviderNameSearchMappingTests.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
+    <Compile Include="Infrastructure\Mapping\ApprenticeshipSearchResultsItemMappingTests.cs" />
+    <Compile Include="Infrastructure\Mapping\ApprenticeshipSearchResultsMappingTests.cs" />
     <Compile Include="Infrastructure\Providers\Api\ApiApprenticeshipSearchProviderTests.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
@@ -329,7 +331,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure\Mapping\" />
     <Folder Include="Infrastructure\Web\Views\Web\" />
   </ItemGroup>
   <ItemGroup>

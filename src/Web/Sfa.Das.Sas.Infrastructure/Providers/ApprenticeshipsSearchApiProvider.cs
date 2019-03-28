@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Sfa.Das.Sas.Infrastructure.Providers
+﻿namespace Sfa.Das.Sas.Infrastructure.Providers
 {
-    using System.Collections.Generic;
-    using SFA.DAS.Apprenticeships.Api.Client;
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Infrastructure.Mapping;
+    using SFA.DAS.Apprenticeships.Api.Client;
+    using System.Collections.Generic;
 
     public class ApprenticeshipsSearchApiProvider : IApprenticeshipSearchProvider
     {

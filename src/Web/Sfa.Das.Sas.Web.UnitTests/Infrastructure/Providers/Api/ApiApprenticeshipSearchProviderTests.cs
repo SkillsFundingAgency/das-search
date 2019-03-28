@@ -20,6 +20,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
         private ApprenticeshipsSearchApiProvider _sut;
 
         private ApprenticeshipSearchResults mappingReturnObject;
+        private IList<ApprenticeshipSearchResultsItem> clientResultsItems;
 
         [SetUp]
         public void Setup()
@@ -29,26 +30,29 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
                 Results = new List<ApplicationServices.Models.ApprenticeshipSearchResultsItem>()
             };
 
+            clientResultsItems = new List<ApprenticeshipSearchResultsItem>()
+            {
+                new ApprenticeshipSearchResultsItem()
+                {
+                    StandardId = "123"
+                },
+                new ApprenticeshipSearchResultsItem()
+                {
+                    StandardId = "234"
+                },
+                new ApprenticeshipSearchResultsItem()
+                {
+                    FrameworkId = "ABC-12-34"
+                }
+            };
+
+
             _apprenticeshipProgrammeApiClientMock = new Mock<IApprenticeshipProgrammeApiClient>();
             _apprenticeshipSearchResultsMappingMock = new Mock<IApprenticeshipSearchResultsMapping>();
 
             _apprenticeshipProgrammeApiClientMock
                 .Setup(s => s.Search(It.IsAny<string>(), It.IsAny<int>()))
-                .Returns(new List<ApprenticeshipSearchResultsItem>()
-                {
-                    new ApprenticeshipSearchResultsItem()
-                    {
-                        StandardId = "123"
-                    },
-                    new ApprenticeshipSearchResultsItem()
-                    {
-                        StandardId = "234"
-                    },
-                    new ApprenticeshipSearchResultsItem()
-                    {
-                        FrameworkId = "ABC-12-34"
-                    }
-                });
+                .Returns(clientResultsItems);
 
             _apprenticeshipSearchResultsMappingMock
                 .Setup(s => s.Map(It.IsAny<IEnumerable<ApprenticeshipSearchResultsItem>>()))
@@ -86,7 +90,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 
             var results = _sut.SearchByKeyword(keyword, page, 0, 0, null);
 
-            _apprenticeshipSearchResultsMappingMock.Verify(v => v.Map(It.IsAny<IEnumerable<ApprenticeshipSearchResultsItem>>()));
+            _apprenticeshipSearchResultsMappingMock.Verify(v => v.Map(clientResultsItems));
 
             results.Should().Be(mappingReturnObject);
 

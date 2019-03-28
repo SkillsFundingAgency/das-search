@@ -193,7 +193,9 @@
     <Compile Include="Extensions\MyCertificateIgnoringHttpConnection.cs" />
     <Compile Include="FeatureToggles\Elk5Feature.cs" />
     <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
+    <Compile Include="Mapping\ApprenticeshipSearchResultsItemMapping.cs" />
     <Compile Include="Mapping\ApprenticeshipSearchResultsMapping.cs" />
+    <Compile Include="Mapping\IApprenticeshipSearchResultsItemMapping.cs" />
     <Compile Include="Mapping\IApprenticeshipSearchResultsMapping.cs" />
     <Compile Include="Mapping\IProviderNameSearchMapping.cs" />
     <Compile Include="Mapping\ProviderNameSearchMapping.cs" />
