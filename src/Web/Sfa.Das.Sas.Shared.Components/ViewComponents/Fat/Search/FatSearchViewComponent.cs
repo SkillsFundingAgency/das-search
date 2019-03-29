@@ -8,15 +8,24 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents
 {
     public class FatSearchViewComponent : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(string searchRouteName, string keywords)
+        public async Task<IViewComponentResult> InvokeAsync(string searchRouteName, string keywords, string classPrefix = "govuk-", string classModifier = null, bool inline = false)
         {
             var model = new FatSearchViewModel
             {
                 Keywords = keywords,
-                SearchRouteName = searchRouteName
+                SearchRouteName = searchRouteName,
+                ClassPrefix = classPrefix,
+                ClassModifier = classModifier
             };
 
-            return View(model);
+            if (!inline)
+            {
+                return View(model);
+            }
+            else{
+                return View("Inline", model);
+            }
+
         }
     }
 }

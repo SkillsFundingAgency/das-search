@@ -9,5 +9,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents
     {
         public string Keywords { get; set; }
         public string SearchRouteName { get; set; }
+        public string ClassPrefix { get; set; }
+        public string ClassModifier { get; set; }
     }
 }
