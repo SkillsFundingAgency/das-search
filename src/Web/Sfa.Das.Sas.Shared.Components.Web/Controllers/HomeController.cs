@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult SearchComponent()
         {
             return View();
         }

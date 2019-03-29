@@ -1,0 +1,10 @@
+﻿@model Sfa.Das.Sas.ApplicationServices.Models.ApprenticeshipSearchResults
+
+
+
+@{
+    foreach (var apprenticeshipSearchResultsItem in Model.Results)
+    {
+        <h1>@apprenticeshipSearchResultsItem.Title</h1>
+    }
+}
