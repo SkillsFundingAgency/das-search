@@ -1,21 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 
-namespace Sfa.Das.Sas.Shared.Components.ViewComponents
+namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
 {
     public class FatSearchViewComponent : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(string searchRouteName, string keywords, string classPrefix = "govuk-", string classModifier = null, bool inline = false)
+        private readonly ICssClasses _cssClasses;
+
+        public FatSearchViewComponent(ICssClasses cssClasses)
         {
+            _cssClasses = cssClasses;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync(string searchRouteName, string keywords,string cssModifier = null, bool inline = false)
+        {
+            if (cssModifier != null)
+            {
+                _cssClasses.ClassModifier = cssModifier;
+            }
+
             var model = new FatSearchViewModel
             {
                 Keywords = keywords,
                 SearchRouteName = searchRouteName,
-                ClassPrefix = classPrefix,
-                ClassModifier = classModifier
+                CssClasses = _cssClasses
             };
 
             if (!inline)

@@ -16,9 +16,12 @@ using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
+using Sfa.Das.Sas.Infrastructure.Providers;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Infrastructure.Settings;
 using Sfa.Das.Sas.Shared.Components.Configuration;
+using Sfa.Das.Sas.Shared.Components.Domain;
+using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
@@ -31,23 +34,27 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
         {
             //   services.AddTransient<IMyService, MyService>();
 
-            services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>( x => new NLogLogger());
+            services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
 
             //var fatConfig = new FatSharedComponentsConfiguration();
             //fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["FatApiBaseUrl"];
-            
-            services.AddMediatR(typeof(ApprenticeshipSearchQuery));
 
+            services.AddMediatR(typeof(ApprenticeshipSearchQuery));
+            services.AddTransient<ICssClasses, DefaultCssClasses>();
 
             //Application DI
             AddApplicationServices(services);
 
             //Infrastructure DI
-            AddInfrastructureServices(services, configuration);
+            AddInfrastructureServices(services);
 
             if (useElastic)
             {
                 AddElasticSearchServices(services);
+            }
+            else
+            {
+                AddApiSearchServices(services, configuration);
             }
         }
 
@@ -63,9 +70,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
         }
 
-        private static void AddInfrastructureServices(IServiceCollection services, IFatConfigurationSettings sharedComponentsConfiguration)
+        private static void AddInfrastructureServices(IServiceCollection services)
         {
-           // services.AddTransient<IConfigurationSettings, ApplicationSettings>();
+            // services.AddTransient<IConfigurationSettings, ApplicationSettings>();
 
             services.AddTransient<ILookupLocations, PostCodesIoLocator>();
 
@@ -73,33 +80,41 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IGetStandards, StandardApiRepository>();
             services.AddTransient<IApprenticeshipProviderRepository, ApprenticeshipProviderApiRepository>();
 
-            services.AddTransient<IProviderNameSearchProvider,ProviderNameSearchProvider>();
-
-            services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
-            services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
-            services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<IProviderNameSearchProvider, ProviderNameSearchProvider>();
 
             services.AddTransient<IStandardMapping, StandardMapping>();
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();
             services.AddTransient<IProviderMapping, ProviderMapping>();
-            services.AddTransient<IProviderNameSearchMapping,ProviderNameSearchMapping>();
+            services.AddTransient<IProviderNameSearchMapping, ProviderNameSearchMapping>();
+            services.AddTransient<IApprenticeshipSearchResultsMapping,ApprenticeshipSearchResultsMapping>();
+            services.AddTransient<IApprenticeshipSearchResultsItemMapping, ApprenticeshipSearchResultsItemMapping>();
 
-            services.AddTransient<IPaginationOrientationService,PaginationOrientationService>();
+            services.AddTransient<IPaginationOrientationService, PaginationOrientationService>();
         }
 
         private static void AddElasticSearchServices(IServiceCollection services)
         {
-            services.AddTransient<IElasticsearchClientFactory,ElasticsearchClientFactory>();
+            services.AddTransient<IElasticsearchClientFactory, ElasticsearchClientFactory>();
             services.AddTransient<IElasticsearchCustomClient, ElasticsearchCustomClient>();
-            services.AddTransient<IElasticsearchHelper,ElasticsearchHelper>();
+            services.AddTransient<IElasticsearchHelper, ElasticsearchHelper>();
 
 
-            services.AddTransient<IApprenticeshipSearchProvider,ElasticsearchApprenticeshipSearchProvider>();
-            services.AddTransient<IProviderLocationSearchProvider,ElasticsearchProviderLocationSearchProvider>();
+            services.AddTransient<IApprenticeshipSearchProvider, ElasticsearchApprenticeshipSearchProvider>();
+            services.AddTransient<IProviderLocationSearchProvider, ElasticsearchProviderLocationSearchProvider>();
 
-            services.AddTransient<IProviderNameSearchProviderQuery,ProviderNameSearchProviderQuery>();
+            services.AddTransient<IProviderNameSearchProviderQuery, ProviderNameSearchProviderQuery>();
 
-            services.AddTransient<IGetProviders,ProviderElasticRepository>();
+            services.AddTransient<IGetProviders, ProviderElasticRepository>();
+        }
+
+        private static void AddApiSearchServices(IServiceCollection services, IFatConfigurationSettings sharedComponentsConfiguration)
+        {
+            services.AddTransient<IApprenticeshipSearchProvider, ApprenticeshipsSearchApiProvider>();
+
+            services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<IApprenticeshipProgrammeApiClient, ApprenticeshipProgrammeApiClient>(service => new ApprenticeshipProgrammeApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
         }
     }
 }

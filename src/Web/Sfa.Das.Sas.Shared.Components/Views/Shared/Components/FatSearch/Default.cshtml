@@ -2,12 +2,12 @@
 @model Sfa.Das.Sas.Shared.Components.ViewComponents.FatSearchViewModel
 
 <form asp-controller="Fat" asp-action="Search">
-    <div class="@(Model.ClassPrefix)form-group">
-        <input class="@(Model.ClassPrefix)input" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
+    <div class="@(Model.CssClasses.FormGroupCss)">
+        <input class="@(Model.CssClasses.InputCss)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
 
     </div>
-    <div class="@(Model.ClassPrefix)form-group">
-        <button type="submit" class="@(Model.ClassPrefix)button">
+    <div class="@(Model.CssClasses.FormGroupCss)">
+        <button type="submit" class="@(Model.CssClasses.ButtonCss)">
             Search
         </button>
     </div>

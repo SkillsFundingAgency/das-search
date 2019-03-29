@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using NUnit.Framework;
 using Sfa.Das.Sas.Shared.Components.ViewComponents;
 using System.Threading.Tasks;
+using Moq;
+using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 {
@@ -12,7 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
     public class FatSearchViewComponentTests
     {
         private FatSearchViewComponent _sut;
-
+        private Mock<ICssClasses> _cssClasses;
 
         [SetUp]
         public void Setup()
@@ -23,7 +26,10 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
             var viewComponentContext = new ViewComponentContext();
             viewComponentContext.ViewContext = viewContext;
 
-            _sut = new FatSearchViewComponent();
+            _cssClasses = new Mock<ICssClasses>(MockBehavior.Strict);
+
+
+            _sut = new FatSearchViewComponent(_cssClasses.Object);
             _sut.ViewComponentContext = viewComponentContext;
         }
 
