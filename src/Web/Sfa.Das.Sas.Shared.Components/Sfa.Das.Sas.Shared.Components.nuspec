@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SFA.DAS.SAS.Shared.Components</id>
+    <version>0.0.4</version>
+    <authors>DAS</authors>
+    <owners>sfanuget</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Shared UI Components for find apprenticeship training functionality</description>
+    <copyright>Copyright 2019</copyright>
+    <licenseUrl>https://github.com/SkillsFundingAgency/das-search/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/SkillsFundingAgency/das-search/</projectUrl>
+    <dependencies>
+      <dependency id="FluentValidation" version="6.2.1" />
+      <dependency id="MediatR.Extensions.Microsoft.DependencyInjection" version="6.0.1" />
+      <dependency id="Microsoft.AspNetCore.Mvc" version="2.2.0" />
+      <dependency id="NLog" version="4.6.0" />
+      <dependency id="SFA.DAS.Apprenticeships.Api.Client" version="0.11.129" />
+      <dependency id="SFA.DAS.AssessmentOrgs.Api.Client" version="0.11.129" />
+      <dependency id="SFA.DAS.NLog.Logger" version="1.2.1" />
+      <dependency id="SFA.DAS.NLog.Targets.Redis" version="1.2.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Sfa.Das.Sas.Shared.Components\bin\Debug\netstandard2.0\sfa.das.sas.*.dll" target="lib" />
+  </files>
+</package>
