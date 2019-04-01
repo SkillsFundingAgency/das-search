@@ -22,6 +22,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\Sfa.Das.Sas.Shared.Components\bin\Debug\netstandard2.0\sfa.das.sas.*.dll" target="lib" />
+    <file src="..\Sfa.Das.Sas.Shared.Components\bin\Release\netstandard2.0\sfa.das.sas.*.dll" target="lib" />
   </files>
 </package>
