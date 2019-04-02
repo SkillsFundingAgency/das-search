@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
 
             if (!inline)
             {
-                return View(model);
+                return View("Default",model);
             }
             else{
                 return View("Inline", model);

@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
             viewComponentContext.ViewContext = viewContext;
 
             _cssClasses = new Mock<ICssClasses>(MockBehavior.Strict);
-
+            _cssClasses.Setup(s => s.ClassModifier).Returns("");
 
             _sut = new FatSearchViewComponent(_cssClasses.Object);
             _sut.ViewComponentContext = viewComponentContext;
@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         [Test]
         public async Task When_Inline_Option_Is_Not_Provided_Then_Return_Default_View()
         {
-            var result = await _sut.InvokeAsync("", "") as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync("") as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
@@ -45,7 +45,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         [Test]
         public async Task When_Inline_Option_Is_Provided_And_False_Then_Return_Default_View()
         {
-            var result = await _sut.InvokeAsync("", "") as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync("", inline: false) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
@@ -53,9 +53,9 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         }
 
         [Test]
-        public async Task When_Inline_Option_Is_Provided_And_True_Then_Return_Default_View()
+        public async Task When_Inline_Option_Is_Provided_And_True_Then_Return_Inline_View()
         {
-            var result = await _sut.InvokeAsync("", "", inline: true) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync("", inline: true) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
@@ -67,7 +67,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         {
             var keyword = "keyword";
 
-            var result = await _sut.InvokeAsync(keyword, "") as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(keyword) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
@@ -79,7 +79,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         {
             var keyword = "keyword";
 
-            var result = await _sut.InvokeAsync(keyword, "") as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(keyword) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
