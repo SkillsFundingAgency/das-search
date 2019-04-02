@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
             _cssClasses = cssClasses;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string searchRouteName, string keywords,string cssModifier = null, bool inline = false)
+        public async Task<IViewComponentResult> InvokeAsync(string keywords,string cssModifier = null, bool inline = false)
         {
             if (cssModifier != null)
             {
@@ -23,7 +23,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
             var model = new FatSearchViewModel
             {
                 Keywords = keywords,
-                SearchRouteName = searchRouteName,
                 CssClasses = _cssClasses
             };
 
