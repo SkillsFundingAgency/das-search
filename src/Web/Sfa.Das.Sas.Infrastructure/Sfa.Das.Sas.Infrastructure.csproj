@@ -237,6 +237,10 @@
     <Compile Include="Settings\CookieSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sfa.Das.FatApi.Client\Sfa.Das.FatApi.Client.csproj">
+      <Project>{3ecec6d3-8915-450b-88ad-37790bc151de}</Project>
+      <Name>Sfa.Das.FatApi.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj">
       <Project>{F8946F39-EDEC-457A-857B-5A76D4151082}</Project>
       <Name>Sfa.Das.Sas.ApplicationServices</Name>

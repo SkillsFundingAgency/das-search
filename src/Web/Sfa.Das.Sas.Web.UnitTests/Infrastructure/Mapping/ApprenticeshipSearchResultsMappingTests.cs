@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using Sfa.Das.FatApi.Client.Model;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Infrastructure.Mapping;
-using ApprenticeshipSearchResultsItem = SFA.DAS.Apprenticeships.Api.Types.ApprenticeshipSearchResultsItem;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
 {
@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
         public void Setup()
         {
             _apprenticeshipSearchResultsItemMock = new Mock<IApprenticeshipSearchResultsItemMapping>(MockBehavior.Strict);
-            _apprenticeshipSearchResultsItemMock.Setup(s => s.Map(It.IsAny<ApprenticeshipSearchResultsItem>())).Returns(new ApplicationServices.Models.ApprenticeshipSearchResultsItem());
+            _apprenticeshipSearchResultsItemMock.Setup(s => s.Map(It.IsAny<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>())).Returns(new ApplicationServices.Models.ApprenticeshipSearchResultsItem());
 
             _sut = new ApprenticeshipSearchResultsMapping(_apprenticeshipSearchResultsItemMock.Object);
         }
@@ -28,28 +28,38 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
         [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_Return_Mapped_Object()
         {
-            var ApprenticeshipSearchResultsItem = new List<ApprenticeshipSearchResultsItem>()
+            var ApprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>()
             {
-                new ApprenticeshipSearchResultsItem(){},
-                new ApprenticeshipSearchResultsItem(){}
+                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem(),
+                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
             };
 
-           var mappedObject = _sut.Map(ApprenticeshipSearchResultsItem);
+            var ApprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            {
+                Results = ApprenticeshipSearchResultsItem
+            };
 
-           mappedObject.Should().BeOfType<ApprenticeshipSearchResults>();
-           mappedObject.Should().NotBeNull();
+            var mappedObject = _sut.Map(ApprenticeSearchResults);
+
+            mappedObject.Should().BeOfType<ApprenticeshipSearchResults>();
+            mappedObject.Should().NotBeNull();
         }
 
         [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_Return_Mapped_Object_Contains_List_Of_Results()
         {
-            var ApprenticeshipSearchResultsItem = new List<ApprenticeshipSearchResultsItem>()
+            var ApprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>()
             {
-                new ApprenticeshipSearchResultsItem(){},
-                new ApprenticeshipSearchResultsItem(){}
+                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem(),
+                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
             };
 
-            var mappedObject = _sut.Map(ApprenticeshipSearchResultsItem);
+            var ApprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            {
+                Results = ApprenticeshipSearchResultsItem
+            };
+
+            var mappedObject = _sut.Map(ApprenticeSearchResults);
 
             mappedObject.Results.Should().HaveCount(2);
             mappedObject.Results.FirstOrDefault().Should().BeOfType<ApplicationServices.Models.ApprenticeshipSearchResultsItem>();
@@ -60,7 +70,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
         {
             var mappedObject = _sut.Map(null);
 
-            mappedObject.Results.Should().BeNull();
+            mappedObject.Should().BeNull();
         }
     }
 }
