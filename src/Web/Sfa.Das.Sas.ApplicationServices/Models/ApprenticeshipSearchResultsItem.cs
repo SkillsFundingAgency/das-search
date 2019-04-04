@@ -6,6 +6,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public class ApprenticeshipSearchResultsItem
     {
+        public string Id { get; set; }
         public string Title { get; set; }
 
         // Standards

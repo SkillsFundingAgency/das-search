@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Sfa.Das.FatApi.Client.Model;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
@@ -13,16 +15,26 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             _apprenticeshipSearchResultsItemMapping = apprenticeshipSearchResultsItemMapping;
         }
 
-        public ApprenticeshipSearchResults Map(IEnumerable<SFA.DAS.Apprenticeships.Api.Types.ApprenticeshipSearchResultsItem> document)
+        public ApprenticeshipSearchResults Map(SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults document)
         {
             var apprenticeshipSearchResults = new ApprenticeshipSearchResults();
 
-            if (document != null && document.Any())
+            if (document != null)
             {
-                apprenticeshipSearchResults.Results = document.Select(_apprenticeshipSearchResultsItemMapping.Map);
+                apprenticeshipSearchResults.ActualPage = document.PageNumber;
+                apprenticeshipSearchResults.LevelAggregation = document.LevelAggregation?.ToDictionary(s => int.Parse(s.Key), s => s.Value as long?);
+                apprenticeshipSearchResults.TotalResults = document.TotalResults;
+                apprenticeshipSearchResults.ResultsToTake = document.PageSize;
+
+                if (document.Results.Any())
+                {
+                    apprenticeshipSearchResults.Results = document.Results.Select(_apprenticeshipSearchResultsItemMapping.Map);
+                }
+
+                return apprenticeshipSearchResults;
             }
 
-            return apprenticeshipSearchResults;
+            return null;
         }
     }
 }
