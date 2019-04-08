@@ -23,6 +23,7 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
         {
             var selectedLevelsCsv = (selectedLevels != null && selectedLevels.Any()) ? string.Join(",", selectedLevels) : null;
             var results = _apprenticeshipSearchResultsMapping.Map(_apprenticeshipProgrammeApiClient.SearchActiveApprenticeships(keywords, page, take, order, selectedLevelsCsv));
+            results.SearchTerm = keywords;
             return results;
         }
     }

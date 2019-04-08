@@ -21,3 +21,25 @@ else
     <h3 class="@Model.CssClasses.HeadingSmall">Try a new search</h3>
     @await Component.InvokeAsync("FatSearch")
 }
+
+@if (Model.TotalResults > Model.ResultsToTake)
+{
+
+    <ul class="das-pagination pagination--employer">
+        @if (Model.CurrentPage > 1)
+        {
+            <li class="das-pagination__list-item">
+                <a class="das-pagination__link das-pagination__link--previous" id="link-pagination-previous" href="/apprentice/application">Previous page </a>
+
+            </li>
+        }
+
+        @if (Model.CurrentPage < Model.LastPage)
+        {
+            <li class="das-pagination__list-item">
+                <a class="das-pagination__link das-pagination__link--next" id="link-pagination-apprentice-next" href="/apprentice/your-apprenticeship">Next page </a>
+            </li>
+        }
+
+    </ul>
+}

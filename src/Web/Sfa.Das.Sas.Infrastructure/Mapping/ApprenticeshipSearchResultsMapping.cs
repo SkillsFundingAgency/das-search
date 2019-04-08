@@ -25,6 +25,8 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 apprenticeshipSearchResults.LevelAggregation = document.LevelAggregation?.ToDictionary(s => int.Parse(s.Key), s => s.Value as long?);
                 apprenticeshipSearchResults.TotalResults = document.TotalResults;
                 apprenticeshipSearchResults.ResultsToTake = document.PageSize;
+                apprenticeshipSearchResults.LastPage = (int)(document.TotalResults / document.PageSize);
+
 
                 if (document.Results.Any())
                 {
