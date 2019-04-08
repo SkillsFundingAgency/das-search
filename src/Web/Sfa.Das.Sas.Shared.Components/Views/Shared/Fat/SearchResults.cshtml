@@ -1,10 +1,5 @@
-﻿@model Sfa.Das.Sas.ApplicationServices.Models.ApprenticeshipSearchResults
+﻿@model Sfa.Das.Sas.Shared.Components.ViewComponents.FatSearchViewModel
 
 
 
-@{
-    foreach (var apprenticeshipSearchResultsItem in Model.Results)
-    {
-        <h1>@apprenticeshipSearchResultsItem.Title</h1>
-    }
-}
+@await Component.InvokeAsync("FatSearchResults", new { keywords = Model.Keywords})

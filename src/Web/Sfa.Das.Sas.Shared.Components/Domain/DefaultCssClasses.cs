@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
         public string ClassModifier { get; set; } = string.Empty;
         public string ClassPrefix { get; set; } = "govuk-";
 
-        public string ButtonCss
+        public string Button
         {
             get
             {
@@ -33,7 +33,16 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
             }
         }
 
-        public string InputCss => $"{ClassPrefix}input";
-        public string FormGroupCss => $"{ClassPrefix}form-group";
+        public string Input => $"{ClassPrefix}input";
+        public string FormGroup => $"{ClassPrefix}form-group";
+        public string Link => $"{ClassPrefix}link";
+        public string List => $"{ClassPrefix}list";
+
+        private string _heading => $"{ClassPrefix}heading";
+        public string HeadingMedium => $"{_heading}-m";
+        public string HeadingLarge => $"{_heading}-l";
+        public string HeadingXLarge => $"{_heading}-xl";
+        public string HeadingSmall => $"{_heading}-s";
+        public string HeadingXSmall => $"{_heading}-xs";
     }
 }

@@ -87,6 +87,45 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
         }
 
         [Test]
+        public void When_Search_Is_Called_With_Page_Then_PageSize_Is_Passed_To_Api()
+        {
+            var keyword = "test keyword";
+            var page = 1;
+            var pageSize = 20;
+
+            var results = _sut.SearchByKeyword(keyword, page, pageSize, 0, null);
+
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(It.IsAny<string>(), It.IsAny<int>(), pageSize, It.IsAny<int>(), It.IsAny<string>()));
+        }
+
+        [Test]
+        public void When_Search_Is_Called_With_Page_Then_Order_Is_Passed_To_Api()
+        {
+            var keyword = "test keyword";
+            var page = 1;
+            var pageSize = 20;
+            var order = 2;
+
+            var results = _sut.SearchByKeyword(keyword, page, 0, order, null);
+
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), order, It.IsAny<string>()));
+        }
+
+        [Test]
+        public void When_Search_Is_Called_With_Page_Then_SelectedLevels_Is_Passed_To_Api()
+        {
+            var keyword = "test keyword";
+            var page = 1;
+            var pageSize = 20;
+            var order = 2;
+            var selectedLevels = new List<int> { 1, 2 };
+            var selectedLevelsString = string.Join(",", selectedLevels);
+            var results = _sut.SearchByKeyword(keyword, page, 0, order, selectedLevels);
+
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), selectedLevelsString));
+        }
+
+        [Test]
         public void When_Search_Is_Called_Then_Results_Are_Mapped()
         {
             var keyword = "test keyword";

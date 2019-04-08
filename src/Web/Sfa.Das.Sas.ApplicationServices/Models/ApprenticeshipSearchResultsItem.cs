@@ -38,5 +38,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public DateTime? EffectiveTo { get; set; }
 
         public DateTime? LastDateForNewStarts { get; set; }
+
+        public ApprenticeshipType ApprenticeshipType { get; set; }
+    }
+
+    public enum ApprenticeshipType
+    {
+        Standard = 0,
+        Framework = 1
     }
 }

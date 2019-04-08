@@ -1,17 +1,16 @@
-using System;
 using FluentAssertions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-using Sfa.Das.Sas.Shared.Components.DependencyResolution;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Moq;
+using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Infrastructure.Elasticsearch;
+using Sfa.Das.Sas.Shared.Components.DependencyResolution;
 using SFA.DAS.Apprenticeships.Api.Client;
+using System;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 {
@@ -25,7 +24,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 
         private string _fatApiUrl = "http://fatApi.url";
 
-       [SetUp]
+        [SetUp]
         public void Setup()
         {
             var appRoot = GetApplicationRoot();
@@ -38,7 +37,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 
             _serviceCollection.AddFatSharedComponents(_FatConfiguration.Object);
 
-             _serviceProvider = _serviceCollection.BuildServiceProvider();
+            _serviceProvider = _serviceCollection.BuildServiceProvider();
 
         }
 

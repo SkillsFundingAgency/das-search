@@ -67,6 +67,14 @@ namespace Sfa.Das.Sas.Shared.Components.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                     "FatSearch",
+                     "employer/find-apprenticeships/{keywords?}",
+                    new { controller = "Fat", action = "Search" });
+                routes.MapRoute(
+                    "Fat",
+                    "employer/find-apprenticeships/{action=Search}/{keywords?}",
+                    new { controller = "Fat" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

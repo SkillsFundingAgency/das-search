@@ -1,0 +1,17 @@
+﻿@model Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.FatSearchResultsItemViewModel
+
+
+
+<li id="@Model.Id">
+    <article class="das-standard-result">
+        <h2 class="@Model.CssClasses.HeadingMedium">
+            <a class="@Model.CssClasses.Link" href="/Apprenticeship/Standard/91?keyword=Tester">@Model.Title</a>
+        </h2>
+        <dl>
+            <dt class="govuk-!-font-weight-bold">Level:</dt>
+            <dd>@Model.Level (equivalent to certificate of higher education)</dd>
+            <dt class="govuk-!-font-weight-bold">Typical length:</dt>
+            <dd>@Model.Duration months</dd>
+        </dl>
+    </article>
+</li>

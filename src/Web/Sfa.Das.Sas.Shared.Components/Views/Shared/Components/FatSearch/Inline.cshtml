@@ -2,10 +2,10 @@
 @model Sfa.Das.Sas.Shared.Components.ViewComponents.FatSearchViewModel
 
 <form asp-controller="Fat" asp-action="Search">
-    <div class="@(Model.CssClasses.FormGroupCss) das-form-group-inline">
-        <input class="@(Model.CssClasses.InputCss)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
+    <div class="@(Model.CssClasses.FormGroup) das-form-group-inline">
+        <input class="@(Model.CssClasses.Input)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
         <div class="das-form-group-inline__button-wrap">
-            <button class="@(Model.CssClasses.ButtonCss)" type="submit">Search</button>
+            <button class="@(Model.CssClasses.Button)" type="submit">Search</button>
         </div>
     </div>
 </form>

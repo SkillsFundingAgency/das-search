@@ -27,6 +27,7 @@ using Sfa.Das.Sas.Infrastructure.Settings;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.Domain;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+using Sfa.Das.Sas.Shared.Components.Mapping;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
@@ -61,6 +62,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             {
                 AddApiSearchServices(services, configuration);
             }
+
+            services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
+            services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
         }
 
         private static void AddApplicationServices(IServiceCollection services)

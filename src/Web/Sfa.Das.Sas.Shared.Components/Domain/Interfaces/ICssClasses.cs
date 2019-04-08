@@ -8,9 +8,17 @@ namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
     {
         string ClassModifier { get; set; }
         string ClassPrefix { get; set; }
-        string ButtonCss { get; }
-        string InputCss { get; }
-        string FormGroupCss { get; }
+        string Button { get; }
+        string Input { get; }
+        string FormGroup { get; }
+        string Link { get; }
+        string List { get; }
+        
+        string HeadingMedium { get; }
+        string HeadingLarge { get; }
+        string HeadingXLarge { get; }
+        string HeadingSmall { get; }
+        string HeadingXSmall { get; }
 
     }
 }
