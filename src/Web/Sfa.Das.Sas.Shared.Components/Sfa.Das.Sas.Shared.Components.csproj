@@ -21,5 +21,6 @@
     <ProjectReference Include="..\Sfa.Das.FatApi.Client\Sfa.Das.FatApi.Client.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj" />
   </ItemGroup>
 </Project>
