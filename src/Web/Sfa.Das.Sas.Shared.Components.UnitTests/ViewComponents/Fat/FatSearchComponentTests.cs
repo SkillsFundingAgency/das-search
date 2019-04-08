@@ -12,25 +12,16 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 {
     [TestFixture]
-    public class FatSearchViewComponentTests
+    public class FatSearchViewComponentTests : ViewComponentTestsBase
     {
         private FatSearchViewComponent _sut;
-        private Mock<ICssClasses> _cssClasses;
 
         [SetUp]
         public void Setup()
         {
-            var httpContext = new DefaultHttpContext();
-            var viewContext = new ViewContext();
-            viewContext.HttpContext = httpContext;
-            var viewComponentContext = new ViewComponentContext();
-            viewComponentContext.ViewContext = viewContext;
-
-            _cssClasses = new Mock<ICssClasses>(MockBehavior.Strict);
-            _cssClasses.Setup(s => s.ClassModifier).Returns("");
-
+            base.Setup();
             _sut = new FatSearchViewComponent(_cssClasses.Object);
-            _sut.ViewComponentContext = viewComponentContext;
+            _sut.ViewComponentContext = _viewComponentContext;
         }
 
         [Test]

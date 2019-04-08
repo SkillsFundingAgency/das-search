@@ -11,13 +11,13 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
     public class FatSearchResultsViewComponent : ViewComponent
     {
         private readonly ICssClasses _cssClasses;
-        private readonly IApprenticeshipSearchProvider _apprenticeshipSearchProvider;
+        private readonly IApprenticeshipSearchService _apprenticeshipSearchService;
         private readonly IFatSearchResultsViewModelMapper _fatSearchResultsViewModelMapper;
 
-        public FatSearchResultsViewComponent(ICssClasses cssClasses, IApprenticeshipSearchProvider apprenticeshipSearchProvider, IFatSearchResultsViewModelMapper fatSearchResultsViewModelMapper)
+        public FatSearchResultsViewComponent(ICssClasses cssClasses, IApprenticeshipSearchService apprenticeshipSearchService, IFatSearchResultsViewModelMapper fatSearchResultsViewModelMapper)
         {
             _cssClasses = cssClasses;
-            _apprenticeshipSearchProvider = apprenticeshipSearchProvider;
+            _apprenticeshipSearchService = apprenticeshipSearchService;
             _fatSearchResultsViewModelMapper = fatSearchResultsViewModelMapper;
         }
 
@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
             {
                 _cssClasses.ClassModifier = cssModifier;
             }
-            var results = _apprenticeshipSearchProvider.SearchByKeyword(keywords, 1, 20, 0, new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
+            var results = _apprenticeshipSearchService.SearchByKeyword(keywords, 1, 20, 0, new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
 
             var model = _fatSearchResultsViewModelMapper.Map(results, _cssClasses);
           
