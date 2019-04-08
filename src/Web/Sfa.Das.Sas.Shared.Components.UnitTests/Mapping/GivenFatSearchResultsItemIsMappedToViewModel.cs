@@ -9,6 +9,7 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
 {
+    [TestFixture]
     public class GivenFatSearchResultsItemIsMappedToViewModel
     {
         private FatSearchResultsItemViewModelMapper _sut;

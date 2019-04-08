@@ -24,7 +24,8 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 CurrentPage = source.ActualPage,
                 LastPage = source.LastPage,
                 ResultsToTake = source.ResultsToTake,
-                SortOrder = source.SortOrder
+                SortOrder = source.SortOrder,
+                Keywords = source.SearchTerm
             };
             return item;
         }
