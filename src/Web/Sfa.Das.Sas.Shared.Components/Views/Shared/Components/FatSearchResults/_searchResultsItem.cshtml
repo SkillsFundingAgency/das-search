@@ -7,13 +7,13 @@
         <h2 class="@CssClasses.HeadingMedium @CssClasses.UtilitiesCss.Margin("bottom",0)">
             <a class="@CssClasses.Link" href="#">@Model.Title</a>
         </h2>
-        @if (Model.LastDateForNewStarts.HasValue)
+        @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
         {
-            <div class="warning-text">
-                <span class="warning-text__icon" aria-hidden="true"></span>
-                <strong class="warning-text__text">
-                    <span class="warning-text__assistive">Warning</span>
-                    This apprenticeship is closed to new starters from @Model.LastDateForNewStarts.Value.ToLongDateString();
+            <div class="@CssClasses.WarningText">
+                <span class="@(CssClasses.WarningText)__icon" aria-hidden="true"></span>
+                <strong class="@(CssClasses.WarningText)__text">
+                    <span class="@(CssClasses.WarningText)__assistive">Warning</span>
+                    This apprenticeship is closed to new starters from @Model.EffectiveTo.Value.ToLongDateString();
                 </strong>
             </div>
         }

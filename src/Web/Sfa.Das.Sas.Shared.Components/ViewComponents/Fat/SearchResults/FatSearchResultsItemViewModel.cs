@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
         public int Level { get; set; }
         public string EquivalentText => EquivalenceLevelService.GetApprenticeshipLevel(Level.ToString());
         public int Duration { get; set; }
-        public DateTime? LastDateForNewStarts { get; set; }
         public ApprenticeshipType ApprenticeshipType { get; set; }
+        public DateTime? EffectiveTo { get; set; }
     }
 }

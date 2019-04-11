@@ -39,7 +39,7 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
         public string FormGroup => $"{ClassPrefix}form-group";
         public string Link => $"{ClassPrefix}link";
         public string List => $"{ClassPrefix}list";
-
+        public string WarningText => $"{ClassPrefix}warning-text";
         private string _heading => $"{ClassPrefix}heading";
         public string HeadingMedium => $"{_heading}-m";
         public string HeadingLarge => $"{_heading}-l";
