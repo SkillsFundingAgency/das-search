@@ -44,7 +44,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 
     public enum ApprenticeshipType
     {
-        Standard = 0,
-        Framework = 1
+        Framework = 0,
+        Standard = 1
     }
 }
