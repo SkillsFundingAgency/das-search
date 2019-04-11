@@ -60,7 +60,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         {
             var result = _sut.Map(_itemToMap, _cssClassMock.Object);
 
-            result.CssClasses.Should().NotBeNull();
             result.SearchQuery.Page.Should().Be(_itemToMap.ActualPage);
             result.SearchQuery.Keywords.Should().Be(_itemToMap.SearchTerm);
             result.LastPage.Should().Be(_itemToMap.LastPage);
@@ -77,7 +76,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
 
             var result = _sut.Map(_itemToMap, _cssClassMock.Object);
 
-            result.CssClasses.Should().NotBeNull();
             result.SearchQuery.Page.Should().Be(_itemToMap.ActualPage);
             result.SearchQuery.Keywords.Should().Be(_itemToMap.SearchTerm);
             result.LastPage.Should().Be(_itemToMap.LastPage);

@@ -52,7 +52,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
             result.ApprenticeshipType.Should().Be(_itemToMap.ApprenticeshipType);
             result.Title.Should().Be(_itemToMap.Title);
             result.Duration.Should().Be(_itemToMap.Duration);
-            result.LastDateForNewStarts.Should().Be(_itemToMap.LastDateForNewStarts);
+            result.EffectiveTo.Should().Be(_itemToMap.LastDateForNewStarts);
             result.Id.Should().Be(_itemToMap.Id);
             result.Level.Should().Be(_itemToMap.Level);
         }

@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         {
             base.Setup();
 
-            _sut = new FatSearchViewComponent(_cssClasses.Object);
+            _sut = new FatSearchViewComponent();
             _sut.ViewComponentContext = _viewComponentContext;
         }
 
@@ -78,7 +78,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 
             result.ViewData.Model.Should().BeOfType<FatSearchViewModel>();
             var model = result.ViewData.Model as FatSearchViewModel;
-            model.SearchQuery.Keywords.Should().Be(_searchQueryViewModel.Keywords);
+            model.Keywords.Should().Be(_searchQueryViewModel.Keywords);
         }
       
     }
