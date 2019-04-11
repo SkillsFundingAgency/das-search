@@ -1,17 +1,32 @@
 ﻿@model Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.FatSearchResultsItemViewModel
-
+@inject Sfa.Das.Sas.Shared.Components.Domain.Interfaces.ICssClasses CssClasses
 
 
 <li id="@Model.Id">
-    <article class="das-standard-result">
-        <h2 class="@Model.CssClasses.HeadingMedium">
-            <a class="@Model.CssClasses.Link" href="/Apprenticeship/Standard/91?keyword=Tester">@Model.Title</a>
+    <article class="das-search-result">
+        <h2 class="@CssClasses.HeadingMedium @CssClasses.UtilitiesCss.Margin("bottom",0)">
+            <a class="@CssClasses.Link" href="#">@Model.Title</a>
         </h2>
-        <dl>
-            <dt class="govuk-!-font-weight-bold">Level:</dt>
+        @if (Model.LastDateForNewStarts.HasValue)
+        {
+            <div class="warning-text">
+                <span class="warning-text__icon" aria-hidden="true"></span>
+                <strong class="warning-text__text">
+                    <span class="warning-text__assistive">Warning</span>
+                    This apprenticeship is closed to new starters from @Model.LastDateForNewStarts.Value.ToLongDateString();
+                </strong>
+            </div>
+        }
+
+        <dl class="@CssClasses.List @CssClasses.UtilitiesCss.Margin("bottom",0) @CssClasses.UtilitiesCss.Margin("top",0)">
+            <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Level:</dt>
             <dd>@Model.Level (Equivalent to @Model.EquivalentText)</dd>
-            <dt class="govuk-!-font-weight-bold">Typical length:</dt>
+            <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Typical length:</dt>
             <dd>@Model.Duration months</dd>
+            <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Apprenticeship Type:</dt>
+            <dd>@Model.ApprenticeshipType.ToString()</dd>
         </dl>
     </article>
 </li>
+
+

@@ -6,25 +6,15 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
 {
     public class FatSearchViewComponent : ViewComponent
     {
-        private readonly ICssClasses _cssClasses;
-
-        public FatSearchViewComponent(ICssClasses cssClasses)
+        public async Task<IViewComponentResult> InvokeAsync(SearchQueryViewModel searchQueryModel,string fatSearchRoute = null, string cssModifier = null, bool inline = false)
         {
-            _cssClasses = cssClasses;
-        }
+            
+            var model = searchQueryModel != null ? searchQueryModel as FatSearchViewModel : new FatSearchViewModel();
 
-        public async Task<IViewComponentResult> InvokeAsync(string keywords,string cssModifier = null, bool inline = false)
-        {
-            if (cssModifier != null)
+            if (fatSearchRoute != null)
             {
-                _cssClasses.ClassModifier = cssModifier;
+                model.FatSearchRoute = fatSearchRoute;
             }
-
-            var model = new FatSearchViewModel
-            {
-                Keywords = keywords,
-                CssClasses = _cssClasses
-            };
 
             if (!inline)
             {

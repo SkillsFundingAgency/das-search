@@ -6,8 +6,9 @@ namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
 {
     public interface ICssClasses
     {
+        IUtilitiesCssClasses UtilitiesCss { get; }
         string ClassModifier { get; set; }
-        string ClassPrefix { get; set; }
+        string ClassPrefix { get; }
         string Button { get; }
         string Input { get; }
         string FormGroup { get; }

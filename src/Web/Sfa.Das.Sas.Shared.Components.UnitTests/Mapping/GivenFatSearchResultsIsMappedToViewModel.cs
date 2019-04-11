@@ -61,12 +61,29 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
             var result = _sut.Map(_itemToMap, _cssClassMock.Object);
 
             result.CssClasses.Should().NotBeNull();
-            result.CurrentPage.Should().Be(_itemToMap.ActualPage);
-            result.Keywords.Should().Be(_itemToMap.SearchTerm);
+            result.SearchQuery.Page.Should().Be(_itemToMap.ActualPage);
+            result.SearchQuery.Keywords.Should().Be(_itemToMap.SearchTerm);
             result.LastPage.Should().Be(_itemToMap.LastPage);
-            result.ResultsToTake.Should().Be(_itemToMap.ResultsToTake);
+            result.SearchQuery.ResultsToTake.Should().Be(_itemToMap.ResultsToTake);
             result.SearchResults.Should().HaveSameCount(_itemToMap.Results);
-            result.SortOrder.Should().Be(_itemToMap.SortOrder);
+            result.SearchQuery.SortOrder.Should().Be(int.Parse(_itemToMap.SortOrder));
+            result.TotalResults.Should().Be(_itemToMap.TotalResults);
+        }
+
+        [Test]
+        public void When_Mapping_And_SortOrder_Is_Null_Then_Items_Are_Mapped_And_sortOrder_Is_Zero()
+        {
+            _itemToMap.SortOrder = null;
+
+            var result = _sut.Map(_itemToMap, _cssClassMock.Object);
+
+            result.CssClasses.Should().NotBeNull();
+            result.SearchQuery.Page.Should().Be(_itemToMap.ActualPage);
+            result.SearchQuery.Keywords.Should().Be(_itemToMap.SearchTerm);
+            result.LastPage.Should().Be(_itemToMap.LastPage);
+            result.SearchQuery.ResultsToTake.Should().Be(_itemToMap.ResultsToTake);
+            result.SearchResults.Should().HaveSameCount(_itemToMap.Results);
+            result.SearchQuery.SortOrder.Should().Be(0);
             result.TotalResults.Should().Be(_itemToMap.TotalResults);
         }
 

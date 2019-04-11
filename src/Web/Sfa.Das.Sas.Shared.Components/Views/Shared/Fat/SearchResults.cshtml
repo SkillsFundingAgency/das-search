@@ -1,5 +1,5 @@
-﻿@model Sfa.Das.Sas.Shared.Components.ViewComponents.FatSearchViewModel
+﻿@model Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchQueryViewModel
 
 
 
-@await Component.InvokeAsync("FatSearchResults", new { keywords = Model.Keywords})
+@await Component.InvokeAsync("FatSearchResults", new { searchQueryModel = Model})

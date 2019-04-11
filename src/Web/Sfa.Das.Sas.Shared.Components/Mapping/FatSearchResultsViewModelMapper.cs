@@ -1,7 +1,7 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using System.Linq;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
@@ -18,14 +18,17 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
         {
             var item = new FatSearchResultsViewModel()
             {
-                CssClasses = cssClasses,
-                SearchResults = source.Results.Select(s => _fatSearchResultsItemViewModelMapper.Map(s,cssClasses)),
+                SearchResults = source.Results.Select(s => _fatSearchResultsItemViewModelMapper.Map(s, cssClasses)),
                 TotalResults = source.TotalResults,
-                CurrentPage = source.ActualPage,
                 LastPage = source.LastPage,
-                ResultsToTake = source.ResultsToTake,
-                SortOrder = source.SortOrder,
-                Keywords = source.SearchTerm
+                SearchQuery = {
+                    
+                    Page = source.ActualPage,
+                    ResultsToTake = source.ResultsToTake,
+                    SortOrder = !string.IsNullOrWhiteSpace(source.SortOrder) ?  int.Parse(source.SortOrder) : 0,
+                    Keywords = source.SearchTerm
+                }
+
             };
             return item;
         }

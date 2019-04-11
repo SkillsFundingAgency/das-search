@@ -20,6 +20,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         private Mock<IApprenticeshipSearchService> _apprenticeshipSearchServicetMock;
         private Mock<IFatSearchResultsViewModelMapper> _FatResultsViewModelMock;
 
+        private  SearchQueryViewModel _searchQueryViewModel = new SearchQueryViewModel();
+
         private ApprenticeshipSearchResults _searchResults = new ApprenticeshipSearchResults();
         private FatSearchResultsViewModel _searchResultsViewModel = new FatSearchResultsViewModel();
 
@@ -44,9 +46,9 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         [Test]
         public async Task Then_FatSearchResultsViewModel_Is_Returned()
         {
-            var keyword = "keyword";
+            _searchQueryViewModel.Keywords = "keyword";
 
-            var result = await _sut.InvokeAsync(keyword) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(_searchQueryViewModel) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
@@ -56,18 +58,18 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         [Test]
         public async Task Then_Apprenticeships_Are_Searched_By_Keyword()
         {
-            var keyword = "keyword";
+            _searchQueryViewModel.Keywords = "keyword";
 
-            var result = await _sut.InvokeAsync(keyword) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(_searchQueryViewModel) as ViewViewComponentResult;
 
-            _apprenticeshipSearchServicetMock.Verify(s => s.SearchByKeyword(keyword, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
+            _apprenticeshipSearchServicetMock.Verify(s => s.SearchByKeyword(_searchQueryViewModel.Keywords, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
         }
         [Test]
         public async Task Then_Search_Results_Are_Mapped_To_ViewModel()
         {
-            var keyword = "keyword";
+            _searchQueryViewModel.Keywords = "keyword";
 
-            var result = await _sut.InvokeAsync(keyword) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(_searchQueryViewModel) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
