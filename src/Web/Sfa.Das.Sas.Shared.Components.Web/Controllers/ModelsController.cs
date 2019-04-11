@@ -8,18 +8,14 @@ using Sfa.Das.Sas.Shared.Components.Web.Models;
 
 namespace Sfa.Das.Sas.Shared.Components.Web.Controllers
 {
-    public class ComponentsController : Controller
+    public class ModelsController : Controller
     {
 
-        public IActionResult Search()
+        public IActionResult SearchQueryViewModel()
         {
             return View();
         }
 
-        public IActionResult SearchResults()
-        {
-            return View();
-        }
 
     }
 }
