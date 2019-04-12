@@ -17,37 +17,15 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             _apprenticeshipSearchProvider = apprenticeshipSearchProvider;
         }
 
-        //[HttpPost]
-        //[Route("Search")]
         public IActionResult Search(SearchQueryViewModel model)
         { 
             return View("Fat/SearchResults", model);
         }
 
-        //public IActionResult Search(string keywords, int? page, int? size, int? sortOrder)
-        //{
-        //    var model = new SearchQueryViewModel()
-        //    {
-        //        Keywords = keywords
-        //    };
-
-        //    if (page != null)
-        //    {
-        //        model.Page = page.Value;
-        //    }
-
-        //    if (size != null)
-        //    {
-        //        model.ResultsToTake = size.Value;
-        //    }
-
-        //    if (sortOrder != null)
-        //    {
-        //        model.SortOrder = sortOrder.Value;
-        //    }
-
-        //    return Search(model);
-        //}
+        public IActionResult Apprenticeship(ApprenticeshipDetailQueryViewModel model)
+        {
+            return View("Fat/ApprenticeshipDetails", model);
+        }
 
     }
 }
