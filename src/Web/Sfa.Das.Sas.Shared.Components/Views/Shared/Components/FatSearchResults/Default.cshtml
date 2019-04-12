@@ -7,7 +7,7 @@
 @if (Model.TotalResults > 0)
 {
     <p>There are @Model.TotalResults apprenticeships matching your search for '@Model.SearchQuery.Keywords'.</p>
-    <ol class="@CssClasses.List">
+    <ol class="@CssClasses.SearchList">
         @foreach (var result in Model.SearchResults)
         {
             <partial name="Components/FatSearchResults/_searchResultsItem" for="@result" />

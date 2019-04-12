@@ -14,6 +14,8 @@ namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
         string FormGroup { get; }
         string Link { get; }
         string List { get; }
+        string ListNumber { get; }
+        string SearchList { get; }
         string WarningText { get; }
         string HeadingMedium { get; }
         string HeadingLarge { get; }
