@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Moq;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+using Sfa.Das.Sas.Shared.Components.ViewModels;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 {

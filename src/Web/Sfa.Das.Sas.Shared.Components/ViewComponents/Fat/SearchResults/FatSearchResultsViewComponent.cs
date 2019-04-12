@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.Mapping;
+using Sfa.Das.Sas.Shared.Components.ViewModels;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
 {
