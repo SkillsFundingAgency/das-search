@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.Shared.Components.ViewComponents;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+using Sfa.Das.Sas.Shared.Components.ViewModels;
 
 namespace Sfa.Das.Sas.Shared.Components.Controllers
 {
