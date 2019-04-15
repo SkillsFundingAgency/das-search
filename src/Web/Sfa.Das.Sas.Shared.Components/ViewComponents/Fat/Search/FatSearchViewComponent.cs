@@ -8,8 +8,13 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
     {
         public async Task<IViewComponentResult> InvokeAsync(SearchQueryViewModel searchQueryModel,string fatSearchRoute = null, string cssModifier = null, bool inline = false)
         {
-            
-            var model = searchQueryModel != null ? searchQueryModel as FatSearchViewModel : new FatSearchViewModel();
+
+            var model = new FatSearchViewModel();
+
+            if (searchQueryModel != null)
+            {
+                model.Keywords = searchQueryModel.Keywords;
+            }
 
             if (fatSearchRoute != null)
             {
