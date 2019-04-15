@@ -32,6 +32,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
                 GetProperties()
             )).AlwaysUnique();
             For<IConfigurationSettings>().Use<ApplicationSettings>();
+            For<IFatConfigurationSettings>().Use<FatSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
