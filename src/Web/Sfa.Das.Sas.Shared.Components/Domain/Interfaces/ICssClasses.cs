@@ -14,6 +14,7 @@ namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
         string FormGroup { get; }
         string Link { get; }
         string List { get; }
+        string ListBullet { get; }
         string ListNumber { get; }
         string SearchList { get; }
         string WarningText { get; }
@@ -23,5 +24,9 @@ namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
         string HeadingSmall { get; }
         string HeadingXSmall { get; }
 
+        string Details { get; }
+        string DetailsSummary { get; }
+        string DetailsSummaryText { get; }
+        string DetailsText { get; }
     }
 }

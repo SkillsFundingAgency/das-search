@@ -28,6 +28,7 @@ using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.Domain;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.Mapping;
+using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
@@ -47,12 +48,16 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
             services.AddTransient<ICssClasses, DefaultCssClasses>();
-
+            services.AddTransient<IValidation, Validation>();
+            services.AddTransient<AbstractValidator<GetFrameworkQuery>,FrameworkQueryValidator>();
             //Application DI
             AddApplicationServices(services);
 
             //Infrastructure DI
             AddInfrastructureServices(services);
+
+            //Orchestrator DI
+            AddOrchesratorServices(services);
 
             if (useElastic)
             {
@@ -65,6 +70,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
             services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
+            services.AddTransient<IFrameworkDetailsViewModelMapper, FrameworkDetailsViewModelMapper>();
         }
 
         private static void AddApplicationServices(IServiceCollection services)
@@ -95,7 +101,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();
             services.AddTransient<IProviderMapping, ProviderMapping>();
             services.AddTransient<IProviderNameSearchMapping, ProviderNameSearchMapping>();
-            services.AddTransient<IApprenticeshipSearchResultsMapping,ApprenticeshipSearchResultsMapping>();
+            services.AddTransient<IApprenticeshipSearchResultsMapping, ApprenticeshipSearchResultsMapping>();
             services.AddTransient<IApprenticeshipSearchResultsItemMapping, ApprenticeshipSearchResultsItemMapping>();
 
             services.AddTransient<IPaginationOrientationService, PaginationOrientationService>();
@@ -118,7 +124,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
         private static void AddApiSearchServices(IServiceCollection services, IFatConfigurationSettings sharedComponentsConfiguration)
         {
-            
+
             services.AddTransient<IApprenticeshipSearchProvider, ApprenticeshipsSearchApiProvider>();
 
             services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
@@ -127,7 +133,13 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IApprenticeshipProgrammeApiClient, ApprenticeshipProgrammeApiClient>(service => new ApprenticeshipProgrammeApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<ISearchApi, SearchApi>(service => new SearchApi(sharedComponentsConfiguration.FatApiBaseUrl));
 
-            
+
+        }
+
+        private static void AddOrchesratorServices(IServiceCollection services)
+        {
+            services.AddTransient<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
+
         }
     }
 }

@@ -54,6 +54,8 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
             }
         }
 
+        public string ListBullet => $"{ClassPrefix}list--bullet";
+
         public string ListNumber => $"{ClassPrefix}list--number";
         public string SearchList
         {
@@ -77,5 +79,9 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
         public string HeadingXLarge => $"{_heading}-xl";
         public string HeadingSmall => $"{_heading}-s";
         public string HeadingXSmall => $"{_heading}-xs";
+        public string Details => $"{ClassPrefix}details";
+        public string DetailsSummary => $"{Details}__summary";
+        public string DetailsSummaryText => $"{Details}__summary-text";
+        public string DetailsText => $"{Details}__text";
     }
 }

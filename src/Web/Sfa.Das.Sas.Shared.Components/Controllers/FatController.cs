@@ -21,9 +21,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         { 
             return View("Fat/SearchResults", model);
         }
-
-        public IActionResult Apprenticeship(ApprenticeshipDetailQueryViewModel model)
+        
+        public IActionResult Apprenticeship(string id)
         {
+            var model = new ApprenticeshipDetailQueryViewModel(){Id = id};
             return View("Fat/ApprenticeshipDetails", model);
         }
 

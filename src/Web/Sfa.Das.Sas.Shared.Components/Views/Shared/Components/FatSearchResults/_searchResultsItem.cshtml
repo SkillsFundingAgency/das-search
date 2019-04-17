@@ -5,7 +5,7 @@
 <li id="@Model.Id">
     <article class="das-search-result">
         <h2 class="@CssClasses.HeadingMedium @CssClasses.UtilitiesCss.Margin("bottom",0)">
-            <a class="@CssClasses.Link" href="/employer/find-apprenticeships/Apprenticeship/@Model.Id">@Model.Title</a>
+            <a class="@CssClasses.Link" href="/employer/find-apprenticeships/Apprenticeship?id=@Model.Id">@Model.Title</a>
         </h2>
         @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
         {
