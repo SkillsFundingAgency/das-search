@@ -9,5 +9,4 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
     {
         public string FatApiBaseUrl => CloudConfigurationManager.GetSetting("ApprenticeshipApiBaseUrl");
     }
-
 }

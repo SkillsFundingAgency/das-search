@@ -36,7 +36,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
 
             var ApprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
             {
-                Results = ApprenticeshipSearchResultsItem
+                Results = ApprenticeshipSearchResultsItem,
+                TotalResults = 300,
+                PageNumber = 1,
+                PageSize = 2,
+
             };
 
             var mappedObject = _sut.Map(ApprenticeSearchResults);
@@ -56,7 +60,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
 
             var ApprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
             {
-                Results = ApprenticeshipSearchResultsItem
+                Results = ApprenticeshipSearchResultsItem,
+                TotalResults = 300,
+                PageNumber = 1,
+                PageSize = 2,
             };
 
             var mappedObject = _sut.Map(ApprenticeSearchResults);
