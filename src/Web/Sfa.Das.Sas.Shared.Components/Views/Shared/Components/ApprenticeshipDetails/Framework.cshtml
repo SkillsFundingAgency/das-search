@@ -5,7 +5,7 @@
 
 <h2 class="@CssClasses.HeadingLarge @CssClasses.UtilitiesCss.Margin("top",0)">Summary of this apprenticeship</h2>
 
-<div class="das-apprenticeship-details">
+
     @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
     {
     <div class="@CssClasses.WarningText">
@@ -16,31 +16,31 @@
         </strong>
     </div>
     }
-<dl class="@CssClasses.List">
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Title</dt>
-    <dd id="Title">@Model.Title</dd>
+<dl class="@CssClasses.List das-definition-list__results">
+    <dt>Title</dt>
+    <dd>@Model.Title</dd>
 
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Type</dt>
-    <dd id="level">Framework</dd>
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Level</dt>
-    <dd id="level">@Model.Level</dd>
+    <dt>Type</dt>
+    <dd>Framework</dd>
+    <dt>Level</dt>
+    <dd>@Model.Level</dd>
 
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Typical length</dt>
-    <dd id="length">@Model.Duration months</dd>
+    <dt>Typical length</dt>
+    <dd>@Model.Duration months</dd>
 
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Current funding band</dt>
-    <dd id="funding-cap">
+    <dt>Current funding band</dt>
+    <dd>
         Up to @Model.FundingCap per apprentice.<br>
         <a href="https://www.gov.uk/guidance/employing-an-apprentice-technical-guide-for-employers#funding-for-your-apprenticeship" target="_blank" rel="external" class="external">More information about funding</a>
     </dd>
 
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Entry requirements</dt>
-    <dd id="entry-requirements">Set by employer.</dd>
+    <dt>Entry requirements</dt>
+    <dd>Set by employer.</dd>
 
     @if (Model.JobRoles?.Any() == true)
         {
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Suitable roles for apprentices</dt>
-    <dd id="will-learn">
+    <dt>Suitable roles for apprentices</dt>
+    <dd>
         <ul class="@CssClasses.List @CssClasses.ListBullet">
             @foreach (var jobRole in Model.JobRoles)
             {
@@ -50,8 +50,8 @@
         <p> Your chosen training provider can advise you about the kinds of skills apprentices will learn.</p>
     </dd>
         }
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Qualifications</dt>
-    <dd id="will-learn">
+    <dt>Qualifications</dt>
+    <dd>
         @if (Model.CompetencyQualification?.Any() == true)
             {
         <p>Apprentices will achieve a practical (or 'competence') qualification:</p>
@@ -92,19 +92,8 @@
 
     </dd>
 
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">Professional registration</dt>
-    <dd id="professional-registration">@Model.ProfessionalRegistration</dd>
+    <dt>Professional registration</dt>
+    <dd>@Model.ProfessionalRegistration</dd>
 
-    <dt class="@CssClasses.UtilitiesCss.FontWeightBold">End Point Assessment</dt>
-    <dd>
-        <details class="@CssClasses.Details">
-            <summary class="@CssClasses.DetailsSummary">
-                <span class="@CssClasses.DetailsSummaryText">View a list of end point assessment organisations for this standard</span>
-            </summary>
-            <div class="@CssClasses.DetailsText">
-            </div>
-        </details>
-    </dd>
-
+   
 </dl>
-</div>
