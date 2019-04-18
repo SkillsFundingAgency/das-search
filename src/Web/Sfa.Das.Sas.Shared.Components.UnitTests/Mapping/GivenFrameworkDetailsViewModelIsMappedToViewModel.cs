@@ -75,6 +75,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
             result.KnowledgeQualification.Should().BeEquivalentTo(_itemToMap.KnowledgeQualification);
             result.ProfessionalRegistration.Should().BeEquivalentTo(_itemToMap.ProfessionalRegistration);
             result.JobRoles.Should().BeEquivalentTo(_itemToMap.JobRoleItems.Select(d => d.Title));
+            result.EquivalentText.Should().NotBeNullOrWhiteSpace();
 
         }
 

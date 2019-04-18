@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using Sfa.Das.Sas.Resources;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
 {
@@ -12,6 +13,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
         public string Title { get; set; }
         public DateTime? EffectiveTo { get; set; }
         public int Level { get; set; }
+        public string EquivalentText => EquivalenceLevelService.GetApprenticeshipLevel(Level.ToString());
         public int Duration { get; set; }
         public IEnumerable<string> JobRoles { get; set; }
         public string Overview { get; set; }
