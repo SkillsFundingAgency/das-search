@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
-using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+﻿using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents
 {

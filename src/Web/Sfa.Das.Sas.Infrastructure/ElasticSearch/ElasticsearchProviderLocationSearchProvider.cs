@@ -9,8 +9,6 @@
     using ApplicationServices.Models;
     using Core.Configuration;
     using Core.Domain.Model;
-    using FeatureToggle.Core.Fluent;
-    using FeatureToggles;
     using Nest;
     using SFA.DAS.NLog.Logger;
 

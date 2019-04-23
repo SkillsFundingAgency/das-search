@@ -6,7 +6,6 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Infrastructure.Mapping;
-    using SFA.DAS.Apprenticeships.Api.Client;
     using System.Collections.Generic;
 
     public class ApprenticeshipsSearchApiProvider : IApprenticeshipSearchProvider

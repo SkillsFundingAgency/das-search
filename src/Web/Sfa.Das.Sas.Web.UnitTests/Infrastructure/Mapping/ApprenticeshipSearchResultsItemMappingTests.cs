@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Moq;
 using NUnit.Framework;
 using Sfa.Das.FatApi.Client.Model;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Infrastructure.Mapping;
-using SFA.DAS.Apprenticeships.Api.Types;
-using ApprenticeshipSearchResultsItem = SFA.DAS.Apprenticeships.Api.Types.ApprenticeshipSearchResultsItem;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
 {

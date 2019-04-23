@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
 {

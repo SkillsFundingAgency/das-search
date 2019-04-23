@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Nest;
-using Sfa.Das.Sas.ApplicationServices;
-
 using Sfa.Das.Sas.Infrastructure.Logging;
 using SFA.DAS.NLog.Logger;
 

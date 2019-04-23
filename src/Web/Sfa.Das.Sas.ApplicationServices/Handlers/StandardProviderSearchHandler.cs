@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using SFA.DAS.NLog.Logger;
-using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {

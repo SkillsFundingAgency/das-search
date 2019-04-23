@@ -1,12 +1,8 @@
 ﻿using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using NUnit.Framework;
 using Sfa.Das.Sas.Shared.Components.ViewComponents;
 using System.Threading.Tasks;
-using Moq;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
