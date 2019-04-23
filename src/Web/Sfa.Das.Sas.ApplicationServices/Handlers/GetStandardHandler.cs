@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 using SFA.DAS.AssessmentOrgs.Api.Client;
@@ -29,7 +31,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _logger = logger;
         }
 
-        public GetStandardResponse Handle(GetStandardQuery message)
+        public async Task<GetStandardResponse> Handle(GetStandardQuery message, CancellationToken cancellationToken)
         {
             var response = new GetStandardResponse();
             var standard = _getStandards.GetStandardById(message.Id);

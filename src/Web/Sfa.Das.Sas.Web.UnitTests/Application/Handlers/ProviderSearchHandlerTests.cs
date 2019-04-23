@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using FluentAssertions;
@@ -55,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "AB23 0BB" };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message,default(CancellationToken));
 
             response.Success.Should().BeTrue();
         }
@@ -66,7 +67,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = null };
             _mockPostcodeIoService.Setup(x => x.GetPostcodeStatus(It.IsAny<string>()))
                 .ReturnsAsync("Error");
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.Success.Should().BeFalse();
             response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
@@ -78,7 +79,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = string.Empty };
             _mockPostcodeIoService.Setup(x => x.GetPostcodeStatus(It.IsAny<string>()))
                 .ReturnsAsync("Error");
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.Success.Should().BeFalse();
             response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
@@ -89,7 +90,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "gfsgfdgds" };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.Success.Should().BeFalse();
             response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PostCodeInvalidFormat);
@@ -107,7 +108,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockPostcodeIoService.Setup(m => m.GetPostcodeStatus(It.IsAny<string>()))
                 .ReturnsAsync(returnCode);
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.Success.Should().BeFalse();
             response.StatusCode.ShouldBeEquivalentTo(expected);
@@ -120,7 +121,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.SearchStandardProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.Success.Should().BeFalse();
             response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.ApprenticeshipNotFound);
@@ -132,7 +133,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = page };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.CurrentPage.Should().Be(1);
         }
@@ -143,7 +144,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = page };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.CurrentPage.Should().Be(page);
         }
@@ -153,7 +154,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Keywords = "abba 42" };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.SearchTerms.Should().Be("abba 42");
         }
@@ -163,7 +164,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", ShowAll = true };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.ShowAllProviders.Should().BeTrue();
         }
@@ -175,7 +176,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.SearchStandardProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.Results.Should().BeSameAs(providerStandardSearchResults);
         }
@@ -190,7 +191,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.TotalResultsForCountry.Should().Be(5);
         }
@@ -204,7 +205,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 8 };
 
-            var response = await _handler.Handle(message);
+            var response = await _handler.Handle(message, default(CancellationToken));
 
             response.CurrentPage.Should().Be(5);
             response.StatusCode.ShouldBeEquivalentTo(ProviderSearchResponseCodes.PageNumberOutOfUpperBound);

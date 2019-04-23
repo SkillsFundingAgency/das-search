@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Threading;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
@@ -23,6 +24,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         private Mock<IGetStandards> _mockIGetStandards;
         private Mock<IGetFrameworks> _mockIGetFrameworks;
         private Mock<ILog> _mockLogger;
+        private CancellationToken _cancellationToken = default(CancellationToken);
 
         private ApprenticeshipProviderDetailHandler _handler;
 
@@ -50,7 +52,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var message = new ApprenticeshipProviderDetailQuery();
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput);
         }
@@ -74,7 +76,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput);
         }
@@ -94,7 +96,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(null as Standard);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             _mockIGetStandards.Verify(x => x.GetStandardById(It.IsAny<string>()), Times.Once);
             response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
@@ -109,7 +111,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             _mockIGetStandards.Verify(x => x.GetStandardById(It.IsAny<string>()), Times.Once);
             response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
@@ -130,7 +132,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetFrameworks.Setup(x => x.GetFrameworkById("1")).Returns(null as Framework);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             _mockIGetFrameworks.Verify(x => x.GetFrameworkById(It.IsAny<string>()), Times.Once);
             response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
@@ -145,7 +147,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(null as ApprenticeshipDetails);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             _mockIGetFrameworks.Verify(x => x.GetFrameworkById(It.IsAny<string>()), Times.Once);
             response.StatusCode.Should().Be(ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound);
@@ -167,7 +169,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             response.ApprenticeshipDetails.Should().Be(stubApprenticeship);
             response.ApprenticeshipLevel.ShouldBeEquivalentTo("4");
@@ -190,7 +192,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByFrameworkId(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetFrameworks.Setup(x => x.GetFrameworkById("1")).Returns(stubStandardProduct);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             response.ApprenticeshipDetails.Should().Be(stubApprenticeship);
             response.ApprenticeshipLevel.ShouldBeEquivalentTo("4");
@@ -213,7 +215,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockSearchService.Setup(x => x.GetCourseByStandardCode(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Returns(stubApprenticeship);
             _mockIGetStandards.Setup(x => x.GetStandardById("1")).Returns(stubStandardProduct);
 
-            var response = _handler.Handle(message);
+            var response = _handler.Handle(message, _cancellationToken).Result;
 
             response.ApprenticeshipDetails.Should().Be(stubApprenticeship);
             response.ApprenticeshipLevel.ShouldBeEquivalentTo("4");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 
@@ -35,7 +36,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnInvalidStandardIdStatusIfIdIsBelowZero()
         {
-            var response = _sut.Handle(new GetStandardQuery { Id = "-1", Keywords = "Test" });
+            var response = _sut.Handle(new GetStandardQuery { Id = "-1", Keywords = "Test" }, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.InvalidStandardId);
         }
@@ -43,7 +44,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnStandardNotFoundStatusIfStandardCannotBeFound()
         {
-            var response = _sut.Handle(new GetStandardQuery() { Id = "1", Keywords = "Test" });
+            var response = _sut.Handle(new GetStandardQuery() { Id = "1", Keywords = "Test" }, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.StandardNotFound);
         }
@@ -57,7 +58,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.Gone);
         }
@@ -69,7 +70,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id));
 
-            _sut.Handle(query);
+            _sut.Handle(query, default(CancellationToken)).Wait();
 
             _mockGetStandards.Verify(x => x.GetStandardById(query.Id), Times.Once);
         }
@@ -82,7 +83,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
             response.Standard.Should().Be(standard);
@@ -96,7 +97,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var orgs = new List<Organisation> { new Organisation() };
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns(orgs);
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
             _mockAssessmentOrgsClient.VerifyAll();
@@ -110,7 +111,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns((IEnumerable<Organisation>)null);
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
             _mockAssessmentOrgsClient.VerifyAll();
@@ -124,7 +125,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(new HttpRequestException());
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
             _mockAssessmentOrgsClient.VerifyAll();
@@ -141,7 +142,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
             _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(entityNotfoundException);
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
             _mockAssessmentOrgsClient.VerifyAll();
@@ -158,7 +159,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
             response.SearchTerms.Should().Be(query.Keywords);

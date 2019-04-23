@@ -21,7 +21,7 @@
       <Setting name="ElasticsearchUsername" value="" />
       <Setting name="ElasticsearchPassword" value="" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="" />
-      <Setting name="FeatureToggle.Elk5Feature" value="" />
+      <Setting name="FeatureToggle.Elk5Feature" value="true" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="" />
       <Setting name="FeatureToggle.ProviderFeedbackFeature" value="true"/>

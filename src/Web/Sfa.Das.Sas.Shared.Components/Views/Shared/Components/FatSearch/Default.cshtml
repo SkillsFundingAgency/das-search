@@ -1,0 +1,14 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Sfa.Das.Sas.Shared.Components.ViewComponents.FatSearchViewModel
+
+<form asp-controller="Fat" asp-action="Search">
+    <div class="@(Model.CssClasses.FormGroupCss)">
+        <input class="@(Model.CssClasses.InputCss)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
+
+    </div>
+    <div class="@(Model.CssClasses.FormGroupCss)">
+        <button type="submit" class="@(Model.CssClasses.ButtonCss)">
+            Search
+        </button>
+    </div>
+</form>

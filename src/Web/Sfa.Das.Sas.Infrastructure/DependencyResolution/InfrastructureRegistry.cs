@@ -45,9 +45,9 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IGetStandards>().Use<StandardApiRepository>();
             For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderApiRepository>();
 
-            For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
-            For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
-            For<IAssessmentOrgsApiClient>().Use<AssessmentOrgsApiClient>().Ctor<string>("baseUri").Is(new ApplicationSettings().ApprenticeshipApiBaseUrl);
+            For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
+            For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
+            For<IAssessmentOrgsApiClient>().Use<AssessmentOrgsApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();
             For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IStandardMapping>().Use<StandardMapping>();

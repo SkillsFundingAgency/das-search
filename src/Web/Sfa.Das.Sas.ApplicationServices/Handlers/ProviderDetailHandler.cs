@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.Core.Domain.Services;
+﻿using System.Threading;
+using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -9,7 +10,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     using Responses;
     using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 
-    public class ProviderDetailHandler : IAsyncRequestHandler<ProviderDetailQuery, ProviderDetailResponse>
+    public class ProviderDetailHandler : IRequestHandler<ProviderDetailQuery, ProviderDetailResponse>
     {
         private readonly IGetProviderDetails _getProviders;
 
@@ -18,7 +19,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _getProviders = getProviders;
         }
 
-        public async Task<ProviderDetailResponse> Handle(ProviderDetailQuery message)
+        public async Task<ProviderDetailResponse> Handle(ProviderDetailQuery message, CancellationToken cancellationToken)
         {
             try
             {

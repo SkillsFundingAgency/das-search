@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
@@ -17,7 +19,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _paginationSettings = paginationSettings;
         }
 
-        public ApprenticeshipSearchResponse Handle(ApprenticeshipSearchQuery message)
+        public async Task<ApprenticeshipSearchResponse> Handle(ApprenticeshipSearchQuery message, CancellationToken cancellationToken)
         {
             var response = new ApprenticeshipSearchResponse
             {

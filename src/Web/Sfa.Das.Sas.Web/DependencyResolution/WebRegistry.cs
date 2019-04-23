@@ -20,8 +20,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
     {
         public WebRegistry()
         {
-            For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
-            For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+            For<ServiceFactory>().Use<ServiceFactory>(ctx => ctx.GetInstance);
             For<IMediator>().Use<Mediator>();
             For<IRequestContext>().Use(x => new RequestContext(new HttpContextWrapper(HttpContext.Current)));
 
@@ -31,7 +30,7 @@ namespace Sfa.Das.Sas.Web.DependencyResolution
             For<IUrlEncoder>().Use<UrlEncoder>();
             For<IXmlDocumentSerialiser>().Use<XmlDocumentSerialiser>();
 
-            For<IProviderApiClient>().Use(x => new ProviderApiClient(new ApplicationSettings().ApprenticeshipApiBaseUrl));
+            For<IProviderApiClient>().Use(x => new ProviderApiClient(new FatSettings().FatApiBaseUrl));
             For<IHttpCookieFactory>().Use<HttpCookieFactory>();
 
             For<IValidation>().Use<Validation>();

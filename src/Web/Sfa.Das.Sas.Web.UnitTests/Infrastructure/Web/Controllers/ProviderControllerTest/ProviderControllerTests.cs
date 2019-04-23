@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using NSubstitute;
 using Sfa.Das.Sas.Core.Configuration;
 using SFA.DAS.Apprenticeships.Api.Types;
 
@@ -25,15 +27,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
     public class ProviderControllerTests
     {
         [Test]
-        public void DetailShouldReturnNotFoundResultIfApprenticeshipProviderNotFound()
+        public async Task DetailShouldReturnNotFoundResultIfApprenticeshipProviderNotFound()
         {
             var searchCriteria = new ApprenticeshipProviderDetailQuery();
-            var stubSearchResponse = new ApprenticeshipProviderDetailResponse { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound };
+            var stubSearchResponse = Task.FromResult(new ApprenticeshipProviderDetailResponse { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound });
 
             ProviderController controller = new ProviderControllerBuilder()
-                .SetupMediator(x => x.Send(It.IsAny<ApprenticeshipProviderDetailQuery>()), stubSearchResponse);
+                .SetupMediator(x => x.Send(It.IsAny<ApprenticeshipProviderDetailQuery>(), default(CancellationToken)), stubSearchResponse);
 
-            var result = controller.Detail(searchCriteria);
+            var result = controller.Detail(searchCriteria).Result;
 
             result.Should().BeOfType<HttpStatusCodeResult>();
 
@@ -47,12 +49,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         {
             var mockMediator = new Mock<IMediator>();
 
-            mockMediator.Setup(x => x.SendAsync(It.IsAny<ProviderDetailQuery>()))
-                .Returns(Task.FromResult(new ProviderDetailResponse
+            mockMediator.Setup(x => x.Send(It.IsAny<ProviderDetailQuery>(), new CancellationToken()))
+                .ReturnsAsync(new ProviderDetailResponse
                 {
                     Provider = new Provider(),
                     StatusCode = ProviderDetailResponse.ResponseCodes.Success
-                }));
+                });
 
             var config = new Mock<IConfigurationSettings>();
             config.Setup(m => m.HideAboutProviderForUkprns)
@@ -72,7 +74,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         {
             var searchCriteria = new ApprenticeshipProviderDetailQuery { StandardCode = "1", LocationId = 2, UkPrn = 3 };
 
-            var stubSearchResponse = new ApprenticeshipProviderDetailResponse();
+            var stubSearchResponse = Task.FromResult(new ApprenticeshipProviderDetailResponse());
 
             var stubProviderViewModel = new ApprenticeshipDetailsViewModel
             {
@@ -87,11 +89,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
             urlHelperMock.Setup(m => m.Action(It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
 
             ProviderController controller = new ProviderControllerBuilder()
-                .SetupMediator(x => x.Send(It.IsAny<ApprenticeshipProviderDetailQuery>()), stubSearchResponse)
+                .SetupMediator((x => x.Send(It.IsAny<ApprenticeshipProviderDetailQuery>(), default(CancellationToken))), stubSearchResponse)
                 .SetupMappingService(x => x.Map(It.IsAny<ApprenticeshipProviderDetailResponse>(), It.IsAny<Action<IMappingOperationOptions<ApprenticeshipProviderDetailResponse, ApprenticeshipDetailsViewModel>>>()), stubProviderViewModel)
                 .WithUrl(urlHelperMock.Object);
 
-            var result = controller.Detail(searchCriteria);
+            var result = controller.Detail(searchCriteria).Result;
 
             result.Should().BeOfType<ViewResult>();
 
