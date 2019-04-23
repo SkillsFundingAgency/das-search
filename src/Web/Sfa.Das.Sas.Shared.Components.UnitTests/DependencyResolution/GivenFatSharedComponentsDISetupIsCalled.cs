@@ -27,8 +27,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
         [SetUp]
         public void Setup()
         {
-            var appRoot = GetApplicationRoot();
-
             _FatConfiguration = new Mock<IFatConfigurationSettings>();
 
             _FatConfiguration.Setup(s => s.FatApiBaseUrl).Returns(_fatApiUrl);
