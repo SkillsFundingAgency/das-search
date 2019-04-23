@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Sfa.Das.Sas.ApplicationServices.Models
+﻿namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public class ProviderFrameworkSearchResults : BaseProviderSearchResults
     {

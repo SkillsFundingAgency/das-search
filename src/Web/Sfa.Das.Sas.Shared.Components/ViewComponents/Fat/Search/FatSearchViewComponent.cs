@@ -1,30 +1,24 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
 {
     public class FatSearchViewComponent : ViewComponent
     {
-        private readonly ICssClasses _cssClasses;
-
-        public FatSearchViewComponent(ICssClasses cssClasses)
+        public async Task<IViewComponentResult> InvokeAsync(SearchQueryViewModel searchQueryModel,string fatSearchRoute = null, string cssModifier = null, bool inline = false)
         {
-            _cssClasses = cssClasses;
-        }
 
-        public async Task<IViewComponentResult> InvokeAsync(string keywords,string cssModifier = null, bool inline = false)
-        {
-            if (cssModifier != null)
+            var model = new FatSearchViewModel();
+
+            if (searchQueryModel != null)
             {
-                _cssClasses.ClassModifier = cssModifier;
+                model.Keywords = searchQueryModel.Keywords;
             }
 
-            var model = new FatSearchViewModel
+            if (fatSearchRoute != null)
             {
-                Keywords = keywords,
-                CssClasses = _cssClasses
-            };
+                model.FatSearchRoute = fatSearchRoute;
+            }
 
             if (!inline)
             {

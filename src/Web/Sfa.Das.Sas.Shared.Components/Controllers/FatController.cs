@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.Shared.Components.ViewComponents;
+using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 
 namespace Sfa.Das.Sas.Shared.Components.Controllers
 {
-    [Route("FindApprenticeshipTraining")]
     public class FatController : Controller
     {
         private readonly IApprenticeshipSearchProvider _apprenticeshipSearchProvider;
@@ -16,13 +13,37 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             _apprenticeshipSearchProvider = apprenticeshipSearchProvider;
         }
 
-        public IActionResult Search(FatSearchViewModel model)
-        {
-
-           var results = _apprenticeshipSearchProvider.SearchByKeyword(model.Keywords,1,20,0, new List<int>(){0,1,2,3,4,5,6,7,8});
-            return View("Fat/SearchResults",results);
+        //[HttpPost]
+        //[Route("Search")]
+        public IActionResult Search(SearchQueryViewModel model)
+        { 
+            return View("Fat/SearchResults", model);
         }
 
+        //public IActionResult Search(string keywords, int? page, int? size, int? sortOrder)
+        //{
+        //    var model = new SearchQueryViewModel()
+        //    {
+        //        Keywords = keywords
+        //    };
+
+        //    if (page != null)
+        //    {
+        //        model.Page = page.Value;
+        //    }
+
+        //    if (size != null)
+        //    {
+        //        model.ResultsToTake = size.Value;
+        //    }
+
+        //    if (sortOrder != null)
+        //    {
+        //        model.SortOrder = sortOrder.Value;
+        //    }
+
+        //    return Search(model);
+        //}
 
     }
 }

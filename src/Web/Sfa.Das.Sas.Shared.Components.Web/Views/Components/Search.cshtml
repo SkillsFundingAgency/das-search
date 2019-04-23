@@ -1,6 +1,6 @@
 ﻿
-<h1 class="govuk-heading-l">Search Component</h1>
-<p class="govuk-body">Allows the user to enter and submit a keyword which initiates a search for available Apprenticeship training.</p>
+    <h1 class="govuk-heading-l">Search Component</h1>
+<p class="govuk-body">Model used when passing query infomation to a shared component</p>
 <h2 class="govuk-heading-m">Parameters</h2>
 <table class="govuk-table">
     <thead class="govuk-table__head">
@@ -12,12 +12,12 @@
         </tr>
     </thead>
     <tbody class="govuk-table__body">
-        <tr class="govuk-table__row">
-            <td class="govuk-table__cell" scope="row">keyword</td>
-            <td class="govuk-table__cell">string</td>
-            <td class="govuk-table__cell"></td>
-            <td class="govuk-table__cell">The keywords which have previously been entered in an apprenticeship search</td>
-        </tr>
+    <tr class="govuk-table__row">
+        <td class="govuk-table__cell" scope="row">searchQueryModel</td>
+        <td class="govuk-table__cell"><a class="govuk-link" asp-controller="Models" asp-action="SearchQueryViewModel" >SearchQueryViewModel</a></td>
+        <td class="govuk-table__cell"></td>
+        <td class="govuk-table__cell">The search query model to use to display the search results</td>
+    </tr>
         <tr class="govuk-table__row">
             <td class="govuk-table__cell" scope="row">cssModifier</td>
             <td class="govuk-table__cell">string</td>
@@ -36,7 +36,7 @@
 </table>
 <h2 class="govuk-heading-m">Examples</h2>
 <h3 class="govuk-heading-s">Default</h3>
-<p class="govuk-body">Either when no inline parameter is provideded or set to false.</p>
+<p class="govuk-body">Either when no inline parameter is provided or set to false.</p>
 @await Component.InvokeAsync("FatSearch")
 <h3 class="govuk-heading-s">Inline</h3>
 <p class="govuk-body">When the inline parameter is set to True.</p>

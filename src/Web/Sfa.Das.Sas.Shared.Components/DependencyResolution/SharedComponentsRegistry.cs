@@ -1,8 +1,7 @@
-﻿using System.Reflection;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.ApplicationServices.Interfaces;
@@ -18,10 +17,9 @@ using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using Sfa.Das.Sas.Infrastructure.Providers;
 using Sfa.Das.Sas.Infrastructure.Repositories;
-using Sfa.Das.Sas.Infrastructure.Settings;
-using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.Domain;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+using Sfa.Das.Sas.Shared.Components.Mapping;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
@@ -32,12 +30,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
     {
         public static void AddFatSharedComponents(this IServiceCollection services, IFatConfigurationSettings configuration, bool useElastic = false)
         {
-            //   services.AddTransient<IMyService, MyService>();
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
 
-            //var fatConfig = new FatSharedComponentsConfiguration();
-            //fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["FatApiBaseUrl"];
 
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
             services.AddTransient<ICssClasses, DefaultCssClasses>();
@@ -56,6 +51,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             {
                 AddApiSearchServices(services, configuration);
             }
+
+            services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
+            services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
         }
 
         private static void AddApplicationServices(IServiceCollection services)
@@ -109,12 +107,16 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
         private static void AddApiSearchServices(IServiceCollection services, IFatConfigurationSettings sharedComponentsConfiguration)
         {
+            
             services.AddTransient<IApprenticeshipSearchProvider, ApprenticeshipsSearchApiProvider>();
 
             services.AddTransient<IStandardApiClient, StandardApiClient>(service => new StandardApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IApprenticeshipProgrammeApiClient, ApprenticeshipProgrammeApiClient>(service => new ApprenticeshipProgrammeApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<ISearchApi, SearchApi>(service => new SearchApi(sharedComponentsConfiguration.FatApiBaseUrl));
+
+            
         }
     }
 }

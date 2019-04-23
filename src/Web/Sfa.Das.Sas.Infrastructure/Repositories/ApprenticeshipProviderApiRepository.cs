@@ -1,15 +1,10 @@
 ﻿namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     using System;
-    using System.IO;
-    using System.Linq;
-    using System.Security.Policy;
     using ApplicationServices.Http;
-    using ApplicationServices.Models;
     using Core.Configuration;
     using Core.Domain.Model;
     using Core.Domain.Repositories;
-    using Elasticsearch;
     using Newtonsoft.Json;
     using Sfa.Das.Sas.Core;
     using SFA.DAS.NLog.Logger;

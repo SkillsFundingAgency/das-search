@@ -1,10 +1,6 @@
 ﻿using Sfa.Automation.Framework.Enums;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests
 {

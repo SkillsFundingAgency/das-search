@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Infrastructure.Settings;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
 
@@ -66,6 +60,14 @@ namespace Sfa.Das.Sas.Shared.Components.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                     "FatSearch",
+                     "employer/find-apprenticeships/{keywords?}",
+                    new { controller = "Fat", action = "Search" });
+                routes.MapRoute(
+                    "Fat",
+                    "employer/find-apprenticeships/{action=Search}/{keywords?}",
+                    new { controller = "Fat" });
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

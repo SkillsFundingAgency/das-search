@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 using NUnit.Framework;
 using PactNet.Mocks.MockHttpService.Models;
 using PactNet.TestExtensions;

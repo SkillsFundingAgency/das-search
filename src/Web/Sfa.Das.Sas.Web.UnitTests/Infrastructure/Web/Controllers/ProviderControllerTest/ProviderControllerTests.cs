@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
-using NSubstitute;
 using Sfa.Das.Sas.Core.Configuration;
 using SFA.DAS.Apprenticeships.Api.Types;
 

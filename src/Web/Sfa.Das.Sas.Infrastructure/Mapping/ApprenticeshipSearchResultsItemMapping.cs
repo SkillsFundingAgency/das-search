@@ -1,36 +1,32 @@
 ﻿using System.Linq;
-using Sfa.Das.Sas.Core.Domain.Model;
+using Sfa.Das.FatApi.Client.Model;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
-    using System.Collections.Generic;
     using Sfa.Das.Sas.ApplicationServices.Models;
     public class ApprenticeshipSearchResultsItemMapping : IApprenticeshipSearchResultsItemMapping
     {
 
-        public ApprenticeshipSearchResultsItem Map(SFA.DAS.Apprenticeships.Api.Types.ApprenticeshipSearchResultsItem document)
+        public ApprenticeshipSearchResultsItem Map(SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem document)
         {
             if (document != null)
             {
-                var item = new ApprenticeshipSearchResultsItem();
+                var item = new ApprenticeshipSearchResultsItem
+                {
+                    Id = document.Id,
+                    FrameworkName = document.FrameworkName,
+                    Duration = document.Duration,
+                    EffectiveFrom = document.EffectiveFrom,
+                    EffectiveTo = document.EffectiveTo,
+                    Level = document.Level,
+                    Published = document.Published,
+                    PathwayName = document.PathwayName,
+                    Title = document.Title,
+                    Keywords = document.Keywords?.Any() == true ? document.Keywords.ToList() : null,
 
-                item.FrameworkId = document.FrameworkId;
-                item.FrameworkName = document.FrameworkName;
-                item.StandardId = document.StandardId;
-                item.Duration = document.Duration;
-                item.EffectiveFrom = document.EffectiveFrom;
-                item.EffectiveTo = document.EffectiveTo;
-                item.Level = document.Level;
-                item.Published = document.Published;
-                item.PathwayName = document.PathwayName;
-                item.Title = document.Title;
-                item.Keywords = document.Keywords;
-
-
-                item.JobRoleItems = document.JobRoleItems?.Select(s => new JobRoleItem() { Description = s.Description, Title = s.Title });
-
-                item.JobRoles = document.JobRoles?.Select(s => s).ToList();
-
+                    JobRoles = document.JobRoles?.Any() == true ? document.JobRoles.ToList() : null,
+                    ApprenticeshipType = document.ProgrammeType == SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem.ProgrammeTypeEnum.NUMBER_0 ? ApprenticeshipType.Framework : ApprenticeshipType.Standard
+                };
                 return item;
             }
 

@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.FatApi.Client.Model;
 using Sfa.Das.Sas.Infrastructure.Mapping;
-using SFA.DAS.Apprenticeships.Api.Types;
-using ApprenticeshipSearchResultsItem = SFA.DAS.Apprenticeships.Api.Types.ApprenticeshipSearchResultsItem;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
 {
@@ -16,33 +13,20 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
     {
 
         private ApprenticeshipSearchResultsItemMapping _sut;
-        private ApprenticeshipSearchResultsItem _apprenticeshipSearchResultsItem;
+        private SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem _apprenticeshipSearchResultsItem;
 
         [SetUp]
         public void Setup()
         {
             _sut = new ApprenticeshipSearchResultsItemMapping();
-            _apprenticeshipSearchResultsItem = new ApprenticeshipSearchResultsItem()
+            _apprenticeshipSearchResultsItem = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
             {
-                StandardId = "123",
-                FrameworkId = "456-12-34",
+                Id = "123",
+                ProgrammeType = SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem.ProgrammeTypeEnum.NUMBER_0,
                 Duration = 12,
                 EffectiveFrom = DateTime.Now.AddYears(-2),
                 EffectiveTo = new DateTime(2020, 07, 31),
                 FrameworkName = "Apprenticeship Name",
-                JobRoleItems = new List<JobRoleItem>()
-                {
-                    new JobRoleItem()
-                    {
-                        Title = "Job Role 1",
-                        Description = "Apprenticeship Description"
-                    },
-                    new JobRoleItem()
-                    {
-                        Title = "Job Role 2",
-                        Description = "Apprenticeship Description"
-                    }
-                },
                 PathwayName = "Pathway Name",
                 JobRoles = new List<string>()
                 {
@@ -56,8 +40,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
                     "Keyword 3"
                 },
                 Level = 3,
-                Published = true,
-                TitleKeyword = "Apprenticeship Name : Pathway Name"
+                Published = true
 
             };
         }
@@ -72,20 +55,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
         }
 
         [Test]
-        public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_StandardId_Is_Mapped()
+        public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_Id_Is_Mapped()
         {
             var mappedObject = _sut.Map(_apprenticeshipSearchResultsItem);
 
-            mappedObject.StandardId.Should().Be(_apprenticeshipSearchResultsItem.StandardId);
+            mappedObject.Id.Should().Be(_apprenticeshipSearchResultsItem.Id);
         }
 
-        [Test]
-        public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_FrameworkId_Is_Mapped()
-        {
-            var mappedObject = _sut.Map(_apprenticeshipSearchResultsItem);
-
-            mappedObject.FrameworkId.Should().Be(_apprenticeshipSearchResultsItem.FrameworkId);
-        }
 
         [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_Duration_Is_Mapped()
@@ -144,16 +120,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
         }
 
         [Test]
-        public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_And_Has_JobRoleItems_Then_JobRoleItems_Is_Mapped()
-        {
-            var mappedObject = _sut.Map(_apprenticeshipSearchResultsItem);
-
-            mappedObject.JobRoleItems.Should().HaveCount(2);
-            mappedObject.JobRoleItems.FirstOrDefault().Title.Should().Be(_apprenticeshipSearchResultsItem.JobRoleItems.FirstOrDefault().Title);
-            mappedObject.JobRoleItems.FirstOrDefault().Description.Should().Be(_apprenticeshipSearchResultsItem.JobRoleItems.FirstOrDefault().Description);
-        }
-
-        [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_And_Has_JobRoles_Then_JobRoles_Is_Mapped()
         {
             var mappedObject = _sut.Map(_apprenticeshipSearchResultsItem);
@@ -174,18 +140,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
             mappedObject.Keywords.FirstOrDefault().Should().Be(_apprenticeshipSearchResultsItem.Keywords.FirstOrDefault());
         }
 
-
-        [Test]
-        public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_And_Has_No_JobRoleItems_Then_JobRoleItems_Is_Null()
-        {
-            var apprenticeshipResultsNoJobrole = _apprenticeshipSearchResultsItem;
-
-            apprenticeshipResultsNoJobrole.JobRoleItems = null;
-
-            var mappedObject = _sut.Map(_apprenticeshipSearchResultsItem);
-
-            mappedObject.JobRoleItems.Should().BeNull();
-        }
 
         [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_And_Has_No_JobRoles_Then_TitleKeyword_Is_Null()

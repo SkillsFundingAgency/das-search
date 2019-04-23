@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SFA.DAS.SAS.Shared.Components</id>
-    <version>0.0.4</version>
+    <version>0.0.9-alpha</version>
     <authors>DAS</authors>
     <owners>sfanuget</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -23,5 +23,6 @@
   </metadata>
   <files>
     <file src="..\Sfa.Das.Sas.Shared.Components\bin\Release\netstandard2.0\sfa.das.sas.*.dll" target="lib" />
+    <file src="..\Sfa.Das.Sas.Shared.Components\bin\Release\netstandard2.0\Sfa.Das.FatApi.Client.dll" target="lib" />
   </files>
 </package>
