@@ -1,6 +1,4 @@
 ﻿using System;
-using FeatureToggle.Core.Fluent;
-using Sfa.Das.Sas.Infrastructure.FeatureToggles;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {

@@ -5,7 +5,6 @@ using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Repositories;
-using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using SFA.DAS.NLog.Logger;

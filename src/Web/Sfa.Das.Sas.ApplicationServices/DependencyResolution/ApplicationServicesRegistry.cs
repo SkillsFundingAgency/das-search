@@ -1,14 +1,11 @@
-﻿using FeatureToggle.Core.Fluent;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
 using Sfa.Das.Sas.ApplicationServices.Http;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
 using StructureMap;
-using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 
 namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution

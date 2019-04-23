@@ -6,14 +6,12 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
     using System.Diagnostics;
     using System.Reflection;
     using ApplicationServices;
-    using ApplicationServices.FeatureToggles;
     using ApplicationServices.Interfaces;
     using ApplicationServices.Settings;
     using Core.Configuration;
     using Core.Domain.Repositories;
     using Core.Domain.Services;
     using Elasticsearch;
-    using FeatureToggle.Core.Fluent;
     using Mapping;
     using PostCodeIo;
     using Repositories;

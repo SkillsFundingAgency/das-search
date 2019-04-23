@@ -1,11 +1,8 @@
 ﻿using FluentAssertions;
-using Microsoft.Rest;
 using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.FatApi.Client.Model;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 {

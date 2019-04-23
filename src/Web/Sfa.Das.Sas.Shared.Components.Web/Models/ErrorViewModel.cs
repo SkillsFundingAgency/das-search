@@ -1,5 +1,3 @@
-using System;
-
 namespace Sfa.Das.Sas.Shared.Components.Web.Models
 {
     public class ErrorViewModel

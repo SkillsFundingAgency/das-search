@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+﻿using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.Domain
 {

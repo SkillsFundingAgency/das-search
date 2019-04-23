@@ -1,8 +1,6 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using Sfa.Automation.Framework.Selenium;
 using System.Collections.Generic;
-using Sfa.Automation.Framework.Enums;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages
 {

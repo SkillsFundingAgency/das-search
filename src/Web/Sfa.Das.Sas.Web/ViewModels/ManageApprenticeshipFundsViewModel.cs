@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {

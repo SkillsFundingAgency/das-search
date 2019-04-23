@@ -1,10 +1,8 @@
 ﻿using System.Linq;
 using Sfa.Das.FatApi.Client.Model;
-using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
-    using System.Collections.Generic;
     using Sfa.Das.Sas.ApplicationServices.Models;
     public class ApprenticeshipSearchResultsItemMapping : IApprenticeshipSearchResultsItemMapping
     {

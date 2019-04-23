@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Sfa.Das.Sas.Core.Domain.Model;
 using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Web.Controllers

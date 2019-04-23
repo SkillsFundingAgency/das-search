@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Nest;
-using Sfa.Das.Sas.ApplicationServices.Models;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {

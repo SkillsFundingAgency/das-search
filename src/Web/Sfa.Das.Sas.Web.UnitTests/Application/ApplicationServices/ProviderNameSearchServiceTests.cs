@@ -1,7 +1,6 @@
 ﻿using System;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 {

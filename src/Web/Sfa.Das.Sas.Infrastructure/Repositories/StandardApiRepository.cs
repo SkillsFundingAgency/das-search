@@ -1,6 +1,4 @@
-﻿
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Core.Domain.Model;
+﻿using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using SFA.DAS.Apprenticeships.Api.Client;
