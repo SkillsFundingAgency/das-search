@@ -30,12 +30,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
     {
         public static void AddFatSharedComponents(this IServiceCollection services, IFatConfigurationSettings configuration, bool useElastic = false)
         {
-            //   services.AddTransient<IMyService, MyService>();
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
 
-            //var fatConfig = new FatSharedComponentsConfiguration();
-            //fatConfig.FatApiBaseUrl = configuration.GetSection("fatSharedComponents")["FatApiBaseUrl"];
 
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
             services.AddTransient<ICssClasses, DefaultCssClasses>();
