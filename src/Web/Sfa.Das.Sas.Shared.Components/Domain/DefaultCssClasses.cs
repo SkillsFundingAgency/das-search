@@ -15,6 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
         }
 
         public IUtilitiesCssClasses UtilitiesCss => new DefaultUtilitiesCssClasses();
+        public ITableCssClasses Table => new DefaultTableCssClasses(ClassPrefix);
         public string ClassModifier { get; set; } = string.Empty;
         public string ClassPrefix { get; set; } = "govuk-";
 

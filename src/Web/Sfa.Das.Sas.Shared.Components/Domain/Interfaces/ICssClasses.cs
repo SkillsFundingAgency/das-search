@@ -3,6 +3,7 @@
     public interface ICssClasses
     {
         IUtilitiesCssClasses UtilitiesCss { get; }
+        ITableCssClasses Table { get; }
         string ClassModifier { get; set; }
         string ClassPrefix { get; }
         string Button { get; }

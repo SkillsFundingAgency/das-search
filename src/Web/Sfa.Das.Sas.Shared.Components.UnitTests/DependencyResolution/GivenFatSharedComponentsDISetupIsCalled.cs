@@ -78,16 +78,5 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 
             elasticsearchClientFactory.Should().BeNull();
         }
-
-
-
-        public string GetApplicationRoot()
-        {
-            var exePath = Path.GetDirectoryName(System.Reflection
-                .Assembly.GetExecutingAssembly().CodeBase);
-            Regex appPathMatcher = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
-            var appRoot = appPathMatcher.Match(exePath).Value;
-            return appRoot;
-        }
     }
 }

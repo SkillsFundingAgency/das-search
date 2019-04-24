@@ -16,6 +16,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
     public interface IApprenticeshipOrchestrator
     {
         Task<FrameworkDetailsViewModel> GetFramework(string id);
+        Task<StandardDetailsViewModel> GetStandard(string id);
         ApprenticeshipType GetApprenticeshipType(string id);
     }
 
@@ -24,12 +25,14 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly IMediator _mediator;
         private readonly ILog _logger;
         private readonly IFrameworkDetailsViewModelMapper _frameworkDetailsViewModelMapper;
+        private readonly IStandardDetailsViewModelMapper _standardDetailsViewModelMapper;
 
-        public ApprenticeshipOrchestrator(IMediator mediator, ILog logger, IFrameworkDetailsViewModelMapper frameworkDetailsViewModelMapper)
+        public ApprenticeshipOrchestrator(IMediator mediator, ILog logger, IFrameworkDetailsViewModelMapper frameworkDetailsViewModelMapper, IStandardDetailsViewModelMapper standardDetailsViewModelMapper)
         {
             _mediator = mediator;
             _logger = logger;
             _frameworkDetailsViewModelMapper = frameworkDetailsViewModelMapper;
+            _standardDetailsViewModelMapper = standardDetailsViewModelMapper;
         }
 
         public async Task<FrameworkDetailsViewModel> GetFramework(string id)
@@ -73,9 +76,65 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             }
         }
 
+        public async Task<StandardDetailsViewModel> GetStandard(string id)
+        {
+            _logger.Info($"Getting standard {id}");
+            var response = await _mediator.Send(new GetStandardQuery { Id = id });
+
+            string message;
+
+            switch (response.StatusCode)
+            {
+                case GetStandardResponse.ResponseCodes.InvalidStandardId:
+                    {
+                        _logger.Info("404 - Attempt to get standard with an ID below zero");
+                        throw new Exception("Cannot find any standards with an ID below zero");
+                    }
+
+                case GetStandardResponse.ResponseCodes.StandardNotFound:
+                    {
+                        message = $"Cannot find standard: {id}";
+                        _logger.Warn($"404 - {message}");
+
+                        throw new Exception(message);
+                    }
+
+                case GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound:
+                    {
+                        message = $"Cannot find assessment organisations for standard: {id}";
+                        _logger.Warn($"404 - {message}");
+                        break;
+                    }
+
+                case GetStandardResponse.ResponseCodes.Gone:
+                    {
+                        message = $"Expired standard request: {id}";
+
+                        _logger.Warn($"410 - {message}");
+
+                        throw new Exception(message);
+                    }
+
+                case GetStandardResponse.ResponseCodes.HttpRequestException:
+                    {
+                        message = $"Request error when requesting assessment orgs for standard: {id}";
+                        _logger.Warn($"400 - {message}");
+
+                        throw new Exception(message);
+                    }
+            }
+
+            _logger.Info($"Mapping Standard {id}");
+            var viewModel = _standardDetailsViewModelMapper.Map(response.Standard, response.AssessmentOrganisations);
+
+            return viewModel;
+        }
+
         public ApprenticeshipType GetApprenticeshipType(string id)
         {
             return id.Contains("-") ? ApprenticeshipType.Framework : ApprenticeshipType.Standard;
         }
+
+
     }
 }

@@ -60,6 +60,8 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
             services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
             services.AddTransient<IFrameworkDetailsViewModelMapper, FrameworkDetailsViewModelMapper>();
+            services.AddTransient<IStandardDetailsViewModelMapper, StandardsDetailsViewModelMapper>();
+            services.AddTransient<IAssessmentOrganisationViewModelMapper, AssessmentOrganisationViewModelMapper>();
         }
 
         private static void AddApplicationServices(IServiceCollection services)

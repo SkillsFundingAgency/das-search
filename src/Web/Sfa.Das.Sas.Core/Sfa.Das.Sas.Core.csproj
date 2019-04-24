@@ -163,6 +163,7 @@
     <Compile Include="Configuration\IFatConfigurationSettings.cs" />
     <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="DependencyResolution\CoreRegistry.cs" />
+    <Compile Include="Domain\AssessmentOrganisation.cs" />
     <Compile Include="Domain\Helpers\IUrlEncoder.cs" />
     <Compile Include="Domain\Helpers\UrlEncoder.cs" />
     <Compile Include="Domain\Model\Address.cs" />
