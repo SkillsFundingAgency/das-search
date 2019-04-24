@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.Core.Domain;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 using SFA.DAS.AssessmentOrgs.Api.Client;
@@ -18,31 +19,31 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class GetStandardHandler : IRequestHandler<GetStandardQuery, GetStandardResponse>
     {
         private readonly IGetStandards _getStandards;
-        private readonly IAssessmentOrgsApiClient _getAssessmentOrgs;
+        private readonly IGetAssessmentOrganisations _getAssessmentOrganisations;
         private readonly ILog _logger;
 
         public GetStandardHandler(
-            IGetStandards getStandards, 
-            IAssessmentOrgsApiClient getAssessmentOrgs,
-            ILog logger)
+            IGetStandards getStandards,
+            ILog logger,
+            IGetAssessmentOrganisations getAssessmentOrganisations)
         {
             _getStandards = getStandards;
-            _getAssessmentOrgs = getAssessmentOrgs;
             _logger = logger;
+            _getAssessmentOrganisations = getAssessmentOrganisations;
         }
 
         public async Task<GetStandardResponse> Handle(GetStandardQuery message, CancellationToken cancellationToken)
         {
             var response = new GetStandardResponse();
-            var standard = _getStandards.GetStandardById(message.Id);
-
-            int intId;
-            int.TryParse(message.Id, out intId);
-            if (intId < 0)
+            int standardId;
+            int.TryParse(message.Id, out standardId);
+            if (standardId < 0)
             {
                 response.StatusCode = GetStandardResponse.ResponseCodes.InvalidStandardId;
                 return response;
             }
+
+            var standard = _getStandards.GetStandardById(message.Id);
 
             if (standard == null)
             {
@@ -61,18 +62,19 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             try
             {
-                var assessmentOrganisations = _getAssessmentOrgs.ByStandard(standard.StandardId);
-                response.AssessmentOrganisations = assessmentOrganisations?.ToList() ?? new List<Organisation>();
+                response.AssessmentOrganisations = await  _getAssessmentOrganisations.GetByStandardId(standardId);
+
             }
             catch (EntityNotFoundException ex)
             {
-                _logger.Warn(ex, $"{typeof(EntityNotFoundException)} when trying to get assesment org by standard id");
+                _logger.Warn(ex, $"{typeof(EntityNotFoundException)} when trying to get assessment org by standard id");
                 response.StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound;
-                response.AssessmentOrganisations = new List<Organisation>();
+                response.AssessmentOrganisations = new List<AssessmentOrganisation>();
+
             }
             catch (HttpRequestException ex)
             {
-                _logger.Warn(ex, $"{typeof(HttpRequestException)} when trying to get assesment org by standard id");
+                _logger.Warn(ex, $"{typeof(HttpRequestException)} when trying to get assessment org by standard id");
                 response.StatusCode = GetStandardResponse.ResponseCodes.HttpRequestException;
             }
 

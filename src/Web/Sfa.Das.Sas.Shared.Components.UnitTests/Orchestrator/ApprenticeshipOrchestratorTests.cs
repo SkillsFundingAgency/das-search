@@ -10,6 +10,7 @@ using NLog.LayoutRenderers.Wrappers;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
@@ -56,7 +57,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
 
             _frameworkMapperMock.Setup(s => s.Map(It.IsAny<Framework>())).Returns(_framework);
-            _standardMapperMock.Setup(s => s.Map(It.IsAny<Standard>(), It.IsAny<IList<Organisation>>())).Returns(_standard);
+            _standardMapperMock.Setup(s => s.Map(It.IsAny<Standard>(), It.IsAny<IList<AssessmentOrganisation>>())).Returns(_standard);
 
             _sut = new ApprenticeshipOrchestrator(_mediatorMock.Object, _loggerMock.Object, _frameworkMapperMock.Object,_standardMapperMock.Object);
         }
@@ -174,7 +175,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             var result = await _sut.GetStandard("123");
 
-            _standardMapperMock.Verify(v => v.Map(It.IsAny<Standard>(),It.IsAny<IList<Organisation>>()), Times.Once);
+            _standardMapperMock.Verify(v => v.Map(It.IsAny<Standard>(),It.IsAny<IList<AssessmentOrganisation>>()), Times.Once);
         }
         #endregion
     }

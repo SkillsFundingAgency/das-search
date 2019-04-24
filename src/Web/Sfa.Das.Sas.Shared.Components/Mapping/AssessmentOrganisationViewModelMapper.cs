@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Sfa.Das.Sas.Core.Domain.Model;
+﻿using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public class AssessmentOrganisationViewModelMapper : IAssessmentOrganisationViewModelMapper
     {
-        public AssessmentOrganisationViewModel Map(Organisation item)
+        public AssessmentOrganisationViewModel Map(AssessmentOrganisation item)
         {
             if (item == null) return null;
 

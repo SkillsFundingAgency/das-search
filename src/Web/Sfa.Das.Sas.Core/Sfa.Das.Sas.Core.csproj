@@ -184,6 +184,7 @@
     <Compile Include="Domain\Repositories\IApprenticeshipProviderRepository.cs" />
     <Compile Include="Domain\Services\IGetProviderDetails.cs" />
     <Compile Include="Domain\Services\IGetProviders.cs" />
+    <Compile Include="Domain\Services\IGetAssessmentOrganisations.cs" />
     <Compile Include="Domain\Services\IGetStandards.cs" />
     <Compile Include="Domain\Services\IGetFrameworks.cs" />
     <Compile Include="IRetryWebRequests.cs" />

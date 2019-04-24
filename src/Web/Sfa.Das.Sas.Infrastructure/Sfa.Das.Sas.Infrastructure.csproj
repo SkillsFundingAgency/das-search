@@ -198,7 +198,9 @@
     <Compile Include="Mapping\IApprenticeshipSearchResultsItemMapping.cs" />
     <Compile Include="Mapping\IApprenticeshipSearchResultsMapping.cs" />
     <Compile Include="Mapping\IProviderNameSearchMapping.cs" />
+    <Compile Include="Mapping\IAssessmentOrganisationMapping.cs" />
     <Compile Include="Mapping\ProviderNameSearchMapping.cs" />
+    <Compile Include="Mapping\AssessmentOrganisationMapping.cs" />
     <Compile Include="Providers\ApprenticeshipsSearchApiProvider.cs" />
     <Compile Include="Repositories\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />

@@ -6,6 +6,7 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.Mapping;
@@ -20,7 +21,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
     {
         private StandardsDetailsViewModelMapper _sut;
         private Standard _itemToMap;
-        private IList<Organisation> _organisationsToMap;
+        private IEnumerable<AssessmentOrganisation> _organisationsToMap;
         private Mock<IAssessmentOrganisationViewModelMapper> _assessmentOrganisationMapperMock;
 
         [SetUp]
@@ -28,7 +29,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         {
             _assessmentOrganisationMapperMock = new Mock<IAssessmentOrganisationViewModelMapper>(MockBehavior.Strict);
 
-            _assessmentOrganisationMapperMock.Setup(s => s.Map(It.IsAny<Organisation>())).Returns(new AssessmentOrganisationViewModel());
+            _assessmentOrganisationMapperMock.Setup(s => s.Map(It.IsAny<AssessmentOrganisation>())).Returns(new AssessmentOrganisationViewModel());
 
             _sut = new StandardsDetailsViewModelMapper(_assessmentOrganisationMapperMock.Object);
 
@@ -50,23 +51,23 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
 
             };
 
-            _organisationsToMap = new List<Organisation>()
+            _organisationsToMap = (new List<AssessmentOrganisation>()
             {
-                new Organisation()
+                new AssessmentOrganisation()
                 {
                     Name = "Organisation 1",
                     Email = "Org@nisation1.com",
                     Phone = "097654321",
                     Website = "http://www.organisaition1.com"
                 },
-                new Organisation()
+                new AssessmentOrganisation()
                 {
                     Name = "Organisation 2",
                     Email = "Org@nisation2.com",
                     Phone = "097654321",
                     Website = "http://www.organisaition2.com"
                 }
-            };
+            }).AsEnumerable();
 
 
         }
@@ -100,10 +101,10 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
             result.WhatApprenticesWillLearn.Should().BeEquivalentTo(_itemToMap.WhatApprenticesWillLearn);
             result.StandardPageUri.Should().BeEquivalentTo(_itemToMap.StandardPageUri);
 
-            result.AssessmentOrganisations.Should().HaveCount(_organisationsToMap.Count);
+            result.AssessmentOrganisations.Should().HaveCount(_organisationsToMap.Count());
             result.AssessmentOrganisationPresent.Should().BeTrue();
 
-            _assessmentOrganisationMapperMock.Verify(v => v.Map(It.IsAny<Organisation>()), Times.AtLeast(2));
+            _assessmentOrganisationMapperMock.Verify(v => v.Map(It.IsAny<AssessmentOrganisation>()), Times.AtLeast(2));
 
         }
 

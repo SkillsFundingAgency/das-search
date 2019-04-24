@@ -84,6 +84,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddTransient<IGetFrameworks, FrameworkApiRepository>();
             services.AddTransient<IGetStandards, StandardApiRepository>();
+            services.AddTransient<IGetAssessmentOrganisations, AssessmentOrganisationApiRepository>();
             services.AddTransient<IApprenticeshipProviderRepository, ApprenticeshipProviderApiRepository>();
 
             services.AddTransient<IProviderNameSearchProvider, ProviderNameSearchProvider>();
@@ -91,6 +92,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IStandardMapping, StandardMapping>();
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();
             services.AddTransient<IProviderMapping, ProviderMapping>();
+            services.AddTransient<IAssessmentOrganisationMapping, AssessmentOrganisationMapping>();
             services.AddTransient<IProviderNameSearchMapping, ProviderNameSearchMapping>();
             services.AddTransient<IApprenticeshipSearchResultsMapping, ApprenticeshipSearchResultsMapping>();
             services.AddTransient<IApprenticeshipSearchResultsItemMapping, ApprenticeshipSearchResultsItemMapping>();

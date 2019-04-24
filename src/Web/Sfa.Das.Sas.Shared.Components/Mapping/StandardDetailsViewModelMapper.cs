@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             _assessmentOrganisationViewModelMapper = assessmentOrganisationViewModelMapper;
         }
 
-        public StandardDetailsViewModel Map(Standard item, IList<Organisation> assessmentOrganisations)
+        public StandardDetailsViewModel Map(Standard item, IEnumerable<AssessmentOrganisation> assessmentOrganisations)
         {
             if (item == null) return null;
 
