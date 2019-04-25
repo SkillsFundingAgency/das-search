@@ -10,7 +10,6 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
         {
             var item = new FatSearchResultsItemViewModel()
             {
-                CssClasses = cssClasses,
                 Id = source.Id,
                 Title = source.Title,
                 Level = source.Level,

@@ -48,7 +48,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         {
             var result = _sut.Map(_itemToMap, _cssClassMock.Object);
 
-            result.CssClasses.Should().NotBeNull();
             result.ApprenticeshipType.Should().Be(_itemToMap.ApprenticeshipType);
             result.Title.Should().Be(_itemToMap.Title);
             result.Duration.Should().Be(_itemToMap.Duration);
