@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\" />
+  </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 ﻿namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
 {
-    public interface ICssClasses
+    public interface ICssViewModel
     {
-        IUtilitiesCssClasses UtilitiesCss { get; }
+        IUtilitiesCssViewModel UtilitiesCss { get; }
         string ClassModifier { get; set; }
         string ClassPrefix { get; }
         string Button { get; }
@@ -10,6 +10,7 @@
         string FormGroup { get; }
         string Link { get; }
         string List { get; }
+        string ListBullet { get; }
         string ListNumber { get; }
         string SearchList { get; }
         string WarningText { get; }
@@ -19,5 +20,9 @@
         string HeadingSmall { get; }
         string HeadingXSmall { get; }
 
+        string Details { get; }
+        string DetailsSummary { get; }
+        string DetailsSummaryText { get; }
+        string DetailsText { get; }
     }
 }

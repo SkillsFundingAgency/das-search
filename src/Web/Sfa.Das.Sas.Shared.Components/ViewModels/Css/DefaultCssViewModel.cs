@@ -1,20 +1,20 @@
 ﻿using System;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 
-namespace Sfa.Das.Sas.Shared.Components.Domain
+namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 {
-    public class DefaultCssClasses : ICssClasses
+    public class DefaultCssViewModel : ICssViewModel
     {
-        public DefaultCssClasses()
+        public DefaultCssViewModel()
         {
 
         }
-        public DefaultCssClasses(string classPrefix)
+        public DefaultCssViewModel(string classPrefix)
         {
             ClassPrefix = classPrefix;
         }
 
-        public IUtilitiesCssClasses UtilitiesCss => new DefaultUtilitiesCssClasses();
+        public IUtilitiesCssViewModel UtilitiesCss => new DefaultUtilitiesCssViewModel();
         public string ClassModifier { get; set; } = string.Empty;
         public string ClassPrefix { get; set; } = "govuk-";
 
@@ -52,6 +52,8 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
             }
         }
 
+        public string ListBullet => $"{ClassPrefix}list--bullet";
+
         public string ListNumber => $"{ClassPrefix}list--number";
         public string SearchList
         {
@@ -75,5 +77,9 @@ namespace Sfa.Das.Sas.Shared.Components.Domain
         public string HeadingXLarge => $"{_heading}-xl";
         public string HeadingSmall => $"{_heading}-s";
         public string HeadingXSmall => $"{_heading}-xs";
+        public string Details => $"{ClassPrefix}details";
+        public string DetailsSummary => $"{Details}__summary";
+        public string DetailsSummaryText => $"{Details}__summary-text";
+        public string DetailsText => $"{Details}__text";
     }
 }

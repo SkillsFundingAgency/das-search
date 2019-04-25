@@ -4,8 +4,9 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
-    public interface IFatSearchResultsItemViewModelMapper
+    public interface IFatSearchResultsViewModelMapper
     {
-        FatSearchResultsItemViewModel Map(ApprenticeshipSearchResultsItem item,ICssClasses cssClasses);
+        FatSearchResultsViewModel Map(ApprenticeshipSearchResults item,ICssViewModel cssViewModel);
+
     }
 }

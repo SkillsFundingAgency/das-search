@@ -1,4 +1,4 @@
-﻿namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
+﻿namespace Sfa.Das.Sas.Shared.Components.ViewModels
 {
     public class SearchQueryViewModel
     {

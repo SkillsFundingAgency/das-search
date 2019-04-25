@@ -6,11 +6,10 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public class FatSearchResultsItemViewModelMapper : IFatSearchResultsItemViewModelMapper
     {
-        public FatSearchResultsItemViewModel Map(ApprenticeshipSearchResultsItem source, ICssClasses cssClasses)
+        public FatSearchResultsItemViewModel Map(ApprenticeshipSearchResultsItem source, ICssViewModel cssViewModel)
         {
             var item = new FatSearchResultsItemViewModel()
             {
-                CssClasses = cssClasses,
                 Id = source.Id,
                 Title = source.Title,
                 Level = source.Level,
