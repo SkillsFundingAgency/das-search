@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public interface IFatSearchResultsViewModelMapper
     {
-        FatSearchResultsViewModel Map(ApprenticeshipSearchResults item,ICssClasses cssClasses);
+        FatSearchResultsViewModel Map(ApprenticeshipSearchResults item,ICssViewModel cssViewModel);
 
     }
 }

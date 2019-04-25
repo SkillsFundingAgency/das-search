@@ -14,14 +14,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
     {
         private FatSearchResultsItemViewModelMapper _sut;
         private ApprenticeshipSearchResultsItem _itemToMap;
-        private Mock<ICssClasses> _cssClassMock;
+        private Mock<ICssViewModel> _cssClassMock;
 
         [SetUp]
         public void Setup()
         {
             _sut = new FatSearchResultsItemViewModelMapper();
 
-            _cssClassMock = new Mock<ICssClasses>();
+            _cssClassMock = new Mock<ICssViewModel>();
 
             _itemToMap = new ApprenticeshipSearchResultsItem()
             {

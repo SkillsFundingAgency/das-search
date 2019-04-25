@@ -1,8 +1,8 @@
 ﻿namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
 {
-    public interface ICssClasses
+    public interface ICssViewModel
     {
-        IUtilitiesCssClasses UtilitiesCss { get; }
+        IUtilitiesCssViewModel UtilitiesCss { get; }
         string ClassModifier { get; set; }
         string ClassPrefix { get; }
         string Button { get; }

@@ -1,6 +1,6 @@
 ﻿namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
 {
-    public interface IUtilitiesCssClasses
+    public interface IUtilitiesCssViewModel
     {
         string ClassPrefix { get; set; }
         string FontWeightBold { get; }

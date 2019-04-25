@@ -1,20 +1,20 @@
 ﻿using System;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 
-namespace Sfa.Das.Sas.Shared.Components.Domain
+namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 {
-    public class DefaultCssClasses : ICssClasses
+    public class DefaultCssViewModel : ICssViewModel
     {
-        public DefaultCssClasses()
+        public DefaultCssViewModel()
         {
 
         }
-        public DefaultCssClasses(string classPrefix)
+        public DefaultCssViewModel(string classPrefix)
         {
             ClassPrefix = classPrefix;
         }
 
-        public IUtilitiesCssClasses UtilitiesCss => new DefaultUtilitiesCssClasses();
+        public IUtilitiesCssViewModel UtilitiesCss => new DefaultUtilitiesCssViewModel();
         public string ClassModifier { get; set; } = string.Empty;
         public string ClassPrefix { get; set; } = "govuk-";
 

@@ -21,6 +21,7 @@ using Sfa.Das.Sas.Shared.Components.Domain;
 using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
@@ -36,7 +37,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
 
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
-            services.AddTransient<ICssClasses, DefaultCssClasses>();
+            services.AddTransient<ICssViewModel, DefaultCssViewModel>();
             services.AddTransient<IValidation, Validation>();
             services.AddTransient<AbstractValidator<GetFrameworkQuery>,FrameworkQueryValidator>();
             //Application DI

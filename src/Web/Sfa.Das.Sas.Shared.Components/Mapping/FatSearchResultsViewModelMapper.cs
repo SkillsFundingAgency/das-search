@@ -14,11 +14,11 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             _fatSearchResultsItemViewModelMapper = fatSearchResultsItemViewModelMapper;
         }
 
-        public FatSearchResultsViewModel Map(ApprenticeshipSearchResults source, ICssClasses cssClasses)
+        public FatSearchResultsViewModel Map(ApprenticeshipSearchResults source, ICssViewModel cssViewModel)
         {
             var item = new FatSearchResultsViewModel()
             {
-                SearchResults = source.Results.Select(s => _fatSearchResultsItemViewModelMapper.Map(s, cssClasses)),
+                SearchResults = source.Results.Select(s => _fatSearchResultsItemViewModelMapper.Map(s, cssViewModel)),
                 TotalResults = source.TotalResults,
                 LastPage = source.LastPage,
                 SearchQuery = {
