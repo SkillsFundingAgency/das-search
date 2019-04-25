@@ -1,20 +1,20 @@
 ﻿using System;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.Domain
 {
-    public class DefaultTableCssClasses : ITableCssClasses
+    public class DefaultTableCssViewModel : ITableCssViewModel
     {
-        public DefaultTableCssClasses()
+        public DefaultTableCssViewModel()
         {
 
         }
-        public DefaultTableCssClasses(string classPrefix)
+        public DefaultTableCssViewModel(string classPrefix)
         {
             _classPrefix = classPrefix;
         }
 
-        public string _classPrefix { get; }
+        private string _classPrefix { get; }
         public string Table => $"{_classPrefix}table";
         public string Head => $"{_classPrefix}table__head";
         public string Header => $"{_classPrefix}table__header";

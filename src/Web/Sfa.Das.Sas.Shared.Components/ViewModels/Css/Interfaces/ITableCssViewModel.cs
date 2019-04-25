@@ -1,8 +1,7 @@
-﻿namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
+﻿namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 {
-    public interface ITableCssClasses
+    public interface ITableCssViewModel
     {
-        string _classPrefix { get; }
         string Table { get; }
         string Head { get; }
         string Header { get; }

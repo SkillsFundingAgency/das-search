@@ -4,13 +4,13 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 {
@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 
             _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).Returns(_searchResults);
 
-            _FatResultsViewModelMock.Setup(s => s.Map(_searchResults, It.IsAny<ICssClasses>())).Returns(_searchResultsViewModel);
+            _FatResultsViewModelMock.Setup(s => s.Map(_searchResults, It.IsAny<ICssViewModel>())).Returns(_searchResultsViewModel);
 
             _sut = new FatSearchResultsViewComponent(_cssClasses.Object, _apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object)
             {
@@ -74,7 +74,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 
             result.Should().BeOfType<ViewViewComponentResult>();
 
-            _FatResultsViewModelMock.Verify(v => v.Map(_searchResults,It.IsAny<ICssClasses>()));
+            _FatResultsViewModelMock.Verify(v => v.Map(_searchResults,It.IsAny<ICssViewModel>()));
 
 
         }

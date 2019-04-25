@@ -1,16 +1,15 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public class FatSearchResultsItemViewModelMapper : IFatSearchResultsItemViewModelMapper
     {
-        public FatSearchResultsItemViewModel Map(ApprenticeshipSearchResultsItem source, ICssClasses cssClasses)
+        public FatSearchResultsItemViewModel Map(ApprenticeshipSearchResultsItem source, ICssViewModel cssViewModel)
         {
             var item = new FatSearchResultsItemViewModel()
             {
-                CssClasses = cssClasses,
                 Id = source.Id,
                 Title = source.Title,
                 Level = source.Level,

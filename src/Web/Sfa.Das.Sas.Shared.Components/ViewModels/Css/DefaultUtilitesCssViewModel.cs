@@ -1,14 +1,14 @@
-﻿using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+﻿using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
-namespace Sfa.Das.Sas.Shared.Components.Domain
+namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 {
-    public class DefaultUtilitiesCssClasses : IUtilitiesCssClasses
+    public class DefaultUtilitiesCssViewModel : IUtilitiesCssViewModel
     {
-        public DefaultUtilitiesCssClasses()
+        public DefaultUtilitiesCssViewModel()
         {
 
         }
-        public DefaultUtilitiesCssClasses(string classPrefix)
+        public DefaultUtilitiesCssViewModel(string classPrefix)
         {
             ClassPrefix = classPrefix;
         }

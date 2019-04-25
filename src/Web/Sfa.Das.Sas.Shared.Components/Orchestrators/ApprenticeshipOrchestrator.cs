@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -13,13 +10,6 @@ using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 {
-    public interface IApprenticeshipOrchestrator
-    {
-        Task<FrameworkDetailsViewModel> GetFramework(string id);
-        Task<StandardDetailsViewModel> GetStandard(string id);
-        ApprenticeshipType GetApprenticeshipType(string id);
-    }
-
     public class ApprenticeshipOrchestrator : IApprenticeshipOrchestrator
     {
         private readonly IMediator _mediator;
@@ -47,21 +37,21 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                     _logger.Info("404 - Framework id has wrong format");
 
 
-                    throw new Exception($"Framework id: {id} has wrong format");
+                    throw new ArgumentException($"Framework id: {id} has wrong format");
                 
                 case GetFrameworkResponse.ResponseCodes.FrameworkNotFound:
                     message = $"Cannot find framework: {id}";
 
                     _logger.Warn($"404 - {message}");
 
-                    throw new Exception(message);
+                    throw new ArgumentException(message);
               
                 case GetFrameworkResponse.ResponseCodes.Gone:
                     message = $"Expired framework request: {id}";
 
                     _logger.Warn($"410 - {message}");
 
-                    throw new Exception(message);
+                    throw new ArgumentException(message);
                  
                 case GetFrameworkResponse.ResponseCodes.Success:
                     _logger.Info($"Mapping Framework {id}");
