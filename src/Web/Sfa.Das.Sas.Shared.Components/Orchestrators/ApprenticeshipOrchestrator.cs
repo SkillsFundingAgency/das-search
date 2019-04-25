@@ -35,21 +35,21 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                     _logger.Info("404 - Framework id has wrong format");
 
 
-                    throw new Exception($"Framework id: {id} has wrong format");
+                    throw new ArgumentException($"Framework id: {id} has wrong format");
                 
                 case GetFrameworkResponse.ResponseCodes.FrameworkNotFound:
                     message = $"Cannot find framework: {id}";
 
                     _logger.Warn($"404 - {message}");
 
-                    throw new Exception(message);
+                    throw new ArgumentException(message);
               
                 case GetFrameworkResponse.ResponseCodes.Gone:
                     message = $"Expired framework request: {id}";
 
                     _logger.Warn($"410 - {message}");
 
-                    throw new Exception(message);
+                    throw new ArgumentException(message);
                  
                 case GetFrameworkResponse.ResponseCodes.Success:
                     _logger.Info($"Mapping Framework {id}");

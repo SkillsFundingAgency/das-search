@@ -53,7 +53,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             Action result = () => _sut.GetFramework(_frameworkId).Wait();
 
-           result.Should().Throw<Exception>()
+           result.Should().Throw<ArgumentException>()
                .WithMessage("Framework id: 420-2-1 has wrong format");
         }
 
@@ -63,7 +63,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             Action result = () => _sut.GetFramework("530-2-1").Wait();
 
-            result.Should().Throw<Exception>()
+            result.Should().Throw<ArgumentException>()
                 .WithMessage("Cannot find framework: 530-2-1");
         }
         [Test]
@@ -72,7 +72,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             Action result = () => _sut.GetFramework("130-2-1").Wait();
 
-            result.Should().Throw<Exception>()
+            result.Should().Throw<ArgumentException>()
                 .WithMessage("Expired framework request: 130-2-1");
         }
 
