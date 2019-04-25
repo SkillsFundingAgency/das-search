@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -13,12 +10,6 @@ using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 {
-    public interface IApprenticeshipOrchestrator
-    {
-        Task<FrameworkDetailsViewModel> GetFramework(string id);
-        ApprenticeshipType GetApprenticeshipType(string id);
-    }
-
     public class ApprenticeshipOrchestrator : IApprenticeshipOrchestrator
     {
         private readonly IMediator _mediator;
