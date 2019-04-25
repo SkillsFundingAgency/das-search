@@ -27,10 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private ApprenticeshipOrchestrator _sut;
         private string _frameworkId = "420-2-1";
 
-        private FrameworkDetailsViewModel _framework = new FrameworkDetailsViewModel()
-        {
-            
-        };
+        private FrameworkDetailsViewModel _framework = new FrameworkDetailsViewModel();
 
         [SetUp]
         public void Setup()
