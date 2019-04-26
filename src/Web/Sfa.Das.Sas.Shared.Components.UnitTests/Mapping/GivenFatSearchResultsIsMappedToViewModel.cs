@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
 
             _fatSearchItemMapperMock = new Mock<IFatSearchResultsItemViewModelMapper>(MockBehavior.Strict);
 
-            _fatSearchItemMapperMock.Setup(s => s.Map(It.IsAny<ApprenticeshipSearchResultsItem>(), It.IsAny<ICssViewModel>())).Returns(new FatSearchResultsItemViewModel(){Title = "Apprenticeship"});
+            _fatSearchItemMapperMock.Setup(s => s.Map(It.IsAny<ApprenticeshipSearchResultsItem>())).Returns(new FatSearchResultsItemViewModel(){Title = "Apprenticeship"});
 
             _sut = new FatSearchResultsViewModelMapper(_fatSearchItemMapperMock.Object);
 
@@ -48,7 +48,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         [Test]
         public void When_Mapping_Then_FatSearchResultsItemViewModel_Is_Returned()
         {
-          var result =  _sut.Map(_itemToMap, _cssClassMock.Object);
+          var result =  _sut.Map(_itemToMap);
 
           result.Should().BeOfType<FatSearchResultsViewModel>();
           result.Should().NotBeNull();
@@ -57,7 +57,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         [Test]
         public void When_Mapping_Then_Items_Are_Mapped()
         {
-            var result = _sut.Map(_itemToMap, _cssClassMock.Object);
+            var result = _sut.Map(_itemToMap);
 
             result.SearchQuery.Page.Should().Be(_itemToMap.ActualPage);
             result.SearchQuery.Keywords.Should().Be(_itemToMap.SearchTerm);
@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         {
             _itemToMap.SortOrder = null;
 
-            var result = _sut.Map(_itemToMap, _cssClassMock.Object);
+            var result = _sut.Map(_itemToMap);
 
             result.SearchQuery.Page.Should().Be(_itemToMap.ActualPage);
             result.SearchQuery.Keywords.Should().Be(_itemToMap.SearchTerm);
