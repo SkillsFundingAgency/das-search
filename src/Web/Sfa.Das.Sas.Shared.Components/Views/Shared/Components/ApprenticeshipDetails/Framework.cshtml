@@ -1,6 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 @model Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails.FrameworkDetailsViewModel;
-@inject Sfa.Das.Sas.Shared.Components.Domain.Interfaces.ICssViewModel CssViewModel;
+@inject ICssViewModel CssViewModel;
 
 
 <h2 class="@CssViewModel.HeadingLarge @CssViewModel.UtilitiesCss.Margin("top",0)">Summary of this apprenticeship</h2>

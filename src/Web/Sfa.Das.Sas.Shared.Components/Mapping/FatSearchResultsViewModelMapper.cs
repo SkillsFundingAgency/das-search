@@ -1,7 +1,7 @@
 ﻿using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using System.Linq;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
@@ -14,11 +14,11 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             _fatSearchResultsItemViewModelMapper = fatSearchResultsItemViewModelMapper;
         }
 
-        public FatSearchResultsViewModel Map(ApprenticeshipSearchResults source, ICssViewModel cssViewModel)
+        public FatSearchResultsViewModel Map(ApprenticeshipSearchResults source)
         {
             var item = new FatSearchResultsViewModel()
             {
-                SearchResults = source.Results.Select(s => _fatSearchResultsItemViewModelMapper.Map(s, cssViewModel)),
+                SearchResults = source.Results.Select(s => _fatSearchResultsItemViewModelMapper.Map(s)),
                 TotalResults = source.TotalResults,
                 LastPage = source.LastPage,
                 SearchQuery = {

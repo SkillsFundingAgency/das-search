@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
+using Sfa.Das.Sas.Core.Domain;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
 
@@ -23,14 +25,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     {
         private GetStandardHandler _sut;
         private Mock<IGetStandards> _mockGetStandards;
-        private Mock<IAssessmentOrgsApiClient> _mockAssessmentOrgsClient;
+        private Mock<IGetAssessmentOrganisations> _getAssessmentOrganisationsMock;
         [SetUp]
         public void Init()
         {
             _mockGetStandards = new Mock<IGetStandards>();
-            _mockAssessmentOrgsClient = new Mock<IAssessmentOrgsApiClient>();
+            _getAssessmentOrganisationsMock = new Mock<IGetAssessmentOrganisations>();
 
-            _sut = new GetStandardHandler(_mockGetStandards.Object, _mockAssessmentOrgsClient.Object, Mock.Of<ILog>());
+
+            _sut = new GetStandardHandler(_mockGetStandards.Object, Mock.Of<ILog>(),_getAssessmentOrganisationsMock.Object);
         }
 
         [Test]
@@ -92,43 +95,46 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnFoundStandardAssessmentOrgsInResponse()
         {
-            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var queryId = 1;
+            var query = new GetStandardQuery() { Id = queryId.ToString(), Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
-            var orgs = new List<Organisation> { new Organisation() };
+            var orgs = new List<AssessmentOrganisation> { new AssessmentOrganisation() };
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
-            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns(orgs);
+            _getAssessmentOrganisationsMock.Setup(x => x.GetByStandardId(queryId)).ReturnsAsync(orgs);
             var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
-            _mockAssessmentOrgsClient.VerifyAll();
-            response.AssessmentOrganisations.Count.Should().Be(1);
+            _getAssessmentOrganisationsMock.VerifyAll();
+            response.AssessmentOrganisations.Count().Should().Be(1);
         }
 
         [Test]
         public void ShouldReturnNoFoundStandardAssessmentOrgsIfNoneInResponse()
         {
-            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var queryId = 1;
+            var query = new GetStandardQuery() { Id = queryId.ToString(), Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
-            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Returns((IEnumerable<Organisation>)null);
+            _getAssessmentOrganisationsMock.Setup(x => x.GetByStandardId(queryId)).ReturnsAsync(new List<AssessmentOrganisation>());
             var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
-            _mockAssessmentOrgsClient.VerifyAll();
-            response.AssessmentOrganisations.Count.Should().Be(0);
+            _getAssessmentOrganisationsMock.VerifyAll();
+            response.AssessmentOrganisations.Count().Should().Be(0);
         }
 
         [Test]
         public void ShouldGenerateAHttpRequestExceptionIfHttpExceptionThrownByAssessmentOrgsClient()
         {
-            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var queryId = 1;
+            var query = new GetStandardQuery() { Id = queryId.ToString(), Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
-            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(new HttpRequestException());
+            _getAssessmentOrganisationsMock.Setup(x => x.GetByStandardId(queryId)).Throws(new HttpRequestException());
             var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
-            _mockAssessmentOrgsClient.VerifyAll();
+            _getAssessmentOrganisationsMock.VerifyAll();
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.HttpRequestException);
             response.AssessmentOrganisations.Should().BeNull();
@@ -137,15 +143,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldGenerateAnEntityNotFoundExceptionIfEntityNotFoundExceptionThrownByAssessmentOrgsClient()
         {
+            var queryId = 1;
             var entityNotfoundException = new EntityNotFoundException(string.Empty, new Exception());
-            var query = new GetStandardQuery() { Id = "1", Keywords = "Test" };
+            var query = new GetStandardQuery() { Id = queryId.ToString(), Keywords = "Test" };
             var standard = new Standard { StandardId = query.Id, IsActiveStandard = true};
             _mockGetStandards.Setup(x => x.GetStandardById(query.Id)).Returns(standard);
-            _mockAssessmentOrgsClient.Setup(x => x.ByStandard(query.Id)).Throws(entityNotfoundException);
+            _getAssessmentOrganisationsMock.Setup(x => x.GetByStandardId(queryId)).Throws(entityNotfoundException);
             var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetStandards.VerifyAll();
-            _mockAssessmentOrgsClient.VerifyAll();
+            _getAssessmentOrganisationsMock.VerifyAll();
 
             response.StatusCode.Should().Be(GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound);
             response.AssessmentOrganisations.Should().BeEquivalentTo(new List<Organisation>());

@@ -1,4 +1,4 @@
-﻿namespace Sfa.Das.Sas.Shared.Components.Domain.Interfaces
+﻿namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 {
     public interface IUtilitiesCssViewModel
     {

@@ -4,13 +4,14 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 {
@@ -18,27 +19,22 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
     public class FatSearchResultsViewComponentTests : ViewComponentTestsBase
     {
         private FatSearchResultsViewComponent _sut;
-        private Mock<IApprenticeshipSearchService> _apprenticeshipSearchServicetMock;
-        private Mock<IFatSearchResultsViewModelMapper> _FatResultsViewModelMock;
+        private Mock<IFatOrchestrator> _fatOrchestratorMock;
 
-        private  SearchQueryViewModel _searchQueryViewModel = new SearchQueryViewModel();
-
-        private ApprenticeshipSearchResults _searchResults = new ApprenticeshipSearchResults();
-        private FatSearchResultsViewModel _searchResultsViewModel = new FatSearchResultsViewModel();
+        private readonly SearchQueryViewModel _searchQueryViewModel = new SearchQueryViewModel();
+        private readonly FatSearchResultsViewModel _searchResultsViewModel = new FatSearchResultsViewModel();
 
         [SetUp]
         public void Setup()
         {
             base.Setup();
 
-            _apprenticeshipSearchServicetMock = new Mock<IApprenticeshipSearchService>(MockBehavior.Strict);
-            _FatResultsViewModelMock = new Mock<IFatSearchResultsViewModelMapper>(MockBehavior.Strict);
+            _fatOrchestratorMock = new Mock<IFatOrchestrator>(MockBehavior.Strict);
 
-            _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).Returns(_searchResults);
+            _fatOrchestratorMock.Setup(s => s.GetSearchResults(It.IsAny<SearchQueryViewModel>())).Returns(_searchResultsViewModel);
 
-            _FatResultsViewModelMock.Setup(s => s.Map(_searchResults, It.IsAny<ICssViewModel>())).Returns(_searchResultsViewModel);
 
-            _sut = new FatSearchResultsViewComponent(_cssClasses.Object, _apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object)
+            _sut = new FatSearchResultsViewComponent(_fatOrchestratorMock.Object)
             {
                 ViewComponentContext = _viewComponentContext
             };
@@ -54,29 +50,17 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
             result.Should().BeOfType<ViewViewComponentResult>();
 
             result.ViewData.Model.Should().BeOfType<FatSearchResultsViewModel>();
+            result.ViewData.Model.Should().Be(_searchResultsViewModel);
         }
 
         [Test]
-        public async Task Then_Apprenticeships_Are_Searched_By_Keyword()
+        public async Task Then_Apprenticeships_Are_Searched()
         {
             _searchQueryViewModel.Keywords = "keyword";
 
             var result = await _sut.InvokeAsync(_searchQueryViewModel) as ViewViewComponentResult;
 
-            _apprenticeshipSearchServicetMock.Verify(s => s.SearchByKeyword(_searchQueryViewModel.Keywords, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
-        }
-        [Test]
-        public async Task Then_Search_Results_Are_Mapped_To_ViewModel()
-        {
-            _searchQueryViewModel.Keywords = "keyword";
-
-            var result = await _sut.InvokeAsync(_searchQueryViewModel) as ViewViewComponentResult;
-
-            result.Should().BeOfType<ViewViewComponentResult>();
-
-            _FatResultsViewModelMock.Verify(v => v.Map(_searchResults,It.IsAny<ICssViewModel>()));
-
-
+            _fatOrchestratorMock.Verify(s => s.GetSearchResults(_searchQueryViewModel));
         }
     }
 }

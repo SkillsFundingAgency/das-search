@@ -28,6 +28,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
                     return View("Framework",await _apprenticeshipOrchestrator.GetFramework(queryModel.Id));
                 
                 case ApprenticeshipType.Standard:
+                    return View("Standard", await _apprenticeshipOrchestrator.GetStandard(queryModel.Id));
                     break;
             }
             return null;

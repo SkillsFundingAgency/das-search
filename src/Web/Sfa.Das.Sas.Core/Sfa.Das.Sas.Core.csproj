@@ -163,6 +163,7 @@
     <Compile Include="Configuration\IFatConfigurationSettings.cs" />
     <Compile Include="Configuration\IConfigurationSettings.cs" />
     <Compile Include="DependencyResolution\CoreRegistry.cs" />
+    <Compile Include="Domain\AssessmentOrganisation.cs" />
     <Compile Include="Domain\Helpers\IUrlEncoder.cs" />
     <Compile Include="Domain\Helpers\UrlEncoder.cs" />
     <Compile Include="Domain\Model\Address.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Domain\Repositories\IApprenticeshipProviderRepository.cs" />
     <Compile Include="Domain\Services\IGetProviderDetails.cs" />
     <Compile Include="Domain\Services\IGetProviders.cs" />
+    <Compile Include="Domain\Services\IGetAssessmentOrganisations.cs" />
     <Compile Include="Domain\Services\IGetStandards.cs" />
     <Compile Include="Domain\Services\IGetFrameworks.cs" />
     <Compile Include="IRetryWebRequests.cs" />

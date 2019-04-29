@@ -1,4 +1,4 @@
-﻿using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+﻿using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 {

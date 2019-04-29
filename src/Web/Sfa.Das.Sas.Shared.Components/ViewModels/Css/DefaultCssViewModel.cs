@@ -1,5 +1,6 @@
 ﻿using System;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
+using Sfa.Das.Sas.Shared.Components.Domain;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 {
@@ -13,7 +14,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         {
             ClassPrefix = classPrefix;
         }
-
+        public ITableCssViewModel Table => new DefaultTableCssViewModel(ClassPrefix);
         public IUtilitiesCssViewModel UtilitiesCss => new DefaultUtilitiesCssViewModel();
         public string ClassModifier { get; set; } = string.Empty;
         public string ClassPrefix { get; set; } = "govuk-";

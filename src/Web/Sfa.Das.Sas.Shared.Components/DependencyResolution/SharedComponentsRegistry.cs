@@ -18,10 +18,10 @@ using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using Sfa.Das.Sas.Infrastructure.Providers;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Shared.Components.Domain;
-using Sfa.Das.Sas.Shared.Components.Domain.Interfaces;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Css;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
@@ -61,6 +61,8 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
             services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
             services.AddTransient<IFrameworkDetailsViewModelMapper, FrameworkDetailsViewModelMapper>();
+            services.AddTransient<IStandardDetailsViewModelMapper, StandardsDetailsViewModelMapper>();
+            services.AddTransient<IAssessmentOrganisationViewModelMapper, AssessmentOrganisationViewModelMapper>();
         }
 
         private static void AddApplicationServices(IServiceCollection services)
@@ -83,6 +85,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddTransient<IGetFrameworks, FrameworkApiRepository>();
             services.AddTransient<IGetStandards, StandardApiRepository>();
+            services.AddTransient<IGetAssessmentOrganisations, AssessmentOrganisationApiRepository>();
             services.AddTransient<IApprenticeshipProviderRepository, ApprenticeshipProviderApiRepository>();
 
             services.AddTransient<IProviderNameSearchProvider, ProviderNameSearchProvider>();
@@ -90,6 +93,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IStandardMapping, StandardMapping>();
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();
             services.AddTransient<IProviderMapping, ProviderMapping>();
+            services.AddTransient<IAssessmentOrganisationMapping, AssessmentOrganisationMapping>();
             services.AddTransient<IProviderNameSearchMapping, ProviderNameSearchMapping>();
             services.AddTransient<IApprenticeshipSearchResultsMapping, ApprenticeshipSearchResultsMapping>();
             services.AddTransient<IApprenticeshipSearchResultsItemMapping, ApprenticeshipSearchResultsItemMapping>();
@@ -129,6 +133,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
         private static void AddOrchesratorServices(IServiceCollection services)
         {
             services.AddTransient<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
+            services.AddTransient<IFatOrchestrator, FatOrchestrator>();
 
         }
     }
