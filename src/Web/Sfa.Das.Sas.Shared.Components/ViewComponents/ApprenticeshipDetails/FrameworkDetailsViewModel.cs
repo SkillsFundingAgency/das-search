@@ -6,7 +6,7 @@ using Sfa.Das.Sas.Resources;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
 {
-    public class FrameworkDetailsViewModel : ApprenticeshipDetailBaseClass
+    public class FrameworkDetailsViewModel : ApprenticeshipDetailBase
     {  
         public IEnumerable<string> JobRoles { get; set; }
         public IEnumerable<string> CompetencyQualification{ get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
 {
-    public class AssessmentOrganisationViewModel : ApprenticeshipDetailBaseClass
+    public class AssessmentOrganisationViewModel : ApprenticeshipDetailBase
     {
         public string Name { get; set; }
         public string Website { get; set; }

@@ -4,7 +4,7 @@ using Sfa.Das.Sas.Resources;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
 {
-    public class ApprenticeshipDetailBaseClass
+    public class ApprenticeshipDetailBase
     {
         private string _professionalRegistration;
 

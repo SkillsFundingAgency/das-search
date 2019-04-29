@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
 {
-    public class StandardDetailsViewModel : ApprenticeshipDetailBaseClass
+    public class StandardDetailsViewModel : ApprenticeshipDetailBase
     {
 
         public string EntryRequirements { get; set; }
