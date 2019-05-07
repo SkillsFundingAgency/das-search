@@ -7,8 +7,8 @@
 <h2 class="@CssViewModel.HeadingLarge @CssViewModel.UtilitiesCss.Margin("top",0)">Summary of this apprenticeship</h2>
 
 
-    @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
-    {
+@if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
+{
     <div class="@CssViewModel.WarningText">
         <span class="@(CssViewModel.WarningText)__icon" aria-hidden="true"></span>
         <strong class="@(CssViewModel.WarningText)__text">
@@ -16,7 +16,7 @@
             This apprenticeship is closed to new starters from @Model.EffectiveTo.Value.ToLongDateString()
         </strong>
     </div>
-    }
+}
 <dl class="@CssViewModel.List das-definition-list__results">
     <dt>Title</dt>
     <dd>@Model.Title</dd>
@@ -39,62 +39,65 @@
     <dd>Set by employer.</dd>
 
     @if (Model.JobRoles?.Any() == true)
-        {
-    <dt>Suitable roles for apprentices</dt>
-    <dd>
-        <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-            @foreach (var jobRole in Model.JobRoles)
-            {
-                <li>@jobRole</li>
-            }
-        </ul>
-        <p> Your chosen training provider can advise you about the kinds of skills apprentices will learn.</p>
-    </dd>
-        }
+    {
+        <dt>Suitable roles for apprentices</dt>
+        <dd>
+            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                @foreach (var jobRole in Model.JobRoles)
+                {
+                    <li>@jobRole</li>
+                }
+            </ul>
+            <p> Your chosen training provider can advise you about the kinds of skills apprentices will learn.</p>
+        </dd>
+    }
     <dt>Qualifications</dt>
     <dd>
         @if (Model.CompetencyQualification?.Any() == true)
-            {
-        <p>Apprentices will achieve a practical (or 'competence') qualification:</p>
-        <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-            @foreach (var competencyQualification in Model.CompetencyQualification)
-                    {
-            <li>@competencyQualification</li>
-                    }
-        </ul>
-            }
+        {
+            <p>Apprentices will achieve a practical (or 'competence') qualification:</p>
+            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                @foreach (var competencyQualification in Model.CompetencyQualification)
+                {
+                    <li>@competencyQualification</li>
+                }
+            </ul>
+        }
 
         @if (Model.KnowledgeQualification?.Any() == true)
-            {
-        <p>Apprentices will also achieve a theory-based (or 'knowledge') qualification:</p>
-        <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-            @foreach (var qualification in Model.KnowledgeQualification)
-                    {
-            <li>@qualification</li>
-                    }
-        </ul>
-            }
+        {
+            <p>Apprentices will also achieve a theory-based (or 'knowledge') qualification:</p>
+            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                @foreach (var qualification in Model.KnowledgeQualification)
+                {
+                    <li>@qualification</li>
+                }
+            </ul>
+        }
 
         @if (Model.CombinedQualification?.Any() == true)
-            {
-        <p>Apprentices will achieve a practical and theory-based (or 'combined') qualification:</p>
-        <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-            @foreach (var qualification in Model.CombinedQualification)
-                    {
-            <li>@qualification</li>
-                    }
-        </ul>
-            }
+        {
+            <p>Apprentices will achieve a practical and theory-based (or 'combined') qualification:</p>
+            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                @foreach (var qualification in Model.CombinedQualification)
+                {
+                    <li>@qualification</li>
+                }
+            </ul>
+        }
 
         @if (Model.CompletionQualifications != string.Empty)
-            {
-        <p>@Model.CompletionQualifications</p>
-            }
+        {
+            <p>@Model.CompletionQualifications</p>
+        }
 
     </dd>
 
     <dt>Professional registration</dt>
     <dd>@Model.ProfessionalRegistration</dd>
 
-   
+
 </dl>
+
+
+@await Component.InvokeAsync("SaveApprenticeship", Model.Id)
