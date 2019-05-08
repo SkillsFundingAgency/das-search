@@ -2,4 +2,7 @@
 
 
 
-@await Component.InvokeAsync("ApprenticeshipDetails", new { queryModel = Model})
+@await Component.InvokeAsync("ApprenticeshipDetails", new { queryModel = Model })
+
+
+@await Component.InvokeAsync("SaveApprenticeship", Model.Id)
