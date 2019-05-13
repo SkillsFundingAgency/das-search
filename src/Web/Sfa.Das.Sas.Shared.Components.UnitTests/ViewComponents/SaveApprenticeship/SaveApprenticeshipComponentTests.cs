@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         {
             base.Setup();
 
-            var config = new FatSharedComponentsConfiguration { EmployerFavouritesUrl = "http://employer-favourites" };
+            var config = new FatSharedComponentsConfiguration { SaveEmployerFavouritesUrl = "http://employer-favourites/save-apprenticeship-favourites" };
 
             _sut = new SaveApprenticeshipViewComponent(config)
             {

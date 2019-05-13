@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.SaveApprenticeship;
 using System;
 using System.Web;
@@ -17,17 +18,11 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket.SaveApprenticeship
 
         public IViewComponentResult Invoke(string apprenticeshipId)
         {
-            var saveUrl = new Uri(new Uri(_config.EmployerFavouritesUrl), "/save-apprenticeship-favourites");
-            var builder = new UriBuilder(saveUrl);
-            var query = HttpUtility.ParseQueryString(builder.Query);
-
-            query["apprenticeshipId"] = apprenticeshipId;
-
-            builder.Query = query.ToString();
+            var uriBuilder = new SaveApprenticeshipUrlBuilder(_config);
 
             var model = new SaveApprenticeshipViewModel
             {
-                SaveUrl = builder.Uri
+                SaveUrl = uriBuilder.GenerateSaveUrl(apprenticeshipId)
             };
 
             return View("Default", model);

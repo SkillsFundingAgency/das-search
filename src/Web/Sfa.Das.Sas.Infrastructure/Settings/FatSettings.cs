@@ -8,6 +8,6 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
     public sealed class FatSettings : IFatConfigurationSettings
     {
         public string FatApiBaseUrl => CloudConfigurationManager.GetSetting("ApprenticeshipApiBaseUrl");
-        public string EmployerFavouritesUrl => throw new System.NotImplementedException();
+        public string SaveEmployerFavouritesUrl => throw new System.NotImplementedException();
     }
 }
