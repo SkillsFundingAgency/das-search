@@ -28,10 +28,10 @@ else
     <ul class="das-pagination das-pagination--employer">
 
         <li class="das-pagination__list-item">
-        @if (Model.SearchQuery.Page > 1)
-        {
-            <a class="das-pagination__link das-pagination__link--previous" id="link-pagination-previous" href="@await GetPaginationBackLinkHref(Model.SearchQuery.Page, Model.SearchQuery.Keywords)">Previous page <span class="das-pagination__caption">@(Model.SearchQuery.Page - 1) of @Model.LastPage</span></a>
-        }
+            @if (Model.SearchQuery.Page > 1)
+            {
+                <a class="das-pagination__link das-pagination__link--previous" id="link-pagination-previous" href="@await GetPaginationBackLinkHref(Model.SearchQuery.Page, Model.SearchQuery.Keywords)">Previous page <span class="das-pagination__caption">@(Model.SearchQuery.Page - 1) of @Model.LastPage</span></a>
+            }
         </li>
 
 
