@@ -1,4 +1,5 @@
-﻿@model Sfa.Das.Sas.Shared.Components.ViewModels.ApprenticeshipDetailQueryViewModel
+﻿@using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search
+@model Sfa.Das.Sas.Shared.Components.ViewModels.ApprenticeshipDetailQueryViewModel
 
 
 
@@ -6,3 +7,5 @@
 
 
 @await Component.InvokeAsync("SaveApprenticeship", Model.Id)
+
+@await Component.InvokeAsync("TrainingProviderSearch", new {apprenticeshipId = Model.Id})
