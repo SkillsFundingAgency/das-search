@@ -1,0 +1,26 @@
+﻿using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
+
+namespace Sfa.Das.Sas.Shared.Components.Mapping
+{
+    public class TrainingProviderSearchResultsItemViewModelMapper : ITrainingProviderSearchResultsItemViewModelMapper
+    {
+
+        public TrainingProviderSearchResultsItem Map(ProviderSearchResultItem source)
+        {
+            var item = new TrainingProviderSearchResultsItem()
+            {
+                Ukprn = source.Ukprn,
+                Distance = source.Distance,
+                EmployerSatisfaction = source.EmployerSatisfaction,
+                LearnerSatisfaction = source.LearnerSatisfaction,
+                NationalProvider = source.NationalProvider,
+                OverallAchievementRate = source.OverallAchievementRate,
+                Name = source.ProviderName,
+                DeliveryModes = source.DeliveryModes,
+            };
+            return item;
+        }
+    }
+}

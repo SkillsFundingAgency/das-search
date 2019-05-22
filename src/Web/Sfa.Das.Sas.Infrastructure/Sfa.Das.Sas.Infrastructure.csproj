@@ -194,6 +194,10 @@
     <Compile Include="FeatureToggles\Elk5Feature.cs" />
     <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
     <Compile Include="Mapping\ApprenticeshipSearchResultsItemMapping.cs" />
+    <Compile Include="Mapping\IProviderSearchResultsMapper.cs" />
+    <Compile Include="Mapping\ISearchResultsMapping.cs" />
+    <Compile Include="Mapping\ProviderSearchResultsMapper.cs" />
+    <Compile Include="Mapping\SearchResultsMapping.cs" />
     <Compile Include="Mapping\ApprenticeshipSearchResultsMapping.cs" />
     <Compile Include="Mapping\IApprenticeshipSearchResultsItemMapping.cs" />
     <Compile Include="Mapping\IApprenticeshipSearchResultsMapping.cs" />
@@ -206,6 +210,7 @@
     <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
     <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />
     <Compile Include="Repositories\AssessmentOrganisationApiRepository.cs" />
+    <Compile Include="Repositories\ProviderLocationSearchApiProvider.cs" />
     <Compile Include="Repositories\ProviderElasticRepository.cs" />
     <Compile Include="Repositories\StandardElasticRepository.cs" />
     <Compile Include="Repositories\FrameworkElasticRepository.cs" />

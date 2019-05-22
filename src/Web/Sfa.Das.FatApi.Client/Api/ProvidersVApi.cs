@@ -434,9 +434,7 @@ namespace Sfa.Das.FatApi.Client.Api
             // to determine the Accept header
             String[] @accepts = new String[] {
                 "application/json",
-                "text/json",
-                "application/xml",
-                "text/xml"
+                "text/json"
             };
             
             foreach (var contentType in @contentTypes)

@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
     {
         public IActionResult Search(TrainingProviderSearchViewModel model)
         { 
-            return View("Components/TrainingProvider/SearchResults/Default", model);
+            return View("TrainingProvider/SearchResults", model);
         }
         
     }

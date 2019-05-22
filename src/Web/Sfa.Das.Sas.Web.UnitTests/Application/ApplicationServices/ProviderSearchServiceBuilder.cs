@@ -6,6 +6,7 @@
     using Moq;
     using Sas.ApplicationServices;
     using Sas.ApplicationServices.Settings;
+    using Sfa.Das.Sas.ApplicationServices.Models;
     using SFA.DAS.NLog.Logger;
 
     internal sealed class ProviderSearchServiceBuilder
@@ -16,6 +17,7 @@
         private readonly Mock<IPaginationSettings> _paginationSettings = new Mock<IPaginationSettings>();
 
         internal Mock<IProviderLocationSearchProvider> LocationSearchProvider { get; } = new Mock<IProviderLocationSearchProvider>();
+        internal Mock<IProviderSearchProvider> _providerSearchService = new Mock<IProviderSearchProvider>();
 
         internal Mock<ILookupLocations> LocationLookup { get; } = new Mock<ILookupLocations>();
 
@@ -26,7 +28,7 @@
 
         public ProviderSearchService Build()
         {
-            var controller = new ProviderSearchService(LocationSearchProvider.Object, _standardsRepository.Object, _frameworksRepository.Object, LocationLookup.Object, _logger.Object, _paginationSettings.Object);
+            var controller = new ProviderSearchService(LocationSearchProvider.Object, _standardsRepository.Object, _frameworksRepository.Object, LocationLookup.Object, _logger.Object, _paginationSettings.Object,_providerSearchService.Object);
 
             return controller;
         }
@@ -53,6 +55,21 @@
             return this;
         }
 
+        internal ProviderSearchServiceBuilder SetupProviderSearchProvider<TResult>(Expression<Func<IProviderSearchProvider, TResult>> expression, TResult result)
+        {
+            _providerSearchService.Setup(expression).Returns(result);
+
+            return this;
+        }
+
+        internal ProviderSearchService SetupProviderSearchProviderException<T>(Expression<Func<IProviderSearchProvider, object>> expression)
+            where T : Exception, new()
+        {
+            _providerSearchService.Setup(expression).Throws<T>();
+
+            return this;
+        }
+
         internal ProviderSearchServiceBuilder SetupStandardRepository<TResult>(Expression<Func<IGetStandards, TResult>> expression, TResult result)
         {
             _standardsRepository.Setup(expression).Returns(result);
@@ -65,6 +82,11 @@
             _frameworksRepository.Setup(expression).Returns(result);
 
             return this;
+        }
+
+        internal ProviderSearchService SetupProviderSearchProvider<T>(Func<IProviderSearchProvider, object> instance, SearchResult<ProviderSearchResultItem> searchResults)
+        {
+            throw new NotImplementedException();
         }
     }
 }

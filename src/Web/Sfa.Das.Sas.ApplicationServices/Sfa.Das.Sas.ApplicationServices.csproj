@@ -151,6 +151,7 @@
     <Compile Include="Handlers\ProviderDetailHandler.cs" />
     <Compile Include="Handlers\ProviderNameSearchHandler.cs" />
     <Compile Include="Handlers\SitemapHandler.cs" />
+    <Compile Include="Handlers\ProviderSearchHandler.cs" />
     <Compile Include="Handlers\StatsHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipProviderDetailHandler.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Http\HttpService.cs" />
     <Compile Include="Interfaces\IProviderNameSearchProvider.cs" />
     <Compile Include="Interfaces\IProviderNameSearchService.cs" />
+    <Compile Include="IProviderSearchProvider.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProviderSearchService.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="Models\PostCodeResponse.cs" />
     <Compile Include="Models\ProviderNameSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultItem.cs" />
+    <Compile Include="Models\ProviderSearchResults.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
@@ -226,6 +229,7 @@
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
     <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />
+    <Compile Include="Responses\ProviderSearchResponse.cs" />
     <Compile Include="Responses\StandardProviderSearchResponse.cs" />
     <Compile Include="Responses\StatsResponse.cs" />
     <Compile Include="Services\IPaginationOrientationService.cs" />
