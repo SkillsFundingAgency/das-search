@@ -6,7 +6,15 @@
 
 @if (Model.TotalResults > 0)
 {
-    <p>There are @Model.TotalResults apprenticeships matching your search for '@Model.SearchQuery.Keywords'.</p>
+    @if (Model.IsAllSearch)
+    {
+        <p>All apprenticeships.</p>
+    }
+    else
+    {
+        <p>There are @Model.TotalResults apprenticeships matching your search for '@Model.SearchQuery.Keywords'.</p>
+    }
+
     <ol class="@CssViewModel.SearchList">
         @foreach (var result in Model.SearchResults)
         {

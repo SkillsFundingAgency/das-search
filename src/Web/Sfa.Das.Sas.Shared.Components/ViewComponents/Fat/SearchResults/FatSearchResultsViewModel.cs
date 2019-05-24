@@ -9,5 +9,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
         public long TotalResults { get; set; }
         public int LastPage { get; set; }
         public SearchQueryViewModel SearchQuery { get; set; } = new SearchQueryViewModel();
+
+        public bool IsAllSearch => string.IsNullOrEmpty(SearchQuery.Keywords) || SearchQuery.Keywords == "*";
     }
 }
