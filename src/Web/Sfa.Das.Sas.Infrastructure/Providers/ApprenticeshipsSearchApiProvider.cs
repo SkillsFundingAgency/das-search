@@ -5,6 +5,7 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
 {
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Models;
+    using Sfa.Das.Sas.Infrastructure.Helpers;
     using Sfa.Das.Sas.Infrastructure.Mapping;
     using System.Collections.Generic;
 
@@ -20,8 +21,10 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
 
         public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
+            var formattedKeywords = QueryHelper.FormatQuery(keywords);
+
             var selectedLevelsCsv = (selectedLevels != null && selectedLevels.Any()) ? string.Join(",", selectedLevels) : null;
-            var results = _apprenticeshipSearchResultsMapping.Map(_apprenticeshipProgrammeApiClient.SearchActiveApprenticeships(keywords, page, take, order, selectedLevelsCsv));
+            var results = _apprenticeshipSearchResultsMapping.Map(_apprenticeshipProgrammeApiClient.SearchActiveApprenticeships(formattedKeywords, page, take, order, selectedLevelsCsv));
             results.SearchTerm = keywords;
             return results;
         }
