@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
+namespace Sfa.Das.Sas.Infrastructure.Helpers
 {
     internal static class QueryHelper
     {
         internal static string FormatQuery(string query, bool toLower = true)
         {
-            return string.IsNullOrEmpty(query) ? "*" : ReplaceUnacceptableCharacters(query, toLower);
+            return string.IsNullOrWhiteSpace(query) ? "*" : ReplaceUnacceptableCharacters(query, toLower);
         }
 
         internal static string FormatQueryReturningEmptyStringIfEmptyOrNull(string query, bool toLower = true)
