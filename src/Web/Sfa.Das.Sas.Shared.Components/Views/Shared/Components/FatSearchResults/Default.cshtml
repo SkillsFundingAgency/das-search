@@ -4,6 +4,8 @@
 @inject ICssViewModel CssViewModel
 
 
+@await Component.InvokeAsync("FatSearch", new { fatSearchRoute = "/employer/find-apprenticeships" })
+
 @if (Model.TotalResults > 0)
 {
     @if (Model.IsAllSearch)
@@ -12,10 +14,11 @@
     }
     else
     {
-        <p>There are @Model.TotalResults apprenticeships matching your search for '@Model.SearchQuery.Keywords'.</p>
+        <p class="das-search-results__summary">There are <span class="das-search-results__summary-count" id="fat-search-result-count">@Model.TotalResults</span> apprenticeships matching your search for <span class="das-search-results__summary-keyword" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</span>.</p>
     }
 
-    <ol class="@CssViewModel.SearchList">
+    <ol class="@CssViewModel.SearchList das-search-results">
+
         @foreach (var result in Model.SearchResults)
         {
             <partial name="Components/FatSearchResults/_searchResultsItem" for="@result" />
@@ -24,7 +27,7 @@
 }
 else
 {
-    <p>Sorry, there is currently no apprenticeship training for '<span class="@CssViewModel.UtilitiesCss.FontWeightBold">@Model.SearchQuery.Keywords</span>'.</p>
+    <p class="das-search-results__summary">Sorry, there is currently no apprenticeship training for <span class="das-search-results__summary-keyword" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</span>.</p>
 
     <h3 class="@CssViewModel.HeadingSmall">Try a new search</h3>
     @await Component.InvokeAsync("FatSearch", new { fatSearchRoute = "/employer/find-apprenticeships" })
@@ -57,20 +60,20 @@ else
 @functions
 {
 
-    Task<string> GetPaginationBackLinkHref(int currentPage, string keywords)
-    {
-        var path = this.ViewContext.HttpContext.Request.Path;
+Task<string> GetPaginationBackLinkHref(int currentPage, string keywords)
+{
+    var path = this.ViewContext.HttpContext.Request.Path;
 
-        var href = $"{path}?keywords={keywords}&page={currentPage - 1}";
-        return Task.FromResult(href);
-    }
+    var href = $"{path}?keywords={keywords}&page={currentPage - 1}";
+    return Task.FromResult(href);
+}
 
-    Task<string> GetPaginationNextLinkHref(int currentPage, string keywords)
-    {
-        var path = this.ViewContext.HttpContext.Request.Path;
+Task<string> GetPaginationNextLinkHref(int currentPage, string keywords)
+{
+    var path = this.ViewContext.HttpContext.Request.Path;
 
-        var href = $"{path}?keywords={keywords}&page={currentPage + 1}";
-        return Task.FromResult(href);
-    }
+    var href = $"{path}?keywords={keywords}&page={currentPage + 1}";
+    return Task.FromResult(href);
+}
 
 }
