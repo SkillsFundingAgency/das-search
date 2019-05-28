@@ -3,9 +3,6 @@
 @model Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.FatSearchResultsViewModel
 @inject ICssViewModel CssViewModel
 
-
-@await Component.InvokeAsync("FatSearch", new { fatSearchRoute = "/employer/find-apprenticeships" })
-
 @if (Model.TotalResults > 0)
 {
     @if (Model.IsAllSearch)
