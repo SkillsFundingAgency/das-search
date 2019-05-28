@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
         {
             var item = new FatSearchResultsViewModel()
             {
-                SearchResults = source.Results.Select(s => _fatSearchResultsItemViewModelMapper.Map(s)),
+                SearchResults = source.Results?.Select(s => _fatSearchResultsItemViewModelMapper.Map(s)),
                 TotalResults = source.TotalResults,
                 LastPage = source.LastPage,
                 SearchQuery = {
