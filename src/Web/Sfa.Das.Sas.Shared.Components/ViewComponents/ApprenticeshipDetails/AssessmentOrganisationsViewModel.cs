@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-
-namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
+﻿namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
 {
     public class AssessmentOrganisationViewModel : ApprenticeshipDetailBase
     {

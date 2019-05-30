@@ -19,7 +19,6 @@ using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using Sfa.Das.Sas.Infrastructure.Providers;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Shared.Components.Configuration;
-using Sfa.Das.Sas.Shared.Components.Domain;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Css;

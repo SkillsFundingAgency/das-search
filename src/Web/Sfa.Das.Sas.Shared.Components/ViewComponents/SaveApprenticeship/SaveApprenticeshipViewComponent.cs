@@ -2,8 +2,6 @@
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.SaveApprenticeship;
-using System;
-using System.Web;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket.SaveApprenticeship
 {

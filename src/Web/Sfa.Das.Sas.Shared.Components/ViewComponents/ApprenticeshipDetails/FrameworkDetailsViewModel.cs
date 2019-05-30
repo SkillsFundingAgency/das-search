@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using Sfa.Das.Sas.Resources;
+﻿using System.Collections.Generic;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails
 {

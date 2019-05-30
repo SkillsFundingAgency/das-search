@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
@@ -22,11 +21,6 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task<SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>> GetSearchResults(TrainingProviderSearchViewModel searchQueryModel)
         {
-            var query = new ProviderSearchQuery()
-            {
-                ApprenticeshipId = searchQueryModel.ApprenticeshipId,
-                PostCode = searchQueryModel.Postcode
-            };
 
             var results = await _mediator.Send(new ProviderSearchQuery()
             {
@@ -34,7 +28,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 PostCode = searchQueryModel.Postcode,
             });
 
-            results.SearchTerms = searchQueryModel.Postcode;
+            
 
             var model = _searchResultsViewModelMapper.Map(results,searchQueryModel);
 

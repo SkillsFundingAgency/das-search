@@ -1,10 +1,8 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+﻿using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using System.Linq;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
-using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
@@ -20,6 +18,8 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 
         public SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> Map(ProviderSearchResponse source, TrainingProviderSearchViewModel query)
         {
+            source.SearchTerms = query.Postcode;
+
             var item = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>()
             {
                 SearchResults = source.Results.Hits.Select(s => _providerSearchResultsItemMaper.Map(s)),
@@ -28,6 +28,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 SearchQuery = query
 
             };
+
             return item;
         }
     }
