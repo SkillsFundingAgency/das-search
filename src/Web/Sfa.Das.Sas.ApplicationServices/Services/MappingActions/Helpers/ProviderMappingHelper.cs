@@ -1,11 +1,10 @@
 ﻿using System.Text;
 
-namespace Sfa.Das.Sas.ApplicationServices.Services.MappingActions.Helpers
+namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
     using System.Collections.Generic;
     using System.Linq;
     using ApplicationServices.Models;
-    using Microsoft.Ajax.Utilities;
 
     public static class ProviderMappingHelper
     {
@@ -40,7 +39,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services.MappingActions.Helpers
 
         public static string GetCommaList(params string [] list)
         {
-            return string.Join(", ", list.Where(m => !m.IsNullOrWhiteSpace()));
+            return string.Join(", ", list.Where(m => !string.IsNullOrWhiteSpace(m)));
         }
 
         private static string ProcessDeliveryModeToRedCrossOrGreenTick(bool status, string desc)
@@ -50,7 +49,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services.MappingActions.Helpers
                 : $"<span class='icon-content'>{desc}</span><span class='red-cross'></span>";
         }
 
-        internal static string GetLocationAddressLine(TrainingLocation providerLocation)
+        public static string GetLocationAddressLine(TrainingLocation providerLocation)
         {
             return GetCommaList(
                 providerLocation.LocationName,

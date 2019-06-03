@@ -70,6 +70,8 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<ISearchResultsViewModelMapper,SearchResultsViewModelMapper>();
             services.AddTransient<IProviderSearchResultsMapper, ProviderSearchResultsMapper>();
             services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
+            services.AddTransient<IFeedbackViewModelMapper, FeedbackViewModelMapper>();
+            services.AddTransient<ITrainingProviderDetailsViewModelMapper, TrainingProviderDetailsViewModelMapper>();
 
         }
 
@@ -84,6 +86,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<AbstractValidator<GetFrameworkQuery>, FrameworkQueryValidator>();
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
             services.AddTransient<IProviderSearchService, ProviderSearchService>();
+            services.AddTransient<IGetProviderDetails, ProviderApiRepository>();
         }
 
         private static void AddInfrastructureServices(IServiceCollection services)

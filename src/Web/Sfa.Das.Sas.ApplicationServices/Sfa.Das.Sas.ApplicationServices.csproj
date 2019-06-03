@@ -234,6 +234,7 @@
     <Compile Include="Responses\StatsResponse.cs" />
     <Compile Include="Services\IPaginationOrientationService.cs" />
     <Compile Include="Services\IPostcodeIoService.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
     <Compile Include="Services\PaginationOrientationService.cs" />
     <Compile Include="Services\PostcodeIoService.cs" />
     <Compile Include="Settings\ICookieSettings.cs" />
