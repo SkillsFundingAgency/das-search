@@ -84,5 +84,20 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
             result.TotalResults.Should().Be(_itemToMap.TotalResults);
         }
 
+        [Test]
+        public void When_Mapping_And_Results_Are_Null_Then_Items_Mapped_As_Null()
+        {
+            _itemToMap.Results = null;
+
+            var result = _sut.Map(_itemToMap);
+
+            result.SearchQuery.Page.Should().Be(_itemToMap.ActualPage);
+            result.SearchQuery.Keywords.Should().Be(_itemToMap.SearchTerm);
+            result.LastPage.Should().Be(_itemToMap.LastPage);
+            result.SearchQuery.ResultsToTake.Should().Be(_itemToMap.ResultsToTake);
+            result.SearchResults.Should().BeNull();
+            result.SearchQuery.SortOrder.Should().Be(int.Parse(_itemToMap.SortOrder));
+            result.TotalResults.Should().Be(_itemToMap.TotalResults);
+        }
     }
 }

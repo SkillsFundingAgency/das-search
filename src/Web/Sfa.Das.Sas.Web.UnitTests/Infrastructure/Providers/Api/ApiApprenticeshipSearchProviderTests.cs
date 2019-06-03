@@ -47,7 +47,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
                     }
             };
 
-
             _apprenticeshipProgrammeApiClientMock = new Mock<ISearchApi>();
             _apprenticeshipSearchResultsMappingMock = new Mock<IApprenticeshipSearchResultsMapping>();
 
@@ -60,6 +59,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
                 .Returns(mappingReturnObject);
 
             _sut = new ApprenticeshipsSearchApiProvider(_apprenticeshipProgrammeApiClientMock.Object, _apprenticeshipSearchResultsMappingMock.Object);
+        }
+
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase("      ")]
+        public void When_Search_Is_Called_With_Blank_Keyword_Then_An_All_Search_Sent_To_Api(string blankSearchKeyword)
+        {
+            var results = _sut.SearchByKeyword(blankSearchKeyword, 0, 0, 0, null);
+
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships("*", It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
         }
 
         [Test]

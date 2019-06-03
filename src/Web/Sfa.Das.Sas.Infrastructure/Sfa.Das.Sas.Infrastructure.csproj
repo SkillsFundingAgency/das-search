@@ -229,7 +229,7 @@
     <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
     <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
     <Compile Include="Repositories\ApprenticeshipProviderRepository.cs" />
-    <Compile Include="Elasticsearch\QueryHelper.cs" />
+    <Compile Include="Helpers\QueryHelper.cs" />
     <Compile Include="Repositories\StandardApiRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Mapping\IFrameworkMapping.cs" />
