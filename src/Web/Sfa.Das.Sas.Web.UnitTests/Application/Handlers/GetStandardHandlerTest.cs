@@ -17,7 +17,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     using Sas.ApplicationServices.Handlers;
     using Sas.ApplicationServices.Queries;
     using Sas.ApplicationServices.Responses;
-    using SFA.DAS.AssessmentOrgs.Api.Client;
     using SFA.DAS.NLog.Logger;
 
     [TestFixture]

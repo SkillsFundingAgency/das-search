@@ -30,9 +30,9 @@ namespace Sfa.Das.Sas.Shared.Components.Web
             });
 
 
-            IFatConfigurationSettings fatConfig = new FatSharedComponentsConfiguration();
+            var fatConfig = new FatSharedComponentsConfiguration();
             Configuration.Bind("fatSharedComponents", fatConfig);
-            services.AddSingleton(fs => fatConfig);
+            services.AddSingleton<IFatConfigurationSettings>(fs => fatConfig);
 
 
             services.AddFatSharedComponents(fatConfig);

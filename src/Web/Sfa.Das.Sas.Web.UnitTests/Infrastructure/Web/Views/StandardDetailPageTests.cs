@@ -8,7 +8,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
     using NUnit.Framework;
     using RazorGenerator.Testing;
     using Sas.Web.Views.Apprenticeship;
-    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
     using ViewModels;
 
     [TestFixture]

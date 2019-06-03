@@ -11,6 +11,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 {
@@ -19,21 +20,24 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
     {
 
         private IServiceCollection _serviceCollection;
-        private Mock<IFatConfigurationSettings> _FatConfiguration;
         private IServiceProvider _serviceProvider;
+
+        private FatSharedComponentsConfiguration _FatConfiguration;
 
         private string _fatApiUrl = "http://fatApi.url";
 
         [SetUp]
         public void Setup()
         {
-            _FatConfiguration = new Mock<IFatConfigurationSettings>();
+            _FatConfiguration = new FatSharedComponentsConfiguration()
+            {
+                FatApiBaseUrl = _fatApiUrl
+            };
 
-            _FatConfiguration.Setup(s => s.FatApiBaseUrl).Returns(_fatApiUrl);
 
             _serviceCollection = new ServiceCollection();
 
-            _serviceCollection.AddFatSharedComponents(_FatConfiguration.Object);
+            _serviceCollection.AddFatSharedComponents(_FatConfiguration);
 
             _serviceProvider = _serviceCollection.BuildServiceProvider();
 

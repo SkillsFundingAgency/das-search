@@ -1,0 +1,72 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@model Sfa.Das.Sas.Shared.Components.ViewModels.SearchResultsViewModel<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem, Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel>
+@inject ICssViewModel CssViewModel
+
+
+@if (!ViewData.ModelState.IsValid)
+{
+@await Component.InvokeAsync("TrainingProviderSearch", new { apprenticeshipId = Model.SearchQuery.ApprenticeshipId })
+}
+
+@if (Model.TotalResults > 0)
+    {
+<p>There are @Model.TotalResults Training providers for '@Model.SearchQuery.Postcode'.</p>
+<ol class="@CssViewModel.SearchList">
+    @foreach (var result in Model.SearchResults)
+            {
+    <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@result" />
+            }
+</ol>
+    }
+    else
+    {
+<p>Sorry, there is currently no training providers for '<span class="@CssViewModel.UtilitiesCss.FontWeightBold">@Model.SearchQuery.Postcode</span>'.</p>
+
+<h3 class="@CssViewModel.HeadingSmall">Try a different postcode</h3>
+    }
+
+@if (Model.TotalResults > Model.SearchQuery.ResultsToTake)
+    {
+
+        <ul class="das-pagination das-pagination--employer">
+
+            <li class="das-pagination__list-item">
+                @if (Model.SearchQuery.Page > 1)
+                {
+                    <a class="das-pagination__link das-pagination__link--previous" id="link-pagination-previous" href="@await GetPaginationBackLinkHref(Model.SearchQuery.Page, Model.SearchQuery.Keywords)">Previous page <span class="das-pagination__caption">@(Model.SearchQuery.Page - 1) of @Model.LastPage</span></a>
+                }
+            </li>
+
+
+            @if (Model.SearchQuery.Page < Model.LastPage)
+            {
+                <li class="das-pagination__list-item">
+                    <a class="das-pagination__link das-pagination__link--next" id="link-pagination-apprentice-next" href="@await GetPaginationNextLinkHref(Model.SearchQuery.Page,Model.SearchQuery.Keywords)">Next page <span class="das-pagination__caption">@(Model.SearchQuery.Page + 1) of @Model.LastPage</span></a>
+                </li>
+            }
+
+        </ul>
+    }
+
+
+@functions
+{
+
+    Task<string> GetPaginationBackLinkHref(int currentPage, string keywords)
+    {
+        var path = this.ViewContext.HttpContext.Request.Path;
+
+        var href = $"{path}?keywords={keywords}&page={currentPage - 1}";
+        return Task.FromResult(href);
+    }
+
+    Task<string> GetPaginationNextLinkHref(int currentPage, string keywords)
+    {
+        var path = this.ViewContext.HttpContext.Request.Path;
+
+        var href = $"{path}?keywords={keywords}&page={currentPage + 1}";
+        return Task.FromResult(href);
+    }
+
+}

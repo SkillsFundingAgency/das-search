@@ -6,3 +6,5 @@
 
 
 @await Component.InvokeAsync("SaveApprenticeship", Model.Id)
+
+@await Component.InvokeAsync("TrainingProviderSearch", new {apprenticeshipId = Model.Id})

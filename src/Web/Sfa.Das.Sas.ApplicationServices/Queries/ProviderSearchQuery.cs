@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using MediatR;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 
 namespace Sfa.Das.Sas.ApplicationServices.Queries
 {
-    public class ProviderSearchQuery
+    public class ProviderSearchQuery : IRequest<ProviderSearchResponse>
     {
         private string _postcode;
 
@@ -15,6 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
         public bool IsLevyPayingEmployer { get; set; }
 
         public int Page { get; set; }
+        public int Take { get; set; } = 20;
 
         public bool NationalProvidersOnly { get; set; }
 

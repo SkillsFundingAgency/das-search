@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SFA.DAS.SAS.Shared.Components</id>
-    <version>0.0.24-alpha</version>
+    <version>0.0.26-alpha</version>
     <authors>DAS</authors>
     <owners>sfanuget</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -20,6 +20,7 @@
       <dependency id="SFA.DAS.NLog.Logger" version="1.2.1" />
       <dependency id="SFA.DAS.NLog.Targets.Redis" version="1.2.1" />
       <dependency id="CommonMark.NET" version="0.15.1" />
+      <dependency id="polly" version="6.0.1" />
     </dependencies>
   </metadata>
   <files>

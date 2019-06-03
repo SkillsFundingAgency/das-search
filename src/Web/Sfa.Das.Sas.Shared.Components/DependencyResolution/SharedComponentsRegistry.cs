@@ -9,6 +9,7 @@ using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
+using Sfa.Das.Sas.Core;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
@@ -17,7 +18,7 @@ using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using Sfa.Das.Sas.Infrastructure.Providers;
 using Sfa.Das.Sas.Infrastructure.Repositories;
-using Sfa.Das.Sas.Shared.Components.Domain;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Css;
@@ -25,12 +26,13 @@ using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.NLog.Logger;
+using SFA.DAS.Providers.Api.Client;
 
 namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 {
     public static class SharedComponentsRegistry
     {
-        public static void AddFatSharedComponents(this IServiceCollection services, IFatConfigurationSettings configuration, bool useElastic = false)
+        public static void AddFatSharedComponents(this IServiceCollection services, FatSharedComponentsConfiguration configuration, bool useElastic = false)
         {
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
@@ -39,7 +41,8 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
             services.AddTransient<ICssViewModel, DefaultCssViewModel>();
             services.AddTransient<IValidation, Validation>();
-            services.AddTransient<AbstractValidator<GetFrameworkQuery>,FrameworkQueryValidator>();
+
+            services.AddSingleton<IPostcodeIOConfigurationSettings, FatSharedComponentsConfiguration>(s => configuration);
             //Application DI
             AddApplicationServices(services);
 
@@ -63,6 +66,11 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IFrameworkDetailsViewModelMapper, FrameworkDetailsViewModelMapper>();
             services.AddTransient<IStandardDetailsViewModelMapper, StandardsDetailsViewModelMapper>();
             services.AddTransient<IAssessmentOrganisationViewModelMapper, AssessmentOrganisationViewModelMapper>();
+            services.AddTransient<ITrainingProviderSearchResultsItemViewModelMapper, TrainingProviderSearchResultsItemViewModelMapper>();
+            services.AddTransient<ISearchResultsViewModelMapper,SearchResultsViewModelMapper>();
+            services.AddTransient<IProviderSearchResultsMapper, ProviderSearchResultsMapper>();
+            services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
+
         }
 
         private static void AddApplicationServices(IServiceCollection services)
@@ -71,10 +79,11 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IApprenticeshipSearchService, ApprenticeshipSearchService>();
             services.AddTransient<IProviderSearchService, ProviderSearchService>();
             services.AddTransient<IPaginationSettings, PaginationSettings>();
-            services.AddTransient<AbstractValidator<ProviderSearchQuery>, ProviderSearchQueryValidator>();
+            services.AddSingleton<IValidator<ProviderSearchQuery>, ProviderSearchQueryValidator>();
             services.AddTransient<AbstractValidator<ApprenticeshipProviderDetailQuery>, ApprenticeshipProviderDetailQueryValidator>();
             services.AddTransient<AbstractValidator<GetFrameworkQuery>, FrameworkQueryValidator>();
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
+            services.AddTransient<IProviderSearchService, ProviderSearchService>();
         }
 
         private static void AddInfrastructureServices(IServiceCollection services)
@@ -97,8 +106,11 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IProviderNameSearchMapping, ProviderNameSearchMapping>();
             services.AddTransient<IApprenticeshipSearchResultsMapping, ApprenticeshipSearchResultsMapping>();
             services.AddTransient<IApprenticeshipSearchResultsItemMapping, ApprenticeshipSearchResultsItemMapping>();
+            services.AddTransient<ISearchResultsMapping, SearchResultsMapping>();
 
             services.AddTransient<IPaginationOrientationService, PaginationOrientationService>();
+
+            services.AddTransient<IRetryWebRequests, WebRequestRetryService>();
         }
 
         private static void AddElasticSearchServices(IServiceCollection services)
@@ -127,6 +139,10 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IApprenticeshipProgrammeApiClient, ApprenticeshipProgrammeApiClient>(service => new ApprenticeshipProgrammeApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<ISearchApi, SearchApi>(service => new SearchApi(sharedComponentsConfiguration.FatApiBaseUrl));
 
+            services.AddTransient<IProviderLocationSearchProvider, ProviderLocationSearchApiProvider>();
+            services.AddTransient<IProviderSearchProvider, ProviderApiRepository>();
+            services.AddTransient<IProviderApiClient, ProviderApiClient>(service => new ProviderApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddTransient<IProvidersVApi, ProvidersVApi>(service => new ProvidersVApi(sharedComponentsConfiguration.FatApiBaseUrl));
 
         }
 
@@ -134,7 +150,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
         {
             services.AddTransient<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
             services.AddTransient<IFatOrchestrator, FatOrchestrator>();
-
+            services.AddTransient<ITrainingProviderOrchestrator, TrainingProviderOrchestrator>();
         }
     }
 }

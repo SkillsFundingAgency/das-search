@@ -91,9 +91,8 @@
       <HintPath>..\packages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Polly, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Polly.4.3.0\lib\net45\Polly.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Polly, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Polly.6.0.1\lib\netstandard2.0\Polly.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Apprenticeships.Api.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Client.0.11.129\lib\net462\SFA.DAS.Apprenticeships.Api.Client.dll</HintPath>
@@ -194,6 +193,10 @@
     <Compile Include="FeatureToggles\Elk5Feature.cs" />
     <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
     <Compile Include="Mapping\ApprenticeshipSearchResultsItemMapping.cs" />
+    <Compile Include="Mapping\IProviderSearchResultsMapper.cs" />
+    <Compile Include="Mapping\ISearchResultsMapping.cs" />
+    <Compile Include="Mapping\ProviderSearchResultsMapper.cs" />
+    <Compile Include="Mapping\SearchResultsMapping.cs" />
     <Compile Include="Mapping\ApprenticeshipSearchResultsMapping.cs" />
     <Compile Include="Mapping\IApprenticeshipSearchResultsItemMapping.cs" />
     <Compile Include="Mapping\IApprenticeshipSearchResultsMapping.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
     <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />
     <Compile Include="Repositories\AssessmentOrganisationApiRepository.cs" />
+    <Compile Include="Repositories\ProviderLocationSearchApiProvider.cs" />
     <Compile Include="Repositories\ProviderElasticRepository.cs" />
     <Compile Include="Repositories\StandardElasticRepository.cs" />
     <Compile Include="Repositories\FrameworkElasticRepository.cs" />
