@@ -8,5 +8,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
         {
             SearchQuery = new SearchQueryViewModel();
         }
+        public bool IsAllSearch => string.IsNullOrEmpty(SearchQuery.Keywords) || SearchQuery.Keywords == "*";
     }
 }
