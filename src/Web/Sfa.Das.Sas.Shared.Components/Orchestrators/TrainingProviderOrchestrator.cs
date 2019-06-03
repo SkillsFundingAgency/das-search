@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Mapping;
@@ -28,11 +29,13 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 PostCode = searchQueryModel.Postcode,
             });
 
-            
+            if (results.Success = false)
+            {
+                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
+               
+            }
 
-            var model = _searchResultsViewModelMapper.Map(results,searchQueryModel);
-
-            return model;
+            return _searchResultsViewModelMapper.Map(results, searchQueryModel);
         }
     }
 }
