@@ -1,8 +1,4 @@
 ﻿@model Sfa.Das.Sas.Shared.Components.ViewModels.TrainingProviderDetailQueryViewModel
-TP Details
 
-@Model.Ukprn
+@await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model })]
 
-@Model.Page
-
-@await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model })

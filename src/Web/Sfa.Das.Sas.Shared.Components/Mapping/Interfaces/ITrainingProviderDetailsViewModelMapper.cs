@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public interface ITrainingProviderDetailsViewModelMapper
     {
-        TrainingProviderDetailsViewModel Map(ProviderDetailResponse source);
+        TrainingProviderDetailsViewModel Map(ApprenticeshipProviderDetailResponse source);
     }
 }

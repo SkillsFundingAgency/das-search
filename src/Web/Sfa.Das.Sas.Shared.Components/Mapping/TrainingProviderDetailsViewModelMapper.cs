@@ -1,4 +1,6 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Responses;
+﻿using System;
+using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using Sfa.Das.Sas.Web.Services.MappingActions.Helpers;
 
@@ -13,39 +15,44 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             _feedbackMapper = feedbackMapper;
         }
 
-        public TrainingProviderDetailsViewModel Map(ProviderDetailResponse source)
+        public TrainingProviderDetailsViewModel Map(ApprenticeshipProviderDetailResponse source)
         {
             var employerSatisfationMessage =
-              (source.Provider.EmployerSatisfaction > 0)
-                  ? ProviderMappingHelper.GetPercentageText(source.Provider.EmployerSatisfaction)
+              (source.ApprenticeshipDetails.Product.EmployerSatisfaction > 0)
+                  ? ProviderMappingHelper.GetPercentageText(source.ApprenticeshipDetails.Product.EmployerSatisfaction)
                   : ProviderMappingHelper.GetPercentageText(null);
 
             var learnerSatisfationMessage =
-                (source.Provider.LearnerSatisfaction > 0)
-                    ? ProviderMappingHelper.GetPercentageText(source.Provider.LearnerSatisfaction)
+                (source.ApprenticeshipDetails.Product.LearnerSatisfaction > 0)
+                    ? ProviderMappingHelper.GetPercentageText(source.ApprenticeshipDetails.Product.LearnerSatisfaction)
                     : ProviderMappingHelper.GetPercentageText(null);
 
             var item = new TrainingProviderDetailsViewModel()
             {
-                Email = source.Provider.Email,
-                CurrentlyNotStartingNewApprentices = source.Provider.CurrentlyNotStartingNewApprentices,
-                IsEmployerProvider = source.Provider.IsEmployerProvider,
-                EmployerSatisfaction = source.Provider.EmployerSatisfaction,
+                ContactInformation = new ContactInformation()
+                {
+                    Email = source.ApprenticeshipDetails.Provider.ContactInformation.Email,
+                    Phone = source.ApprenticeshipDetails.Provider.ContactInformation.Phone,
+                    Website = source.ApprenticeshipDetails.Provider.ContactInformation.Website,
+                    ContactUsUrl = source.ApprenticeshipDetails.Provider.ContactInformation.ContactUsUrl
+                },
+                 
+                CurrentlyNotStartingNewApprentices = source.ApprenticeshipDetails.Provider.CurrentlyNotStartingNewApprentices,
+                EmployerSatisfaction = Convert.ToInt32(source.ApprenticeshipDetails.Product.EmployerSatisfaction),
                 EmployerSatisfactionMessage = employerSatisfationMessage,
-                IsHigherEducationInstitute = source.Provider.IsHigherEducationInstitute,
-                LearnerSatisfaction = source.Provider.LearnerSatisfaction,
+                IsHigherEducationInstitute = source.ApprenticeshipDetails.Provider.IsHigherEducationInstitute,
+                LearnerSatisfaction = source.ApprenticeshipDetails.Product.LearnerSatisfaction.Value,
                 LearnerSatisfactionMessage = learnerSatisfationMessage,
-                NationalProvider = source.Provider.NationalProvider,
-                Phone = source.Provider.Phone,
-                UkPrn = source.Provider.Ukprn,
-                ProviderName = source.Provider.ProviderName,
-                Website = source.Provider.Website,
-                MarketingInfo = source.Provider.MarketingInfo,
-                HasParentCompanyGuarantee = source.Provider.HasParentCompanyGuarantee,
-                IsNew = source.Provider.IsNew,
-                IsLevyPayerOnly = source.Provider.IsLevyPayerOnly,
+                NationalProvider = source.ApprenticeshipDetails.Provider.NationalProvider,
+                Ukprn = source.ApprenticeshipDetails.Provider.UkPrn,
+                Name = source.ApprenticeshipDetails.Provider.Name,
+                
+                MarketingInfo = source.ApprenticeshipDetails.Product.ProviderMarketingInfo,
+                HasParentCompanyGuarantee = source.ApprenticeshipDetails.Provider.HasParentCompanyGuarantee,
+                IsNewProvider = source.ApprenticeshipDetails.Provider.IsNew,
+                IsLevyPayerOnly = source.ApprenticeshipDetails.Provider.IsLevyPayerOnly,
 
-                ProviderFeedback = _feedbackMapper.Map(source.Provider.ProviderFeedback)
+                Feedback = _feedbackMapper.Map(source.ApprenticeshipDetails.Provider.ProviderFeedback)
 
             };
 

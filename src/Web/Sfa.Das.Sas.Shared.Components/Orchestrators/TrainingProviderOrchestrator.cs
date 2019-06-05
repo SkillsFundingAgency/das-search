@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
@@ -52,16 +53,16 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 page = detailsQueryModel.Page;
             }
 
-            var response = await _mediator.Send(new ProviderDetailQuery { UkPrn = detailsQueryModel.Ukprn, Page = page });
+            var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType});
 
-            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.ProviderNotFound)
+            if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
             {
                 var message = $"Cannot find provider: {detailsQueryModel.Ukprn}";
                 _logger.Warn($"404 - {message}");
                 throw new HttpRequestException(message);
             }
 
-            if (response.StatusCode == ProviderDetailResponse.ResponseCodes.HttpRequestException)
+            if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput)
             {
                 var message = $"Not able to call the apprenticeship service.";
                 _logger.Warn($"{response.StatusCode} - {message}");

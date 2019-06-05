@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Responses;
+﻿using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 
 namespace Sfa.Das.Sas.ApplicationServices.Queries
 {
@@ -17,5 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
         public bool IsLevyPayingEmployer { get; set; }
         public string Keyword { get; set; }
         public string Postcode { get; set; }
+        public string ApprenticeshipId { get; set; }
+        public ApprenticeshipType ApprenticeshipType { get; set; }
     }
 }

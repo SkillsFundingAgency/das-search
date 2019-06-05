@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
@@ -23,6 +24,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private TrainingProviderOrchestrator _sut;
         private Mock<IMediator> _mockMediator;
         private Mock<ISearchResultsViewModelMapper> _mockSearchResultsViewModelMapper;
+        private Mock<ITrainingProviderDetailsViewModelMapper> _mockTrainingProviderDetailsViewModelMapper;
+        private Mock<ILog> _mockLogger;
 
         private  TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
 
@@ -35,11 +38,13 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _mockMediator = new Mock<IMediator>();
             _mockSearchResultsViewModelMapper = new Mock<ISearchResultsViewModelMapper>();
+            _mockTrainingProviderDetailsViewModelMapper = new Mock<ITrainingProviderDetailsViewModelMapper>();
+            _mockLogger = new Mock<ILog>();
 
             _mockMediator.Setup(s => s.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
             _mockSearchResultsViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchResultsViewModel);
 
-            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object);
+            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object);
         }
 
         [Test]
