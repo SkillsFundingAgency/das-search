@@ -46,11 +46,13 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 NationalProvider = source.ApprenticeshipDetails.Provider.NationalProvider,
                 Ukprn = source.ApprenticeshipDetails.Provider.UkPrn,
                 Name = source.ApprenticeshipDetails.Provider.Name,
-                
+                DeliveryModes = source.ApprenticeshipDetails.Product.DeliveryModes,
                 MarketingInfo = source.ApprenticeshipDetails.Product.ProviderMarketingInfo,
                 HasParentCompanyGuarantee = source.ApprenticeshipDetails.Provider.HasParentCompanyGuarantee,
                 IsNewProvider = source.ApprenticeshipDetails.Provider.IsNew,
                 IsLevyPayerOnly = source.ApprenticeshipDetails.Provider.IsLevyPayerOnly,
+                AchievementRate = Convert.ToInt32(source.ApprenticeshipDetails.Product.AchievementRate),
+                NationalAchievementRate = Convert.ToInt32(source.ApprenticeshipDetails.Product.NationalAchievementRate),
 
                 Feedback = _feedbackMapper.Map(source.ApprenticeshipDetails.Provider.ProviderFeedback)
 

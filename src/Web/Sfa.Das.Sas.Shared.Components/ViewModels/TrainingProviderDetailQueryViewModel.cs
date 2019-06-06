@@ -8,5 +8,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
         public int Page { get; set; }
         public string ApprenticeshipId { get; set; }
         public ApprenticeshipType ApprenticeshipType { get; set; }
+        public int LocationId { get; set; }
     }
 }

@@ -54,14 +54,14 @@
 <div class="das-provider-about">
     <h2 class="@CssViewModel.HeadingMedium">ABOUT THE APPRENTICESHIP</h2>
 
-    @Html.MarkdownToHtml(Model.Apprenticeship.Overview);
+    @Html.MarkdownToHtml(Model.Apprenticeship.Overview)
 
 </div>
 
 <div class="das-provider-information">
 
     <h2 class="@CssViewModel.HeadingMedium">PROVIDER INFORMATION</h2>
-
+    
     @Html.MarkdownToHtml(Model.MarketingInfo)
 
 
@@ -76,6 +76,10 @@
 </div>
 
 <div class="das-provider-employers">
+    
+    
+    @if (Model.Feedback != null)
+    {
 
     <h2 class="@CssViewModel.HeadingMedium">What employers are saying</h2>
 
@@ -112,26 +116,27 @@
 
     </div>
 
-    <div class="grid-row">
-        <div class="grid-column-one-half">
-            <h3 class="@CssViewModel.HeadingSmall">Strengths</h3>
-            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-                @foreach (var strength in Model.Feedback.Strengths)
-                {
-                    <li>@strength.Name <strong>(@strength.Count)</strong></li>
-                }
-            </ul>
+        <div class="grid-row">
+            <div class="grid-column-one-half">
+                <h3 class="@CssViewModel.HeadingSmall">Strengths</h3>
+                <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                    @foreach (var strength in Model.Feedback.Strengths)
+                    {
+                        <li>@strength.Name <strong>(@strength.Count)</strong></li>
+                    }
+                </ul>
+            </div>
+            <div class="grid-column-one-half">
+                <h3 class="@CssViewModel.HeadingSmall">Things to improve</h3>
+                <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                    @foreach (var weakness in Model.Feedback.Weaknesses)
+                    {
+                        <li>@weakness.Name <strong>(@weakness.Count)</strong></li>
+                    }
+                </ul>
+            </div>
         </div>
-        <div class="grid-column-one-half">
-            <h3 class="@CssViewModel.HeadingSmall">Things to improve</h3>
-            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-                @foreach (var weakness in Model.Feedback.Weaknesses)
-                {
-                    <li>@weakness.Name <strong>(@weakness.Count)</strong></li>
-                }
-            </ul>
-        </div>
-    </div>
+    }
 
     <dl class="@CssViewModel.List das-definition-list__results das-definition-list__results--black">
 
@@ -162,7 +167,7 @@
     </dl>
 </div>
 
-<div class="das-provider-disclasimer">
+<div class="das-provider-disclaimer">
 
     <h2 class="@CssViewModel.HeadingXSmall">Content disclaimer</h2>
 
