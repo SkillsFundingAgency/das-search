@@ -11,11 +11,12 @@
 
 @if (Model.TotalResults > 0)
 {
-    @await Component.InvokeAsync("TrainingProviderSearchSummary", new { searchQueryModel = Model.SearchQuery })
+    <p>There are @Model.TotalResults Training providers for '@Model.SearchQuery.Postcode'.</p>
     <ol class="@CssViewModel.SearchList">
         @foreach (var result in Model.SearchResults)
         {
-            <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@result" />
+            var itemModel = Tuple.Create(result, Model.SearchQuery);
+            <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@itemModel" />
         }
     </ol>
 }

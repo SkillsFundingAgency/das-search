@@ -8,5 +8,6 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
     public interface ITrainingProviderOrchestrator
     {
         Task<SearchResultsViewModel<TrainingProviderSearchResultsItem,TrainingProviderSearchViewModel>> GetSearchResults(TrainingProviderSearchViewModel searchQueryModel);
+        Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel);
     }
 }
