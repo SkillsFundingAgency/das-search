@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Shared.Components.Mapping;
@@ -38,11 +36,16 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 PostCode = searchQueryModel.Postcode,
             });
 
-
-
             var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);
 
-            return model;
+            if (results.Success = false)
+            {
+                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
+               
+            }
+
+
+            return _searchResultsViewModelMapper.Map(results, searchQueryModel);
         }
 
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)

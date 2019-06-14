@@ -9,6 +9,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     using ApplicationServices.Interfaces;
     using ApplicationServices.Models;
     using ApplicationServices.Responses;
+    using Sfa.Das.Sas.Infrastructure.Helpers;
     using SFA.DAS.NLog.Logger;
 
 

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
@@ -30,6 +32,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private  TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
 
         private ProviderSearchResponse _searchResults = new ProviderSearchResponse();
+        private ProviderSearchResponse _searchResultsError = new ProviderSearchResponse(){Success = false,StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat};
         private SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> _searchResultsViewModel = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>();
 
         [SetUp]
@@ -79,5 +82,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _mockSearchResultsViewModelMapper.Verify(v => v.Map(_searchResults, _searchQueryViewModel));
         }
+
     }
 }
