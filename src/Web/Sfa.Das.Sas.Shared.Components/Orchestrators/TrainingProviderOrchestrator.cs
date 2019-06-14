@@ -38,9 +38,9 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 PostCode = searchQueryModel.Postcode,
             });
 
-            
 
-            var model = _searchResultsViewModelMapper.Map(results,searchQueryModel);
+
+            var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);
 
             return model;
         }
@@ -53,7 +53,8 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 page = detailsQueryModel.Page;
             }
 
-                var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId});
+
+            var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
 
             if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
             {

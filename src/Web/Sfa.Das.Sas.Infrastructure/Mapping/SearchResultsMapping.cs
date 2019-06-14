@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
 
             var item = new SearchResult<ProviderSearchResultItem>();
             item.Total = document.TotalResults;
-            item.Hits = document.Results.Select(s => _providerSearchResultsMapper.Map(s));
+            item.Hits = document.Results?.Select(s => _providerSearchResultsMapper.Map(s));
 
             return item;
         }

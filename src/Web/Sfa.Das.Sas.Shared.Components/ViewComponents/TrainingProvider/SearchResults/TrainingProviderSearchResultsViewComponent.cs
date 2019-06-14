@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
         public async Task<IViewComponentResult> InvokeAsync(TrainingProviderSearchViewModel searchQueryModel, bool inline = false)
         {
 
-            var model = await _tpOrchestrator.GetSearchResults(searchQueryModel);
+            var model = await _tpOrchestrator.GetSearchResults(searchQueryModel);   
 
             return View("../TrainingProvider/SearchResults/Default", model);
 
