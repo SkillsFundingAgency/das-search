@@ -83,7 +83,7 @@
             {
                 const string noDetails = @"A government-approved organisation must assess apprentices towards the end of their apprenticeship.<br/><br/> " +
                                          "This end-point assessment ensures apprentices achieve the skills, training and any qualifications necessary to complete their apprenticeship. <br/><br/>" +
-                                         "You can download the assessment plan from the Institute for Apprenticeships. " +
+                                         "You can download the assessment plan from the Institute for Apprenticeships and Technical Education. " +
                                          "There are no end-point assessment organisations for this apprenticeship yet. " +
                                          "Please email <a href='mailto:apprentice.assessment@education.gov.uk' target='_blank'>apprentice.assessment@education.gov.uk</a> if you urgently need an end-point assessment organisation.";
                 @GetStandardProperty("How apprentices are assessed", "no-assessment-organisations", noDetails)
@@ -91,10 +91,10 @@
 
             @if (areOrganisationsPresent)
             {
-                <dt>End Point Assessment</dt>
+                <dt>End-Point Assessment</dt>
                 <dd>
                     <details>
-                        <summary><span class="summary" style="text-decoration: none">View a list of end point assessment organisations for this standard</span></summary>
+                        <summary><span class="summary" style="text-decoration: none">View a list of end-point assessment organisations for this standard</span></summary>
                         <table class="responsive">
                             <thead>
                                 <tr>
@@ -128,7 +128,9 @@
                 </dd>
             }
 
-            @GetMoreInformationProperty(Model.StandardPageUri)
+            <dt>More Information</dt>
+            <dd id="more-information">The <a href="https://www.instituteforapprenticeships.org/">Institute for Apprenticeships and Technical Education</a> has more detailed information about this apprenticeship.</dd>
+            @*@GetMoreInformationProperty(Model.StandardPageUri)*@
         </dl>
 
 
@@ -153,10 +155,10 @@
 @helper GetMoreInformationProperty(string link)
 {
     {
-        var details = "The Institute for Apprenticeships has more detailed information about this apprenticeship.";
+        var details = "The Institute for Apprenticeships and Technical Education has more detailed information about this apprenticeship.";
         if (link != null && link.Trim() != string.Empty)
         {
-            details = @"The Institute for Apprenticeships has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
+            details = @"The Institute for Apprenticeships and Technical Education has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
         }
 
         <dt>More Information</dt>
