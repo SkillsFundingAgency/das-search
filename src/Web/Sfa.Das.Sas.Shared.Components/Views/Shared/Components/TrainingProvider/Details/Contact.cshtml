@@ -4,8 +4,7 @@
 @model Sfa.Das.Sas.Shared.Components.ViewModels.TrainingProviderDetailsViewModel
 @inject ICssViewModel CssViewModel
 
-<div class="sidebar sidebar--fixed-170 sidebar--employer">
-    <div class="sidebar__hero">
+
         <section class="das-provider__contact-details">
             <h2 class="@CssViewModel.HeadingLarge">Contact details</h2>
 
@@ -40,7 +39,7 @@
                         </a>
                     </dd>
                 }
-                @if (!string.IsNullOrWhiteSpace(Model.ContactInformation.Email))
+                @if (!string.IsNullOrWhiteSpace(Model.LocationAddressLine))
                 {
                     <dt>Address:</dt>
                     <dd>
@@ -56,8 +55,7 @@
                 }
             </dl>
             </section>
-    </div>
-</div>
+
 
 
 @functions

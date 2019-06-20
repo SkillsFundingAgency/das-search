@@ -4,8 +4,8 @@
 @inject ICssViewModel CssViewModel
 
 <form asp-controller="Fat" asp-action="Search" method="get">
-    <div class="@(CssViewModel.FormGroup) das-form-group-inline">
-        <input class="@(CssViewModel.Input)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
+    <div class="@(CssViewModel.FormCss.FormGroup) das-form-group-inline">
+        <input class="@(CssViewModel.FormCss.Input)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
         <div class="das-form-group-inline__button-wrap">
             <button class="@(CssViewModel.Button)" type="submit">Search</button>
         </div>
