@@ -5,6 +5,8 @@
         string Input { get; }
         string FormGroup { get; }
         string Radio { get; }
-        string RadioInline { get; }
+        string RadioInput { get; }
+        string RadioGroupInline { get; }
+        string Label { get; }
     }
 }
