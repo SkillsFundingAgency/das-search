@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
         private  TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
 
-        private ProviderSearchResponse _searchResults = new ProviderSearchResponse();
+        private ProviderSearchResponse _searchResults = new ProviderSearchResponse() { Success = true };
         private ProviderSearchResponse _searchResultsError = new ProviderSearchResponse(){Success = false,StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat};
         private SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> _searchResultsViewModel = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>();
 

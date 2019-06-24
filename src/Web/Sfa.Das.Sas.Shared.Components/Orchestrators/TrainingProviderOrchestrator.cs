@@ -38,7 +38,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
             var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);
 
-            if (results.Success = false)
+            if (results.Success == false)
             {
                 throw new Exception($"Unable to get provider search response: {results.StatusCode}");
                
@@ -50,12 +50,6 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)
         {
-            int page = 1;
-            if (detailsQueryModel.Page > 1)
-            {
-                page = detailsQueryModel.Page;
-            }
-
 
             var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
 
