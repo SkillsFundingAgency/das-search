@@ -128,9 +128,7 @@
                 </dd>
             }
 
-            <dt>More Information</dt>
-            <dd id="more-information">The <a href="https://www.instituteforapprenticeships.org/">Institute for Apprenticeships and Technical Education</a> has more detailed information about this apprenticeship.</dd>
-            @*@GetMoreInformationProperty(Model.StandardPageUri)*@
+            @GetMoreInformationProperty(Model.StandardPageUri)
         </dl>
 
 
@@ -155,7 +153,7 @@
 @helper GetMoreInformationProperty(string link)
 {
     {
-        var details = "The Institute for Apprenticeships and Technical Education has more detailed information about this apprenticeship.";
+        var details = "The <a href='" + "https://www.instituteforapprenticeships.org/" + "' target='_blank'>Institute for Apprenticeships and Technical Education</a> has more detailed information about this apprenticeship.";
         if (link != null && link.Trim() != string.Empty)
         {
             details = @"The Institute for Apprenticeships and Technical Education has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
