@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         public string Input => $"{_classPrefix}input";
         public string FormGroup => $"{_classPrefix}form-group";
 
-        public string Radio => $"{_classPrefix}radio";
-        public string RadioInline => $"{Radio} radio-inline";
+        public string Radio => $"{_classPrefix}radios";
+        public string RadioInline => $"{Radio} radios-inline";
     }
 }
