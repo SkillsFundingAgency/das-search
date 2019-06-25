@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             item.DeliveryModes = document.DeliveryModes;
             item.Distance = document.Distance;
             item.NationalProvider = document.NationalProvider;
-
+            item.LocationId = document.Location.LocationId;
             return item;
         }
     }

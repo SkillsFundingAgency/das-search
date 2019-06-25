@@ -16,6 +16,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         }
         public ITableCssViewModel Table => new DefaultTableCssViewModel(ClassPrefix);
         public IUtilitiesCssViewModel UtilitiesCss => new DefaultUtilitiesCssViewModel();
+        public IDefaultFormCssViewModel FormCss => new DefaultFormCssViewModel(ClassPrefix);
         public string ClassModifier { get; set; } = string.Empty;
         public string ClassPrefix { get; set; } = "govuk-";
 
@@ -33,9 +34,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
                 }
             }
         }
-
-        public string Input => $"{ClassPrefix}input";
-        public string FormGroup => $"{ClassPrefix}form-group";
         public string Link => $"{ClassPrefix}link";
 
         public string List

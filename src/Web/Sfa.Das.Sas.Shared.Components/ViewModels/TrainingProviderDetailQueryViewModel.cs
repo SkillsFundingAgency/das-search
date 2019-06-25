@@ -1,8 +1,22 @@
-﻿namespace Sfa.Das.Sas.Shared.Components.ViewModels
+﻿using Sfa.Das.Sas.ApplicationServices.Models;
+
+namespace Sfa.Das.Sas.Shared.Components.ViewModels
 {
     public class TrainingProviderDetailQueryViewModel
     {
-        public string Ukprn { get; set; }
+        public ViewType ViewType { get; set; }
+        public long Ukprn { get; set; }
         public int Page { get; set; }
+        public string ApprenticeshipId { get; set; }
+        public ApprenticeshipType ApprenticeshipType { get; set; }
+        public int LocationId { get; set; }
+    }
+
+    public enum ViewType
+    {
+        Details = 0,
+        Contact = 1,
+        Summary = 2
+        
     }
 }

@@ -4,11 +4,11 @@
     {
         ITableCssViewModel Table { get; }
         IUtilitiesCssViewModel UtilitiesCss { get; }
+        IDefaultFormCssViewModel FormCss { get; }
         string ClassModifier { get; set; }
         string ClassPrefix { get; }
         string Button { get; }
-        string Input { get; }
-        string FormGroup { get; }
+
         string Link { get; }
         string List { get; }
         string ListBullet { get; }

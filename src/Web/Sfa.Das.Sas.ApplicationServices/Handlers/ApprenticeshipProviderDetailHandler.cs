@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -44,6 +46,21 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             if (result.Errors.Any(x => x.ErrorCode == ValidationCodes.InvalidInput))
             {
                 return new ApprenticeshipProviderDetailResponse { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput };
+            }
+
+            if (!string.IsNullOrEmpty(message.ApprenticeshipId))
+            {
+                switch (message.ApprenticeshipType)
+                {
+                    case ApprenticeshipType.Framework:
+                        message.FrameworkId = message.ApprenticeshipId;
+                        break;
+                    case ApprenticeshipType.Standard:
+                        message.StandardCode = message.ApprenticeshipId;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
 
             if (result.IsValid && !string.IsNullOrEmpty(message.StandardCode))

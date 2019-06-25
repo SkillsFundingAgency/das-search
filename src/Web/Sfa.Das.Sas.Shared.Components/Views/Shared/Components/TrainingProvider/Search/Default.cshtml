@@ -4,23 +4,25 @@
 @inject ICssViewModel CssViewModel;
     <form action="@Model.SearchRoute">
 
-        <div class="@(CssViewModel.FormGroup)">
+        <div class="@(CssViewModel.FormCss.FormGroup)">
             <label>Use the postcode for where the apprentice will work.</label>
-            <input class="@(CssViewModel.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
+            <input class="@(CssViewModel.FormCss.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
             <span asp-validation-for="Postcode" class="error-message"></span>
         </div>
-        <div class="@(CssViewModel.FormGroup) radios">
-            <p>Is your organisation a levy-payer?</p>
-            <div class="radios__item">
 
-                <input class="@(CssViewModel.Input) radios__input" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
-                <label class="label radios__label" for="LevyPayerYes">Yes </label>
-            </div>
-            <div class="radios__item">
-                <input class="@(CssViewModel.Input) radios__input" type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
-                <label class="label radios__label" for="LevyPayerNo">No</label>
+        <div class="@(CssViewModel.FormCss.FormGroup)">
+            <div class="@CssViewModel.FormCss.RadioGroupInline"> 
+                <div class="radios__item">
+                    <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
+                    <label class="@(CssViewModel.FormCss.Label) radios__label" for="LevyPayerYes">Yes, I pay the levy</label>
+                </div>
+                <div class="radios__item">
+                    <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)"  type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
+                    <label class="@(CssViewModel.FormCss.Label) radios__label" for="LevyPayerNo">No, I don't pay the levy</label>
+                </div>
             </div>
         </div>
+
         <div class="das-form-group-inline__button-wrap">
             <input type="hidden" asp-for="ApprenticeshipId" />
             <input type="hidden" asp-for="Keywords"/>

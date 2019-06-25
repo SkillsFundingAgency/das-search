@@ -22,13 +22,19 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 
             var item = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>()
             {
-                SearchResults = source.Results.Hits.Select(s => _providerSearchResultsItemMaper.Map(s)),
-                TotalResults = source.Results.TotalResults,
+               
                 LastPage = source.Results.LastPage,
                 SearchQuery = query
 
             };
 
+            if (source.Results != null)
+            {
+
+                item.SearchResults = source.Results.Hits?.Select(s => _providerSearchResultsItemMaper.Map(s));
+                item.TotalResults = source.Results.TotalResults;
+
+            }
             return item;
         }
     }

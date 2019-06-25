@@ -12,5 +12,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
         public double? LearnerSatisfaction { get; set; }
         public double? OverallAchievementRate { get; set; }
         public List<string> DeliveryModes { get; set; }
+        public int LocationId { get; set; }
     }
 }

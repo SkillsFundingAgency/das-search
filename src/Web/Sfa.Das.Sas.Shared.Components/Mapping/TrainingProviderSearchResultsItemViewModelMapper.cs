@@ -18,6 +18,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 OverallAchievementRate = source.OverallAchievementRate,
                 Name = source.ProviderName,
                 DeliveryModes = source.DeliveryModes,
+                LocationId = source.LocationId
             };
             return item;
         }
