@@ -15,6 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 
         public string ClassPrefix { get; set; } = "govuk-";
         public string FontWeightBold => $"{ClassPrefix}!-font-weight-bold";
+        public string VisuallyHidden => $"{ClassPrefix}visually-hidden";
         public string Margin(string type, int size)
         {
             return $"{ClassPrefix}!-margin-{type}-{size}";
