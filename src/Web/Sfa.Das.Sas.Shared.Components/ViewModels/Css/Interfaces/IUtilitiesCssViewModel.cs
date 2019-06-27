@@ -5,6 +5,7 @@
         string ClassPrefix { get; set; }
         string FontWeightBold { get; }
         string Margin(string type, int size);
+        string VisuallyHidden { get; }
 
     }
 }

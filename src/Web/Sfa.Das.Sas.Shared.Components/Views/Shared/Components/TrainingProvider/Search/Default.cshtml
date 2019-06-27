@@ -5,25 +5,25 @@
     <form action="@Model.SearchRoute">
 
         <div class="@(CssViewModel.FormCss.FormGroup)">
-            <label>Use the postcode for where the apprentice will work.</label>
+            <label class="@(CssViewModel.UtilitiesCss.VisuallyHidden)">Use the postcode for where the apprentice will work.</label>
             <input class="@(CssViewModel.FormCss.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
             <span asp-validation-for="Postcode" class="error-message"></span>
         </div>
 
         <div class="@(CssViewModel.FormCss.FormGroup)">
             <div class="@CssViewModel.FormCss.RadioGroupInline"> 
-                <div class="radios__item">
+                <div class="@(CssViewModel.FormCss.RadioItem)">
                     <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
-                    <label class="@(CssViewModel.FormCss.Label) radios__label" for="LevyPayerYes">Yes, I pay the levy</label>
+                    <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerYes">Yes, I pay the levy</label>
                 </div>
-                <div class="radios__item">
+                <div class="@(CssViewModel.FormCss.RadioItem)">
                     <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)"  type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
-                    <label class="@(CssViewModel.FormCss.Label) radios__label" for="LevyPayerNo">No, I don't pay the levy</label>
+                    <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerNo">No, I don't pay the levy</label>
                 </div>
             </div>
         </div>
 
-        <div class="das-form-group-inline__button-wrap">
+        <div class="@(CssViewModel.FormCss.FormGroup)">
             <input type="hidden" asp-for="ApprenticeshipId" />
             <input type="hidden" asp-for="Keywords"/>
             <button class="@(CssViewModel.Button)" type="submit">Search</button>
