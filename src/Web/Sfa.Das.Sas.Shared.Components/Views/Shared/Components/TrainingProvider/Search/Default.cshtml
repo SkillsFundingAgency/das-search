@@ -12,13 +12,13 @@
 
         <div class="@(CssViewModel.FormCss.FormGroup)">
             <div class="@CssViewModel.FormCss.RadioGroupInline"> 
-                <div class="radios__item">
+                <div class="@(CssViewModel.FormCss.RadioItem)">
                     <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
-                    <label class="@(CssViewModel.FormCss.Label) radios__label" for="LevyPayerYes">Yes, I pay the levy</label>
+                    <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerYes">Yes, I pay the levy</label>
                 </div>
-                <div class="radios__item">
+                <div class="@(CssViewModel.FormCss.RadioItem)">
                     <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)"  type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
-                    <label class="@(CssViewModel.FormCss.Label) radios__label" for="LevyPayerNo">No, I don't pay the levy</label>
+                    <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerNo">No, I don't pay the levy</label>
                 </div>
             </div>
         </div>
