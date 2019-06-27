@@ -62,7 +62,7 @@
                 AssessmentOrganisations = new List<Organisation>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#more-information").Should().Contain("The Institute for Apprenticeships has more detailed information");
+            GetPartial(html, "#more-information").Should().Contain("Institute for Apprenticeships and Technical Education has more detailed information");
         }
 
         [Test]

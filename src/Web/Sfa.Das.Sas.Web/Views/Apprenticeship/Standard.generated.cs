@@ -80,14 +80,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 7666), Tuple.Create("\"", 7674)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 7690), Tuple.Create("\"", 7698)
 
 #line 146 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 7671), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 7695), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 7671), false)
+, 7695), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -148,10 +148,10 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line 154 "..\..\Views\Apprenticeship\Standard.cshtml"
  
     {
-        var details = "The Institute for Apprenticeships has more detailed information about this apprenticeship.";
+        var details = "The <a href='" + "https://www.instituteforapprenticeships.org/" + "' target='_blank'>Institute for Apprenticeships and Technical Education</a> has more detailed information about this apprenticeship.";
         if (link != null && link.Trim() != string.Empty)
         {
-            details = @"The Institute for Apprenticeships has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
+            details = @"The Institute for Apprenticeships and Technical Education has more <a href='" + link + "' target='_blank'>detailed information</a> about this apprenticeship.";
         }
 
 
@@ -217,14 +217,14 @@ WriteLiteralTo(__razor_helper_writer, "</dt>\r\n");
 
 WriteLiteralTo(__razor_helper_writer, "        <dd");
 
-WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8523), Tuple.Create("\"", 8531)
+WriteAttributeTo(__razor_helper_writer, "id", Tuple.Create(" id=\"", 8680), Tuple.Create("\"", 8688)
 
 #line 172 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 8528), Tuple.Create<System.Object, System.Int32>(id
+, Tuple.Create(Tuple.Create("", 8685), Tuple.Create<System.Object, System.Int32>(id
 
 #line default
 #line hidden
-, 8528), false)
+, 8685), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -344,14 +344,14 @@ WriteLiteralTo(__razor_helper_writer, " rel=\"nofollow\"");
 
 WriteLiteralTo(__razor_helper_writer, " id=\"ga-find-provider-bottom\"");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 9510), Tuple.Create("\"", 9645)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 9667), Tuple.Create("\"", 9802)
 
 #line 201 "..\..\Views\Apprenticeship\Standard.cshtml"
-           , Tuple.Create(Tuple.Create("", 9517), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new {standardId = standardId, keywords = searchTerm, ukprn = ukprn})
+           , Tuple.Create(Tuple.Create("", 9674), Tuple.Create<System.Object, System.Int32>(Url.Action("SearchForStandardProviders", "Apprenticeship", new {standardId = standardId, keywords = searchTerm, ukprn = ukprn})
 
 #line default
 #line hidden
-, 9517), false)
+, 9674), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n");
@@ -728,7 +728,7 @@ WriteLiteral("\r\n\r\n");
             {
                 const string noDetails = @"A government-approved organisation must assess apprentices towards the end of their apprenticeship.<br/><br/> " +
                                          "This end-point assessment ensures apprentices achieve the skills, training and any qualifications necessary to complete their apprenticeship. <br/><br/>" +
-                                         "You can download the assessment plan from the Institute for Apprenticeships. " +
+                                         "You can download the assessment plan from the Institute for Apprenticeships and Technical Education. " +
                                          "There are no end-point assessment organisations for this apprenticeship yet. " +
                                          "Please email <a href='mailto:apprentice.assessment@education.gov.uk' target='_blank'>apprentice.assessment@education.gov.uk</a> if you urgently need an end-point assessment organisation.";
                 
@@ -766,7 +766,7 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                <dt>End Point Assessment</dt>\r\n");
+WriteLiteral("                <dt>End-Point Assessment</dt>\r\n");
 
 WriteLiteral("                <dd>\r\n                    <details>\r\n                        <sum" +
 "mary><span");
@@ -775,7 +775,7 @@ WriteLiteral(" class=\"summary\"");
 
 WriteLiteral(" style=\"text-decoration: none\"");
 
-WriteLiteral(">View a list of end point assessment organisations for this standard</span></summ" +
+WriteLiteral(">View a list of end-point assessment organisations for this standard</span></summ" +
 "ary>\r\n                        <table");
 
 WriteLiteral(" class=\"responsive\"");
@@ -853,21 +853,21 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6543), Tuple.Create("\"", 6584)
+WriteAttribute("href", Tuple.Create(" href=\"", 6567), Tuple.Create("\"", 6608)
             
             #line 118 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6550), Tuple.Create<System.Object, System.Int32>(linkProtocol
+, Tuple.Create(Tuple.Create("", 6574), Tuple.Create<System.Object, System.Int32>(linkProtocol
             
             #line default
             #line hidden
-, 6550), false)
+, 6574), false)
             
             #line 118 "..\..\Views\Apprenticeship\Standard.cshtml"
-, Tuple.Create(Tuple.Create("", 6563), Tuple.Create<System.Object, System.Int32>(organisation.Website
+, Tuple.Create(Tuple.Create("", 6587), Tuple.Create<System.Object, System.Int32>(organisation.Website
             
             #line default
             #line hidden
-, 6563), false)
+, 6587), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
@@ -914,15 +914,15 @@ WriteLiteral(" data-label=\"email\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6916), Tuple.Create("\"", 6949)
-, Tuple.Create(Tuple.Create("", 6923), Tuple.Create("mailto:", 6923), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 6940), Tuple.Create("\"", 6973)
+, Tuple.Create(Tuple.Create("", 6947), Tuple.Create("mailto:", 6947), true)
             
             #line 122 "..\..\Views\Apprenticeship\Standard.cshtml"
-             , Tuple.Create(Tuple.Create("", 6930), Tuple.Create<System.Object, System.Int32>(organisation.Email
+             , Tuple.Create(Tuple.Create("", 6954), Tuple.Create<System.Object, System.Int32>(organisation.Email
             
             #line default
             #line hidden
-, 6930), false)
+, 6954), false)
 );
 
 WriteLiteral(" target=\"_blank\"");
