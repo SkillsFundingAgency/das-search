@@ -5,7 +5,7 @@
     <form action="@Model.SearchRoute">
 
         <div class="@(CssViewModel.FormCss.FormGroup)">
-            <label class="@(CssViewModel.UtilitiesCss.VisuallyHidden)">Use the postcode for where the apprentice will work.</label>
+            <label class="@(CssViewModel.VisuallyHidden)">Use the postcode for where the apprentice will work.</label>
             <input class="@(CssViewModel.FormCss.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
             <span asp-validation-for="Postcode" class="error-message"></span>
         </div>

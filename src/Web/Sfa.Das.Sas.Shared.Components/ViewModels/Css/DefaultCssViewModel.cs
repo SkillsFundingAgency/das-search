@@ -80,5 +80,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         public string DetailsSummary => $"{Details}__summary";
         public string DetailsSummaryText => $"{Details}__summary-text";
         public string DetailsText => $"{Details}__text";
+
+        public string VisuallyHidden => $"{ClassPrefix}visually-hidden";
     }
 }
