@@ -4,20 +4,19 @@
 @inject ICssViewModel CssViewModel;
     <form action="@Model.SearchRoute">
 
-        <div class="@(CssViewModel.FormGroup)">
+        <div class="@(CssViewModel.FormCss.FormGroup)">
             <label>Use the postcode for where the apprentice will work.</label>
-            <input class="@(CssViewModel.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
+            <input class="@(CssViewModel.FormCss.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
             <span asp-validation-for="Postcode" class="error-message"></span>
         </div>
-        <div class="@(CssViewModel.FormGroup) radios">
+        <div class="@(CssViewModel.FormCss.FormGroup) radios">
             <p>Is your organisation a levy-payer?</p>
             <div class="radios__item">
-
-                <input class="@(CssViewModel.Input) radios__input" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
+                <input class="@(CssViewModel.FormCss.Input) @CssViewModel.FormCss.RadioInline" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
                 <label class="label radios__label" for="LevyPayerYes">Yes </label>
             </div>
             <div class="radios__item">
-                <input class="@(CssViewModel.Input) radios__input" type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
+                <input class="@(CssViewModel.FormCss.Input) @CssViewModel.FormCss.RadioInline" type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
                 <label class="label radios__label" for="LevyPayerNo">No</label>
             </div>
         </div>

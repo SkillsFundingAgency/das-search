@@ -46,12 +46,15 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 NationalProvider = source.ApprenticeshipDetails.Provider.NationalProvider,
                 Ukprn = source.ApprenticeshipDetails.Provider.UkPrn,
                 Name = source.ApprenticeshipDetails.Provider.Name,
-                
+                DeliveryModes = source.ApprenticeshipDetails.Product.DeliveryModes,
                 MarketingInfo = source.ApprenticeshipDetails.Product.ProviderMarketingInfo,
                 HasParentCompanyGuarantee = source.ApprenticeshipDetails.Provider.HasParentCompanyGuarantee,
                 IsNewProvider = source.ApprenticeshipDetails.Provider.IsNew,
                 IsLevyPayerOnly = source.ApprenticeshipDetails.Provider.IsLevyPayerOnly,
-
+                AchievementRate = Convert.ToInt32(source.ApprenticeshipDetails.Product.AchievementRate),
+                NationalAchievementRate = Convert.ToInt32(source.ApprenticeshipDetails.Product.NationalAchievementRate),
+                LocationAddressLine = ProviderMappingHelper.GetCommaList(source.ApprenticeshipDetails.Location.LocationName, source.ApprenticeshipDetails.Location.Address.Address1, source.ApprenticeshipDetails.Location.Address.Address2, source.ApprenticeshipDetails.Location.Address.Town, source.ApprenticeshipDetails.Location.Address.County, source.ApprenticeshipDetails.Location.Address.Postcode),
+                LegalName = source.ApprenticeshipDetails.Provider.LegalName,
                 Feedback = _feedbackMapper.Map(source.ApprenticeshipDetails.Provider.ProviderFeedback)
 
             };

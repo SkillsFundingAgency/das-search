@@ -3,12 +3,12 @@
 @model Sfa.Das.Sas.Shared.Components.ViewComponents.FatSearchViewModel
 @inject ICssViewModel CssViewModel;
 
-<form action="@Model.FatSearchRoute">
-    <div class="@(CssViewModel.FormGroup)">
-        <input class="@(CssViewModel.Input)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
+<form asp-controller="Fat" asp-action="Search" method="get">
+    <div class="@(CssViewModel.FormCss.FormGroup)">
+        <input class="@(CssViewModel.FormCss.Input)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
 
     </div>
-    <div class="@(CssViewModel.FormGroup)">
+    <div class="@(CssViewModel.FormCss.FormGroup)">
         <button type="submit" class="@(CssViewModel.Button)">
             Search
         </button>

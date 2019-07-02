@@ -9,6 +9,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core.Configuration;
+    using Sfa.Das.Sas.Infrastructure.Helpers;
 
     public sealed class ElasticsearchApprenticeshipSearchProvider : IApprenticeshipSearchProvider
     {

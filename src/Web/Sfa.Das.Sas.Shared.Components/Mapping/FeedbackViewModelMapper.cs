@@ -8,7 +8,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
     {
         public FeedbackViewModel Map(Feedback source)
         {
-            if (source == null)
+                if (source == null)
             {
                 return null;
             }

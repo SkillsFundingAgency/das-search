@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Shared.Components.Mapping;
@@ -38,22 +36,22 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 PostCode = searchQueryModel.Postcode,
             });
 
-            
+            var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);
 
-            var model = _searchResultsViewModelMapper.Map(results,searchQueryModel);
+            if (results.Success == false)
+            {
+                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
+               
+            }
 
-            return model;
+
+            return _searchResultsViewModelMapper.Map(results, searchQueryModel);
         }
 
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)
         {
-            int page = 1;
-            if (detailsQueryModel.Page > 1)
-            {
-                page = detailsQueryModel.Page;
-            }
 
-            var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType});
+            var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
 
             if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
             {

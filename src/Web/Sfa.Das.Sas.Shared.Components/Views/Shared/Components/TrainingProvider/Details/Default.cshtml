@@ -4,64 +4,21 @@
 @model Sfa.Das.Sas.Shared.Components.ViewModels.TrainingProviderDetailsViewModel
 @inject ICssViewModel CssViewModel
 
-<h2 class="@CssViewModel.HeadingLarge @CssViewModel.UtilitiesCss.Margin("Top",0)">Training Information</h2>
-
-<dl class="@CssViewModel.List das-definition-list__results das-definition-list__results--black">
-    <dt>Apprenticeship:</dt>
-    <dd>@Model.Apprenticeship.Title</dd>
-    <dt>Level:</dt>
-    <dd>@Model.Apprenticeship.Level (equivalent to @Model.Apprenticeship.EquivalentText)</dd>
-
-    <dt>Training options:</dt>
-    <dd>
-        <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-            <li><span class="@GetTrainingOptionsStatusClass("dayrelease",Model.DeliveryModes)">day release</span></li>
-            <li><span class="@GetTrainingOptionsStatusClass("blockrelease",Model.DeliveryModes)">block release</span></li>
-            <li><span class="@GetTrainingOptionsStatusClass("100percentemployer",Model.DeliveryModes)">at your location</span></li>
-        </ul>
-        <details class="@CssViewModel.Details">
-            <summary class="@CssViewModel.DetailsSummary">
-                <span class="@CssViewModel.DetailsSummaryText @CssViewModel.Link">Explain training options</span>
-            </summary>
-            <div class="@CssViewModel.DetailsText">
-                <p><span class="das-provider__copy--black">Day release:</span> for example one day a week at the training provider's location.</p>
-                <p><span class="das-provider__copy--black">Block release:</span> for example 3-4 weeks at the training provider's location.</p>
-                <p><span class="das-provider__copy--black">At your location:</span> the training provider comes to your workplace.</p>
-            </div>
-        </details>
-    </dd>
-
-    <dt>Achievement rates:</dt>
-    <dd>
-        <div>Acheivement average: <span class="das-provider__copy--black">@Model.AchievementRate%</span></div>
-        <progress class="das-provider__progress-bar" max="100" value="@Model.AchievementRate"></progress>
-
-        <div>National average: <span class="das-provider__copy--black">@Model.NationalAchievementRate%</span></div>
-        <progress class="das-provider__progress-bar" max="100" value="@Model.NationalAchievementRate"></progress>
-
-        <details class="@CssViewModel.Details">
-            <summary class="@CssViewModel.DetailsSummary">
-                <span class="@CssViewModel.DetailsSummaryText @CssViewModel.Link">Explain achievement rates</span>
-            </summary>
-            <div class="@CssViewModel.DetailsText">
-                <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
-                <p>Based on the latest data for 50 apprentices.</p>
-                <p>Source: <a href="https://www.gov.uk/government/collections/sfa-national-success-rates-tables" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a></p>
-            </div>
-        </details>
-    </dd>
-</dl>
 <div class="das-provider-about">
+
+    <h2 class="@CssViewModel.HeadingLarge @CssViewModel.UtilitiesCss.Margin("Top",0)">Training Information</h2>
+
+
     <h2 class="@CssViewModel.HeadingMedium">ABOUT THE APPRENTICESHIP</h2>
 
-    @Html.MarkdownToHtml(Model.Apprenticeship.Overview);
+    @Html.MarkdownToHtml(Model.Apprenticeship.Overview)
 
 </div>
 
 <div class="das-provider-information">
 
     <h2 class="@CssViewModel.HeadingMedium">PROVIDER INFORMATION</h2>
-
+    
     @Html.MarkdownToHtml(Model.MarketingInfo)
 
 
@@ -76,6 +33,10 @@
 </div>
 
 <div class="das-provider-employers">
+    
+    
+    @if (Model.Feedback != null)
+    {
 
     <h2 class="@CssViewModel.HeadingMedium">What employers are saying</h2>
 
@@ -112,28 +73,29 @@
 
     </div>
 
-    <div class="grid-row">
-        <div class="grid-column-one-half">
-            <h3 class="@CssViewModel.HeadingSmall">Strengths</h3>
-            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-                @foreach (var strength in Model.Feedback.Strengths)
-                {
-                    <li>@strength.Name <strong>(@strength.Count)</strong></li>
-                }
-            </ul>
+        <div class="grid-row">
+            <div class="grid-column-one-half">
+                <h3 class="@CssViewModel.HeadingSmall">Strengths</h3>
+                <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                    @foreach (var strength in Model.Feedback.Strengths)
+                    {
+                        <li>@strength.Name <strong>(@strength.Count)</strong></li>
+                    }
+                </ul>
+            </div>
+            <div class="grid-column-one-half">
+                <h3 class="@CssViewModel.HeadingSmall">Things to improve</h3>
+                <ul class="@CssViewModel.List @CssViewModel.ListBullet">
+                    @foreach (var weakness in Model.Feedback.Weaknesses)
+                    {
+                        <li>@weakness.Name <strong>(@weakness.Count)</strong></li>
+                    }
+                </ul>
+            </div>
         </div>
-        <div class="grid-column-one-half">
-            <h3 class="@CssViewModel.HeadingSmall">Things to improve</h3>
-            <ul class="@CssViewModel.List @CssViewModel.ListBullet">
-                @foreach (var weakness in Model.Feedback.Weaknesses)
-                {
-                    <li>@weakness.Name <strong>(@weakness.Count)</strong></li>
-                }
-            </ul>
-        </div>
-    </div>
+    }
 
-    <dl class="@CssViewModel.List das-definition-list__results das-definition-list__results--black">
+    <dl class="@CssViewModel.List das-provider__training-information-definition-list__results">
 
         <dt>Employer satisfaction:</dt>
         <dd>
@@ -156,13 +118,17 @@
                 Source: <a href="https://www.gov.uk/government/statistical-data-sets/fe-choices-performance-indicators" target="_blank">Skills Funding Agency FE Choices</a>
             </div>
         </dd>
+        
+        @if (string.IsNullOrWhiteSpace(Model.LegalName))
+        {
+            <dt>Legal name:</dt>
+            <dd>@Model.LegalName</dd>
+        }
 
-        <dt>Legal name:</dt>
-        <dd>@Model.LegalName</dd>
     </dl>
 </div>
 
-<div class="das-provider-disclasimer">
+<div class="das-provider-disclaimer">
 
     <h2 class="@CssViewModel.HeadingXSmall">Content disclaimer</h2>
 
