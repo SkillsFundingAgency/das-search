@@ -1,0 +1,40 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@model Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.FatSearchFilterViewModel
+@inject ICssViewModel CssViewModel
+
+
+<form asp-controller="Fat" asp-action="Search" method="get">
+    <h3 class="@CssViewModel.HeadingMedium">Filter results</h3>
+    <div class="@(CssViewModel.FormCss.FormGroup)">
+        <label class="@(CssViewModel.FormCss.Label)">Showing search results for:</label>
+        <input class="@(CssViewModel.FormCss.Input)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
+
+    </div>
+    
+    <div class="@(CssViewModel.FormCss.FormGroup)">
+        <label class="@(CssViewModel.FormCss.Label)">Showing search results for:</label>
+        <ul>
+
+      
+        @foreach (var item in Model.LevelsAggregate.OrderBy(m => m.Value))
+        {
+            <li>
+                <input class="" value="@item.Value" id="SelectedLevels_@(item.Value)" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                <label asp-for="SelectedLevels" class="@Html.Raw(item.Count == 0 ? "disabled" : "") @(CssViewModel.FormCss.Label)">level @item.Value (@item.Count)</label>
+            </li>
+        }
+        </ul>
+
+    </div>
+    
+    <div class="@(CssViewModel.FormCss.FormGroup)">
+        <input type="hidden" asp-for="Page" />
+        <input type="hidden" asp-for="SortOrder" />
+        <input type="hidden" asp-for="ResultsToTake" />
+        <button type="submit" class="@(CssViewModel.Button)">
+            Update
+        </button>
+    </div>
+
+</form>
