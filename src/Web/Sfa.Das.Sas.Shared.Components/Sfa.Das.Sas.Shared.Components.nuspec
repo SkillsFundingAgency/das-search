@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SFA.DAS.SAS.Shared.Components</id>
-    <version>0.0.37-alpha</version>
+    <version>0.0.38-alpha</version>
     <authors>DAS</authors>
     <owners>sfanuget</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -15,15 +15,15 @@
       <dependency id="MediatR.Extensions.Microsoft.DependencyInjection" version="6.0.1" />
       <dependency id="Microsoft.AspNetCore.Mvc" version="2.2.0" />
       <dependency id="NLog" version="4.6.0" />
-      <dependency id="SFA.DAS.Apprenticeships.Api.Client" version="0.11.129" />
-      <dependency id="SFA.DAS.AssessmentOrgs.Api.Client" version="0.11.129" />
+      <dependency id="SFA.DAS.Apprenticeships.Api.Client" version="0.11.174" />
+      <dependency id="SFA.DAS.AssessmentOrgs.Api.Client" version="0.11.174" />
+      <dependency id="SFA.DAS.Providers.Api.Client" version="0.11.174" />
       <dependency id="SFA.DAS.NLog.Logger" version="1.2.1" />
       <dependency id="SFA.DAS.NLog.Targets.Redis" version="1.2.1" />
       <dependency id="CommonMark.NET" version="0.15.1" />
       <dependency id="polly" version="6.0.1" />
       <dependency id="FeatureToggle" version="3.3.0" />
       <dependency id="StructureMap" version="4.2.0.402" />
-      <dependency id="SFA.DAS.Providers.Api.Client" version="0.11.174" />
       <dependency id="NEST" version="5.0.0" />
       <dependency id="Newtonsoft.Json" version="12.0.2" />
     </dependencies>
