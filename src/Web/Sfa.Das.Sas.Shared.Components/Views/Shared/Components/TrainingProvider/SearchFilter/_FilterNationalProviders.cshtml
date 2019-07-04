@@ -1,0 +1,27 @@
+﻿@model IList<Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.FilterViewModel>;
+
+<fieldset class="filters filters-accordion">
+    <h2 class="toggler heading-small">National training providers</h2>
+    <div class="toggled-content">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <input value="@item.Value" name="NationalProvidersOnly" id="NationalProvidersOnly_@item.Value" type="radio" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "")/>
+                    <label for="NationalProvidersOnly_@item.Value">
+                        @if (item.Value.ToLower() == "true")
+                        {
+                            @:National providers only
+                        }
+                        else
+                        {
+                            @:All training providers
+                        }
+                        (@item.Count)
+                    </label>
+                </li>
+            }
+           
+        </ul>
+    </div>
+</fieldset>

@@ -118,7 +118,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             var hasNonLevyContract = message.IsLevyPayingEmployer == false;
 
-
             var searchResults = await _searchService.SearchProviders(message.ApprenticeshipId, message.PostCode, new Pagination { Page = pageNumber, Take = message.Take }, message.DeliveryModes, hasNonLevyContract);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
@@ -141,7 +140,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 SearchTerms = message.Keywords,
                 ShowOnlyNationalProviders = message.NationalProvidersOnly,
                 ShowAllProviders = message.ShowAll,
-                StatusCode = GetResponseCode(searchResults.ResponseCode)
+                StatusCode = GetResponseCode(searchResults.ResponseCode),
+                
             };
 
             return providerSearchResponse;

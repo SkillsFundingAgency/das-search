@@ -6,6 +6,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using SFA.DAS.NLog.Logger;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.ApplicationServices
@@ -137,8 +138,16 @@ namespace Sfa.Das.Sas.ApplicationServices
                     StandardLevel = standard.Level,
                     PostCode = postCode,
                     Hits = searchResults.Hits,
-                    TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
-                    NationalProviders = searchResults.NationalProvidersAggregation,
+                    TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation.ToDictionary(s => s.Key, s =>
+                    {
+                        if (s.Value != null) { return s.Value.Value; }
+                        return 0;
+                    }),
+                    NationalProviders = searchResults.NationalProvidersAggregation.ToDictionary(s => s.Key, s =>
+                    {
+                        if (s.Value != null) { return s.Value.Value; }
+                        return 0;
+                    }),
                     SelectedTrainingOptions = deliveryModes,
                     StandardResponseCode = responseCode,
                     ShowNationalProvidersOnly = false,
@@ -257,8 +266,20 @@ namespace Sfa.Das.Sas.ApplicationServices
                     FrameworkResponseCode = responseCode,
                     PostCode = postCode,
                     Hits = hits,
-                    TrainingOptionsAggregation = trainingOptionsAggregation,
-                    NationalProviders = searchResults.NationalProvidersAggregation,
+                    TrainingOptionsAggregation = trainingOptionsAggregation.ToDictionary(s => s.Key, s =>
+                    {
+                        if (s.Value != null) { return s.Value.Value; }
+                        return 0;
+                    }),
+                    NationalProviders = searchResults.NationalProvidersAggregation.ToDictionary(s => s.Key, s =>
+                    {
+                        if (s.Value != null)
+                        {
+                            return s.Value.Value;
+                        }
+
+                        return 0;
+                    }),
                     SelectedTrainingOptions = deliveryModes,
                     ShowNationalProvidersOnly = false,
                 };
@@ -327,8 +348,16 @@ namespace Sfa.Das.Sas.ApplicationServices
                     Title = apprenticeship?.Title,
                     Level = apprenticeship.Level,
                     PostCode = postCode,
-                    TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation,
-                    NationalProviders = searchResults.NationalProvidersAggregation,
+                    TrainingOptionsAggregation = searchResults.TrainingOptionsAggregation.ToDictionary(s => s.Key, s =>
+                    {
+                        if (s.Value != null) { return s.Value.Value; }
+                        return 0;
+                    }),
+                    NationalProviders = searchResults.NationalProvidersAggregation.ToDictionary(s => s.Key, s =>
+                    {
+                        if (s.Value != null) { return s.Value.Value; }
+                        return 0;
+                    }),
                     SelectedTrainingOptions = deliveryModes,
                     ResponseCode = LocationLookupResponse.Ok,
                     ShowNationalProvidersOnly = false,

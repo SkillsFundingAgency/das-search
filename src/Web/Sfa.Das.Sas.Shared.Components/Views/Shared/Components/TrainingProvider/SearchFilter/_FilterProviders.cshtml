@@ -1,0 +1,60 @@
+﻿@using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider
+@model IList<Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.FilterViewModel>
+
+<fieldset class="filters filters-accordion">
+    <h2 class="toggler heading-small">Training options</h2>
+    <div class="toggled-content">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <input value="@item.Value.ToLower()" name="DeliveryModes" id="DeliveryModes_@item.Value" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                    <label for="DeliveryModes_@item.Value">@await GetLabelText(item)</label>
+                </li>
+            }
+        </ul>
+        <details>
+            <summary>Explain training options</summary>
+            <div class="panel panel-border-narrow">
+                <p>
+                    <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
+                </p>
+                <p>
+                    <span class="bold-small">Block release:</span> for example 3-4 weeks at the training provider's location.
+                </p>
+                <p>
+                    <span class="bold-small">At your location:</span> the training provider comes to your workplace.
+                </p>
+            </div>
+        </details>
+    </div>
+</fieldset>
+
+
+@functions
+{
+
+    Task<string> GetLabelText(FilterViewModel item)
+    {
+        var labelText = "";
+
+        switch (item.Value)
+        {
+            case "blockrelease":
+                labelText = "Block release";
+                   
+                break;
+            case "dayrelease":
+                labelText = "Day release";
+                break;
+            case "100percentemployer":
+                labelText = "At your location";
+                break;
+        }
+
+        labelText = $"{labelText} ({item.Count})";
+
+        return Task.FromResult(labelText);
+    }
+
+}
