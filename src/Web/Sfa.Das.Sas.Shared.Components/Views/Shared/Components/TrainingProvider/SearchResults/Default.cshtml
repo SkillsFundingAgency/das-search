@@ -27,7 +27,7 @@ else
     <h3 class="@CssViewModel.HeadingSmall">Try a different postcode</h3>
 }
 
-@if (Model.TotalResults > Model.SearchQuery.ResultsToTake)
+@if (Model.TotalResults > (Model.SearchQuery.ResultsToTake * Model.SearchQuery.Page))
 {
 
     <ul class="das-pagination das-pagination--employer">
