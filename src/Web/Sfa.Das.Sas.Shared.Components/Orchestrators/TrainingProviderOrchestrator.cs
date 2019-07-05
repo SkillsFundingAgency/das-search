@@ -44,8 +44,6 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 throw new Exception($"Unable to get provider search response: {results.StatusCode}");
                
             }
-
-
             return _searchResultsViewModelMapper.Map(results, searchQueryModel);
         }
 
@@ -68,7 +66,6 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
                 throw new HttpRequestException(message);
             }
-
 
             var model = _trainingProviderDetailsViewModelMapper.Map(response);
 
