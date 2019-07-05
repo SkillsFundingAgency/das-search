@@ -34,6 +34,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             {
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
+                Page = searchQueryModel.Page
             });
 
             var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);

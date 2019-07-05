@@ -1,6 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
-@model Sfa.Das.Sas.Shared.Components.ViewModels.SearchResultsViewModel<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem, Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel>
+@using  Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
+@model Sfa.Das.Sas.Shared.Components.ViewModels.SearchResultsViewModel<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>
 @inject ICssViewModel CssViewModel
 
 
@@ -35,7 +36,7 @@ else
         <li class="das-pagination__list-item">
             @if (Model.SearchQuery.Page > 1)
             {
-                <a class="das-pagination__link das-pagination__link--previous" id="link-pagination-previous" href="@await GetPaginationBackLinkHref(Model.SearchQuery.Page, Model.SearchQuery.Keywords)">Previous page <span class="das-pagination__caption">@(Model.SearchQuery.Page - 1) of @Model.LastPage</span></a>
+                <a class="das-pagination__link das-pagination__link--previous" id="link-pagination-previous" href="@await GetPaginationBackLinkHref(Model.SearchQuery.Page, Model.SearchQuery)">Previous page <span class="das-pagination__caption">@(Model.SearchQuery.Page - 1) of @Model.LastPage</span></a>
             }
         </li>
 
@@ -43,7 +44,7 @@ else
         @if (Model.SearchQuery.Page < Model.LastPage)
         {
             <li class="das-pagination__list-item">
-                <a class="das-pagination__link das-pagination__link--next" id="link-pagination-apprentice-next" href="@await GetPaginationNextLinkHref(Model.SearchQuery.Page,Model.SearchQuery.Keywords)">Next page <span class="das-pagination__caption">@(Model.SearchQuery.Page + 1) of @Model.LastPage</span></a>
+                <a class="das-pagination__link das-pagination__link--next" id="link-pagination-apprentice-next" href="@await GetPaginationNextLinkHref(Model.SearchQuery.Page,Model.SearchQuery)">Next page <span class="das-pagination__caption">@(Model.SearchQuery.Page + 1) of @Model.LastPage</span></a>
             </li>
         }
 
@@ -54,19 +55,19 @@ else
 @functions
 {
 
-    Task<string> GetPaginationBackLinkHref(int currentPage, string keywords)
+    Task<string> GetPaginationBackLinkHref(int currentPage, TrainingProviderSearchViewModel item)
     {
         var path = this.ViewContext.HttpContext.Request.Path;
 
-        var href = $"{path}?keywords={keywords}&page={currentPage - 1}";
+        var href = $"{path}?Postcode={item.Postcode}&Page={currentPage - 1}&ApprenticeshipId={item.ApprenticeshipId}&IsLevyPayer={item.IsLevyPayer}";
         return Task.FromResult(href);
     }
 
-    Task<string> GetPaginationNextLinkHref(int currentPage, string keywords)
+    Task<string> GetPaginationNextLinkHref(int currentPage, TrainingProviderSearchViewModel item)
     {
         var path = this.ViewContext.HttpContext.Request.Path;
 
-        var href = $"{path}?keywords={keywords}&page={currentPage + 1}";
+        var href = $"{path}?Postcode={item.Postcode}&Page={currentPage + 1}&ApprenticeshipId={item.ApprenticeshipId}&IsLevyPayer={item.IsLevyPayer}";
         return Task.FromResult(href);
     }
 
