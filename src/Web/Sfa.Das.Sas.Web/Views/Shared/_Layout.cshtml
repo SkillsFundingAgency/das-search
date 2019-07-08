@@ -13,6 +13,7 @@
         <meta name="format-detection" content="date=no" />
         <meta name="format-detection" content="address=no" />
         <link href="~/Content/dist/css/screen.min.css" rel="stylesheet"/>
+        <link href="https://das-at-frnt-end.azureedge.net/css/main.css" rel="stylesheet"/>
 
         @* Favivon *@
         <meta name="msapplication-config" content="/Content/favicons/browserconfig.xml"/>
@@ -45,20 +46,23 @@
 @Scripts.Render("~/bundles/header")
 @Html.Partial("_Analytics")
     </head>
-<body id="@ViewBag.PageID">
-<script>
-    document.body.className = ((document.body.className)
-        ? document.body.className + ' js-enabled'
-        : 'js-enabled');
-</script>
-@Html.Action("Header", "Shared")
+    <body id="@ViewBag.PageID">
+        <script>
+            document.body.className = ((document.body.className)
+                ? document.body.className + ' js-enabled'
+                : 'js-enabled');
+        </script>
+        @Html.Action("Header", "Shared")
 
-<div class="container body-content">
-    @RenderBody()
-</div>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
 
-@Html.Action("Footer", "Shared")
+        @Html.Action("Footer", "Shared")
 
-@Html.Partial("_ScriptsFooter")
-</body>
+        @Html.Partial("_ScriptsFooter")
+
+        @RenderSection("Scripts", required: false)
+
+    </body>
 </html>
