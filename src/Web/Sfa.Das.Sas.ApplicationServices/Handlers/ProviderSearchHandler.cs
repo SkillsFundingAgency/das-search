@@ -141,7 +141,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 SearchTerms = message.Keywords,
                 ShowOnlyNationalProviders = message.NationalProvidersOnly,
                 ShowAllProviders = message.ShowAll,
-                StatusCode = GetResponseCode(searchResults.ResponseCode)
+                StatusCode = GetResponseCode(searchResults.ResponseCode),
+                
             };
 
             return providerSearchResponse;
