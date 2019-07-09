@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
@@ -34,7 +35,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 ApprenticeshipId = "123"
             };
 
-            var response = await _sut.Handle(request, default);
+            var response = await _sut.Handle(request, default(CancellationToken));
 
             response.Should().NotBeEmpty();
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<Guid>(a => a != Guid.Empty), It.IsAny<ApprenticeshipFavouritesBasket>()));
@@ -51,7 +52,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 ApprenticeshipId = "123"
             };
 
-            await _sut.Handle(request, default);
+            await _sut.Handle(request, default(CancellationToken));
 
             _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<Guid>(), It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123")));
         }
@@ -73,7 +74,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 ApprenticeshipId = "123"
             };
 
-            var response = await _sut.Handle(request, default);
+            var response = await _sut.Handle(request, default(CancellationToken));
 
             response.Should().Be(basketId);
             _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<Guid>(), It.Is<ApprenticeshipFavouritesBasket>(b => b.Count == 2)));
@@ -93,7 +94,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 ApprenticeshipId = "123"
             };
 
-            await _sut.Handle(request, default);
+            await _sut.Handle(request, default(CancellationToken));
 
             _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<Guid>(), It.IsAny<ApprenticeshipFavouritesBasket>()), Times.Never);
         }
