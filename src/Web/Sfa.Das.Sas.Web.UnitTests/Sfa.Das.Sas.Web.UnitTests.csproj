@@ -238,6 +238,7 @@
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceBuilder.cs" />
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceTests.cs" />
     <Compile Include="Application\ApplicationServices\StandardSearchServiceTest.cs" />
+    <Compile Include="Application\Handlers\AddFavouriteToBasketHandlerTests.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipProviderDetailHandlerTest.cs" />
     <Compile Include="Application\Handlers\FrameworkProviderSearchHandlerTests.cs" />

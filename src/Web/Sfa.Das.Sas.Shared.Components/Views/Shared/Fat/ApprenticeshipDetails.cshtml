@@ -1,10 +1,11 @@
 ﻿@model Sfa.Das.Sas.Shared.Components.ViewModels.ApprenticeshipDetailQueryViewModel
+@using Sfa.Das.Sas.Shared.Components.ViewModels
 
-
+@await Html.PartialAsync("Basket/_AddToBasket", new AddToBasketModel(Model))
 
 @await Component.InvokeAsync("ApprenticeshipDetails", new { queryModel = Model })
 
 
 @await Component.InvokeAsync("SaveApprenticeship", Model.Id)
 
-@await Component.InvokeAsync("TrainingProviderSearch", new {apprenticeshipId = Model.Id})
+@await Component.InvokeAsync("TrainingProviderSearch", new { apprenticeshipId = Model.Id })
