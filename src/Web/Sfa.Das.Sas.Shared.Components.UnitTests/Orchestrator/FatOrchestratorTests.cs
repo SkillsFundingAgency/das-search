@@ -18,6 +18,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private FatOrchestrator _sut;
         private Mock<IApprenticeshipSearchService> _apprenticeshipSearchServicetMock;
         private Mock<IFatSearchResultsViewModelMapper> _FatResultsViewModelMock;
+        private Mock<IFatSearchFilterViewModelMapper> _fatSearchFilterViewModelMapper;
 
         private  SearchQueryViewModel _searchQueryViewModel = new SearchQueryViewModel();
 
@@ -30,12 +31,13 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _apprenticeshipSearchServicetMock = new Mock<IApprenticeshipSearchService>(MockBehavior.Strict);
             _FatResultsViewModelMock = new Mock<IFatSearchResultsViewModelMapper>(MockBehavior.Strict);
+            _fatSearchFilterViewModelMapper = new Mock<IFatSearchFilterViewModelMapper>();
 
             _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).Returns(_searchResults);
 
             _FatResultsViewModelMock.Setup(s => s.Map(_searchResults)).Returns(_searchResultsViewModel);
 
-            _sut = new FatOrchestrator(_apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object);
+            _sut = new FatOrchestrator(_apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object, _fatSearchFilterViewModelMapper.Object);
         }
 
         [Test]
