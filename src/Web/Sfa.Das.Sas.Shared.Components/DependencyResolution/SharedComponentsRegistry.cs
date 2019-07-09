@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Http;
@@ -13,6 +14,7 @@ using Sfa.Das.Sas.Core;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Infrastructure.Basket;
 using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
@@ -34,6 +36,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
     {
         public static void AddFatSharedComponents(this IServiceCollection services, FatSharedComponentsConfiguration configuration, bool useElastic = false)
         {
+            ConfigureCaching(services, configuration);
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
 
@@ -43,6 +46,8 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IValidation, Validation>();
 
             services.AddSingleton<IPostcodeIOConfigurationSettings, FatSharedComponentsConfiguration>(s => configuration);
+            services.AddSingleton<IApprenticehipFavouritesBasketStoreConfig, FatSharedComponentsConfiguration>(s => configuration);
+            
             //Application DI
             AddApplicationServices(services);
 
@@ -67,12 +72,27 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IStandardDetailsViewModelMapper, StandardsDetailsViewModelMapper>();
             services.AddTransient<IAssessmentOrganisationViewModelMapper, AssessmentOrganisationViewModelMapper>();
             services.AddTransient<ITrainingProviderSearchResultsItemViewModelMapper, TrainingProviderSearchResultsItemViewModelMapper>();
-            services.AddTransient<ISearchResultsViewModelMapper,SearchResultsViewModelMapper>();
+            services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
             services.AddTransient<IProviderSearchResultsMapper, ProviderSearchResultsMapper>();
             services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
             services.AddTransient<IFeedbackViewModelMapper, FeedbackViewModelMapper>();
             services.AddTransient<ITrainingProviderDetailsViewModelMapper, TrainingProviderDetailsViewModelMapper>();
 
+        }
+
+        private static void ConfigureCaching(IServiceCollection services, FatSharedComponentsConfiguration configuration)
+        {
+            if (services.BuildServiceProvider().GetService<IHostingEnvironment>().IsDevelopment())
+            {
+                services.AddDistributedMemoryCache();
+            }
+            else
+            {
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = configuration.BasketRedisConnectionString;
+                });
+            }
         }
 
         private static void AddApplicationServices(IServiceCollection services)
@@ -114,6 +134,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IPaginationOrientationService, PaginationOrientationService>();
 
             services.AddTransient<IRetryWebRequests, WebRequestRetryService>();
+            services.AddTransient<IApprenticeshipFavouritesBasketStore, ApprenticeshipFavouritesBasketStore>();
         }
 
         private static void AddElasticSearchServices(IServiceCollection services)

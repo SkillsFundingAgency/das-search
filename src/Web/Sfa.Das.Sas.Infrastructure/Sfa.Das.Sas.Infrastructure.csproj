@@ -186,6 +186,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basket\ApprenticeshipFavouritesBasketStore.cs" />
     <Compile Include="Elasticsearch\IProviderNameSearchProviderQuery.cs" />
     <Compile Include="Elasticsearch\ProviderNameSearchProvider.cs" />
     <Compile Include="Elasticsearch\ProviderNameSearchProviderQuery.cs" />

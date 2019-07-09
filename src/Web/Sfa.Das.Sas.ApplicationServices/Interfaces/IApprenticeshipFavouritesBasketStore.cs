@@ -4,7 +4,7 @@ using Sfa.Das.Sas.ApplicationServices.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Interfaces
 {
-    public interface IFavouritesBasketStore
+    public interface IApprenticeshipFavouritesBasketStore
     {
         Task<ApprenticeshipFavouritesBasket> GetAsync(Guid basketId);
         Task UpdateAsync(Guid basketId, ApprenticeshipFavouritesBasket basket);

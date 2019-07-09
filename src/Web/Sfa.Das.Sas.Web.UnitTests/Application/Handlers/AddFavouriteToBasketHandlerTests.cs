@@ -15,29 +15,28 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     [TestFixture]
     public class AddFavouriteToBasketHandlerTests
     {
-        private IRequestHandler<AddFavouriteToBasketCommand> _sut;
-        private Mock<IFavouritesBasketStore> _mockBasket;
+        private IRequestHandler<AddFavouriteToBasketCommand, Guid> _sut;
+        private Mock<IApprenticeshipFavouritesBasketStore> _mockBasket;
 
         [SetUp]
         public void Setup()
         {
-            _mockBasket = new Mock<IFavouritesBasketStore>();
+            _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
             _sut = new AddFavouriteToBasketCommandHandler(_mockBasket.Object);
         }
 
         [Test]
         public async Task Handle_CreatesBasketId_WhenNoBasketSpecified()
         {
-            var basketId = Guid.NewGuid();
-
             var request = new AddFavouriteToBasketCommand
             {
                 BasketId = null,
                 ApprenticeshipId = "123"
             };
 
-            await _sut.Handle(request, default);
+            var response = await _sut.Handle(request, default);
 
+            response.Should().NotBeEmpty();
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<Guid>(a => a != Guid.Empty), It.IsAny<ApprenticeshipFavouritesBasket>()));
         }
 
@@ -74,8 +73,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 ApprenticeshipId = "123"
             };
 
-            await _sut.Handle(request, default);
+            var response = await _sut.Handle(request, default);
 
+            response.Should().Be(basketId);
             _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<Guid>(), It.Is<ApprenticeshipFavouritesBasket>(b => b.Count == 2)));
 
             savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123").Should().NotBeNull();

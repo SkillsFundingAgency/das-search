@@ -9,16 +9,16 @@ using Sfa.Das.Sas.ApplicationServices.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class AddFavouriteToBasketCommandHandler : AsyncRequestHandler<AddFavouriteToBasketCommand>
+    public class AddFavouriteToBasketCommandHandler : IRequestHandler<AddFavouriteToBasketCommand, Guid>
     {
-        private readonly IFavouritesBasketStore _basketStore;
+        private readonly IApprenticeshipFavouritesBasketStore _basketStore;
 
-        public AddFavouriteToBasketCommandHandler(IFavouritesBasketStore basketStore)
+        public AddFavouriteToBasketCommandHandler(IApprenticeshipFavouritesBasketStore basketStore)
         {
             _basketStore = basketStore;
         }
 
-        protected override async Task Handle(AddFavouriteToBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(AddFavouriteToBasketCommand request, CancellationToken cancellationToken)
         {
             ApprenticeshipFavouritesBasket basket;
             Guid basketId;
@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 basket = await _basketStore.GetAsync(request.BasketId.Value);
 
                 if (basket.Any(x => x.ApprenticeshipId == request.ApprenticeshipId))
-                    return; // Ignore if saving just an apprenticehip that is already in the basket.
+                    return basketId; // Ignore if saving just an apprenticehip that is already in the basket.
 
                 basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
             }
@@ -43,6 +43,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
 
             await _basketStore.UpdateAsync(basketId, basket);
+
+            return basketId;
         }
     }
 }
