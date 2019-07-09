@@ -18,5 +18,9 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         public string RadioInput => $"{_classPrefix}radio__input";
         public string RadioGroupInline => $"{Radio} radio-inline";
         public string Label => $"{_classPrefix}label";
+
+        public string Checkbox => $"{_classPrefix}checkbox";
+        public string CheckboxInput => $"{_classPrefix}checkboxes__input";
+        public string CheckboxItem => $"{_classPrefix}checkboxes__item";
     }
 }

@@ -8,5 +8,9 @@
         string RadioInput { get; }
         string RadioGroupInline { get; }
         string Label { get; }
+
+        string Checkbox { get; }
+        string CheckboxInput { get; }
+        string CheckboxItem { get; }
     }
 }

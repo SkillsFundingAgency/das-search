@@ -25,5 +25,6 @@
         string DetailsSummary { get; }
         string DetailsSummaryText { get; }
         string DetailsText { get; }
+        string VisuallyHidden { get; }
     }
 }
