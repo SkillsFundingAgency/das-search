@@ -13,13 +13,14 @@ namespace Sfa.Das.Sas.Shared.Components.Configuration
             _config = config;
         }
 
-        public Uri GenerateSaveUrl(string apprenticeshipId)
+        public Uri GenerateSaveUrl(string apprenticeshipId, int ukprn)
         {
             var saveUrl = new Uri(_config.SaveEmployerFavouritesUrl);
             var builder = new UriBuilder(saveUrl);
             var query = HttpUtility.ParseQueryString(builder.Query);
 
             query["apprenticeshipId"] = apprenticeshipId;
+            query["ukprn"] = ukprn.ToString();
 
             builder.Query = query.ToString();
 

@@ -6,5 +6,6 @@
         string FontWeightBold { get; }
         string Margin(string type, int size);
 
+
     }
 }
