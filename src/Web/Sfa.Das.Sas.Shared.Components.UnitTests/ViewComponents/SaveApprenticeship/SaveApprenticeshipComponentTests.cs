@@ -26,29 +26,29 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         }
 
         [Test]
-        public void Invoke_ReturnsModelContainingUrlToEmployerFavourties_ForStandard()
+        public void Invoke_ReturnsModelContainingUrlToEmployerFavourties_ForStandardAndProvider()
         {
-            var result = _sut.Invoke("100") as ViewViewComponentResult;
+            var result = _sut.Invoke("100", 10000020) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
             result.ViewData.Model.Should().BeAssignableTo<SaveApprenticeshipViewModel>();
-            (result.ViewData.Model as SaveApprenticeshipViewModel).SaveUrl.Should().Be("http://employer-favourites/save-apprenticeship-favourites?apprenticeshipId=100");
+            (result.ViewData.Model as SaveApprenticeshipViewModel).SaveUrl.Should().Be("http://employer-favourites/save-apprenticeship-favourites?apprenticeshipId=100&ukprn=10000020");
         }
 
         [Test]
         public void Invoke_ReturnsModelContainingUrlToEmployerFavourties_ForFramework()
         {
-            var result = _sut.Invoke("420-2-1") as ViewViewComponentResult;
+            var result = _sut.Invoke("420-2-1", 10000020) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
             result.ViewData.Model.Should().BeAssignableTo<SaveApprenticeshipViewModel>();
-            (result.ViewData.Model as SaveApprenticeshipViewModel).SaveUrl.Should().Be("http://employer-favourites/save-apprenticeship-favourites?apprenticeshipId=420-2-1");
+            (result.ViewData.Model as SaveApprenticeshipViewModel).SaveUrl.Should().Be("http://employer-favourites/save-apprenticeship-favourites?apprenticeshipId=420-2-1&ukprn=10000020");
         }
 
         [Test]
         public void Invoke_ReturnsDefaultView()
         {
-            var result = _sut.Invoke("420-2-1") as ViewViewComponentResult;
+            var result = _sut.Invoke("420-2-1", 10000020) as ViewViewComponentResult;
 
             result.ViewName.Should().Be("Default");
         }

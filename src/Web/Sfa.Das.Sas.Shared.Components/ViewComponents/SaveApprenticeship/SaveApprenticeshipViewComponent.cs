@@ -14,13 +14,13 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket.SaveApprenticeship
             _config = config;
         }
 
-        public IViewComponentResult Invoke(string apprenticeshipId)
+        public IViewComponentResult Invoke(string apprenticeshipId, int ukprn)
         {
             var uriBuilder = new SaveApprenticeshipUrlBuilder(_config);
 
             var model = new SaveApprenticeshipViewModel
             {
-                SaveUrl = uriBuilder.GenerateSaveUrl(apprenticeshipId)
+                SaveUrl = uriBuilder.GenerateSaveUrl(apprenticeshipId, ukprn)
             };
 
             return View("Default", model);
