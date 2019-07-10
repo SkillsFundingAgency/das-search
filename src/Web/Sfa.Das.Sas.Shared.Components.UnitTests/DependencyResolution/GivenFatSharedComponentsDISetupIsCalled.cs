@@ -3,15 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Http;
-using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
 using SFA.DAS.Apprenticeships.Api.Client;
 using System;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Sfa.Das.Sas.Shared.Components.Configuration;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 {
@@ -29,18 +27,21 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
         [SetUp]
         public void Setup()
         {
+            var mockHostingEnvironment = new Mock<IHostingEnvironment>();
+            mockHostingEnvironment.Setup(m => m.EnvironmentName).Returns("Development");
+
             _FatConfiguration = new FatSharedComponentsConfiguration()
             {
                 FatApiBaseUrl = _fatApiUrl
             };
 
-
             _serviceCollection = new ServiceCollection();
+
+            _serviceCollection.AddTransient<IHostingEnvironment>(x => mockHostingEnvironment.Object);
 
             _serviceCollection.AddFatSharedComponents(_FatConfiguration);
 
             _serviceProvider = _serviceCollection.BuildServiceProvider();
-
         }
 
         [Test]
