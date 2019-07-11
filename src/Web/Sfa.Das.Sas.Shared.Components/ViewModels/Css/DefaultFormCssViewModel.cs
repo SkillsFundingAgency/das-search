@@ -24,5 +24,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         public string Checkbox => $"{_classPrefix}checkbox";
         public string CheckboxInput => $"{_classPrefix}checkboxes__input";
         public string CheckboxItem => $"{_classPrefix}checkboxes__item";
+        public string CheckboxLabel => $"{Label} {_classPrefix}checkboxes__label";
     }
 }

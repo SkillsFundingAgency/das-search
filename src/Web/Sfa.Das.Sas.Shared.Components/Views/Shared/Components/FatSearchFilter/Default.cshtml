@@ -20,7 +20,7 @@
             {
                 <div class="@CssViewModel.FormCss.CheckboxItem das-search-results__filter-checkbox">
                     <input class="@CssViewModel.FormCss.CheckboxInput" value="@item.Value" id="SelectedLevels_@(item.Value)" name="SelectedLevels" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
-                    <label asp-for="SelectedLevels" class="@Html.Raw(item.Count == 0 ? "disabled" : "") @(CssViewModel.FormCss.Label)">level @item.Value (@item.Count)</label>
+                    <label asp-for="SelectedLevels" class="@Html.Raw(item.Count == 0 ? "disabled" : "") @(CssViewModel.FormCss.CheckboxLabel)">level @item.Value (@item.Count)</label>
                 </div>
             }
         </div>
