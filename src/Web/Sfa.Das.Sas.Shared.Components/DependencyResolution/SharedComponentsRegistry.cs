@@ -21,6 +21,7 @@ using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using Sfa.Das.Sas.Infrastructure.Providers;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Shared.Components.Configuration;
+using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Css;
@@ -40,10 +41,11 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
 
-
             services.AddMediatR(typeof(ApprenticeshipSearchQuery));
             services.AddTransient<ICssViewModel, DefaultCssViewModel>();
             services.AddTransient<IValidation, Validation>();
+            services.AddHttpContextAccessor();
+            services.AddTransient<ICookieManager, CookieManager>();
 
             services.AddSingleton<IPostcodeIOConfigurationSettings, FatSharedComponentsConfiguration>(s => configuration);
             services.AddSingleton<IApprenticehipFavouritesBasketStoreConfig, FatSharedComponentsConfiguration>(s => configuration);

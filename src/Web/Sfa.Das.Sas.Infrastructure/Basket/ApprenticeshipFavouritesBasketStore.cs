@@ -10,6 +10,7 @@ namespace Sfa.Das.Sas.Infrastructure.Basket
 {
     public class ApprenticeshipFavouritesBasketStore : IApprenticeshipFavouritesBasketStore
     {
+        private const string CacheItemPrefix = "EmpFav-";
         private readonly IDistributedCache _cache;
         private readonly IApprenticehipFavouritesBasketStoreConfig _config;
 
@@ -21,12 +22,12 @@ namespace Sfa.Das.Sas.Infrastructure.Basket
 
         public Task<ApprenticeshipFavouritesBasket> GetAsync(Guid basketId)
         {
-            throw new NotImplementedException();
+            return RetrieveFromCache($"{CacheItemPrefix}{basketId}");
         }
 
         public Task UpdateAsync(Guid basketId, ApprenticeshipFavouritesBasket basket)
         {
-            return SaveToCache(basketId.ToString(), basket, new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0));
+            return SaveToCache($"{CacheItemPrefix}{basketId}", basket, new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0));
         }
 
         private Task SaveToCache(string key, ApprenticeshipFavouritesBasket item, TimeSpan slidingExpiration)

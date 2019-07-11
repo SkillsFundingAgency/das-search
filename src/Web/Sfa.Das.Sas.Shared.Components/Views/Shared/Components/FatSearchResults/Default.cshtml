@@ -13,14 +13,19 @@
     {
         <p class="das-search-results__summary">There are <span class="das-search-results__summary-count" id="fat-search-result-count">@Model.TotalResults</span> apprenticeships matching your search for <span class="das-search-results__summary-keyword" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</span>.</p>
     }
+    <form asp-controller="Basket" asp-action="AddApprenticeshipFromResults" method="post">
+        <input type="hidden" asp-for="@Model.SearchQuery.Keywords" />
+        <input type="hidden" asp-for="@Model.SearchQuery.Page" />
+        <input type="hidden" asp-for="@Model.SearchQuery.SortOrder" />
+        <input type="hidden" asp-for="@Model.SearchQuery.ResultsToTake" />
+        <ol class="@CssViewModel.SearchList das-search-results">
 
-    <ol class="@CssViewModel.SearchList das-search-results">
-
-        @foreach (var result in Model.SearchResults)
-        {
-            <partial name="Components/FatSearchResults/_searchResultsItem" for="@result" />
-        }
-    </ol>
+            @foreach (var result in Model.SearchResults)
+            {
+                <partial name="Components/FatSearchResults/_searchResultsItem" for="@result" />
+            }
+        </ol>
+    </form>
 }
 else
 {
