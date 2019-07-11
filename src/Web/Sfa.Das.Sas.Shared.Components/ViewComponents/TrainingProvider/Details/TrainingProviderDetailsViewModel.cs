@@ -27,11 +27,11 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
 
         public Address Address { get; set; }
 
-        public int EmployerSatisfaction { get; set; }
+        public int? EmployerSatisfaction { get; set; }
 
         public string EmployerSatisfactionMessage { get; set; }
 
-        public double LearnerSatisfaction { get; set; }
+        public double? LearnerSatisfaction { get; set; }
 
         public string LearnerSatisfactionMessage { get; set; }
 

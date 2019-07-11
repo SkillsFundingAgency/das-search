@@ -38,10 +38,10 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 },
                  
                 CurrentlyNotStartingNewApprentices = source.ApprenticeshipDetails.Provider.CurrentlyNotStartingNewApprentices,
-                EmployerSatisfaction = Convert.ToInt32(source.ApprenticeshipDetails.Product.EmployerSatisfaction),
+                EmployerSatisfaction = Convert.ToInt32(source.ApprenticeshipDetails.Product.EmployerSatisfaction ?? 0.00),
                 EmployerSatisfactionMessage = employerSatisfationMessage,
                 IsHigherEducationInstitute = source.ApprenticeshipDetails.Provider.IsHigherEducationInstitute,
-                LearnerSatisfaction = source.ApprenticeshipDetails.Product.LearnerSatisfaction.Value,
+                LearnerSatisfaction = Convert.ToInt32(source.ApprenticeshipDetails.Product.LearnerSatisfaction ?? 0.00),
                 LearnerSatisfactionMessage = learnerSatisfationMessage,
                 NationalProvider = source.ApprenticeshipDetails.Provider.NationalProvider,
                 Ukprn = source.ApprenticeshipDetails.Provider.UkPrn,

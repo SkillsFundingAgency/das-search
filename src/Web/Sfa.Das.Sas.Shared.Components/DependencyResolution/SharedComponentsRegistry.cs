@@ -72,6 +72,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
             services.AddTransient<IFeedbackViewModelMapper, FeedbackViewModelMapper>();
             services.AddTransient<ITrainingProviderDetailsViewModelMapper, TrainingProviderDetailsViewModelMapper>();
+            services.AddTransient<IFatSearchFilterViewModelMapper, FatSearchFilterViewModelMapper>();
             services.AddTransient<ITrainingProviderSearchFilterViewModelMapper, TrainingProviderSearchFilterViewModelMapper>();
 
         }

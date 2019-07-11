@@ -144,5 +144,34 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
             results.Should().Be(mappingReturnObject);
 
         }
+
+        [Test]
+        public void When_Search_Is_Called_Then_SortOrder_Is_Mapped()
+        {
+            var keyword = "test keyword";
+            var page = 1;
+            var sortOrder = 1;
+
+            var results = _sut.SearchByKeyword(keyword, page, 0, sortOrder, null);
+
+            results.Should().Be(mappingReturnObject);
+            results.SortOrder.Should().Be(sortOrder.ToString());
+
+        }
+
+        [Test]
+        public void When_Search_Is_Called_Then_Keyword_Is_Mapped()
+        {
+            var keyword = "test keyword";
+            var page = 1;
+            var sortOrder = 1;
+
+            var results = _sut.SearchByKeyword(keyword, page, 0, sortOrder, null);
+
+            results.Should().Be(mappingReturnObject);
+            results.SearchTerm.Should().Be(keyword);
+
+        }
+
     }
 }

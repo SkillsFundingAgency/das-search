@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Exceptions;
+﻿using System;
+using Sfa.Das.Sas.ApplicationServices.Exceptions;
 using Sfa.Das.Sas.ApplicationServices.Logging;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Settings;
@@ -151,7 +152,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     SelectedTrainingOptions = deliveryModes,
                     StandardResponseCode = responseCode,
                     ShowNationalProvidersOnly = false,
-                };
+                    LastPage = takeElements > 0 ? (int)Math.Ceiling((double)searchResults.Total / takeElements) : 1
+            };
 
                 return result;
             }
@@ -361,7 +363,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                     SelectedTrainingOptions = deliveryModes,
                     ResponseCode = LocationLookupResponse.Ok,
                     ShowNationalProvidersOnly = false,
-                    Hits = searchResults.Hits
+                    Hits = searchResults.Hits,
+                    LastPage = takeElements > 0 ? (int)System.Math.Ceiling((double)searchResults.Total / takeElements) : 1
                 };
 
                 return result;

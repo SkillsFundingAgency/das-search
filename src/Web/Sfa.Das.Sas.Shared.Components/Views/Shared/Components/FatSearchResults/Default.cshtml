@@ -12,6 +12,8 @@
     else
     {
         <p class="das-search-results__summary">There are <span class="das-search-results__summary-count" id="fat-search-result-count">@Model.TotalResults</span> apprenticeships matching your search for <span class="das-search-results__summary-keyword" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</span>.</p>
+
+        <partial name="Components/FatSearchResults/_searchResultsSort" for="@Model.SearchQuery" />
     }
 
     <ol class="@CssViewModel.SearchList das-search-results">
