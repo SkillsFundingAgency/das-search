@@ -17,23 +17,23 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(string apprenticeshipId, int? ukprn)
+        public async Task<IActionResult> Add(string selectedItem)
         {
             // Validate arg formats
             //Fail: throw exception
+            var parts = selectedItem.Split('$');
+            var apprenticeshipId = parts[0];
+            var ukprn = parts[1] == string.Empty ? null : parts[1];
 
             // Get cookie
             var cookie = Request.Cookies[BasketCookieName];
             Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
 
-            // Merge item into basket
-            var command = new AddFavouriteToBasketCommand
+            var basketId = await _mediator.Send(new AddFavouriteToBasketCommand
             {
                 ApprenticeshipId = apprenticeshipId,
                 BasketId = cookieBasketId
-            };
-
-            var basketId = await _mediator.Send(command);
+            });
 
             if (cookie == null)
                 Response.Cookies.Append(BasketCookieName, basketId.ToString());

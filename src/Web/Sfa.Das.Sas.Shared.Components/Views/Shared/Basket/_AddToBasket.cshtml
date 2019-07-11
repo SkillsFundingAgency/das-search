@@ -6,10 +6,8 @@
 
 <form asp-controller="Basket" asp-action="Add" method="post">
     <div class="@(CssViewModel.FormCss.FormGroup)">
-        <button type="submit" class="@(CssViewModel.Button)">
+        <button type="submit" class="@(CssViewModel.Button)" name="selectedItem" value="@($"{Model.ApprenticeshipId}${Model.Ukprn}")">
             Add to Favourites
         </button>
-        <input type="hidden" name="apprenticeshipId" value="@Model.ApprenticeshipId" />
-        <input type="hidden" name="ukprn" value="@Model.Ukprn" />
     </div>
 </form>
