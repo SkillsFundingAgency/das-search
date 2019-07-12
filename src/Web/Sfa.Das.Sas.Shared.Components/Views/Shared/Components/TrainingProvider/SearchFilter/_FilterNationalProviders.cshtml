@@ -1,27 +1,29 @@
-﻿@model IList<Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.FilterViewModel>;
+﻿@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@model IList<Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.FilterViewModel>;
+@inject ICssViewModel CssViewModel
 
-<fieldset class="filters filters-accordion">
-    <h2 class="toggler heading-small">National training providers</h2>
-    <div class="toggled-content">
-        <ul>
-            @foreach (var item in Model)
-            {
-                <li>
-                    <input value="@item.Value" name="NationalProvidersOnly" id="NationalProvidersOnly_@item.Value" type="radio" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "")/>
-                    <label for="NationalProvidersOnly_@item.Value">
-                        @if (item.Value.ToLower() == "true")
-                        {
-                            @:National providers only
-                        }
-                        else
-                        {
-                            @:All training providers
-                        }
-                        (@item.Count)
-                    </label>
-                </li>
-            }
-           
-        </ul>
+
+<div class="@(CssViewModel.FormCss.FormGroup)">
+    <p class="@(CssViewModel.UtilitiesCss.FontWeightBold)">National training providers:</p>
+    <div class="@CssViewModel.FormCss.Radio">
+
+        @foreach (var item in Model)
+        {
+            <div class="@CssViewModel.FormCss.RadioItem">
+
+                <input class="@CssViewModel.FormCss.RadioInput" value="@item.Value" name="NationalProvidersOnly" id="NationalProvidersOnly_@item.Value" type="radio" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                <label class="@Html.Raw(item.Count == 0 ? "disabled" : "") @(CssViewModel.FormCss.RadioLabel)" for="NationalProvidersOnly_@item.Value">
+                    @if (item.Value.ToLower() == "true")
+                    {
+                        @:National providers only
+                    }
+                    else
+                    {
+                        @:All training providers
+                    }
+                    (@item.Count)
+                </label>
+            </div>
+        }
     </div>
-</fieldset>
+</div>

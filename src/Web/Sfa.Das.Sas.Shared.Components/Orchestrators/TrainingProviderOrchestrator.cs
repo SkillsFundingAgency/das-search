@@ -38,8 +38,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
                 DeliveryModes = searchQueryModel.DeliveryModes,
-                NationalProvidersOnly = searchQueryModel.NationalProvidersOnly
-
+                NationalProvidersOnly = searchQueryModel.NationalProvidersOnly,
                 Page = searchQueryModel.Page
             });
 

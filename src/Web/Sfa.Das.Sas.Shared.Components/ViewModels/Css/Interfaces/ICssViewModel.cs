@@ -9,6 +9,7 @@
         string ClassPrefix { get; }
         string Button { get; }
 
+        string ButtonSecondary { get; }
         string Link { get; }
         string List { get; }
         string ListBullet { get; }

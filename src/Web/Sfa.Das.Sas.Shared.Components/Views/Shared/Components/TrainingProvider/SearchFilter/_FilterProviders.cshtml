@@ -1,21 +1,25 @@
 ﻿@using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 @model IList<Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.FilterViewModel>
+@inject ICssViewModel CssViewModel
 
-<fieldset class="filters filters-accordion">
-    <h2 class="toggler heading-small">Training options</h2>
-    <div class="toggled-content">
-        <ul>
-            @foreach (var item in Model)
-            {
-                <li>
-                    <input value="@item.Value.ToLower()" name="DeliveryModes" id="DeliveryModes_@item.Value" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
-                    <label for="DeliveryModes_@item.Value">@await GetLabelText(item)</label>
-                </li>
-            }
-        </ul>
-        <details>
-            <summary>Explain training options</summary>
-            <div class="panel panel-border-narrow">
+<div class="@(CssViewModel.FormCss.FormGroup)">
+    <p class="@(CssViewModel.UtilitiesCss.FontWeightBold)">Training options:</p>
+    <div class="@CssViewModel.FormCss.Radio">
+
+        @foreach (var item in Model)
+        {
+            <div class="@CssViewModel.FormCss.RadioItem">
+                <input class="@CssViewModel.FormCss.RadioInput" value="@item.Value.ToLower()" name="DeliveryModes" id="DeliveryModes_@item.Value" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                <label class="@Html.Raw(item.Count == 0 ? "disabled" : "") @(CssViewModel.FormCss.RadioLabel)" for="DeliveryModes_@item.Value">@await GetLabelText(item)</label>
+            </div>
+        }
+
+        <details class="@CssViewModel.Details">
+            <summary class="@CssViewModel.DetailsSummary">
+                <span class="@CssViewModel.DetailsSummaryText">Explain training options</span>
+            </summary>
+            <div class="@CssViewModel.DetailsText">
                 <p>
                     <span class="bold-small">Day release:</span> for example one day a week at the training provider's location.
                 </p>
@@ -28,8 +32,7 @@
             </div>
         </details>
     </div>
-</fieldset>
-
+</div>
 
 @functions
 {
@@ -42,7 +45,7 @@
         {
             case "blockrelease":
                 labelText = "Block release";
-                   
+
                 break;
             case "dayrelease":
                 labelText = "Day release";

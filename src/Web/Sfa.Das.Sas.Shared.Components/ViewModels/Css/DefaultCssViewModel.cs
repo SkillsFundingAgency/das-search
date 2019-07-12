@@ -34,6 +34,20 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
                 }
             }
         }
+        public string ButtonSecondary
+        {
+            get
+            {
+                if (String.IsNullOrWhiteSpace(ClassModifier))
+                {
+                    return $"{ClassPrefix}button";
+                }
+                else
+                {
+                    return $"{ClassPrefix}button {ClassPrefix}button--{ClassModifier}";
+                }
+            }
+        }
         public string Link => $"{ClassPrefix}link";
 
         public string List
