@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider
     {
         public string Value { get; set; }
 
-        public long Count { get; set; }
+        public long? Count { get; set; }
 
         public bool Checked { get; set; }
     }

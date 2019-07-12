@@ -42,12 +42,12 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
                     PostCode = "Postcode",
                     PostCodeMissing = false,
                     ResultsToTake = 10,
-                    NationalProviders = new Dictionary<string, long>()
+                    NationalProviders = new Dictionary<string, long?>()
                     {
                         {"true",100 },
                         {"false",100 }
                     } ,
-                    TrainingOptionsAggregation = new Dictionary<string, long>()
+                    TrainingOptionsAggregation = new Dictionary<string, long?>()
                     {
                         { "blockrelease", 44},
                         { "100percentemployer", 31},

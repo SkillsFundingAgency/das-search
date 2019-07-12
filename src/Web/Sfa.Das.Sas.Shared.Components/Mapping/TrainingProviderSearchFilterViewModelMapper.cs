@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 else
                 {
                     filter.Checked = item.ShowOnlyNationalProviders == false;
-                    filter.Count = item.Results.NationalProviders.Sum(s => s.Value);
+                    filter.Count = item.Results.NationalProviders.Sum(s => s.Value.Value);
                 }
 
                 result.NationalProviders.Add(filter);
@@ -42,7 +42,20 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 var filter = new FilterViewModel();
 
                 filter.Count = trainingOption.Value;
-                filter.Value = trainingOption.Key.ToLower();
+             
+                switch (trainingOption.Key.ToLower())
+                {
+                    case "blockrelease":
+                        filter.Value = "0";
+
+                        break;
+                    case "dayrelease":
+                        filter.Value = "1";
+                        break;
+                    case "100percentemployer":
+                        filter.Value = "2";
+                        break;
+                }
                 filter.Checked = searchQueryModel.DeliveryModes.Contains(filter.Value);
                 
                 result.TrainingOptions.Add(filter);

@@ -5,13 +5,13 @@
 
 <div class="@(CssViewModel.FormCss.FormGroup)">
     <p class="@(CssViewModel.UtilitiesCss.FontWeightBold)">Training options:</p>
-    <div class="@CssViewModel.FormCss.Radio">
+    <div class="@CssViewModel.FormCss.Checkbox">
 
-        @foreach (var item in Model)
+        @foreach (var item in Model)    
         {
-            <div class="@CssViewModel.FormCss.RadioItem">
-                <input class="@CssViewModel.FormCss.RadioInput" value="@item.Value.ToLower()" name="DeliveryModes" id="DeliveryModes_@item.Value" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
-                <label class="@Html.Raw(item.Count == 0 ? "disabled" : "") @(CssViewModel.FormCss.RadioLabel)" for="DeliveryModes_@item.Value">@await GetLabelText(item)</label>
+            <div class="@CssViewModel.FormCss.CheckboxItem">
+                <input class="@CssViewModel.FormCss.CheckboxInput" value="@item.Value.ToLower()" name="DeliveryModes" id="DeliveryModes_@item.Value" type="checkbox" @Html.Raw(item.Checked ? "checked" : "") @Html.Raw(item.Count == 0 ? "disabled" : "") />
+                <label class="@Html.Raw(item.Count == 0 ? "disabled" : "") @(CssViewModel.FormCss.CheckboxLabel)" for="DeliveryModes_@item.Value">@await GetLabelText(item)</label>
             </div>
         }
 
@@ -43,14 +43,14 @@
 
         switch (item.Value)
         {
-            case "blockrelease":
+            case "0":
                 labelText = "Block release";
 
                 break;
-            case "dayrelease":
+            case "1":
                 labelText = "Day release";
                 break;
-            case "100percentemployer":
+            case "2":
                 labelText = "At your location";
                 break;
         }
