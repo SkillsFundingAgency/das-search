@@ -105,7 +105,11 @@ WriteLiteral(">Apprenticeship name or job role</span>\r\n                    </l
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral("></span>\r\n                    <input");
+WriteLiteral("></span>\r\n                    <div");
+
+WriteLiteral(" id=\"apprenticeships-container\"");
+
+WriteLiteral(">\r\n                        <input");
 
 WriteLiteral(" type=\"search\"");
 
@@ -117,7 +121,7 @@ WriteLiteral(" class=\"text-box form-control\"");
 
 WriteLiteral(" maxlength=\"200\"");
 
-WriteLiteral(">\r\n                </div>\r\n");
+WriteLiteral(">\r\n                    </div>\r\n                </div>\r\n");
 
 WriteLiteral("                <input");
 
@@ -132,7 +136,7 @@ WriteLiteral(" value=\"Search apprenticeship training\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 24 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 26 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             
@@ -145,13 +149,52 @@ WriteLiteral(" id=\"search-training-provider\"");
 WriteLiteral(">You can also ");
 
             
-            #line 26 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 28 "..\..\Views\Apprenticeship\Search.cshtml"
                                                         Write(Html.ActionLink("search for a training provider", "Search", "Provider"));
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n        </div>\r\n    </div>\r\n</main>");
+WriteLiteral("</span>\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n    <script");
+
+WriteLiteral(" src=\"https://das-at-frnt-end.azureedge.net/libs/accessible-autocomplete/accessib" +
+"le-autocomplete.min.js\"");
+
+WriteLiteral(@"></script>
+    <script>
+
+        var container = document.querySelector('#apprenticeships-container');
+        container.innerHTML = '';
+
+        var getSuggestions = function (query, updateResults) {
+
+            let results = [];
+
+            $.ajax({
+                url: ""https://localhost:44300/v3/apprenticeship-programmes/autocomplete"",
+                dataType: 'json',
+                data: { searchString: query } 
+                
+            }).done(function (data) {
+                data.forEach(function (apprenticeship) {
+                    results.push(apprenticeship.Title)
+                });
+                updateResults(results)
+            });
+        }
+
+        accessibleAutocomplete({
+            element: container,
+            id: 'keywords',
+            name: 'Keywords',
+            displayMenu: 'overlay',
+            source: getSuggestions
+        })
+
+
+
+    </script>
+");
 
         }
     }
