@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Sfa.Das.Sas.Shared.Components.Cookies
 {
     public class CookieManager : ICookieManager
     {
-        private IHttpContextAccessor _contextAccessor;
+        private readonly IHttpContextAccessor _contextAccessor;
 
         public CookieManager(IHttpContextAccessor contextAccessor)
         {
@@ -16,9 +17,17 @@ namespace Sfa.Das.Sas.Shared.Components.Cookies
             return _contextAccessor.HttpContext.Request.Cookies[cookieName];
         }
 
-        public void Set(string cookieName, string value)
+        public void Set(string cookieName, string value, DateTimeOffset? expiry)
         {
-            _contextAccessor.HttpContext.Response.Cookies.Append(cookieName, value);
+            CookieOptions option = new CookieOptions
+            {
+                HttpOnly = true,
+                IsEssential = true,
+                Secure = true,
+                Expires = expiry
+            };
+
+            _contextAccessor.HttpContext.Response.Cookies.Append(cookieName, value, option);
         }
     }
 }

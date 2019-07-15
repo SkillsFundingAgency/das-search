@@ -2,7 +2,7 @@
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.Shared.Components.Cookies;
-using System.Collections.Generic;
+using System;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 {
@@ -38,10 +38,19 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var cookieName = "TestCookie";
             var cookieValue = "Test Cookie Value";
+            var expiry = DateTime.UtcNow.AddDays(90);
 
-            _sut.Set(cookieName, cookieValue);
+            _sut.Set(cookieName, cookieValue, expiry);
 
-            _mockHttpContext.Verify(x => x.Response.Cookies.Append(cookieName, cookieValue));
+            _mockHttpContext.Verify(x => x.Response.Cookies.Append(cookieName, cookieValue, It.Is<CookieOptions>(a => CookieValuesSet(a, expiry))));
+        }
+
+        private static bool CookieValuesSet(CookieOptions a, DateTime expiry)
+        {
+            return a.Expires == expiry
+                && a.HttpOnly == true
+                && a.IsEssential == true
+                && a.Secure == true;
         }
 
         private Mock<HttpContext> GetMockHttpContext()

@@ -86,7 +86,11 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
         {
             if (services.BuildServiceProvider().GetService<IHostingEnvironment>().IsDevelopment())
             {
-                services.AddDistributedMemoryCache();
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = configuration.BasketRedisConnectionString;
+                });
+                //services.AddDistributedMemoryCache();
             }
             else
             {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Commands;
+using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Controllers;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
@@ -40,7 +41,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             _mockMediator = new Mock<IMediator>();
             _mockCookieManager = new Mock<ICookieManager>();
 
-            _sut = new BasketController(_mockMediator.Object, _mockCookieManager.Object);
+            _sut = new BasketController(_mockMediator.Object, _mockCookieManager.Object, Mock.Of<IApprenticehipFavouritesBasketStoreConfig>());
         }
 
         #region AddApprenticeshipFromDetails
@@ -91,11 +92,11 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var newBasketId = Guid.NewGuid(); // Setup basket it to be returned by save logic
             _mockMediator.Setup(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
-            _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>()));
+            _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTimeOffset?>()));
 
             var result = await _sut.AddApprenticeshipFromDetails(APPRENTICESHIP_ID);
 
-            _mockCookieManager.Verify(x => x.Set(BasketCookieName, newBasketId.ToString()));
+            _mockCookieManager.Verify(x => x.Set(BasketCookieName, newBasketId.ToString(), It.IsAny<DateTimeOffset?>()));
         }
 
         #endregion
@@ -151,11 +152,11 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var newBasketId = Guid.NewGuid(); // Setup basket it to be returned by save logic
             _mockMediator.Setup(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
-            _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>()));
+            _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTimeOffset?>()));
 
             var result = await _sut.AddApprenticeshipFromResults(_searchResultsPageModel);
 
-            _mockCookieManager.Verify(x => x.Set(BasketCookieName, newBasketId.ToString()));
+            _mockCookieManager.Verify(x => x.Set(BasketCookieName, newBasketId.ToString(), It.IsAny<DateTimeOffset?>()));
         }
 
         #endregion

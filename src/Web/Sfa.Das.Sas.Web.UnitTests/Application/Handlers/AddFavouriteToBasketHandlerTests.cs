@@ -42,6 +42,23 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
+        public async Task Handle_CreatesBasketId_IfPassedBasketIdNoLongerExistsInCache()
+        {
+            var expiredBasketId = Guid.NewGuid();
+
+            var request = new AddFavouriteToBasketCommand
+            {
+                BasketId = expiredBasketId,
+                ApprenticeshipId = "123"
+            };
+
+            var response = await _sut.Handle(request, default(CancellationToken));
+
+            response.Should().NotBeEmpty();
+            _mockBasket.Verify(x => x.UpdateAsync(It.Is<Guid>(a => a != Guid.Empty && a != expiredBasketId), It.IsAny<ApprenticeshipFavouritesBasket>()));
+        }
+
+        [Test]
         public async Task Handle_AddsItemToBasket_ForNewBasket()
         {
             var basketId = Guid.NewGuid();

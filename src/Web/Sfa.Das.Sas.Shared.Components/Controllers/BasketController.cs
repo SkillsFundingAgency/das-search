@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.ApplicationServices.Commands;
+using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
@@ -12,14 +13,20 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ICookieManager _cookieManager;
+        private readonly IApprenticehipFavouritesBasketStoreConfig _config;
         private const string BasketCookieName = "ApprenticeshipBasket";
 
-        public BasketController(IMediator mediator, ICookieManager cookieManager)
+        public BasketController(
+            IMediator mediator, 
+            ICookieManager cookieManager, 
+            IApprenticehipFavouritesBasketStoreConfig config)
         {
             _mediator = mediator;
             _cookieManager = cookieManager;
+            _config = config;
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(string apprenticeshipId)
         {
@@ -28,6 +35,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             return RedirectToAction("Apprenticeship", "Fat", new { id = apprenticeshipId });
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
@@ -48,8 +56,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
                 BasketId = cookieBasketId
             });
 
-            if (cookie == null)
-                _cookieManager.Set(BasketCookieName, basketId.ToString());
+            _cookieManager.Set(BasketCookieName, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
         }
     }
 }
