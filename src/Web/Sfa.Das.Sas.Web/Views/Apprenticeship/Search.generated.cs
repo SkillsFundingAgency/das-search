@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Apprenticeship/Search.cshtml")]
-    public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.ApplicationServices.Queries.ApprenticeshipSearchQuery>
+    public partial class Search : System.Web.Mvc.WebViewPage<Sfa.Das.Sas.Web.ViewModels.ApprenticeshipSearchViewModel>
     {
         public Search()
         {
@@ -171,14 +171,21 @@ WriteLiteral(@"></script>
             let results = [];
 
             $.ajax({
-                url: ""https://localhost:44300/v3/apprenticeship-programmes/autocomplete"",
+                url: """);
+
+            
+            #line 44 "..\..\Views\Apprenticeship\Search.cshtml"
+                  Write($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete");
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@""",
                 dataType: 'json',
                 data: { searchString: query } 
                 
             }).done(function (data) {
-                data.forEach(function (apprenticeship) {
-                    results.push(apprenticeship.Title)
-                });
+                results = data.Results.map(r => r.Title);
                 updateResults(results)
             });
         }

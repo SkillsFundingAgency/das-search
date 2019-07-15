@@ -1,4 +1,4 @@
-﻿@model Sfa.Das.Sas.ApplicationServices.Queries.ApprenticeshipSearchQuery
+﻿@model Sfa.Das.Sas.Web.ViewModels.ApprenticeshipSearchViewModel
 @{
     ViewBag.Title = "Home Page";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
@@ -41,14 +41,12 @@
             let results = [];
 
             $.ajax({
-                url: "https://localhost:44300/v3/apprenticeship-programmes/autocomplete",
+                url: "@($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete")",
                 dataType: 'json',
                 data: { searchString: query } 
                 
             }).done(function (data) {
-                data.forEach(function (apprenticeship) {
-                    results.push(apprenticeship.Title)
-                });
+                results = data.Results.map(r => r.Title);
                 updateResults(results)
             });
         }

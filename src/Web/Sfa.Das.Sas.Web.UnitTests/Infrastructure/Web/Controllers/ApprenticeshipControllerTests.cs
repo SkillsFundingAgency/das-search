@@ -4,12 +4,13 @@ using FluentAssertions;
 using MediatR;
 using Moq;
 using NUnit.Framework;
-using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
+using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Web.Controllers;
 using Sfa.Das.Sas.Web.Services;
 using Sfa.Das.Sas.Web.ViewModels;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 {
@@ -20,6 +21,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         private Mock<ILog> _mockLogger;
         private Mock<IMappingService> _mockMappingService;
         private Mock<IMediator> _mockMediator;
+        private Mock<IConfigurationSettings> _configurationSettingsMock;
 
         [SetUp]
         public void Init()
@@ -27,13 +29,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockLogger = new Mock<ILog>();
             _mockMappingService = new Mock<IMappingService>();
             _mockMediator = new Mock<IMediator>();
+            _configurationSettingsMock = new Mock<IConfigurationSettings>();
 
             _sut = new ApprenticeshipController(
                 _mockLogger.Object,
                 _mockMappingService.Object,
                 _mockMediator.Object,
                 Mock.Of<IButtonTextService>(),
-                Mock.Of<IFundingBandService>());
+                Mock.Of<IFundingBandService>(),
+                _configurationSettingsMock.Object);
         }
 
         [Test]
