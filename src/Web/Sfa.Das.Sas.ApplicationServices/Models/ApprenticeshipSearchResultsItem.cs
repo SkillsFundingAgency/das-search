@@ -6,6 +6,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
 {
     public class ApprenticeshipSearchResultsItem
     {
+        public string Id { get; set; }
         public string Title { get; set; }
 
         // Standards
@@ -37,5 +38,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public DateTime? EffectiveTo { get; set; }
 
         public DateTime? LastDateForNewStarts { get; set; }
+
+        public ApprenticeshipType ApprenticeshipType { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
+﻿using Sfa.Das.Sas.Core.Domain;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
 {
     using System.Collections.Generic;
     using ExtensionHelpers;
@@ -6,7 +8,6 @@
     using NUnit.Framework;
     using RazorGenerator.Testing;
     using Sas.Web.Views.Apprenticeship;
-    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
     using ViewModels;
 
     [TestFixture]
@@ -46,7 +47,7 @@
             var model = new StandardViewModel
             {
                 Level = 6,
-                AssessmentOrganisations = new List<Organisation>()
+                AssessmentOrganisations = new List<AssessmentOrganisation>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#no-assessment-organisations").Should().Contain("There are no end-point assessment");
@@ -59,7 +60,7 @@
             var model = new StandardViewModel
             {
                 Level = 6,
-                AssessmentOrganisations = new List<Organisation>()
+                AssessmentOrganisations = new List<AssessmentOrganisation>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#more-information").Should().Contain("Institute for Apprenticeships and Technical Education has more detailed information");
@@ -72,7 +73,7 @@
             var model = new StandardViewModel
             {
                 Level = 6,
-                AssessmentOrganisations = new List<Organisation>()
+                AssessmentOrganisations = new List<AssessmentOrganisation>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#organisation-name").Should().BeEmpty();
@@ -98,7 +99,7 @@
             var model = new StandardViewModel
             {
                 Level = 6,
-                AssessmentOrganisations = new List<Organisation> { new Organisation { Name = "organisation 1" } }
+                AssessmentOrganisations = new List<AssessmentOrganisation> { new AssessmentOrganisation { Name = "organisation 1" } }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, ".organisation-name").Should().Be("organisation 1");
@@ -112,7 +113,7 @@
             var model = new StandardViewModel
             {
                 Level = 6,
-                AssessmentOrganisations = new List<Organisation> { new Organisation { Phone = phoneNumber } }
+                AssessmentOrganisations = new List<AssessmentOrganisation> { new AssessmentOrganisation { Phone = phoneNumber } }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, ".phone-number").Should().Be(phoneNumber);
@@ -126,7 +127,7 @@
             var model = new StandardViewModel
             {
                 Level = 6,
-                AssessmentOrganisations = new List<Organisation> { new Organisation { Email = email } }
+                AssessmentOrganisations = new List<AssessmentOrganisation> { new AssessmentOrganisation { Email = email } }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, ".email").Should().Be(email);
@@ -139,7 +140,7 @@
             var model = new StandardViewModel
             {
                 Level = 6,
-                AssessmentOrganisations = new List<Organisation> { new Organisation { Name = "organisation 1" } }
+                AssessmentOrganisations = new List<AssessmentOrganisation> { new AssessmentOrganisation { Name = "organisation 1" } }
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
             GetPartial(html, "#no-assessment-organisations").Should().BeEmpty();

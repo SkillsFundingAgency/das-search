@@ -1,6 +1,4 @@
-﻿using System;
-using FluentAssertions;
-using Sfa.Das.Sas.Web.AcceptanceTests.Pages;
+﻿using FluentAssertions;
 using TechTalk.SpecFlow;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests

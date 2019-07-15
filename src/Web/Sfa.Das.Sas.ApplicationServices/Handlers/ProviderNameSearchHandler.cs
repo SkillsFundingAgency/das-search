@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿using System.Threading;
+
+namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Threading.Tasks;
     using Interfaces;
@@ -6,7 +8,7 @@
     using Queries;
     using Responses;
 
-    public sealed class ProviderNameSearchHandler : IAsyncRequestHandler<ProviderNameSearchQuery, ProviderNameSearchResponse>
+    public sealed class ProviderNameSearchHandler : IRequestHandler<ProviderNameSearchQuery, ProviderNameSearchResponse>
     {
         private readonly IProviderNameSearchService _nameSearchService;
 
@@ -16,7 +18,7 @@
             _nameSearchService = nameSearchService;
         }
 
-        public async Task<ProviderNameSearchResponse> Handle(ProviderNameSearchQuery message)
+        public async Task<ProviderNameSearchResponse> Handle(ProviderNameSearchQuery message, CancellationToken cancellationToken)
         {
             var searchResults = await _nameSearchService.SearchProviderNameAndAliases(message.SearchTerm, message.Page);
 

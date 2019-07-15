@@ -1,4 +1,5 @@
-﻿using SFA.DAS.Apprenticeships.Api.Types.Pagination;
+﻿using System.Threading;
+using SFA.DAS.Apprenticeships.Api.Types.Pagination;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
@@ -55,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockProviderDetailRepository.Setup(x => x.GetApprenticeshipTrainingSummary(It.IsAny<long>(), It.IsAny<int>())).Returns(Task.FromResult(apprenticeshipTrainingSummary));
             _handler = new ProviderDetailHandler(_mockProviderDetailRepository.Object);
             var message = new ProviderDetailQuery();
-            var response = _handler.Handle(message).Result;
+            var response = _handler.Handle(message, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(ProviderDetailResponse.ResponseCodes.Success);
             response.Provider.Should().Be(provider);
@@ -70,7 +71,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockProviderDetailRepository.Setup(x => x.GetProviderDetails(It.IsAny<long>())).Throws(entityNotfoundException);
             _handler = new ProviderDetailHandler(_mockProviderDetailRepository.Object);
             var message = new ProviderDetailQuery();
-            var response = _handler.Handle(message).Result;
+            var response = _handler.Handle(message, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(ProviderDetailResponse.ResponseCodes.ProviderNotFound);
             response.Provider.Should().BeNull();
@@ -83,7 +84,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockProviderDetailRepository.Setup(x => x.GetProviderDetails(It.IsAny<long>())).Throws(new HttpRequestException());
             _handler = new ProviderDetailHandler(_mockProviderDetailRepository.Object);
             var message = new ProviderDetailQuery();
-            var response = _handler.Handle(message).Result;
+            var response = _handler.Handle(message, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(ProviderDetailResponse.ResponseCodes.HttpRequestException);
             response.Provider.Should().BeNull();

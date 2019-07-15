@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
@@ -27,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
         }
 
-        public StatsResponse Handle(StatsQuery message)
+        public async Task<StatsResponse> Handle(StatsQuery message, CancellationToken cancellationToken)
         {
             var response = new StatsResponse
             {

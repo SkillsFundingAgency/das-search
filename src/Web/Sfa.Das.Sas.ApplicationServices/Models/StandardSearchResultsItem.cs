@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {

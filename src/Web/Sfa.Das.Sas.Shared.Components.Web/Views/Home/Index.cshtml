@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h1 class="govuk-heading-l">Shared components</h1>
+<h1 class="govuk-heading-m">Find apprenticeship training search</h1>
+
+
+<h2 class="govuk-heading-m">Demo</h2>
+@await Component.InvokeAsync("FatSearch", new { fatSearchRoute = "/employer/find-apprenticeships" })
+
+
+<h2 class="govuk-heading-m">Components</h2>
+
+<ol class="govuk-list govuk-list--number">
+    <li>
+        <h2 class="govuk-heading-s">Apprenticeships</h2>
+        <ul class="govuk-list govuk-list--bullet">
+            <li class="">
+                <a asp-controller="Components" asp-action="Search" aria-describedby="eligibility-completed">
+                    Search for apprenticeship
+                </a>
+            </li>
+            <li class="">
+                <a asp-controller="Components" asp-action="SearchResults" aria-describedby="eligibility-completed">
+                    Apprenticeship search results list
+                </a>
+            </li>
+        </ul>
+    </li>
+
+</ol>
+<h2 class="govuk-heading-m">Models</h2>
+
+<ol class="govuk-list govuk-list--number">
+    <li>
+        <ul class="govuk-list govuk-list--bullet">
+            <li class="">
+                <a asp-controller="Models" asp-action="SearchQueryViewModel" aria-describedby="eligibility-completed">
+                    SearchQueryViewModel
+                </a>
+            </li>
+        </ul>
+    </li>
+
+</ol>
+

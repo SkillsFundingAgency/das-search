@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Threading;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
@@ -42,7 +43,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(framework.FrameworkId)).Returns(framework);
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             response.FrameworkId.Should().Be(framework.FrameworkId);
             response.Keywords.Should().Be(query.Keywords);
@@ -55,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(It.IsAny<string>()));
 
-            var response = _sut.Handle(new GetFrameworkProvidersQuery());
+            var response = _sut.Handle(new GetFrameworkProvidersQuery(), default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound);
         }

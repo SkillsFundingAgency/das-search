@@ -2,22 +2,19 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Moq;
     using NUnit.Framework;
-    using Sas.Infrastructure.Repositories;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
-    using SFA.DAS.Providers.Api.Client;
 
     [TestFixture]
-    public class ProviderApiRepositoryGetProviderListTests
+    public class ProviderApiRepositoryGetProviderListTests : ProviderApiRepositoryBase
     {
         private List<ProviderSummary> _actualResult;
         private List<ProviderSummary> _expectedResult;
 
+
         [SetUp]
         public void Init()
         {
-            var mockProviderApiClient = new Mock<IProviderApiClient>();
             const long ukprn = 11000;
             const long ukprn2 = 20;
             const long ukprn3 = 1;
@@ -35,15 +32,14 @@
 
             _expectedResult = providerSummaries;
 
-            mockProviderApiClient.Setup(x => x.FindAll()).Returns((IEnumerable<ProviderSummary>)providerSummaries);
-            var providerRepository = new ProviderApiRepository(mockProviderApiClient.Object);
-            var res = providerRepository.GetAllProviders();
-            _actualResult = res.ToList();
+            _mockProviderApiClient.Setup(x => x.FindAll()).Returns((IEnumerable<ProviderSummary>)providerSummaries);
         }
 
         [Test]
         public void ShouldProvideTheMatchingNumberOfProviderSummaries()
         {
+            var res = _sut.GetAllProviders();
+            _actualResult = res.ToList();
             Assert.AreEqual(_actualResult, _expectedResult);
         }
     }

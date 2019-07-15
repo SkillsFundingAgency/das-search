@@ -23,9 +23,9 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
 
-        private readonly IConfigurationSettings _applicationSettings;
+        private readonly IPostcodeIOConfigurationSettings _applicationSettings;
 
-        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IConfigurationSettings applicationSettings)
+        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IPostcodeIOConfigurationSettings applicationSettings)
         {
             _retryService = retryService;
             _logger = logger;

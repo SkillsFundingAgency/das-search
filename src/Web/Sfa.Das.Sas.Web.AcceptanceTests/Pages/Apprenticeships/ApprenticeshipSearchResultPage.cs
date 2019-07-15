@@ -4,7 +4,6 @@ using Sfa.Das.Sas.Web.AcceptanceTests.Pages.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sfa.Automation.Framework.Extensions;
 using Sfa.Das.Sas.Web.AcceptanceTests.Helpers;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages

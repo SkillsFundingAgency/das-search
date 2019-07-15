@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
+﻿using System.Threading;
+
+namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ControllerBuilders
 {
     using System;
     using System.Linq.Expressions;
@@ -18,6 +20,7 @@
         private readonly Mock<IMappingService> _mockMappingService = new Mock<IMappingService>();
         private readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
         private readonly Mock<IConfigurationSettings> _mockSettings = new Mock<IConfigurationSettings>();
+        private CancellationToken _cancellationToken = default(CancellationToken);
 
         private UrlHelper _url;
         private HttpContextBase _httpContext;

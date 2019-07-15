@@ -13,9 +13,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
     {
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
-        private readonly IConfigurationSettings _applicationSettings;
+        private readonly IPostcodeIOConfigurationSettings _applicationSettings;
 
-        public PostcodeIoService(IRetryWebRequests retryService, ILog logger, IConfigurationSettings applicationSettings)
+        public PostcodeIoService(IRetryWebRequests retryService, ILog logger, IPostcodeIOConfigurationSettings applicationSettings)
         {
             _retryService = retryService;
             _logger = logger;

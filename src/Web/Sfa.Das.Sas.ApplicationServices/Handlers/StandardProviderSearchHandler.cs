@@ -1,6 +1,6 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Services;
+﻿using System.Threading;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using SFA.DAS.NLog.Logger;
-using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     using Settings;
     using Validators;
 
-    public sealed class StandardProviderSearchHandler : IAsyncRequestHandler<StandardProviderSearchQuery, StandardProviderSearchResponse>
+    public sealed class StandardProviderSearchHandler : IRequestHandler<StandardProviderSearchQuery, StandardProviderSearchResponse>
     {
         private readonly ILog _logger;
         private readonly IProviderSearchService _searchService;
@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _logger = logger;
         }
 
-        public async Task<StandardProviderSearchResponse> Handle(StandardProviderSearchQuery message)
+        public async Task<StandardProviderSearchResponse> Handle(StandardProviderSearchQuery message, CancellationToken cancellationToken)
         {
             var result = _validator.Validate(message);
 

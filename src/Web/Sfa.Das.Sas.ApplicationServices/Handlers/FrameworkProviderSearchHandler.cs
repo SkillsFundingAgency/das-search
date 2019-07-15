@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
@@ -13,7 +14,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public sealed class FrameworkProviderSearchHandler : IAsyncRequestHandler<FrameworkProviderSearchQuery, FrameworkProviderSearchResponse>
+    public sealed class FrameworkProviderSearchHandler : IRequestHandler<FrameworkProviderSearchQuery, FrameworkProviderSearchResponse>
     {
         private readonly ILog _logger;
         private readonly IProviderSearchService _searchService;
@@ -35,7 +36,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _logger = logger;
         }
 
-        public async Task<FrameworkProviderSearchResponse> Handle(FrameworkProviderSearchQuery message)
+        public async Task<FrameworkProviderSearchResponse> Handle(FrameworkProviderSearchQuery message, CancellationToken cancellationToken)
         {
             var result = _validator.Validate(message);
 

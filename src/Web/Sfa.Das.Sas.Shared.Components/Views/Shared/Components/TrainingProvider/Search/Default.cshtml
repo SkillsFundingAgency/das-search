@@ -1,0 +1,32 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@model Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel
+@inject ICssViewModel CssViewModel;
+    <form action="@Model.SearchRoute">
+
+        <div class="@(CssViewModel.FormCss.FormGroup)">
+            <label class="@(CssViewModel.VisuallyHidden)">Use the postcode for where the apprentice will work.</label>
+            <input class="@(CssViewModel.FormCss.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
+            <span asp-validation-for="Postcode" class="error-message"></span>
+        </div>
+
+        <div class="@(CssViewModel.FormCss.FormGroup)">
+            <div class="@CssViewModel.FormCss.RadioGroupInline"> 
+                <div class="@(CssViewModel.FormCss.RadioItem)">
+                    <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
+                    <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerYes">Yes, I pay the levy</label>
+                </div>
+                <div class="@(CssViewModel.FormCss.RadioItem)">
+                    <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)"  type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
+                    <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerNo">No, I don't pay the levy</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="@(CssViewModel.FormCss.FormGroup)">
+            <input type="hidden" asp-for="ApprenticeshipId" />
+            <input type="hidden" asp-for="Keywords"/>
+            <button class="@(CssViewModel.Button)" type="submit">Search</button>
+        </div>
+
+    </form>
