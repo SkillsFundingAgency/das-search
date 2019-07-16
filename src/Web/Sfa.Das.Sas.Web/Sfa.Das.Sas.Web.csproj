@@ -652,6 +652,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
+    <Content Include="scripts\accessible-autocomplete.min.js" />
     <Content Include="scripts\app\selection-buttons.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
