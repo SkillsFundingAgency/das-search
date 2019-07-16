@@ -18,7 +18,7 @@
                         <span class="form-label">Apprenticeship name or job role</span>
                     </label>
                     <span class="error-message"></span>
-                    <div id="apprenticeships-container">
+                    <div id="apprenticeships-container" data-api-url="@($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete")">
                         <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
                     </div>
                 </div>
@@ -29,36 +29,3 @@
         </div>
     </div>
 </main>
-
-    <script src="https://das-at-frnt-end.azureedge.net/libs/accessible-autocomplete/accessible-autocomplete.min.js"></script>
-    <script>
-
-        var container = document.querySelector('#apprenticeships-container');
-        container.innerHTML = '';
-
-        var getSuggestions = function (query, updateResults) {
-
-            let results = [];
-
-            $.ajax({
-                url: "@($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete")",
-                dataType: 'json',
-                data: { searchString: query } 
-                
-            }).done(function (data) {
-                results = data.Results.map(r => r.Title);
-                updateResults(results)
-            });
-        }
-
-        accessibleAutocomplete({
-            element: container,
-            id: 'keywords',
-            name: 'Keywords',
-            displayMenu: 'overlay',
-            source: getSuggestions
-        })
-
-
-
-    </script>
