@@ -34,3 +34,36 @@ var SearchAndShortlist = SearchAndShortlist || {};
     ui.init();
 
 }(SearchAndShortlist.ui = {}));
+
+
+var container = document.querySelector('#apprenticeships-container'),
+    $container = $(container);
+
+if ($container) {
+
+    $container.empty();
+    var getSuggestions = function (query, updateResults) {
+
+        let results = [];
+
+        $.ajax({
+            url: $container.data('api-url'),
+            dataType: 'json',
+            data: { searchString: query }
+
+        }).done(function (data) {
+            results = data.Results.map(function (r) {
+                return r.Title;
+            });
+            updateResults(results);
+        });
+    };
+
+    accessibleAutocomplete({
+        element: container,
+        id: 'keywords',
+        name: 'Keywords',
+        displayMenu: 'overlay',
+        source: getSuggestions
+    });
+}
