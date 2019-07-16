@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
 
         public async Task<ApprenticeshipTrainingSummary> GetApprenticeshipTrainingSummary(long ukprn, int pageNumber)
         {
-            return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn, pageNumber);
+            return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn);
         }
 
         public async Task<SearchResult<ProviderSearchResultItem>> SearchProvidersByLocation(string apprenticeshipId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)

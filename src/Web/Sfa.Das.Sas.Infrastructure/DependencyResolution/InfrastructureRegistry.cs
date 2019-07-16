@@ -1,4 +1,8 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Services;
+﻿using Sfa.Das.FatApi.Client.Api;
+using Sfa.Das.FatApi.Client.Client;
+using SFA.DAS.Providers.Api.Client;
+using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Infrastructure.Providers;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
@@ -32,33 +36,41 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<IFatConfigurationSettings>().Use<FatSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
-            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<ILookupLocations>().Use<PostCodesIoLocator>();
 
-            For<IGetProviders>().Use<ProviderElasticRepository>();
 
-            For<IElasticsearchHelper>().Use<ElasticsearchHelper>();
-
+            For<IApprenticeshipSearchProvider>().Use<ApprenticeshipsSearchApiProvider>();
             For<IGetFrameworks>().Use<FrameworkApiRepository>();
             For<IGetStandards>().Use<StandardApiRepository>();
             For<IGetAssessmentOrganisations>().Use<AssessmentOrganisationApiRepository>();
             For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderApiRepository>();
+            For<IProviderLocationSearchProvider>().Use<ProviderLocationSearchApiProvider>();
 
             For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IAssessmentOrgsApiClient>().Use<AssessmentOrgsApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
-            For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();
-            For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
+         
+        
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
             For<IAssessmentOrganisationMapping>().Use<AssessmentOrganisationMapping>();
             For<IProviderNameSearchMapping>().Use<ProviderNameSearchMapping>();
-            For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
-            For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
+            For<IApprenticeshipSearchResultsMapping>().Use<ApprenticeshipSearchResultsMapping>();
+            For<IApprenticeshipSearchResultsItemMapping>().Use<ApprenticeshipSearchResultsItemMapping>();
+            For<ISearchResultsMapping>().Use<SearchResultsMapping>();
+
             For<IPaginationOrientationService>().Use<PaginationOrientationService>();
-            For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
+            For<ISearchApi>().Use(new SearchApi(new FatSettings().FatApiBaseUrl));
+            For<ISearchVApi>().Use<SearchVApi>();
+            For<IProvidersVApi>().Use<ProvidersVApi>();
+
+            For<IProviderApiClient>().Use(new ProviderApiClient(new FatSettings().FatApiBaseUrl));
+
+
+            //For<IGetProviders>().Use<ProviderElasticRepository>();
+            //For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
+            //For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
         }
 
         private IDictionary<string, object> GetProperties()
