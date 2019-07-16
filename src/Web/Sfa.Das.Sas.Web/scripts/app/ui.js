@@ -44,8 +44,7 @@ if ($container) {
     $container.empty();
     var getSuggestions = function (query, updateResults) {
 
-        let results = [];
-
+        var results = [];
         $.ajax({
             url: $container.data('api-url'),
             dataType: 'json',

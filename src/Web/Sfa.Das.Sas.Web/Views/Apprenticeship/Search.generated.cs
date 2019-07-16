@@ -109,6 +109,17 @@ WriteLiteral("></span>\r\n                    <div");
 
 WriteLiteral(" id=\"apprenticeships-container\"");
 
+WriteLiteral(" data-api-url=\"");
+
+            
+            #line 21 "..\..\Views\Apprenticeship\Search.cshtml"
+                                                                  Write($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
+
 WriteLiteral(">\r\n                        <input");
 
 WriteLiteral(" type=\"search\"");
@@ -155,53 +166,7 @@ WriteLiteral(">You can also ");
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n    <script");
-
-WriteLiteral(" src=\"https://das-at-frnt-end.azureedge.net/libs/accessible-autocomplete/accessib" +
-"le-autocomplete.min.js\"");
-
-WriteLiteral(@"></script>
-    <script>
-
-        var container = document.querySelector('#apprenticeships-container');
-        container.innerHTML = '';
-
-        var getSuggestions = function (query, updateResults) {
-
-            let results = [];
-
-            $.ajax({
-                url: """);
-
-            
-            #line 44 "..\..\Views\Apprenticeship\Search.cshtml"
-                  Write($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete");
-
-            
-            #line default
-            #line hidden
-WriteLiteral(@""",
-                dataType: 'json',
-                data: { searchString: query } 
-                
-            }).done(function (data) {
-                results = data.Results.map(r => r.Title);
-                updateResults(results)
-            });
-        }
-
-        accessibleAutocomplete({
-            element: container,
-            id: 'keywords',
-            name: 'Keywords',
-            displayMenu: 'overlay',
-            source: getSuggestions
-        })
-
-
-
-    </script>
-");
+WriteLiteral("</span>\r\n        </div>\r\n    </div>\r\n</main>\r\n");
 
         }
     }
