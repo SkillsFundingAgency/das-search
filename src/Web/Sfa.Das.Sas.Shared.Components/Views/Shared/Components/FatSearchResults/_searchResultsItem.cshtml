@@ -9,7 +9,8 @@
             <a class="@CssViewModel.Link das-search-result__heading-link" href="/employer/find-apprenticeships/Apprenticeship?id=@Model.Id">@Model.Title</a>
         </h2>
 
-        @await Html.PartialAsync("Basket/_AddToBasketButton", Model.Id)
+        @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.Id })
+
 
         @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
         {
