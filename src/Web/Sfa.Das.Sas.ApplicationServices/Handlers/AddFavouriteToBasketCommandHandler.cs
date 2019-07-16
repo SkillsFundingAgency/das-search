@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Sfa.Das.Sas.ApplicationServices.Commands;
 using Sfa.Das.Sas.ApplicationServices.Interfaces;
 using Sfa.Das.Sas.ApplicationServices.Models;
@@ -12,10 +13,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class AddFavouriteToBasketCommandHandler : IRequestHandler<AddFavouriteToBasketCommand, Guid>
     {
         private readonly IApprenticeshipFavouritesBasketStore _basketStore;
+        private readonly ILogger<AddFavouriteToBasketCommandHandler> _logger;
 
-        public AddFavouriteToBasketCommandHandler(IApprenticeshipFavouritesBasketStore basketStore)
+        public AddFavouriteToBasketCommandHandler(ILogger<AddFavouriteToBasketCommandHandler> logger, IApprenticeshipFavouritesBasketStore basketStore)
         {
             _basketStore = basketStore;
+            _logger = logger;
         }
 
         public async Task<Guid> Handle(AddFavouriteToBasketCommand request, CancellationToken cancellationToken)
@@ -46,6 +49,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
 
             await _basketStore.UpdateAsync(basketId, basket);
+
+            _logger.LogDebug("Updated apprenticeship basket: {basketId}", basketId);
 
             return basketId;
         }

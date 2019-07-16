@@ -6,11 +6,11 @@
 
 <form asp-controller="Basket" asp-action="AddApprenticeshipFromDetails" method="post">
     <div class="@(CssViewModel.FormCss.FormGroup)">
-        <button type="submit" class="@(CssViewModel.Button)" name="apprenticeshipId" value="@Model.Id">
-            Add to Favourites
-        </button>
+        @await Html.PartialAsync("Basket/_AddToBasketButton", Model.Id)
     </div>
+
 </form>
+
 
 @await Component.InvokeAsync("ApprenticeshipDetails", new { queryModel = Model })
 

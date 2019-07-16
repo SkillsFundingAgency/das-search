@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Commands;
@@ -23,7 +24,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void Setup()
         {
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
-            _sut = new AddFavouriteToBasketCommandHandler(_mockBasket.Object);
+            _sut = new AddFavouriteToBasketCommandHandler(new NullLogger<AddFavouriteToBasketCommandHandler>(), _mockBasket.Object);
         }
 
         [Test]

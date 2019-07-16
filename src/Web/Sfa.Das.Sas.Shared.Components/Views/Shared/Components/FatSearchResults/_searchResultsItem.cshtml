@@ -8,9 +8,9 @@
         <h2 class="@CssViewModel.HeadingMedium das-search-result__heading">
             <a class="@CssViewModel.Link das-search-result__heading-link" href="/employer/find-apprenticeships/Apprenticeship?id=@Model.Id">@Model.Title</a>
         </h2>
-        <button type="submit" class="@(CssViewModel.Button)" name="apprenticeshipId" value="@($"{Model.Id}")">
-            Add to Favourites
-        </button>
+
+        @await Html.PartialAsync("Basket/_AddToBasketButton", Model.Id)
+
         @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
         {
             <div class="@CssViewModel.WarningText">
