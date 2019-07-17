@@ -1,4 +1,5 @@
-﻿using Sfa.Das.Sas.ApplicationServices;
+﻿using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
@@ -16,11 +17,11 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             _fatSearchResultsViewModelMapper = fatSearchResultsViewModelMapper;
         }
 
-        public FatSearchResultsViewModel GetSearchResults(SearchQueryViewModel searchQueryModel)
+        public async Task<FatSearchResultsViewModel> GetSearchResults(SearchQueryViewModel searchQueryModel)
         {
             var results = _apprenticeshipSearchService.SearchByKeyword(searchQueryModel.Keywords, searchQueryModel.Page, searchQueryModel.ResultsToTake, searchQueryModel.SortOrder, searchQueryModel.SelectedLevels);
 
-            var model = _fatSearchResultsViewModelMapper.Map(results);
+            var model = _fatSearchResultsViewModelMapper.Map(await results);
 
             return model;
         }

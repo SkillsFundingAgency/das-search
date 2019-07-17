@@ -1,6 +1,8 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
 using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Http;
@@ -140,13 +142,18 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IApprenticeshipProgrammeApiClient, ApprenticeshipProgrammeApiClient>(service => new ApprenticeshipProgrammeApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
-            services.AddTransient<ISearchApi, SearchApi>(service => new SearchApi(sharedComponentsConfiguration.FatApiBaseUrl));
 
             services.AddTransient<IProviderLocationSearchProvider, ProviderLocationSearchApiProvider>();
             services.AddTransient<IProviderSearchProvider, ProviderApiRepository>();
             services.AddTransient<IProviderApiClient, ProviderApiClient>(service => new ProviderApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
-            services.AddTransient<IProvidersVApi, ProvidersVApi>(service => new ProvidersVApi(sharedComponentsConfiguration.FatApiBaseUrl));
 
+            services.AddRefitClient<ISearchApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
+
+            services.AddRefitClient<IProvidersVApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddRefitClient<ISearchVApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
         }
 
         private static void AddOrchesratorServices(IServiceCollection services)

@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 
             _fatOrchestratorMock = new Mock<IFatOrchestrator>(MockBehavior.Strict);
 
-            _fatOrchestratorMock.Setup(s => s.GetSearchResults(It.IsAny<SearchQueryViewModel>())).Returns(_searchResultsViewModel);
+            _fatOrchestratorMock.Setup(s => s.GetSearchResults(It.IsAny<SearchQueryViewModel>())).ReturnsAsync(_searchResultsViewModel);
 
 
             _sut = new FatSearchResultsViewComponent(_fatOrchestratorMock.Object)

@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _apprenticeshipSearchServicetMock = new Mock<IApprenticeshipSearchService>(MockBehavior.Strict);
             _FatResultsViewModelMock = new Mock<IFatSearchResultsViewModelMapper>(MockBehavior.Strict);
 
-            _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).Returns(_searchResults);
+            _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).ReturnsAsync(_searchResults);
 
             _FatResultsViewModelMock.Setup(s => s.Map(_searchResults)).Returns(_searchResultsViewModel);
 
