@@ -17,7 +17,7 @@
       <Setting name="EnvironmentName" value="local" />
       <Setting name="ApprenticeshipIndexAlias" value="localapprenticeshipindexalias" />
       <Setting name="ProviderIndexAlias" value="localproviderindexalias" />
-      <Setting name="ApprenticeshipApiBaseUrl" value="https://findapprenticeshiptraining-api.sfa.bis.gov.uk/" />
+      <Setting name="ApprenticeshipApiBaseUrl" value="https://findapprenticeshiptraining-api.apprenticeships.education.gov.uk/" />
       <Setting name="ElasticsearchUsername" value="fatindexer-ro-svc" />
       <Setting name="ElasticsearchPassword" value="93f1{cf)!FR787D" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="" />

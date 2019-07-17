@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Sfa.Das.FatApi.Client.Api;
 
 namespace Sfa.Das.Sas.Infrastructure.Providers
@@ -11,22 +12,25 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
 
     public class ApprenticeshipsSearchApiProvider : IApprenticeshipSearchProvider
     {
-        private readonly ISearchApi _apprenticeshipProgrammeApiClient;
+        private readonly ISearchVApi _apprenticeshipProgrammeApiClient;
         private readonly IApprenticeshipSearchResultsMapping _apprenticeshipSearchResultsMapping;
-        public ApprenticeshipsSearchApiProvider(ISearchApi apprenticeshipProgrammeApiClient, IApprenticeshipSearchResultsMapping apprenticeshipSearchResultsMapping)
+        public ApprenticeshipsSearchApiProvider(ISearchVApi apprenticeshipProgrammeApiClient, IApprenticeshipSearchResultsMapping apprenticeshipSearchResultsMapping)
         {
             _apprenticeshipProgrammeApiClient = apprenticeshipProgrammeApiClient;
             _apprenticeshipSearchResultsMapping = apprenticeshipSearchResultsMapping;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
+        public async Task<ApprenticeshipSearchResults> SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
             var selectedLevelsCsv = (selectedLevels != null && selectedLevels.Any()) ? string.Join(",", selectedLevels) : null;
-            var results = _apprenticeshipSearchResultsMapping.Map(_apprenticeshipProgrammeApiClient.SearchActiveApprenticeships(formattedKeywords, page, take, order, selectedLevelsCsv));
-            results.SearchTerm = keywords;
-            return results;
+
+            var results = _apprenticeshipProgrammeApiClient.SearchActiveApprenticeshipsAsync(formattedKeywords, page, take, order, selectedLevelsCsv);
+
+            var mappedResults = _apprenticeshipSearchResultsMapping.Map(await results);
+            mappedResults.SearchTerm = keywords;
+            return mappedResults;
         }
     }
 }

@@ -20,7 +20,7 @@
         public void Setup()
         {
             _apprenticeshipSearchResultsItemMock = new Mock<IApprenticeshipSearchResultsItemMapping>(MockBehavior.Strict);
-            _apprenticeshipSearchResultsItemMock.Setup(s => s.Map(It.IsAny<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>())).Returns(new ApplicationServices.Models.ApprenticeshipSearchResultsItem());
+            _apprenticeshipSearchResultsItemMock.Setup(s => s.Map(It.IsAny<SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem>())).Returns(new ApplicationServices.Models.ApprenticeshipSearchResultsItem());
 
             _sut = new ApprenticeshipSearchResultsMapping(_apprenticeshipSearchResultsItemMock.Object);
         }
@@ -28,13 +28,13 @@
         [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_Return_Mapped_Object()
         {
-            var apprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>()
+            var apprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem>()
             {
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem(),
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem(),
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem()
             };
 
-            var apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            var apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults()
             {
                 Results = apprenticeshipSearchResultsItem,
                 TotalResults = 300,
@@ -52,13 +52,13 @@
         [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_Total_Pages_Calculated_Correctly()
         {
-            var apprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>()
+            var apprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem>()
             {
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem(),
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem(),
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem()
             };
 
-            var apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            var apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults()
             {
                 Results = apprenticeshipSearchResultsItem,
                 TotalResults = 11,
@@ -73,7 +73,7 @@
             mappedObject.Should().NotBeNull();
             mappedObject.LastPage.Should().Be(2);
 
-            apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults()
             {
                 Results = apprenticeshipSearchResultsItem,
                 TotalResults = 10,
@@ -88,7 +88,7 @@
             mappedObject.Should().NotBeNull();
             mappedObject.LastPage.Should().Be(1);
 
-            apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults()
             {
                 Results = apprenticeshipSearchResultsItem,
                 TotalResults = 9,
@@ -107,13 +107,13 @@
         [Test]
         public void When_Mapping_From_List_Of_ApprenticeshipSearchResultsItem_Then_Return_Mapped_Object_Contains_List_Of_Results()
         {
-            var apprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>()
+            var apprenticeshipSearchResultsItem = new List<SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem>()
             {
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem(),
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem(),
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem()
             };
 
-            var apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            var apprenticeSearchResults = new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults()
             {
                 Results = apprenticeshipSearchResultsItem,
                 TotalResults = 300,

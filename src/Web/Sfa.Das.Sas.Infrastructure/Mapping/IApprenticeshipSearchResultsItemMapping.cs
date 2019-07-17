@@ -6,6 +6,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
 
     public interface IApprenticeshipSearchResultsItemMapping
     {
-        ApprenticeshipSearchResultsItem Map(SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem document);
+        ApprenticeshipSearchResultsItem Map(SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem document);
     }
 }

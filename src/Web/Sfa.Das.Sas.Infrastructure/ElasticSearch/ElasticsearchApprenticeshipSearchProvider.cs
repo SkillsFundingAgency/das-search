@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 {
@@ -25,7 +26,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
             _applicationSettings = applicationSettings;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
+        public Task<ApprenticeshipSearchResults> SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
@@ -35,7 +36,7 @@ namespace Sfa.Das.Sas.Infrastructure.Elasticsearch
 
             var levelAggregation = BuildLevelAggregationResult(results);
 
-            return MapToApprenticeshipSearchResults(take, selectedLevels, formattedKeywords, results, levelAggregation);
+            return Task.FromResult(MapToApprenticeshipSearchResults(take, selectedLevels, formattedKeywords, results, levelAggregation));
         }
 
         private static ApprenticeshipSearchResults MapToApprenticeshipSearchResults(

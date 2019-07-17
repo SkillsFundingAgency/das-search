@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             message.Page = message.Page <= 0 ? 1 : message.Page;
 
-            var searchResults = _searchService.SearchByKeyword(message.Keywords, message.Page, _paginationSettings.DefaultResultsAmount, message.Order, message.SelectedLevels);
+            var searchResults = await _searchService.SearchByKeyword(message.Keywords, message.Page, _paginationSettings.DefaultResultsAmount, message.Order, message.SelectedLevels);
 
             response.ActualPage = message.Page;
             response.AggregationLevel = searchResults.LevelAggregation;
