@@ -13,13 +13,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 
     public class ApiApprenticeshipSearchProviderTests
     {
-        private Mock<ISearchApi> _apprenticeshipProgrammeApiClientMock;
+        private Mock<ISearchVApi> _apprenticeshipProgrammeApiClientMock;
         private Mock<IApprenticeshipSearchResultsMapping> _apprenticeshipSearchResultsMappingMock;
 
         private ApprenticeshipsSearchApiProvider _sut;
 
         private ApprenticeshipSearchResults mappingReturnObject;
-        private SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults clientResultsItems;
+        private SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults clientResultsItems;
 
         [SetUp]
         public void Setup()
@@ -29,33 +29,33 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
                 Results = new List<ApplicationServices.Models.ApprenticeshipSearchResultsItem>()
             };
 
-            clientResultsItems = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults()
+            clientResultsItems = new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults()
             {
-                Results = new List<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem>() {
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
+                Results = new List<SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem>() {
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem()
                 {
                     Id = "123"
                 },
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem()
                 {
                     Id = "234"
                 },
-                new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
+                new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem()
                 {
                     Id = "ABC-12-34"
                 }
                     }
             };
 
-            _apprenticeshipProgrammeApiClientMock = new Mock<ISearchApi>();
+            _apprenticeshipProgrammeApiClientMock = new Mock<ISearchVApi>();
             _apprenticeshipSearchResultsMappingMock = new Mock<IApprenticeshipSearchResultsMapping>();
 
             _apprenticeshipProgrammeApiClientMock
-                .Setup(s => s.SearchActiveApprenticeships(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()))
-                .Returns(clientResultsItems);
+                .Setup(s => s.SearchActiveApprenticeshipsAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()))
+                .ReturnsAsync(clientResultsItems);
 
             _apprenticeshipSearchResultsMappingMock
-                .Setup(s => s.Map(It.IsAny<SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults>()))
+                .Setup(s => s.Map(It.IsAny<SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults>()))
                 .Returns(mappingReturnObject);
 
             _sut = new ApprenticeshipsSearchApiProvider(_apprenticeshipProgrammeApiClientMock.Object, _apprenticeshipSearchResultsMappingMock.Object);
@@ -68,7 +68,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
         {
             var results = _sut.SearchByKeyword(blankSearchKeyword, 0, 0, 0, null);
 
-            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships("*", It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeshipsAsync("*", It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 
             var results = _sut.SearchByKeyword(keyword, 0, 0, 0, null);
 
-            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(keyword, It.IsAny<int>(),It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeshipsAsync(keyword, It.IsAny<int>(),It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 
             var results = _sut.SearchByKeyword(keyword, page, 0, 0, null);
 
-            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(It.IsAny<string>(), page, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeshipsAsync(It.IsAny<string>(), page, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()));
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 
             var results = _sut.SearchByKeyword(keyword, page, pageSize, 0, null);
 
-            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(It.IsAny<string>(), It.IsAny<int>(), pageSize, It.IsAny<int>(), It.IsAny<string>()));
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeshipsAsync(It.IsAny<string>(), It.IsAny<int>(), pageSize, It.IsAny<int>(), It.IsAny<string>()));
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 
             var results = _sut.SearchByKeyword(keyword, page, 0, order, null);
 
-            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), order, It.IsAny<string>()));
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeshipsAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), order, It.IsAny<string>()));
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
             var selectedLevelsString = string.Join(",", selectedLevels);
             var results = _sut.SearchByKeyword(keyword, page, 0, order, selectedLevels);
 
-            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeships(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), selectedLevelsString));
+            _apprenticeshipProgrammeApiClientMock.Verify(v => v.SearchActiveApprenticeshipsAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), selectedLevelsString));
         }
 
         [Test]
