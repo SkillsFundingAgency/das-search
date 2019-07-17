@@ -1,4 +1,5 @@
-﻿using Sfa.Das.FatApi.Client.Api;
+﻿using Refit;
+using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.FatApi.Client.Client;
 using SFA.DAS.Providers.Api.Client;
 using Sfa.Das.Sas.ApplicationServices.Services;
@@ -38,7 +39,6 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<ICookieSettings>().Use<CookieSettings>();
             For<ILookupLocations>().Use<PostCodesIoLocator>();
 
-
             For<IApprenticeshipSearchProvider>().Use<ApprenticeshipsSearchApiProvider>();
             For<IGetFrameworks>().Use<FrameworkApiRepository>();
             For<IGetStandards>().Use<StandardApiRepository>();
@@ -49,8 +49,6 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IAssessmentOrgsApiClient>().Use<AssessmentOrgsApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
-         
-        
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
@@ -61,16 +59,16 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<ISearchResultsMapping>().Use<SearchResultsMapping>();
 
             For<IPaginationOrientationService>().Use<PaginationOrientationService>();
-            For<ISearchApi>().Use(new SearchApi(new FatSettings().FatApiBaseUrl));
-            For<ISearchVApi>().Use<SearchVApi>();
-            For<IProvidersVApi>().Use<ProvidersVApi>();
+
+            For<ISearchApi>().Use(RestService.For<ISearchApi>(new FatSettings().FatApiBaseUrl)).Singleton();
+            For<ISearchVApi>().Use(RestService.For<ISearchVApi>(new FatSettings().FatApiBaseUrl)).Singleton();
+            For<IProvidersVApi>().Use(RestService.For<IProvidersVApi>(new FatSettings().FatApiBaseUrl)).Singleton();
 
             For<IProviderApiClient>().Use(new ProviderApiClient(new FatSettings().FatApiBaseUrl));
 
-
-            //For<IGetProviders>().Use<ProviderElasticRepository>();
-            //For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
-            //For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
+            // For<IGetProviders>().Use<ProviderElasticRepository>();
+            // For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
+            // For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
         }
 
         private IDictionary<string, object> GetProperties()
