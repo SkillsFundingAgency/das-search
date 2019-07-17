@@ -14,7 +14,6 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         private readonly IMediator _mediator;
         private readonly ICookieManager _cookieManager;
         private readonly IApprenticehipFavouritesBasketStoreConfig _config;
-        private const string BasketCookieName = "ApprenticeshipBasket";
 
         public BasketController(
             IMediator mediator, 
@@ -47,7 +46,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         private async Task SaveApprenticeship(string apprenticeshipId)
         {
             // Get cookie
-            var cookie = _cookieManager.Get(BasketCookieName);
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
             Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
 
             var basketId = await _mediator.Send(new AddFavouriteToBasketCommand
@@ -56,7 +55,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
                 BasketId = cookieBasketId
             });
 
-            _cookieManager.Set(BasketCookieName, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
+            _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
         }
     }
 }

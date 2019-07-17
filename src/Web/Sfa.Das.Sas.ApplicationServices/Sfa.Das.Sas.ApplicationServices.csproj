@@ -152,6 +152,7 @@
     <Compile Include="FeatureToggles\ProviderFeedbackFeature.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
     <Compile Include="Handlers\AddFavouriteToBasketCommandHandler.cs" />
+    <Compile Include="Handlers\GetBasketHandler.cs" />
     <Compile Include="Handlers\IXmlDocumentSerialiser.cs" />
     <Compile Include="Handlers\ProviderDetailHandler.cs" />
     <Compile Include="Handlers\ProviderNameSearchHandler.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="ProviderNameSearchService.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
+    <Compile Include="Queries\GetBasketQuery.cs" />
     <Compile Include="Queries\ProviderDetailQuery.cs" />
     <Compile Include="Queries\ProviderNameSearchQuery.cs" />
     <Compile Include="Queries\SitemapQuery.cs" />

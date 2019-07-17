@@ -3,7 +3,12 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 
-<button type="submit" class="@(CssViewModel.Button)" name="apprenticeshipId" value="@Model.ApprenticeshipId">
-    Add to Favourites
+@{ 
+    var buttonStatusClassSuffix = Model.IsInBasket ? "checked" : "unchecked";
+    var buttonText = Model.IsInBasket ? "Favourite Added" : "Add to Favourites";
+}
+
+<button type="submit" class="das-search-result__favourite-button--@buttonStatusClassSuffix" name="apprenticeshipId" value="@Model.ApprenticeshipId">
+    @buttonText
 </button>
 

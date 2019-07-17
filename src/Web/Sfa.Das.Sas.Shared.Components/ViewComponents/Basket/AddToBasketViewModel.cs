@@ -3,5 +3,6 @@
     public class AddToBasketViewModel
     {
         public string ApprenticeshipId { get; set; }
+        public bool IsInBasket { get; set; }
     }
 }
