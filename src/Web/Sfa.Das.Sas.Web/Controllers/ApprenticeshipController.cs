@@ -99,7 +99,7 @@
         // GET: Standard
         public ActionResult Standard(string id, string keyword, string ukprn = null)
         {
-            _logger.Info($"Getting strandard {id}");
+            _logger.Info($"Getting standard {id}");
             var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keyword });
 
             string message;
