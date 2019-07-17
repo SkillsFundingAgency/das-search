@@ -63,6 +63,7 @@ if ($container) {
         id: 'keywords',
         name: 'Keywords',
         displayMenu: 'overlay',
+        showNoOptionsFound: false,
         source: getSuggestions
     });
 }
