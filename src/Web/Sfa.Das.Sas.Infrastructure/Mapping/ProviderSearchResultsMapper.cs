@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Sfa.Das.FatApi.Client.Model;
+using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
@@ -26,6 +27,16 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             item.Distance = document.Distance;
             item.NationalProvider = document.NationalProvider;
             item.LocationId = document.Location.LocationId;
+            item.LocationName = document.Location.LocationName;
+            item.Address = new Address()
+            {
+                Address1 = document.Location.Address.Street,
+                Town = document.Location.Address.Town,
+                Postcode = document.Location.Address.Postcode,
+                County = document.Location.Address.Primary
+
+            };
+            item.IsHigherEducationInstitute = true;
             return item;
         }
     }

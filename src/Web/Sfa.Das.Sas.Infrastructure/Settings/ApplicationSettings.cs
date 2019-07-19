@@ -9,7 +9,7 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
     using Sfa.Das.Sas.Core.Configuration;
 
-    public sealed class ApplicationSettings : IConfigurationSettings
+    public sealed class ApplicationSettings : IConfigurationSettings, IPostcodeIOConfigurationSettings
     {
         public string ApprenticeshipIndexAlias => CloudConfigurationManager.GetSetting("ApprenticeshipIndexAlias");
 

@@ -57,6 +57,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IApprenticeshipSearchResultsMapping>().Use<ApprenticeshipSearchResultsMapping>();
             For<IApprenticeshipSearchResultsItemMapping>().Use<ApprenticeshipSearchResultsItemMapping>();
             For<ISearchResultsMapping>().Use<SearchResultsMapping>();
+            For<IProviderSearchResultsMapper>().Use<ProviderSearchResultsMapper>();
 
             For<IPaginationOrientationService>().Use<PaginationOrientationService>();
 
@@ -65,6 +66,9 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IProvidersVApi>().Use(RestService.For<IProvidersVApi>(new FatSettings().FatApiBaseUrl)).Singleton();
 
             For<IProviderApiClient>().Use(new ProviderApiClient(new FatSettings().FatApiBaseUrl));
+            For<IProviderSearchProvider>().Use<ProviderApiRepository>();
+
+            For<IPostcodeIOConfigurationSettings>().Use<ApplicationSettings>();
 
             // For<IGetProviders>().Use<ProviderElasticRepository>();
             // For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
