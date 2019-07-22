@@ -100,39 +100,27 @@ WriteLiteral(">\r\n                        <span");
 
 WriteLiteral(" class=\"form-label\"");
 
-WriteLiteral(">Apprenticeship name or job role</span>\r\n                    </label>\r\n          " +
-"          <span");
+WriteLiteral(">Apprenticeship name or job role</span>\r\n                        <span");
+
+WriteLiteral(" class=\"form-hint\"");
+
+WriteLiteral(">Start typing the apprenticeship name</span>\r\n                    </label>\r\n     " +
+"               <span");
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral("></span>\r\n                    <div");
+WriteLiteral("></span>\r\n");
 
-WriteLiteral(" id=\"apprenticeships-container\"");
-
-WriteLiteral(" data-api-url=\"");
+WriteLiteral("                    ");
 
             
-            #line 21 "..\..\Views\Apprenticeship\Search.cshtml"
-                                                                  Write($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete");
+            #line 22 "..\..\Views\Apprenticeship\Search.cshtml"
+               Write(Html.Partial("_ApprenticeshipSearch"));
 
             
             #line default
             #line hidden
-WriteLiteral("\"");
-
-WriteLiteral(">\r\n                        <input");
-
-WriteLiteral(" type=\"search\"");
-
-WriteLiteral(" id=\"keywords\"");
-
-WriteLiteral(" name=\"Keywords\"");
-
-WriteLiteral(" class=\"text-box form-control\"");
-
-WriteLiteral(" maxlength=\"200\"");
-
-WriteLiteral(">\r\n                    </div>\r\n                </div>\r\n");
+WriteLiteral("\r\n                </div>\r\n");
 
 WriteLiteral("                <input");
 
@@ -147,7 +135,7 @@ WriteLiteral(" value=\"Search apprenticeship training\"");
 WriteLiteral(" />\r\n");
 
             
-            #line 26 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 25 "..\..\Views\Apprenticeship\Search.cshtml"
             }
 
             
@@ -160,7 +148,7 @@ WriteLiteral(" id=\"search-training-provider\"");
 WriteLiteral(">You can also ");
 
             
-            #line 28 "..\..\Views\Apprenticeship\Search.cshtml"
+            #line 27 "..\..\Views\Apprenticeship\Search.cshtml"
                                                         Write(Html.ActionLink("search for a training provider", "Search", "Provider"));
 
             

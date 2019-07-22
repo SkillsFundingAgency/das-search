@@ -9,9 +9,9 @@
     ViewBag.PageID = "search-apprentice-results";
 }
 <main id="content" role="main">
-    <input type="hidden" value="@Model.SearchTerm" id="ga-search-term"/>
+    <input type="hidden" value="@Model.SearchTerm" id="ga-search-term" />
     <input type="hidden" value="@Model.Results.IsNullOrEmpty().ToString()" id="ga-no-result" />
-    
+
     <div class="grid-row">
         <div class="column-full">
             <a class="link-back" href="/Apprenticeship/Search">Back</a>
@@ -26,7 +26,7 @@
 
             @if (Model.TotalResults == 0)
             {
-                using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new {@class = "search-box"}))
+                using (Html.BeginForm("SearchResults", "Apprenticeship", FormMethod.Get, new { @class = "search-box apprenticeship-search-form" }))
                 {
                     <div class="form-group">
                         <label for="keywords">
@@ -34,14 +34,14 @@
                             <span class="form-hint">Can include job title or apprenticeship</span>
                         </label>
                         <span class="error-message"></span>
-                        <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
+                        @Html.Partial("_ApprenticeshipSearch", Model.SearchViewModel)
                     </div>
-                    <input class="button" id="submit-keywords" type="submit" value="Search"/>
+                    <input class="button" id="submit-keywords" type="submit" value="Search" />
                 }
             }
         </div>
-        </div>
-    
+    </div>
+
     <div class="grid-row">
         @if (Model.TotalResults > 0)
         {
@@ -52,8 +52,10 @@
                         <label for="keywords">
                             <span class="form-label-bold">Showing search results for:</span>
                         </label>
-                        <input type="search" id="keywords" name="Keywords" class="form-control form-control-3-4" value="@Model.SearchTerm" maxlength="200">
-                        <input id="submit-keywords" class="button" type="submit" value="Search" />
+                        <div class="form-control-3-4" style="float:left;">
+                            @Html.Partial("_ApprenticeshipSearch", Model.SearchViewModel)
+                        </div>
+                        <input id="submit-keywords" style="float:right; margin-right:65px" class="button" type="submit" value="Search" />
                     </div>
                 </div>
             }
@@ -112,7 +114,7 @@
                     @GetPaginationNextLink()
                 </div>
             </div>
-                    }
+        }
 
     </div>
 </main>
@@ -172,9 +174,9 @@
 @helper GetStandardTitle(ApprenticeshipSearchResultItemViewModel item, int index)
 {
     <h2 class="result-title">
-        @Html.ActionLink(item.Title, "Standard", "Apprenticeship", 
-            new { @id = item.StandardId, @keyword = Model.SearchTerm}, 
-            new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) } )
+        @Html.ActionLink(item.Title, "Standard", "Apprenticeship",
+            new { @id = item.StandardId, @keyword = Model.SearchTerm },
+            new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
         <span class="tag tag-new">New</span>
     </h2>
 }
@@ -190,20 +192,20 @@
 
 @helper GetApprenticeshipDetailItem(string title, string id, string item, string unit = "")
 {
-if (string.IsNullOrEmpty(item))
-{
-    return;
-}
+    if (string.IsNullOrEmpty(item))
+    {
+        return;
+    }
     <dt><b>@title</b></dt>
     <dd class="@id">@item @unit</dd>
 }
 
 @helper GetApprenticeshipDuration(string title, string id, string item, string unit = "")
 {
-if (string.IsNullOrEmpty(item))
-{
-    return;
-}
+    if (string.IsNullOrEmpty(item))
+    {
+        return;
+    }
     <dt><b>@title</b></dt>
     <dd class="@id">@item months</dd>
 }
@@ -240,7 +242,7 @@ if (string.IsNullOrEmpty(item))
                             <p><a href="https://www.gov.uk/what-different-qualification-levels-mean/overview" target="_blank" rel="external">More about levels</a></p>
                         </div>
                     </details>
-                    
+
 
                 </div>
             </fieldset>
