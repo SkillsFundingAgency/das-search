@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using Sfa.Das.Sas.Core.Domain.Model;
-using SFA.DAS.Apprenticeships.Api.Types;
-
-namespace Sfa.Das.Sas.Web.Controllers
+﻿namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
@@ -15,6 +12,8 @@ namespace Sfa.Das.Sas.Web.Controllers
     using MediatR;
     using Services;
     using Services.MappingActions.Helpers;
+    using Sfa.Das.Sas.Core.Configuration;
+    using SFA.DAS.Apprenticeships.Api.Types;
     using SFA.DAS.NLog.Logger;
     using ViewModels;
 
@@ -26,20 +25,28 @@ namespace Sfa.Das.Sas.Web.Controllers
         private readonly IMediator _mediator;
         private readonly IButtonTextService _buttonTextService;
         private readonly IFundingBandService _fundingBandService;
+        private readonly IConfigurationSettings _configurationSettings;
         private readonly int _nextFundingPeriodMessageCutoffMonths = 3;
 
-        public ApprenticeshipController(ILog logger, IMappingService mappingService, IMediator mediator, IButtonTextService buttonTextService, IFundingBandService fundingBandService)
+        public ApprenticeshipController(
+            ILog logger,
+            IMappingService mappingService,
+            IMediator mediator,
+            IButtonTextService buttonTextService,
+            IFundingBandService fundingBandService, 
+            IConfigurationSettings configurationSettings)
         {
             _logger = logger;
             _mappingService = mappingService;
             _mediator = mediator;
             _buttonTextService = buttonTextService;
             _fundingBandService = fundingBandService;
+            _configurationSettings = configurationSettings;
         }
 
         public ActionResult Search()
         {
-            return View();
+            return View(new ApprenticeshipSearchViewModel { ApprenticeshipInfoApiBaseUrl = _configurationSettings.ApprenticeshipApiBaseUrl });
         }
 
         public ActionResult ApprenticeshipOrProvider(bool? retry, bool? isApprenticeship)
@@ -58,15 +65,15 @@ namespace Sfa.Das.Sas.Web.Controllers
                 case null:
                     return View(viewModel);
                 case true:
-                {
-                    var url = Url.Action("Search", "Apprenticeship");
-                    return new RedirectResult(url);
-                }
+                    {
+                        var url = Url.Action("Search", "Apprenticeship");
+                        return new RedirectResult(url);
+                    }
                 default:
-                {
-                    var url = Url.Action("Search", "Provider");
-                    return new RedirectResult(url);
-                }
+                    {
+                        var url = Url.Action("Search", "Provider");
+                        return new RedirectResult(url);
+                    }
             }
         }
 
@@ -92,50 +99,50 @@ namespace Sfa.Das.Sas.Web.Controllers
         // GET: Standard
         public ActionResult Standard(string id, string keyword, string ukprn = null)
         {
-            _logger.Info($"Getting strandard {id}");
-            var response = _mediator.Send(new GetStandardQuery {Id = id, Keywords = keyword});
+            _logger.Info($"Getting standard {id}");
+            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keyword });
 
             string message;
 
             switch (response.StatusCode)
             {
                 case GetStandardResponse.ResponseCodes.InvalidStandardId:
-                {
-                    _logger.Info("404 - Attempt to get standard with an ID below zero");
-                    return HttpNotFound("Cannot find any standards with an ID below zero");
-                }
+                    {
+                        _logger.Info("404 - Attempt to get standard with an ID below zero");
+                        return HttpNotFound("Cannot find any standards with an ID below zero");
+                    }
 
                 case GetStandardResponse.ResponseCodes.StandardNotFound:
-                {
-                    message = $"Cannot find standard: {id}";
-                    _logger.Warn($"404 - {message}");
+                    {
+                        message = $"Cannot find standard: {id}";
+                        _logger.Warn($"404 - {message}");
 
-                    return new HttpNotFoundResult(message);
-                }
+                        return new HttpNotFoundResult(message);
+                    }
 
                 case GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound:
-                {
-                    message = $"Cannot find assessment organisations for standard: {id}";
-                    _logger.Warn($"404 - {message}");
-                    break;
-                }
+                    {
+                        message = $"Cannot find assessment organisations for standard: {id}";
+                        _logger.Warn($"404 - {message}");
+                        break;
+                    }
 
                 case GetStandardResponse.ResponseCodes.Gone:
-                {
-                    message = $"Expired standard request: {id}";
+                    {
+                        message = $"Expired standard request: {id}";
 
-                    _logger.Warn($"410 - {message}");
+                        _logger.Warn($"410 - {message}");
 
-                    return new HttpStatusCodeResult(HttpStatusCode.Gone);
-                }
+                        return new HttpStatusCodeResult(HttpStatusCode.Gone);
+                    }
 
                 case GetStandardResponse.ResponseCodes.HttpRequestException:
-                {
-                    message = $"Request error when requesting assessment orgs for standard: {id}";
-                    _logger.Warn($"400 - {message}");
+                    {
+                        message = $"Request error when requesting assessment orgs for standard: {id}";
+                        _logger.Warn($"400 - {message}");
 
-                    return new HttpNotFoundResult(message);
-                }
+                        return new HttpNotFoundResult(message);
+                    }
             }
 
             _logger.Info($"Mapping Standard {id}");
@@ -144,7 +151,7 @@ namespace Sfa.Das.Sas.Web.Controllers
 
             return View(viewModel);
         }
-        
+
         public ActionResult Framework(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting framework {id}");
@@ -185,7 +192,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             }
         }
 
-        public ActionResult SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords,string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
+        public ActionResult SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetStandardProvidersQuery
             {
