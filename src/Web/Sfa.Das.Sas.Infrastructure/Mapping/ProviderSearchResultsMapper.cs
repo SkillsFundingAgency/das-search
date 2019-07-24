@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 County = document.Location.Address.Primary
 
             };
-            item.IsHigherEducationInstitute = true;
+            item.IsHigherEducationInstitute = document.IsHigherEducationInstitute;
             return item;
         }
     }

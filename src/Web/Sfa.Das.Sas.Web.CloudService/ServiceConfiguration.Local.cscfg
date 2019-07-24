@@ -17,9 +17,9 @@
       <Setting name="EnvironmentName" value="local" />
       <Setting name="ApprenticeshipIndexAlias" value="localapprenticeshipindexalias" />
       <Setting name="ProviderIndexAlias" value="localproviderindexalias" />
-      <Setting name="ApprenticeshipApiBaseUrl" value="https://findapprenticeshiptraining-api.apprenticeships.education.gov.uk/" />
-      <Setting name="ElasticsearchUsername" value="fatindexer-ro-svc" />
-      <Setting name="ElasticsearchPassword" value="93f1{cf)!FR787D" />
+      <Setting name="ApprenticeshipApiBaseUrl" value="https://localhost:44300" />
+      <Setting name="ElasticsearchUsername" value="" />
+      <Setting name="ElasticsearchPassword" value="" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="" />
       <Setting name="FeatureToggle.Elk5Feature" value="true" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="" />

@@ -150,6 +150,9 @@ namespace Sfa.Das.FatApi.Client.Model
         [DataMember(Name="CurrentlyNotStartingNewApprentices", EmitDefaultValue=false)]
         public bool CurrentlyNotStartingNewApprentices { get; set; }
 
+        [DataMember(Name = "IsHigherEducationInstitute", EmitDefaultValue = false)]
+        public bool IsHigherEducationInstitute { get; set; }
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

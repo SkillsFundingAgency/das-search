@@ -70,6 +70,9 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 
             For<IPostcodeIOConfigurationSettings>().Use<ApplicationSettings>();
 
+            For<IPaginationOrientationService>().Use<PaginationOrientationService>();
+            
+
             // For<IGetProviders>().Use<ProviderElasticRepository>();
             // For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
             // For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();

@@ -12,9 +12,9 @@ namespace Sfa.Das.Sas.ApplicationServices
     public class ProviderNameSearchService : IProviderNameSearchService
     {
         private readonly IPaginationSettings _paginationSettings;
-        private readonly IProviderNameSearchProvider _searchProviderName;
+        private readonly IProviderSearchProvider _searchProviderName;
         private readonly ILog _logger;
-        public ProviderNameSearchService(IPaginationSettings paginationSettings, IProviderNameSearchProvider searchProviderName, ILog logger)
+        public ProviderNameSearchService(IPaginationSettings paginationSettings, IProviderSearchProvider searchProviderName, ILog logger)
         {
             _paginationSettings = paginationSettings;
             _searchProviderName = searchProviderName;
@@ -23,29 +23,8 @@ namespace Sfa.Das.Sas.ApplicationServices
 
         public async Task<ProviderNameSearchResultsAndPagination> SearchProviderNameAndAliases(string searchTerm, int page)
         {
-            var results = new ProviderNameSearchResultsAndPagination();
+            return await _searchProviderName.SearchProviderNameAndAliases(searchTerm, page, page);
 
-            var take = _paginationSettings.DefaultResultsAmount;
-
-            _logger.Info(
-                $"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
-
-            try
-            {
-                results = await _searchProviderName.SearchByTerm(searchTerm, page, take);
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{take}]");
-                results.ResponseCode = ProviderNameSearchResponseCodes.SearchFailed;
-                results.HasError = true;
-                return results;
-            }
-
-            _logger.Info(
-                $"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{results.ActualPage}], Page Size: [{take}], Total Results: [{results.TotalResults}]");
-
-            return results;
         }
     }
 }

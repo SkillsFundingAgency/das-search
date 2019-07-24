@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
             _mockProviderApiClient.Setup(x => x.GetAsync(It.IsAny<long>())).Returns(Task.FromResult(new Provider()));
             _mockProviderApiClient.Setup(x => x.GetActiveApprenticeshipTrainingByProviderAsync(It.IsAny<long>(), It.IsAny<int>())).Returns(Task.FromResult(new ApprenticeshipTrainingSummary()));
 
-            _sut = new ProviderApiRepository(_mockProviderApiClient.Object, _mockProviderV3ApiClient.Object, _mockSearchResultsMapping.Object);
+            _sut = new ProviderApiRepository(_mockProviderApiClient.Object, _mockProviderV3ApiClient.Object, _mockSearchResultsMapping.Object,_mockLogger.Object,_mockSearchVApi.Object,_mockProviderNameMapping.Object);
         }
         [Test]
         public async Task ShouldBeOfTypeProvider()

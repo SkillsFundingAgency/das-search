@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
@@ -17,7 +18,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     [TestFixture]
     public class ProviderNameSearchHandlerTests
     {
-        private Mock<IProviderNameSearchService> _mockProviderNameSearchService;
+        private Mock<IProviderSearchProvider> _mockProviderNameSearchService;
         private ProviderNameSearchHandler _handler;
         private int _actualPage;
         private int _lastPage;
@@ -30,7 +31,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [SetUp]
         public void Setup()
         {
-            _mockProviderNameSearchService = new Mock<IProviderNameSearchService>();
+            _mockProviderNameSearchService = new Mock<IProviderSearchProvider>();
             _actualPage = 1;
             _lastPage = 2;
             _resultsToTake = 20;
@@ -58,7 +59,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             };
 
             _mockProviderNameSearchService.Setup(
-                    x => x.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>()))
+                    x => x.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(),It.IsAny<int>()))
                 .Returns(Task.FromResult(providerNameSearchResults));
 
             _handler = new ProviderNameSearchHandler(
