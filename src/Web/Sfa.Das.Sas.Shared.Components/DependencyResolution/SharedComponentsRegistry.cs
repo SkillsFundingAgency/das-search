@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 {
     public static class SharedComponentsRegistry
     {
-        public static void AddFatSharedComponents(this IServiceCollection services, FatSharedComponentsConfiguration configuration, bool useElastic = false)
+        public static void AddFatSharedComponents(this IServiceCollection services, FatSharedComponentsConfiguration configuration)
         {
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
@@ -54,14 +54,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             //Orchestrator DI
             AddOrchesratorServices(services);
 
-            if (useElastic)
-            {
-                AddElasticSearchServices(services);
-            }
-            else
-            {
-                AddApiSearchServices(services, configuration);
-            }
+            AddApiSearchServices(services, configuration);
 
             services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
             services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
@@ -69,7 +62,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IStandardDetailsViewModelMapper, StandardsDetailsViewModelMapper>();
             services.AddTransient<IAssessmentOrganisationViewModelMapper, AssessmentOrganisationViewModelMapper>();
             services.AddTransient<ITrainingProviderSearchResultsItemViewModelMapper, TrainingProviderSearchResultsItemViewModelMapper>();
-            services.AddTransient<ISearchResultsViewModelMapper,SearchResultsViewModelMapper>();
+            services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
             services.AddTransient<IProviderSearchResultsMapper, ProviderSearchResultsMapper>();
             services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
             services.AddTransient<IFeedbackViewModelMapper, FeedbackViewModelMapper>();
@@ -87,7 +80,6 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<AbstractValidator<ApprenticeshipProviderDetailQuery>, ApprenticeshipProviderDetailQueryValidator>();
             services.AddTransient<AbstractValidator<GetFrameworkQuery>, FrameworkQueryValidator>();
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
-            services.AddTransient<IProviderSearchService, ProviderSearchService>();
             services.AddTransient<IGetProviderDetails, ProviderApiRepository>();
         }
 
@@ -101,8 +93,6 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IGetStandards, StandardApiRepository>();
             services.AddTransient<IGetAssessmentOrganisations, AssessmentOrganisationApiRepository>();
             services.AddTransient<IApprenticeshipProviderRepository, ApprenticeshipProviderApiRepository>();
-
-            services.AddTransient<IProviderNameSearchProvider, ProviderNameSearchProvider>();
 
             services.AddTransient<IStandardMapping, StandardMapping>();
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();
@@ -118,20 +108,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IRetryWebRequests, WebRequestRetryService>();
         }
 
-        private static void AddElasticSearchServices(IServiceCollection services)
-        {
-            services.AddTransient<IElasticsearchClientFactory, ElasticsearchClientFactory>();
-            services.AddTransient<IElasticsearchCustomClient, ElasticsearchCustomClient>();
-            services.AddTransient<IElasticsearchHelper, ElasticsearchHelper>();
 
-
-            services.AddTransient<IApprenticeshipSearchProvider, ElasticsearchApprenticeshipSearchProvider>();
-            services.AddTransient<IProviderLocationSearchProvider, ElasticsearchProviderLocationSearchProvider>();
-
-            services.AddTransient<IProviderNameSearchProviderQuery, ProviderNameSearchProviderQuery>();
-
-            services.AddTransient<IGetProviders, ProviderElasticRepository>();
-        }
 
         private static void AddApiSearchServices(IServiceCollection services, IFatConfigurationSettings sharedComponentsConfiguration)
         {
@@ -143,7 +120,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IApprenticeshipProgrammeApiClient, ApprenticeshipProgrammeApiClient>(service => new ApprenticeshipProgrammeApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
 
-            services.AddTransient<IProviderLocationSearchProvider, ProviderLocationSearchApiProvider>();
+          //  services.AddTransient<IProviderLocationSearchProvider, ProviderLocationSearchApiProvider>();
             services.AddTransient<IProviderSearchProvider, ProviderApiRepository>();
             services.AddTransient<IProviderApiClient, ProviderApiClient>(service => new ProviderApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
 

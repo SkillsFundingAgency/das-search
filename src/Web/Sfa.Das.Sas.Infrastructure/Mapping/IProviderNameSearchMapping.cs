@@ -7,8 +7,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
     public interface IProviderNameSearchMapping
     {
-        IEnumerable<ProviderNameSearchResult> FilterNonMatchingAliases(string searchTerm, IEnumerable<ProviderNameSearchResult> resultsToFilter);
-
         ProviderNameSearchResultsAndPagination Map(SFADASApprenticeshipsApiTypesV3ProviderSearchResults document, string searchTerm);
     }
 }

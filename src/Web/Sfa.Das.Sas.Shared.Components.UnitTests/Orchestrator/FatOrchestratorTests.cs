@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel);
+            var result = _sut.GetSearchResults(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<FatSearchResultsViewModel>();
         }
@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel);
+            var result = _sut.GetSearchResults(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<FatSearchResultsViewModel>();
 

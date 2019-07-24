@@ -352,7 +352,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Results.Title)))
                 .ForMember(x => x.FrameworkLevel, y => y.MapFrom(z => z.Results.Level))
                 .ForMember(x => x.ShowAll, y => y.MapFrom(z => z.ShowAllProviders))
-                //.ForMember(x => x.FrameworkCode, y => y.MapFrom(z => z.Results.FrameworkCode))
+                .ForMember(x => x.FrameworkCode, y => y.Ignore())
                 .ForMember(x => x.FrameworkId, y => y.MapFrom(z => z.Results.ApprenticeshipId))
                 .ForMember(x => x.FrameworkName, y => y.MapFrom(z => z.Results.Title))
                 .ForMember(x => x.PathwayName, y => y.MapFrom(z => z.Results.Title))

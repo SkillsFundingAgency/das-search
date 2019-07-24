@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
 
             var trainingLocations = new List<TrainingLocation> { new TrainingLocation { LocationId = 1, LocationName = "Location1", Address = new Address { Postcode = "N17" } } };
 
-            var results = new ProviderStandardSearchResults
+            var results = new ProviderSearchResults
             {
                 TrainingOptionsAggregation = new Dictionary<string, long?>
                 {
@@ -29,21 +29,21 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                     ["blockrelease"] = 2
                 },
                 SelectedTrainingOptions = new List<string> { "dayrelease" },
-                Hits = new List<IApprenticeshipProviderSearchResultsItem>
+                Hits = new List<ProviderSearchResultItem>
                 {
-                    new StandardProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1, OverallAchievementRate = 42.5 },
-                    new StandardProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1 },
-                    new StandardProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1 }
+                    new ProviderSearchResultItem { LocationId = 1, LocationName = "Location1", Address = new Address { Postcode = "N17" }, OverallAchievementRate = 42.5 },
+                    new ProviderSearchResultItem { LocationId = 1, LocationName = "Location1", Address = new Address { Postcode = "N17" } },
+                    new ProviderSearchResultItem { LocationId = 1, LocationName = "Location1", Address = new Address { Postcode = "N17" } }
                 },
                 TotalResults = 105,
                 ResultsToTake = 10,
                 PostCode = "GU21 6DB",
                 PostCodeMissing = true,
-                StandardId = "1234",
-                StandardName = "Test Name"
+                ApprenticeshipId = "1234",
+                Title = "Test Name"
             };
 
-            var source = new StandardProviderSearchResponse
+            var source = new ProviderSearchResponse
             {
                 Success = false,
                 CurrentPage = 2,
@@ -54,7 +54,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound
             };
 
-            var viewModel = mapper.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(source);
+            var viewModel = mapper.Map<ProviderSearchResponse, ProviderStandardSearchResultViewModel>(source);
 
             viewModel.ActualPage.Should().Be(2);
             viewModel.DeliveryModes.Count().Should().Be(2);
@@ -83,32 +83,31 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
         {
             var mapper = new MappingService(null);
 
-            var trainingLocations = new List<TrainingLocation> { new TrainingLocation { LocationId = 1, LocationName = "Location1", Address = new Address { Postcode = "N17" } } };
+            var trainingLocation =  new TrainingLocation { LocationId = 1, LocationName = "Location1", Address = new Address { Postcode = "N17" } };
 
-            var results = new ProviderFrameworkSearchResults
+            var results = new ProviderSearchResults
             {
-                Title = "Abba: Abba",
                 TrainingOptionsAggregation = new Dictionary<string, long?>
                 {
                     ["dayrelease"] = 10,
                     ["blockrelease"] = 2
                 },
                 SelectedTrainingOptions = new List<string> { "dayrelease" },
-                Hits = new List<IApprenticeshipProviderSearchResultsItem>
+                Hits = new List<ProviderSearchResultItem>
                 {
-                    new FrameworkProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1, OverallAchievementRate = 42.5 },
-                    new FrameworkProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1 },
-                    new FrameworkProviderSearchResultsItem { TrainingLocations = trainingLocations, MatchingLocationId = 1, EmployerSatisfaction = 1.1, LearnerSatisfaction = 2.2 }
+                    new ProviderSearchResultItem { LocationId = trainingLocation.LocationId, LocationName = trainingLocation.LocationName,Address = new Address { Postcode = "N17" },OverallAchievementRate = 42.5 },
+                    new ProviderSearchResultItem { LocationId = trainingLocation.LocationId, LocationName = trainingLocation.LocationName,Address = new Address { Postcode = "N17" } },
+                    new ProviderSearchResultItem { LocationId = trainingLocation.LocationId, LocationName = trainingLocation.LocationName,Address = new Address { Postcode = "N17" }, EmployerSatisfaction = 1.1, LearnerSatisfaction = 2.2 }
                 },
                 TotalResults = 105,
                 ResultsToTake = 10,
                 PostCode = "GU21 6DB",
                 PostCodeMissing = true,
-                FrameworkCode = 4321,
-                FrameworkName = "Test Name"
+                ApprenticeshipId = "4321",
+                Title = "Test Name"
             };
 
-            var source = new FrameworkProviderSearchResponse
+            var source = new ProviderSearchResponse
             {
                 Success = false,
                 CurrentPage = 2,
@@ -119,9 +118,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
                 StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound
             };
 
-            var viewModel = mapper.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(source);
+            var viewModel = mapper.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(source);
 
-            viewModel.Title.Should().Be("Abba");
+            viewModel.Title.Should().Be("Test Name");
             viewModel.ActualPage.Should().Be(2);
             viewModel.DeliveryModes.Count().Should().Be(2);
             viewModel.DeliveryModes.Count(x => x.Checked).Should().Be(1);
@@ -132,7 +131,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Services
             viewModel.PostCodeMissing.Should().BeTrue();
             viewModel.ResultsToTake.Should().Be(10);
             viewModel.ShowAll.Should().BeTrue();
-            viewModel.FrameworkCode.Should().Be(4321);
+            viewModel.FrameworkId.Should().Be("4321");
             viewModel.FrameworkName.Should().Be("Test Name");
             viewModel.TotalProvidersCountry.Should().Be(1000);
             viewModel.TotalResults.Should().Be(105);

@@ -16,7 +16,6 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
     using Core.Configuration;
     using Core.Domain.Repositories;
     using Core.Domain.Services;
-    using Elasticsearch;
     using Mapping;
     using PostCodeIo;
     using Repositories;
@@ -44,7 +43,7 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IGetStandards>().Use<StandardApiRepository>();
             For<IGetAssessmentOrganisations>().Use<AssessmentOrganisationApiRepository>();
             For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderApiRepository>();
-            For<IProviderLocationSearchProvider>().Use<ProviderLocationSearchApiProvider>();
+           // For<IProviderLocationSearchProvider>().Use<ProviderLocationSearchApiProvider>();
 
             For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
@@ -71,11 +70,6 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IPostcodeIOConfigurationSettings>().Use<ApplicationSettings>();
 
             For<IPaginationOrientationService>().Use<PaginationOrientationService>();
-            
-
-            // For<IGetProviders>().Use<ProviderElasticRepository>();
-            // For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
-            // For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
         }
 
         private IDictionary<string, object> GetProperties()

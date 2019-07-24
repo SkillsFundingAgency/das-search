@@ -35,9 +35,6 @@
     <CodeAnalysisRuleSet>..\SharedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elasticsearch.Net, Version=5.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Elasticsearch.Net.5.6.5\lib\net461\Elasticsearch.Net.dll</HintPath>
-    </Reference>
     <Reference Include="FeatureToggle, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FeatureToggle.3.4.0\lib\net40\FeatureToggle.dll</HintPath>
       <Private>True</Private>
@@ -84,9 +81,6 @@
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Nest, Version=5.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\NEST.5.6.5\lib\net461\Nest.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -196,11 +190,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elasticsearch\IProviderNameSearchProviderQuery.cs" />
-    <Compile Include="Elasticsearch\ProviderNameSearchProvider.cs" />
-    <Compile Include="Elasticsearch\ProviderNameSearchProviderQuery.cs" />
-    <Compile Include="Extensions\MyCertificateIgnoringHttpConnection.cs" />
-    <Compile Include="FeatureToggles\Elk5Feature.cs" />
     <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
     <Compile Include="Mapping\ApprenticeshipSearchResultsItemMapping.cs" />
     <Compile Include="Mapping\IProviderSearchResultsMapper.cs" />
@@ -216,29 +205,14 @@
     <Compile Include="Mapping\AssessmentOrganisationMapping.cs" />
     <Compile Include="Providers\ApprenticeshipsSearchApiProvider.cs" />
     <Compile Include="Repositories\ApprenticeshipProviderApiRepository.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchHelper.cs" />
-    <Compile Include="Elasticsearch\IElasticsearchHelper.cs" />
     <Compile Include="Repositories\AssessmentOrganisationApiRepository.cs" />
-    <Compile Include="Repositories\ProviderLocationSearchApiProvider.cs" />
-    <Compile Include="Repositories\ProviderElasticRepository.cs" />
-    <Compile Include="Repositories\StandardElasticRepository.cs" />
-    <Compile Include="Repositories\FrameworkElasticRepository.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchProviderLocationSearchProvider.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Logging\ElasticSearchLogEntry.cs" />
     <Compile Include="Repositories\ProviderApiRepository.cs" />
     <Compile Include="Settings\FatSettings.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchCustomClient.cs" />
     <Compile Include="Repositories\FrameworkApiRepository.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchClientFactory.cs" />
-    <Compile Include="Elasticsearch\IElasticsearchCustomClient.cs" />
-    <Compile Include="Elasticsearch\Models\ElasticsearchResponse.cs" />
-    <Compile Include="Elasticsearch\ElasticsearchApprenticeshipSearchProvider.cs" />
-    <Compile Include="Elasticsearch\IElasticsearchClientFactory.cs" />
-    <Compile Include="Elasticsearch\Models\IElasticsearchResponse.cs" />
-    <Compile Include="Repositories\ApprenticeshipProviderRepository.cs" />
     <Compile Include="Helpers\QueryHelper.cs" />
     <Compile Include="Repositories\StandardApiRepository.cs" />
     <Compile Include="GlobalSuppressions.cs" />

@@ -137,7 +137,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
             var keyword = "test keyword";
             var page = 1;
 
-            var results = _sut.SearchByKeyword(keyword, page, 0, 0, null);
+            var results = _sut.SearchByKeyword(keyword, page, 0, 0, null).Result;
 
             _apprenticeshipSearchResultsMappingMock.Verify(v => v.Map(clientResultsItems));
 

@@ -33,12 +33,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
 
-            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
+            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(new ProviderNameSearchResultsAndPagination());
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            await providerNameSearchService.SearchProviderNameAndAliases("test", pageNumber);
+            await providerNameSearchService.SearchProviderNameAndAliases("test", pageNumber,null);
 
             _mockNameSearchProvider.Verify(x => x.SearchProviderNameAndAliases("test", pageNumber, numberOfItemsToReturn));
         }
@@ -49,12 +49,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
             const string searchTerm = "test";
-            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
+            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(new ProviderNameSearchResultsAndPagination());
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
+            await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber, null);
 
             var expected = $"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
 
@@ -67,12 +67,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
             const string searchTerm = "test";
-            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
+            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).Throws<Exception>();
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
+            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber, null);
 
             var expected = $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
 
@@ -94,7 +94,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
+            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber, null);
 
             var expected = $"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{result.ActualPage}], Page Size: [{numberOfItemsToReturn}], Total Results: [{result.TotalResults}]";
 

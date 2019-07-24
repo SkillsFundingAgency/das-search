@@ -27,13 +27,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task FrameworkSearchResultsShouldReturnBadRequestStatusCodeIfApprenticeshipIdIsInvalid()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.InvalidApprenticeshipId };
+            var stubSearchResponse = new ProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.InvalidApprenticeshipId };
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
             ProviderController controller = new ProviderControllerBuilder()
-                                .SetupMappingService(x => x.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<FrameworkProviderSearchResponse>()), stubViewModel)
-                                .SetupMediator(x => x.Send<FrameworkProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse));
+                                .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
+                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse));
 
             var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
 
@@ -47,13 +47,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task FrameworkSearchResultsShouldReturnNotFoundStatusCodeIfTheFrameworkIsNotFound()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound };
+            var stubSearchResponse = new ProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.ApprenticeshipNotFound };
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
             ProviderController controller = new ProviderControllerBuilder()
-                                .SetupMappingService(x => x.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<FrameworkProviderSearchResponse>()), stubViewModel)
-                                .SetupMediator(x => x.Send<FrameworkProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse));
+                                .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
+                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse));
 
             var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
 
@@ -67,15 +67,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task SearchResultsShouldRedirectToSearchEntryPageIfPostCodeIsNotSet()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat };
+            var stubSearchResponse = new ProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat };
             var mockUrlHelper = new Mock<UrlHelper>();
             mockUrlHelper.Setup(x => x.Action("SearchForFrameworkProviders", "Apprenticeship", It.IsAny<object>())).Returns("someurl");
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
             ProviderController controller = new ProviderControllerBuilder()
-                                .SetupMappingService(x => x.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<FrameworkProviderSearchResponse>()), stubViewModel)
-                                .SetupMediator(x => x.Send<FrameworkProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse))
+                                .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
+                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse))
                                 .WithUrl(mockUrlHelper.Object);
 
             var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
@@ -90,15 +90,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task SearchResultsShouldRedirectToLatPageIfParameterExtendsUpperBound()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PageNumberOutOfUpperBound };
+            var stubSearchResponse = new ProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.PageNumberOutOfUpperBound };
             var mockUrlHelper = new Mock<UrlHelper>();
             mockUrlHelper.Setup(x => x.Action("FrameworkResults", "Provider", It.IsAny<RouteValueDictionary>())).Returns("someurl");
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel();
 
             ProviderController controller = new ProviderControllerBuilder()
-                                .SetupMappingService(x => x.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<FrameworkProviderSearchResponse>()), stubViewModel)
-                                .SetupMediator(x => x.Send<FrameworkProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse))
+                                .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
+                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse))
                                 .WithUrl(mockUrlHelper.Object);
 
             var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
@@ -113,14 +113,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
         [Test]
         public async Task SearchResultsShouldReturnViewResultWhenFrameworkSearchIsSuccessful()
         {
-            var stubSearchResponse = new FrameworkProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.Success };
+            var stubSearchResponse = new ProviderSearchResponse { Success = true, StatusCode = ProviderSearchResponseCodes.Success };
 
             var stubViewModel = new ProviderFrameworkSearchResultViewModel { Title = "title1" };
 
             ProviderController controller =
                 new ProviderControllerBuilder().SetupMappingService(
-                    x => x.Map(It.IsAny<FrameworkProviderSearchResponse>(), It.IsAny<Action<IMappingOperationOptions<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>>>()),
-                    stubViewModel).SetupMediator(x => x.Send<FrameworkProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse));
+                    x => x.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<Action<IMappingOperationOptions<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>>>()),
+                    stubViewModel).SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse));
 
             var searchCriteria = new FrameworkProviderSearchQuery { ApprenticeshipId = "123", PostCode = "AB3 1SD" };
 

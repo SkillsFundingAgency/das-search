@@ -18,26 +18,6 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             _orientation = orientation;
         }
 
-        public IEnumerable<ProviderNameSearchResult> FilterNonMatchingAliases(string searchTerm, IEnumerable<ProviderNameSearchResult> resultsToFilter)
-        {
-            var resultsToReturn = new List<ProviderNameSearchResult>();
-            foreach (var item in resultsToFilter)
-            {
-                var details = new ProviderNameSearchResult
-                {
-                    ProviderName = item.ProviderName,
-                    UkPrn = item.UkPrn,
-                    Aliases = item.Aliases?
-                        .Where(m => m.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .Select(s => s.Trim()).ToList()
-                };
-
-                resultsToReturn.Add(details);
-            }
-
-            return resultsToReturn;
-        }
-
         public ProviderNameSearchResultsAndPagination Map(SFADASApprenticeshipsApiTypesV3ProviderSearchResults document, string searchTerm)
         {
             var pagination = _orientation.GeneratePaginationDetails(document.PageNumber, document.PageSize, document.TotalResults);

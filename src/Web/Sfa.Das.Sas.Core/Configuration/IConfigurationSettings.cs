@@ -11,8 +11,6 @@ namespace Sfa.Das.Sas.Core.Configuration
 
         string BuildId { get; }
 
-        IEnumerable<Uri> ElasticServerUrls { get; }
-
         Uri SurveyUrl { get; }
 
         string CookieInfoBannerCookieName { get; }
@@ -36,10 +34,6 @@ namespace Sfa.Das.Sas.Core.Configuration
         Uri SurveyProviderUrl { get; }
 
         Uri AchievementRateUrl { get; }
-
-        string ElasticsearchUsername { get; }
-
-        string ElasticsearchPassword { get; }
 
         IEnumerable<long> HideAboutProviderForUkprns { get; }
 

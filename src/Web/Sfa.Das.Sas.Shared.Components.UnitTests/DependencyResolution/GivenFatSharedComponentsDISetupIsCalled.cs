@@ -75,12 +75,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
             httpClient.Should().BeOfType<HttpService>();
         }
 
-        [Test]
-        public void Then_ElasticsearchClientFactory_is_not_registered()
-        {
-            var elasticsearchClientFactory = _serviceProvider.GetService<IElasticsearchClientFactory>();
-
-            elasticsearchClientFactory.Should().BeNull();
-        }
+       
     }
 }
