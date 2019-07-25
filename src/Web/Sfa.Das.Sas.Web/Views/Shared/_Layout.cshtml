@@ -43,20 +43,23 @@
 @Scripts.Render("~/bundles/header")
 @Html.Partial("_Analytics")
     </head>
-<body id="@ViewBag.PageID">
-<script>
-    document.body.className = ((document.body.className)
-        ? document.body.className + ' js-enabled'
-        : 'js-enabled');
-</script>
-@Html.Action("Header", "Shared")
+    <body id="@ViewBag.PageID">
+        <script>
+            document.body.className = ((document.body.className)
+                ? document.body.className + ' js-enabled'
+                : 'js-enabled');
+        </script>
+        @Html.Action("Header", "Shared")
 
-<div class="container body-content">
-    @RenderBody()
-</div>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
 
-@Html.Action("Footer", "Shared")
+        @Html.Action("Footer", "Shared")
 
-@Html.Partial("_ScriptsFooter")
-</body>
+        @Html.Partial("_ScriptsFooter")
+
+        @RenderSection("Scripts", required: false)
+
+    </body>
 </html>
