@@ -150,6 +150,14 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LocationId, y => y.MapFrom(z => z.LocationId))
                 .ForMember(x => x.LocationName, y => y.MapFrom(z => z.LocationName))
                 .ForMember(x => x.Address, y => y.MapFrom(z => z.Address))
+                .ForMember(x => x.StandardCode, y => y.Ignore())
+                .ForMember(x => x.MarketingName, y => y.Ignore())
+                .ForMember(x => x.Phone, y => y.Ignore())
+                .ForMember(x => x.Email, y => y.Ignore())
+                .ForMember(x => x.ContactUsUrl, y => y.Ignore())
+                .ForMember(x => x.Website, y => y.Ignore())
+                .ForMember(x => x.CurrentlyNotStartingNewApprentices, y => y.Ignore())
+
                 ;
 
             cfg.CreateMap<ProviderSearchResultItem, FrameworkProviderResultItemViewModel>()
@@ -161,6 +169,20 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LocationId, y => y.MapFrom(z => z.LocationId))
                 .ForMember(x => x.LocationName, y => y.MapFrom(z => z.LocationName))
                 .ForMember(x => x.Address, y => y.MapFrom(z => z.Address))
+                .ForMember(x => x.CurrentlyNotStartingNewApprentices, y => y.Ignore())
+                .ForMember(x => x.FrameworkCode, y => y.Ignore())
+                .ForMember(x => x.PathwayCode, y => y.Ignore())
+                .ForMember(x => x.Level, y => y.Ignore())
+                .ForMember(x => x.MarketingName, y => y.Ignore())
+                .ForMember(x => x.ProviderMarketingInfo, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipMarketingInfo, y => y.Ignore())
+                .ForMember(x => x.Phone, y => y.Ignore())
+                .ForMember(x => x.Email, y => y.Ignore())
+                .ForMember(x => x.ContactUsUrl, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipInfoUrl, y => y.Ignore())
+                .ForMember(x => x.Website, y => y.Ignore())
+                .ForMember(x => x.FrameworkId, y => y.Ignore())
+
                 ;
 
             // Provider detail page
