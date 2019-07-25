@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using Refit;
-using Sfa.Das.FatApi.Client.Client;
 using Sfa.Das.FatApi.Client.Model;
 
 namespace Sfa.Das.FatApi.Client.Api

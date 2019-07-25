@@ -238,7 +238,6 @@
     <Compile Include="Application\ApplicationServices\StandardSearchServiceTest.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipProviderDetailHandlerTest.cs" />
-    <Compile Include="Application\Handlers\FrameworkProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderDetailHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderNameSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
@@ -246,7 +245,6 @@
     <Compile Include="Application\Handlers\GetStandardHandlerTest.cs" />
     <Compile Include="Application\Handlers\GetFrameworkHandlerTest.cs" />
     <Compile Include="Application\Handlers\GetFrameworkProvidersHandlerTest.cs" />
-    <Compile Include="Application\Handlers\StandardProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\GetStandardProvidersHandlerTest.cs" />
     <Compile Include="Application\Handlers\XmlDocumentSerialiserTests.cs" />
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />

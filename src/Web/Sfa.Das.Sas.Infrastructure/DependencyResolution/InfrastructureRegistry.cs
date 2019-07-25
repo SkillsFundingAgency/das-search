@@ -1,6 +1,5 @@
 ﻿using Refit;
 using Sfa.Das.FatApi.Client.Api;
-using Sfa.Das.FatApi.Client.Client;
 using SFA.DAS.Providers.Api.Client;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Infrastructure.Providers;
@@ -11,7 +10,6 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
     using System.Diagnostics;
     using System.Reflection;
     using ApplicationServices;
-    using ApplicationServices.Interfaces;
     using ApplicationServices.Settings;
     using Core.Configuration;
     using Core.Domain.Repositories;

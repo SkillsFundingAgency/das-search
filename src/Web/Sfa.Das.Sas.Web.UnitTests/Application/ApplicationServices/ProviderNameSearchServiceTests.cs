@@ -8,7 +8,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
     using Moq;
     using NUnit.Framework;
     using Sas.ApplicationServices;
-    using Sas.ApplicationServices.Interfaces;
     using Sas.ApplicationServices.Settings;
     using SFA.DAS.NLog.Logger;
 

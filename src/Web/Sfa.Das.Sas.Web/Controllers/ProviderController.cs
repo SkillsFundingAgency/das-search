@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         public async Task<ActionResult> StandardResults(ProviderSearchQuery criteria)
         {
 
-            var response = await _mediator.Send<ProviderSearchResponse>(criteria);
+            var response = await _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {
@@ -86,7 +86,7 @@ namespace Sfa.Das.Sas.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> FrameworkResults(ProviderSearchQuery criteria)
         {
-            var response = await _mediator.Send<ProviderSearchResponse>(criteria);
+            var response = await _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {

@@ -4,7 +4,6 @@ using Sfa.Das.Sas.ApplicationServices.Settings;
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Threading.Tasks;
-    using Interfaces;
     using MediatR;
     using Queries;
     using Responses;

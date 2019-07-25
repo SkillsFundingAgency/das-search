@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Moq;
-using NLog.LayoutRenderers.Wrappers;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
@@ -15,7 +13,6 @@ using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator

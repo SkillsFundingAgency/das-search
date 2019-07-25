@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Sfa.Das.Sas.Core.Domain;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
-using SFA.DAS.AssessmentOrgs.Api.Client;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {

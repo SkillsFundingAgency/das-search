@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
                                 .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
                                 .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse));
 
-            var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
+            var result = await controller.FrameworkResults(new ProviderSearchQuery());
 
             result.Should().BeOfType<HttpStatusCodeResult>();
 
@@ -53,9 +53,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
 
             ProviderController controller = new ProviderControllerBuilder()
                                 .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
-                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse));
+                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse));
 
-            var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
+            var result = await controller.FrameworkResults(new ProviderSearchQuery());
 
             result.Should().BeOfType<HttpStatusCodeResult>();
 
@@ -75,10 +75,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
 
             ProviderController controller = new ProviderControllerBuilder()
                                 .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
-                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse))
+                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse))
                                 .WithUrl(mockUrlHelper.Object);
 
-            var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
+            var result = await controller.FrameworkResults(new ProviderSearchQuery());
 
             result.Should().BeOfType<RedirectResult>();
 
@@ -98,10 +98,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
 
             ProviderController controller = new ProviderControllerBuilder()
                                 .SetupMappingService(x => x.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(It.IsAny<ProviderSearchResponse>()), stubViewModel)
-                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse))
+                                .SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(),default(CancellationToken)), Task.FromResult(stubSearchResponse))
                                 .WithUrl(mockUrlHelper.Object);
 
-            var result = await controller.FrameworkResults(new FrameworkProviderSearchQuery());
+            var result = await controller.FrameworkResults(new ProviderSearchQuery());
 
             result.Should().BeOfType<RedirectResult>();
 
@@ -120,9 +120,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers.ProviderContr
             ProviderController controller =
                 new ProviderControllerBuilder().SetupMappingService(
                     x => x.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<Action<IMappingOperationOptions<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>>>()),
-                    stubViewModel).SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<FrameworkProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse));
+                    stubViewModel).SetupMediator(x => x.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), default(CancellationToken)), Task.FromResult(stubSearchResponse));
 
-            var searchCriteria = new FrameworkProviderSearchQuery { ApprenticeshipId = "123", PostCode = "AB3 1SD" };
+            var searchCriteria = new ProviderSearchQuery { ApprenticeshipId = "123", PostCode = "AB3 1SD" };
 
             var result = await controller.FrameworkResults(searchCriteria);
 

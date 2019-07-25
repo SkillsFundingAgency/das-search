@@ -5,8 +5,6 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
-    using Sfa.Das.Sas.Web.Extensions;
-
     using Resources = Resources.EquivalenceLevels;
 
     internal class ApprenticeshipSearchResultItemViewModelMappingAction :

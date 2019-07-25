@@ -11,7 +11,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     using Moq;
     using NUnit.Framework;
     using Sas.ApplicationServices.Handlers;
-    using Sas.ApplicationServices.Interfaces;
     using Sas.ApplicationServices.Models;
     using Sas.ApplicationServices.Queries;
     using Sas.ApplicationServices.Responses;

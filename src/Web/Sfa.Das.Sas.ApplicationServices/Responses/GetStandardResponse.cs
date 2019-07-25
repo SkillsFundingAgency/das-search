@@ -4,7 +4,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
     using System.Collections.Generic;
     using Core.Domain.Model;
-    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
     public class GetStandardResponse
     {

@@ -1,7 +1,5 @@
-using System;
 using System.Threading.Tasks;
 using Refit;
-using Sfa.Das.FatApi.Client.Client;
 using Sfa.Das.FatApi.Client.Model;
 
 namespace Sfa.Das.FatApi.Client.Api

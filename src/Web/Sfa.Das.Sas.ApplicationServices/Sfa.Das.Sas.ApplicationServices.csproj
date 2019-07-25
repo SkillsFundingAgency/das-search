@@ -163,12 +163,10 @@
     <Compile Include="Handlers\StatsHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipProviderDetailHandler.cs" />
-    <Compile Include="Handlers\FrameworkProviderSearchHandler.cs" />
     <Compile Include="Handlers\GetFrameworkHandler.cs" />
     <Compile Include="Handlers\GetFrameworkProvidersHandler.cs" />
     <Compile Include="Handlers\GetStandardHandler.cs" />
     <Compile Include="Handlers\GetStandardProvidersHandler.cs" />
-    <Compile Include="Handlers\StandardProviderSearchHandler.cs" />
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
@@ -218,7 +216,6 @@
     <Compile Include="Queries\ApprenticeshipSearchQuery.cs" />
     <Compile Include="Responses\ApprenticeshipSearchResponse.cs" />
     <Compile Include="Responses\ApprenticeshipProviderDetailResponse.cs" />
-    <Compile Include="Queries\FrameworkProviderSearchQuery.cs" />
     <Compile Include="Responses\FrameworkProviderSearchResponse.cs" />
     <Compile Include="Queries\GetFrameworkProvidersQuery.cs" />
     <Compile Include="Responses\GetFrameworkProvidersResponse.cs" />
@@ -235,7 +232,6 @@
     <Compile Include="Responses\ProviderNameSearchResponseCodes.cs" />
     <Compile Include="Responses\ProviderSearchNameResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
-    <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponse.cs" />
     <Compile Include="Responses\StandardProviderSearchResponse.cs" />

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SFA.DAS.Apprenticeships.Api.Types;
+﻿using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Web.Services
 {
