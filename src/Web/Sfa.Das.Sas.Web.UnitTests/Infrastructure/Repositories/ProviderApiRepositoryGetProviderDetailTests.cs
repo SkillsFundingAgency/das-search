@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
         public void Setup()
         {
             _mockProviderApiClient.Setup(x => x.GetAsync(It.IsAny<long>())).Returns(Task.FromResult(new Provider()));
-            _mockProviderApiClient.Setup(x => x.GetActiveApprenticeshipTrainingByProviderAsync(It.IsAny<long>(), It.IsAny<int>())).ReturnsAsync(new ApprenticeshipTrainingSummary());
+            _mockProviderApiClient.Setup(x => x.GetActiveApprenticeshipTrainingByProviderAsync(It.IsAny<long>(), It.IsAny<int>())).ReturnsAsync(new ApprenticeshipTrainingSummary(){Ukprn = 12345});
        
             _sut = new ProviderApiRepository(_mockProviderApiClient.Object, _mockProviderV3ApiClient.Object, _mockSearchResultsMapping.Object,_mockLogger.Object,_mockSearchVApi.Object,_mockProviderNameMapping.Object);
         }
