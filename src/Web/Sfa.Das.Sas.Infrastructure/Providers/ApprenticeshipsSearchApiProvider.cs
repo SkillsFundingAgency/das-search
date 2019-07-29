@@ -26,7 +26,7 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
 
             var selectedLevelsCsv = (selectedLevels != null && selectedLevels.Any()) ? string.Join(",", selectedLevels) : null;
             
-            var results = _apprenticeshipSearchResultsMapping.Map(_apprenticeshipProgrammeApiClient.SearchActiveApprenticeships(formattedKeywords, page, take, order, selectedLevelsCsv));
+            var results = _apprenticeshipSearchResultsMapping.Map(await _apprenticeshipProgrammeApiClient.SearchActiveApprenticeshipsAsync(formattedKeywords, page, take, order, selectedLevelsCsv));
             results.SearchTerm = keywords;
             results.SortOrder = order.ToString();
             return results;

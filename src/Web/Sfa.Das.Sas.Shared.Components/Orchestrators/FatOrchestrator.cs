@@ -28,11 +28,11 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             return model;
         }
 
-        public FatSearchFilterViewModel GetSearchFilters(SearchQueryViewModel searchQueryModel)
+        public async Task<FatSearchFilterViewModel> GetSearchFilters(SearchQueryViewModel searchQueryModel)
         {
             var results = _apprenticeshipSearchService.SearchByKeyword(searchQueryModel.Keywords, searchQueryModel.Page, searchQueryModel.ResultsToTake, searchQueryModel.SortOrder, searchQueryModel.SelectedLevels);
 
-            var model = _fatSearchFilterViewModelMapper.Map(results, searchQueryModel);
+            var model = _fatSearchFilterViewModelMapper.Map(await results, searchQueryModel);
 
             return model;
         }
