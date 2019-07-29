@@ -12,7 +12,7 @@
     <input type="hidden" name="SelectedLevels" value="@level" />
     }
     
-    <label asp-for="SortOrder" class="@(CssClasses.VisuallyHidden)">Sort by</label>
+    <label asp-for="SortOrder" class="@(CssViewModel.VisuallyHidden)">Sort by</label>
     <select name="SortOrder" asp-for="SortOrder" class="select das-search-results__header-sort-by">
         <option selected="@(Model.SortOrder == 1)" value="1">Best match</option>
         <option selected="@(Model.SortOrder == 2)" value="2">Level (high to low)</option>

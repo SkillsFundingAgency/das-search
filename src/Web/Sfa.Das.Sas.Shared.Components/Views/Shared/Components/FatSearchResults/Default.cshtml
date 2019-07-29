@@ -16,7 +16,7 @@
             There are 
             <strong class="bold" id="fat-search-result-count">@Model.TotalResults</strong> 
             apprenticeships 
-            <span class="@(CssClasses.VisuallyHidden)">matching your search for <strong class="bold" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</strong></span>
+            <span class="@(CssViewModel.VisuallyHidden)">matching your search for <strong class="bold" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</strong></span>
         </p>
     }
         <partial name="Components/FatSearchResults/_searchResultsSort" for="@Model.SearchQuery" />

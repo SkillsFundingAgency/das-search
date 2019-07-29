@@ -5,7 +5,7 @@
 
 <form asp-controller="Fat" asp-action="Search" method="get">
     <div class="@(CssViewModel.FormCss.FormGroup) das-form-group-inline">
-        <label asp-for="Keywords" class="@(CssClasses.VisuallyHidden)">Apprenticeship name or job role</label>
+        <label asp-for="Keywords" class="@(CssViewModel.VisuallyHidden)">Apprenticeship name or job role</label>
         <input class="@(CssViewModel.FormCss.Input)" type="search" placeholder="Apprenticeship keyword...">
         <div class="das-form-group-inline__button-wrap">
             <button class="@(CssViewModel.Button)" type="submit" id="employer-apprenticeship-search">Search</button>
