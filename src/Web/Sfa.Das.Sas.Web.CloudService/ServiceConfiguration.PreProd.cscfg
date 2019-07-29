@@ -6,7 +6,6 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="__StorageConnectionString__" />
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
       <Setting name="SurveyUrl" value="__SurveyUrl__" />
-      <Setting name="ElasticServerUrls" value="__ElasticServerUrls__" />
       <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/collections/fe-choices" />
       <Setting name="CookieGoogleUrl" value="https://tools.google.com/dlpage/gaoptout" />
       <Setting name="CookieImprovementUrl" value="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/" />
@@ -18,8 +17,6 @@
       <Setting name="ApprenticeshipIndexAlias" value="__ApprenticeshipIndexAlias__" />
       <Setting name="ProviderIndexAlias" value="__ProviderIndexAlias__" />
       <Setting name="ApprenticeshipApiBaseUrl" value="__ApprenticeshipApiBaseUrl__" />
-      <Setting name="ElasticsearchUsername" value="__ElasticsearchUsername__" />
-      <Setting name="ElasticsearchPassword" value="__ElasticsearchPassword__" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="__FeatureToggle.IgnoreSslCertificateFeature__" />
       <Setting name="FeatureToggle.Elk5Feature" value="__FeatureToggle.Elk5Feature__" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="__FeatureToggle.ApprenticeshipServiceApiFeature__" />

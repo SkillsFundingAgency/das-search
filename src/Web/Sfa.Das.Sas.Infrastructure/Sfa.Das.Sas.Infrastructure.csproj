@@ -207,7 +207,6 @@
     <Compile Include="Repositories\ApprenticeshipProviderApiRepository.cs" />
     <Compile Include="Repositories\AssessmentOrganisationApiRepository.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
-    <Compile Include="Logging\ElasticSearchLogEntry.cs" />
     <Compile Include="Repositories\ProviderApiRepository.cs" />
     <Compile Include="Settings\FatSettings.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
