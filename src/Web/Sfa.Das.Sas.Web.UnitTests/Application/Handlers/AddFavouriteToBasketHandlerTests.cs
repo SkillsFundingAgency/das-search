@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
-        public async Task Handle_CreatesBasketId_IfPassedBasketIdNoLongerExistsInCache()
+        public async Task Handle_CreatesSameBasketId_IfPassedBasketIdNoLongerExistsInCache()
         {
             var expiredBasketId = Guid.NewGuid();
 
@@ -56,7 +56,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var response = await _sut.Handle(request, default(CancellationToken));
 
             response.Should().NotBeEmpty();
-            _mockBasket.Verify(x => x.UpdateAsync(It.Is<Guid>(a => a != Guid.Empty && a != expiredBasketId), It.IsAny<ApprenticeshipFavouritesBasket>()));
+            _mockBasket.Verify(x => x.UpdateAsync(It.Is<Guid>(a => a != Guid.Empty && a == expiredBasketId), It.IsAny<ApprenticeshipFavouritesBasket>()));
         }
 
         [Test]

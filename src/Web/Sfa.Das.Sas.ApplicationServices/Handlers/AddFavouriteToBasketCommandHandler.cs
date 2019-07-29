@@ -29,19 +29,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             if (request.BasketId.HasValue)
             {
                 basketId = request.BasketId.Value;
-                basket = await _basketStore.GetAsync(request.BasketId.Value);
+                basket = await _basketStore.GetAsync(request.BasketId.Value) ?? new ApprenticeshipFavouritesBasket();
 
-                if (basket == null)
-                {
-                    CreateNewBasket(request, out basket, out basketId);
-                }
-                else
-                {
-                    if (basket.Any(x => x.ApprenticeshipId == request.ApprenticeshipId))
-                        return basketId; // Ignore if saving just an apprenticehip that is already in the basket.
+                if (basket.Any(x => x.ApprenticeshipId == request.ApprenticeshipId))
+                    return basketId; // Ignore if saving just an apprenticehip that is already in the basket.
 
-                    basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
-                }
+                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
             }
             else
             {
