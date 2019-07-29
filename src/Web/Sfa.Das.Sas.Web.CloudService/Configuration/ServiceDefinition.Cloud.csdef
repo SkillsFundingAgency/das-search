@@ -25,7 +25,6 @@
       <Setting name="ProviderIndexAlias" />
       <Setting name="ApprenticeshipApiBaseUrl" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" />
-      <Setting name="FeatureToggle.Elk5Feature" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" />
       <Setting name="FeatureToggle.ProviderFeedbackFeature" />
