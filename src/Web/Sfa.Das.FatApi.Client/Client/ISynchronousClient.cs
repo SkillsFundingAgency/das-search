@@ -10,7 +10,6 @@
 
 
 using System;
-using System.IO;
 
 namespace Sfa.Das.FatApi.Client.Client
 {

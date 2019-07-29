@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             _apprenticeshipSearchResultsItemMapping = apprenticeshipSearchResultsItemMapping;
         }
 
-        public ApprenticeshipSearchResults Map(SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResults document)
+        public ApprenticeshipSearchResults Map(SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResults document)
         {
             var apprenticeshipSearchResults = new ApprenticeshipSearchResults();
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using SFA.DAS.Apprenticeships.Api.Types.Providers;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
 

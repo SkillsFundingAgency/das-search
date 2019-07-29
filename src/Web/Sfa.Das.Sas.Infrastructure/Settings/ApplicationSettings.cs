@@ -9,15 +9,14 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
 
     using Sfa.Das.Sas.Core.Configuration;
 
-    public sealed class ApplicationSettings : IConfigurationSettings
+    public sealed class ApplicationSettings : IConfigurationSettings, IPostcodeIOConfigurationSettings
     {
         public string ApprenticeshipIndexAlias => CloudConfigurationManager.GetSetting("ApprenticeshipIndexAlias");
 
         public string ProviderIndexAlias => CloudConfigurationManager.GetSetting("ProviderIndexAlias");
         public string ApprenticeshipApiBaseUrl => CloudConfigurationManager.GetSetting("ApprenticeshipApiBaseUrl");
-        public string BuildId => CloudConfigurationManager.GetSetting("BuildId");
 
-        public IEnumerable<Uri> ElasticServerUrls => GetElasticSearchIps();
+        public string BuildId => CloudConfigurationManager.GetSetting("BuildId");
 
         public Uri SurveyUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyUrl"));
 
@@ -32,10 +31,6 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
         public Uri SatisfactionSourceUrl => new Uri(CloudConfigurationManager.GetSetting("SatisfactionSourceUrl"));
 
         public Uri AchievementRateUrl => new Uri(CloudConfigurationManager.GetSetting("AchievementRateUrl"));
-
-        public string ElasticsearchUsername => CloudConfigurationManager.GetSetting("ElasticsearchUsername");
-
-        public string ElasticsearchPassword => CloudConfigurationManager.GetSetting("ElasticsearchPassword");
 
         public Uri CookieImprovementUrl => new Uri(CloudConfigurationManager.GetSetting("CookieImprovementUrl"));
 
@@ -54,18 +49,12 @@ namespace Sfa.Das.Sas.Infrastructure.Settings
         private IEnumerable<long> GetHideAboutProviderUrkprns()
         {
             return
-                    CloudConfigurationManager.GetSetting("HideAboutProviderForUkprns")
+                CloudConfigurationManager.GetSetting("HideAboutProviderForUkprns")
                     .Split(',')
                     .Select(m => m.Trim())
                     .Where(m => System.Text.RegularExpressions.Regex.IsMatch(m, "^[0-9]{1,18}$"))
                     .Where(m => !string.IsNullOrEmpty(m))
                     .Select(m => long.Parse(m));
-        }
-
-    private IEnumerable<Uri> GetElasticSearchIps()
-        {
-            var urlStrings = CloudConfigurationManager.GetSetting("ElasticServerUrls").Split(',');
-            return urlStrings.Select(url => new Uri(url));
         }
     }
 }

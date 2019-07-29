@@ -13,16 +13,16 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Mapping
     {
 
         private ApprenticeshipSearchResultsItemMapping _sut;
-        private SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem _apprenticeshipSearchResultsItem;
+        private SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem _apprenticeshipSearchResultsItem;
 
         [SetUp]
         public void Setup()
         {
             _sut = new ApprenticeshipSearchResultsItemMapping();
-            _apprenticeshipSearchResultsItem = new SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem()
+            _apprenticeshipSearchResultsItem = new SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem()
             {
                 Id = "123",
-                ProgrammeType = SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem.ProgrammeTypeEnum.NUMBER_0,
+                ProgrammeType = SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem.ProgrammeTypeEnum.NUMBER_0,
                 Duration = 12,
                 EffectiveFrom = DateTime.Now.AddYears(-2),
                 EffectiveTo = new DateTime(2020, 07, 31),

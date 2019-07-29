@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(new ApprenticeshipSearchResults
+                .ReturnsAsync(new ApprenticeshipSearchResults
                 {
                     Results = new List<ApprenticeshipSearchResultsItem>(),
                     TotalResults = 20
@@ -42,7 +42,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(new ApprenticeshipSearchResults
+                .ReturnsAsync(new ApprenticeshipSearchResults
                 {
                     LastPage = 3,
                     TotalResults = 10,
@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(searchResults);
+                .ReturnsAsync(searchResults);
 
             var query = new ApprenticeshipSearchQuery
             {
@@ -101,7 +101,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), 1, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(new ApprenticeshipSearchResults
+                .ReturnsAsync(new ApprenticeshipSearchResults
                 {
                     Results = new List<ApprenticeshipSearchResultsItem>(),
                     TotalResults = 20

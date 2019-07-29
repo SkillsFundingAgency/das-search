@@ -4,14 +4,10 @@ using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
-using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
 {

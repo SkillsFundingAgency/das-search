@@ -1,4 +1,8 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Services;
+﻿using Refit;
+using Sfa.Das.FatApi.Client.Api;
+using SFA.DAS.Providers.Api.Client;
+using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Infrastructure.Providers;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 {
@@ -6,12 +10,10 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
     using System.Diagnostics;
     using System.Reflection;
     using ApplicationServices;
-    using ApplicationServices.Interfaces;
     using ApplicationServices.Settings;
     using Core.Configuration;
     using Core.Domain.Repositories;
     using Core.Domain.Services;
-    using Elasticsearch;
     using Mapping;
     using PostCodeIo;
     using Repositories;
@@ -32,33 +34,40 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IConfigurationSettings>().Use<ApplicationSettings>();
             For<IFatConfigurationSettings>().Use<FatSettings>();
             For<ICookieSettings>().Use<CookieSettings>();
-            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
-            For<IElasticsearchClientFactory>().Use<ElasticsearchClientFactory>();
             For<ILookupLocations>().Use<PostCodesIoLocator>();
 
-            For<IGetProviders>().Use<ProviderElasticRepository>();
-
-            For<IElasticsearchHelper>().Use<ElasticsearchHelper>();
-
+            For<IApprenticeshipSearchProvider>().Use<ApprenticeshipsSearchApiProvider>();
             For<IGetFrameworks>().Use<FrameworkApiRepository>();
             For<IGetStandards>().Use<StandardApiRepository>();
             For<IGetAssessmentOrganisations>().Use<AssessmentOrganisationApiRepository>();
             For<IApprenticeshipProviderRepository>().Use<ApprenticeshipProviderApiRepository>();
+           // For<IProviderLocationSearchProvider>().Use<ProviderLocationSearchApiProvider>();
 
             For<IStandardApiClient>().Use<StandardApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IFrameworkApiClient>().Use<FrameworkApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
             For<IAssessmentOrgsApiClient>().Use<AssessmentOrgsApiClient>().Ctor<string>("baseUri").Is(new FatSettings().FatApiBaseUrl);
-            For<IApprenticeshipSearchProvider>().Use<ElasticsearchApprenticeshipSearchProvider>();
-            For<IProviderLocationSearchProvider>().Use<ElasticsearchProviderLocationSearchProvider>();
             For<IStandardMapping>().Use<StandardMapping>();
             For<IFrameworkMapping>().Use<FrameworkMapping>();
             For<IProviderMapping>().Use<ProviderMapping>();
             For<IAssessmentOrganisationMapping>().Use<AssessmentOrganisationMapping>();
             For<IProviderNameSearchMapping>().Use<ProviderNameSearchMapping>();
-            For<IElasticsearchCustomClient>().Use<ElasticsearchCustomClient>();
-            For<IProviderNameSearchProvider>().Use<ProviderNameSearchProvider>();
+            For<IApprenticeshipSearchResultsMapping>().Use<ApprenticeshipSearchResultsMapping>();
+            For<IApprenticeshipSearchResultsItemMapping>().Use<ApprenticeshipSearchResultsItemMapping>();
+            For<ISearchResultsMapping>().Use<SearchResultsMapping>();
+            For<IProviderSearchResultsMapper>().Use<ProviderSearchResultsMapper>();
+
             For<IPaginationOrientationService>().Use<PaginationOrientationService>();
-            For<IProviderNameSearchProviderQuery>().Use<ProviderNameSearchProviderQuery>();
+
+            For<ISearchApi>().Use(RestService.For<ISearchApi>(new FatSettings().FatApiBaseUrl)).Singleton();
+            For<ISearchVApi>().Use(RestService.For<ISearchVApi>(new FatSettings().FatApiBaseUrl)).Singleton();
+            For<IProvidersVApi>().Use(RestService.For<IProvidersVApi>(new FatSettings().FatApiBaseUrl)).Singleton();
+
+            For<IProviderApiClient>().Use(new ProviderApiClient(new FatSettings().FatApiBaseUrl));
+            For<IProviderSearchProvider>().Use<ProviderApiRepository>();
+
+            For<IPostcodeIOConfigurationSettings>().Use<ApplicationSettings>();
+
+            For<IPaginationOrientationService>().Use<PaginationOrientationService>();
         }
 
         private IDictionary<string, object> GetProperties()

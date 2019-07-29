@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 : $"<span class='icon-content'>{desc}</span><span class='red-cross'></span>";
         }
 
-        public static string GetLocationAddressLine(TrainingLocation providerLocation)
+        public static string GetLocationAddressLine(ProviderSearchResultItem providerLocation)
         {
             return GetCommaList(
                 providerLocation.LocationName,

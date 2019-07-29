@@ -1,8 +1,4 @@
-﻿using System;
-using Sfa.Das.Sas.Shared.Components.Domain;
-using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
-
-namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
+﻿namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 {
     public class DefaultFormCssViewModel : IDefaultFormCssViewModel
     {

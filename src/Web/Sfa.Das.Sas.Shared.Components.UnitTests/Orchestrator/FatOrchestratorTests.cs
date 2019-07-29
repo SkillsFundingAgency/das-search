@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
@@ -31,7 +30,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _apprenticeshipSearchServicetMock = new Mock<IApprenticeshipSearchService>(MockBehavior.Strict);
             _FatResultsViewModelMock = new Mock<IFatSearchResultsViewModelMapper>(MockBehavior.Strict);
 
-            _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).Returns(_searchResults);
+            _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).ReturnsAsync(_searchResults);
 
             _FatResultsViewModelMock.Setup(s => s.Map(_searchResults)).Returns(_searchResultsViewModel);
 
@@ -43,7 +42,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel);
+            var result = _sut.GetSearchResults(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<FatSearchResultsViewModel>();
         }
@@ -62,7 +61,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel);
+            var result = _sut.GetSearchResults(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<FatSearchResultsViewModel>();
 

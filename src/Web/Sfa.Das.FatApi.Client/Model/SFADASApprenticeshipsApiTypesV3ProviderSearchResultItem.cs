@@ -11,17 +11,11 @@
 
 using System;
 using System.Linq;
-using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Sfa.Das.FatApi.Client.Client.OpenAPIDateConverter;
 
 namespace Sfa.Das.FatApi.Client.Model
 {
@@ -149,6 +143,9 @@ namespace Sfa.Das.FatApi.Client.Model
         /// </summary>
         [DataMember(Name="CurrentlyNotStartingNewApprentices", EmitDefaultValue=false)]
         public bool CurrentlyNotStartingNewApprentices { get; set; }
+
+        [DataMember(Name = "IsHigherEducationInstitute", EmitDefaultValue = false)]
+        public bool IsHigherEducationInstitute { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

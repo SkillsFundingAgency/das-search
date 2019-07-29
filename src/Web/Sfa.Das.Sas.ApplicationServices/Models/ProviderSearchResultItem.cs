@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
@@ -13,5 +14,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public List<string> DeliveryModes { get; set; }
         public double Distance { get; set; }
         public int LocationId { get; set; }
+        public string LocationName { get; set; }
+        public Address Address { get; set; }
+        public bool IsHigherEducationInstitute { get; set; }
     }
 }

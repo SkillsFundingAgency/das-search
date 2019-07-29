@@ -1,16 +1,11 @@
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Http;
-using Sfa.Das.Sas.Core.Configuration;
-using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
 using SFA.DAS.Apprenticeships.Api.Client;
 using System;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
@@ -75,12 +70,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
             httpClient.Should().BeOfType<HttpService>();
         }
 
-        [Test]
-        public void Then_ElasticsearchClientFactory_is_not_registered()
-        {
-            var elasticsearchClientFactory = _serviceProvider.GetService<IElasticsearchClientFactory>();
-
-            elasticsearchClientFactory.Should().BeNull();
-        }
+       
     }
 }
