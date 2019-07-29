@@ -1,23 +1,22 @@
-﻿@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 @model Sfa.Das.Sas.Shared.Components.ViewModels.SearchQueryViewModel
 @inject ICssViewModel CssViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
-<form asp-controller="Fat" asp-action="Search">
+<form asp-controller="Fat" asp-action="Search" id="fat-search-result-sort">
     <input type="hidden" name="Keywords" asp-for="Keywords" />
     <input type="hidden" name="page" asp-for="Page" />
     @foreach (var level in Model.SelectedLevels)
     {
     <input type="hidden" name="SelectedLevels" value="@level" />
     }
-    <div class="form-block">
-        <label for="select-order" class="form-label-bold">Sort by</label>
-        <select name="SortOrder" asp-for="SortOrder" class="form-control form-control-1-3">
-            <option selected="@(Model.SortOrder == 1)" value="1">Best match</option>
-            <option selected="@(Model.SortOrder == 2)" value="2">Level (high to low)</option>
-            <option selected="@(Model.SortOrder == 3)" value="3">Level (low to high)</option>
-        </select>
-        <button type="submit" value="Sort" class="button">Sort</button>
-    </div>
+    
+    <label asp-for="SortOrder" class="@(CssClasses.VisuallyHidden)">Sort by</label>
+    <select name="SortOrder" asp-for="SortOrder" class="select das-search-results__header-sort-by">
+        <option selected="@(Model.SortOrder == 1)" value="1">Best match</option>
+        <option selected="@(Model.SortOrder == 2)" value="2">Level (high to low)</option>
+        <option selected="@(Model.SortOrder == 3)" value="3">Level (low to high)</option>
+    </select>
+    <button type="submit" value="Sort" class="button">Sort</button>
 </form>

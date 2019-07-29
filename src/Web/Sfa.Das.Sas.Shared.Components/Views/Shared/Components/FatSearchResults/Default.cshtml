@@ -1,23 +1,28 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 @model Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.FatSearchResultsViewModel
 @inject ICssViewModel CssViewModel
 
 @if (Model.TotalResults > 0)
 {
+    <div class="das-search-results__header">
     @if (Model.IsAllSearch)
     {
-        <p>All apprenticeships.</p>
+        <p class="das-search-results__header-results-header-text">All apprenticeships</p>
     }
     else
     {
-        <p class="das-search-results__summary">There are <span class="das-search-results__summary-count" id="fat-search-result-count">@Model.TotalResults</span> apprenticeships matching your search for <span class="das-search-results__summary-keyword" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</span>.</p>
-
-        <partial name="Components/FatSearchResults/_searchResultsSort" for="@Model.SearchQuery" />
+        <p class="das-search-results__header-results-header-text">
+            There are 
+            <strong class="bold" id="fat-search-result-count">@Model.TotalResults</strong> 
+            apprenticeships 
+            <span class="@(CssClasses.VisuallyHidden)">matching your search for <strong class="bold" id="fat-search-result-keyword">@Model.SearchQuery.Keywords</strong></span>
+        </p>
     }
+        <partial name="Components/FatSearchResults/_searchResultsSort" for="@Model.SearchQuery" />
+    </div>
 
     <ol class="@CssViewModel.SearchList das-search-results">
-
         @foreach (var result in Model.SearchResults)
         {
             <partial name="Components/FatSearchResults/_searchResultsItem" for="@result" />
