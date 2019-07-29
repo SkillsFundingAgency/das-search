@@ -8,7 +8,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
     using Moq;
     using NUnit.Framework;
     using Sas.ApplicationServices;
-    using Sas.ApplicationServices.Interfaces;
     using Sas.ApplicationServices.Settings;
     using SFA.DAS.NLog.Logger;
 
@@ -16,14 +15,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
     public sealed class ProviderNameSearchServiceTests
     {
         private Mock<IPaginationSettings> _mockPaginationSettings;
-        private Mock<IProviderNameSearchProvider> _mockNameSearchProvider;
+        private Mock<IProviderSearchProvider> _mockNameSearchProvider;
         private Mock<ILog> _mockLogger;
 
         [SetUp]
         public void Setup()
         {
             _mockLogger = new Mock<ILog>();
-            _mockNameSearchProvider = new Mock<IProviderNameSearchProvider>();
+            _mockNameSearchProvider = new Mock<IProviderSearchProvider>();
             _mockPaginationSettings = new Mock<IPaginationSettings>();
         }
 
@@ -33,14 +32,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
 
-            _mockNameSearchProvider.Setup(m => m.SearchByTerm(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
+            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(new ProviderNameSearchResultsAndPagination());
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            await providerNameSearchService.SearchProviderNameAndAliases("test", pageNumber);
+            await providerNameSearchService.SearchProviderNameAndAliases("test", pageNumber,null);
 
-            _mockNameSearchProvider.Verify(x => x.SearchByTerm("test", pageNumber, numberOfItemsToReturn));
+            _mockNameSearchProvider.Verify(x => x.SearchProviderNameAndAliases("test", pageNumber, numberOfItemsToReturn));
         }
 
         [Test]
@@ -49,12 +48,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
             const string searchTerm = "test";
-            _mockNameSearchProvider.Setup(m => m.SearchByTerm(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
+            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(new ProviderNameSearchResultsAndPagination());
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
+            await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber, null);
 
             var expected = $"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
 
@@ -67,12 +66,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int numberOfItemsToReturn = 10;
             const int pageNumber = 1;
             const string searchTerm = "test";
-            _mockNameSearchProvider.Setup(m => m.SearchByTerm(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()));
+            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).Throws<Exception>();
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
+            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber, null);
 
             var expected = $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{pageNumber}], Page Size: [{numberOfItemsToReturn}]";
 
@@ -89,12 +88,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
             const int pageNumber = 1;
             const string searchTerm = "test";
             var returnedResults = new ProviderNameSearchResultsAndPagination { ActualPage = 1, HasError = false, TotalResults = 1 };
-            _mockNameSearchProvider.Setup(m => m.SearchByTerm(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult(returnedResults));
+            _mockNameSearchProvider.Setup(m => m.SearchProviderNameAndAliases(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult(returnedResults));
             _mockPaginationSettings.Setup(p => p.DefaultResultsAmount).Returns(numberOfItemsToReturn);
 
             var providerNameSearchService = new ProviderNameSearchService(_mockPaginationSettings.Object, _mockNameSearchProvider.Object, _mockLogger.Object);
 
-            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber);
+            var result = await providerNameSearchService.SearchProviderNameAndAliases(searchTerm, pageNumber, null);
 
             var expected = $"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{result.ActualPage}], Page Size: [{numberOfItemsToReturn}], Total Results: [{result.TotalResults}]";
 

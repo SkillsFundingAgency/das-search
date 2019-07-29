@@ -7,7 +7,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
     public class ApprenticeshipSearchResultsItemMapping : IApprenticeshipSearchResultsItemMapping
     {
 
-        public ApprenticeshipSearchResultsItem Map(SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem document)
+        public ApprenticeshipSearchResultsItem Map(SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem document)
         {
             if (document != null)
             {
@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                     Keywords = document.Keywords?.Any() == true ? document.Keywords.ToList() : null,
 
                     JobRoles = document.JobRoles?.Any() == true ? document.JobRoles.ToList() : null,
-                    ApprenticeshipType = document.ProgrammeType == SFADASApprenticeshipsApiTypesV2ApprenticeshipSearchResultsItem.ProgrammeTypeEnum.NUMBER_0 ? ApprenticeshipType.Framework : ApprenticeshipType.Standard
+                    ApprenticeshipType = document.ProgrammeType == SFADASApprenticeshipsApiTypesV3ApprenticeshipSearchResultsItem.ProgrammeTypeEnum.NUMBER_0 ? ApprenticeshipType.Framework : ApprenticeshipType.Standard
                 };
                 return item;
             }

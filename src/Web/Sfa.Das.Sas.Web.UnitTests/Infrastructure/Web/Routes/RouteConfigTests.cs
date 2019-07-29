@@ -46,7 +46,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Routes
         [Test]
         public void ShouldMapFrameworkResults()
         {
-            var expectedRoute = new { controller = "Provider", action = "FrameworkResults", criteria = new FrameworkProviderSearchQuery() };
+            var expectedRoute = new { controller = "Provider", action = "FrameworkResults", criteria = new ProviderSearchQuery() };
             RouteAssert.HasRoute(_routes, "/provider/frameworkresults", expectedRoute);
         }
     }

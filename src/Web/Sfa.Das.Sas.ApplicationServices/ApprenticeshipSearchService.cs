@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices
+﻿using System.Threading.Tasks;
+
+namespace Sfa.Das.Sas.ApplicationServices
 {
     using System.Collections.Generic;
     using Logging;
@@ -22,10 +24,10 @@
             _paginationSettings = paginationSettings;
         }
 
-        public ApprenticeshipSearchResults SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
+        public async Task<ApprenticeshipSearchResults> SearchByKeyword(string keywords, int page, int take, int order, List<int> selectedLevels)
         {
             var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
-            var results = _searchProvider.SearchByKeyword(keywords, page, takeElements, order, selectedLevels);
+            var results = await _searchProvider.SearchByKeyword(keywords, page, takeElements, order, selectedLevels);
 
              _logger.Info(
                 "Apprenticeship Keyword Search",

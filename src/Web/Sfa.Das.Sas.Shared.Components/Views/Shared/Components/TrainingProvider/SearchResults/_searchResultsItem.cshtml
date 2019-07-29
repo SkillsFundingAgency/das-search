@@ -7,6 +7,10 @@
     <article class="das-search-result">
         <h2 class="@CssViewModel.HeadingMedium @CssViewModel.UtilitiesCss.Margin("bottom",0)">
             <a class="@CssViewModel.Link" href="/TrainingProvider/Details?ukprn=@Model.Item1.Ukprn&apprenticeshipId=@Model.Item2.ApprenticeshipId&LocationId=@Model.Item1.LocationId">@Model.Item1.Name</a>
+            @if (Model.Item1.NationalProvider)
+            {
+                <span class="das-tag--national">National</span>
+            }
         </h2>
 
         <dl class="@CssViewModel.List  das-search-result__details">

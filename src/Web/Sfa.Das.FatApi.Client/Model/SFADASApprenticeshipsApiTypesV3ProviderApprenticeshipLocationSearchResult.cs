@@ -11,17 +11,11 @@
 
 using System;
 using System.Linq;
-using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Sfa.Das.FatApi.Client.Client.OpenAPIDateConverter;
 
 namespace Sfa.Das.FatApi.Client.Model
 {
@@ -40,7 +34,7 @@ namespace Sfa.Das.FatApi.Client.Model
         /// <param name="pageSize">pageSize.</param>
         /// <param name="pageNumber">pageNumber.</param>
         /// <param name="results">results.</param>
-        public SFADASApprenticeshipsApiTypesV3ProviderApprenticeshipLocationSearchResult(Dictionary<string, long> trainingOptionsAggregation = default(Dictionary<string, long>), Dictionary<string, long> nationalProvidersAggregation = default(Dictionary<string, long>), long totalResults = default(long), int pageSize = default(int), int pageNumber = default(int), List<SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem> results = default(List<SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem>))
+        public SFADASApprenticeshipsApiTypesV3ProviderApprenticeshipLocationSearchResult(Dictionary<string, long?> trainingOptionsAggregation = default(Dictionary<string, long?>), Dictionary<string, long?> nationalProvidersAggregation = default(Dictionary<string, long?>), long totalResults = default(long), int pageSize = default(int), int pageNumber = default(int), List<SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem> results = default(List<SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem>))
         {
             this.TrainingOptionsAggregation = trainingOptionsAggregation;
             this.NationalProvidersAggregation = nationalProvidersAggregation;
@@ -54,13 +48,13 @@ namespace Sfa.Das.FatApi.Client.Model
         /// Gets or Sets TrainingOptionsAggregation
         /// </summary>
         [DataMember(Name="TrainingOptionsAggregation", EmitDefaultValue=false)]
-        public Dictionary<string, long> TrainingOptionsAggregation { get; set; }
+        public Dictionary<string, long?> TrainingOptionsAggregation { get; set; }
 
         /// <summary>
         /// Gets or Sets NationalProvidersAggregation
         /// </summary>
         [DataMember(Name="NationalProvidersAggregation", EmitDefaultValue=false)]
-        public Dictionary<string, long> NationalProvidersAggregation { get; set; }
+        public Dictionary<string, long?> NationalProvidersAggregation { get; set; }
 
         /// <summary>
         /// Gets or Sets TotalResults

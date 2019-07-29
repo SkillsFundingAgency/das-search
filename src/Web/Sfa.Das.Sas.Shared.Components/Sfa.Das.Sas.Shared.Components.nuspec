@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SFA.DAS.SAS.Shared.Components</id>
-    <version>0.0.42-alpha</version>
+    <version>0.0.45-alpha</version>
     <authors>DAS</authors>
     <owners>sfanuget</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -24,7 +24,6 @@
       <dependency id="polly" version="6.0.1" />
       <dependency id="FeatureToggle" version="3.3.0" />
       <dependency id="StructureMap" version="4.2.0.402" />
-      <dependency id="NEST" version="5.0.0" />
       <dependency id="Newtonsoft.Json" version="12.0.2" />
     </dependencies>
   </metadata>

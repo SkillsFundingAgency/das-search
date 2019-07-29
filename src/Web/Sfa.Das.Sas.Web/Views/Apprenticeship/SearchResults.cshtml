@@ -1,6 +1,8 @@
-﻿@using Sfa.Das.Sas.Web.ViewModels
+﻿
+@using Sfa.Das.Sas.Web.ViewModels
 @using Sfa.Das.Sas.Web.Extensions
 @using Sfa.Das.Sas.Web.Helpers
+@using Sfa.Das.Sas.Web.Models
 @model ApprenticeshipSearchResultViewModel
 
 @{
@@ -97,9 +99,9 @@
                 {
                     index += 1;
                     <article class="result @(item.ApprenticeshipType)-result"
-                             id="@(item.ApprenticeshipType)-@(!item.StandardId.IsNullOrEmpty() ? item.StandardId : item.FrameworkId)">
+                             id="@(item.ApprenticeshipType)-@(item.Id)">
                         <header>
-                            @(!item.StandardId.IsNullOrEmpty() ? GetStandardTitle(item, index) : GetFrameworkTitle(item, index))
+                            @(item.ApprenticeshipType == ApprenticeshipType.Standard ? GetStandardTitle(item, index) : GetFrameworkTitle(item, index))
                         </header>
                         <dl class="result-data-list">
                             @GetApprenticeshipDetailItem("Level:", "level", item.Level)
@@ -173,7 +175,7 @@
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Standard", "Apprenticeship", 
-            new { @id = item.StandardId, @keyword = Model.SearchTerm}, 
+            new { @id = item.Id, @keyword = Model.SearchTerm}, 
             new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) } )
         <span class="tag tag-new">New</span>
     </h2>
@@ -183,7 +185,7 @@
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Framework", "Apprenticeship",
-            new { @id = item.FrameworkId, @keyword = Model.SearchTerm },
+            new { @id = item.Id, @keyword = Model.SearchTerm },
             new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
     </h2>
 }

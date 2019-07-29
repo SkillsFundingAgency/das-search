@@ -11,6 +11,7 @@ namespace Sfa.Das.Sas.Web
                       "~/Content/dist/css/screen.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/scripts/accessible-autocomplete.min.js",
                 "~/scripts/polyfills/*.js",
                 "~/scripts/pages/*.js",
                 "~/scripts/app/*.js"));

@@ -37,9 +37,10 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> StandardResults(StandardProviderSearchQuery criteria)
+        public async Task<ActionResult> StandardResults(ProviderSearchQuery criteria)
         {
-            var response = await _mediator.Send<StandardProviderSearchResponse>(criteria);
+
+            var response = await _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {
@@ -71,7 +72,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     return new RedirectResult(url);
             }
 
-            var viewModel = _mappingService.Map<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
+            var viewModel = _mappingService.Map<ProviderSearchResponse, ProviderStandardSearchResultViewModel>(response, opt => opt
                 .AfterMap((src, dest) =>
                 {
                     dest.AbsolutePath = Request?.Url?.AbsolutePath;
@@ -83,9 +84,9 @@ namespace Sfa.Das.Sas.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> FrameworkResults(FrameworkProviderSearchQuery criteria)
+        public async Task<ActionResult> FrameworkResults(ProviderSearchQuery criteria)
         {
-            var response = await _mediator.Send<FrameworkProviderSearchResponse>(criteria);
+            var response = await _mediator.Send(criteria);
 
             switch (response.StatusCode)
             {
@@ -117,7 +118,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     return new RedirectResult(url);
             }
 
-            var viewModel = _mappingService.Map<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(response, opt => opt
+            var viewModel = _mappingService.Map<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>(response, opt => opt
                 .AfterMap((src, dest) =>
                 {
                     dest.AbsolutePath = Request?.Url?.AbsolutePath;

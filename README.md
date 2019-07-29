@@ -15,7 +15,6 @@ The [web application](https://www.findapprenticeship.service.gov.uk) provides a 
 
 ### Dependencies 
 - [Postcodes.io](http://postcodes.io)
-- Elasticsearch 2.3.5
 - Google Analytics
 - survey monkey
 
