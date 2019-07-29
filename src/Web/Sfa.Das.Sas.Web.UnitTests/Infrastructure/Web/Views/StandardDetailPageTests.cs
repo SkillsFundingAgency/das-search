@@ -63,7 +63,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                 AssessmentOrganisations = new List<AssessmentOrganisation>()
             };
             var html = detail.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#more-information").Should().Contain("The Institute for Apprenticeships has more detailed information");
+            GetPartial(html, "#more-information").Should().Contain("Institute for Apprenticeships and Technical Education has more detailed information");
         }
 
         [Test]

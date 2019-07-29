@@ -568,6 +568,7 @@
     <Content Include="Content\dist\images\govuk-crest.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\dist\images\icons\search.svg" />
     <Content Include="Content\dist\images\icons\status\green_16.png" />
     <Content Include="Content\dist\images\icons\icon-important-2x.png" />
     <Content Include="Content\dist\images\icons\icon-important.png" />
@@ -610,6 +611,7 @@
     <Content Include="Content\src\images\icons\icon-important.png" />
     <Content Include="Content\src\images\icons\icon-pointer-2x.png" />
     <Content Include="Content\src\images\icons\icon-pointer.png" />
+    <Content Include="Content\src\images\icons\search.svg" />
     <Content Include="Content\src\images\open-government-licence.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -676,10 +678,12 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\src\styles\custom-elements\_autocomplete.scss" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
+    <Content Include="scripts\accessible-autocomplete.min.js" />
     <Content Include="scripts\app\selection-buttons.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -711,6 +715,7 @@
     <Content Include="scripts\vendor\js.cookie-2.1.1.js" />
     <Content Include="scripts\vendor\js.cookie-2.1.1.min.js" />
     <Content Include="scripts\vendor\modernizr-3.3.1.min.js" />
+    <Compile Include="ViewModels\ApprenticeshipSearchViewModel.cs" />
     <Content Include="Views\Apprenticeship\Framework.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Framework.generated.cs</LastGenOutput>
