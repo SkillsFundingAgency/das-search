@@ -8,6 +8,7 @@
         <h2 class="@CssViewModel.HeadingMedium das-search-result__heading">
             <a class="@CssViewModel.Link das-search-result__heading-link" href="/employer/find-apprenticeships/Apprenticeship?id=@Model.Id">@Model.Title</a>
         </h2>
+
         @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
         {
             <div class="@CssViewModel.WarningText">
@@ -27,6 +28,8 @@
             <dt class="das-search-result__details-title">Apprenticeship Type:</dt>
             <dd class="das-search-result__details-definition">@Model.ApprenticeshipType.ToString()</dd>
         </dl>
+
+        @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.Id })
     </article>
 </li>
 

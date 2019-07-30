@@ -168,6 +168,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\IApprenticehipFavouritesBasketStoreConfig.cs" />
     <Compile Include="Configuration\IPostcodeIOConfigurationSettings.cs" />
     <Compile Include="Configuration\IFatConfigurationSettings.cs" />
     <Compile Include="Configuration\IConfigurationSettings.cs" />
