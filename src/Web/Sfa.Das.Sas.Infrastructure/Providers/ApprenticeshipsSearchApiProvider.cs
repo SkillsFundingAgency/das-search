@@ -29,6 +29,8 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
             var results = _apprenticeshipSearchResultsMapping.Map(await _apprenticeshipProgrammeApiClient.SearchActiveApprenticeshipsAsync(formattedKeywords, page, take, order, selectedLevelsCsv));
             results.SearchTerm = keywords;
             results.SortOrder = order.ToString();
+            results.SelectedLevels = selectedLevels;
+
             return results;
         }
     }
