@@ -17,7 +17,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
         public async Task<IViewComponentResult> InvokeAsync(SearchQueryViewModel searchQueryModel)
         {
 
-            var model = _fatOrchestrator.GetSearchFilters(searchQueryModel);
+            var model = await _fatOrchestrator.GetSearchFilters(searchQueryModel);
 
             return View("Default", model);
 
