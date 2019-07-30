@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 using Microsoft.AspNetCore.Hosting;
+using Moq;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 {
