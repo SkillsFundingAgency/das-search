@@ -23,8 +23,11 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             var item = new SearchResult<ProviderSearchResultItem>();
             item.Total = document.TotalResults;
             item.Hits = document.Results?.Select(s => _providerSearchResultsMapper.Map(s));
-
+            item.TrainingOptionsAggregation = document.TrainingOptionsAggregation;
+            item.NationalProvidersAggregation = document.NationalProvidersAggregation;
             return item;
         }
+
+
     }
 }

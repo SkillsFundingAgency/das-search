@@ -16,7 +16,6 @@
         private readonly Mock<ILog> _logger = new Mock<ILog>();
         private readonly Mock<IPaginationSettings> _paginationSettings = new Mock<IPaginationSettings>();
 
-        internal Mock<IProviderLocationSearchProvider> LocationSearchProvider { get; } = new Mock<IProviderLocationSearchProvider>();
         internal Mock<IProviderSearchProvider> _providerSearchService = new Mock<IProviderSearchProvider>();
 
         internal Mock<ILookupLocations> LocationLookup { get; } = new Mock<ILookupLocations>();
@@ -28,7 +27,7 @@
 
         public ProviderSearchService Build()
         {
-            var controller = new ProviderSearchService(LocationSearchProvider.Object, _standardsRepository.Object, _frameworksRepository.Object, LocationLookup.Object, _logger.Object, _paginationSettings.Object,_providerSearchService.Object);
+            var controller = new ProviderSearchService(_standardsRepository.Object, _frameworksRepository.Object, LocationLookup.Object, _logger.Object, _paginationSettings.Object,_providerSearchService.Object);
 
             return controller;
         }
@@ -36,21 +35,6 @@
         internal ProviderSearchServiceBuilder SetupPostCodeLookup<TResult>(Expression<Func<ILookupLocations, TResult>> expression, TResult result)
         {
             LocationLookup.Setup(expression).Returns(result);
-
-            return this;
-        }
-
-        internal ProviderSearchServiceBuilder SetupLocationSearchProvider<TResult>(Expression<Func<IProviderLocationSearchProvider, TResult>> expression, TResult result)
-        {
-            LocationSearchProvider.Setup(expression).Returns(result);
-
-            return this;
-        }
-
-        internal ProviderSearchService SetupLocationSearchProviderException<T>(Expression<Func<IProviderLocationSearchProvider, object>> expression)
-            where T : Exception, new()
-        {
-            LocationSearchProvider.Setup(expression).Throws<T>();
 
             return this;
         }

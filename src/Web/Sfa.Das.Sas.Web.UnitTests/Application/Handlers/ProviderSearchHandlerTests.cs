@@ -188,7 +188,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var providerStandardSearchResults = new ProviderSearchResults() { TotalResults = 42, Hits = new List<ProviderSearchResultItem>() };
             _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
 
-            var message = new StandardProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 8 };
+            var message = new ProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 8 };
 
             var response = await _handler.Handle(message, default(CancellationToken));
 

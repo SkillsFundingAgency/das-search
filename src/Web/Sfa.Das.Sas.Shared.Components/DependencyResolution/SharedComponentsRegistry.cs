@@ -1,11 +1,12 @@
-﻿using FluentValidation;
+﻿using System;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
 using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Http;
-using Sfa.Das.Sas.ApplicationServices.Interfaces;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Settings;
@@ -15,7 +16,6 @@ using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Basket;
-using Sfa.Das.Sas.Infrastructure.Elasticsearch;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using Sfa.Das.Sas.Infrastructure.PostCodeIo;
 using Sfa.Das.Sas.Infrastructure.Providers;
@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 {
     public static class SharedComponentsRegistry
     {
-        public static void AddFatSharedComponents(this IServiceCollection services, FatSharedComponentsConfiguration configuration, bool useElastic = false)
+        public static void AddFatSharedComponents(this IServiceCollection services, FatSharedComponentsConfiguration configuration)
         {
             ConfigureCaching(services, configuration);
 
@@ -59,14 +59,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             //Orchestrator DI
             AddOrchesratorServices(services);
 
-            if (useElastic)
-            {
-                AddElasticSearchServices(services);
-            }
-            else
-            {
-                AddApiSearchServices(services, configuration);
-            }
+            AddApiSearchServices(services, configuration);
 
             services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
             services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
@@ -107,7 +100,6 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<AbstractValidator<ApprenticeshipProviderDetailQuery>, ApprenticeshipProviderDetailQueryValidator>();
             services.AddTransient<AbstractValidator<GetFrameworkQuery>, FrameworkQueryValidator>();
             services.AddTransient<IPostcodeIoService, PostcodeIoService>();
-            services.AddTransient<IProviderSearchService, ProviderSearchService>();
             services.AddTransient<IGetProviderDetails, ProviderApiRepository>();
         }
 
@@ -121,8 +113,6 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IGetStandards, StandardApiRepository>();
             services.AddTransient<IGetAssessmentOrganisations, AssessmentOrganisationApiRepository>();
             services.AddTransient<IApprenticeshipProviderRepository, ApprenticeshipProviderApiRepository>();
-
-            services.AddTransient<IProviderNameSearchProvider, ProviderNameSearchProvider>();
 
             services.AddTransient<IStandardMapping, StandardMapping>();
             services.AddTransient<IFrameworkMapping, FrameworkMapping>();
@@ -139,20 +129,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IApprenticeshipFavouritesBasketStore, ApprenticeshipFavouritesBasketStore>();
         }
 
-        private static void AddElasticSearchServices(IServiceCollection services)
-        {
-            services.AddTransient<IElasticsearchClientFactory, ElasticsearchClientFactory>();
-            services.AddTransient<IElasticsearchCustomClient, ElasticsearchCustomClient>();
-            services.AddTransient<IElasticsearchHelper, ElasticsearchHelper>();
 
-
-            services.AddTransient<IApprenticeshipSearchProvider, ElasticsearchApprenticeshipSearchProvider>();
-            services.AddTransient<IProviderLocationSearchProvider, ElasticsearchProviderLocationSearchProvider>();
-
-            services.AddTransient<IProviderNameSearchProviderQuery, ProviderNameSearchProviderQuery>();
-
-            services.AddTransient<IGetProviders, ProviderElasticRepository>();
-        }
 
         private static void AddApiSearchServices(IServiceCollection services, IFatConfigurationSettings sharedComponentsConfiguration)
         {
@@ -163,13 +140,18 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IFrameworkApiClient, FrameworkApiClient>(service => new FrameworkApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(service => new AssessmentOrgsApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
             services.AddTransient<IApprenticeshipProgrammeApiClient, ApprenticeshipProgrammeApiClient>(service => new ApprenticeshipProgrammeApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
-            services.AddTransient<ISearchApi, SearchApi>(service => new SearchApi(sharedComponentsConfiguration.FatApiBaseUrl));
 
-            services.AddTransient<IProviderLocationSearchProvider, ProviderLocationSearchApiProvider>();
+          //  services.AddTransient<IProviderLocationSearchProvider, ProviderLocationSearchApiProvider>();
             services.AddTransient<IProviderSearchProvider, ProviderApiRepository>();
             services.AddTransient<IProviderApiClient, ProviderApiClient>(service => new ProviderApiClient(sharedComponentsConfiguration.FatApiBaseUrl));
-            services.AddTransient<IProvidersVApi, ProvidersVApi>(service => new ProvidersVApi(sharedComponentsConfiguration.FatApiBaseUrl));
 
+            services.AddRefitClient<ISearchApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
+
+            services.AddRefitClient<IProvidersVApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddRefitClient<ISearchVApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
         }
 
         private static void AddOrchesratorServices(IServiceCollection services)

@@ -2,16 +2,11 @@
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
-using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 {
@@ -31,7 +26,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 
             _fatOrchestratorMock = new Mock<IFatOrchestrator>(MockBehavior.Strict);
 
-            _fatOrchestratorMock.Setup(s => s.GetSearchResults(It.IsAny<SearchQueryViewModel>())).Returns(_searchResultsViewModel);
+            _fatOrchestratorMock.Setup(s => s.GetSearchResults(It.IsAny<SearchQueryViewModel>())).ReturnsAsync(_searchResultsViewModel);
 
 
             _sut = new FatSearchResultsViewComponent(_fatOrchestratorMock.Object)
