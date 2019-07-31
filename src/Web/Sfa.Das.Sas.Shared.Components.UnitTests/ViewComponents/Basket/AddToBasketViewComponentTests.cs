@@ -1,4 +1,7 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
@@ -6,12 +9,10 @@ using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Cookies;
+using Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Basket;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
+namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
 {
     [TestFixture]
     public class AddToBasketViewComponentTests : ViewComponentTestsBase

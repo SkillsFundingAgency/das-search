@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
                 model.IsInBasket = basket.Any(x => x.ApprenticeshipId == apprenticeshipId);
             }
 
-            return View("Default", model);
+            return View("../Basket/AddToBasket/Default", model);
         }
     }
 }
