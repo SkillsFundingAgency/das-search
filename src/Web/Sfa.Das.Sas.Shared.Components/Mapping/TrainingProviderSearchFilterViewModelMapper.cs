@@ -45,11 +45,11 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
              
                 switch (trainingOption.Key.ToLower())
                 {
-                    case "blockrelease":
+                    case "dayrelease":
                         filter.Value = "0";
 
                         break;
-                    case "dayrelease":
+                    case "blockrelease":
                         filter.Value = "1";
                         break;
                     case "100percentemployer":
