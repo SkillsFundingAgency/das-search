@@ -27,32 +27,36 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> AddApprenticeshipFromDetails(string apprenticeshipId)
+        public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
-            await SaveApprenticeship(apprenticeshipId);
+            await SaveApprenticeship(queryModel.ItemId);
 
-            return RedirectToAction("Apprenticeship", "Fat", new { id = apprenticeshipId });
+            return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
-            await SaveApprenticeship(queryModel.ApprenticeshipId);
+            await SaveApprenticeship(queryModel.ItemId);
 
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
         {
-            await SaveApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.SearchQuery.Ukprn);
+            await SaveApprenticeship(queryModel.ApprenticeshipId, queryModel.ItemId);
 
-            return RedirectToAction("Details", "TrainingProvider", queryModel.SearchQuery);
+            return RedirectToAction("Details", "TrainingProvider", queryModel);
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
         {
-            await SaveApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn);
+            await SaveApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId);
 
             return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
         }

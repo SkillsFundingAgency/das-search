@@ -19,13 +19,19 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             _cookieManager = cookieManager;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId)
+        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int? ukprn = null)
         {
             var model = new AddToBasketViewModel
             {
-                ApprenticeshipId = apprenticeshipId
+                ItemId = ukprn.HasValue ? ukprn.ToString() : apprenticeshipId,
+                IsInBasket = await IsInBasket(apprenticeshipId, ukprn)
             };
 
+            return View("Default", model);
+        }
+
+        private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn)
+        {
             // Get cookie
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
             Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
@@ -33,10 +39,25 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             if (cookieBasketId.HasValue)
             {
                 var basket = await _mediator.Send(new GetBasketQuery { BasketId = cookieBasketId.Value });
-                model.IsInBasket = basket.Any(x => x.ApprenticeshipId == apprenticeshipId);
+
+                if (!ukprn.HasValue)
+                {
+                    return basket.Any(x => x.ApprenticeshipId == apprenticeshipId);
+                }
+                else
+                {
+                    var apprenticeship = basket.SingleOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
+
+                    if (apprenticeship == null)
+                        return false;
+                    else
+                    {
+                        return ukprn.HasValue ? apprenticeship.Ukprns.Contains(ukprn.Value) : false;
+                    }
+                }
             }
 
-            return View("Default", model);
+            return false;
         }
     }
 }
