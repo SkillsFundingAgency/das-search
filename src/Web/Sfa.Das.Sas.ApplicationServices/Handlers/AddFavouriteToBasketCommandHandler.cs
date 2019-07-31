@@ -32,9 +32,36 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 basket = await _basketStore.GetAsync(request.BasketId.Value) ?? new ApprenticeshipFavouritesBasket();
 
                 if (basket.Any(x => x.ApprenticeshipId == request.ApprenticeshipId))
-                    return basketId; // Ignore if saving just an apprenticehip that is already in the basket.
+                {
+                    if (request.Ukprn.HasValue)
+                    {
+                        var apprenticeship = basket.First(x => x.ApprenticeshipId == request.ApprenticeshipId);
 
-                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
+                        if (apprenticeship.Ukprns.Contains(request.Ukprn.Value))
+                        {
+                            return basketId;
+                        }
+                        else
+                        {
+                            apprenticeship.Ukprns.Add(request.Ukprn.Value);
+                        }
+                    }
+                    else
+                    {
+                        return basketId; // Ignore if saving just an apprenticehip that is already in the basket.
+                    }
+                }
+                else
+                {
+                    if (request.Ukprn.HasValue)
+                    {
+                        basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId, request.Ukprn.Value));
+                    }
+                    else
+                    {
+                        basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
+                    }
+                }
             }
             else
             {
@@ -51,10 +78,16 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private static void CreateNewBasket(AddFavouriteToBasketCommand request, out ApprenticeshipFavouritesBasket basket, out Guid basketId)
         {
             basketId = Guid.NewGuid();
-            basket = new ApprenticeshipFavouritesBasket
-                {
-                    new ApprenticeshipFavourite(request.ApprenticeshipId)
-                };
+            basket = new ApprenticeshipFavouritesBasket();
+
+            if (request.Ukprn.HasValue)
+            {
+                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId, request.Ukprn.Value));
+            }
+            else
+            {
+                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
+            }
         }
     }
 }
