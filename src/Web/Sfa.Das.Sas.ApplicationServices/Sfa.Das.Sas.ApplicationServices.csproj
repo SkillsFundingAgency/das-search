@@ -57,6 +57,9 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
@@ -149,12 +152,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddFavouriteToBasketCommand.cs" />
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ApprenticeshipServiceApiFeature.cs" />
     <Compile Include="FeatureToggles\CloudConfigToggleValueProvider.cs" />
     <Compile Include="FeatureToggles\ProviderFeedbackFeature.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
+    <Compile Include="Handlers\AddFavouriteToBasketCommandHandler.cs" />
+    <Compile Include="Handlers\GetBasketHandler.cs" />
     <Compile Include="Handlers\IXmlDocumentSerialiser.cs" />
     <Compile Include="Handlers\ProviderDetailHandler.cs" />
     <Compile Include="Handlers\ProviderNameSearchHandler.cs" />
@@ -170,6 +176,7 @@
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
+    <Compile Include="Interfaces\IApprenticeshipFavouritesBasketStore.cs" />
     <Compile Include="Interfaces\IProviderNameSearchProvider.cs" />
     <Compile Include="Interfaces\IProviderNameSearchService.cs" />
     <Compile Include="IProviderSearchProvider.cs" />
@@ -180,6 +187,8 @@
     <Compile Include="IApprenticeshipSearchProvider.cs" />
     <Compile Include="Logging\ApprenticeshipSearchLogEntry.cs" />
     <Compile Include="Logging\HttpErrorLogEntry.cs" />
+    <Compile Include="Models\ApprenticeshipFavourite.cs" />
+    <Compile Include="Models\ApprenticeshipFavouritesBasket.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
     <Compile Include="Models\ApprenticeshipType.cs" />
@@ -209,6 +218,7 @@
     <Compile Include="ProviderNameSearchService.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
+    <Compile Include="Queries\GetBasketQuery.cs" />
     <Compile Include="Queries\ProviderDetailQuery.cs" />
     <Compile Include="Queries\ProviderNameSearchQuery.cs" />
     <Compile Include="Queries\SitemapQuery.cs" />
@@ -268,9 +278,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

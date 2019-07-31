@@ -7,6 +7,8 @@ using SFA.DAS.Apprenticeships.Api.Client;
 using System;
 using System.Linq;
 using Sfa.Das.Sas.Shared.Components.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Moq;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 {
@@ -24,18 +26,21 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
         [SetUp]
         public void Setup()
         {
+            var mockHostingEnvironment = new Mock<IHostingEnvironment>();
+            mockHostingEnvironment.Setup(m => m.EnvironmentName).Returns("Development");
+
             _FatConfiguration = new FatSharedComponentsConfiguration()
             {
                 FatApiBaseUrl = _fatApiUrl
             };
 
-
             _serviceCollection = new ServiceCollection();
+
+            _serviceCollection.AddTransient<IHostingEnvironment>(x => mockHostingEnvironment.Object);
 
             _serviceCollection.AddFatSharedComponents(_FatConfiguration);
 
             _serviceProvider = _serviceCollection.BuildServiceProvider();
-
         }
 
         [Test]

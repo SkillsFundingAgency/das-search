@@ -83,6 +83,9 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
@@ -236,6 +239,8 @@
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceBuilder.cs" />
     <Compile Include="Application\ApplicationServices\ProviderSearchServiceTests.cs" />
     <Compile Include="Application\ApplicationServices\StandardSearchServiceTest.cs" />
+    <Compile Include="Application\Handlers\GetBasketHandlerTests.cs" />
+    <Compile Include="Application\Handlers\AddFavouriteToBasketHandlerTests.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipProviderDetailHandlerTest.cs" />
     <Compile Include="Application\Handlers\ProviderDetailHandlerTests.cs" />
