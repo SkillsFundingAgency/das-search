@@ -43,7 +43,21 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
 
-        private async Task SaveApprenticeship(string apprenticeshipId)
+        public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
+        {
+            await SaveApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.SearchQuery.Ukprn);
+
+            return RedirectToAction("Details", "TrainingProvider", queryModel.SearchQuery);
+        }
+
+        public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
+        {
+            await SaveApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn);
+
+            return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
+        }
+
+        private async Task SaveApprenticeship(string apprenticeshipId, int? ukprn = null)
         {
             // Get cookie
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
@@ -52,6 +66,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             var basketId = await _mediator.Send(new AddFavouriteToBasketCommand
             {
                 ApprenticeshipId = apprenticeshipId,
+                Ukprn = ukprn,
                 BasketId = cookieBasketId
             });
 

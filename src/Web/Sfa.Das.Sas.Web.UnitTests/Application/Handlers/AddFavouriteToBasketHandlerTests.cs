@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
-        public async Task Handle_AddsItemToBasket_ForNewBasket()
+        public async Task Handle_AddsApprenticeshipToBasket_ForNewBasket()
         {
             var basketId = Guid.NewGuid();
 
@@ -117,6 +117,41 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             await _sut.Handle(request, default(CancellationToken));
 
             _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<Guid>(), It.IsAny<ApprenticeshipFavouritesBasket>()), Times.Never);
+        }
+
+        [Test]
+        public async Task Handle_AddsProviderToBasket_ForNewBasket()
+        {
+            var basketId = Guid.NewGuid();
+
+            var request = new AddFavouriteToBasketCommand
+            {
+                BasketId = null,
+                ApprenticeshipId = "123",
+                Ukprn = 12345678
+            };
+
+            await _sut.Handle(request, default(CancellationToken));
+
+            _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<Guid>(), It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123" && a[0].Ukprns.Contains(12345678))));
+        }
+
+        [Test]
+        public async Task Handle_AddsTrainingProviderToExistingBasket_ForNewApprenticeship()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public async Task Handle_AddsTrainingProviderToExistingBasket_ForExistingApprenticeship()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public async Task Handle_AddsTrainingProviderToExistingBasket_WhenProviderHasAlreadyBeenAddedForApprenticeship()
+        {
+            Assert.Fail();
         }
     }
 }

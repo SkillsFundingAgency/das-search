@@ -13,13 +13,23 @@
 @if (Model.TotalResults > 0)
 {
     <p>There are @Model.TotalResults Training providers for '@Model.SearchQuery.Postcode'.</p>
-    <ol class="@CssViewModel.SearchList">
-        @foreach (var result in Model.SearchResults)
-        {
-            var itemModel = Tuple.Create(result, Model.SearchQuery);
-            <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@itemModel" />
-        }
-    </ol>
+    <form asp-controller="Basket" asp-action="AddProviderFromDetails" method="post">
+        <input type="hidden" asp-for="@Model.SearchQuery.ApprenticeshipId" />
+        <input type="hidden" asp-for="@Model.SearchQuery.IsLevyPayer" />
+        <input type="hidden" asp-for="@Model.SearchQuery.Keywords" />
+        <input type="hidden" asp-for="@Model.SearchQuery.Page" />
+        <input type="hidden" asp-for="@Model.SearchQuery.Postcode" />
+        <input type="hidden" asp-for="@Model.SearchQuery.SelectedLevels" />
+        <input type="hidden" asp-for="@Model.SearchQuery.SortOrder" />
+        <input type="hidden" asp-for="@Model.SearchQuery.ResultsToTake" />
+        <ol class="@CssViewModel.SearchList">
+            @foreach (var result in Model.SearchResults)
+            {
+                var itemModel = Tuple.Create(result, Model.SearchQuery);
+                <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@itemModel" />
+            }
+        </ol>
+    </form>
 }
 else
 {

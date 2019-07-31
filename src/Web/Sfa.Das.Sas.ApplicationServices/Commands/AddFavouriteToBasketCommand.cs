@@ -7,5 +7,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Commands
     {
         public Guid? BasketId { get; set; }
         public string ApprenticeshipId { get; set; }
+        public int? Ukprn { get; set; }
     }
 }
