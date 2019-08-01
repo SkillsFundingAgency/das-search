@@ -9,7 +9,6 @@ using Sfa.Das.Sas.Shared.Components.Controllers;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,49 +25,10 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         private Mock<ICookieManager> _mockCookieManager;
         private BasketController _sut;
 
-        private SaveBasketFromApprenticeshipDetailsViewModel _addFromApprenticeshipDetailsModel = new SaveBasketFromApprenticeshipDetailsViewModel
-        {
-            ItemId = APPRENTICESHIP_ID
-        };
-
-        private SaveBasketFromApprenticeshipResultsViewModel _addFromApprenticeshipResultsModel = new SaveBasketFromApprenticeshipResultsViewModel
-        {
-            ItemId = APPRENTICESHIP_ID,
-            SearchQuery = new ViewModels.SearchQueryViewModel
-            {
-                Keywords = "baker",
-                Page = 3,
-                ResultsToTake = 40,
-                SortOrder = 1
-            }
-        };
-
-        private SaveBasketFromProviderDetailsViewModel _addFromProviderDetailsModel = new SaveBasketFromProviderDetailsViewModel
-        {
-            ItemId = UKPRN,
-            ApprenticeshipId = APPRENTICESHIP_ID,
-            ApprenticeshipType = ApplicationServices.Models.ApprenticeshipType.Standard,
-            LocationId = LOCATION_ID,
-            Page = 1,
-            Ukprn = UKPRN,
-            ViewType = ViewModels.ViewType.Details
-        };
-
-        private SaveBasketFromProviderSearchViewModel _addFromProviderSearchModel = new SaveBasketFromProviderSearchViewModel
-        {
-            ItemId = UKPRN,
-            SearchQuery = new Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel
-            {
-                ApprenticeshipId = APPRENTICESHIP_ID,
-                IsLevyPayer = true,
-                Keywords = "some keywords",
-                Page = 1,
-                Postcode = "AB12 3TR",
-                ResultsToTake = 10,
-                SortOrder = 1
-            }
-        };
-
+        private readonly static SaveBasketFromApprenticeshipDetailsViewModel _addFromApprenticeshipDetailsModel = GetApprenticeshipDetailsRequestModel();
+        private readonly static SaveBasketFromApprenticeshipResultsViewModel _addFromApprenticeshipResultsModel = GetApprenticeshipResultsRequestModel();
+        private readonly static SaveBasketFromProviderDetailsViewModel _addFromProviderDetailsModel = GetProviderDetailsRequestModel();
+        private readonly static SaveBasketFromProviderSearchViewModel _addFromProviderSearchModel = GetProviderResultsRequestModel();
 
         [SetUp]
         public void Setup()
@@ -319,5 +279,48 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         }
 
         #endregion
+
+        private static SaveBasketFromApprenticeshipDetailsViewModel GetApprenticeshipDetailsRequestModel() => new SaveBasketFromApprenticeshipDetailsViewModel
+        {
+            ItemId = APPRENTICESHIP_ID
+        };
+
+        private static SaveBasketFromApprenticeshipResultsViewModel GetApprenticeshipResultsRequestModel() => new SaveBasketFromApprenticeshipResultsViewModel
+        {
+            ItemId = APPRENTICESHIP_ID,
+            SearchQuery = new ViewModels.SearchQueryViewModel
+            {
+                Keywords = "baker",
+                Page = 3,
+                ResultsToTake = 40,
+                SortOrder = 1
+            }
+        };
+
+        private static SaveBasketFromProviderDetailsViewModel GetProviderDetailsRequestModel() => new SaveBasketFromProviderDetailsViewModel
+        {
+            ItemId = UKPRN,
+            ApprenticeshipId = APPRENTICESHIP_ID,
+            ApprenticeshipType = ApplicationServices.Models.ApprenticeshipType.Standard,
+            LocationId = LOCATION_ID,
+            Page = 1,
+            Ukprn = UKPRN,
+            ViewType = ViewModels.ViewType.Details
+        };
+
+        private static SaveBasketFromProviderSearchViewModel GetProviderResultsRequestModel() => new SaveBasketFromProviderSearchViewModel
+        {
+            ItemId = UKPRN,
+            SearchQuery = new Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel
+            {
+                ApprenticeshipId = APPRENTICESHIP_ID,
+                IsLevyPayer = true,
+                Keywords = "some keywords",
+                Page = 1,
+                Postcode = "AB12 3TR",
+                ResultsToTake = 10,
+                SortOrder = 1
+            }
+        };
     }
 }

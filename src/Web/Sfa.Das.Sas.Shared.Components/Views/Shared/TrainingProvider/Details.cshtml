@@ -7,22 +7,24 @@
 <h1 class="@CssViewModel.HeadingXLarge">@await Component.InvokeAsync("TrainingProviderTitle", new { searchQueryModel = Model })</h1>
 
 <div class="grid-row">
+    <form asp-controller="Basket" asp-action="AddProviderFromDetails" method="post">
+        <input type="hidden" asp-for="@Model.ApprenticeshipId" />
+        <input type="hidden" asp-for="@Model.LocationId" />
+        <input type="hidden" asp-for="@Model.Page" />
+        <input type="hidden" asp-for="@Model.Ukprn" />
+        <div class="@(CssViewModel.FormCss.FormGroup)">
+            @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.ApprenticeshipId, ukprn = Model.Ukprn })
+        </div>
+    </form>
+</div>
+
+<div class="grid-row">
     <div class="grid-column-two-thirds">&nbsp;</div>
     <div class="grid-column-one-third"> @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model, ViewType = ViewType.Contact })</div>
 </div>
 
-
 <div class="grid-row">
     <div class="grid-column-two-thirds grid-column-two-thirds-from-desktop">
-        <form asp-controller="Basket" asp-action="AddProviderFromDetails" method="post">
-            <input type="hidden" asp-for="@Model.ApprenticeshipId" />
-            <input type="hidden" asp-for="@Model.LocationId" />
-            <input type="hidden" asp-for="@Model.Page" />
-            <input type="hidden" asp-for="@Model.Ukprn" />
-            <div class="@(CssViewModel.FormCss.FormGroup)">
-                @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.ApprenticeshipId, ukprn = Model.Ukprn })
-            </div>
-        </form>
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model, ViewType = ViewType.Summary })
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model })
     </div>

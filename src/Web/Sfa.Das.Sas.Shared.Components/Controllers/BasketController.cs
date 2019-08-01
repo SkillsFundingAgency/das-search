@@ -63,7 +63,6 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
 
         private async Task SaveApprenticeship(string apprenticeshipId, int? ukprn = null)
         {
-            // Get cookie
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
             Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
 
