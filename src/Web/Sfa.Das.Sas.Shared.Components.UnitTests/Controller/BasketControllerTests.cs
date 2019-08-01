@@ -154,6 +154,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             routeValues["Page"].Should().Be(_addFromApprenticeshipResultsModel.SearchQuery.Page);
             routeValues["ResultsToTake"].Should().Be(_addFromApprenticeshipResultsModel.SearchQuery.ResultsToTake);
             routeValues["SortOrder"].Should().Be(_addFromApprenticeshipResultsModel.SearchQuery.SortOrder);
+            routeValues["SelectedLevels"].Should().Be(_addFromApprenticeshipResultsModel.SearchQuery.SelectedLevels);
         }
 
         [Test]
@@ -256,7 +257,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
         #endregion
 
-        // TODO: LWA - Need to update tests when merge in filter branch.
         #region AddProviderFromResults
 
         [Test]
@@ -270,10 +270,13 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             redirect.ControllerName.Should().Be("TrainingProvider");
             redirect.ActionName.Should().Be("Search");
             var routeValues = redirect.RouteValues; 
-            routeValues["Postcode"].Should().Be(_addFromProviderSearchModel.SearchQuery.Postcode);
-            routeValues["IsLevyPayer"].Should().Be(_addFromProviderSearchModel.SearchQuery.IsLevyPayer);
             routeValues["ApprenticeshipId"].Should().Be(_addFromProviderSearchModel.SearchQuery.ApprenticeshipId);
+            routeValues["DeliveryModes"].Should().Be(_addFromProviderSearchModel.SearchQuery.DeliveryModes);
+            routeValues["IsLevyPayer"].Should().Be(_addFromProviderSearchModel.SearchQuery.IsLevyPayer);
+            routeValues["NationalProvidersOnly"].Should().Be(_addFromProviderSearchModel.SearchQuery.NationalProvidersOnly);
             routeValues["Page"].Should().Be(_addFromProviderSearchModel.SearchQuery.Page);
+            routeValues["Postcode"].Should().Be(_addFromProviderSearchModel.SearchQuery.Postcode);
+            routeValues["SortOrder"].Should().Be(_addFromProviderSearchModel.SearchQuery.SortOrder);
         }
 
         [Test]
