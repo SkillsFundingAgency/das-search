@@ -123,7 +123,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.DeliveryModes = new List<string>(){"1","2,","3"};
             }
 
-            var searchResults = await _searchService.SearchProviders(message.ApprenticeshipId, message.PostCode, new Pagination { Page = pageNumber, Take = message.Take }, message.DeliveryModes, hasNonLevyContract);
+            var searchResults = await _searchService.SearchProviders(message.ApprenticeshipId, message.PostCode, new Pagination { Page = pageNumber, Take = message.Take }, message.DeliveryModes, hasNonLevyContract,message.NationalProvidersOnly);
 
             if (searchResults.TotalResults > 0 && !searchResults.Hits.Any())
             {

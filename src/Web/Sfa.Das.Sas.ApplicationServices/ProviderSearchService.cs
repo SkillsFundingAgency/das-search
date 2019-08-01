@@ -7,6 +7,7 @@ using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using SFA.DAS.NLog.Logger;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.ApplicationServices
@@ -62,7 +63,7 @@ namespace Sfa.Das.Sas.ApplicationServices
         }
 
 
-        public async Task<ProviderSearchResults> SearchProviders(string apprenticeshipId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool hasNonLevyContract)
+        public async Task<ProviderSearchResults> SearchProviders(string apprenticeshipId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool hasNonLevyContract, bool showNationalOnly)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -105,7 +106,8 @@ namespace Sfa.Das.Sas.ApplicationServices
                 var filter = new ProviderSearchFilter
                 {
                     DeliveryModes = deliveryModes,
-                    HasNonLevyContract = hasNonLevyContract
+                    HasNonLevyContract = hasNonLevyContract,
+                    ShowNationalOnly = showNationalOnly
                 };
 
                 var searchResults = await _providerSearchProvider.SearchProvidersByLocation(apprenticeshipId, coordinates, pagination.Page, takeElements, filter);

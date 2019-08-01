@@ -17,11 +17,13 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private FatOrchestrator _sut;
         private Mock<IApprenticeshipSearchService> _apprenticeshipSearchServicetMock;
         private Mock<IFatSearchResultsViewModelMapper> _FatResultsViewModelMock;
+        private Mock<IFatSearchFilterViewModelMapper> _fatSearchFilterViewModelMapper;
 
         private  SearchQueryViewModel _searchQueryViewModel = new SearchQueryViewModel();
 
         private ApprenticeshipSearchResults _searchResults = new ApprenticeshipSearchResults();
         private FatSearchResultsViewModel _searchResultsViewModel = new FatSearchResultsViewModel();
+        private FatSearchFilterViewModel _searchFilterViewModel = new FatSearchFilterViewModel();
 
         [SetUp]
         public void Setup()
@@ -29,12 +31,15 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _apprenticeshipSearchServicetMock = new Mock<IApprenticeshipSearchService>(MockBehavior.Strict);
             _FatResultsViewModelMock = new Mock<IFatSearchResultsViewModelMapper>(MockBehavior.Strict);
+            _fatSearchFilterViewModelMapper = new Mock<IFatSearchFilterViewModelMapper>();
 
             _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).ReturnsAsync(_searchResults);
 
             _FatResultsViewModelMock.Setup(s => s.Map(_searchResults)).Returns(_searchResultsViewModel);
 
-            _sut = new FatOrchestrator(_apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object);
+            _fatSearchFilterViewModelMapper.Setup(s => s.Map(_searchResults,_searchQueryViewModel)).Returns(_searchFilterViewModel);
+
+            _sut = new FatOrchestrator(_apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object, _fatSearchFilterViewModelMapper.Object);
         }
 
         [Test]
@@ -66,6 +71,29 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             result.Should().BeOfType<FatSearchResultsViewModel>();
 
             _FatResultsViewModelMock.Verify(v => v.Map(_searchResults));
+
+
+        }
+
+        [Test]
+        public void Then_FatSearchFilterViewModel_Is_Returned()
+        {
+            _searchQueryViewModel.Keywords = "keyword";
+
+            var result = _sut.GetSearchFilters(_searchQueryViewModel);
+
+            result.Should().BeOfType<FatSearchFilterViewModel>();
+        }
+        [Test]
+        public void Then_Search_Filter_Is_Mapped_To_ViewModel()
+        {
+            _searchQueryViewModel.Keywords = "keyword";
+
+            var result = _sut.GetSearchFilters(_searchQueryViewModel);
+
+            result.Should().BeOfType<FatSearchFilterViewModel>();
+
+            _fatSearchFilterViewModelMapper.Verify(v => v.Map(_searchResults,_searchQueryViewModel));
 
 
         }
