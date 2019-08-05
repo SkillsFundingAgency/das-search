@@ -190,7 +190,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Basket\ApprenticeshipFavouritesBasketStore.cs" />
     <Compile Include="FeatureToggles\IgnoreSslCertificateFeature.cs" />
     <Compile Include="Mapping\ApprenticeshipSearchResultsItemMapping.cs" />
     <Compile Include="Mapping\IProviderSearchResultsMapper.cs" />

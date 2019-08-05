@@ -2,19 +2,18 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using Sfa.Das.Sas.ApplicationServices.Interfaces;
-using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Shared.Basket.Interfaces;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
-namespace Sfa.Das.Sas.Infrastructure.Basket
+namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
 {
-    public class ApprenticeshipFavouritesBasketStore : IApprenticeshipFavouritesBasketStore
+    internal class ApprenticeshipFavouritesBasketStore : IApprenticeshipFavouritesBasketStore
     {
         private const string CacheItemPrefix = "EmpFav-";
         private readonly IDistributedCache _cache;
-        private readonly IApprenticehipFavouritesBasketStoreConfig _config;
+        private readonly ApprenticehipFavouritesBasketStoreConfig _config;
 
-        public ApprenticeshipFavouritesBasketStore(IDistributedCache cache, IApprenticehipFavouritesBasketStoreConfig config)
+        public ApprenticeshipFavouritesBasketStore(IDistributedCache cache, ApprenticehipFavouritesBasketStoreConfig config)
         {
             _cache = cache;
             _config = config;
