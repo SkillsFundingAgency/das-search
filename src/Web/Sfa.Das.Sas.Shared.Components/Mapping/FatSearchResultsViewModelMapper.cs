@@ -6,18 +6,18 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public class FatSearchResultsViewModelMapper : IFatSearchResultsViewModelMapper
     {
-        private IFatSearchResultsItemViewModelMapper _fatSearchResultsItemViewModelMapper;
+        private IApprenticeshipItemViewModelMapper _apprenticeshipItemViewModelMapper;
 
-        public FatSearchResultsViewModelMapper(IFatSearchResultsItemViewModelMapper fatSearchResultsItemViewModelMapper)
+        public FatSearchResultsViewModelMapper(IApprenticeshipItemViewModelMapper apprenticeshipItemViewModelMapper)
         {
-            _fatSearchResultsItemViewModelMapper = fatSearchResultsItemViewModelMapper;
+            _apprenticeshipItemViewModelMapper = apprenticeshipItemViewModelMapper;
         }
 
         public FatSearchResultsViewModel Map(ApprenticeshipSearchResults source)
         {
             var item = new FatSearchResultsViewModel()
             {
-                SearchResults = source.Results?.Select(s => _fatSearchResultsItemViewModelMapper.Map(s)),
+                SearchResults = source.Results?.Select(s => _apprenticeshipItemViewModelMapper.Map(s)),
                 TotalResults = source.TotalResults,
                 LastPage = source.LastPage,
                 SearchQuery = {

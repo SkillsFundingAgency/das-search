@@ -187,8 +187,10 @@
     <Compile Include="IApprenticeshipSearchProvider.cs" />
     <Compile Include="Logging\ApprenticeshipSearchLogEntry.cs" />
     <Compile Include="Logging\HttpErrorLogEntry.cs" />
-    <Compile Include="Models\ApprenticeshipFavourite.cs" />
-    <Compile Include="Models\ApprenticeshipFavouritesBasket.cs" />
+    <Compile Include="Models\ApprenticeshipFavouriteRead.cs" />
+    <Compile Include="Models\ApprenticeshipFavouriteWrite.cs" />
+    <Compile Include="Models\ApprenticeshipFavouritesBasketRead.cs" />
+    <Compile Include="Models\ApprenticeshipFavouritesBasketWrite.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
     <Compile Include="Models\ApprenticeshipType.cs" />

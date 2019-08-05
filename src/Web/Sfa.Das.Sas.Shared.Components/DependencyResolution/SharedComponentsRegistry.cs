@@ -62,7 +62,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             AddApiSearchServices(services, configuration);
 
-            services.AddTransient<IFatSearchResultsItemViewModelMapper, FatSearchResultsItemViewModelMapper>();
+            services.AddTransient<IApprenticeshipItemViewModelMapper, ApprenticeshipItemViewModelMapper>();
             services.AddTransient<IFatSearchResultsViewModelMapper, FatSearchResultsViewModelMapper>();
             services.AddTransient<IFrameworkDetailsViewModelMapper, FrameworkDetailsViewModelMapper>();
             services.AddTransient<IStandardDetailsViewModelMapper, StandardsDetailsViewModelMapper>();
@@ -73,6 +73,8 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
             services.AddTransient<IFeedbackViewModelMapper, FeedbackViewModelMapper>();
             services.AddTransient<ITrainingProviderDetailsViewModelMapper, TrainingProviderDetailsViewModelMapper>();
+            services.AddTransient<IBasketViewModelMapper,BasketViewModelMapper>();
+            services.AddTransient<IApprenticeshipBasketItemViewModelMapper, ApprenticeshipBasketItemViewModelMapper>();
 
         }
 
@@ -160,6 +162,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
             services.AddTransient<IFatOrchestrator, FatOrchestrator>();
             services.AddTransient<ITrainingProviderOrchestrator, TrainingProviderOrchestrator>();
+            services.AddTransient<IBasketOrchestrator, BasketOrchestrator>();
         }
     }
 }

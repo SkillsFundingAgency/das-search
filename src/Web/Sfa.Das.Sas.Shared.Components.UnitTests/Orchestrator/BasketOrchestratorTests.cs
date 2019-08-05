@@ -13,6 +13,7 @@ using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
@@ -27,24 +28,24 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
         private string _basketId = "12345678-abcd-1234-abcd-0123456789ab";
 
-        private ApprenticeshipFavouritesBasket _apprenticeshipFavouritesBasket = new ApprenticeshipFavouritesBasket()
+        private ApprenticeshipFavouritesBasketRead _apprenticeshipFavouritesBasket = new ApprenticeshipFavouritesBasketRead()
         {
-            new ApprenticeshipFavourite()
+            new ApprenticeshipFavouriteRead()
             {
                 ApprenticeshipId = "123"
             },
-            new ApprenticeshipFavourite()
+            new ApprenticeshipFavouriteRead()
             {
                 ApprenticeshipId = "123-12-12"
             }
         };
 
-        private BasketViewModel _basketViewModel;
+        private BasketViewModel<ApprenticeshipBasketItemViewModel> _basketViewModel;
 
         [SetUp]
         public void Setup()
         {
-            _basketViewModel = new BasketViewModel()
+            _basketViewModel = new BasketViewModel<ApprenticeshipBasketItemViewModel>()
             {
                 BasketId = Guid.Parse(_basketId)
             };
@@ -53,8 +54,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _basketViewModelMapperMock = new Mock<IBasketViewModelMapper>();
             _cookieManagerMock = new Mock<ICookieManager>();
 
-            _basketViewModelMapperMock.Setup(s => s.Map(new ApprenticeshipFavouritesBasket())).Returns(new BasketViewModel());
-            _basketViewModelMapperMock.Setup(s => s.Map(_apprenticeshipFavouritesBasket)).Returns(_basketViewModel);
+            _basketViewModelMapperMock.Setup(s => s.Map(new ApprenticeshipFavouritesBasketRead(),It.IsAny<Guid>())).Returns(new BasketViewModel<ApprenticeshipBasketItemViewModel>());
+            _basketViewModelMapperMock.Setup(s => s.Map(_apprenticeshipFavouritesBasket, It.IsAny<Guid>())).Returns(_basketViewModel);
 
             _sut = new BasketOrchestrator(_mediatorMock.Object,_cookieManagerMock.Object,_basketViewModelMapperMock.Object);
         }
@@ -80,7 +81,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             var result = _sut.GetBasket().Result;
 
-            _basketViewModelMapperMock.Verify(s => s.Map(_apprenticeshipFavouritesBasket), Times.Once);
+            _basketViewModelMapperMock.Verify(s => s.Map(_apprenticeshipFavouritesBasket,It.IsAny<Guid>()), Times.Once);
 
             result.BasketId.Should().HaveValue();
             result.Should().BeEquivalentTo(_basketViewModel);
@@ -90,13 +91,13 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public void When_getting_invalid_basket_with_cookie_Then_model_with()
         {
             _cookieManagerMock.Setup(s => s.Get(It.IsAny<string>())).Returns(_basketId);
-            _mediatorMock.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new ApprenticeshipFavouritesBasket());
+            _mediatorMock.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new ApprenticeshipFavouritesBasketRead());
 
             _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object);
 
             var result = _sut.GetBasket().Result;
 
-            _basketViewModelMapperMock.Verify(s => s.Map(new ApprenticeshipFavouritesBasket()), Times.Once);
+            _basketViewModelMapperMock.Verify(s => s.Map(new ApprenticeshipFavouritesBasketRead(),It.IsAny<Guid>()), Times.Once);
 
 
             result.BasketId.Should().NotHaveValue();

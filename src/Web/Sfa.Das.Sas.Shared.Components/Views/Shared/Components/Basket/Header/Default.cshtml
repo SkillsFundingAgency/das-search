@@ -3,14 +3,11 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 
-<h1>Basket</h1>
 
-<ul>
-    @foreach (var apprenticeship in Model.Items)
-    {
-        <li>
-            <partial name="Components/Basket/Details/_apprenticeshipItem" for="@apprenticeship"/>
-        </li>
-    }
-</ul>
+<h1>Your favourite apprenticeships and training providers</h1>
 
+<div>
+    
+    <span>@Model.Items.Count()</span> Apprenticeships
+    <span>@Model.Items.SelectMany(w => w.TrainingProvider).Count()</span> Training provider(s)
+</div>

@@ -2,19 +2,19 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public class ApprenticeshipFavourite
+    public class ApprenticeshipFavouriteWrite
     {
-        public ApprenticeshipFavourite()
+        public ApprenticeshipFavouriteWrite()
         {
             Ukprns = new List<int>();
         }
 
-        public ApprenticeshipFavourite(string apprenticeshipId) : this()
+        public ApprenticeshipFavouriteWrite(string apprenticeshipId) : this()
         {
             ApprenticeshipId = apprenticeshipId;
         }
 
-        public ApprenticeshipFavourite(string apprenticeshipId, int ukprn) : this(apprenticeshipId)
+        public ApprenticeshipFavouriteWrite(string apprenticeshipId, int ukprn) : this(apprenticeshipId)
         {
             Ukprns.Add(ukprn);
         }

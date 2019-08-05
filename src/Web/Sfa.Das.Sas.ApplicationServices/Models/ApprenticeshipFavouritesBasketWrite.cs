@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public class ApprenticeshipFavouritesBasket : List<ApprenticeshipFavourite>
+    public class ApprenticeshipFavouritesBasketWrite : List<ApprenticeshipFavouriteWrite>
     {
     }
 }

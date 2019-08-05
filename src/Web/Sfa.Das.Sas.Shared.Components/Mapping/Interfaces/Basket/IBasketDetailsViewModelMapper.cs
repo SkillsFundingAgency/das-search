@@ -1,11 +1,12 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+﻿using System;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public interface IBasketViewModelMapper
     {
-        BasketViewModel Map(ApprenticeshipFavouritesBasket item);
+        BasketViewModel<ApprenticeshipBasketItemViewModel> Map(ApprenticeshipFavouritesBasketRead item, Guid basketId);
     }
 }
