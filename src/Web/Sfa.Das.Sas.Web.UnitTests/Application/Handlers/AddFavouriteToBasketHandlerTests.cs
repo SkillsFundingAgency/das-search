@@ -11,6 +11,8 @@ using Sfa.Das.Sas.ApplicationServices.Commands;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.ApplicationServices.Interfaces;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Shared.Basket.Interfaces;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using MediatR;
-using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Queries
 {

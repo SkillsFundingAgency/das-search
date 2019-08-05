@@ -338,6 +338,10 @@
       <Project>{88f7cfd8-69a0-49a9-83f5-d729def4afca}</Project>
       <Name>Sfa.Das.Sas.Resources</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj">
+      <Project>{83DBB4A0-6A9E-44BA-A172-D21EB707E508}</Project>
+      <Name>Sfa.Das.Sas.Shared.Basket</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Components\Sfa.Das.Sas.Shared.Components.csproj">
       <Project>{6DAA7395-344E-4BE2-AD02-6DF17DEAC358}</Project>
       <Name>Sfa.Das.Sas.Shared.Components</Name>
