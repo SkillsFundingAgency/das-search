@@ -9,5 +9,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public ProviderFilterOptions SearchOption { get; set; }
 
         public bool HasNonLevyContract { get; set; }
+
+        public bool ShowNationalOnly { get; set; }
     }
 }

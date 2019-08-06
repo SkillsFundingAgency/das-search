@@ -9,6 +9,7 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using SFA.DAS.NLog.Logger;
+using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider;
 
 namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 {
@@ -17,14 +18,16 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly IMediator _mediator;
         private readonly ISearchResultsViewModelMapper _searchResultsViewModelMapper;
         private readonly ITrainingProviderDetailsViewModelMapper _trainingProviderDetailsViewModelMapper;
+        private readonly ITrainingProviderSearchFilterViewModelMapper _trainingProviderSearchFilterViewModelMapper;
         private readonly ILog _logger;
 
-        public TrainingProviderOrchestrator(IMediator mediator, ISearchResultsViewModelMapper searchResultsViewModelMapper, ILog logger, ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper)
+        public TrainingProviderOrchestrator(IMediator mediator, ISearchResultsViewModelMapper searchResultsViewModelMapper, ILog logger, ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper)
         {
             _mediator = mediator;
             _searchResultsViewModelMapper = searchResultsViewModelMapper;
             _logger = logger;
             _trainingProviderDetailsViewModelMapper = trainingProviderDetailsViewModelMapper;
+            _trainingProviderSearchFilterViewModelMapper = trainingProviderSearchFilterViewModelMapper;
         }
 
         public async Task<SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>> GetSearchResults(TrainingProviderSearchViewModel searchQueryModel)
@@ -34,6 +37,8 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             {
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
+                DeliveryModes = searchQueryModel.DeliveryModes,
+                NationalProvidersOnly = searchQueryModel.NationalProvidersOnly,
                 Page = searchQueryModel.Page
             });
 
@@ -45,6 +50,27 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                
             }
             return _searchResultsViewModelMapper.Map(results, searchQueryModel);
+        }
+
+        public async Task<TrainingProviderSearchFilterViewModel> GetSearchFilter(TrainingProviderSearchViewModel searchQueryModel)
+        {
+            var results = await _mediator.Send(new ProviderSearchQuery()
+            {
+                ApprenticeshipId = searchQueryModel.ApprenticeshipId,
+                PostCode = searchQueryModel.Postcode,
+                DeliveryModes =searchQueryModel.DeliveryModes,
+                NationalProvidersOnly = searchQueryModel.NationalProvidersOnly
+            });
+
+            var model = _trainingProviderSearchFilterViewModelMapper.Map(results, searchQueryModel);
+
+            if (results.Success == false)
+            {
+                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
+
+            }
+
+            return model;
         }
 
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)

@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 
-namespace Sfa.Das.Sas.ApplicationServices.Models
+namespace Sfa.Das.Sas.Shared.Basket.Models
 {
-    public class ApprenticeshipFavouriteWrite
+    public class ApprenticeshipFavourite
     {
-        public ApprenticeshipFavouriteWrite()
+        public ApprenticeshipFavourite()
         {
             Ukprns = new List<int>();
         }
 
-        public ApprenticeshipFavouriteWrite(string apprenticeshipId) : this()
+        public ApprenticeshipFavourite(string apprenticeshipId) : this()
         {
             ApprenticeshipId = apprenticeshipId;
         }
 
-        public ApprenticeshipFavouriteWrite(string apprenticeshipId, int ukprn) : this(apprenticeshipId)
+        public ApprenticeshipFavourite(string apprenticeshipId, int ukprn) : this(apprenticeshipId)
         {
             Ukprns.Add(ukprn);
         }

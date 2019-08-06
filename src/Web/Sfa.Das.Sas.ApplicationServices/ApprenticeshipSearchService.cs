@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             var takeElements = take == 0 ? _paginationSettings.DefaultResultsAmount : take;
             var results = await _searchProvider.SearchByKeyword(keywords, page, takeElements, order, selectedLevels);
 
-            _logger.Info(
+             _logger.Info(
                 "Apprenticeship Keyword Search",
                 new ApprenticeshipSearchLogEntry { TotalHits = results?.TotalResults ?? -1, Keywords = keywords?.Split(' ') ?? new[] { "[empty]" } });
 

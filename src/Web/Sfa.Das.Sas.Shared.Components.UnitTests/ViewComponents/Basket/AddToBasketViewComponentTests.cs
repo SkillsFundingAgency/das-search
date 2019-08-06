@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Shared.Basket.Models;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Basket;

@@ -176,7 +176,6 @@
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
-    <Compile Include="Interfaces\IApprenticeshipFavouritesBasketStore.cs" />
     <Compile Include="Interfaces\IProviderNameSearchProvider.cs" />
     <Compile Include="Interfaces\IProviderNameSearchService.cs" />
     <Compile Include="IProviderSearchProvider.cs" />
@@ -188,9 +187,7 @@
     <Compile Include="Logging\ApprenticeshipSearchLogEntry.cs" />
     <Compile Include="Logging\HttpErrorLogEntry.cs" />
     <Compile Include="Models\ApprenticeshipFavouriteRead.cs" />
-    <Compile Include="Models\ApprenticeshipFavouriteWrite.cs" />
     <Compile Include="Models\ApprenticeshipFavouritesBasketRead.cs" />
-    <Compile Include="Models\ApprenticeshipFavouritesBasketWrite.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
     <Compile Include="Models\ApprenticeshipType.cs" />
@@ -267,6 +264,10 @@
     <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj">
       <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
       <Name>Sfa.Das.Sas.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj">
+      <Project>{83DBB4A0-6A9E-44BA-A172-D21EB707E508}</Project>
+      <Name>Sfa.Das.Sas.Shared.Basket</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
         {
             var service = new ProviderSearchServiceBuilder().Build();
 
-            var result = await service.SearchProviders("123-2-1", postcode, _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders("123-2-1", postcode, _pageZeroWithTenItems, null, false,false);
 
             Assert.That(result.PostCodeMissing, Is.True);
         }
@@ -40,7 +40,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
                 .SetupPostCodeLookup(x => x.GetLatLongFromPostCode(It.IsAny<string>()), Task.FromResult(_testPostCodeCoordinate))
                 .SetupProviderSearchProvider(x => x.SearchProvidersByLocation(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()), Task.FromResult(searchResults));
 
-            var result = await service.SearchProviders(TestApprenticeshipId, postcode, _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders(TestApprenticeshipId, postcode, _pageZeroWithTenItems, null, false, false);
 
             result.ApprenticeshipId.Should().Be(TestApprenticeshipId);
         }
@@ -65,7 +65,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
                 .SetupProviderSearchProvider(x => x.SearchProvidersByLocation(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()), Task.FromResult(searchResults));
             var service = builder.Build();
 
-            var result = await service.SearchProviders(TestApprenticeshipId, TestPostCode, _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders(TestApprenticeshipId, TestPostCode, _pageZeroWithTenItems, null, false, false);
 
             result.Hits.Should().BeSameAs(searchResults.Hits);
 
@@ -94,7 +94,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
 
 
             var service = builder.Build();
-            var result = await service.SearchProviders(TestApprenticeshipId, TestPostCode, _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders(TestApprenticeshipId, TestPostCode, _pageZeroWithTenItems, null, false, false);
 
             result.TotalResults.Should().Be(0);
             result.ApprenticeshipId.Should().Be(TestApprenticeshipId);
@@ -120,7 +120,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
                     .SetupProviderSearchProvider(x => x.SearchProvidersByLocation(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()), Task.FromResult(searchResults));
 
 
-            var result = await service.SearchProviders(frameworkId, "AS2 3SS", _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders(frameworkId, "AS2 3SS", _pageZeroWithTenItems, null, false, false);
 
             result.TotalResults.Should().Be(testTotalResults);
         }
@@ -137,7 +137,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
                 .SetupProviderSearchProvider(x => x.SearchProvidersByLocation(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()), Task.FromResult(searchResults));
 
 
-            var result = await service.SearchProviders("123", "AS3 4AS", _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders("123", "AS3 4AS", _pageZeroWithTenItems, null, false, false);
 
             result.Title.Should().Be(TestApprenticeshipTitle);
         }
@@ -154,7 +154,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
                 .SetupProviderSearchProvider(x => x.SearchProvidersByLocation(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()), Task.FromResult(searchResults));
 
 
-            var result = await service.SearchProviders("123-2-1", "AS3 4AS", _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders("123-2-1", "AS3 4AS", _pageZeroWithTenItems, null, false, false);
 
             result.Title.Should().Be(TestApprenticeshipTitle);
         }
@@ -168,7 +168,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.ApplicationServices
                    .SetupProviderSearchProviderException<SearchException>(x => x.
                         SearchProvidersByLocation(It.IsAny<string>(), It.IsAny<Coordinate>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<ProviderSearchFilter>()));
 
-            var result = await service.SearchProviders("-1", "AS3 4AS", _pageZeroWithTenItems, null, false);
+            var result = await service.SearchProviders("-1", "AS3 4AS", _pageZeroWithTenItems, null, false, false);
 
             result.ResponseCode.Should().Be(LocationLookupResponse.ApprenticeshipNotFound);
         }

@@ -25,12 +25,13 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
             var formattedKeywords = QueryHelper.FormatQuery(keywords);
 
             var selectedLevelsCsv = (selectedLevels != null && selectedLevels.Any()) ? string.Join(",", selectedLevels) : null;
+            
+            var results = _apprenticeshipSearchResultsMapping.Map(await _apprenticeshipProgrammeApiClient.SearchActiveApprenticeshipsAsync(formattedKeywords, page, take, order, selectedLevelsCsv));
+            results.SearchTerm = keywords;
+            results.SortOrder = order.ToString();
+            results.SelectedLevels = selectedLevels;
 
-            var results = _apprenticeshipProgrammeApiClient.SearchActiveApprenticeshipsAsync(formattedKeywords, page, take, order, selectedLevelsCsv);
-
-            var mappedResults = _apprenticeshipSearchResultsMapping.Map(await results);
-            mappedResults.SearchTerm = keywords;
-            return mappedResults;
+            return results;
         }
     }
 }

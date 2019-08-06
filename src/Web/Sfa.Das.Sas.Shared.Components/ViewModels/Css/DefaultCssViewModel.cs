@@ -34,6 +34,20 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
                 }
             }
         }
+        public string ButtonSecondary
+        {
+            get
+            {
+                if (String.IsNullOrWhiteSpace(ClassModifier))
+                {
+                    return $"{ClassPrefix}button";
+                }
+                else
+                {
+                    return $"{ClassPrefix}button {ClassPrefix}button--{ClassModifier}";
+                }
+            }
+        }
         public string Link => $"{ClassPrefix}link";
 
         public string List
@@ -80,7 +94,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         public string DetailsSummary => $"{Details}__summary";
         public string DetailsSummaryText => $"{Details}__summary-text";
         public string DetailsText => $"{Details}__text";
-
         public string VisuallyHidden => $"{ClassPrefix}visually-hidden";
     }
 }

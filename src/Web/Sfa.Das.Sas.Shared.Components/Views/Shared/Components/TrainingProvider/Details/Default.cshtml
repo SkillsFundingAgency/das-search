@@ -9,7 +9,7 @@
     <h2 class="@CssViewModel.HeadingLarge @CssViewModel.UtilitiesCss.Margin("Top",0)">Training Information</h2>
 
 
-    <h2 class="@CssViewModel.HeadingMedium">ABOUT THE APPRENTICESHIP</h2>
+    <h2 class="@CssViewModel.HeadingMedium">About the apprenticeship</h2>
 
     @Html.MarkdownToHtml(Model.Apprenticeship.Overview)
 
@@ -17,7 +17,7 @@
 
 <div class="das-provider-information">
 
-    <h2 class="@CssViewModel.HeadingMedium">PROVIDER INFORMATION</h2>
+    <h2 class="@CssViewModel.HeadingMedium">Provider information</h2>
     
     @Html.MarkdownToHtml(Model.MarketingInfo)
 
@@ -51,22 +51,22 @@
         <dl class="@CssViewModel.List">
             <dt class="das-provider-rating-reviews__definition-list--title">Excellent</dt>
             <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--excellent" max="22" value="@Model.Feedback.ExcellentFeedbackCount"></progress>
+                <progress class="das-provider__progress-bar das-provider__progress-bar--excellent" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.ExcellentFeedbackCount"></progress>
                 <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.ExcellentFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
             </dd>
             <dt class="das-provider-rating-reviews__definition-list--title">Good</dt>
             <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--good" max="22" value="@Model.Feedback.GoodFeedbackCount"></progress>
+                <progress class="das-provider__progress-bar das-provider__progress-bar--good" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.GoodFeedbackCount"></progress>
                 <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.GoodFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
             </dd>
             <dt class="das-provider-rating-reviews__definition-list--title">Poor</dt>
             <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--poor" max="22" value="@Model.Feedback.PoorFeedbackCount"></progress>
+                <progress class="das-provider__progress-bar das-provider__progress-bar--poor" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.PoorFeedbackCount"></progress>
                 <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.PoorFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
             </dd>
             <dt class="das-provider-rating-reviews__definition-list--title">Very poor</dt>
             <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--very-poor" max="22" value="@Model.Feedback.VeryPoorFeedbackCount"></progress>
+                <progress class="das-provider__progress-bar das-provider__progress-bar--very-poor" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.VeryPoorFeedbackCount"></progress>
                 <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.VeryPoorFeedbackCount review <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
             </dd>
         </dl>

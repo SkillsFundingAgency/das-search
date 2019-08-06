@@ -7,10 +7,11 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
-using Sfa.Das.Sas.ApplicationServices.Interfaces;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Shared.Basket.Interfaces;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
@@ -29,7 +30,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
             _sut = new GetBasketHandler(new NullLogger<GetBasketHandler>(), _mockBasket.Object,_mockStandard.Object,_mockFramework.Object,_mockProviders.Object);
 
-            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync(new ApprenticeshipFavouritesBasketRead { new ApprenticeshipFavouriteRead() { ApprenticeshipId = "23" } });
+            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync(new ApprenticeshipFavouritesBasket { new ApprenticeshipFavourite() { ApprenticeshipId = "23" } });
         }
 
         [Test]
@@ -52,7 +53,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public async Task Handle_ReturnsEmptyBasket_IfBasketDoesNotExist()
         {
-            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync((ApprenticeshipFavouritesBasketRead)null);
+            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync((ApprenticeshipFavouritesBasket)null);
 
             var basketId = Guid.NewGuid();
 

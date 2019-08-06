@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -7,6 +8,8 @@ using Sfa.Das.Sas.ApplicationServices.Interfaces;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Shared.Basket.Interfaces;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -35,42 +38,48 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             var basket = await _basketStore.GetAsync(request.BasketId);
 
+            ApprenticeshipFavouritesBasketRead basketRead = null;
 
-            if(basket != null)
+            if (basket != null)
             {
+                basketRead = new ApprenticeshipFavouritesBasketRead();
+
                 Parallel.ForEach(basket, (basketItem) =>
                 {
-                    EnrichApprenticeshipInfo(basketItem);
+                  basketRead.Add(EnrichApprenticeshipInfo(basketItem));
                 });
             }
 
-
-            return basket ?? new ApprenticeshipFavouritesBasketRead();
+            return basketRead ?? new ApprenticeshipFavouritesBasketRead();
         }
 
-        private void EnrichApprenticeshipInfo(ApprenticeshipFavouriteRead apprenticeship)
+        private ApprenticeshipFavouriteRead EnrichApprenticeshipInfo(ApprenticeshipFavourite apprenticeship)
         {
+            var apprenticeshipRead = new ApprenticeshipFavouriteRead(){ApprenticeshipId = apprenticeship.ApprenticeshipId};
+
             if (IsFramework(apprenticeship.ApprenticeshipId))
             {
-                EnrichFramework(apprenticeship);
+                EnrichFramework(apprenticeshipRead);
             }
             else
             {
-                EnrichStandard(apprenticeship);
+                EnrichStandard(apprenticeshipRead);
             }
 
-            EnrichTrainingProvider(apprenticeship);
+            EnrichTrainingProvider(apprenticeshipRead, apprenticeship.Ukprns);
+
+            return apprenticeshipRead;
         }
 
-        private void EnrichTrainingProvider(ApprenticeshipFavouriteRead apprenticeship)
+        private void EnrichTrainingProvider(ApprenticeshipFavouriteRead apprenticeship, IEnumerable<int> ukprns)
         {
-            Parallel.ForEach(apprenticeship.Providers, async item =>
+            Parallel.ForEach(ukprns, async ukprnItem =>
             {
-                var providerResult = await _getProvider.GetProviderDetails(item.Ukprn);
+                var providerResult = await _getProvider.GetProviderDetails(ukprnItem);
 
                 if (providerResult != null)
                 {
-                    item.Name = providerResult.ProviderName;
+                    apprenticeship.Providers.Add(new ApprenticeshipProviderFavourite(ukprnItem){Name = providerResult.ProviderName});
                 }
             });
         }

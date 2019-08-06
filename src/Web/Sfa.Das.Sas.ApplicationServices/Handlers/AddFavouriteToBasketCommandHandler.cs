@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Sfa.Das.Sas.ApplicationServices.Commands;
-using Sfa.Das.Sas.ApplicationServices.Interfaces;
-using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.Shared.Basket.Interfaces;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -23,18 +23,18 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public async Task<Guid> Handle(AddFavouriteToBasketCommand request, CancellationToken cancellationToken)
         {
-            ApprenticeshipFavouritesBasketWrite basket;
+            ApprenticeshipFavouritesBasket basket;
             Guid basketId;
 
             if (request.BasketId.HasValue)
             {
                 basketId = request.BasketId.Value;
-                basket = (await _basketStore.GetAsync(request.BasketId.Value)).ToBasketWrite() ?? new ApprenticeshipFavouritesBasketWrite();
+                basket = (await _basketStore.GetAsync(request.BasketId.Value)) ?? new ApprenticeshipFavouritesBasket();
 
                 if (basket.Any(x => x.ApprenticeshipId == request.ApprenticeshipId))
                     return basketId; // Ignore if saving just an apprenticehip that is already in the basket.
 
-                basket.Add(new ApprenticeshipFavouriteWrite(request.ApprenticeshipId));
+                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
             }
             else
             {
@@ -48,12 +48,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return basketId;
         }
 
-        private static void CreateNewBasket(AddFavouriteToBasketCommand request, out ApprenticeshipFavouritesBasketWrite basket, out Guid basketId)
+        private static void CreateNewBasket(AddFavouriteToBasketCommand request, out ApprenticeshipFavouritesBasket basket, out Guid basketId)
         {
             basketId = Guid.NewGuid();
-            basket = new ApprenticeshipFavouritesBasketWrite
+            basket = new ApprenticeshipFavouritesBasket
                 {
-                    new ApprenticeshipFavouriteWrite(request.ApprenticeshipId)
+                    new ApprenticeshipFavourite(request.ApprenticeshipId)
                 };
         }
     }

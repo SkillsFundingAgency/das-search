@@ -16,5 +16,10 @@
         public string RadioItem => $"{_classPrefix}radios__item";
         public string RadioGroupInline => $"{Radio} radios--inline";
         public string Label => $"{_classPrefix}label";
+
+        public string Checkbox => $"{_classPrefix}checkbox";
+        public string CheckboxInput => $"{_classPrefix}checkboxes__input";
+        public string CheckboxItem => $"{_classPrefix}checkboxes__item";
+        public string CheckboxLabel => $"{Label} {_classPrefix}checkboxes__label";
     }
 }

@@ -28,5 +28,6 @@
     <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj" />
+    <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj" />
   </ItemGroup>
 </Project>
