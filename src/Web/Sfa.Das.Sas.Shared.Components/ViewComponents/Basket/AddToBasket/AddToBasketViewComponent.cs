@@ -40,21 +40,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             {
                 var basket = await _mediator.Send(new GetBasketQuery { BasketId = cookieBasketId.Value });
 
-                if (!ukprn.HasValue)
-                {
-                    return basket.Any(x => x.ApprenticeshipId == apprenticeshipId);
-                }
-                else
-                {
-                    var apprenticeship = basket.SingleOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
-
-                    if (apprenticeship == null)
-                        return false;
-                    else
-                    {
-                        return ukprn.HasValue ? apprenticeship.Ukprns.Contains(ukprn.Value) : false;
-                    }
-                }
+                return basket.IsInBasket(apprenticeshipId, ukprn);
             }
 
             return false;
