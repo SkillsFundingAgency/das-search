@@ -34,9 +34,12 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
             _mockCookieManager = new Mock<ICookieManager>();
             _mockCookieManager.Setup(x => x.Get(CookieNames.BasketCookie)).Returns(cookieBasketId.ToString());
 
+            var basket = new ApprenticeshipFavouritesBasket();
+            basket.Add("420-2-1", UKPRN);
+
             _mockMediator = new Mock<IMediator>();
             _mockMediator.Setup(x => x.Send(It.Is<GetBasketQuery>(a => a.BasketId == cookieBasketId), default(CancellationToken)))
-                .ReturnsAsync(new ApprenticeshipFavouritesBasket { new ApprenticeshipFavourite { ApprenticeshipId = "420-2-1", Ukprns = new List<int> { UKPRN } } });
+                .ReturnsAsync(basket);
 
             _sut = new AddToBasketViewComponent(_mockMediator.Object, _mockCookieManager.Object)
             {

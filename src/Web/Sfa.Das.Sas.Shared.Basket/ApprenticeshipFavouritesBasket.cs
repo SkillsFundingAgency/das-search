@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Sfa.Das.Sas.Shared.Basket.Models
 {
-    public class ApprenticeshipFavouritesBasket : List<ApprenticeshipFavourite>
+    public class ApprenticeshipFavouritesBasket : IEnumerable<ApprenticeshipFavourite>
     {
+        private readonly List<ApprenticeshipFavourite> _items = new List<ApprenticeshipFavourite>();
+
         public ApprenticeshipFavouritesBasket()
         {
             Id = Guid.NewGuid();
@@ -13,27 +16,32 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
         public Guid Id { get; set; }
 
-        public bool Update(string apprenticeshipId)
+        public IEnumerator<ApprenticeshipFavourite> GetEnumerator()
         {
-            if (this.Any(x => x.ApprenticeshipId == apprenticeshipId))
+            return _items.GetEnumerator();
+        }
+
+        public bool Add(string apprenticeshipId)
+        {
+            if (_items.Any(x => x.ApprenticeshipId == apprenticeshipId))
             {
                 return false;
             }
             else
             {
-                this.Add(new ApprenticeshipFavourite(apprenticeshipId));
+                _items.Add(new ApprenticeshipFavourite(apprenticeshipId));
 
                 return true;
             }
         }
 
-        public bool Update(string apprenticeshipId, int ukprn)
+        public bool Add(string apprenticeshipId, int ukprn)
         {
-            var apprenticeship = this.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
+            var apprenticeship = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
 
             if (apprenticeship == null)
             {
-                this.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn));
+                _items.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn));
                 return true;
             }
 
@@ -48,5 +56,12 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
                 return true;
             }
         }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public ApprenticeshipFavourite this[int i] => _items[i];
     }
 }

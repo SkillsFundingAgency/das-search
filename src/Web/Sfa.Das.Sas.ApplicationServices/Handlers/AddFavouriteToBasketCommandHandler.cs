@@ -35,11 +35,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             {
                 if (request.Ukprn.HasValue)
                 {
-                    basketChanged = basket.Update(request.ApprenticeshipId, request.Ukprn.Value);
+                    basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
                 }
                 else
                 {
-                    basketChanged = basket.Update(request.ApprenticeshipId);
+                    basketChanged = basket.Add(request.ApprenticeshipId);
                 }
             }
 
@@ -59,11 +59,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (request.Ukprn.HasValue)
             {
-                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId, request.Ukprn.Value));
+                basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
             }
             else
             {
-                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
+                basket.Add(request.ApprenticeshipId);
             }
 
             return basket;
