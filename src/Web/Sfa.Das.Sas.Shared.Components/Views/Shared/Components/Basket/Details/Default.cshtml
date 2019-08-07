@@ -3,14 +3,11 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 
-<h1>Basket</h1>
-
-<ul>
+<ol class="list das-search-results__list das-search-results__list--employer basket">
     @foreach (var apprenticeship in Model.Items)
     {
-        <li>
-            <partial name="Components/Basket/Details/_apprenticeshipItem" for="@apprenticeship"/>
+        <li class="das-search-results__list-item">
+            <partial name="Components/Basket/Details/_apprenticeshipItem" for="@apprenticeship" />
         </li>
     }
-</ul>
-
+</ol>

@@ -4,32 +4,36 @@
 @inject ICssViewModel CssViewModel
 
 
-    <h2><a asp-action="Details" asp-route-apprenticeshipId="@Model.Id"> @Model.Title </a></h2>
-    
-    <div>
-        @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
-        {
-            <div class="@CssViewModel.WarningText">
-                <span class="@(CssViewModel.WarningText)__icon" aria-hidden="true"></span>
-                <strong class="@(CssViewModel.WarningText)__text">
-                    <span class="@(CssViewModel.WarningText)__assistive">Warning</span>
-                    This apprenticeship is closed to new starters from @Model.EffectiveTo.Value.ToLongDateString()
-                </strong>
-            </div>
-        }
 
-        <dl class="@CssViewModel.List  das-search-result__details">
+<div class="basket__item-header">
+    <h2 class="basket__item-heading">
+        <a asp-controller="Fat" asp-action="" asp-route-ApprenticeshipId="@Model.Id">@Model.Title</a>
+    </h2>
+</div>
+
+
+<div class="grid-row">
+    <div class="grid-column-one-half">
+        <dl class="@CssViewModel.List das-search-result__details">
             <dt class="das-search-result__details-title">Level:</dt>
             <dd class="das-search-result__details-definition">@Model.Level (Equivalent to @Model.EquivalentText)</dd>
             <dt class="das-search-result__details-title">Typical length:</dt>
             <dd class="das-search-result__details-definition">@Model.Duration months</dd>
+            <dt class="das-search-result__details-title">Apprenticeship Type:</dt>
+            <dd class="das-search-result__details-definition">@Model.ApprenticeshipType.ToString()</dd>
         </dl>
     </div>
-    
-    
-    <div>
-        @foreach (var trainingProviderSearchResultsItem in Model.TrainingProvider)
+    <div class="grid-column-one-half">
+        @if (Model.TrainingProvider.Count > 0)
         {
-    <partial name="_trainingProviderItem" for="@trainingProviderSearchResultsItem"/>
+            <h3>@Model.TrainingProvider.Count training providers</h3>
+            @foreach (var trainingProviderSearchResultsItem in Model.TrainingProvider)
+            {
+                <ul>
+                    <li>  <partial name="_trainingProviderItem" for="@trainingProviderSearchResultsItem" /> </li>
+                </ul>
+            }
         }
+       
     </div>
+</div>

@@ -3,6 +3,4 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 
-<ul>
-    <li><a asp-controller="TrainingProvider" asp-action="Details" asp-route-Ukprn="@Model.Ukprn">@Model.Name</a></li>
-</ul>
+<a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@Model.Ukprn">Provider name</a> 
