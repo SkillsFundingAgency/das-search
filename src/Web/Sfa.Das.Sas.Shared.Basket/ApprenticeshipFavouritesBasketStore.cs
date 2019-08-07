@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
@@ -36,7 +37,8 @@ namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
                 return null;
             }
 
-            var basket = JsonConvert.DeserializeObject<ApprenticeshipFavouritesBasket>(json);
+            var basketItems = JsonConvert.DeserializeObject<IList<ApprenticeshipFavourite>>(json);
+            var basket = new ApprenticeshipFavouritesBasket(basketItems);
             var basketIdValue = key.Remove(0, CacheItemPrefix.Length);
             basket.Id = Guid.Parse(basketIdValue);
 

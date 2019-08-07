@@ -14,12 +14,12 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             Id = Guid.NewGuid();
         }
 
-        public Guid Id { get; set; }
-
-        public IEnumerator<ApprenticeshipFavourite> GetEnumerator()
+        internal ApprenticeshipFavouritesBasket(IList<ApprenticeshipFavourite> basketItems)
         {
-            return _items.GetEnumerator();
+            _items.AddRange(basketItems);
         }
+
+        public Guid Id { get; set; }
 
         public bool Add(string apprenticeshipId)
         {
@@ -57,9 +57,14 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             }
         }
 
+        public IEnumerator<ApprenticeshipFavourite> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return _items.GetEnumerator();
         }
 
         public ApprenticeshipFavourite this[int i] => _items[i];
