@@ -30,7 +30,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
             _sut = new GetBasketHandler(new NullLogger<GetBasketHandler>(), _mockBasket.Object,_mockStandard.Object,_mockFramework.Object,_mockProviders.Object);
 
-            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync(new ApprenticeshipFavouritesBasket { new ApprenticeshipFavourite() { ApprenticeshipId = "23" } });
+            var basket = new ApprenticeshipFavouritesBasket();
+            basket.Add("23");
+
+            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync(basket);
         }
 
         [Test]
