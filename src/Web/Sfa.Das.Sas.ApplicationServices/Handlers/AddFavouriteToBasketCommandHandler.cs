@@ -23,38 +23,60 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public async Task<Guid> Handle(AddFavouriteToBasketCommand request, CancellationToken cancellationToken)
         {
-            ApprenticeshipFavouritesBasket basket;
-            Guid basketId;
+            bool basketChanged;
+            var basket = await GetBasket(request);
 
-            if (request.BasketId.HasValue)
+            if (basket == null)
             {
-                basketId = request.BasketId.Value;
-                basket = await _basketStore.GetAsync(request.BasketId.Value) ?? new ApprenticeshipFavouritesBasket();
-
-                if (basket.Any(x => x.ApprenticeshipId == request.ApprenticeshipId))
-                    return basketId; // Ignore if saving just an apprenticehip that is already in the basket.
-
-                basket.Add(new ApprenticeshipFavourite(request.ApprenticeshipId));
+                basketChanged = true;
+                basket = CreateNewBasket(request);
             }
             else
             {
-                CreateNewBasket(request, out basket, out basketId);
+                if (request.Ukprn.HasValue)
+                {
+                    basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
+                }
+                else
+                {
+                    basketChanged = basket.Add(request.ApprenticeshipId);
+                }
             }
 
-            await _basketStore.UpdateAsync(basketId, basket);
+            if (basketChanged)
+            {
+                await _basketStore.UpdateAsync(basket);
+            }
 
-            _logger.LogDebug("Updated apprenticeship basket: {basketId}", basketId);
+            _logger.LogDebug("Updated apprenticeship basket: {basketId}", basket.Id);
 
-            return basketId;
+            return basket.Id;
         }
 
-        private static void CreateNewBasket(AddFavouriteToBasketCommand request, out ApprenticeshipFavouritesBasket basket, out Guid basketId)
+        private static ApprenticeshipFavouritesBasket CreateNewBasket(AddFavouriteToBasketCommand request)
         {
-            basketId = Guid.NewGuid();
-            basket = new ApprenticeshipFavouritesBasket
-                {
-                    new ApprenticeshipFavourite(request.ApprenticeshipId)
-                };
+            var basket = new ApprenticeshipFavouritesBasket();
+
+            if (request.Ukprn.HasValue)
+            {
+                basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
+            }
+            else
+            {
+                basket.Add(request.ApprenticeshipId);
+            }
+
+            return basket;
+        }
+
+        private async Task<ApprenticeshipFavouritesBasket> GetBasket(AddFavouriteToBasketCommand request)
+        {
+            if (request.BasketId.HasValue)
+            {
+                return await _basketStore.GetAsync(request.BasketId.Value);
+            }
+
+            return null;
         }
     }
 }

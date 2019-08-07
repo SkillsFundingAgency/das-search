@@ -7,6 +7,6 @@ namespace Sfa.Das.Sas.Shared.Basket.Interfaces
     public interface IApprenticeshipFavouritesBasketStore
     {
         Task<ApprenticeshipFavouritesBasket> GetAsync(Guid basketId);
-        Task UpdateAsync(Guid basketId, ApprenticeshipFavouritesBasket basket);
+        Task UpdateAsync(ApprenticeshipFavouritesBasket basket);
     }
 }
