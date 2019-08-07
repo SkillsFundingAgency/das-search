@@ -57,6 +57,25 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             }
         }
 
+        public bool IsInBasket(string apprenticeshipId, int? ukprn = null)
+        {
+            if (!ukprn.HasValue)
+            {
+                return _items.Any(x => x.ApprenticeshipId == apprenticeshipId);
+            }
+            else
+            {
+                var apprenticeship = _items.SingleOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
+
+                if (apprenticeship == null)
+                    return false;
+                else
+                {
+                    return ukprn.HasValue ? apprenticeship.Ukprns.Contains(ukprn.Value) : false;
+                }
+            }
+        }
+
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator()
         {
             return _items.GetEnumerator();
