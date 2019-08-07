@@ -3,12 +3,10 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 
-
 <form action="@Model.SaveBasketUrl" method="post">
     <div class="@(CssViewModel.FormCss.FormGroup)">
-        <button type="submit" class="@(CssViewModel.Button)" asp-for="@Model.BasketId">
+        <button type="submit" class="@(CssViewModel.Button)" name="@nameof(Model.BasketId)" value="@Model.BasketId.ToString()">
             CREATE AN ACCOUNT
         </button>
     </div>
 </form>
-
