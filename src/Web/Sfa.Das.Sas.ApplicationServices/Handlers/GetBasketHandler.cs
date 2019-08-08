@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -40,7 +41,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             ApprenticeshipFavouritesBasketRead basketRead = null;
 
-            if (basket != null)
+            if (basket != null && basket.Any())
             {
                 basketRead = new ApprenticeshipFavouritesBasketRead(basket);
 
