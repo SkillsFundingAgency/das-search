@@ -69,7 +69,24 @@ WriteLiteral(">\r\n\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n            <header");
+WriteLiteral(">\r\n\r\n            <div");
+
+WriteLiteral(" class=\"notification\"");
+
+WriteLiteral(" data-cookie-confirmation=\"true\"");
+
+WriteLiteral(">\r\n                <section");
+
+WriteLiteral(" aria-live=\"polite\"");
+
+WriteLiteral(" role=\"region\"");
+
+WriteLiteral(">\r\n                    <h2");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(">Your cookie settings were saved</h2>\r\n                </section>\r\n            </" +
+"div>\r\n\r\n            <header");
 
 WriteLiteral(" class=\"page-header\"");
 
@@ -78,26 +95,170 @@ WriteLiteral(">\r\n                <div>\r\n                    <h1");
 WriteLiteral(" class=\"heading-xlarge\"");
 
 WriteLiteral(">\r\n                        Cookies\r\n                    </h1>\r\n                </" +
-"div>\r\n            </header>\r\n\r\n            <div");
+"div>\r\n            </header>\r\n\r\n\r\n            <h2");
+
+WriteLiteral(" class=\"heading-large\"");
+
+WriteLiteral(">Cookie settings</h2>\r\n\r\n            <div");
+
+WriteLiteral(" class=\"das-cookie-settings__no-js\"");
+
+WriteLiteral(@">
+                <p>We use Javascript to set most of our cookies. Unfortunately Javascript is not running on your browser, so you cannot change your settings. You can try:</p>
+                <ul>
+                    <li>reloading the page</li>
+                    <li>turning on Javascript in your browser</li>
+                </ul>
+            </div>
+
+    
+           
+                <form");
+
+WriteLiteral(" data-module=\"cookie-settings\"");
+
+WriteLiteral(">\r\n\r\n                    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n                        <fieldset");
+
+WriteLiteral(" class=\"inline\"");
+
+WriteLiteral(" aria-describedby=\"hint-cookie-1\"");
+
+WriteLiteral(">\r\n                            <legend>\r\n                                <h3");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(">Analytics</h3>\r\n                            </legend>\r\n\r\n                       " +
+"     <p");
+
+WriteLiteral(" id=\"hint-cookie-1\"");
+
+WriteLiteral(" class=\"form-hint\"");
+
+WriteLiteral(">\r\n                                Analytics description\r\n                       " +
+"     </p>\r\n\r\n                            <label");
+
+WriteLiteral(" for=\"radio-cookie-analytics-0\"");
+
+WriteLiteral(" class=\"block-label selection-button-radio\"");
+
+WriteLiteral(">\r\n                                <input");
+
+WriteLiteral(" type=\"radio\"");
+
+WriteLiteral(" name=\"cookies-AnalyticsConsent\"");
+
+WriteLiteral(" id=\"radio-cookie-analytics-0\"");
+
+WriteLiteral(" value=\"on\"");
+
+WriteLiteral(">\r\n                                On\r\n                            </label>\r\n\r\n  " +
+"                          <label");
+
+WriteLiteral(" for=\"radio-cookie-analytics-1\"");
+
+WriteLiteral(" class=\"block-label selection-button-radio\"");
+
+WriteLiteral(">\r\n                                <input");
+
+WriteLiteral(" type=\"radio\"");
+
+WriteLiteral(" name=\"cookies-AnalyticsConsent\"");
+
+WriteLiteral(" id=\"radio-cookie-analytics-1\"");
+
+WriteLiteral(" value=\"off\"");
+
+WriteLiteral(">\r\n                                Off\r\n                            </label>\r\n\r\n " +
+"                       </fieldset>\r\n                    </div>\r\n\r\n              " +
+"      <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n                        <fieldset");
+
+WriteLiteral(" class=\"inline\"");
+
+WriteLiteral(" aria-describedby=\"hint-cookie-1\"");
+
+WriteLiteral(">\r\n                            <legend>\r\n                                <h3");
+
+WriteLiteral(" class=\"heading-medium\"");
+
+WriteLiteral(">Marketing</h3>\r\n                            </legend>\r\n\r\n                       " +
+"     <p");
+
+WriteLiteral(" id=\"hint-cookie-1\"");
+
+WriteLiteral(" class=\"form-hint\"");
+
+WriteLiteral(">\r\n                                Marketing description\r\n                       " +
+"     </p>\r\n\r\n                            <label");
+
+WriteLiteral(" for=\"radio-cookie-marketing-0\"");
+
+WriteLiteral(" class=\"block-label selection-button-radio\"");
+
+WriteLiteral(">\r\n                                <input");
+
+WriteLiteral(" type=\"radio\"");
+
+WriteLiteral(" name=\"cookies-MarketingConsent\"");
+
+WriteLiteral(" id=\"radio-cookie-marketing-0\"");
+
+WriteLiteral(" value=\"on\"");
+
+WriteLiteral(">\r\n                                On\r\n                            </label>\r\n    " +
+"                            \r\n                            <label");
+
+WriteLiteral(" for=\"radio-cookie-marketing-1\"");
+
+WriteLiteral(" class=\"block-label selection-button-radio\"");
+
+WriteLiteral(">\r\n                                <input");
+
+WriteLiteral(" type=\"radio\"");
+
+WriteLiteral(" name=\"cookies-MarketingConsent\"");
+
+WriteLiteral(" id=\"radio-cookie-marketing-1\"");
+
+WriteLiteral(" value=\"off\"");
+
+WriteLiteral(">\r\n                                Off\r\n                            </label>\r\n   " +
+"                          \r\n                        </fieldset>\r\n               " +
+"     </div>\r\n                    <button");
+
+WriteLiteral(" class=\"govuk-button\"");
+
+WriteLiteral(" type=\"submit\"");
+
+WriteLiteral(">Save changes</button>\r\n                </form>\r\n\r\n\r\n                <div");
 
 WriteLiteral(" class=\"summary\"");
 
 WriteLiteral(@">
-                <p>The Education and Skills Funding Agency (ESFA) puts small files (known as ‘cookies’) onto your computer to collect information about how you browse our sites.</p>
-            </div>
+                    <p>The Education and Skills Funding Agency (ESFA) puts small files (known as ‘cookies’) onto your computer to collect information about how you browse our sites.</p>
+                </div>
 
-            <p>Cookies are used to: </p>
 
-            <ul");
+
+                <p>Cookies are used to: </p>
+
+                <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(@">
-                <li>measure how you use our websites so they can be updated and improved based on your needs</li>
-                <li>remember the notifications you’ve seen so that we don’t show them to you again</li>
-            </ul>
+                    <li>measure how you use our websites so they can be updated and improved based on your needs</li>
+                    <li>remember the notifications you’ve seen so that we don’t show them to you again</li>
+                </ul>
 
-            <div");
+                <div");
 
 WriteLiteral(" role=\"note\"");
 
@@ -106,63 +267,63 @@ WriteLiteral(" aria-label=\"Information\"");
 WriteLiteral(" class=\"panel panel-border-narrow\"");
 
 WriteLiteral(@">
-                <p>SFA cookies aren’t used to identify you personally.</p>
-            </div>
+                    <p>SFA cookies aren’t used to identify you personally.</p>
+                </div>
 
-            <p>
-                You’ll normally see a message on the site before we store a cookie on your computer.
-            </p>
+                <p>
+                    You’ll normally see a message on the site before we store a cookie on your computer.
+                </p>
 
-            <p>
-                Find out more about <a");
+                <p>
+                    Find out more about <a");
 
 WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1654), Tuple.Create("\"", 1676)
+WriteAttribute("href", Tuple.Create(" href=\"", 5002), Tuple.Create("\"", 5024)
             
-            #line 41 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 1661), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
+            #line 114 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 5009), Tuple.Create<System.Object, System.Int32>(Model.AboutUrl
             
             #line default
             #line hidden
-, 1661), false)
+, 5009), false)
 );
 
-WriteLiteral(">how to manage cookies.</a>\r\n            </p>\r\n\r\n            <h2");
+WriteLiteral(">how to manage cookies.</a>\r\n                </p>\r\n\r\n                <h2");
 
 WriteLiteral(" class=\"heading-large\"");
 
-WriteLiteral(">\r\n                How cookies are used by SFA\r\n            </h2>\r\n\r\n            " +
-"<h3");
+WriteLiteral(">\r\n                    How cookies are used by SFA\r\n                </h2>\r\n\r\n    " +
+"            <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(@">
-                Measuring website usage (Google Analytics)
-            </h3>
+                    Measuring website usage (Google Analytics)
+                </h3>
 
-            <p>
-                We use Google Analytics software to collect information about how you use SFA sites. We do this to help make sure our sites are meeting the needs of its users and to help us make improvements.
-            </p>
+                <p>
+                    We use Google Analytics software to collect information about how you use SFA sites. We do this to help make sure our sites are meeting the needs of its users and to help us make improvements.
+                </p>
 
-            <p>Google Analytics stores information about:</p>
+                <p>Google Analytics stores information about:</p>
 
-            <ul");
+                <ul");
 
 WriteLiteral(" class=\"list list-bullet\"");
 
 WriteLiteral(@">
-                <li>the pages you visit on SFA sites </li>
-                <li>how long you spend on each SFA page</li>
-                <li>how you got to our sites</li>
-                <li>what you click on while you’re visiting our sites</li>
-            </ul>
+                    <li>the pages you visit on SFA sites </li>
+                    <li>how long you spend on each SFA page</li>
+                    <li>how you got to our sites</li>
+                    <li>what you click on while you’re visiting our sites</li>
+                </ul>
 
-            <p>We don’t collect or store your personal information (for example your name or address) so this information can’t be used to identify who you are. </p>
+                <p>We don’t collect or store your personal information (for example your name or address) so this information can’t be used to identify who you are. </p>
 
-            <div");
+                <div");
 
 WriteLiteral(" role=\"note\"");
 
@@ -170,227 +331,233 @@ WriteLiteral(" aria-label=\"Information\"");
 
 WriteLiteral(" class=\"panel panel-border-narrow\"");
 
-WriteLiteral(">\r\n                <p>We don’t allow Google to use or share our analytics data.</" +
-"p>\r\n            </div>\r\n\r\n            <p>Google Analytics sets the following coo" +
-"kies:</p>\r\n\r\n            <h3");
+WriteLiteral(">\r\n                    <p>We don’t allow Google to use or share our analytics dat" +
+"a.</p>\r\n                </div>\r\n\r\n                <p>Google Analytics sets the f" +
+"ollowing cookies:</p>\r\n\r\n                <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(@">
-                Universal Analytics
-            </h3>
+                    Universal Analytics
+                </h3>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Purpose</th>
-                        <th>Expires</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>_ga</td>
-                        <td>This helps us count how many people visit SFA sites by tracking if you’ve visited before</td>
-                        <td>2 years</td>
-                    </tr>
-                    <tr>
-                        <td>_gat</td>
-                        <td>Used to manage the rate at which page view requests are made</td>
-                        <td>10 minutes</td>
-                    </tr>
-                </tbody>
-            </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Expires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>_ga</td>
+                            <td>This helps us count how many people visit SFA sites by tracking if you’ve visited before</td>
+                            <td>2 years</td>
+                        </tr>
+                        <tr>
+                            <td>_gat</td>
+                            <td>Used to manage the rate at which page view requests are made</td>
+                            <td>10 minutes</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <p> 
-                You can <a");
+                <p>
+                    You can <a");
 
 WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3994), Tuple.Create("\"", 4017)
+WriteAttribute("href", Tuple.Create(" href=\"", 7533), Tuple.Create("\"", 7556)
             
-            #line 100 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 4001), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
+            #line 173 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 7540), Tuple.Create<System.Object, System.Int32>(Model.GoogleUrl
             
             #line default
             #line hidden
-, 4001), false)
+, 7540), false)
 );
 
-WriteLiteral(">opt out of Google Analytics cookies.</a>\r\n            </p>\r\n\r\n\r\n            <h3");
+WriteLiteral(">opt out of Google Analytics cookies.</a>\r\n                </p>\r\n\r\n\r\n            " +
+"    <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(@">
-                Application Insight
-            </h3>
-            <p>We use Microsoft Azure Application Insights to monitor and improve the performance</p>
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Purpose</th>
-                    <th>Expires</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>ai_session</td>
-                    <td>
-                        Allow us to track a user over current session.
-                    </td>
-                    <td>10 minutes</td>
-                </tr>
-                <tr>
-                    <td>ai_user</td>
-                    <td>
-                        Allow us to track a user over a longer period of time.
-                    </td>
-                    <td>1 year</td>
-                </tr>
+                    Application Insight
+                </h3>
+                <p>We use Microsoft Azure Application Insights to monitor and improve the performance</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Expires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ai_session</td>
+                            <td>
+                                Allow us to track a user over current session.
+                            </td>
+                            <td>10 minutes</td>
+                        </tr>
+                        <tr>
+                            <td>ai_user</td>
+                            <td>
+                                Allow us to track a user over a longer period of time.
+                            </td>
+                            <td>1 year</td>
+                        </tr>
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            <p>
-                Read more about <a");
+                <p>
+                    Read more about <a");
 
 WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5175), Tuple.Create("\"", 5211)
+WriteAttribute("href", Tuple.Create(" href=\"", 8918), Tuple.Create("\"", 8954)
             
-            #line 136 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 5182), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
+            #line 209 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 8925), Tuple.Create<System.Object, System.Int32>(Model.ApplicationInsightsUrl
             
             #line default
             #line hidden
-, 5182), false)
+, 8925), false)
 );
 
-WriteLiteral(">Application Insights data retention</a>\r\n            </p>\r\n\r\n            <h2");
+WriteLiteral(">Application Insights data retention</a>\r\n                </p>\r\n\r\n               " +
+" <h2");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">HotJar - user behaviour data </h2>\r\n\r\n            <p>We use HotJar to anonymousl" +
-"y monitor user behaviour and give us insight into how to fix user experience pro" +
-"blems.</p>\r\n\r\n            <table");
+WriteLiteral(">HotJar - user behaviour data </h2>\r\n\r\n                <p>We use HotJar to anonym" +
+"ously monitor user behaviour and give us insight into how to fix user experience" +
+" problems.</p>\r\n\r\n                <table");
 
 WriteLiteral(" class=\"privacyTable\"");
 
-WriteLiteral(">\r\n\r\n                <thead>\r\n                    <tr>\r\n                        <" +
-"th>\r\n                            Name\r\n                        </th>\r\n          " +
-"              <th>\r\n                            Purpose\r\n                       " +
-" </th>\r\n                        <th>\r\n                            Expires after\r" +
-"\n                        </th>\r\n                    </tr>\r\n                </the" +
-"ad>\r\n                <tbody>\r\n                    <tr>\r\n                        " +
-"<td>\r\n                            _hjClosedSurveyInvites\r\n                      " +
-"  </td>\r\n                        <td>\r\n                            This cookie i" +
+WriteLiteral(">\r\n\r\n                    <thead>\r\n                        <tr>\r\n                 " +
+"           <th>\r\n                                Name\r\n                         " +
+"   </th>\r\n                            <th>\r\n                                Purp" +
+"ose\r\n                            </th>\r\n                            <th>\r\n      " +
+"                          Expires after\r\n                            </th>\r\n    " +
+"                    </tr>\r\n                    </thead>\r\n                    <tb" +
+"ody>\r\n                        <tr>\r\n                            <td>\r\n          " +
+"                      _hjClosedSurveyInvites\r\n                            </td>\r" +
+"\n                            <td>\r\n                                This cookie i" +
 "s set once a visitor interacts with a Survey invitation modal popup. It is used " +
 "to ensure that the same invite does not re-appear if it has already been shown.\r" +
-"\n                        </td>\r\n                        <td>\r\n                  " +
-"          1 year\r\n                        </td>\r\n                    </tr>\r\n\r\n  " +
-"                  <tr>\r\n                        <td>\r\n                          " +
-"  _hjDonePolls\r\n                        </td>\r\n                        <td>\r\n   " +
-"                         This cookie is set once a visitor completes a poll usin" +
-"g the Feedback Poll widget. It is used to ensure that the same poll does not re-" +
-"appear if it has already been filled in.\r\n                        </td>\r\n       " +
-"                 <td>\r\n                            1 year\r\n                     " +
-"   </td>\r\n                    </tr>\r\n\r\n                    <tr>\r\n               " +
-"         <td>_hjMinimizedPolls</td>\r\n                        <td>This cookie is " +
-"set once a visitor minimizes a Feedback Poll widget. It is used to ensure that t" +
-"he widget stays minimizes when the visitor navigates through your site.</td>\r\n  " +
-"                      <td>\r\n                            1 year\r\n                " +
-"        </td>\r\n                    </tr>\r\n\r\n                    <tr>\r\n          " +
-"              <td>_hjDoneTestersWidgets</td>\r\n                        <td>This c" +
-"ookie is set once a visitor submits their information in the Recruit User Tester" +
-"s widget. It is used to ensure that the same form does not re-appear if it has a" +
-"lready been filled in.</td>\r\n                        <td>\r\n                     " +
-"       1 year\r\n                        </td>\r\n                    </tr>\r\n\r\n     " +
-"               <tr>\r\n                        <td>_hjMinimizedTestersWidgets</td>" +
-"\r\n                        <td>This cookie is set once a visitor minimizes a Recr" +
-"uit User Testers widget. It is used to ensure that the widget stays minimizes wh" +
-"en the visitor navigates through your site.</td>\r\n                        <td>\r\n" +
-"                            1 year\r\n                        </td>\r\n             " +
-"       </tr>\r\n\r\n                    <tr>\r\n                        <td>_hjInclude" +
-"dInSample</td>\r\n                        <td>This session cookie is set to let Ho" +
+"\n                            </td>\r\n                            <td>\r\n          " +
+"                      1 year\r\n                            </td>\r\n               " +
+"         </tr>\r\n\r\n                        <tr>\r\n                            <td>" +
+"\r\n                                _hjDonePolls\r\n                            </td" +
+">\r\n                            <td>\r\n                                This cookie" +
+" is set once a visitor completes a poll using the Feedback Poll widget. It is us" +
+"ed to ensure that the same poll does not re-appear if it has already been filled" +
+" in.\r\n                            </td>\r\n                            <td>\r\n     " +
+"                           1 year\r\n                            </td>\r\n          " +
+"              </tr>\r\n\r\n                        <tr>\r\n                           " +
+" <td>_hjMinimizedPolls</td>\r\n                            <td>This cookie is set " +
+"once a visitor minimizes a Feedback Poll widget. It is used to ensure that the w" +
+"idget stays minimizes when the visitor navigates through your site.</td>\r\n      " +
+"                      <td>\r\n                                1 year\r\n            " +
+"                </td>\r\n                        </tr>\r\n\r\n                        " +
+"<tr>\r\n                            <td>_hjDoneTestersWidgets</td>\r\n              " +
+"              <td>This cookie is set once a visitor submits their information in" +
+" the Recruit User Testers widget. It is used to ensure that the same form does n" +
+"ot re-appear if it has already been filled in.</td>\r\n                           " +
+" <td>\r\n                                1 year\r\n                            </td>" +
+"\r\n                        </tr>\r\n\r\n                        <tr>\r\n               " +
+"             <td>_hjMinimizedTestersWidgets</td>\r\n                            <t" +
+"d>This cookie is set once a visitor minimizes a Recruit User Testers widget. It " +
+"is used to ensure that the widget stays minimizes when the visitor navigates thr" +
+"ough your site.</td>\r\n                            <td>\r\n                        " +
+"        1 year\r\n                            </td>\r\n                        </tr>" +
+"\r\n\r\n                        <tr>\r\n                            <td>_hjIncludedInS" +
+"ample</td>\r\n                            <td>This session cookie is set to let Ho" +
 "tjar know whether that visitor is included in the sample which is used to genera" +
-"te funnels.</td>\r\n                        <td>\r\n                            1 ye" +
-"ar\r\n                        </td>\r\n                    </tr>\r\n\r\n                " +
-"</tbody>\r\n            </table>\r\n\r\n            <h3");
+"te funnels.</td>\r\n                            <td>\r\n                            " +
+"    1 year\r\n                            </td>\r\n                        </tr>\r\n\r\n" +
+"                    </tbody>\r\n                </table>\r\n\r\n                <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
 WriteLiteral(@">
-                Our introductory message
-            </h3>
+                    Our introductory message
+                </h3>
 
-            <p>You may see a pop-up welcome message when you first visit an SFA site. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again.</p>
+                <p>You may see a pop-up welcome message when you first visit an SFA site. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again.</p>
 
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Purpose</th>
-                    <th>Expires</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>seen_cookie_message</td>
-                    <td>Saves a message to let us know that you’ve seen our cookie message</td>
-                    <td>30 days</td>
-                </tr>
-                </tbody>
-            </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Expires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>seen_cookie_message</td>
+                            <td>Saves a message to let us know that you’ve seen our cookie message</td>
+                            <td>30 days</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <h3");
+                <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">\r\n                Government services\r\n            </h3>\r\n\r\n            <p>\r\n   " +
-"             Most services we link to are run by different government department" +
-"s, eg HM Revenue and Customs (<abbr");
+WriteLiteral(">\r\n                    Government services\r\n                </h3>\r\n\r\n            " +
+"    <p>\r\n                    Most services we link to are run by different gover" +
+"nment departments, eg HM Revenue and Customs (<abbr");
 
 WriteLiteral(" title=\"HM Revenue and Customs\"");
 
 WriteLiteral(">HMRC</abbr>) or the Home Office. These services may set additional cookies and, " +
-"if so, will have their own cookies policy.\r\n            </p>\r\n\r\n            <h3");
+"if so, will have their own cookies policy.\r\n                </p>\r\n\r\n            " +
+"    <h3");
 
 WriteLiteral(" class=\"heading-medium\"");
 
-WriteLiteral(">\r\n                Our performance survey\r\n            </h3>\r\n\r\n            <p>\r\n" +
-"                We use <a");
+WriteLiteral(">\r\n                    Our performance survey\r\n                </h3>\r\n\r\n         " +
+"       <p>\r\n                    We use <a");
 
 WriteLiteral(" rel=\"external\"");
 
 WriteLiteral(" target=\"_blank\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 10092), Tuple.Create("\"", 10123)
+WriteAttribute("href", Tuple.Create(" href=\"", 14279), Tuple.Create("\"", 14310)
             
-            #line 254 "..\..\Views\Start\Cookies.cshtml"
-, Tuple.Create(Tuple.Create("", 10099), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
+            #line 327 "..\..\Views\Start\Cookies.cshtml"
+, Tuple.Create(Tuple.Create("", 14286), Tuple.Create<System.Object, System.Int32>(Model.SurveyProviderUrl
             
             #line default
             #line hidden
-, 10099), false)
+, 14286), false)
 );
 
 WriteLiteral(">SurveyMonkey</a> to collect responses to the survey. If you take part, SurveyMon" +
 "key will save extra cookies to your computer to track your progress through it.\r" +
-"\n            </p>\r\n\r\n            <div");
+"\n                </p>\r\n\r\n                <div");
 
 WriteLiteral(" class=\"meta-data group\"");
 
-WriteLiteral(">\r\n                <p");
+WriteLiteral(">\r\n                    <p");
 
 WriteLiteral(" class=\"modmodified-date\"");
 
-WriteLiteral(">Last updated: 8 August 2016</p>\r\n            </div>\r\n        </div>\r\n    </div>\r" +
-"\n</main>");
+WriteLiteral(">Last updated: 8 August 2016</p>\r\n                </div>\r\n            </div>\r\n   " +
+"     </div>\r\n</main>");
 
         }
     }
