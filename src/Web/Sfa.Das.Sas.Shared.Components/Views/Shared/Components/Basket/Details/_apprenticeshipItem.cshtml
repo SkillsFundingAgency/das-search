@@ -12,8 +12,8 @@
 </div>
 
 
-<div class="grid-row">
-    <div class="grid-column-one-half">
+<div class="@CssViewModel.GridCss.Row">
+    <div class="@CssViewModel.GridCss.ColumnOneHalf">
         <dl class="@CssViewModel.List das-search-result__details">
             <dt class="das-search-result__details-title">Level:</dt>
             <dd class="das-search-result__details-definition">@Model.Level (Equivalent to @Model.EquivalentText)</dd>
@@ -23,14 +23,14 @@
             <dd class="das-search-result__details-definition">@Model.ApprenticeshipType.ToString()</dd>
         </dl>
     </div>
-    <div class="grid-column-one-half">
+    <div class="@CssViewModel.GridCss.ColumnOneHalf">
         @if (Model.TrainingProvider.Count > 0)
         {
             <h3>@Model.TrainingProvider.Count training providers</h3>
             @foreach (var trainingProviderSearchResultsItem in Model.TrainingProvider)
             {
                 <ul>
-                    <li> <a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn">Provider name</a> </li>
+                    <li> <a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn">@trainingProviderSearchResultsItem.Name</a> </li>
                 </ul>
             }
         }
