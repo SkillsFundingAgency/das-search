@@ -30,7 +30,7 @@
             @foreach (var trainingProviderSearchResultsItem in Model.TrainingProvider)
             {
                 <ul>
-                    <li>  <partial name="_trainingProviderItem" for="@trainingProviderSearchResultsItem" /> </li>
+                    <li> <a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn">Provider name</a> </li>
                 </ul>
             }
         }

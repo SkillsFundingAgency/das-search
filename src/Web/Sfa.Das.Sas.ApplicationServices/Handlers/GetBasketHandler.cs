@@ -42,46 +42,45 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (basket != null)
             {
-                basketRead = new ApprenticeshipFavouritesBasketRead();
+                basketRead = new ApprenticeshipFavouritesBasketRead(basket);
 
-                Parallel.ForEach(basket, (basketItem) =>
+                Parallel.ForEach(basketRead, (basketItem) =>
                 {
-                  basketRead.Add(EnrichApprenticeshipInfo(basketItem));
+                  EnrichApprenticeshipInfo(basketItem);
                 });
             }
 
             return basketRead ?? new ApprenticeshipFavouritesBasketRead();
         }
 
-        private ApprenticeshipFavouriteRead EnrichApprenticeshipInfo(ApprenticeshipFavourite apprenticeship)
+        private void EnrichApprenticeshipInfo(ApprenticeshipFavouriteRead apprenticeship)
         {
             var apprenticeshipRead = new ApprenticeshipFavouriteRead(){ApprenticeshipId = apprenticeship.ApprenticeshipId};
-
             if (IsFramework(apprenticeship.ApprenticeshipId))
             {
-                EnrichFramework(apprenticeshipRead);
+                EnrichFramework(apprenticeship);
             }
             else
             {
-                EnrichStandard(apprenticeshipRead);
+                EnrichStandard(apprenticeship);
             }
 
-            EnrichTrainingProvider(apprenticeshipRead, apprenticeship.Ukprns);
+            EnrichTrainingProvider(apprenticeship);
 
-            return apprenticeshipRead;
         }
 
-        private void EnrichTrainingProvider(ApprenticeshipFavouriteRead apprenticeship, IEnumerable<int> ukprns)
+        private void EnrichTrainingProvider(ApprenticeshipFavouriteRead apprenticeship)
         {
-            Parallel.ForEach(ukprns, async ukprnItem =>
+            foreach (var providerItem in apprenticeship.Providers)
             {
-                var providerResult = await _getProvider.GetProviderDetails(ukprnItem);
+                var providerResult = _getProvider.GetProviderDetails(providerItem.Ukprn).GetAwaiter().GetResult();
 
                 if (providerResult != null)
                 {
-                    apprenticeship.Providers.Add(new ApprenticeshipProviderFavourite(ukprnItem){Name = providerResult.ProviderName});
+                    providerItem.Name = providerResult.ProviderName;
                 }
-            });
+            }
+
         }
 
         private void EnrichFramework(ApprenticeshipFavouriteRead apprenticeship)

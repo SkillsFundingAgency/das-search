@@ -28,6 +28,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void Setup()
         {
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
+            _mockFramework = new Mock<IGetFrameworks>();
+            _mockStandard = new Mock<IGetStandards>();
+            _mockProviders = new Mock<IGetProviderDetails>();
+
             _sut = new GetBasketHandler(new NullLogger<GetBasketHandler>(), _mockBasket.Object,_mockStandard.Object,_mockFramework.Object,_mockProviders.Object);
 
             var basket = new ApprenticeshipFavouritesBasket();

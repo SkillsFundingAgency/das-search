@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
 
             _mockMediator = new Mock<IMediator>();
             _mockMediator.Setup(x => x.Send(It.Is<GetBasketQuery>(a => a.BasketId == cookieBasketId), default(CancellationToken)))
-                .ReturnsAsync(basket);
+                .ReturnsAsync(new ApprenticeshipFavouritesBasketRead(basket));
 
             _sut = new AddToBasketViewComponent(_mockMediator.Object, _mockCookieManager.Object)
             {
