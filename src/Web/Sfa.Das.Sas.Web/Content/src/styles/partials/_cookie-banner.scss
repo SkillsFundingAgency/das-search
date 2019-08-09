@@ -259,13 +259,7 @@
 }
 
 .das-cookie-banner__confirmation {
-    position: relative;
-    padding: 5px;
     display: none;
-}
-
-.das-cookie-banner__confirmation-message {
-    margin: 0;
 }
 
 .das-cookie-banner__hide-button {
@@ -273,7 +267,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
-    font-size: 1rem;
     line-height: 1.25;
     outline: 0;
     border: 0;
@@ -326,12 +319,12 @@
 }
 
 /* Modal variation */
-.global-cookie-message--modal {
+#global-cookie-message.global-cookie-message--modal {
     z-index: 10;
 }
 
 @media (min-width: 48.0625em) {
-    .global-cookie-message--modal {
+    #global-cookie-message.global-cookie-message--modal {
         position: fixed;
         width: 40%;
         left: 30%;
@@ -373,6 +366,7 @@
 
 .global-cookie-message--modal .das-cookie-banner__header {
     display: block;
+    margin-top: 0
 }
 
 .global-cookie-message--modal .das-cookie-banner__hide-button {

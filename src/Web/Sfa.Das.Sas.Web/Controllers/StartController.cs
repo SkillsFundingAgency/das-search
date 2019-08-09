@@ -37,7 +37,12 @@
             
             return View(cookieViewModel);
         }
-        
+
+        public ActionResult CookieDetails()
+        {
+            return View();
+        }
+
         [OutputCache(Duration = 86400)]
         public ContentResult RobotsText()
         {

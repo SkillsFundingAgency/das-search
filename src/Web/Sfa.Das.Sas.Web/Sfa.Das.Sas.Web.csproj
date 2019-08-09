@@ -509,6 +509,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_WhatEmployersAreSaying.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Start\CookieDetails.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CookieDetails.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Start\Cookies.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -652,6 +657,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\src\styles\custom-elements\_autocomplete.scss" />
     <Content Include="Content\src\styles\partials\_cookie-banner.scss" />
+    <Content Include="Content\src\styles\custom-elements\_notification.scss" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -820,6 +826,10 @@
       <LastGenOutput>_WhatEmployersAreSaying.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Shared\_CookieBanner.cshtml" />
+    <Content Include="Views\Start\CookieDetails.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CookieDetails.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
