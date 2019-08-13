@@ -33,7 +33,7 @@
             IMappingService mappingService,
             IMediator mediator,
             IButtonTextService buttonTextService,
-            IFundingBandService fundingBandService, 
+            IFundingBandService fundingBandService,
             IConfigurationSettings configurationSettings)
         {
             _logger = logger;
@@ -83,6 +83,11 @@
             var response = _mediator.Send(query);
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
+            viewModel.SearchViewModel = new ApprenticeshipSearchViewModel
+            {
+                ApprenticeshipInfoApiBaseUrl = _configurationSettings.ApprenticeshipApiBaseUrl,
+                SearchTerm = viewModel.SearchTerm
+            };
 
             if (response.StatusCode != ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound)
             {
