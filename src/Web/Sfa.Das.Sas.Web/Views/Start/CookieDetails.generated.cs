@@ -389,102 +389,105 @@ WriteLiteral(" class=\"cell-width-30\"");
 
 WriteLiteral(">\r\n                            Expires\r\n                        </th>\r\n          " +
 "          </tr>\r\n                </thead>\r\n                <tbody>\r\n            " +
-"        <tr>\r\n                        <td>\r\n                            __cfduid" +
-"\r\n                        </td>\r\n                        <td>\r\n                 " +
-"           Associated with sites using CloudFlare, this is used to make pages lo" +
-"ad more quickly\r\n                        </td>\r\n                        <td>\r\n  " +
-"                          3 months\r\n                        </td>\r\n             " +
-"       </tr>\r\n                    <tr>\r\n                        <td>\r\n          " +
-"                  APISID\r\n                        </td>\r\n                       " +
-" <td>\r\n                            YouTube may set this cookie on your computer " +
-"once you click on the YouTube video player\r\n                        </td>\r\n     " +
-"                   <td>\r\n                            2 years\r\n                  " +
-"      </td>\r\n                    </tr>\r\n                    <tr>\r\n              " +
-"          <td>\r\n                            CONSENT\r\n                        </t" +
-"d>\r\n                        <td><span>YouTube may set this cookie on your comput" +
-"er once you click on the YouTube video player</span></td>\r\n                     " +
-"   <td>\r\n                            20 years\r\n                        </td>\r\n  " +
-"                  </tr>\r\n                    <tr>\r\n                        <td>\r" +
-"\n                            HSID\r\n                        </td>\r\n              " +
-"          <td><span>YouTube may set this cookie on your computer once you click " +
-"on the YouTube video player</span></td>\r\n                        <td>\r\n         " +
-"                   2 years\r\n                        </td>\r\n                    <" +
-"/tr>\r\n                    <tr>\r\n                        <td>\r\n                  " +
-"          LOGIN_INFO\r\n                        </td>\r\n                        <td" +
-"><span>YouTube may set this cookie on your computer once you click on the YouTub" +
-"e video player</span></td>\r\n                        <td>\r\n                      " +
-"      18 months\r\n                        </td>\r\n                    </tr>\r\n     " +
-"               <tr>\r\n                        <td>\r\n                            P" +
-"REF\r\n                        </td>\r\n                        <td><span>YouTube ma" +
-"y set this cookie on your computer once you click on the YouTube video player</s" +
-"pan></td>\r\n                        <td>\r\n                            2 years\r\n  " +
+"        <tr>\r\n                        <td>FIU_User</td>\r\n                       " +
+" <td>This assists Google Analytics</td>\r\n                        <td>1 month</td" +
+">\r\n                    </tr>\r\n                    <tr>\r\n                        " +
+"<td>\r\n                            __cfduid\r\n                        </td>\r\n     " +
+"                   <td>\r\n                            Associated with sites using" +
+" CloudFlare, this is used to make pages load more quickly\r\n                     " +
+"   </td>\r\n                        <td>\r\n                            3 months\r\n  " +
 "                      </td>\r\n                    </tr>\r\n                    <tr>" +
-"\r\n                        <td>\r\n                            SAPISID\r\n           " +
-"             </td>\r\n                        <td><span>YouTube may set this cooki" +
-"e on your computer once you click on the YouTube video player</span></td>\r\n     " +
-"                   <td>\r\n                            2 years\r\n                  " +
-"      </td>\r\n                    </tr>\r\n                    <tr>\r\n              " +
-"          <td>\r\n                            SID\r\n                        </td>\r\n" +
-"                        <td><span>YouTube may set this cookie on your computer o" +
-"nce you click on the YouTube video player</span></td>\r\n                        <" +
-"td>\r\n                            2 years\r\n                        </td>\r\n       " +
-"             </tr>\r\n                    <tr>\r\n                        <td>\r\n    " +
-"                        SIDCC\r\n                        </td>\r\n                  " +
+"\r\n                        <td>\r\n                            APISID\r\n            " +
+"            </td>\r\n                        <td>\r\n                            You" +
+"Tube may set this cookie on your computer once you click on the YouTube video pl" +
+"ayer\r\n                        </td>\r\n                        <td>\r\n             " +
+"               2 years\r\n                        </td>\r\n                    </tr>" +
+"\r\n                    <tr>\r\n                        <td>\r\n                      " +
+"      CONSENT\r\n                        </td>\r\n                        <td><span>" +
+"YouTube may set this cookie on your computer once you click on the YouTube video" +
+" player</span></td>\r\n                        <td>\r\n                            2" +
+"0 years\r\n                        </td>\r\n                    </tr>\r\n             " +
+"       <tr>\r\n                        <td>\r\n                            HSID\r\n   " +
+"                     </td>\r\n                        <td><span>YouTube may set th" +
+"is cookie on your computer once you click on the YouTube video player</span></td" +
+">\r\n                        <td>\r\n                            2 years\r\n          " +
+"              </td>\r\n                    </tr>\r\n                    <tr>\r\n      " +
+"                  <td>\r\n                            LOGIN_INFO\r\n                " +
+"        </td>\r\n                        <td><span>YouTube may set this cookie on " +
+"your computer once you click on the YouTube video player</span></td>\r\n          " +
+"              <td>\r\n                            18 months\r\n                     " +
+"   </td>\r\n                    </tr>\r\n                    <tr>\r\n                 " +
+"       <td>\r\n                            PREF\r\n                        </td>\r\n  " +
+"                      <td><span>YouTube may set this cookie on your computer onc" +
+"e you click on the YouTube video player</span></td>\r\n                        <td" +
+">\r\n                            2 years\r\n                        </td>\r\n         " +
+"           </tr>\r\n                    <tr>\r\n                        <td>\r\n      " +
+"                      SAPISID\r\n                        </td>\r\n                  " +
 "      <td><span>YouTube may set this cookie on your computer once you click on t" +
 "he YouTube video player</span></td>\r\n                        <td>\r\n             " +
-"               3 months\r\n                        </td>\r\n                    </tr" +
-">\r\n                    <tr>\r\n                        <td>\r\n                     " +
-"       SSID\r\n                        </td>\r\n                        <td><span>Yo" +
-"uTube may set this cookie on your computer once you click on the YouTube video p" +
-"layer</span></td>\r\n                        <td>\r\n                            2 y" +
-"ears\r\n                        </td>\r\n                    </tr>\r\n                " +
-"    <tr>\r\n                        <td>\r\n                            VISITOR_INFO" +
-"1 _LIVE\r\n                        </td>\r\n                        <td><span>YouTub" +
-"e may set this cookie on your computer once you click on the YouTube video playe" +
-"r</span></td>\r\n                        <td>\r\n                            1 year\r" +
-"\n                        </td>\r\n                    </tr>\r\n                    <" +
-"tr>\r\n                        <td>\r\n                            YSC\r\n            " +
-"            </td>\r\n                        <td><span>YouTube may set this cookie" +
-" on your computer once you click on the YouTube video player</span></td>\r\n      " +
-"                  <td>\r\n                            When you close your browser\r" +
-"\n                        </td>\r\n                    </tr>\r\n                    <" +
-"tr>\r\n                        <td>\r\n                            _ga\r\n            " +
-"            </td>\r\n                        <td><span>YouTube may set this cookie" +
-" on your computer once you click on the YouTube video player</span></td>\r\n      " +
-"                  <td>\r\n                            1 year\r\n                    " +
-"    </td>\r\n                    </tr>\r\n                    <tr>\r\n                " +
-"        <td>\r\n                            .AspNetCore .Antiforgery\r\n            " +
-"            </td>\r\n                        <td>\r\n                            Thi" +
-"s enables the website to function properly\r\n                        </td>\r\n     " +
-"                   <td>\r\n                            When you close your browser" +
-"\r\n                        </td>\r\n                    </tr>\r\n                    " +
-"<tr>\r\n                        <td>\r\n                            AnalyticsConsent" +
-"\r\n                        </td>\r\n                        <td>\r\n                 " +
-"           This lets us know whether you\'ve given us permission to track your ac" +
-"tivity for analytics purposes\r\n                        </td>\r\n                  " +
-"      <td>\r\n                            1 year\r\n                        </td>\r\n " +
+"               2 years\r\n                        </td>\r\n                    </tr>" +
+"\r\n                    <tr>\r\n                        <td>\r\n                      " +
+"      SID\r\n                        </td>\r\n                        <td><span>YouT" +
+"ube may set this cookie on your computer once you click on the YouTube video pla" +
+"yer</span></td>\r\n                        <td>\r\n                            2 yea" +
+"rs\r\n                        </td>\r\n                    </tr>\r\n                  " +
+"  <tr>\r\n                        <td>\r\n                            SIDCC\r\n       " +
+"                 </td>\r\n                        <td><span>YouTube may set this c" +
+"ookie on your computer once you click on the YouTube video player</span></td>\r\n " +
+"                       <td>\r\n                            3 months\r\n             " +
+"           </td>\r\n                    </tr>\r\n                    <tr>\r\n         " +
+"               <td>\r\n                            SSID\r\n                        <" +
+"/td>\r\n                        <td><span>YouTube may set this cookie on your comp" +
+"uter once you click on the YouTube video player</span></td>\r\n                   " +
+"     <td>\r\n                            2 years\r\n                        </td>\r\n " +
 "                   </tr>\r\n                    <tr>\r\n                        <td>" +
-"\r\n                            BNES_.AspNetCore .Antiforgery\r\n                   " +
-"     </td>\r\n                        <td>\r\n                            This enabl" +
-"es the website to function properly\r\n                        </td>\r\n            " +
-"            <td>\r\n                            When you close your browser\r\n     " +
-"                   </td>\r\n                    </tr>\r\n                    <tr>\r\n " +
-"                       <td>\r\n                            BNES_samesite\r\n        " +
-"                </td>\r\n                        <td>\r\n                           " +
-" This enables the website to function properly\r\n                        </td>\r\n " +
-"                       <td>\r\n                            When you close your bro" +
-"wser\r\n                        </td>\r\n                    </tr>\r\n                " +
-"    <tr>\r\n                        <td>\r\n                            CookieConsen" +
-"t\r\n                        </td>\r\n                        <td>\r\n                " +
-"            This stores your cookie consent preferences\r\n                       " +
-" </td>\r\n                        <td>\r\n                            1 year\r\n      " +
-"                  </td>\r\n                    </tr>\r\n                    <tr>\r\n  " +
-"                      <td>\r\n                            MarketingConsent\r\n      " +
-"                  </td>\r\n                        <td>\r\n                         " +
-"   This stores your marketing cookie consent preferences\r\n                      " +
-"  </td>\r\n                        <td>\r\n                            1 year\r\n     " +
-"                   </td>\r\n                    </tr>\r\n                </tbody>\r\n " +
-"           </table>\r\n\r\n\r\n            <h3");
+"\r\n                            VISITOR_INFO1 _LIVE\r\n                        </td>" +
+"\r\n                        <td><span>YouTube may set this cookie on your computer" +
+" once you click on the YouTube video player</span></td>\r\n                       " +
+" <td>\r\n                            1 year\r\n                        </td>\r\n      " +
+"              </tr>\r\n                    <tr>\r\n                        <td>\r\n   " +
+"                         YSC\r\n                        </td>\r\n                   " +
+"     <td><span>YouTube may set this cookie on your computer once you click on th" +
+"e YouTube video player</span></td>\r\n                        <td>\r\n              " +
+"              When you close your browser\r\n                        </td>\r\n      " +
+"              </tr>\r\n                    <tr>\r\n                        <td>\r\n   " +
+"                         _ga\r\n                        </td>\r\n                   " +
+"     <td><span>YouTube may set this cookie on your computer once you click on th" +
+"e YouTube video player</span></td>\r\n                        <td>\r\n              " +
+"              1 year\r\n                        </td>\r\n                    </tr>\r\n" +
+"                    <tr>\r\n                        <td>\r\n                        " +
+"    .AspNetCore .Antiforgery\r\n                        </td>\r\n                   " +
+"     <td>\r\n                            This enables the website to function prop" +
+"erly\r\n                        </td>\r\n                        <td>\r\n             " +
+"               When you close your browser\r\n                        </td>\r\n     " +
+"               </tr>\r\n                    <tr>\r\n                        <td>\r\n  " +
+"                          AnalyticsConsent\r\n                        </td>\r\n     " +
+"                   <td>\r\n                            This lets us know whether y" +
+"ou\'ve given us permission to track your activity for analytics purposes\r\n       " +
+"                 </td>\r\n                        <td>\r\n                          " +
+"  1 year\r\n                        </td>\r\n                    </tr>\r\n            " +
+"        <tr>\r\n                        <td>\r\n                            BNES_.As" +
+"pNetCore .Antiforgery\r\n                        </td>\r\n                        <t" +
+"d>\r\n                            This enables the website to function properly\r\n " +
+"                       </td>\r\n                        <td>\r\n                    " +
+"        When you close your browser\r\n                        </td>\r\n            " +
+"        </tr>\r\n                    <tr>\r\n                        <td>\r\n         " +
+"                   BNES_samesite\r\n                        </td>\r\n               " +
+"         <td>\r\n                            This enables the website to function " +
+"properly\r\n                        </td>\r\n                        <td>\r\n         " +
+"                   When you close your browser\r\n                        </td>\r\n " +
+"                   </tr>\r\n                    <tr>\r\n                        <td>" +
+"\r\n                            CookieConsent\r\n                        </td>\r\n    " +
+"                    <td>\r\n                            This stores your cookie co" +
+"nsent preferences\r\n                        </td>\r\n                        <td>\r\n" +
+"                            1 year\r\n                        </td>\r\n             " +
+"       </tr>\r\n                    <tr>\r\n                        <td>\r\n          " +
+"                  MarketingConsent\r\n                        </td>\r\n             " +
+"           <td>\r\n                            This stores your marketing cookie c" +
+"onsent preferences\r\n                        </td>\r\n                        <td>\r" +
+"\n                            1 year\r\n                        </td>\r\n            " +
+"        </tr>\r\n                </tbody>\r\n            </table>\r\n\r\n\r\n            <" +
+"h3");
 
 WriteLiteral(" class=\"heading-small\"");
 
