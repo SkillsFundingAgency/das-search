@@ -92,8 +92,9 @@ WriteLiteral(">\r\n                <div>\r\n                    <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n                        Cookies\r\n                    </h1>\r\n                </" +
-"div>\r\n            </header>\r\n\r\n            <div");
+WriteLiteral(">\r\n                        Cookies on Finding Apprenticeship Training\r\n          " +
+"          </h1>\r\n                </div>\r\n            </header>\r\n\r\n            <d" +
+"iv");
 
 WriteLiteral(" class=\"das-cookie-settings__no-js\"");
 

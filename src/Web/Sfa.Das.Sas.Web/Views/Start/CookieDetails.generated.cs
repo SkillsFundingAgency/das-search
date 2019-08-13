@@ -245,271 +245,114 @@ WriteLiteral(">\r\n                            Expires\r\n                      
 "                <td>\r\n                            1 month\r\n                     " +
 "   </td>\r\n                    </tr>\r\n                    <tr>\r\n                 " +
 "       <td>\r\n                            MUID\r\n                        </td>\r\n  " +
-"                      <td>\r\n                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            1 year
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            NAP
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            1 month
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SRCHD
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            2 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SRCHHPGUSR
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            4 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SRCHUID
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            2 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SRCHUSR
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            4 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            _RwBf
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            4 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            MUIDB
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">Used by Bing, these record your actions after you've viewed or clicked an advert to measure its performance and tailor future advertising to you</span>
-                        </td>
-                        <td>
-                            1 month
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            _fbp
-                        </td>
-                        <td>
-                            These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising
-                        </td>
-                        <td>
-                            3 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            act
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            When you close your browser
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            c_user
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            1 year
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            datr
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            18 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            fr
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            1 year
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            presence
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            When you close your browser
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            sb
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            spin
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            wd
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            xs
-                        </td>
-                        <td>
-                            <span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">These help to deliver our advertising when you visit Facebook or a digital platform powered by Facebook Advertising</span>
-                        </td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2");
+"                      <td>\r\n                            <span>Used by Bing, thes" +
+"e record your actions after you\'ve viewed or clicked an advert to measure its pe" +
+"rformance and tailor future advertising to you</span>\r\n                        <" +
+"/td>\r\n                        <td>\r\n                            1 year\r\n        " +
+"                </td>\r\n                    </tr>\r\n                    <tr>\r\n    " +
+"                    <td>\r\n                            NAP\r\n                     " +
+"   </td>\r\n                        <td>\r\n                            <span>Used b" +
+"y Bing, these record your actions after you\'ve viewed or clicked an advert to me" +
+"asure its performance and tailor future advertising to you</span>\r\n             " +
+"           </td>\r\n                        <td>\r\n                            1 mo" +
+"nth\r\n                        </td>\r\n                    </tr>\r\n                 " +
+"   <tr>\r\n                        <td>\r\n                            SRCHD\r\n      " +
+"                  </td>\r\n                        <td>\r\n                         " +
+"   <span>Used by Bing, these record your actions after you\'ve viewed or clicked " +
+"an advert to measure its performance and tailor future advertising to you</span>" +
+"\r\n                        </td>\r\n                        <td>\r\n                 " +
+"           2 months\r\n                        </td>\r\n                    </tr>\r\n " +
+"                   <tr>\r\n                        <td>\r\n                         " +
+"   SRCHHPGUSR\r\n                        </td>\r\n                        <td>\r\n    " +
+"                        <span>Used by Bing, these record your actions after you\'" +
+"ve viewed or clicked an advert to measure its performance and tailor future adve" +
+"rtising to you</span>\r\n                        </td>\r\n                        <t" +
+"d>\r\n                            4 months\r\n                        </td>\r\n       " +
+"             </tr>\r\n                    <tr>\r\n                        <td>\r\n    " +
+"                        SRCHUID\r\n                        </td>\r\n                " +
+"        <td>\r\n                            <span>Used by Bing, these record your " +
+"actions after you\'ve viewed or clicked an advert to measure its performance and " +
+"tailor future advertising to you</span>\r\n                        </td>\r\n        " +
+"                <td>\r\n                            2 months\r\n                    " +
+"    </td>\r\n                    </tr>\r\n                    <tr>\r\n                " +
+"        <td>\r\n                            SRCHUSR\r\n                        </td>" +
+"\r\n                        <td>\r\n                            <span>Used by Bing, " +
+"these record your actions after you\'ve viewed or clicked an advert to measure it" +
+"s performance and tailor future advertising to you</span>\r\n                     " +
+"   </td>\r\n                        <td>\r\n                            4 months\r\n  " +
+"                      </td>\r\n                    </tr>\r\n                    <tr>" +
+"\r\n                        <td>\r\n                            _RwBf\r\n             " +
+"           </td>\r\n                        <td>\r\n                            <spa" +
+"n>Used by Bing, these record your actions after you\'ve viewed or clicked an adve" +
+"rt to measure its performance and tailor future advertising to you</span>\r\n     " +
+"                   </td>\r\n                        <td>\r\n                        " +
+"    4 months\r\n                        </td>\r\n                    </tr>\r\n        " +
+"            <tr>\r\n                        <td>\r\n                            MUID" +
+"B\r\n                        </td>\r\n                        <td>\r\n                " +
+"            <span>Used by Bing, these record your actions after you\'ve viewed or" +
+" clicked an advert to measure its performance and tailor future advertising to y" +
+"ou</span>\r\n                        </td>\r\n                        <td>\r\n        " +
+"                    1 month\r\n                        </td>\r\n                    " +
+"</tr>\r\n                    <tr>\r\n                        <td>\r\n                 " +
+"           _fbp\r\n                        </td>\r\n                        <td>\r\n  " +
+"                          These help to deliver our advertising when you visit F" +
+"acebook or a digital platform powered by Facebook Advertising\r\n                 " +
+"       </td>\r\n                        <td>\r\n                            3 months" +
+"\r\n                        </td>\r\n                    </tr>\r\n                    " +
+"<tr>\r\n                        <td>\r\n                            act\r\n           " +
+"             </td>\r\n                        <td>\r\n                            <s" +
+"pan>These help to deliver our advertising when you visit Facebook or a digital p" +
+"latform powered by Facebook Advertising</span>\r\n                        </td>\r\n " +
+"                       <td>\r\n                            When you close your bro" +
+"wser\r\n                        </td>\r\n                    </tr>\r\n                " +
+"    <tr>\r\n                        <td>\r\n                            c_user\r\n    " +
+"                    </td>\r\n                        <td>\r\n                       " +
+"     <span>These help to deliver our advertising when you visit Facebook or a di" +
+"gital platform powered by Facebook Advertising</span>\r\n                        <" +
+"/td>\r\n                        <td>\r\n                            1 year\r\n        " +
+"                </td>\r\n                    </tr>\r\n                    <tr>\r\n    " +
+"                    <td>\r\n                            datr\r\n                    " +
+"    </td>\r\n                        <td>\r\n                            <span>These" +
+" help to deliver our advertising when you visit Facebook or a digital platform p" +
+"owered by Facebook Advertising</span>\r\n                        </td>\r\n          " +
+"              <td>\r\n                            18 months\r\n                     " +
+"   </td>\r\n                    </tr>\r\n                    <tr>\r\n                 " +
+"       <td>\r\n                            fr\r\n                        </td>\r\n    " +
+"                    <td>\r\n                            <span>These help to delive" +
+"r our advertising when you visit Facebook or a digital platform powered by Faceb" +
+"ook Advertising</span>\r\n                        </td>\r\n                        <" +
+"td>\r\n                            1 year\r\n                        </td>\r\n        " +
+"            </tr>\r\n                    <tr>\r\n                        <td>\r\n     " +
+"                       presence\r\n                        </td>\r\n                " +
+"        <td>\r\n                            <span>These help to deliver our advert" +
+"ising when you visit Facebook or a digital platform powered by Facebook Advertis" +
+"ing</span>\r\n                        </td>\r\n                        <td>\r\n       " +
+"                     When you close your browser\r\n                        </td>\r" +
+"\n                    </tr>\r\n                    <tr>\r\n                        <t" +
+"d>\r\n                            sb\r\n                        </td>\r\n             " +
+"           <td>\r\n                            <span>These help to deliver our adv" +
+"ertising when you visit Facebook or a digital platform powered by Facebook Adver" +
+"tising</span>\r\n                        </td>\r\n                        <td>\r\n    " +
+"                        2 years\r\n                        </td>\r\n                " +
+"    </tr>\r\n                    <tr>\r\n                        <td>\r\n             " +
+"               spin\r\n                        </td>\r\n                        <td>" +
+"\r\n                            <span>These help to deliver our advertising when y" +
+"ou visit Facebook or a digital platform powered by Facebook Advertising</span>\r\n" +
+"                        </td>\r\n                        <td>\r\n                   " +
+"         2 years\r\n                        </td>\r\n                    </tr>\r\n    " +
+"                <tr>\r\n                        <td>\r\n                            " +
+"wd\r\n                        </td>\r\n                        <td>\r\n               " +
+"             <span>These help to deliver our advertising when you visit Facebook" +
+" or a digital platform powered by Facebook Advertising</span>\r\n                 " +
+"       </td>\r\n                        <td>\r\n                            2 years\r" +
+"\n                        </td>\r\n                    </tr>\r\n                    <" +
+"tr>\r\n                        <td>\r\n                            xs\r\n             " +
+"           </td>\r\n                        <td>\r\n                            <spa" +
+"n>These help to deliver our advertising when you visit Facebook or a digital pla" +
+"tform powered by Facebook Advertising</span>\r\n                        </td>\r\n   " +
+"                     <td>\r\n                            2 years\r\n                " +
+"        </td>\r\n                    </tr>\r\n                </tbody>\r\n            " +
+"</table>\r\n\r\n            <h2");
 
 WriteLiteral(" class=\"heading-medium\"");
 
@@ -544,207 +387,104 @@ WriteLiteral(" scope=\"col\"");
 
 WriteLiteral(" class=\"cell-width-30\"");
 
-WriteLiteral(@">
-                            Expires
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            __cfduid
-                        </td>
-                        <td>
-                            Associated with sites using CloudFlare, this is used to make pages load more quickly
-                        </td>
-                        <td>
-                            3 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            APISID
-                        </td>
-                        <td>
-                            YouTube may set this cookie on your computer once you click on the YouTube video player
-                        </td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            CONSENT
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            20 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            HSID
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            LOGIN_INFO
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            18 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            PREF
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SAPISID
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SID
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SIDCC
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            3 months
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            SSID
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            2 years
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            VISITOR_INFO1 _LIVE
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            1 year
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            YSC
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(@">YouTube may set this cookie on your computer once you click on the YouTube video player</span></td>
-                        <td>
-                            When you close your browser
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            _ga
-                        </td>
-                        <td><span");
-
-WriteLiteral(" class=\"visually-hidden\"");
-
-WriteLiteral(">YouTube may set this cookie on your computer once you click on the YouTube video" +
-" player</span></td>\r\n                        <td>\r\n                            1" +
-" year\r\n                        </td>\r\n                    </tr>\r\n               " +
-"     <tr>\r\n                        <td>\r\n                            .AspNetCore" +
-" .Antiforgery\r\n                        </td>\r\n                        <td>\r\n    " +
-"                        This enables the website to function properly\r\n         " +
-"               </td>\r\n                        <td>\r\n                            " +
-"When you close your browser\r\n                        </td>\r\n                    " +
-"</tr>\r\n                    <tr>\r\n                        <td>\r\n                 " +
-"           AnalyticsConsent\r\n                        </td>\r\n                    " +
-"    <td>\r\n                            This lets us know whether you\'ve given us " +
-"permission to track your activity for analytics purposes\r\n                      " +
-"  </td>\r\n                        <td>\r\n                            1 year\r\n     " +
+WriteLiteral(">\r\n                            Expires\r\n                        </th>\r\n          " +
+"          </tr>\r\n                </thead>\r\n                <tbody>\r\n            " +
+"        <tr>\r\n                        <td>\r\n                            __cfduid" +
+"\r\n                        </td>\r\n                        <td>\r\n                 " +
+"           Associated with sites using CloudFlare, this is used to make pages lo" +
+"ad more quickly\r\n                        </td>\r\n                        <td>\r\n  " +
+"                          3 months\r\n                        </td>\r\n             " +
+"       </tr>\r\n                    <tr>\r\n                        <td>\r\n          " +
+"                  APISID\r\n                        </td>\r\n                       " +
+" <td>\r\n                            YouTube may set this cookie on your computer " +
+"once you click on the YouTube video player\r\n                        </td>\r\n     " +
+"                   <td>\r\n                            2 years\r\n                  " +
+"      </td>\r\n                    </tr>\r\n                    <tr>\r\n              " +
+"          <td>\r\n                            CONSENT\r\n                        </t" +
+"d>\r\n                        <td><span>YouTube may set this cookie on your comput" +
+"er once you click on the YouTube video player</span></td>\r\n                     " +
+"   <td>\r\n                            20 years\r\n                        </td>\r\n  " +
+"                  </tr>\r\n                    <tr>\r\n                        <td>\r" +
+"\n                            HSID\r\n                        </td>\r\n              " +
+"          <td><span>YouTube may set this cookie on your computer once you click " +
+"on the YouTube video player</span></td>\r\n                        <td>\r\n         " +
+"                   2 years\r\n                        </td>\r\n                    <" +
+"/tr>\r\n                    <tr>\r\n                        <td>\r\n                  " +
+"          LOGIN_INFO\r\n                        </td>\r\n                        <td" +
+"><span>YouTube may set this cookie on your computer once you click on the YouTub" +
+"e video player</span></td>\r\n                        <td>\r\n                      " +
+"      18 months\r\n                        </td>\r\n                    </tr>\r\n     " +
+"               <tr>\r\n                        <td>\r\n                            P" +
+"REF\r\n                        </td>\r\n                        <td><span>YouTube ma" +
+"y set this cookie on your computer once you click on the YouTube video player</s" +
+"pan></td>\r\n                        <td>\r\n                            2 years\r\n  " +
+"                      </td>\r\n                    </tr>\r\n                    <tr>" +
+"\r\n                        <td>\r\n                            SAPISID\r\n           " +
+"             </td>\r\n                        <td><span>YouTube may set this cooki" +
+"e on your computer once you click on the YouTube video player</span></td>\r\n     " +
+"                   <td>\r\n                            2 years\r\n                  " +
+"      </td>\r\n                    </tr>\r\n                    <tr>\r\n              " +
+"          <td>\r\n                            SID\r\n                        </td>\r\n" +
+"                        <td><span>YouTube may set this cookie on your computer o" +
+"nce you click on the YouTube video player</span></td>\r\n                        <" +
+"td>\r\n                            2 years\r\n                        </td>\r\n       " +
+"             </tr>\r\n                    <tr>\r\n                        <td>\r\n    " +
+"                        SIDCC\r\n                        </td>\r\n                  " +
+"      <td><span>YouTube may set this cookie on your computer once you click on t" +
+"he YouTube video player</span></td>\r\n                        <td>\r\n             " +
+"               3 months\r\n                        </td>\r\n                    </tr" +
+">\r\n                    <tr>\r\n                        <td>\r\n                     " +
+"       SSID\r\n                        </td>\r\n                        <td><span>Yo" +
+"uTube may set this cookie on your computer once you click on the YouTube video p" +
+"layer</span></td>\r\n                        <td>\r\n                            2 y" +
+"ears\r\n                        </td>\r\n                    </tr>\r\n                " +
+"    <tr>\r\n                        <td>\r\n                            VISITOR_INFO" +
+"1 _LIVE\r\n                        </td>\r\n                        <td><span>YouTub" +
+"e may set this cookie on your computer once you click on the YouTube video playe" +
+"r</span></td>\r\n                        <td>\r\n                            1 year\r" +
+"\n                        </td>\r\n                    </tr>\r\n                    <" +
+"tr>\r\n                        <td>\r\n                            YSC\r\n            " +
+"            </td>\r\n                        <td><span>YouTube may set this cookie" +
+" on your computer once you click on the YouTube video player</span></td>\r\n      " +
+"                  <td>\r\n                            When you close your browser\r" +
+"\n                        </td>\r\n                    </tr>\r\n                    <" +
+"tr>\r\n                        <td>\r\n                            _ga\r\n            " +
+"            </td>\r\n                        <td><span>YouTube may set this cookie" +
+" on your computer once you click on the YouTube video player</span></td>\r\n      " +
+"                  <td>\r\n                            1 year\r\n                    " +
+"    </td>\r\n                    </tr>\r\n                    <tr>\r\n                " +
+"        <td>\r\n                            .AspNetCore .Antiforgery\r\n            " +
+"            </td>\r\n                        <td>\r\n                            Thi" +
+"s enables the website to function properly\r\n                        </td>\r\n     " +
+"                   <td>\r\n                            When you close your browser" +
+"\r\n                        </td>\r\n                    </tr>\r\n                    " +
+"<tr>\r\n                        <td>\r\n                            AnalyticsConsent" +
+"\r\n                        </td>\r\n                        <td>\r\n                 " +
+"           This lets us know whether you\'ve given us permission to track your ac" +
+"tivity for analytics purposes\r\n                        </td>\r\n                  " +
+"      <td>\r\n                            1 year\r\n                        </td>\r\n " +
+"                   </tr>\r\n                    <tr>\r\n                        <td>" +
+"\r\n                            BNES_.AspNetCore .Antiforgery\r\n                   " +
+"     </td>\r\n                        <td>\r\n                            This enabl" +
+"es the website to function properly\r\n                        </td>\r\n            " +
+"            <td>\r\n                            When you close your browser\r\n     " +
 "                   </td>\r\n                    </tr>\r\n                    <tr>\r\n " +
-"                       <td>\r\n                            BNES_.AspNetCore .Antif" +
-"orgery\r\n                        </td>\r\n                        <td>\r\n           " +
-"                 This enables the website to function properly\r\n                " +
-"        </td>\r\n                        <td>\r\n                            When yo" +
-"u close your browser\r\n                        </td>\r\n                    </tr>\r\n" +
-"                    <tr>\r\n                        <td>\r\n                        " +
-"    BNES_samesite\r\n                        </td>\r\n                        <td>\r\n" +
-"                            This enables the website to function properly\r\n     " +
-"                   </td>\r\n                        <td>\r\n                        " +
-"    When you close your browser\r\n                        </td>\r\n                " +
-"    </tr>\r\n                    <tr>\r\n                        <td>\r\n             " +
-"               CookieConsent\r\n                        </td>\r\n                   " +
-"     <td>\r\n                            This stores your cookie consent preferenc" +
-"es\r\n                        </td>\r\n                        <td>\r\n               " +
-"             1 year\r\n                        </td>\r\n                    </tr>\r\n " +
-"                   <tr>\r\n                        <td>\r\n                         " +
-"   MarketingConsent\r\n                        </td>\r\n                        <td>" +
-"\r\n                            This stores your marketing cookie consent preferen" +
-"ces\r\n                        </td>\r\n                        <td>\r\n              " +
-"              1 year\r\n                        </td>\r\n                    </tr>\r\n" +
-"                </tbody>\r\n            </table>\r\n\r\n\r\n            <h3");
+"                       <td>\r\n                            BNES_samesite\r\n        " +
+"                </td>\r\n                        <td>\r\n                           " +
+" This enables the website to function properly\r\n                        </td>\r\n " +
+"                       <td>\r\n                            When you close your bro" +
+"wser\r\n                        </td>\r\n                    </tr>\r\n                " +
+"    <tr>\r\n                        <td>\r\n                            CookieConsen" +
+"t\r\n                        </td>\r\n                        <td>\r\n                " +
+"            This stores your cookie consent preferences\r\n                       " +
+" </td>\r\n                        <td>\r\n                            1 year\r\n      " +
+"                  </td>\r\n                    </tr>\r\n                    <tr>\r\n  " +
+"                      <td>\r\n                            MarketingConsent\r\n      " +
+"                  </td>\r\n                        <td>\r\n                         " +
+"   This stores your marketing cookie consent preferences\r\n                      " +
+"  </td>\r\n                        <td>\r\n                            1 year\r\n     " +
+"                   </td>\r\n                    </tr>\r\n                </tbody>\r\n " +
+"           </table>\r\n\r\n\r\n            <h3");
 
 WriteLiteral(" class=\"heading-small\"");
 
