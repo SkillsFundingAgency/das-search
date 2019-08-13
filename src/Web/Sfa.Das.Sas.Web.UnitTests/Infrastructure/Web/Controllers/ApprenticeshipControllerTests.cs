@@ -17,6 +17,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
     [TestFixture]
     public sealed class ApprenticeshipControllerTests
     {
+        private const string ApprenticeshipApiBaseUrl = "www.baseUrlForApprenticeshipsApi.com";
         private ApprenticeshipController _sut;
         private Mock<ILog> _mockLogger;
         private Mock<IMappingService> _mockMappingService;
@@ -30,6 +31,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockMappingService = new Mock<IMappingService>();
             _mockMediator = new Mock<IMediator>();
             _configurationSettingsMock = new Mock<IConfigurationSettings>();
+            _configurationSettingsMock.SetupGet(mock => mock.ApprenticeshipApiBaseUrl).Returns(ApprenticeshipApiBaseUrl);
 
             _sut = new ApprenticeshipController(
                 _mockLogger.Object,
@@ -43,6 +45,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         [Test]
         public void ShouldRedirectIfSearchResultsPageTooHigh()
         {
+            var viewModel = new ApprenticeshipSearchResultViewModel();
+            _mockMappingService.Setup(x =>
+                x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()))
+                .Returns(viewModel);
             _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>()))
                 .Returns(new ApprenticeshipSearchResponse
                 {
@@ -85,6 +91,38 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
                 Times.Once);
 
             result.Model.Should().Be(viewModel);
+        }
+
+        [Test]
+        public void ShouldSetSearchViewModel()
+        {
+            // Arrange
+            var searchTerm = "Sport";
+            var viewModel = new ApprenticeshipSearchResultViewModel { SearchTerm = searchTerm };
+            _mockMappingService.Setup(x =>
+                x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()))
+                .Returns(viewModel);
+            _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>()))
+                .Returns(new ApprenticeshipSearchResponse
+                {
+                    StatusCode = ApprenticeshipSearchResponse.ResponseCodes.Success
+                });
+
+            var urlHelper = new Mock<UrlHelper>();
+
+            urlHelper.Setup(x => x.Action(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
+                     .Returns("www.google.co.uk");
+
+            _sut.Url = urlHelper.Object;
+
+            // Act
+            var result = _sut.SearchResults(new ApprenticeshipSearchQuery { Keywords = searchTerm }) as ViewResult;
+
+            // Assert
+            var model = result.Model as ApprenticeshipSearchResultViewModel;
+            model.SearchViewModel.Should().NotBeNull();
+            model.SearchViewModel.SearchTerm.Should().Be(searchTerm);
+            model.SearchViewModel.ApprenticeshipInfoApiBaseUrl.Should().Be(ApprenticeshipApiBaseUrl);
         }
 
         [Test]

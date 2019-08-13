@@ -64,6 +64,7 @@ if (container) {
         name: 'Keywords',
         displayMenu: 'overlay',
         showNoOptionsFound: false,
-        source: getSuggestions
+        source: getSuggestions,
+        defaultValue: $container.data('search-term')
     });
 }
