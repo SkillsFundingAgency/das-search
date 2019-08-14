@@ -1,0 +1,7 @@
+﻿@model Sfa.Das.Sas.Web.ViewModels.ApprenticeshipSearchViewModel
+
+<div id="apprenticeships-container" data-search-term="@Model.SearchTerm" data-api-url="@($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete")">
+    <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
+</div>
+
+

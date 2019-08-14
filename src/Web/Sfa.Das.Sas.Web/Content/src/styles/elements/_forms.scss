@@ -203,6 +203,7 @@ textarea.form-control {
 
   @include media(tablet) {
     width: 75%;
+    display: inline-block;
   }
 }
 

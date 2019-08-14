@@ -19,5 +19,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
         public bool HasError { get; set; }
 
         public IEnumerable<LevelAggregationViewModel> AggregationLevel { get; set; }
+
+        public ApprenticeshipSearchViewModel SearchViewModel { get; internal set; }
     }
 }
