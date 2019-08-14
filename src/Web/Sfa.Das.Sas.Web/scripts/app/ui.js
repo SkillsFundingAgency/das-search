@@ -39,7 +39,7 @@ var SearchAndShortlist = SearchAndShortlist || {};
 var container = document.querySelector('#apprenticeships-container'),
     $container = $(container);
 
-if ($container) {
+if (container) {
 
     $container.empty();
     var getSuggestions = function (query, updateResults) {
