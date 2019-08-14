@@ -38,6 +38,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockMediator = new Mock<IMediator>();
             _mockSearchResultsViewModelMapper = new Mock<ISearchResultsViewModelMapper>();
             _mockTrainingProviderDetailsViewModelMapper = new Mock<ITrainingProviderDetailsViewModelMapper>();
+            _mockTrainingProviderFilterViewModelMapper = new Mock<ITrainingProviderSearchFilterViewModelMapper>();
             _mockLogger = new Mock<ILog>();
 
             _mockMediator.Setup(s => s.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
