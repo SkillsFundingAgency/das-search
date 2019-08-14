@@ -30,6 +30,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private ProviderSearchResponse _searchResults = new ProviderSearchResponse() { Success = true };
         private ProviderSearchResponse _searchResultsError = new ProviderSearchResponse(){Success = false,StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat};
         private SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> _searchResultsViewModel = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>();
+        private TrainingProviderSearchFilterViewModel _searchFilterViewModel = new TrainingProviderSearchFilterViewModel();
 
         [SetUp]
         public void Setup()
@@ -43,6 +44,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _mockMediator.Setup(s => s.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
             _mockSearchResultsViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchResultsViewModel);
+            _mockTrainingProviderFilterViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchFilterViewModel);
 
             _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object);
         }
@@ -110,7 +112,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             result.Should().BeOfType<TrainingProviderSearchFilterViewModel>();
 
-            _mockSearchResultsViewModelMapper.Verify(v => v.Map(_searchResults, _searchQueryViewModel));
+            _mockTrainingProviderFilterViewModelMapper.Verify(v => v.Map(_searchResults, _searchQueryViewModel));
         }
     }
 }
