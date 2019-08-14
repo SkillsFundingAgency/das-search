@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using FluentAssertions;
@@ -44,12 +45,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         }
 
         [Test]
-        public void ShouldRedirectIfSearchResultsPageTooHigh()
+        public async Task ShouldRedirectIfSearchResultsPageTooHigh()
         {
             var viewModel = new ApprenticeshipSearchResultViewModel();
             _mockMappingService.Setup(x =>
                 x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()))
                 .Returns(viewModel);
+            _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new ApprenticeshipSearchResponse
                 {
                     StatusCode = ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound
                 });
@@ -61,7 +64,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
 
             _sut.Url = urlHelper.Object;
 
-            var result = _sut.SearchResults(new ApprenticeshipSearchQuery()).Result as RedirectResult;
+            var result = await _sut.SearchResults(new ApprenticeshipSearchQuery()) as RedirectResult;
 
             result.Should().NotBeNull();
         }
@@ -93,7 +96,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
         }
 
         [Test]
-        public void ShouldSetSearchViewModel()
+        public async Task ShouldSetSearchViewModel()
         {
             // Arrange
             var searchTerm = "Sport";
@@ -101,8 +104,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _mockMappingService.Setup(x =>
                 x.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(It.IsAny<ApprenticeshipSearchResponse>()))
                 .Returns(viewModel);
-            _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>()))
-                .Returns(new ApprenticeshipSearchResponse
+            _mockMediator.Setup(x => x.Send(It.IsAny<ApprenticeshipSearchQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new ApprenticeshipSearchResponse
                 {
                     StatusCode = ApprenticeshipSearchResponse.ResponseCodes.Success
                 });
@@ -115,7 +118,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Controllers
             _sut.Url = urlHelper.Object;
 
             // Act
-            var result = _sut.SearchResults(new ApprenticeshipSearchQuery { Keywords = searchTerm }) as ViewResult;
+            var result = await _sut.SearchResults(new ApprenticeshipSearchQuery { Keywords = searchTerm }) as ViewResult;
 
             // Assert
             var model = result.Model as ApprenticeshipSearchResultViewModel;

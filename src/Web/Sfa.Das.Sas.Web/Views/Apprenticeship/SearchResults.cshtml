@@ -177,7 +177,7 @@
 {
     <h2 class="result-title">
         @Html.ActionLink(item.Title, "Standard", "Apprenticeship",
-            new { @id = item.StandardId, @keyword = Model.SearchTerm },
+            new { @id = item.Id, @keyword = Model.SearchTerm },
             new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
         <span class="tag tag-new">New</span>
     </h2>
