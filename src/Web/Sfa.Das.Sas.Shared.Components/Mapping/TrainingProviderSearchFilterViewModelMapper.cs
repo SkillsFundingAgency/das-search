@@ -13,6 +13,11 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
         {
             var result = new TrainingProviderSearchFilterViewModel();
 
+            result.ApprenticeshipId = searchQueryModel.ApprenticeshipId;
+            result.Keywords = searchQueryModel.Keywords;
+            result.SortOrder = searchQueryModel.SortOrder;
+            result.Postcode = searchQueryModel.Postcode;
+
             result.NationalProviders = new List<FilterViewModel>();
 
             if (item.Results != null)
