@@ -6,7 +6,7 @@
 
 <h1 class="@CssViewModel.HeadingXLarge">@await Component.InvokeAsync("TrainingProviderTitle", new { searchQueryModel = Model })</h1>
 
-@*<div class="grid-row">
+<div class="grid-row">
     <form asp-controller="Basket" asp-action="AddProviderFromDetails" method="post">
         <input type="hidden" asp-for="@Model.ApprenticeshipId" />
         <input type="hidden" asp-for="@Model.LocationId" />
@@ -16,7 +16,7 @@
             @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.ApprenticeshipId, ukprn = Model.Ukprn })
         </div>
     </form>
-</div>*@
+</div>
 
 <div class="grid-row">
     <div class="grid-column-two-thirds">&nbsp;</div>
