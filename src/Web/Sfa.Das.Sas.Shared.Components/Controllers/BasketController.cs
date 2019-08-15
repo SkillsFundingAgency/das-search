@@ -25,6 +25,11 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             _config = config;
         }
 
+        public async Task<IActionResult> View()
+        {
+            return View("Basket/View");
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
@@ -74,11 +79,6 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             });
 
             _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
-        }
-
-        public async Task<IActionResult> View()
-        {
-            return View("Basket/View");
         }
     }
 }

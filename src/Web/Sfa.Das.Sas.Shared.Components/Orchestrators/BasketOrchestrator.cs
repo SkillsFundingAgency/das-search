@@ -25,10 +25,10 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task<BasketViewModel<ApprenticeshipBasketItemViewModel>> GetBasket(Guid basketId)
         {
-                var basket = await _mediator.Send(new GetBasketQuery { BasketId = basketId });
+            var basket = await _mediator.Send(new GetBasketQuery { BasketId = basketId });
 
-                return _basketViewModelMapper.Map(basket, basketId);
-        }
+            return _basketViewModelMapper.Map(basket, basketId);
+        }   
 
         public async Task<BasketViewModel<ApprenticeshipBasketItemViewModel>> GetBasket()
         {
