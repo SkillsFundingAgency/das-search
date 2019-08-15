@@ -12,7 +12,7 @@
         {
             var sut = new OverallCohortResolverTestClass();
             sut.TestResolveCore(null).Should().Be("*");
-            sut.TestResolveCore("-").Should().Be("5-29");
+            sut.TestResolveCore("-").Should().Be(null);
             sut.TestResolveCore("2").Should().Be("2");
             sut.TestResolveCore("30").Should().Be("30");
         }
