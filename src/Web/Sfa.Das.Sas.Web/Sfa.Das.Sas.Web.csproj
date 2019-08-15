@@ -826,6 +826,9 @@
       <LastGenOutput>ApprenticeshipOrProvider.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Apprenticeship\_ApprenticeshipSearch.cshtml" />
+    <None Include="Sfa.Das.Sas.Web.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\Provider\_FilterProviders.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>RazorGenerator</Generator>
