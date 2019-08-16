@@ -2,10 +2,12 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core;
 using Sfa.Das.Sas.Core.Configuration;
+using SSfa.Das.Sas.ApplicationServices.Settings;
 
 namespace Sfa.Das.Sas.ApplicationServices.Services
 {
@@ -13,13 +15,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
     {
         private readonly IRetryWebRequests _retryService;
         private readonly ILogger<PostcodeIoService> _logger;
-        private readonly IPostcodeIOConfigurationSettings _applicationSettings;
+        private readonly PostcodeLookupSettings _applicationSettings;
 
-        public PostcodeIoService(IRetryWebRequests retryService, ILogger<PostcodeIoService> logger, IPostcodeIOConfigurationSettings applicationSettings)
+        public PostcodeIoService(IRetryWebRequests retryService, ILogger<PostcodeIoService> logger, IOptions<PostcodeLookupSettings> applicationSettings)
         {
             _retryService = retryService;
             _logger = logger;
-            _applicationSettings = applicationSettings;
+            _applicationSettings = applicationSettings.Value;
         }
 
         public async Task<string> GetPostcodeStatus(string postcode)
@@ -38,7 +40,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
         {
             try
             {
-                var uri = new Uri(_applicationSettings.PostcodeUrl, postcode.Replace(" ", string.Empty));
+                var uri = new Uri(new Uri(_applicationSettings.PostcodeUrl), postcode.Replace(" ", string.Empty));
                 var response = await _retryService.RetryWeb(() => MakeRequestAsync(uri.ToString()), CouldntConnect);
 
                 if (response.IsSuccessStatusCode)
@@ -60,7 +62,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
         {
             try
             {
-                var terminatedUri = new Uri(_applicationSettings.PostcodeTerminatedUrl, postcode.Replace(" ", string.Empty));
+                var terminatedUri = new Uri(new Uri(_applicationSettings.PostcodeTerminatedUrl), postcode.Replace(" ", string.Empty));
                 var terminated = await _retryService.RetryWeb(() => MakeRequestAsync(terminatedUri.ToString()), CouldntConnect);
 
                 if (terminated.IsSuccessStatusCode)

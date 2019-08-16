@@ -9,7 +9,6 @@
     using ApplicationServices.Models;
     using Core.Configuration;
     using Core.Domain.Model;
-    using SFA.DAS.NLog.Logger;
 
     public sealed class ProviderLocationSearchApiProvider : IProviderLocationSearchProvider
     {

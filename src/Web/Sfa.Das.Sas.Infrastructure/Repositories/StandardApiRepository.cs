@@ -1,9 +1,9 @@
-﻿using Sfa.Das.Sas.Core.Domain.Model;
+﻿using Microsoft.Extensions.Logging;
+using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using SFA.DAS.Apprenticeships.Api.Client;
 using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
-using SFA.DAS.NLog.Logger;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -14,12 +14,12 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
     {
         private readonly IStandardMapping _standardMapping;
         private readonly IStandardApiClient _standardApiClient;
-        private readonly ILog _applicationLogger;
+        private readonly ILogger<StandardApiRepository> _applicationLogger;
 
         public StandardApiRepository(
             IStandardMapping standardMapping,
             IStandardApiClient standardApiClient,
-            ILog applicationLogger)
+            ILogger<StandardApiRepository> applicationLogger)
         {
             _standardMapping = standardMapping;
             _standardApiClient = standardApiClient;
@@ -33,9 +33,9 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
                 var result = _standardApiClient.Get(id);
                 return _standardMapping.MapToStandard(result);
             }
-            catch (EntityNotFoundException ex)
+            catch (EntityNotFoundException)
             {
-                _applicationLogger.Info($"404 trying to get standard with id {id}");
+                _applicationLogger.LogInformation($"404 trying to get standard with id {id}");
                 return null;
             }
             catch (HttpRequestException ex)

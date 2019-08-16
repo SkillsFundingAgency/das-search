@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Shared.Basket",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.ApplicationServices", "Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj", "{D8474EA4-1573-4C70-96A5-572C8C2FB11F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Infrastructure", "Sfa.Das.Sas.Infrastructure\Sfa.Das.Sas.Infrastructure.csproj", "{102F4103-212A-496E-8F47-807E8F5026E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{D8474EA4-1573-4C70-96A5-572C8C2FB11F}.Release|x64.Build.0 = Release|Any CPU
 		{D8474EA4-1573-4C70-96A5-572C8C2FB11F}.Release|x86.ActiveCfg = Release|Any CPU
 		{D8474EA4-1573-4C70-96A5-572C8C2FB11F}.Release|x86.Build.0 = Release|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Debug|x64.Build.0 = Debug|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Debug|x86.Build.0 = Debug|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Release|x64.Build.0 = Release|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Release|x86.ActiveCfg = Release|Any CPU
+		{102F4103-212A-496E-8F47-807E8F5026E7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

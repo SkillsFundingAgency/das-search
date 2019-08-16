@@ -1,13 +1,7 @@
-using Microsoft.Azure;
-
 namespace Sfa.Das.Sas.Infrastructure.Settings
 {
-
-    using Sfa.Das.Sas.Core.Configuration;
-
-    public sealed class FatSettings : IFatConfigurationSettings
+    public sealed class FatSettings
     {
-        public string FatApiBaseUrl => CloudConfigurationManager.GetSetting("ApprenticeshipApiBaseUrl");
-        public string SaveEmployerFavouritesUrl => throw new System.NotImplementedException();
+        public string FatApiBaseUrl { get; set; }
     }
 }

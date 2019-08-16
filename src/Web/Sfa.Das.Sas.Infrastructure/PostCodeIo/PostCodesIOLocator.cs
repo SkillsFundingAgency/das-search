@@ -1,6 +1,4 @@
-﻿using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
+﻿namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
 {
     using System;
     using System.Collections.Generic;
@@ -8,34 +6,35 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Core.Configuration;
     using Logging;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Sfa.Das.Sas.ApplicationServices;
     using Sfa.Das.Sas.ApplicationServices.Exceptions;
     using Sfa.Das.Sas.ApplicationServices.Models;
     using Sfa.Das.Sas.Core;
     using Sfa.Das.Sas.Core.Domain.Model;
-    
+    using Sfa.Das.Sas.Infrastructure.Settings;
 
     public class PostCodesIoLocator : ILookupLocations
     {
         private readonly IRetryWebRequests _retryService;
-        private readonly ILog _logger;
+        private readonly ILogger<PostCodesIoLocator> _logger;
 
-        private readonly IPostcodeIOConfigurationSettings _applicationSettings;
+        private readonly PostcodeLookupSettings _applicationSettings;
 
-        public PostCodesIoLocator(IRetryWebRequests retryService, ILog logger, IPostcodeIOConfigurationSettings applicationSettings)
+        public PostCodesIoLocator(IRetryWebRequests retryService, ILogger<PostCodesIoLocator> logger, IOptions<PostcodeLookupSettings> applicationSettings)
         {
             _retryService = retryService;
             _logger = logger;
-            _applicationSettings = applicationSettings;
+            _applicationSettings = applicationSettings.Value;
         }
 
         public async Task<CoordinateResponse> GetLatLongFromPostCode(string postcode)
         {
             var coordinates = new Coordinate();
-            var uri = new Uri(_applicationSettings.PostcodeUrl, postcode.Replace(" ", string.Empty));
+            var uri = new Uri(new Uri(_applicationSettings.PostcodeUrl), postcode.Replace(" ", string.Empty));
 
             try
             {
@@ -92,7 +91,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, $"Unable to connect to Postcode lookup servce. Url: {uri}");
+                _logger.LogError(ex, $"Unable to connect to Postcode lookup servce. Url: {uri}");
 
                 throw new SearchException("Unable to connect to Post Code Lookup service", ex);
             }
@@ -107,7 +106,7 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                 { "Url", uri.ToString() }
             };
 
-            _logger.Info($"{message}: {postcode}. Service url:{uri}", dir);
+            _logger.LogInformation($"{message}: {postcode}. Service url:{uri}", dir);
             SendDependencyLog(response.StatusCode, uri, responseTime);
         }
 
@@ -121,12 +120,12 @@ namespace Sfa.Das.Sas.Infrastructure.PostCodeIo
                 Url = uri.ToString()
             };
 
-            _logger.Debug("Dependency PostCodeIo", logEntry);
+            _logger.LogDebug("Dependency PostCodeIo {logEntry}", logEntry);
         }
 
         private void CouldntConnect(Exception ex)
         {
-            _logger.Warn(string.Concat("Couldn't connect to postcode service, retrying...", ex.Message));
+            _logger.LogWarning(string.Concat("Couldn't connect to postcode service, retrying...", ex.Message));
         }
 
         private async Task<HttpResponseMessage> MakeRequestAsync(string url)

@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
                 Level = document.Level,
                 JobRoles = document.JobRoles.ToList(),
                 Keywords = document.Keywords.ToList(),
-                MaxFunding = document.MaxFunding,
+                MaxFunding = document.CurrentFundingCap,
                 Duration = document.Duration,
                 IntroductoryText = document.IntroductoryText,
                 EntryRequirements = document.EntryRequirements,

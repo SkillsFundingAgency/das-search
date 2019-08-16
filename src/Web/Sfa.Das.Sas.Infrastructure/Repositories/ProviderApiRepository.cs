@@ -1,7 +1,6 @@
 ﻿using System;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.FatApi.Client.Api;
-using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Responses;
@@ -12,20 +11,20 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.Logging;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
     using SFA.DAS.Providers.Api.Client;
 
     public class ProviderApiRepository : IGetProviderDetails, IProviderSearchProvider
     {
-
         private readonly IProviderApiClient _providerApiClient;
         private readonly IProvidersVApi _providersV3Api;
         private readonly ISearchVApi _searchV3Api;
         private readonly ISearchResultsMapping _searchResultsMapping;
         private readonly IProviderNameSearchMapping _providerNameSearchMapping;
-        private readonly ILog _logger;
+        private readonly ILogger<ProviderApiRepository> _logger;
 
-        public ProviderApiRepository(IProviderApiClient providerApiClient, IProvidersVApi providersV3Api, ISearchResultsMapping searchResultsMapping, ILog logger, ISearchVApi searchV3Api, IProviderNameSearchMapping providerNameSearchMapping)
+        public ProviderApiRepository(IProviderApiClient providerApiClient, IProvidersVApi providersV3Api, ISearchResultsMapping searchResultsMapping, ILogger<ProviderApiRepository> logger, ISearchVApi searchV3Api, IProviderNameSearchMapping providerNameSearchMapping)
         {
             _providerApiClient = providerApiClient;
             _providersV3Api = providersV3Api;
@@ -65,7 +64,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             var results = new ProviderNameSearchResultsAndPagination();
 
 
-            _logger.Info(
+            _logger.LogInformation(
                 $"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");
 
             try
@@ -76,13 +75,13 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                _logger.Error(e, $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");
+                _logger.LogError(e, $"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");
                 results.ResponseCode = ProviderNameSearchResponseCodes.SearchFailed;
                 results.HasError = true;
                 return results;
             }
 
-            _logger.Info(
+            _logger.LogInformation(
                 $"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{results.ActualPage}], Page Size: [{pageSize}], Total Results: [{results.TotalResults}]");
 
             return results;

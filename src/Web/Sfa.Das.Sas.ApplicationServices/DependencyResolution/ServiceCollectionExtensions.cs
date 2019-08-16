@@ -7,12 +7,13 @@ using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.ApplicationServices.Validators;
+using SSfa.Das.Sas.ApplicationServices.Settings;
 
 namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddFavouritesBasket(this IServiceCollection services, IConfiguration configuration)
+        public static void AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMediatR(typeof(ServiceCollectionExtensions).Assembly);
 
@@ -25,6 +26,7 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
             services.AddScoped<IPostcodeIoService, PostcodeIoService>();
 
             services.Configure<PaginationSettings>(configuration.GetSection("PaginationSettings"));
+            services.Configure<PostcodeLookupSettings>(configuration.GetSection("PostcodeLookup"));
         }
     }
 }

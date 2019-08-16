@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Mapping;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.AssessmentOrgs.Api.Client;
-using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     public sealed class AssessmentOrganisationApiRepository : IAssessmentOrgsApiClient, IGetAssessmentOrganisations
     {
         private readonly IAssessmentOrgsApiClient _apiClient;
-        private readonly ILog _logger;
+        private readonly ILogger<AssessmentOrganisationApiRepository> _logger;
         private readonly IAssessmentOrganisationMapping _assessmentOrganisationMapping;
 
-        public AssessmentOrganisationApiRepository(IAssessmentOrgsApiClient apiClient, ILog logger, IAssessmentOrganisationMapping assessmentOrganisationMapping)
+        public AssessmentOrganisationApiRepository(IAssessmentOrgsApiClient apiClient, ILogger<AssessmentOrganisationApiRepository> logger, IAssessmentOrganisationMapping assessmentOrganisationMapping)
         {
             _apiClient = apiClient;
             _logger = logger;

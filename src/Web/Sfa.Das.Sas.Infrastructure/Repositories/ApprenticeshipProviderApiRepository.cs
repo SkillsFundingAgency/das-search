@@ -2,25 +2,26 @@
 {
     using System;
     using ApplicationServices.Http;
-    using Core.Configuration;
     using Core.Domain.Model;
     using Core.Domain.Repositories;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Sfa.Das.Sas.Core;
-    using SFA.DAS.NLog.Logger;
+    using Sfa.Das.Sas.Infrastructure.Settings;
 
     public sealed class ApprenticeshipProviderApiRepository : IApprenticeshipProviderRepository
     {
-        private readonly ILog _applicationLogger;
-        private readonly IFatConfigurationSettings _fatSettings;
+        private readonly ILogger<ApprenticeshipProviderApiRepository> _applicationLogger;
+        private readonly FatSettings _fatSettings;
         private readonly IHttpGet _httpService;
 
-        public ApprenticeshipProviderApiRepository(ILog applicationLogger,
-            IFatConfigurationSettings fatSettings,
+        public ApprenticeshipProviderApiRepository(ILogger<ApprenticeshipProviderApiRepository> applicationLogger,
+            IOptions<FatSettings> fatSettings,
             IHttpGet httpService)
         {
             _applicationLogger = applicationLogger;
-            _fatSettings = fatSettings;
+            _fatSettings = fatSettings.Value;
             _httpService = httpService;
         }
 

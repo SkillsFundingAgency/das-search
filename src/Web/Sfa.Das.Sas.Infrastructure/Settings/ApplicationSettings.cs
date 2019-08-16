@@ -1,60 +1,50 @@
-using Microsoft.Azure;
-
 namespace Sfa.Das.Sas.Infrastructure.Settings
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Linq;
-
     using Sfa.Das.Sas.Core.Configuration;
 
-    public sealed class ApplicationSettings : IConfigurationSettings, IPostcodeIOConfigurationSettings
-    {
-        public string ApprenticeshipIndexAlias => CloudConfigurationManager.GetSetting("ApprenticeshipIndexAlias");
+    //TODO: LWA - Do we need this file?
+    // public sealed class ApplicationSettings
+    // {
+    //     public Uri SurveyUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyUrl"));
 
-        public string ProviderIndexAlias => CloudConfigurationManager.GetSetting("ProviderIndexAlias");
-        public string ApprenticeshipApiBaseUrl => CloudConfigurationManager.GetSetting("ApprenticeshipApiBaseUrl");
+    //     public string CookieInfoBannerCookieName => ConfigurationManager.AppSettings["CookieInfoBannerCookieName"];
 
-        public string BuildId => CloudConfigurationManager.GetSetting("BuildId");
+    //     public Uri PostcodeUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeUrl"));
 
-        public Uri SurveyUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyUrl"));
+    //     public Uri PostcodeTerminatedUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeTerminatedUrl"));
 
-        public string CookieInfoBannerCookieName => ConfigurationManager.AppSettings["CookieInfoBannerCookieName"];
+    //     public string EnvironmentName => CloudConfigurationManager.GetSetting("EnvironmentName");
 
-        public Uri PostcodeUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeUrl"));
+    //     public Uri SatisfactionSourceUrl => new Uri(CloudConfigurationManager.GetSetting("SatisfactionSourceUrl"));
 
-        public Uri PostcodeTerminatedUrl => new Uri(CloudConfigurationManager.GetSetting("PostcodeTerminatedUrl"));
+    //     public Uri AchievementRateUrl => new Uri(CloudConfigurationManager.GetSetting("AchievementRateUrl"));
 
-        public string EnvironmentName => CloudConfigurationManager.GetSetting("EnvironmentName");
+    //     public Uri CookieImprovementUrl => new Uri(CloudConfigurationManager.GetSetting("CookieImprovementUrl"));
 
-        public Uri SatisfactionSourceUrl => new Uri(CloudConfigurationManager.GetSetting("SatisfactionSourceUrl"));
+    //     public Uri CookieGoogleUrl => new Uri(CloudConfigurationManager.GetSetting("CookieGoogleUrl"));
 
-        public Uri AchievementRateUrl => new Uri(CloudConfigurationManager.GetSetting("AchievementRateUrl"));
+    //     public Uri CookieApplicationInsightsUrl => new Uri(CloudConfigurationManager.GetSetting("CookieApplicationInsightsUrl"));
 
-        public Uri CookieImprovementUrl => new Uri(CloudConfigurationManager.GetSetting("CookieImprovementUrl"));
+    //     public Uri CookieAboutUrl => new Uri(CloudConfigurationManager.GetSetting("CookieAboutUrl"));
 
-        public Uri CookieGoogleUrl => new Uri(CloudConfigurationManager.GetSetting("CookieGoogleUrl"));
+    //     public Uri SurveyProviderUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyProviderUrl"));
 
-        public Uri CookieApplicationInsightsUrl => new Uri(CloudConfigurationManager.GetSetting("CookieApplicationInsightsUrl"));
+    //     public Uri ManageApprenticeshipFundsUrl => new Uri(CloudConfigurationManager.GetSetting("ManageApprenticeshipFundsUrl"));
 
-        public Uri CookieAboutUrl => new Uri(CloudConfigurationManager.GetSetting("CookieAboutUrl"));
+    //     public IEnumerable<long> HideAboutProviderForUkprns => GetHideAboutProviderUrkprns();
 
-        public Uri SurveyProviderUrl => new Uri(CloudConfigurationManager.GetSetting("SurveyProviderUrl"));
-
-        public Uri ManageApprenticeshipFundsUrl => new Uri(CloudConfigurationManager.GetSetting("ManageApprenticeshipFundsUrl"));
-
-        public IEnumerable<long> HideAboutProviderForUkprns => GetHideAboutProviderUrkprns();
-
-        private IEnumerable<long> GetHideAboutProviderUrkprns()
-        {
-            return
-                CloudConfigurationManager.GetSetting("HideAboutProviderForUkprns")
-                    .Split(',')
-                    .Select(m => m.Trim())
-                    .Where(m => System.Text.RegularExpressions.Regex.IsMatch(m, "^[0-9]{1,18}$"))
-                    .Where(m => !string.IsNullOrEmpty(m))
-                    .Select(m => long.Parse(m));
-        }
-    }
+    //     private IEnumerable<long> GetHideAboutProviderUrkprns()
+    //     {
+    //         return
+    //             CloudConfigurationManager.GetSetting("HideAboutProviderForUkprns")
+    //                 .Split(',')
+    //                 .Select(m => m.Trim())
+    //                 .Where(m => System.Text.RegularExpressions.Regex.IsMatch(m, "^[0-9]{1,18}$"))
+    //                 .Where(m => !string.IsNullOrEmpty(m))
+    //                 .Select(m => long.Parse(m));
+    //     }
+    // }
 }

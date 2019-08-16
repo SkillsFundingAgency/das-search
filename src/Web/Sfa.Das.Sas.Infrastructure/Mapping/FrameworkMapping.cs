@@ -49,7 +49,7 @@
                 FrameworkName = document.FrameworkName,
                 PathwayCode = document.PathwayCode,
                 PathwayName = document.PathwayName,
-                MaxFunding = document.MaxFunding,
+                MaxFunding = document.CurrentFundingCap,
                 Duration = document.Duration,
                 ExpiryDate = document.ExpiryDate,
                 JobRoleItems = MapJobRoleItems(document.JobRoleItems),
