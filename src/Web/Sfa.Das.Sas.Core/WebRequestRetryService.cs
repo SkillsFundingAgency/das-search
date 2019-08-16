@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Polly;
-using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Core
 {
     public sealed class WebRequestRetryService : IRetryWebRequests
     {
-        private readonly ILog _logger;
+        private readonly ILogger<WebRequestRetryService> _logger;
 
-        public WebRequestRetryService(ILog logger)
+        public WebRequestRetryService(ILogger<WebRequestRetryService> logger)
         {
             _logger = logger;
         }
