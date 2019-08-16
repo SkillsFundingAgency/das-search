@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Logging
 {
-    public class ApprenticeshipSearchLogEntry : ILogEntry
+    public class ApprenticeshipSearchLogEntry
     {
         public IEnumerable<string> Keywords { get; set; }
 
@@ -12,5 +11,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Logging
         public string Postcode { get; set; }
 
         public double[] Coordinates { get; set; }
+
+        public override string ToString()
+        {
+            return string.Empty;
+        }
     }
 }

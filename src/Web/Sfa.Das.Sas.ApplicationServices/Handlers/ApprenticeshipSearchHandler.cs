@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Options;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.ApplicationServices.Settings;
@@ -11,12 +12,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class ApprenticeshipSearchHandler : IRequestHandler<ApprenticeshipSearchQuery, ApprenticeshipSearchResponse>
     {
         private readonly IApprenticeshipSearchService _searchService;
-        private readonly IPaginationSettings _paginationSettings;
+        private readonly PaginationSettings _paginationSettings;
 
-        public ApprenticeshipSearchHandler(IApprenticeshipSearchService searchService, IPaginationSettings paginationSettings)
+        public ApprenticeshipSearchHandler(IApprenticeshipSearchService searchService, IOptions<PaginationSettings> paginationSettings)
         {
             _searchService = searchService;
-            _paginationSettings = paginationSettings;
+            _paginationSettings = paginationSettings.Value;
         }
 
         public async Task<ApprenticeshipSearchResponse> Handle(ApprenticeshipSearchQuery message, CancellationToken cancellationToken)

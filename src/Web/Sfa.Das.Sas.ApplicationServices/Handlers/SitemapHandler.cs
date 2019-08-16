@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     using Responses;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
 
-    public class SitemapHandler : IRequestHandler<SitemapQuery, SitemapResponse>
+    public class SitemapHandler : RequestHandler<SitemapQuery, SitemapResponse>
     {
         private const string SitemapNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
         private readonly IGetStandards _getStandards;
@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _xmlDocumentSerialiser = documentSerialiser;
         }
 
-        public async Task<SitemapResponse> Handle(SitemapQuery message, CancellationToken cancellationToken)
+        protected override SitemapResponse Handle(SitemapQuery message)
         {
             IEnumerable<string> identifiers = null;
 

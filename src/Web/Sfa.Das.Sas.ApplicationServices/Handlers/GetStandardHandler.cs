@@ -9,19 +9,19 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using Core.Domain.Services;
     using MediatR;
+    using Microsoft.Extensions.Logging;
     using Queries;
     using Responses;
-    using SFA.DAS.NLog.Logger;
 
     public class GetStandardHandler : IRequestHandler<GetStandardQuery, GetStandardResponse>
     {
         private readonly IGetStandards _getStandards;
         private readonly IGetAssessmentOrganisations _getAssessmentOrganisations;
-        private readonly ILog _logger;
+        private readonly ILogger<GetStandardHandler> _logger;
 
         public GetStandardHandler(
             IGetStandards getStandards,
-            ILog logger,
+            ILogger<GetStandardHandler> logger,
             IGetAssessmentOrganisations getAssessmentOrganisations)
         {
             _getStandards = getStandards;
@@ -64,14 +64,14 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
             catch (EntityNotFoundException ex)
             {
-                _logger.Warn(ex, $"{typeof(EntityNotFoundException)} when trying to get assessment org by standard id");
+                _logger.LogWarning(ex, $"{typeof(EntityNotFoundException)} when trying to get assessment org by standard id");
                 response.StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound;
                 response.AssessmentOrganisations = new List<AssessmentOrganisation>();
 
             }
             catch (HttpRequestException ex)
             {
-                _logger.Warn(ex, $"{typeof(HttpRequestException)} when trying to get assessment org by standard id");
+                _logger.LogWarning(ex, $"{typeof(HttpRequestException)} when trying to get assessment org by standard id");
                 response.StatusCode = GetStandardResponse.ResponseCodes.HttpRequestException;
             }
 

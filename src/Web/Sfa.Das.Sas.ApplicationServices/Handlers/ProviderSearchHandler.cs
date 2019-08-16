@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using Sfa.Das.Sas.ApplicationServices.Exceptions;
 using Sfa.Das.Sas.ApplicationServices.Services;
-using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
@@ -11,6 +10,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     using Core.Domain.Model;
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using Models;
     using Queries;
     using Responses;
@@ -19,9 +20,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
     public sealed class ProviderSearchHandler : IRequestHandler<ProviderSearchQuery, ProviderSearchResponse>
     {
-        private readonly ILog _logger;
+        private readonly ILogger<ProviderSearchHandler> _logger;
         private readonly IProviderSearchService _searchService;
-        private readonly IPaginationSettings _paginationSettings;
+        private readonly PaginationSettings _paginationSettings;
         private readonly IPostcodeIoService _postcodeIoService;
         private readonly IValidator<ProviderSearchQuery> _validator;
 
@@ -39,13 +40,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         public ProviderSearchHandler(
             IValidator<ProviderSearchQuery> validator,
             IProviderSearchService searchService,
-            IPaginationSettings paginationSettings,
+            IOptions<PaginationSettings> paginationSettings,
             IPostcodeIoService postcodeIoService,
-            ILog logger)
+            ILogger<ProviderSearchHandler> logger)
         {
             _validator = validator;
             _searchService = searchService;
-            _paginationSettings = paginationSettings;
+            _paginationSettings = paginationSettings.Value;
             _postcodeIoService = postcodeIoService;
             _logger = logger;
         }
@@ -134,7 +135,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (searchResults.ResponseCode != LocationLookupResponse.Ok)
             {
-                _logger.Error(new SearchException($"Error:{searchResults.ResponseCode}"), "Unable to get Providers for search criteria");
+                _logger.LogError(new SearchException($"Error:{searchResults.ResponseCode}"), "Unable to get Providers for search criteria");
             }
 
             var providerSearchResponse = new ProviderSearchResponse()

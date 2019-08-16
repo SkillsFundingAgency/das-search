@@ -1,9 +1,9 @@
-﻿using SFA.DAS.NLog.Logger;
-
-namespace Sfa.Das.Sas.ApplicationServices.Logging
+﻿namespace Sfa.Das.Sas.ApplicationServices.Logging
 {
-    public class HttpErrorLogEntry : ILogEntry
+    public class HttpErrorLogEntry
     {
         public string Url { get; set; }
+
+        public override string ToString() => string.Empty;
     }
 }

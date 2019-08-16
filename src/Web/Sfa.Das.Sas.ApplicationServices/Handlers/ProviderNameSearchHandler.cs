@@ -5,19 +5,20 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Threading.Tasks;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using Queries;
     using Responses;
 
     public sealed class ProviderNameSearchHandler : IRequestHandler<ProviderNameSearchQuery, ProviderNameSearchResponse>
     {
         private readonly IProviderSearchProvider _searchProviderName;
-        private readonly IPaginationSettings _paginationSettings;
+        private readonly PaginationSettings _paginationSettings;
 
         public ProviderNameSearchHandler(
-            IProviderSearchProvider searchProviderName, IPaginationSettings paginationSettings)
+            IProviderSearchProvider searchProviderName, IOptions<PaginationSettings> paginationSettings)
         {
             _searchProviderName = searchProviderName;
-            _paginationSettings = paginationSettings;
+            _paginationSettings = paginationSettings.Value;
         }
 
         public async Task<ProviderNameSearchResponse> Handle(ProviderNameSearchQuery message, CancellationToken cancellationToken)

@@ -2,18 +2,16 @@
 using System.Net;
 using System.Text;
 
-
-using SFA.DAS.NLog.Logger;
-
 namespace Sfa.Das.Sas.ApplicationServices.Http
 {
     using Logging;
+    using Microsoft.Extensions.Logging;
 
     public class HttpService : IHttpGet
     {
-        private readonly ILog _logger;
+        private readonly ILogger<HttpService> _logger;
 
-        public HttpService(ILog logger)
+        public HttpService(ILogger<HttpService> logger)
         {
             this._logger = logger;
         }
@@ -36,7 +34,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Http
                 }
                 catch (WebException ex)
                 {
-                    _logger.Warn(ex.ToString(), new HttpErrorLogEntry { Url = url });
+                    _logger.LogWarning(ex.ToString()+"{httpError}", new HttpErrorLogEntry { Url = url });
 
                     HttpWebResponse res = (HttpWebResponse)ex.Response;
                     if (res.StatusCode == HttpStatusCode.NotFound)

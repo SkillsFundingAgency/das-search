@@ -10,7 +10,7 @@ using IGetProviders = Sfa.Das.Sas.Core.Domain.Services.IGetProviders;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class StatsHandler : IRequestHandler<StatsQuery, StatsResponse>
+    public class StatsHandler : RequestHandler<StatsQuery, StatsResponse>
     {
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
         }
 
-        public async Task<StatsResponse> Handle(StatsQuery message, CancellationToken cancellationToken)
+        protected override StatsResponse Handle(StatsQuery message)
         {
             var response = new StatsResponse
             {

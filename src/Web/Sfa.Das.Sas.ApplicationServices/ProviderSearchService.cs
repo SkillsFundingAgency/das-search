@@ -5,10 +5,11 @@ using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Settings;
 using Sfa.Das.Sas.Core.Domain.Model;
 using Sfa.Das.Sas.Core.Domain.Services;
-using SFA.DAS.NLog.Logger;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Sfa.Das.Sas.ApplicationServices
 {
@@ -17,23 +18,23 @@ namespace Sfa.Das.Sas.ApplicationServices
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
         private readonly ILookupLocations _postCodeLookup;
-        private readonly ILog _logger;
-        private readonly IPaginationSettings _paginationSettings;
+        private readonly ILogger<ProviderSearchService> _logger;
+        private readonly PaginationSettings _paginationSettings;
         private readonly IProviderSearchProvider _providerSearchProvider;
 
         public ProviderSearchService(
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
             ILookupLocations postcodeLookup,
-            ILog logger,
-            IPaginationSettings paginationSettings,
+            ILogger<ProviderSearchService> logger,
+            IOptions<PaginationSettings> paginationSettings,
             IProviderSearchProvider providerSearchProvider)
         {
             _getStandards = getStandards;
             _getFrameworks = getFrameworks;
             _postCodeLookup = postcodeLookup;
             _logger = logger;
-            _paginationSettings = paginationSettings;
+            _paginationSettings = paginationSettings.Value;
             _providerSearchProvider = providerSearchProvider;
         }
 
@@ -59,7 +60,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                 Coordinates = new[] { coordinates.Lon, coordinates.Lat }
             };
 
-            _logger.Info("Provider location search", logEntry);
+            _logger.LogInformation("Provider location search {apprenticeshipSearch}", logEntry);
         }
 
 
@@ -133,7 +134,7 @@ namespace Sfa.Das.Sas.ApplicationServices
             }
             catch (SearchException ex)
             {
-                _logger.Error(ex, "Search for provider failed.");
+                _logger.LogError(ex, "Search for provider failed.");
 
                 return GetProviderSearchResultErrorResponse(apprenticeshipId, apprenticeship?.Title, postCode, ServerLookupResponse.InternalServerError);
             }

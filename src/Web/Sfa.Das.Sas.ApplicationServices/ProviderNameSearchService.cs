@@ -5,18 +5,19 @@ namespace Sfa.Das.Sas.ApplicationServices
 {
     using System.Threading.Tasks;
     using Interfaces;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
     using Models;
     using Settings;
-    using SFA.DAS.NLog.Logger;
 
     public class ProviderNameSearchService : IProviderNameSearchService
     {
-        private readonly IPaginationSettings _paginationSettings;
+        private readonly PaginationSettings _paginationSettings;
         private readonly IProviderSearchProvider _searchProviderName;
-        private readonly ILog _logger;
-        public ProviderNameSearchService(IPaginationSettings paginationSettings, IProviderSearchProvider searchProviderName, ILog logger)
+        private readonly ILogger<ProviderNameSearchService> _logger;
+        public ProviderNameSearchService(IOptions<PaginationSettings> paginationSettings, IProviderSearchProvider searchProviderName, ILogger<ProviderNameSearchService> logger)
         {
-            _paginationSettings = paginationSettings;
+            _paginationSettings = paginationSettings.Value;
             _searchProviderName = searchProviderName;
             _logger = logger;
         }
@@ -28,24 +29,24 @@ namespace Sfa.Das.Sas.ApplicationServices
                 pageSize = _paginationSettings.DefaultResultsAmount;
             }
 
-            _logger.Info($"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");
+            _logger.LogInformation($"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");
 
             try
             {
                 var results = await _searchProviderName.SearchProviderNameAndAliases(searchTerm, page, pageSize.Value);
 
-                _logger.Info($"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{results.ActualPage}], Page Size: [{pageSize}], Total Results: [{results.TotalResults}]");
+                _logger.LogInformation($"Provider Name Search complete: SearchTerm: [{searchTerm}], Page: [{results.ActualPage}], Page Size: [{pageSize}], Total Results: [{results.TotalResults}]");
 
                 return results;
             }
             catch (Exception e)
             {
-                _logger.Error(e,$"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");
-            return new ProviderNameSearchResultsAndPagination()
-            {
-                HasError = true,
-                ResponseCode = ProviderNameSearchResponseCodes.SearchFailed
-            };
+                _logger.LogError(e,$"Provider Name Search error: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");
+                return new ProviderNameSearchResultsAndPagination()
+                {
+                    HasError = true,
+                    ResponseCode = ProviderNameSearchResponseCodes.SearchFailed
+                };
             }
         }
     }

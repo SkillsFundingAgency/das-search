@@ -7,7 +7,7 @@ using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class GetFrameworkProvidersHandler : IRequestHandler<GetFrameworkProvidersQuery, GetFrameworkProvidersResponse>
+    public class GetFrameworkProvidersHandler : RequestHandler<GetFrameworkProvidersQuery, GetFrameworkProvidersResponse>
     {
         private readonly IGetFrameworks _getFrameworks;
 
@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _getFrameworks = getFrameworks;
         }
 
-        public async Task<GetFrameworkProvidersResponse> Handle(GetFrameworkProvidersQuery message, CancellationToken cancellationToken)
+        protected override GetFrameworkProvidersResponse Handle(GetFrameworkProvidersQuery message)
         {
             var framework = _getFrameworks.GetFrameworkById(message.FrameworkId);
 

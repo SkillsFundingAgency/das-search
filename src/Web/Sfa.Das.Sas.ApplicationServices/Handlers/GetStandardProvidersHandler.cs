@@ -7,7 +7,7 @@ using Sfa.Das.Sas.Core.Domain.Services;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class GetStandardProvidersHandler : IRequestHandler<GetStandardProvidersQuery, GetStandardProvidersResponse>
+    public class GetStandardProvidersHandler : RequestHandler<GetStandardProvidersQuery, GetStandardProvidersResponse>
     {
         private readonly IGetStandards _getStandards;
 
@@ -16,7 +16,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _getStandards = getStandards;
         }
 
-        public async Task<GetStandardProvidersResponse> Handle(GetStandardProvidersQuery message, CancellationToken cancellationToken)
+
+        protected override GetStandardProvidersResponse Handle(GetStandardProvidersQuery message)
         {
             var standard = _getStandards.GetStandardById(message.StandardId);
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Core;
 using Sfa.Das.Sas.Core.Configuration;
@@ -12,10 +12,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
     public class PostcodeIoService : IPostcodeIoService
     {
         private readonly IRetryWebRequests _retryService;
-        private readonly ILog _logger;
+        private readonly ILogger<PostcodeIoService> _logger;
         private readonly IPostcodeIOConfigurationSettings _applicationSettings;
 
-        public PostcodeIoService(IRetryWebRequests retryService, ILog logger, IPostcodeIOConfigurationSettings applicationSettings)
+        public PostcodeIoService(IRetryWebRequests retryService, ILogger<PostcodeIoService> logger, IPostcodeIOConfigurationSettings applicationSettings)
         {
             _retryService = retryService;
             _logger = logger;
@@ -50,7 +50,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             }
             catch (Exception ex)
             {
-                _logger.Warn(string.Concat("Couldn't connect to postcode service", ex.Message));
+                _logger.LogWarning(string.Concat("Couldn't connect to postcode service", ex.Message));
             }
 
             return "Error";
@@ -70,7 +70,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             }
             catch (Exception ex)
             {
-                _logger.Warn(string.Concat("Couldn't connect to postcode service", ex.Message));
+                _logger.LogWarning(string.Concat("Couldn't connect to postcode service", ex.Message));
             }
 
             return prevMessage;
@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
 
         private void CouldntConnect(Exception ex)
         {
-            _logger.Warn(string.Concat("Couldn't connect to postcode service, retrying...", ex.Message));
+            _logger.LogWarning(string.Concat("Couldn't connect to postcode service, retrying...", ex.Message));
         }
     }
 }

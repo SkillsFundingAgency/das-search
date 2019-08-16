@@ -11,17 +11,17 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     using Core.Domain.Services;
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Logging;
     using Queries;
     using Responses;
     using SFA.DAS.Apprenticeships.Api.Types;
-    using SFA.DAS.NLog.Logger;
     using Validators;
 
-    public sealed class ApprenticeshipProviderDetailHandler : IRequestHandler<ApprenticeshipProviderDetailQuery, ApprenticeshipProviderDetailResponse>
+    public sealed class ApprenticeshipProviderDetailHandler : RequestHandler<ApprenticeshipProviderDetailQuery, ApprenticeshipProviderDetailResponse>
     {
         private readonly AbstractValidator<ApprenticeshipProviderDetailQuery> _validator;
         private readonly IApprenticeshipProviderRepository _apprenticeshipProviderRepository;
-        private readonly ILog _logger;
+        private readonly ILogger<ApprenticeshipProviderDetailHandler> _logger;
         private readonly IGetStandards _getStandards;
         private readonly IGetFrameworks _getFrameworks;
 
@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             IApprenticeshipProviderRepository apprenticeshipProviderRepository,
             IGetStandards getStandards,
             IGetFrameworks getFrameworks,
-            ILog logger)
+            ILogger<ApprenticeshipProviderDetailHandler> logger)
         {
             _validator = validator;
             _apprenticeshipProviderRepository = apprenticeshipProviderRepository;
@@ -39,7 +39,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _logger = logger;
         }
 
-        public async Task<ApprenticeshipProviderDetailResponse> Handle(ApprenticeshipProviderDetailQuery message, CancellationToken cancellationToken)
+
+        protected override ApprenticeshipProviderDetailResponse Handle(ApprenticeshipProviderDetailQuery message)
         {
             var result = _validator.Validate(message);
 
