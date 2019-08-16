@@ -141,19 +141,13 @@ namespace Sfa.Das.FatApi.Client.Model
                     this.NationalProvidersAggregation.SequenceEqual(input.NationalProvidersAggregation)
                 ) && 
                 (
-                    this.TotalResults == input.TotalResults ||
-                    (this.TotalResults != null &&
-                    this.TotalResults.Equals(input.TotalResults))
+                    this.TotalResults == input.TotalResults
                 ) && 
                 (
-                    this.PageSize == input.PageSize ||
-                    (this.PageSize != null &&
-                    this.PageSize.Equals(input.PageSize))
+                    this.PageSize == input.PageSize
                 ) && 
                 (
-                    this.PageNumber == input.PageNumber ||
-                    (this.PageNumber != null &&
-                    this.PageNumber.Equals(input.PageNumber))
+                    this.PageNumber == input.PageNumber
                 ) && 
                 (
                     this.Results == input.Results ||
@@ -176,12 +170,9 @@ namespace Sfa.Das.FatApi.Client.Model
                     hashCode = hashCode * 59 + this.TrainingOptionsAggregation.GetHashCode();
                 if (this.NationalProvidersAggregation != null)
                     hashCode = hashCode * 59 + this.NationalProvidersAggregation.GetHashCode();
-                if (this.TotalResults != null)
-                    hashCode = hashCode * 59 + this.TotalResults.GetHashCode();
-                if (this.PageSize != null)
-                    hashCode = hashCode * 59 + this.PageSize.GetHashCode();
-                if (this.PageNumber != null)
-                    hashCode = hashCode * 59 + this.PageNumber.GetHashCode();
+                hashCode = hashCode * 59 + this.TotalResults.GetHashCode();
+                hashCode = hashCode * 59 + this.PageSize.GetHashCode();
+                hashCode = hashCode * 59 + this.PageNumber.GetHashCode();
                 if (this.Results != null)
                     hashCode = hashCode * 59 + this.Results.GetHashCode();
                 return hashCode;

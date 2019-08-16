@@ -5,14 +5,15 @@
     <AssemblyName>Sfa.Das.Sas.ApplicationServices</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0"/>
-    <PackageReference Include="MediatR" Version="6.0.0"/>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.1"/>
-    <PackageReference Include="FluentValidation" Version="8.4.0"/>
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.1" />
+    <PackageReference Include="FluentValidation" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj"/>
-    <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj"/>
+    <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj" />
+    <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj" />
+    <ProjectReference Include="..\Sfa.Das.FatApi.Client\Sfa.Das.FatApi.Client.csproj" />
   </ItemGroup>
 </Project>

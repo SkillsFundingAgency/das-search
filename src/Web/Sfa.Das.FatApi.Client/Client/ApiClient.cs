@@ -307,7 +307,7 @@ namespace Sfa.Das.FatApi.Client.Client
                     request.RequestFormat = DataFormat.Json;
                 }
 
-                request.AddBody(options.Data);
+                request.AddJsonBody(options.Data);
             }
 
             if (options.FileParameters != null)
@@ -381,15 +381,15 @@ namespace Sfa.Das.FatApi.Client.Client
             var existingDeserializer = req.JsonSerializer as IDeserializer;
             if (existingDeserializer != null)
             {
-                client.AddHandler(existingDeserializer, "application/json", "text/json", "text/x-json", "text/javascript", "*+json");
+                client.AddHandler(() => existingDeserializer, "application/json", "text/json", "text/x-json", "text/javascript", "*+json");
             }
             else
             {
                 var codec = new CustomJsonCodec(configuration);
-                client.AddHandler(codec, "application/json", "text/json", "text/x-json", "text/javascript", "*+json");
+                client.AddHandler(() => codec, "application/json", "text/json", "text/x-json", "text/javascript", "*+json");
             }
 
-            client.AddHandler(new XmlDeserializer(), "application/xml", "text/xml", "*+xml", "*");
+            client.AddHandler(() => new XmlDeserializer(), "application/xml", "text/xml", "*+xml", "*");
 
             client.Timeout = configuration.Timeout;
 

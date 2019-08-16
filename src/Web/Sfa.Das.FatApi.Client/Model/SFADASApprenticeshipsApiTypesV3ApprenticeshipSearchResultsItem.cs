@@ -234,19 +234,13 @@ namespace Sfa.Das.FatApi.Client.Model
                     this.Keywords.SequenceEqual(input.Keywords)
                 ) && 
                 (
-                    this.Level == input.Level ||
-                    (this.Level != null &&
-                    this.Level.Equals(input.Level))
+                    this.Level == input.Level
                 ) && 
                 (
-                    this.Published == input.Published ||
-                    (this.Published != null &&
-                    this.Published.Equals(input.Published))
+                    this.Published == input.Published
                 ) && 
                 (
-                    this.Duration == input.Duration ||
-                    (this.Duration != null &&
-                    this.Duration.Equals(input.Duration))
+                    this.Duration == input.Duration
                 ) && 
                 (
                     this.EffectiveFrom == input.EffectiveFrom ||
@@ -293,12 +287,9 @@ namespace Sfa.Das.FatApi.Client.Model
                     hashCode = hashCode * 59 + this.JobRoles.GetHashCode();
                 if (this.Keywords != null)
                     hashCode = hashCode * 59 + this.Keywords.GetHashCode();
-                if (this.Level != null)
-                    hashCode = hashCode * 59 + this.Level.GetHashCode();
-                if (this.Published != null)
-                    hashCode = hashCode * 59 + this.Published.GetHashCode();
-                if (this.Duration != null)
-                    hashCode = hashCode * 59 + this.Duration.GetHashCode();
+                hashCode = hashCode * 59 + this.Level.GetHashCode();
+                hashCode = hashCode * 59 + this.Published.GetHashCode();
+                hashCode = hashCode * 59 + this.Duration.GetHashCode();
                 if (this.EffectiveFrom != null)
                     hashCode = hashCode * 59 + this.EffectiveFrom.GetHashCode();
                 if (this.EffectiveTo != null)

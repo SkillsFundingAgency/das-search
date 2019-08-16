@@ -204,9 +204,7 @@ namespace Sfa.Das.FatApi.Client.Model
 
             return 
                 (
-                    this.Ukprn == input.Ukprn ||
-                    (this.Ukprn != null &&
-                    this.Ukprn.Equals(input.Ukprn))
+                    this.Ukprn == input.Ukprn
                 ) && 
                 (
                     this.Location == input.Location ||
@@ -219,14 +217,10 @@ namespace Sfa.Das.FatApi.Client.Model
                     this.ProviderName.Equals(input.ProviderName))
                 ) && 
                 (
-                    this.OverallAchievementRate == input.OverallAchievementRate ||
-                    (this.OverallAchievementRate != null &&
-                    this.OverallAchievementRate.Equals(input.OverallAchievementRate))
+                    this.OverallAchievementRate == input.OverallAchievementRate
                 ) && 
                 (
-                    this.NationalProvider == input.NationalProvider ||
-                    (this.NationalProvider != null &&
-                    this.NationalProvider.Equals(input.NationalProvider))
+                    this.NationalProvider == input.NationalProvider
                 ) && 
                 (
                     this.DeliveryModes == input.DeliveryModes ||
@@ -235,24 +229,16 @@ namespace Sfa.Das.FatApi.Client.Model
                     this.DeliveryModes.SequenceEqual(input.DeliveryModes)
                 ) && 
                 (
-                    this.Distance == input.Distance ||
-                    (this.Distance != null &&
-                    this.Distance.Equals(input.Distance))
+                    this.Distance == input.Distance
                 ) && 
                 (
-                    this.EmployerSatisfaction == input.EmployerSatisfaction ||
-                    (this.EmployerSatisfaction != null &&
-                    this.EmployerSatisfaction.Equals(input.EmployerSatisfaction))
+                    this.EmployerSatisfaction == input.EmployerSatisfaction
                 ) && 
                 (
-                    this.LearnerSatisfaction == input.LearnerSatisfaction ||
-                    (this.LearnerSatisfaction != null &&
-                    this.LearnerSatisfaction.Equals(input.LearnerSatisfaction))
+                    this.LearnerSatisfaction == input.LearnerSatisfaction
                 ) && 
                 (
-                    this.NationalOverallAchievementRate == input.NationalOverallAchievementRate ||
-                    (this.NationalOverallAchievementRate != null &&
-                    this.NationalOverallAchievementRate.Equals(input.NationalOverallAchievementRate))
+                    this.NationalOverallAchievementRate == input.NationalOverallAchievementRate
                 ) && 
                 (
                     this.OverallCohort == input.OverallCohort ||
@@ -260,19 +246,13 @@ namespace Sfa.Das.FatApi.Client.Model
                     this.OverallCohort.Equals(input.OverallCohort))
                 ) && 
                 (
-                    this.HasNonLevyContract == input.HasNonLevyContract ||
-                    (this.HasNonLevyContract != null &&
-                    this.HasNonLevyContract.Equals(input.HasNonLevyContract))
+                    this.HasNonLevyContract == input.HasNonLevyContract
                 ) && 
                 (
-                    this.IsLevyPayerOnly == input.IsLevyPayerOnly ||
-                    (this.IsLevyPayerOnly != null &&
-                    this.IsLevyPayerOnly.Equals(input.IsLevyPayerOnly))
+                    this.IsLevyPayerOnly == input.IsLevyPayerOnly
                 ) && 
                 (
-                    this.CurrentlyNotStartingNewApprentices == input.CurrentlyNotStartingNewApprentices ||
-                    (this.CurrentlyNotStartingNewApprentices != null &&
-                    this.CurrentlyNotStartingNewApprentices.Equals(input.CurrentlyNotStartingNewApprentices))
+                    this.CurrentlyNotStartingNewApprentices == input.CurrentlyNotStartingNewApprentices
                 );
         }
 
@@ -285,34 +265,22 @@ namespace Sfa.Das.FatApi.Client.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Ukprn != null)
-                    hashCode = hashCode * 59 + this.Ukprn.GetHashCode();
+                hashCode = hashCode * 59 + this.Ukprn.GetHashCode();
                 if (this.Location != null)
                     hashCode = hashCode * 59 + this.Location.GetHashCode();
                 if (this.ProviderName != null)
                     hashCode = hashCode * 59 + this.ProviderName.GetHashCode();
-                if (this.OverallAchievementRate != null)
-                    hashCode = hashCode * 59 + this.OverallAchievementRate.GetHashCode();
-                if (this.NationalProvider != null)
-                    hashCode = hashCode * 59 + this.NationalProvider.GetHashCode();
-                if (this.DeliveryModes != null)
-                    hashCode = hashCode * 59 + this.DeliveryModes.GetHashCode();
-                if (this.Distance != null)
-                    hashCode = hashCode * 59 + this.Distance.GetHashCode();
-                if (this.EmployerSatisfaction != null)
-                    hashCode = hashCode * 59 + this.EmployerSatisfaction.GetHashCode();
-                if (this.LearnerSatisfaction != null)
-                    hashCode = hashCode * 59 + this.LearnerSatisfaction.GetHashCode();
-                if (this.NationalOverallAchievementRate != null)
-                    hashCode = hashCode * 59 + this.NationalOverallAchievementRate.GetHashCode();
-                if (this.OverallCohort != null)
-                    hashCode = hashCode * 59 + this.OverallCohort.GetHashCode();
-                if (this.HasNonLevyContract != null)
-                    hashCode = hashCode * 59 + this.HasNonLevyContract.GetHashCode();
-                if (this.IsLevyPayerOnly != null)
-                    hashCode = hashCode * 59 + this.IsLevyPayerOnly.GetHashCode();
-                if (this.CurrentlyNotStartingNewApprentices != null)
-                    hashCode = hashCode * 59 + this.CurrentlyNotStartingNewApprentices.GetHashCode();
+                hashCode = hashCode * 59 + this.OverallAchievementRate.GetHashCode();
+                hashCode = hashCode * 59 + this.NationalProvider.GetHashCode();
+                hashCode = hashCode * 59 + this.DeliveryModes.GetHashCode();
+                hashCode = hashCode * 59 + this.Distance.GetHashCode();
+                hashCode = hashCode * 59 + this.EmployerSatisfaction.GetHashCode();
+                hashCode = hashCode * 59 + this.LearnerSatisfaction.GetHashCode();
+                hashCode = hashCode * 59 + this.NationalOverallAchievementRate.GetHashCode();
+                hashCode = hashCode * 59 + this.OverallCohort.GetHashCode();
+                hashCode = hashCode * 59 + this.HasNonLevyContract.GetHashCode();
+                hashCode = hashCode * 59 + this.IsLevyPayerOnly.GetHashCode();
+                hashCode = hashCode * 59 + this.CurrentlyNotStartingNewApprentices.GetHashCode();
                 return hashCode;
             }
         }

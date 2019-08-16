@@ -101,9 +101,7 @@ namespace Sfa.Das.FatApi.Client.Model
 
             return 
                 (
-                    this.LocationId == input.LocationId ||
-                    (this.LocationId != null &&
-                    this.LocationId.Equals(input.LocationId))
+                    this.LocationId == input.LocationId
                 ) && 
                 (
                     this.LocationName == input.LocationName ||
@@ -126,8 +124,7 @@ namespace Sfa.Das.FatApi.Client.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.LocationId != null)
-                    hashCode = hashCode * 59 + this.LocationId.GetHashCode();
+                hashCode = hashCode * 59 + this.LocationId.GetHashCode();
                 if (this.LocationName != null)
                     hashCode = hashCode * 59 + this.LocationName.GetHashCode();
                 if (this.Address != null)
