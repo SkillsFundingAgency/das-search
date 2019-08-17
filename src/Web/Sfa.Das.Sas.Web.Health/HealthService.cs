@@ -1,6 +1,7 @@
 ﻿namespace Sfa.Das.Sas.Web.Health
 {
     using System.Net;
+    using Microsoft.Extensions.Options;
     using Models;
 
     public interface IHealthService
@@ -10,11 +11,11 @@
 
     public class HealthService : IHealthService
     {
-        private readonly IHealthSettings _healthSettings;
+        private readonly HealthSettings _healthSettings;
 
-        public HealthService(IHealthSettings healthSettings)
+        public HealthService(IOptions<HealthSettings> healthSettings)
         {
-            _healthSettings = healthSettings;
+            _healthSettings = healthSettings.Value;
         }
 
         public HealthModel CreateModel()

@@ -2,12 +2,10 @@
 {
     using System.Configuration;
 
-    public class HealthSettings : IHealthSettings
+    public class HealthSettings
     {
-        public string ApprenticeshipApiBaseUrl => ConfigurationManager.AppSettings["ApprenticeshipApiBaseUrl"];
-
-        public string PostcodeUrl => ConfigurationManager.AppSettings["PostcodeUrl"];
-
-        public string BuildId => ConfigurationManager.AppSettings["BuildId"];
+        public string ApprenticeshipApiBaseUrl { get; set; }
+        public string PostcodeUrl { get; set; }
+        public string BuildId { get; set; }
     }
 }
