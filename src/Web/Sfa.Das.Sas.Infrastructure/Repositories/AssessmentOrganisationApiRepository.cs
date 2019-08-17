@@ -2,75 +2,29 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Mapping;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
-using SFA.DAS.AssessmentOrgs.Api.Client;
 
 namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    public sealed class AssessmentOrganisationApiRepository : IAssessmentOrgsApiClient, IGetAssessmentOrganisations
+    public sealed class AssessmentOrganisationApiRepository : IAssessmentOrgsApi, IGetAssessmentOrganisations
     {
-        private readonly IAssessmentOrgsApiClient _apiClient;
+        private readonly IAssessmentOrgsApi _apiClient;
         private readonly ILogger<AssessmentOrganisationApiRepository> _logger;
         private readonly IAssessmentOrganisationMapping _assessmentOrganisationMapping;
 
-        public AssessmentOrganisationApiRepository(IAssessmentOrgsApiClient apiClient, ILogger<AssessmentOrganisationApiRepository> logger, IAssessmentOrganisationMapping assessmentOrganisationMapping)
+        public AssessmentOrganisationApiRepository(IAssessmentOrgsApi apiClient, ILogger<AssessmentOrganisationApiRepository> logger, IAssessmentOrganisationMapping assessmentOrganisationMapping)
         {
             _apiClient = apiClient;
             _logger = logger;
             _assessmentOrganisationMapping = assessmentOrganisationMapping;
         }
 
-        public void Dispose()
+        public Task<IEnumerable<FatApi.Client.Model.Organisation>> ByStandardAsync(int standardId)
         {
-            _apiClient.Dispose();
-        }
-
-        public Organisation Get(string organisationId)
-        {
-            return _apiClient.Get(organisationId);
-        }
-
-        public async Task<Organisation> GetAsync(string organisationId)
-        {
-            return await _apiClient.GetAsync(organisationId);
-        }
-
-        public IEnumerable<Organisation> ByStandard(int standardId)
-        {
-            return _apiClient.ByStandard(standardId);
-        }
-
-        public async Task<IEnumerable<Organisation>> ByStandardAsync(int standardId)
-        {
-            return await _apiClient.ByStandardAsync(standardId);
-        }
-
-        public IEnumerable<Organisation> ByStandard(string standardId)
-        {
-            return _apiClient.ByStandard(standardId);
-        }
-
-        public async Task<IEnumerable<Organisation>> ByStandardAsync(string standardId)
-        {
-            return await _apiClient.ByStandardAsync(standardId);
-        }
-
-        public IEnumerable<OrganisationSummary> FindAll()
-        {
-            return _apiClient.FindAll();
-        }
-
-        public async Task<IEnumerable<OrganisationSummary>> FindAllAsync()
-        {
-            return await _apiClient.FindAllAsync();
-        }
-
-        public bool Exists(string organisationId)
-        {
-            return _apiClient.Exists(organisationId);
+            return _apiClient.ByStandardAsync(standardId);
         }
 
         public async Task<bool> ExistsAsync(string organisationId)
@@ -78,14 +32,19 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             return await _apiClient.ExistsAsync(organisationId);
         }
 
-        public IEnumerable<StandardOrganisationSummary> FindAllStandardsByOrganisationId(string organisationId)
+        public Task<IEnumerable<FatApi.Client.Model.OrganisationSummary>> FindAllAsync()
         {
-            return _apiClient.FindAllStandardsByOrganisationId(organisationId);
+            return _apiClient.FindAllAsync();
         }
 
-        public async Task<IEnumerable<StandardOrganisationSummary>> FindAllStandardsByOrganisationIdAsync(string organisationId)
+        public Task<IEnumerable<FatApi.Client.Model.StandardOrganisationSummary>> FindAllStandardsByOrganisationIdAsync(string organisationId)
         {
-            return await _apiClient.FindAllStandardsByOrganisationIdAsync(organisationId);
+            return _apiClient.FindAllStandardsByOrganisationIdAsync(organisationId);
+        }
+
+        public Task<FatApi.Client.Model.Organisation> GetAsync(string organisationId)
+        {
+            return _apiClient.GetAsync(organisationId);
         }
 
         public async Task<IEnumerable<AssessmentOrganisation>> GetByStandardId(int id)

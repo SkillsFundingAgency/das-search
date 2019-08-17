@@ -14,6 +14,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj" />
-    <ProjectReference Include="..\Sfa.Das.FatApi.Client\Sfa.Das.FatApi.Client.csproj" />
   </ItemGroup>
 </Project>

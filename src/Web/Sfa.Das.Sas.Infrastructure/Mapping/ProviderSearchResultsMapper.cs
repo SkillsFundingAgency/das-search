@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Infrastructure.Mapping
             item.NationalProvider = document.NationalProvider;
             item.LocationId = document.Location.LocationId;
             item.LocationName = document.Location.LocationName;
-            item.Address = new Address()
+            item.Address = new Core.Domain.Model.Address()
             {
                 Address1 = document.Location.Address.Street,
                 Town = document.Location.Address.Town,

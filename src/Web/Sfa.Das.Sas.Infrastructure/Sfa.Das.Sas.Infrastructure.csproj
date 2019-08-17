@@ -8,12 +8,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0"/>
     <PackageReference Include="Refit" Version="4.7.9"/>
     <PackageReference Include="SFA.DAS.Providers.Api.Client" Version="0.11.203"/>
-    <PackageReference Include="SFA.DAS.AssessmentOrgs.Api.Client" Version="0.11.203"/>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0"/>
     <PackageReference Include="Refit.HttpClientFactory" Version="4.7.9"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sfa.Das.FatApi.Client\Sfa.Das.FatApi.Client.csproj"/>
     <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj"/>
   </ItemGroup>
 </Project>

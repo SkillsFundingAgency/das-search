@@ -5,8 +5,6 @@ using Refit;
 using Sfa.Das.FatApi.Client.Api;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Services;
-using Sfa.Das.Sas.ApplicationServices.Settings;
-using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Core.Domain.Repositories;
 using Sfa.Das.Sas.Core.Domain.Services;
 using Sfa.Das.Sas.Infrastructure.Mapping;
@@ -15,7 +13,6 @@ using Sfa.Das.Sas.Infrastructure.Providers;
 using Sfa.Das.Sas.Infrastructure.Repositories;
 using Sfa.Das.Sas.Infrastructure.Settings;
 using SFA.DAS.Apprenticeships.Api.Client;
-using SFA.DAS.AssessmentOrgs.Api.Client;
 using SFA.DAS.Providers.Api.Client;
 
 namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
@@ -50,15 +47,17 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
 
             services.AddScoped<IStandardApiClient, StandardApiClient>(c => new StandardApiClient(fatApiBaseUrl));
             services.AddScoped<IFrameworkApiClient, FrameworkApiClient>(c => new FrameworkApiClient(fatApiBaseUrl));
-            services.AddScoped<IAssessmentOrgsApiClient, AssessmentOrgsApiClient>(c => new AssessmentOrgsApiClient(fatApiBaseUrl));
 
             services.AddRefitClient<ISearchApi>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(fatApiBaseUrl));
 
-           services.AddRefitClient<ISearchVApi>()
+            services.AddRefitClient<ISearchVApi>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(fatApiBaseUrl));
 
-           services.AddRefitClient<IProvidersVApi>()
+            services.AddRefitClient<IProvidersVApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(fatApiBaseUrl));
+
+            services.AddRefitClient<IAssessmentOrgsApi>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(fatApiBaseUrl));
 
             services.AddScoped<IProviderApiClient>(c => new ProviderApiClient(fatApiBaseUrl));

@@ -1,5 +1,5 @@
-﻿using Sfa.Das.Sas.Core.Domain;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+﻿using Sfa.Das.FatApi.Client.Model;
+using Sfa.Das.Sas.Core.Domain;
 
 namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
