@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Resources", "Sf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Web.Health", "Sfa.Das.Sas.Web.Health\Sfa.Das.Sas.Web.Health.csproj", "{C3395D58-2E04-4B28-857B-A0E27C312C1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfa.Das.Sas.Web", "Sfa.Das.Sas.Web\Sfa.Das.Sas.Web.csproj", "{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,5 +102,17 @@ Global
 		{C3395D58-2E04-4B28-857B-A0E27C312C1F}.Release|x64.Build.0 = Debug|Any CPU
 		{C3395D58-2E04-4B28-857B-A0E27C312C1F}.Release|x86.ActiveCfg = Debug|Any CPU
 		{C3395D58-2E04-4B28-857B-A0E27C312C1F}.Release|x86.Build.0 = Debug|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Debug|x64.Build.0 = Debug|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Debug|x86.Build.0 = Debug|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Release|x64.ActiveCfg = Release|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Release|x64.Build.0 = Release|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Release|x86.ActiveCfg = Release|Any CPU
+		{9F2A3CD6-8645-48A6-99BD-CAE19D8C2AD8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
     internal class ApprenticeshipSearchResultItemViewModelMappingAction :
         IMappingAction<ApprenticeshipSearchResultsItem, ApprenticeshipSearchResultItemViewModel>
     {
-        public void Process(ApprenticeshipSearchResultsItem source, ApprenticeshipSearchResultItemViewModel destination)
+        public void Process(ApprenticeshipSearchResultsItem source, ApprenticeshipSearchResultItemViewModel destination, ResolutionContext context)
         {
             destination.Level = GetLevelText(source.Level);
             switch (source.ApprenticeshipType)

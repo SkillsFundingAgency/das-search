@@ -5,7 +5,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Services.MappingActions.Helpers
     using System.Collections.Generic;
     using System.Linq;
     using ApplicationServices.Models;
-    using Microsoft.Ajax.Utilities;
 
     public static class ProviderMappingHelper
     {
@@ -40,7 +39,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services.MappingActions.Helpers
 
         public static string GetCommaList(params string [] list)
         {
-            return string.Join(", ", list.Where(m => !m.IsNullOrWhiteSpace()));
+            return string.Join(", ", list.Where(m => !string.IsNullOrWhiteSpace(m)));
         }
 
         private static string ProcessDeliveryModeToRedCrossOrGreenTick(bool status, string desc)

@@ -4,6 +4,6 @@
 
     public interface ICookieService
     {
-        bool ShowCookieForBanner(HttpContextBase httpContext);
+        bool ShowCookieForBanner();
     }
 }

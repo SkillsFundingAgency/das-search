@@ -1,39 +1,32 @@
 ﻿namespace Sfa.Das.Sas.Web.Services
 {
     using System;
-    using System.Web;
-
-    using Core.Configuration;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Options;
+    using Sfa.Das.Sas.Web.Settings;
 
     public class CookieService : ICookieService
     {
-        private readonly IConfigurationSettings _applicationSettings;
+        private readonly GeneralSettings _applicationSettings;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public CookieService(IConfigurationSettings applicationSettings)
+        public CookieService(IOptions<GeneralSettings> applicationSettings, IHttpContextAccessor contextAccessor)
         {
-            _applicationSettings = applicationSettings;
+            _applicationSettings = applicationSettings.Value;
+            _contextAccessor = contextAccessor;
         }
 
-        public bool ShowCookieForBanner(HttpContextBase httpContext)
+        public bool ShowCookieForBanner()
         {
-            if (httpContext == null)
-            {
-                return false;
-            }
-
-            var httpCookie = httpContext.Request.Cookies.Get(_applicationSettings.CookieInfoBannerCookieName);
+            var httpCookie = _contextAccessor.HttpContext.Request.Cookies[_applicationSettings.CookieInfoBannerCookieName];
 
             if (httpCookie != null)
             {
                 return false;
             }
 
-            var cookie = new HttpCookie(_applicationSettings.CookieInfoBannerCookieName)
-            {
-                Expires = DateTime.UtcNow.AddDays(30)
-            };
-
-            httpContext.Response.Cookies.Add(cookie);
+            CookieOptions cookieOptions = new CookieOptions { Expires = DateTime.UtcNow.AddDays(30) };
+            _contextAccessor.HttpContext.Response.Cookies.Append(_applicationSettings.CookieInfoBannerCookieName, "", cookieOptions);
 
             return true;
         }

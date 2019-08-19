@@ -6,9 +6,9 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers
 {
-    public class AggregationLevelValueResolver : ValueResolver<ApprenticeshipSearchResponse, IEnumerable<LevelAggregationViewModel>>
+    public class AggregationLevelValueResolver : IValueResolver<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel, IEnumerable<LevelAggregationViewModel>>
     {
-        protected override IEnumerable<LevelAggregationViewModel> ResolveCore(ApprenticeshipSearchResponse source)
+        public IEnumerable<LevelAggregationViewModel> Resolve(ApprenticeshipSearchResponse source, ApprenticeshipSearchResultViewModel destination, IEnumerable<LevelAggregationViewModel> destMember, ResolutionContext context)
         {
             return CreateLevelAggregation(source.AggregationLevel, source.SelectedLevels?.ToList());
         }

@@ -6,9 +6,9 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers
 {
     using Sfa.Das.Sas.ApplicationServices.Models;
 
-    public class DeliveryModesValueResolver : ValueResolver<BaseProviderSearchResults, IEnumerable<DeliveryModeViewModel>>
+    public class DeliveryModesValueResolver : IValueResolver<BaseProviderSearchResults, object, IEnumerable<DeliveryModeViewModel>>
     {
-        protected override IEnumerable<DeliveryModeViewModel> ResolveCore(BaseProviderSearchResults source)
+        public IEnumerable<DeliveryModeViewModel> Resolve(BaseProviderSearchResults source, object destination, IEnumerable<DeliveryModeViewModel> destMember, ResolutionContext context)
         {
             if (source == null)
             {

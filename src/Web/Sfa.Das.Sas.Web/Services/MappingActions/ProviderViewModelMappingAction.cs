@@ -7,7 +7,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
     public class ProviderViewModelMappingAction : IMappingAction<ApprenticeshipDetails, ApprenticeshipDetailsViewModel>
     {
-        public void Process(ApprenticeshipDetails source, ApprenticeshipDetailsViewModel destination)
+        public void Process(ApprenticeshipDetails source, ApprenticeshipDetailsViewModel destination, ResolutionContext context)
         {
             destination.EmployerSatisfactionMessage = ProviderMappingHelper.GetPercentageText(source.Product.EmployerSatisfaction);
             destination.LearnerSatisfactionMessage = ProviderMappingHelper.GetPercentageText(source.Product.LearnerSatisfaction);

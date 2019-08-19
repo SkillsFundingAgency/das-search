@@ -1,9 +1,0 @@
-diff a/src/Web/Sfa.Das.Sas.Web/Sfa.Das.Sas.Web.csproj b/src/Web/Sfa.Das.Sas.Web/Sfa.Das.Sas.Web.csproj	(rejected hunks)
-@@ -664,6 +664,7 @@
-     <Content Include="Views\Apprenticeship\Framework.cshtml">
-       <Generator>RazorGenerator</Generator>
-       <LastGenOutput>Framework.generated.cs</LastGenOutput>
-+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-     </Content>
-     <Content Include="Views\Apprenticeship\Search.cshtml">
-       <Generator>RazorGenerator</Generator>

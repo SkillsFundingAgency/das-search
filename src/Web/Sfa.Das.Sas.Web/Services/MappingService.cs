@@ -10,15 +10,15 @@ namespace Sfa.Das.Sas.Web.Services
     using MappingActions;
     using MappingActions.Helpers;
     using MappingActions.ValueResolvers;
-    using SFA.DAS.NLog.Logger;
+    using Microsoft.Extensions.Logging;
     using ViewModels;
 
     public class MappingService : IMappingService
     {
-        private readonly ILog _logger;
+        private readonly ILogger<MappingService> _logger;
         private readonly IMapper _mapper;
 
-        public MappingService(ILog logger)
+        public MappingService(ILogger<MappingService> logger)
         {
             _logger = logger;
             Configuration = Config();
@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Web.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Error mapping objects");
+                _logger.LogError(ex, "Error mapping objects");
                 throw;
             }
         }
@@ -48,12 +48,12 @@ namespace Sfa.Das.Sas.Web.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Error mapping objects");
+                _logger.LogError(ex, "Error mapping objects");
                 throw;
             }
         }
 
-        private static void CreateProviderDetailsMappings(IMapperConfiguration cfg)
+        private static void CreateProviderDetailsMappings(IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<StatsResponse, StatsViewModel>()
                 .ForMember(dest => dest.StandardCount, opt => opt.MapFrom(source => source.StandardCount))
@@ -231,12 +231,12 @@ namespace Sfa.Das.Sas.Web.Services
                 .AfterMap<ProviderViewModelMappingAction>();
         }
 
-        private static void CreateApprenticeshipSearchResultsMappings(IMapperConfiguration cfg)
+        private static void CreateApprenticeshipSearchResultsMappings(IMapperConfigurationExpression cfg)
         {
             // Apprenticeship search listing  -> mix of standard and framework
             cfg.CreateMap<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>()
                 .ForMember(x => x.SearchViewModel, opt => opt.Ignore())
-                .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
+                .ForMember(x => x.AggregationLevel, opt => opt.MapFrom<AggregationLevelValueResolver>())
                 .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
 
             // Nexzt
@@ -245,7 +245,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .AfterMap<ApprenticeshipSearchResultItemViewModelMappingAction>();
         }
 
-        private static void CreateApprenticeshipDetailsMappings(IMapperConfiguration cfg)
+        private static void CreateApprenticeshipDetailsMappings(IMapperConfigurationExpression cfg)
         {
             // Standard detail page
             cfg.CreateMap<GetStandardResponse, StandardViewModel>()
@@ -295,7 +295,7 @@ namespace Sfa.Das.Sas.Web.Services
                 ;
         }
 
-        private static void CreateProviderSearchMappings(IMapperConfiguration cfg)
+        private static void CreateProviderSearchMappings(IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<GetFrameworkProvidersResponse, ProviderSearchViewModel>()
                 .ForMember(x => x.Title, y => y.ResolveUsing<FrameworkTitleWithLevelResolver>())

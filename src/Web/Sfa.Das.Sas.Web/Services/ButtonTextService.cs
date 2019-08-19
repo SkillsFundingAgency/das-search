@@ -1,12 +1,14 @@
-﻿using System.Web;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace Sfa.Das.Sas.Web.Services
 {
-    public class ButtonTextService: IButtonTextService
+    public class ButtonTextService : IButtonTextService
     {
-        public string GetFindTrainingProvidersText(HttpContextBase httpContext)
+        public string GetFindTrainingProvidersText(IHttpContextAccessor httpContext)
         {
-            var isApprenticeSearch = httpContext.Request.UrlReferrer == null || !httpContext.Request.UrlReferrer.AbsolutePath.ToLower().Contains("provider/");
+            string referer = httpContext.HttpContext.Request.Headers["Referer"];
+            var isApprenticeSearch = referer == null || !new Uri(referer).AbsolutePath.ToLower().Contains("provider/");
             return isApprenticeSearch ? "Find training providers" : "Find more training providers";
         }
     }

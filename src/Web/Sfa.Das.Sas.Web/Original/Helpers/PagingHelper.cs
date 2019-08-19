@@ -1,7 +1,4 @@
-﻿using System.Web.Mvc;
-using Sfa.Das.Sas.ApplicationServices.Settings;
-
-namespace Sfa.Das.Sas.Web.Helpers
+﻿namespace Sfa.Das.Sas.Web.Helpers
 {
     public class PagingHelper
     {

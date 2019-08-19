@@ -1,9 +1,9 @@
-﻿using System.Web;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Sfa.Das.Sas.Web.Services
 {
     public interface IButtonTextService
     {
-        string GetFindTrainingProvidersText(HttpContextBase httpContext);
+        string GetFindTrainingProvidersText(IHttpContextAccessor httpContext);
     }
 }

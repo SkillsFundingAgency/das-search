@@ -3,9 +3,7 @@ using System.Collections.Generic;
 namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
 {
     using System.Linq;
-    using FeatureToggle.Core.Fluent;
     using SFA.DAS.Apprenticeships.Api.Types.Providers;
-    using Sfa.Das.Sas.ApplicationServices.FeatureToggles;
     using ViewModels;
 
     public static class ProviderDetailViewModelMapper
@@ -46,7 +44,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 IsNew = provider.IsNew,
                 IsLevyPayerOnly = provider.IsLevyPayerOnly,
                 SearchTerm = searchTerm,
-                ProviderFeedback = Is<ProviderFeedbackFeature>.Enabled && provider.ProviderFeedback != null ? new FeedbackViewModel(provider.ProviderFeedback) : (FeedbackViewModel)null
+                ProviderFeedback = provider.ProviderFeedback != null ? new FeedbackViewModel(provider.ProviderFeedback) : (FeedbackViewModel)null
             };
 
             if (provider.Aliases != null && provider.Aliases.Any())

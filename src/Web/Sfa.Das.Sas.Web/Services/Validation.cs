@@ -1,15 +1,15 @@
-﻿using SFA.DAS.NLog.Logger;
-
+﻿
 namespace Sfa.Das.Sas.Web.Services
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
+    using Microsoft.Extensions.Logging;
 
     public class Validation : IValidation
     {
-        private readonly ILog _logger;
+        private readonly ILogger<Validation> _logger;
 
-        public Validation(ILog logger)
+        public Validation(ILogger<Validation> logger)
         {
             _logger = logger;
         }
@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.Web.Services
             if (!match.Success)
             {
                 var dict = new Dictionary<string, object> { { "Postcode", postCode }, { "Identifier", "Postcodes-ValidationFail" } };
-                _logger.Info("Postcode not validate", dict);
+                _logger.LogInformation("Postcode not validate{postCodeValidationErrors}", dict);
             }
 
             return match.Success;

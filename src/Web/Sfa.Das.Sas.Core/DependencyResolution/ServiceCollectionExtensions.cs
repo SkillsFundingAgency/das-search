@@ -4,7 +4,7 @@ namespace Sfa.Das.Sas.Core.DependencyResolution
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddCore(this IServiceCollection services, string redisConnectionString, int expiryLengthInDays = 90)
+        public static void AddCore(this IServiceCollection services)
         {
             services.AddScoped<IRetryWebRequests, WebRequestRetryService>();
         }

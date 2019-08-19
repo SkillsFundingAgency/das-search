@@ -1,6 +1,4 @@
-﻿using System.Web;
-
-namespace Sfa.Das.Sas.Web.Factories
+﻿namespace Sfa.Das.Sas.Web.Factories
 {
     using Interfaces;
 

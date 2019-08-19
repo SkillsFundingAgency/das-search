@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Sfa.Das.Sas.Shared.Components.Web/bin/Debug/netcoreapp2.2/Sfa.Das.Sas.Shared.Components.Web.dll",
+            "program": "${workspaceFolder}/Sfa.Das.Sas.Web/bin/Debug/netcoreapp2.2/Sfa.Das.Sas.Web.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Sfa.Das.Sas.Shared.Components.Web",
+            "cwd": "${workspaceFolder}/Sfa.Das.Sas.Web",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
