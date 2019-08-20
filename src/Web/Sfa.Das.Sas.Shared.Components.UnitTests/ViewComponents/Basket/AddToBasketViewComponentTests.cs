@@ -14,6 +14,7 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.Basket;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Models;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
 {
