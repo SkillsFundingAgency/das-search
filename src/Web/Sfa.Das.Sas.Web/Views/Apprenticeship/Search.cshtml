@@ -19,9 +19,7 @@
                         <span class="form-hint">Start typing the apprenticeship name</span>
                     </label>
                     <span class="error-message"></span>
-                    <div id="apprenticeships-container" data-api-url="@($"{Model.ApprenticeshipInfoApiBaseUrl}/v3/apprenticeship-programmes/autocomplete")">
-                        <input type="search" id="keywords" name="Keywords" class="text-box form-control" maxlength="200">
-                    </div>
+                    @Html.Partial("_ApprenticeshipSearch")
                 </div>
                 <input class="button" id="submit-keywords" type="submit" value="Search apprenticeship training" />
             }

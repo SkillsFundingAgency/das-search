@@ -26,7 +26,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                     ResultsToTake = source.ResultsToTake,
                     SortOrder = !string.IsNullOrWhiteSpace(source.SortOrder) ?  int.Parse(source.SortOrder) : 0,
                     Keywords = source.SearchTerm,
-                    SelectedLevels = source.SelectedLevels.ToList()
+                    SelectedLevels = source.SelectedLevels?.ToList()
                 }
 
             };

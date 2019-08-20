@@ -50,8 +50,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
                     TrainingOptionsAggregation = new Dictionary<string, long?>()
                     {
                         { "blockrelease", 44},
-                        { "100percentemployer", 31},
-                        { "dayrelease", 28}
+                        { "dayrelease", 28},
+                        { "100percentemployer", 31}
                     }
 
 
@@ -60,7 +60,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
             _queryItemToMap = new TrainingProviderSearchViewModel()
             {
                 ApprenticeshipId = "157",
-                DeliveryModes = new List<string>() { "blockrelease", "100percentemployer", "dayrelease" },
+                DeliveryModes = new List<string>() { "0", "1", "2" },
                 IsLevyPayer = false,
                 Keywords = "words",
                 NationalProvidersOnly = false,

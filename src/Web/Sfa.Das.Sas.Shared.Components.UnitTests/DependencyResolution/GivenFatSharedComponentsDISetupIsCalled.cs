@@ -7,8 +7,8 @@ using SFA.DAS.Apprenticeships.Api.Client;
 using System;
 using System.Linq;
 using Sfa.Das.Sas.Shared.Components.Configuration;
-using Microsoft.AspNetCore.Hosting;
 using Moq;
+using Microsoft.Extensions.Hosting;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.DependencyResolution
 {

@@ -16,8 +16,8 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         private readonly IApprenticehipFavouritesBasketStoreConfig _config;
 
         public BasketController(
-            IMediator mediator, 
-            ICookieManager cookieManager, 
+            IMediator mediator,
+            ICookieManager cookieManager,
             IApprenticehipFavouritesBasketStoreConfig config)
         {
             _mediator = mediator;
