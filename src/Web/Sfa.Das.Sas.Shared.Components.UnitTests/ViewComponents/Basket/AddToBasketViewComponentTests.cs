@@ -1,4 +1,7 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
@@ -6,12 +9,14 @@ using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Basket.Models;
 using Sfa.Das.Sas.Shared.Components.Cookies;
+using Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Basket;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Models;
 
-namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
+namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
 {
     [TestFixture]
     public class AddToBasketViewComponentTests : ViewComponentTestsBase
@@ -37,7 +42,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
 
             _mockMediator = new Mock<IMediator>();
             _mockMediator.Setup(x => x.Send(It.Is<GetBasketQuery>(a => a.BasketId == cookieBasketId), default(CancellationToken)))
-                .ReturnsAsync(basket);
+                .ReturnsAsync(new ApprenticeshipFavouritesBasketRead(basket));
 
             _sut = new AddToBasketViewComponent(_mockMediator.Object, _mockCookieManager.Object)
             {

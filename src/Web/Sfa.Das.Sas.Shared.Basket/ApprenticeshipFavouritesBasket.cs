@@ -75,7 +75,6 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
                 }
             }
         }
-
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator()
         {
             return _items.GetEnumerator();

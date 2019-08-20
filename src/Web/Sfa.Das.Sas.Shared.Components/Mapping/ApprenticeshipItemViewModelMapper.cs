@@ -1,13 +1,15 @@
-﻿using Sfa.Das.Sas.ApplicationServices.Models;
+﻿using System.Linq;
+using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 
 namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
-    public class FatSearchResultsItemViewModelMapper : IFatSearchResultsItemViewModelMapper
+    public class ApprenticeshipItemViewModelMapper : IApprenticeshipItemViewModelMapper
     {
-        public FatSearchResultsItemViewModel Map(ApprenticeshipSearchResultsItem source)
+        public ApprenticeshipItemViewModel Map(ApprenticeshipSearchResultsItem source)
         {
-            var item = new FatSearchResultsItemViewModel()
+            var item = new ApprenticeshipItemViewModel()
             {
                 Id = source.Id,
                 Title = source.Title,
@@ -18,5 +20,6 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             };
             return item;
         }
+
     }
 }

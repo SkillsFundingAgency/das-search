@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
                 IsInBasket = await IsInBasket(apprenticeshipId, ukprn)
             };
 
-            return View("Default", model);
+            return View("../Basket/AddToBasket/Default", model);
         }
 
         private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn)

@@ -323,7 +323,7 @@
       <Name>Sfa.Das.FatApi.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.ApplicationServices\Sfa.Das.Sas.ApplicationServices.csproj">
-      <Project>{F8946F39-EDEC-457A-857B-5A76D4151082}</Project>
+      <Project>{f8946f39-edec-457a-857b-5a76d4151082}</Project>
       <Name>Sfa.Das.Sas.ApplicationServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Core\Sfa.Das.Sas.Core.csproj">

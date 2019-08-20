@@ -25,6 +25,11 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             _config = config;
         }
 
+        public async Task<IActionResult> View()
+        {
+            return View("Basket/View");
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)

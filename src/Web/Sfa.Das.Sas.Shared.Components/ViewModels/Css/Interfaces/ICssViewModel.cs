@@ -5,6 +5,7 @@
         ITableCssViewModel Table { get; }
         IUtilitiesCssViewModel UtilitiesCss { get; }
         IDefaultFormCssViewModel FormCss { get; }
+        ICssGridViewModel GridCss { get; }
         string ClassModifier { get; set; }
         string ClassPrefix { get; }
         string Button { get; }

@@ -2,9 +2,9 @@
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Resources;
 
-namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
+namespace Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship
 {
-    public class FatSearchResultsItemViewModel
+    public class ApprenticeshipItemViewModel
     {
         public string Id { get; set; }
         public string Title { get; set; }
