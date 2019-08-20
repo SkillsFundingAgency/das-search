@@ -4,7 +4,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
-    <form asp-controller="Fat" asp-action="Search" id="fat-search-result-sort">
+    <form asp-controller="Fat" asp-action="Search" id="fat-search-result-sort" class="js-select-change-submit das-search-results__header-sort-by">
         <input type="hidden" name="Keywords" asp-for="Keywords" />
         <input type="hidden" name="page" asp-for="Page" />
         @foreach (var level in Model.SelectedLevels)
