@@ -7,9 +7,9 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
-using Sfa.Das.Sas.ApplicationServices.Interfaces;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Shared.Basket.Interfaces;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
@@ -25,7 +25,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
             _sut = new GetBasketHandler(new NullLogger<GetBasketHandler>(), _mockBasket.Object);
 
-            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync(new ApprenticeshipFavouritesBasket { new ApprenticeshipFavourite { ApprenticeshipId = "23" } });
+            var basket = new ApprenticeshipFavouritesBasket();
+            basket.Add("23");
+
+            _mockBasket.Setup(x => x.GetAsync(It.IsAny<Guid>())).ReturnsAsync(basket);
         }
 
         [Test]

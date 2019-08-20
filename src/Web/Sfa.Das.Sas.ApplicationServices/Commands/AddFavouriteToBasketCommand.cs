@@ -1,5 +1,5 @@
-﻿using MediatR;
-using System;
+﻿using System;
+using MediatR;
 
 namespace Sfa.Das.Sas.ApplicationServices.Commands
 {
@@ -7,5 +7,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Commands
     {
         public Guid? BasketId { get; set; }
         public string ApprenticeshipId { get; set; }
+        public int? Ukprn { get; set; }
     }
 }

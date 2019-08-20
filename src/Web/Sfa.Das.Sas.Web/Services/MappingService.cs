@@ -235,6 +235,7 @@ namespace Sfa.Das.Sas.Web.Services
         {
             // Apprenticeship search listing  -> mix of standard and framework
             cfg.CreateMap<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>()
+                .ForMember(x => x.SearchViewModel, opt => opt.Ignore())
                 .ForMember(x => x.AggregationLevel, opt => opt.ResolveUsing<AggregationLevelValueResolver>())
                 .ForMember(x => x.LastPage, y => y.MapFrom(z => SearchMappingHelper.CalculateLastPage(z.TotalResults, z.ResultsToTake)));
 

@@ -2,7 +2,7 @@
 {
     public class SaveBasketFromApprenticeshipResultsViewModel
     {
-        public string ApprenticeshipId { get; set; }
+        public string ItemId { get; set; }
         public SearchQueryViewModel SearchQuery { get; set; }
     }
 }
