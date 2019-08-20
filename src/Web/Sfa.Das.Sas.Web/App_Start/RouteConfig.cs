@@ -15,6 +15,11 @@ namespace Sfa.Das.Sas.Web
                 defaults: new { controller = "Start", action = "Cookies", id = UrlParameter.Optional });
 
             routes.MapRoute(
+                name: "CookieDetails",
+                url: "cookie-details",
+                defaults: new { controller = "Start", action = "CookieDetails", id = UrlParameter.Optional });
+
+            routes.MapRoute(
                 name: "Stats",
                 url: "stats",
                 defaults: new { controller = "Stats", action = "Stats", id = UrlParameter.Optional });

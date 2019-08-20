@@ -538,6 +538,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_WhatEmployersAreSaying.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Start\CookieDetails.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CookieDetails.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Start\Cookies.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -680,11 +685,14 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\src\styles\custom-elements\_autocomplete.scss" />
+    <Content Include="Content\src\styles\partials\_cookie-banner.scss" />
+    <Content Include="Content\src\styles\custom-elements\_notification.scss" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\VSTS - Sample.pubxml" />
     <Content Include="scripts\accessible-autocomplete.min.js" />
+    <Content Include="scripts\app\cookies.js" />
     <Content Include="scripts\app\selection-buttons.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -846,6 +854,11 @@
     <Content Include="Views\Provider\_WhatEmployersAreSaying.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_WhatEmployersAreSaying.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_CookieBanner.cshtml" />
+    <Content Include="Views\Start\CookieDetails.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CookieDetails.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

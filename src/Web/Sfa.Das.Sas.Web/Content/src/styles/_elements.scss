@@ -378,3 +378,9 @@ only screen and (min-resolution: 2dppx) {
 .result .error-summary.warning {
     margin: 15px 0;
 }
+
+@for $i from 1 through 14 {
+    .cell-width-#{$i * 5} {
+        width: $i * 5%;
+    }
+}
