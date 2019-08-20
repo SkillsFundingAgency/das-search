@@ -13,7 +13,7 @@
         }
 
         <label asp-for="SortOrder" class="@(CssViewModel.VisuallyHidden)">Sort by</label>
-        <select name="SortOrder" asp-for="SortOrder" class="select das-search-results__header-sort-by">
+        <select name="SortOrder" asp-for="SortOrder" class="select">
             <option selected="@(Model.SortOrder == 1)" value="1">Best match</option>
             <option selected="@(Model.SortOrder == 2)" value="2">Level (high to low)</option>
             <option selected="@(Model.SortOrder == 3)" value="3">Level (low to high)</option>
