@@ -1,13 +1,16 @@
-﻿@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+﻿@using Sfa.Das.Sas.Shared.Components.Extensions
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 @model Sfa.Das.Sas.Shared.Components.ViewModels.Basket.BasketViewModel<Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship.ApprenticeshipBasketItemViewModel>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
-
+@{
+    var providerCount = @Model.Items.SelectMany(w => w.TrainingProvider).Count();
+}
 
 <h1>Your favourite apprenticeships and training providers</h1>
 
 <div>
-    
-    <span>@Model.Items.Count()</span> Apprenticeships
-    <span>@Model.Items.SelectMany(w => w.TrainingProvider).Count()</span> Training provider(s)
+
+    <span>@Model.Items.Count()</span> @("Apprenticeship".Pluralize(Model.Items.Count()))
+    <span>@providerCount</span> Training @("provider".Pluralize(providerCount))
 </div>
