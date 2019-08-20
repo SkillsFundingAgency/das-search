@@ -67,7 +67,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             if (searchTerm.Length < 3)
             {
                 _logger.Info(
-                    $"Formatted search term causing SearchTermTooShort: [{searchTerm}]");
+                    $"Search term causing SearchTermTooShort: [{searchTerm}]");
 
                 results.SearchTerm = searchTerm;
                 results.HasError = true;

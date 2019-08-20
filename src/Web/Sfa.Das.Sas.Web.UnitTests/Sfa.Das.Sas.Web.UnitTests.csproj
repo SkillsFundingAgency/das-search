@@ -256,9 +256,10 @@
     <Compile Include="Infrastructure\Mapping\ApprenticeshipSearchResultsItemMappingTests.cs" />
     <Compile Include="Infrastructure\Mapping\ApprenticeshipSearchResultsMappingTests.cs" />
     <Compile Include="Infrastructure\Providers\Api\ApiApprenticeshipSearchProviderTests.cs" />
-    <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryBase.cs" />
-    <Compile Include="Infrastructure\Repositories\ProviderApiRepositorySearchProviders.cs" />
-    <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderDetailTests.cs" />
+    <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositoryBase.cs" />
+    <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositorySearchProviderNameTest.cs" />
+    <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositorySearchProviders.cs" />
+    <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
     <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ControllerBuilders\ProviderControllerBuilder.cs" />
@@ -284,7 +285,7 @@
     <Compile Include="Infrastructure\Web\Services\Mapping\ForOverallCohortResolver.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\ForSearchMappingHelper.cs" />
     <Compile Include="Infrastructure\Web\Services\Mapping\OverallCohortResolverTestClass.cs" />
-    <Compile Include="Infrastructure\Repositories\ProviderApiRepositoryGetProviderListTests.cs" />
+    <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositoryGetProviderListTests.cs" />
     <Compile Include="Infrastructure\Web\Views\FrameworkDetailPageTests.cs" />
     <Compile Include="Infrastructure\Web\Views\Provider\ProviderDetailPageTests.cs" />
     <Compile Include="Infrastructure\Web\Views\Provider\WhatEmployersAreSayingPartialTests.cs" />
