@@ -120,7 +120,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             if (message.DeliveryModes == null)
             {
-                message.DeliveryModes = new List<string>(){"1","2,","3"};
+                message.DeliveryModes = new List<string> { "1", "2", "3" };
             }
 
             var searchResults = await _searchService.SearchProviders(message.ApprenticeshipId, message.PostCode, new Pagination { Page = pageNumber, Take = message.Take }, message.DeliveryModes, hasNonLevyContract,message.NationalProvidersOnly);
