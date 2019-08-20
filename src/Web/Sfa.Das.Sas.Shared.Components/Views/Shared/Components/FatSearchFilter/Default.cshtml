@@ -4,13 +4,12 @@
 @inject ICssViewModel CssViewModel
 
 
+
+<h3 class="@CssViewModel.HeadingMedium">Search</h3> 
+@await Component.InvokeAsync("FatSearch", new { fatSearchRoute = "/employer/find-apprenticeships", inline = true })
+
 <form asp-controller="Fat" asp-action="Search" method="get">
     <h3 class="@CssViewModel.HeadingMedium">Filter results</h3>
-    <div class="@(CssViewModel.FormCss.FormGroup)">
-        <p class="@CssViewModel.UtilitiesCss.FontWeightBold">Showing search results for:</p>
-        <label class="@(CssViewModel.VisuallyHidden)">Showing search results for:</label>
-        <input class="@(CssViewModel.FormCss.Input)" asp-for="Keywords" type="search" placeholder="Apprenticeship keyword...">
-    </div>
     <div class="@(CssViewModel.FormCss.FormGroup)">
         <p class="@(CssViewModel.UtilitiesCss.FontWeightBold)">Apprenticeship level:</p>
         <div class="@CssViewModel.FormCss.Checkbox das-search-results__filter-checkboxes">
@@ -24,7 +23,7 @@
         </div>
     </div>
     <div class="@(CssViewModel.FormCss.FormGroup)">
-        <input type="hidden" asp-for="Page" />
+        <input type="hidden" asp-for="Keywords" />
         <input type="hidden" asp-for="SortOrder" />
         <input type="hidden" asp-for="ResultsToTake" />
         <button type="submit" class="@(CssViewModel.ButtonSecondary)">
