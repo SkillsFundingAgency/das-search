@@ -4,11 +4,11 @@
 @inject ICssViewModel CssViewModel
 @if (Model.Items.Count > 0)
 {
-    <ol class="@CssViewModel.List das-search-results__list das-search-results__list--employer basket">
+    <ol class="@CssViewModel.List das-search-results__list das-search-results__list--employer das-basket">
 
         @foreach (var apprenticeship in Model.Items)
         {
-            <li class="das-search-results__list-item">
+            <li>
                 <partial name="Components/Basket/Details/_apprenticeshipItem" for="@apprenticeship"/>
             </li>
         }
