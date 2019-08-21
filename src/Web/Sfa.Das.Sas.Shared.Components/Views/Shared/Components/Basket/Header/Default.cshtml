@@ -4,13 +4,17 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 @{
-    var providerCount = @Model.Items.SelectMany(w => w.TrainingProvider).Count();
+    var apprenticeshipCount = Model.Items?.Count() ?? 0;
+    var providerCount = Model.Items?.SelectMany(w => w.TrainingProvider).Count() ?? 0;
 }
 
 <h1>Your favourite apprenticeships and training providers</h1>
 
-<div>
+@if (Model.HasItems)
+{
+    <div>
 
-    <span>@Model.Items.Count()</span> @("Apprenticeship".Pluralize(Model.Items.Count()))
-    <span>@providerCount</span> Training @("provider".Pluralize(providerCount))
-</div>
+        <span>@(apprenticeshipCount)</span> @("Apprenticeship".Pluralize(apprenticeshipCount))
+        <span>@providerCount</span> Training @("provider".Pluralize(providerCount))
+    </div>
+}

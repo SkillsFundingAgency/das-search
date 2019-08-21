@@ -8,5 +8,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Basket
         public Guid? BasketId { get; set; }
 
         public IList<T> Items { get; set; }
+
+        public bool HasItems => Items?.Count > 0;
     }
 }
