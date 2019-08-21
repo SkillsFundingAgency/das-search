@@ -55,23 +55,23 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "    <a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4912), Tuple.Create("\"", 4963)
-, Tuple.Create(Tuple.Create("", 4919), Tuple.Create("../Provider/", 4919), true)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 4934), Tuple.Create("\"", 4985)
+, Tuple.Create(Tuple.Create("", 4941), Tuple.Create("../Provider/", 4941), true)
 
 #line 132 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4931), Tuple.Create<System.Object, System.Int32>(ukprn
+, Tuple.Create(Tuple.Create("", 4953), Tuple.Create<System.Object, System.Int32>(ukprn
 
 #line default
 #line hidden
-, 4931), false)
-, Tuple.Create(Tuple.Create("", 4937), Tuple.Create("?keyword=", 4937), true)
+, 4953), false)
+, Tuple.Create(Tuple.Create("", 4959), Tuple.Create("?keyword=", 4959), true)
 
 #line 132 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4946), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
+, Tuple.Create(Tuple.Create("", 4968), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
 
 #line default
 #line hidden
-, 4946), false)
+, 4968), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -103,23 +103,23 @@ WriteLiteralTo(__razor_helper_writer, " class=\"sublist\"");
 
 WriteLiteralTo(__razor_helper_writer, ">\r\n                ...<a");
 
-WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5144), Tuple.Create("\"", 5195)
-, Tuple.Create(Tuple.Create("", 5151), Tuple.Create("../Provider/", 5151), true)
+WriteAttributeTo(__razor_helper_writer, "href", Tuple.Create(" href=\"", 5166), Tuple.Create("\"", 5217)
+, Tuple.Create(Tuple.Create("", 5173), Tuple.Create("../Provider/", 5173), true)
 
 #line 140 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5163), Tuple.Create<System.Object, System.Int32>(ukprn
+, Tuple.Create(Tuple.Create("", 5185), Tuple.Create<System.Object, System.Int32>(ukprn
 
 #line default
 #line hidden
-, 5163), false)
-, Tuple.Create(Tuple.Create("", 5169), Tuple.Create("?keyword=", 5169), true)
+, 5185), false)
+, Tuple.Create(Tuple.Create("", 5191), Tuple.Create("?keyword=", 5191), true)
 
 #line 140 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 5178), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
+, Tuple.Create(Tuple.Create("", 5200), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
 
 #line default
 #line hidden
-, 5178), false)
+, 5200), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
@@ -383,16 +383,16 @@ WriteLiteral(">\r\n                            <option");
 
 WriteLiteral(" value=\"1\"");
 
-WriteLiteral(">Best match</option>\r\n                            <option");
+WriteLiteral(">Distance (closest first)</option>\r\n                            <option");
 
 WriteLiteral(" value=\"2\"");
 
-WriteLiteral(">Level (high to low)</option>\r\n                            <option");
+WriteLiteral(">Training provider (A-Z)</option>\r\n                            <option");
 
 WriteLiteral(" value=\"3\"");
 
-WriteLiteral(">Level (low to high)</option>\r\n                        </select>\r\n               " +
-"         <button");
+WriteLiteral(">Training provider (Z-A)</option>\r\n                        </select>\r\n           " +
+"             <button");
 
 WriteLiteral(" type=\"submit\"");
 
@@ -509,23 +509,23 @@ WriteLiteral(" id=\"previous-nav\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3778), Tuple.Create("\"", 3856)
-, Tuple.Create(Tuple.Create("", 3785), Tuple.Create("../provider/searchResults?SearchTerm=", 3785), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 3800), Tuple.Create("\"", 3878)
+, Tuple.Create(Tuple.Create("", 3807), Tuple.Create("../provider/searchResults?SearchTerm=", 3807), true)
             
             #line 104 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 3822), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
+, Tuple.Create(Tuple.Create("", 3844), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
             
             #line default
             #line hidden
-, 3822), false)
-, Tuple.Create(Tuple.Create("", 3839), Tuple.Create("&Page=", 3839), true)
+, 3844), false)
+, Tuple.Create(Tuple.Create("", 3861), Tuple.Create("&Page=", 3861), true)
             
             #line 104 "..\..\Views\Provider\SearchResults.cshtml"
-                 , Tuple.Create(Tuple.Create("", 3845), Tuple.Create<System.Object, System.Int32>(pageBefore
+                 , Tuple.Create(Tuple.Create("", 3867), Tuple.Create<System.Object, System.Int32>(pageBefore
             
             #line default
             #line hidden
-, 3845), false)
+, 3867), false)
 );
 
 WriteLiteral(">\r\n                                Previous <span");
@@ -583,23 +583,23 @@ WriteLiteral(" id=\"next-nav\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4379), Tuple.Create("\"", 4456)
-, Tuple.Create(Tuple.Create("", 4386), Tuple.Create("../provider/searchResults?SearchTerm=", 4386), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 4401), Tuple.Create("\"", 4478)
+, Tuple.Create(Tuple.Create("", 4408), Tuple.Create("../provider/searchResults?SearchTerm=", 4408), true)
             
             #line 115 "..\..\Views\Provider\SearchResults.cshtml"
-, Tuple.Create(Tuple.Create("", 4423), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
+, Tuple.Create(Tuple.Create("", 4445), Tuple.Create<System.Object, System.Int32>(Model.SearchTerm
             
             #line default
             #line hidden
-, 4423), false)
-, Tuple.Create(Tuple.Create("", 4440), Tuple.Create("&Page=", 4440), true)
+, 4445), false)
+, Tuple.Create(Tuple.Create("", 4462), Tuple.Create("&Page=", 4462), true)
             
             #line 115 "..\..\Views\Provider\SearchResults.cshtml"
-                 , Tuple.Create(Tuple.Create("", 4446), Tuple.Create<System.Object, System.Int32>(pageAfter
+                 , Tuple.Create(Tuple.Create("", 4468), Tuple.Create<System.Object, System.Int32>(pageAfter
             
             #line default
             #line hidden
-, 4446), false)
+, 4468), false)
 );
 
 WriteLiteral(">\r\n                                Next <span");
