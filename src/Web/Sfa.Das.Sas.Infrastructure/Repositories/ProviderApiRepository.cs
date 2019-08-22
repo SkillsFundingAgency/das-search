@@ -70,6 +70,9 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
                     case "100percentemployer":
                         deliveryModes.Add("2");
                         break;
+                    default:
+                        deliveryModes.Add(filterDeliveryMode);
+                        break;
                 }
             }
 
