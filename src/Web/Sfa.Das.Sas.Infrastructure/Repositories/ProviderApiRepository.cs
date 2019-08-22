@@ -91,7 +91,6 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
                     $"Search term causing SearchTermTooShort: [{searchTerm}]");
 
                 results.SearchTerm = searchTerm;
-                results.HasError = true;
                 results.ResponseCode = ProviderNameSearchResponseCodes.SearchTermTooShort;
 
                 return results;
