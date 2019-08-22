@@ -117,7 +117,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
         {
             var result = await _sut.InvokeAsync("420-2-1") as ViewViewComponentResult;
 
-            result.ViewName.Should().Be("Default");
+            result.ViewName.Should().Be("../Basket/AddToBasket/Default");
         }
     }
 }
