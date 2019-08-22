@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
                 SaveBasketUrl = _config.SaveEmployerFavouritesUrl
             };
 
-            return View("Default", model);
+            return View("../Basket/Save/Default", model);
         }
     }
 }
