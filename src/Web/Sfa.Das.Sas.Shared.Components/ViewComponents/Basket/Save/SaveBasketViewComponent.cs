@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using System;
 
@@ -19,12 +20,13 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
         public IViewComponentResult Invoke()
         {
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
-            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+            var basketIdForQueryString = Guid.TryParse(cookie, out Guid result) ? result.ToString() : string.Empty;
+
+            var uriBuilder = new SaveApprenticeshipUrlBuilder(_config);
 
             var model = new SaveBasketViewModel
             {
-                BasketId = cookieBasketId,
-                SaveBasketUrl = _config.SaveEmployerFavouritesUrl
+                SaveBasketUrl = uriBuilder.GenerateSaveUrl(basketIdForQueryString).ToString()
             };
 
             return View("../Basket/Save/Default", model);

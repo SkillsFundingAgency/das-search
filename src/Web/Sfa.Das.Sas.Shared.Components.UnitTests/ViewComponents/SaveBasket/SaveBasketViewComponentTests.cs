@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         private Mock<IFatConfigurationSettings> _mockConfiguration;
         private SaveBasketViewComponent _sut;
         private Guid BasketId;
-        private const string EMP_FAV_SAVE_URL = "https://emp-fav/save-url";
+        private const string EMP_FAV_SAVE_URL = "https://emp-fav/save-url?basketId=";
 
         [SetUp]
         public new void Setup()
@@ -38,30 +38,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         }
 
         [Test]
-        public void Invoke_ReturnsModelContainingBasketId_WhenCookieExists()
-        {
-            var result = _sut.Invoke() as ViewViewComponentResult;
-
-            result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<SaveBasketViewModel>();
-            var model = result.ViewData.Model as SaveBasketViewModel;
-            model.BasketId.Should().Be(BasketId);
-        }
-
-        [Test]
-        public void Invoke_ReturnsModelContainingNullBasketId_WhenNoCookieExists()
-        {
-            _mockCookieManager.Reset();
-
-            var result = _sut.Invoke() as ViewViewComponentResult;
-
-            result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<SaveBasketViewModel>();
-            var model = result.ViewData.Model as SaveBasketViewModel;
-            model.BasketId.Should().BeNull();
-        }
-
-        [Test]
         public void Invoke_ReturnsModelContainingSaveUrl()
         {
             var result = _sut.Invoke() as ViewViewComponentResult;
@@ -69,7 +45,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
             result.Should().BeOfType<ViewViewComponentResult>();
             result.ViewData.Model.Should().BeAssignableTo<SaveBasketViewModel>();
             var model = result.ViewData.Model as SaveBasketViewModel;
-            model.SaveBasketUrl.Should().Be(EMP_FAV_SAVE_URL);
+            model.SaveBasketUrl.Should().Be(EMP_FAV_SAVE_URL + BasketId);
         }
     }
 }
