@@ -54,8 +54,29 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
 
         public async Task<SearchResult<ProviderSearchResultItem>> SearchProvidersByLocation(string apprenticeshipId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
         {
-            var result = await _providersV3Api.GetByApprenticeshipIdAndLocationAsync(apprenticeshipId, coordinates.Lat, coordinates.Lon, page, take, filter.HasNonLevyContract, filter.ShowNationalOnly, string.Join(",", filter.DeliveryModes));
-            
+            var deliveryModes = new List<string>();
+
+            foreach (var filterDeliveryMode in filter.DeliveryModes)
+            {
+                switch (filterDeliveryMode)
+                {
+                    case "dayrelease":
+                        deliveryModes.Add("0");
+                        break;
+                    case "blockrelease":
+                        deliveryModes.Add("1");
+
+                        break;
+                    case "100percentemployer":
+                        deliveryModes.Add("2");
+                        break;
+                    default:
+                        deliveryModes.Add(filterDeliveryMode);
+                        break;
+                }
+            }
+
+            var result = await _providersV3Api.GetByApprenticeshipIdAndLocationAsync(apprenticeshipId, coordinates.Lat, coordinates.Lon, page, take, filter.HasNonLevyContract, filter.ShowNationalOnly, string.Join(",", deliveryModes));
 
             return _searchResultsMapping.Map(result);
         }
