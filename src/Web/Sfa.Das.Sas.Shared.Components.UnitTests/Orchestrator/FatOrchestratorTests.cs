@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -76,25 +77,24 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         }
 
         [Test]
-        public void Then_FatSearchFilterViewModel_Is_Returned()
+        public async Task Then_FatSearchFilterViewModel_Is_Returned()
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchFilters(_searchQueryViewModel);
+            var result = await _sut.GetSearchFilters(_searchQueryViewModel);
 
             result.Should().BeOfType<FatSearchFilterViewModel>();
         }
         [Test]
-        public void Then_Search_Filter_Is_Mapped_To_ViewModel()
+        public async Task Then_Search_Filter_Is_Mapped_To_ViewModel()
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchFilters(_searchQueryViewModel);
+            var result = await _sut.GetSearchFilters(_searchQueryViewModel);
 
             result.Should().BeOfType<FatSearchFilterViewModel>();
 
             _fatSearchFilterViewModelMapper.Verify(v => v.Map(_searchResults,_searchQueryViewModel));
-
 
         }
     }

@@ -35,7 +35,7 @@ namespace Sfa.Das.Sas.Web.Controllers
             IMappingService mappingService,
             IMediator mediator,
             IButtonTextService buttonTextService,
-            IFundingBandService fundingBandService, 
+            IFundingBandService fundingBandService,
             IConfigurationSettings configurationSettings)
         {
             _logger = logger;
@@ -85,6 +85,11 @@ namespace Sfa.Das.Sas.Web.Controllers
             var response = await _mediator.Send(query);
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
+            viewModel.SearchViewModel = new ApprenticeshipSearchViewModel
+            {
+                ApprenticeshipInfoApiBaseUrl = _configurationSettings.ApprenticeshipApiBaseUrl,
+                SearchTerm = viewModel.SearchTerm
+            };
 
             if (response.StatusCode != ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound)
             {

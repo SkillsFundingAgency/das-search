@@ -39,7 +39,7 @@ var SearchAndShortlist = SearchAndShortlist || {};
 var container = document.querySelector('#apprenticeships-container'),
     $container = $(container);
 
-if ($container) {
+if (container) {
 
     $container.empty();
     var getSuggestions = function (query, updateResults) {
@@ -64,6 +64,7 @@ if ($container) {
         name: 'Keywords',
         displayMenu: 'overlay',
         showNoOptionsFound: false,
-        source: getSuggestions
+        source: getSuggestions,
+        defaultValue: $container.data('search-term')
     });
 }

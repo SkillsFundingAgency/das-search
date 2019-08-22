@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 message.Page = 1;
             }
 
-            var searchResults = await _searchProviderName.SearchProviderNameAndAliases(message.SearchTerm, message.Page, message.PageSize);
+            var searchResults = await _searchProviderName.SearchProviderNameAndAliases(message.SearchTerm ?? string.Empty, message.Page, message.PageSize);
 
             var providerNameSearchResponse = new ProviderNameSearchResponse
             {

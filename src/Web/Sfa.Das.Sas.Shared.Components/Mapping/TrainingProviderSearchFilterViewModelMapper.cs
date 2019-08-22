@@ -13,52 +13,63 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
         {
             var result = new TrainingProviderSearchFilterViewModel();
 
+            result.ApprenticeshipId = searchQueryModel.ApprenticeshipId;
+            result.Keywords = searchQueryModel.Keywords;
+            result.SortOrder = searchQueryModel.SortOrder;
+            result.Postcode = searchQueryModel.Postcode;
+
             result.NationalProviders = new List<FilterViewModel>();
 
-            foreach (var resultsNationalProvider in item.Results.NationalProviders)
+            if (item.Results != null)
             {
-                var filter = new FilterViewModel();
-
-                filter.Value = resultsNationalProvider.Key;
-                filter.Count = resultsNationalProvider.Value;
-
-                if (filter.Value == "true")
+                foreach (var resultsNationalProvider in item.Results.NationalProviders)
                 {
-                    filter.Checked = item.ShowOnlyNationalProviders;
-                }
-                else
-                {
-                    filter.Checked = item.ShowOnlyNationalProviders == false;
-                    filter.Count = item.Results.NationalProviders.Sum(s => s.Value.Value);
-                }
+                    var filter = new FilterViewModel();
 
-                result.NationalProviders.Add(filter);
+                    filter.Value = resultsNationalProvider.Key;
+                    filter.Count = resultsNationalProvider.Value;
+
+                    if (filter.Value == "true")
+                    {
+                        filter.Checked = item.ShowOnlyNationalProviders;
+                    }
+                    else
+                    {
+                        filter.Checked = item.ShowOnlyNationalProviders == false;
+                        filter.Count = item.Results.NationalProviders.Sum(s => s.Value.Value);
+                    }
+
+                    result.NationalProviders.Add(filter);
+                }
             }
 
             result.TrainingOptions = new List<FilterViewModel>();
 
-            foreach (var trainingOption in item.Results.TrainingOptionsAggregation)
+            if (item.Results != null)
             {
-                var filter = new FilterViewModel();
-
-                filter.Count = trainingOption.Value;
-             
-                switch (trainingOption.Key.ToLower())
+                foreach (var trainingOption in item.Results.TrainingOptionsAggregation)
                 {
-                    case "dayrelease":
-                        filter.Value = "0";
+                    var filter = new FilterViewModel();
 
-                        break;
-                    case "blockrelease":
-                        filter.Value = "1";
-                        break;
-                    case "100percentemployer":
-                        filter.Value = "2";
-                        break;
+                    filter.Count = trainingOption.Value;
+
+                    switch (trainingOption.Key.ToLower())
+                    {
+                        case "dayrelease":
+                            filter.Value = "0";
+
+                            break;
+                        case "blockrelease":
+                            filter.Value = "1";
+                            break;
+                        case "100percentemployer":
+                            filter.Value = "2";
+                            break;
+                    }
+                    filter.Checked = searchQueryModel.DeliveryModes.Contains(filter.Value);
+
+                    result.TrainingOptions.Add(filter);
                 }
-                filter.Checked = searchQueryModel.DeliveryModes.Contains(filter.Value);
-                
-                result.TrainingOptions.Add(filter);
             }
 
             return result;

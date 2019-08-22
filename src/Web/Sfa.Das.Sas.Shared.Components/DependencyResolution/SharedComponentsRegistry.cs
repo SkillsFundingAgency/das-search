@@ -36,7 +36,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
     {
         public static void AddFatSharedComponents(this IServiceCollection services, FatSharedComponentsConfiguration configuration)
         {
-            services.AddFavouritesBasket(configuration.BasketRedisConnectionString, configuration.BasketSlidingExpiryDays);
+            //services.AddFavouritesBasket(configuration.BasketRedisConnectionString, configuration.BasketSlidingExpiryDays);
 
             services.AddTransient<SFA.DAS.NLog.Logger.ILog, SFA.DAS.NLog.Logger.NLogLogger>(x => new NLogLogger());
 

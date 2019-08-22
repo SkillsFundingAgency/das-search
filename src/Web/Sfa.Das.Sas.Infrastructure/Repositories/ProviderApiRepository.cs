@@ -64,6 +64,17 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
         {
             var results = new ProviderNameSearchResultsAndPagination();
 
+            if (searchTerm.Length < 3)
+            {
+                _logger.Info(
+                    $"Search term causing SearchTermTooShort: [{searchTerm}]");
+
+                results.SearchTerm = searchTerm;
+                results.HasError = true;
+                results.ResponseCode = ProviderNameSearchResponseCodes.SearchTermTooShort;
+
+                return results;
+            }
 
             _logger.Info(
                 $"Provider Name Search started: SearchTerm: [{searchTerm}], Page: [{page}], Page Size: [{pageSize}]");

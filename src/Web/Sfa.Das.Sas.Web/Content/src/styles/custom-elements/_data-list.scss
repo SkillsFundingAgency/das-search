@@ -102,17 +102,19 @@ $module: 'data-list';
     margin-bottom: $gutter;
 
     ul {
-        //TODO: apply '.list-bullet' directly to desired lists in case numbered list may be required interchangably
-        @extend .list-bullet;
-        margin-bottom: 0; 
+        list-style-type: disc;
+        margin-bottom: 0;
+        padding-left: 20px;
     }
 }
 
 .data-list--provider {
     @include data-list(35);
+
     ul {
-        @extend .list-bullet;
+        list-style-type: disc;
         margin-bottom: 0;
+        padding-left: 20px;
     }
 }
 
