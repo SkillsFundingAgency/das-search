@@ -1,0 +1,26 @@
+﻿@using Sfa.Das.Sas.Shared.Components.ViewModels
+
+<h1 class="govuk-heading-l">Search Results Component</h1>
+<p class="govuk-body">Displays a list of apprenticeship results for a given search query</p>
+<h2 class="govuk-heading-m">Parameters</h2>
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">Parameter</th>
+            <th class="govuk-table__header" scope="col">Type</th>
+            <th class="govuk-table__header" scope="col">Default value</th>
+            <th class="govuk-table__header" scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+            <td class="govuk-table__cell" scope="row">searchQueryModel</td>
+            <td class="govuk-table__cell"><a class="govuk-link" asp-controller="Models" asp-action="SearchQueryViewModel" >SearchQueryViewModel</a></td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell">The search query model to use to display the search results</td>
+        </tr>
+    </tbody>
+</table>
+<h2 class="govuk-heading-m">Example</h2>
+<p class="govuk-body">searchQueryModel.keywords = "engineer"</p>
+@await Component.InvokeAsync("FatSearchResults",new{ searchQueryModel = new SearchQueryViewModel(){Keywords = "engineer"}})

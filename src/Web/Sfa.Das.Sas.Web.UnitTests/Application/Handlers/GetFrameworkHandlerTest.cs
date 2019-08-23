@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Threading;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
@@ -45,7 +46,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [TestCase("")]
         public void ShouldReturnInvalidFrameworkIdStatus(string frameworkId)
         {
-            var response = _sut.Handle(new GetFrameworkQuery { Id = frameworkId, Keywords = "Test" });
+            var response = _sut.Handle(new GetFrameworkQuery { Id = frameworkId, Keywords = "Test" }, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.InvalidFrameworkId);
         }
@@ -53,7 +54,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnInvalidFrameworkIdStatusIfIdIsBelowZero()
         {
-            var response = _sut.Handle(new GetFrameworkQuery() { Id = "-1", Keywords = "Test" });
+            var response = _sut.Handle(new GetFrameworkQuery() { Id = "-1", Keywords = "Test" }, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.InvalidFrameworkId);
         }
@@ -61,7 +62,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [Test]
         public void ShouldReturnFrameworkNotFoundStatusIfFrameworkCannotBeFound()
         {
-            var response = _sut.Handle(new GetFrameworkQuery { Id = "4-1-2", Keywords = "Test" });
+            var response = _sut.Handle(new GetFrameworkQuery { Id = "4-1-2", Keywords = "Test" }, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.FrameworkNotFound);
         }
@@ -74,7 +75,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             response.StatusCode.Should().Be(GetFrameworkResponse.ResponseCodes.Gone);
         }
@@ -86,7 +87,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id));
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             _mockGetFrameworks.Verify(x => x.GetFrameworkById(query.Id), Times.Once);
         }
@@ -98,8 +99,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var framework = new Framework { FrameworkId = query.Id, IsActiveFramework = true};
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
-
-            var response = _sut.Handle(query);
+        
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             response.Framework.Should().Be(framework);
         }
@@ -112,7 +113,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockGetFrameworks.Setup(x => x.GetFrameworkById(query.Id)).Returns(framework);
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query, default(CancellationToken)).Result;
 
             response.SearchTerms.Should().Be(query.Keywords);
         }

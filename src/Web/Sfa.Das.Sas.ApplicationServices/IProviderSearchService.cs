@@ -7,8 +7,6 @@ namespace Sfa.Das.Sas.ApplicationServices
 
     public interface IProviderSearchService
     {
-        Task<ProviderStandardSearchResults> SearchStandardProviders(string standardId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll, bool hasNonLevyContract);
-
-        Task<ProviderFrameworkSearchResults> SearchFrameworkProviders(string frameworkId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool nationalProviders, bool showAll, bool hasNonLevyContract);
+        Task<ProviderSearchResults> SearchProviders(string apprenticeshipId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool hasNonLevyContract, bool showNationalOnly);
     }
 }

@@ -12,7 +12,6 @@
     <ConfigurationSettings>
       <Setting name="PostcodeUrl" />
       <Setting name="SurveyUrl" />
-      <Setting name="ElasticServerUrls" />
       <Setting name="SatisfactionSourceUrl" />
       <Setting name="CookieGoogleUrl" />
       <Setting name="CookieImprovementUrl" />
@@ -24,10 +23,7 @@
       <Setting name="ApprenticeshipIndexAlias" />
       <Setting name="ProviderIndexAlias" />
       <Setting name="ApprenticeshipApiBaseUrl" />
-      <Setting name="ElasticsearchUsername" />
-      <Setting name="ElasticsearchPassword" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" />
-      <Setting name="FeatureToggle.Elk5Feature" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" />
       <Setting name="FeatureToggle.ProviderFeedbackFeature" />

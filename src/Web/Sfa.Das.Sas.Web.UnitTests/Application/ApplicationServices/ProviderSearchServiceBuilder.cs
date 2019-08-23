@@ -6,6 +6,7 @@
     using Moq;
     using Sas.ApplicationServices;
     using Sas.ApplicationServices.Settings;
+    using Sfa.Das.Sas.ApplicationServices.Models;
     using SFA.DAS.NLog.Logger;
 
     internal sealed class ProviderSearchServiceBuilder
@@ -15,7 +16,7 @@
         private readonly Mock<ILog> _logger = new Mock<ILog>();
         private readonly Mock<IPaginationSettings> _paginationSettings = new Mock<IPaginationSettings>();
 
-        internal Mock<IProviderLocationSearchProvider> LocationSearchProvider { get; } = new Mock<IProviderLocationSearchProvider>();
+        internal Mock<IProviderSearchProvider> _providerSearchService = new Mock<IProviderSearchProvider>();
 
         internal Mock<ILookupLocations> LocationLookup { get; } = new Mock<ILookupLocations>();
 
@@ -26,7 +27,7 @@
 
         public ProviderSearchService Build()
         {
-            var controller = new ProviderSearchService(LocationSearchProvider.Object, _standardsRepository.Object, _frameworksRepository.Object, LocationLookup.Object, _logger.Object, _paginationSettings.Object);
+            var controller = new ProviderSearchService(_standardsRepository.Object, _frameworksRepository.Object, LocationLookup.Object, _logger.Object, _paginationSettings.Object,_providerSearchService.Object);
 
             return controller;
         }
@@ -38,17 +39,17 @@
             return this;
         }
 
-        internal ProviderSearchServiceBuilder SetupLocationSearchProvider<TResult>(Expression<Func<IProviderLocationSearchProvider, TResult>> expression, TResult result)
+        internal ProviderSearchServiceBuilder SetupProviderSearchProvider<TResult>(Expression<Func<IProviderSearchProvider, TResult>> expression, TResult result)
         {
-            LocationSearchProvider.Setup(expression).Returns(result);
+            _providerSearchService.Setup(expression).Returns(result);
 
             return this;
         }
 
-        internal ProviderSearchService SetupLocationSearchProviderException<T>(Expression<Func<IProviderLocationSearchProvider, object>> expression)
+        internal ProviderSearchService SetupProviderSearchProviderException<T>(Expression<Func<IProviderSearchProvider, object>> expression)
             where T : Exception, new()
         {
-            LocationSearchProvider.Setup(expression).Throws<T>();
+            _providerSearchService.Setup(expression).Throws<T>();
 
             return this;
         }
@@ -65,6 +66,11 @@
             _frameworksRepository.Setup(expression).Returns(result);
 
             return this;
+        }
+
+        internal ProviderSearchService SetupProviderSearchProvider<T>(Func<IProviderSearchProvider, object> instance, SearchResult<ProviderSearchResultItem> searchResults)
+        {
+            throw new NotImplementedException();
         }
     }
 }

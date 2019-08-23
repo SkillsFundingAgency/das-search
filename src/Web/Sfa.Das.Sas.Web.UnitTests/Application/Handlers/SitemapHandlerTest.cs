@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
@@ -64,7 +65,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), StandardPlaceholder, items))
                 .Returns(CreateDocument(Namespace, StandardPlaceholder, items));
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards }, default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;
@@ -91,7 +92,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), FrameworkPlaceholder, items))
                 .Returns(CreateDocument(Namespace, FrameworkPlaceholder, items));
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks }, default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;
@@ -132,7 +133,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockUrlEncoder.Setup(x => x.EncodeTextForUri(providerNameToProcess)).Returns(providerNameProcessed);
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = ProviderPlaceholder, SitemapRequest = SitemapType.Providers });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = ProviderPlaceholder, SitemapRequest = SitemapType.Providers },default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;
@@ -163,7 +164,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockUrlEncoder.Setup(x => x.EncodeTextForUri(standardOneTitle)).Returns(standardOneEncoded);
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards }, default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;
@@ -194,7 +195,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockUrlEncoder.Setup(x => x.EncodeTextForUri(standardOneTitle)).Returns(standardOneEncoded);
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards }, default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;
@@ -224,7 +225,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockUrlEncoder.Setup(x => x.EncodeTextForUri(frameworkOneTitle)).Returns(frameworkOneEncoded);
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks }, default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;
@@ -252,7 +253,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), StandardPlaceholder, items))
                 .Returns(CreateDocument(Namespace, StandardPlaceholder, items));
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = StandardPlaceholder, SitemapRequest = SitemapType.Standards }, default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;
@@ -282,7 +283,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _mockDocumentCreator.Setup(x => x.Serialise(It.IsAny<string>(), FrameworkPlaceholder, items))
                 .Returns(CreateDocument(Namespace, FrameworkPlaceholder, items));
 
-            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks });
+            var response = _sut.Handle(new SitemapQuery { UrlPlaceholder = FrameworkPlaceholder, SitemapRequest = SitemapType.Frameworks }, default(CancellationToken)).Result;
 
             var doc = XDocument.Parse(response.Content);
             XNamespace ns = Namespace;

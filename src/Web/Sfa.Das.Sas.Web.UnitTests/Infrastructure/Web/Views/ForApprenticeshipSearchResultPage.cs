@@ -198,13 +198,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                                   new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                                   new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 2",
                                         Level = "3 (equivalent to 2 A level passes)",
-                                        FrameworkId = "3"
+                                        Id = "3"
                                       }
                               },
                 AggregationLevel = new List<LevelAggregationViewModel>()
@@ -231,52 +231,52 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       }
                 },
                 ActualPage = 1,
@@ -303,52 +303,52 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       }
                 },
                 ActualPage = 2,
@@ -375,52 +375,52 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       },
                     new ApprenticeshipSearchResultItemViewModel
                                       {
                                         Title = "Test title 1",
-                                        StandardId = "3"
+                                        Id = "3"
                                       }
                 },
                 ActualPage = 3,

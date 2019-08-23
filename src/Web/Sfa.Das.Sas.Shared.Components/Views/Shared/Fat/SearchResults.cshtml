@@ -1,0 +1,6 @@
+﻿@model Sfa.Das.Sas.Shared.Components.ViewModels.SearchQueryViewModel
+
+
+@await Component.InvokeAsync("FatSearchFilter", new { searchQueryModel = Model })
+
+@await Component.InvokeAsync("FatSearchResults", new { searchQueryModel = Model })

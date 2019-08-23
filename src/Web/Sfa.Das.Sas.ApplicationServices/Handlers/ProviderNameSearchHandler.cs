@@ -1,24 +1,39 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Handlers
+﻿using System.Threading;
+using Sfa.Das.Sas.ApplicationServices.Settings;
+
+namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     using System.Threading.Tasks;
-    using Interfaces;
     using MediatR;
     using Queries;
     using Responses;
 
-    public sealed class ProviderNameSearchHandler : IAsyncRequestHandler<ProviderNameSearchQuery, ProviderNameSearchResponse>
+    public sealed class ProviderNameSearchHandler : IRequestHandler<ProviderNameSearchQuery, ProviderNameSearchResponse>
     {
-        private readonly IProviderNameSearchService _nameSearchService;
+        private readonly IProviderSearchProvider _searchProviderName;
+        private readonly IPaginationSettings _paginationSettings;
 
         public ProviderNameSearchHandler(
-            IProviderNameSearchService nameSearchService)
+            IProviderSearchProvider searchProviderName, IPaginationSettings paginationSettings)
         {
-            _nameSearchService = nameSearchService;
+            _searchProviderName = searchProviderName;
+            _paginationSettings = paginationSettings;
         }
 
-        public async Task<ProviderNameSearchResponse> Handle(ProviderNameSearchQuery message)
+        public async Task<ProviderNameSearchResponse> Handle(ProviderNameSearchQuery message, CancellationToken cancellationToken)
         {
-            var searchResults = await _nameSearchService.SearchProviderNameAndAliases(message.SearchTerm, message.Page);
+
+            if (message.PageSize == 0)
+            {
+                message.PageSize = _paginationSettings.DefaultResultsAmount;
+            }
+
+            if (message.Page == 0)
+            {
+                message.Page = 1;
+            }
+
+            var searchResults = await _searchProviderName.SearchProviderNameAndAliases(message.SearchTerm ?? string.Empty, message.Page, message.PageSize);
 
             var providerNameSearchResponse = new ProviderNameSearchResponse
             {

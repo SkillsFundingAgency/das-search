@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SFA.DAS.Apprenticeships.Api.Types;
+﻿using SFA.DAS.Apprenticeships.Api.Types;
 
 namespace Sfa.Das.Sas.Web.Services
 {
@@ -142,28 +141,48 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.CurrentlyNotStartingNewApprentices, y => y.Ignore())
                 ;
 
-            cfg.CreateMap<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>()
-                .ForMember(x => x.StandardCode, y => y.MapFrom(z => z.StandardCode))
+            cfg.CreateMap<ProviderSearchResultItem, StandardProviderResultItemViewModel>()
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.EmployerSatisfaction, z.IsHigherEducationInstitute)))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.LearnerSatisfaction, z.IsHigherEducationInstitute)))
                 .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.OverallAchievementRate)))
-                .ForMember(x => x.LocationAddressLine, y => y.MapFrom(z => ProviderMappingHelper.GetLocationAddressLine(z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId))))
+                .ForMember(x => x.LocationAddressLine, y => y.MapFrom(z => ProviderMappingHelper.GetLocationAddressLine(z)))
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
-                .ForMember(x => x.LocationId, y => y.MapFrom(z => z.MatchingLocationId))
-                .ForMember(x => x.LocationName, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).LocationName))
-                .ForMember(x => x.Address, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).Address))
+                .ForMember(x => x.LocationId, y => y.MapFrom(z => z.LocationId))
+                .ForMember(x => x.LocationName, y => y.MapFrom(z => z.LocationName))
+                .ForMember(x => x.Address, y => y.MapFrom(z => z.Address))
+                .ForMember(x => x.StandardCode, y => y.Ignore())
+                .ForMember(x => x.MarketingName, y => y.Ignore())
+                .ForMember(x => x.Phone, y => y.Ignore())
+                .ForMember(x => x.Email, y => y.Ignore())
+                .ForMember(x => x.ContactUsUrl, y => y.Ignore())
+                .ForMember(x => x.Website, y => y.Ignore())
+                .ForMember(x => x.CurrentlyNotStartingNewApprentices, y => y.Ignore())
+
                 ;
 
-            cfg.CreateMap<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>()
-                .ForMember(x => x.FrameworkId, y => y.MapFrom(z => z.FrameworkId))
+            cfg.CreateMap<ProviderSearchResultItem, FrameworkProviderResultItemViewModel>()
                 .ForMember(x => x.EmployerSatisfactionMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.EmployerSatisfaction, z.IsHigherEducationInstitute)))
                 .ForMember(x => x.LearnerSatisfactionMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.LearnerSatisfaction, z.IsHigherEducationInstitute)))
                 .ForMember(x => x.AchievementRateMessage, y => y.MapFrom(z => ProviderMappingHelper.GetPercentageText(z.OverallAchievementRate)))
-                .ForMember(x => x.LocationAddressLine, y => y.MapFrom(z => ProviderMappingHelper.GetLocationAddressLine(z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId))))
+                .ForMember(x => x.LocationAddressLine, y => y.MapFrom(z => ProviderMappingHelper.GetLocationAddressLine(z)))
                 .ForMember(x => x.DeliveryOptionsMessage, y => y.ResolveUsing<DeliveryOptionResolver>().FromMember(z => z.DeliveryModes))
-                .ForMember(x => x.LocationId, y => y.MapFrom(z => z.MatchingLocationId))
-                .ForMember(x => x.LocationName, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).LocationName))
-                .ForMember(x => x.Address, y => y.MapFrom(z => z.TrainingLocations.Single(x => x.LocationId == z.MatchingLocationId).Address))
+                .ForMember(x => x.LocationId, y => y.MapFrom(z => z.LocationId))
+                .ForMember(x => x.LocationName, y => y.MapFrom(z => z.LocationName))
+                .ForMember(x => x.Address, y => y.MapFrom(z => z.Address))
+                .ForMember(x => x.CurrentlyNotStartingNewApprentices, y => y.Ignore())
+                .ForMember(x => x.FrameworkCode, y => y.Ignore())
+                .ForMember(x => x.PathwayCode, y => y.Ignore())
+                .ForMember(x => x.Level, y => y.Ignore())
+                .ForMember(x => x.MarketingName, y => y.Ignore())
+                .ForMember(x => x.ProviderMarketingInfo, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipMarketingInfo, y => y.Ignore())
+                .ForMember(x => x.Phone, y => y.Ignore())
+                .ForMember(x => x.Email, y => y.Ignore())
+                .ForMember(x => x.ContactUsUrl, y => y.Ignore())
+                .ForMember(x => x.ApprenticeshipInfoUrl, y => y.Ignore())
+                .ForMember(x => x.Website, y => y.Ignore())
+                .ForMember(x => x.FrameworkId, y => y.Ignore())
+
                 ;
 
             // Provider detail page
@@ -300,7 +319,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.ApprenticeshipType, y => y.MapFrom(z => ApprenticeshipTrainingType.Standard));
 
             // Provider search
-            cfg.CreateMap<StandardProviderSearchResponse, ProviderStandardSearchResultViewModel>()
+            cfg.CreateMap<ProviderSearchResponse, ProviderStandardSearchResultViewModel>()
                 .ForMember(x => x.AbsolutePath, y => y.Ignore())
                 .ForMember(x => x.ActualPage, y => y.MapFrom(z => z.CurrentPage))
                 .ForMember(x => x.Hits, y => y.MapFrom(z => z.Results.Hits))
@@ -308,9 +327,9 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.PostCodeMissing, y => y.MapFrom(z => z.Results.PostCodeMissing))
                 .ForMember(x => x.ResultsToTake, y => y.MapFrom(z => z.Results.ResultsToTake))
                 .ForMember(x => x.ShowAll, y => y.MapFrom(z => z.ShowAllProviders))
-                .ForMember(x => x.StandardId, y => y.MapFrom(z => z.Results.StandardId))
-                .ForMember(x => x.StandardName, y => y.MapFrom(z => z.Results.StandardName))
-                .ForMember(x => x.StandardLevel, y => y.MapFrom(z => z.Results.StandardLevel))
+                .ForMember(x => x.StandardId, y => y.MapFrom(z => z.Results.ApprenticeshipId))
+                .ForMember(x => x.StandardName, y => y.MapFrom(z => z.Results.Title))
+                .ForMember(x => x.StandardLevel, y => y.MapFrom(z => z.Results.Level))
                 .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.Results.TotalResults))
                 .ForMember(x => x.ShowNationalProviders, y => y.MapFrom(z => z.ShowOnlyNationalProviders))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => !z.Success))
@@ -345,7 +364,7 @@ namespace Sfa.Das.Sas.Web.Services
 
 
             // ToDo: CF ->  Rename models?
-            cfg.CreateMap<FrameworkProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
+            cfg.CreateMap<ProviderSearchResponse, ProviderFrameworkSearchResultViewModel>()
                 .ForMember(x => x.AbsolutePath, y => y.Ignore())
                 .ForMember(x => x.ActualPage, y => y.MapFrom(z => z.CurrentPage))
                 .ForMember(x => x.Hits, y => y.MapFrom(z => z.Results.Hits))
@@ -353,12 +372,12 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.PostCodeMissing, y => y.MapFrom(z => z.Results.PostCodeMissing))
                 .ForMember(x => x.ResultsToTake, y => y.MapFrom(z => z.Results.ResultsToTake))
                 .ForMember(x => x.Title, y => y.MapFrom(z => ApprenticeshipMappingHelper.FrameworkTitle(z.Results.Title)))
-                .ForMember(x => x.FrameworkLevel, y => y.MapFrom(z => z.Results.FrameworkLevel))
+                .ForMember(x => x.FrameworkLevel, y => y.MapFrom(z => z.Results.Level))
                 .ForMember(x => x.ShowAll, y => y.MapFrom(z => z.ShowAllProviders))
-                .ForMember(x => x.FrameworkCode, y => y.MapFrom(z => z.Results.FrameworkCode))
-                .ForMember(x => x.FrameworkId, y => y.MapFrom(z => z.Results.FrameworkId))
-                .ForMember(x => x.FrameworkName, y => y.MapFrom(z => z.Results.FrameworkName))
-                .ForMember(x => x.PathwayName, y => y.MapFrom(z => z.Results.PathwayName))
+                .ForMember(x => x.FrameworkCode, y => y.Ignore())
+                .ForMember(x => x.FrameworkId, y => y.MapFrom(z => z.Results.ApprenticeshipId))
+                .ForMember(x => x.FrameworkName, y => y.MapFrom(z => z.Results.Title))
+                .ForMember(x => x.PathwayName, y => y.MapFrom(z => z.Results.Title))
                 .ForMember(x => x.TotalResults, y => y.MapFrom(z => z.Results.TotalResults))
                 .ForMember(x => x.HasError, y => y.MapFrom(z => !z.Success))
                 .ForMember(x => x.ShowNationalProviders, y => y.MapFrom(z => z.ShowOnlyNationalProviders))

@@ -1,6 +1,4 @@
-﻿@using Sfa.Das.Sas.ApplicationServices.FeatureToggles
-@using FeatureToggle.Core.Fluent
-@using Sfa.Das.Sas.Web.Helpers
+﻿@using Sfa.Das.Sas.Web.Helpers
 @using Sfa.Das.Sas.Web.ViewModels
 @model Sfa.Das.Sas.Web.ViewModels.ProviderFrameworkSearchResultViewModel
 
@@ -12,7 +10,7 @@
             <header>
                 <h2 class="result-title">
                     @Html.ActionLink(item.ProviderName, "Detail", "Provider", 
-                        new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId, isLevyPayingEmployer = Model.IsLevyPayingEmployer, Postcode = Model.PostCode, Keyword = Model.SearchTerms },
+                        new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = Model.FrameworkId, isLevyPayingEmployer = Model.IsLevyPayingEmployer, Postcode = Model.PostCode, Keyword = Model.SearchTerms },
                         new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) })
                     @if (item.NationalProvider)
                     {

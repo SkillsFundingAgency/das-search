@@ -5,8 +5,6 @@ using Sfa.Das.Sas.Web.ViewModels;
 
 namespace Sfa.Das.Sas.Web.Services.MappingActions
 {
-    using Sfa.Das.Sas.Web.Extensions;
-
     using Resources = Resources.EquivalenceLevels;
 
     internal class ApprenticeshipSearchResultItemViewModelMappingAction :
@@ -15,7 +13,16 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
         public void Process(ApprenticeshipSearchResultsItem source, ApprenticeshipSearchResultItemViewModel destination)
         {
             destination.Level = GetLevelText(source.Level);
-            destination.ApprenticeshipType = !destination.StandardId.IsNullOrEmpty() ? "standard" : "framework"; // ToDo: use of constants :) (CF)
+            switch (source.ApprenticeshipType)
+            {
+                case ApprenticeshipType.Framework:
+                    destination.ApprenticeshipType = Models.ApprenticeshipType.Framework;
+                    break;
+                case ApprenticeshipType.Standard:
+                    destination.ApprenticeshipType = Models.ApprenticeshipType.Standard;
+                    break;
+            }
+            
             destination.Title = ApprenticeshipMappingHelper.FrameworkTitle(source.Title);
         }
 

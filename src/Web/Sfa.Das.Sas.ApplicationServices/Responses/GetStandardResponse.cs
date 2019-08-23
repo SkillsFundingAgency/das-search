@@ -1,8 +1,9 @@
-﻿namespace Sfa.Das.Sas.ApplicationServices.Responses
+﻿using Sfa.Das.Sas.Core.Domain;
+
+namespace Sfa.Das.Sas.ApplicationServices.Responses
 {
     using System.Collections.Generic;
     using Core.Domain.Model;
-    using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 
     public class GetStandardResponse
     {
@@ -22,7 +23,7 @@
 
         public string SearchTerms { get; set; }
 
-        public List<Organisation> AssessmentOrganisations { get; set; }
+        public IEnumerable<AssessmentOrganisation> AssessmentOrganisations { get; set; }
 
     }
 }

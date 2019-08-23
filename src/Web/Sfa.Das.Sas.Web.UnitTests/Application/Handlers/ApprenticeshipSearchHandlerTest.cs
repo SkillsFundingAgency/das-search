@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -17,6 +18,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         private ApprenticeshipSearchHandler _sut;
         private Mock<IApprenticeshipSearchService> _mockApprenticeshipSearchService;
         private Mock<IPaginationSettings> _mockPaginationSettings;
+        private CancellationToken _cancellationToken = default(CancellationToken);
 
         [SetUp]
         public void Init()
@@ -26,7 +28,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(new ApprenticeshipSearchResults
+                .ReturnsAsync(new ApprenticeshipSearchResults
                 {
                     Results = new List<ApprenticeshipSearchResultsItem>(),
                     TotalResults = 20
@@ -40,14 +42,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(new ApprenticeshipSearchResults
+                .ReturnsAsync(new ApprenticeshipSearchResults
                 {
                     LastPage = 3,
                     TotalResults = 10,
                     Results = new List<ApprenticeshipSearchResultsItem>()
                 });
 
-            var response = _sut.Handle(new ApprenticeshipSearchQuery());
+            var response = _sut.Handle(new ApprenticeshipSearchQuery(), _cancellationToken).Result;
 
             response.StatusCode.Should().Be(ApprenticeshipSearchResponse.ResponseCodes.PageNumberOutOfUpperBound);
         }
@@ -71,7 +73,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(searchResults);
+                .ReturnsAsync(searchResults);
 
             var query = new ApprenticeshipSearchQuery
             {
@@ -79,7 +81,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 Order = 2
             };
 
-            var response = _sut.Handle(query);
+            var response = _sut.Handle(query,_cancellationToken).Result;
 
             response.LastPage.Should().Be(searchResults.LastPage);
             response.TotalResults.Should().Be(searchResults.TotalResults);
@@ -99,13 +101,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockApprenticeshipSearchService.Setup(x => x.SearchByKeyword(
                 It.IsAny<string>(), 1, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()))
-                .Returns(new ApprenticeshipSearchResults
+                .ReturnsAsync(new ApprenticeshipSearchResults
                 {
                     Results = new List<ApprenticeshipSearchResultsItem>(),
                     TotalResults = 20
                 });
 
-            var response = _sut.Handle(new ApprenticeshipSearchQuery { Page = 0 });
+            var response = _sut.Handle(new ApprenticeshipSearchQuery { Page = 0 },_cancellationToken);
 
             _mockApprenticeshipSearchService.Verify(x => x.SearchByKeyword(
                 It.IsAny<string>(), 1, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()));
