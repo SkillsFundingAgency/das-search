@@ -1,0 +1,61 @@
+﻿@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@model Tuple<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem,Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel>
+@inject ICssViewModel CssViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<li id="@Model.Item1.Ukprn" class="das-search-results__list-item">
+    <article class="das-search-result">
+        <h2 class="@CssViewModel.HeadingMedium @CssViewModel.UtilitiesCss.Margin("bottom",0)">
+            <a class="@CssViewModel.Link" href="/TrainingProvider/Details?ukprn=@Model.Item1.Ukprn&apprenticeshipId=@Model.Item2.ApprenticeshipId&LocationId=@Model.Item1.LocationId">@Model.Item1.Name</a>
+            @if (Model.Item1.NationalProvider)
+            {
+                <span class="das-tag--national">National</span>
+            }
+        </h2>
+
+        <dl class="@CssViewModel.List  das-search-result__details">
+            <dt class="das-search-result__details-title">Distance:</dt>
+            <dd class="das-search-result__details-definition">@Model.Item1.Distance miles away</dd>
+            <dt class="das-search-result__details-title">Training options:</dt>
+            <dd class="das-search-result__details-definition">
+                <div class="das-search-results__training-options">
+                    <span class="@GetTrainingOptionsStatusClass("dayrelease",Model.Item1.DeliveryModes)">day release</span>
+                    <span class="@GetTrainingOptionsStatusClass("blockrelease",Model.Item1.DeliveryModes)">block release</span>
+                    <span class="@GetTrainingOptionsStatusClass("100percentemployer",Model.Item1.DeliveryModes)">at your location</span>
+                </div>
+            </dd>
+            <dt class="das-search-result__details-title">Employer satisfaction:</dt>
+            <dd class="das-search-result__details-definition">@Model.Item1.EmployerSatisfaction%</dd>
+            <dt class="das-search-result__details-title">Learner satisfaction:</dt>
+            <dd class="das-search-result__details-definition">@Model.Item1.LearnerSatisfaction%</dd>
+            <dt class="das-search-result__details-title">Achievement rate:</dt>
+            <dd class="das-search-result__details-definition">@Model.Item1.OverallAchievementRate%</dd>
+        </dl>
+
+        @*@await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.Item2.ApprenticeshipId, ukprn = Model.Item1.Ukprn })*@
+    </article>
+</li>
+
+
+@functions
+{
+
+    string GetTrainingOptionsStatusClass(string trainingOption, IList<string> options)
+    {
+        var cssClass = "das-search-results__training-options";
+        var classSuffix = string.Empty;
+
+        if (options.Contains(trainingOption,StringComparer.OrdinalIgnoreCase))
+        {
+            classSuffix = "--tick";
+        }
+        else
+        {
+            classSuffix = "--cross";
+        }
+
+        return $"{cssClass}{classSuffix}";
+    }
+
+
+}

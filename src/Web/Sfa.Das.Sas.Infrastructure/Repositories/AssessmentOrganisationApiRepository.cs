@@ -1,17 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.Core.Domain;
+using Sfa.Das.Sas.Core.Domain.Services;
+using Sfa.Das.Sas.Infrastructure.Mapping;
 using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
 using SFA.DAS.AssessmentOrgs.Api.Client;
+using SFA.DAS.NLog.Logger;
 
 namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
-    public sealed class AssessmentOrganisationApiRepository : IAssessmentOrgsApiClient
+    public sealed class AssessmentOrganisationApiRepository : IAssessmentOrgsApiClient, IGetAssessmentOrganisations
     {
         private readonly IAssessmentOrgsApiClient _apiClient;
+        private readonly ILog _logger;
+        private readonly IAssessmentOrganisationMapping _assessmentOrganisationMapping;
 
-        public AssessmentOrganisationApiRepository(IAssessmentOrgsApiClient apiClient)
+        public AssessmentOrganisationApiRepository(IAssessmentOrgsApiClient apiClient, ILog logger, IAssessmentOrganisationMapping assessmentOrganisationMapping)
         {
             _apiClient = apiClient;
+            _logger = logger;
+            _assessmentOrganisationMapping = assessmentOrganisationMapping;
         }
 
         public void Dispose()
@@ -77,6 +86,12 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
         public async Task<IEnumerable<StandardOrganisationSummary>> FindAllStandardsByOrganisationIdAsync(string organisationId)
         {
             return await _apiClient.FindAllStandardsByOrganisationIdAsync(organisationId);
+        }
+
+        public async Task<IEnumerable<AssessmentOrganisation>> GetByStandardId(int id)
+        {
+                var organisations = await this.ByStandardAsync(id);
+                return organisations.Select(_assessmentOrganisationMapping.Map);
         }
     }
 }

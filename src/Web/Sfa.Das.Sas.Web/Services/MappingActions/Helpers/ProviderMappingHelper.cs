@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
+namespace Sfa.Das.Sas.ApplicationServices.Services.MappingActions.Helpers
 {
     using System.Collections.Generic;
     using System.Linq;

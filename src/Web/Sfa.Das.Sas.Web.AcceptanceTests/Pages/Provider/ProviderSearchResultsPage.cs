@@ -1,10 +1,8 @@
 ﻿using OpenQA.Selenium;
 using Sfa.Das.Sas.Web.AcceptanceTests.Helpers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Sfa.Automation.Framework.Extensions;
 
 namespace Sfa.Das.Sas.Web.AcceptanceTests.Pages.Apprenticeships
 {

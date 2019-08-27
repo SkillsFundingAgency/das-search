@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Sfa.Das.Sas.Infrastructure.Mapping
+﻿namespace Sfa.Das.Sas.Infrastructure.Mapping
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Sfa.Das.Sas.ApplicationServices.Models;
-    using Sfa.Das.Sas.Core.Domain.Model;
+    using ApplicationServices.Models;
+    using Core.Domain.Model;
     using ApiFramework = SFA.DAS.Apprenticeships.Api.Types.Framework;
     using ApiJobRoleItem = SFA.DAS.Apprenticeships.Api.Types.JobRoleItem;
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Sfa.Das.Sas.Core.Domain.Model;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
@@ -31,7 +33,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _xmlDocumentSerialiser = documentSerialiser;
         }
 
-        public SitemapResponse Handle(SitemapQuery message)
+        public async Task<SitemapResponse> Handle(SitemapQuery message, CancellationToken cancellationToken)
         {
             IEnumerable<string> identifiers = null;
 

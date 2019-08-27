@@ -8,12 +8,8 @@ namespace Sfa.Das.Sas.Core.Configuration
         string ApprenticeshipIndexAlias { get; }
 
         string ProviderIndexAlias { get; }
-
         string ApprenticeshipApiBaseUrl { get; }
-
         string BuildId { get; }
-
-        IEnumerable<Uri> ElasticServerUrls { get; }
 
         Uri SurveyUrl { get; }
 
@@ -38,10 +34,6 @@ namespace Sfa.Das.Sas.Core.Configuration
         Uri SurveyProviderUrl { get; }
 
         Uri AchievementRateUrl { get; }
-
-        string ElasticsearchUsername { get; }
-
-        string ElasticsearchPassword { get; }
 
         IEnumerable<long> HideAboutProviderForUkprns { get; }
 

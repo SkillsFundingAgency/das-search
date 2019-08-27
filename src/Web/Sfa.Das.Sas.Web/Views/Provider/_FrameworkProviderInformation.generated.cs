@@ -145,7 +145,7 @@ WriteLiteral("                    ");
             
             #line 14 "..\..\Views\Provider\_FrameworkProviderInformation.cshtml"
                Write(Html.ActionLink(item.ProviderName, "Detail", "Provider", 
-                        new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = item.FrameworkId, isLevyPayingEmployer = Model.IsLevyPayingEmployer, Postcode = Model.PostCode, Keyword = Model.SearchTerms },
+                        new { @ukprn = item.UkPrn, @locationId = item.LocationId, @frameworkId = Model.FrameworkId, isLevyPayingEmployer = Model.IsLevyPayingEmployer, Postcode = Model.PostCode, Keyword = Model.SearchTerms },
                         new { @attr_ga_result_interval = @ViewHelper.GetGaIndexAttrbute(index) }));
 
             

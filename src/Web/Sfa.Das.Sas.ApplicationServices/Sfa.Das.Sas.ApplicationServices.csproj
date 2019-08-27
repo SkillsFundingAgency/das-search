@@ -45,16 +45,36 @@
       <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MediatR, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MediatR.2.1.0\lib\net45\MediatR.dll</HintPath>
+    <Reference Include="MediatR, Version=6.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.6.0.0\lib\net461\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.0.1\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
@@ -64,7 +84,7 @@
       <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Client.0.11.75\lib\net462\SFA.DAS.Apprenticeships.Api.Client.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.Apprenticeships.Api.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.95\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
+      <HintPath>..\packages\SFA.DAS.Apprenticeships.Api.Types.0.11.129\lib\net462\SFA.DAS.Apprenticeships.Api.Types.dll</HintPath>
     </Reference>
     <Reference Include="SFA.DAS.AssessmentOrgs.Api.Client, Version=0.11.95.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SFA.DAS.AssessmentOrgs.Api.Client.0.11.95\lib\net45\SFA.DAS.AssessmentOrgs.Api.Client.dll</HintPath>
@@ -85,10 +105,32 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
@@ -110,30 +152,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddFavouriteToBasketCommand.cs" />
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ApprenticeshipServiceApiFeature.cs" />
     <Compile Include="FeatureToggles\CloudConfigToggleValueProvider.cs" />
     <Compile Include="FeatureToggles\ProviderFeedbackFeature.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
+    <Compile Include="Handlers\AddFavouriteToBasketCommandHandler.cs" />
+    <Compile Include="Handlers\GetBasketHandler.cs" />
     <Compile Include="Handlers\IXmlDocumentSerialiser.cs" />
     <Compile Include="Handlers\ProviderDetailHandler.cs" />
     <Compile Include="Handlers\ProviderNameSearchHandler.cs" />
     <Compile Include="Handlers\SitemapHandler.cs" />
+    <Compile Include="Handlers\ProviderSearchHandler.cs" />
     <Compile Include="Handlers\StatsHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipSearchHandler.cs" />
     <Compile Include="Handlers\ApprenticeshipProviderDetailHandler.cs" />
-    <Compile Include="Handlers\FrameworkProviderSearchHandler.cs" />
     <Compile Include="Handlers\GetFrameworkHandler.cs" />
     <Compile Include="Handlers\GetFrameworkProvidersHandler.cs" />
     <Compile Include="Handlers\GetStandardHandler.cs" />
     <Compile Include="Handlers\GetStandardProvidersHandler.cs" />
-    <Compile Include="Handlers\StandardProviderSearchHandler.cs" />
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
     <Compile Include="Interfaces\IProviderNameSearchProvider.cs" />
     <Compile Include="Interfaces\IProviderNameSearchService.cs" />
+    <Compile Include="IProviderSearchProvider.cs" />
     <Compile Include="IProviderLocationSearchProvider.cs" />
     <Compile Include="ILookupLocations.cs" />
     <Compile Include="IProviderSearchService.cs" />
@@ -143,6 +188,7 @@
     <Compile Include="Logging\HttpErrorLogEntry.cs" />
     <Compile Include="Models\ApprenticeshipSearchResults.cs" />
     <Compile Include="Models\ApprenticeshipSearchResultsItem.cs" />
+    <Compile Include="Models\ApprenticeshipType.cs" />
     <Compile Include="Models\BaseProviderSearchResults.cs" />
     <Compile Include="Models\CodeTypes.cs" />
     <Compile Include="Models\DeliveryMode.cs" />
@@ -152,6 +198,7 @@
     <Compile Include="Models\PostCodeResponse.cs" />
     <Compile Include="Models\ProviderNameSearchResults.cs" />
     <Compile Include="Models\ProviderSearchResultItem.cs" />
+    <Compile Include="Models\ProviderSearchResults.cs" />
     <Compile Include="Models\ProviderStandardSearchResults.cs" />
     <Compile Include="Models\ProviderFrameworkSearchResults.cs" />
     <Compile Include="Models\FrameworkProviderSearchResultsItem.cs" />
@@ -168,6 +215,7 @@
     <Compile Include="ProviderNameSearchService.cs" />
     <Compile Include="ProviderSearchService.cs" />
     <Compile Include="ApprenticeshipSearchService.cs" />
+    <Compile Include="Queries\GetBasketQuery.cs" />
     <Compile Include="Queries\ProviderDetailQuery.cs" />
     <Compile Include="Queries\ProviderNameSearchQuery.cs" />
     <Compile Include="Queries\SitemapQuery.cs" />
@@ -175,7 +223,6 @@
     <Compile Include="Queries\ApprenticeshipSearchQuery.cs" />
     <Compile Include="Responses\ApprenticeshipSearchResponse.cs" />
     <Compile Include="Responses\ApprenticeshipProviderDetailResponse.cs" />
-    <Compile Include="Queries\FrameworkProviderSearchQuery.cs" />
     <Compile Include="Responses\FrameworkProviderSearchResponse.cs" />
     <Compile Include="Queries\GetFrameworkProvidersQuery.cs" />
     <Compile Include="Responses\GetFrameworkProvidersResponse.cs" />
@@ -192,12 +239,13 @@
     <Compile Include="Responses\ProviderNameSearchResponseCodes.cs" />
     <Compile Include="Responses\ProviderSearchNameResponse.cs" />
     <Compile Include="Responses\ProviderSearchResponseBase.cs" />
-    <Compile Include="Queries\StandardProviderSearchQuery.cs" />
     <Compile Include="Responses\SitemapResponse.cs" />
+    <Compile Include="Responses\ProviderSearchResponse.cs" />
     <Compile Include="Responses\StandardProviderSearchResponse.cs" />
     <Compile Include="Responses\StatsResponse.cs" />
     <Compile Include="Services\IPaginationOrientationService.cs" />
     <Compile Include="Services\IPostcodeIoService.cs" />
+    <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
     <Compile Include="Services\PaginationOrientationService.cs" />
     <Compile Include="Services\PostcodeIoService.cs" />
     <Compile Include="Settings\ICookieSettings.cs" />
@@ -215,6 +263,10 @@
       <Project>{f1b42430-c055-421c-91a0-915a707335f3}</Project>
       <Name>Sfa.Das.Sas.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj">
+      <Project>{83DBB4A0-6A9E-44BA-A172-D21EB707E508}</Project>
+      <Name>Sfa.Das.Sas.Shared.Basket</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -227,9 +279,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

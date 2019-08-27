@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain.Services;
@@ -14,7 +16,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             _getStandards = getStandards;
         }
 
-        public GetStandardProvidersResponse Handle(GetStandardProvidersQuery message)
+        public async Task<GetStandardProvidersResponse> Handle(GetStandardProvidersQuery message, CancellationToken cancellationToken)
         {
             var standard = _getStandards.GetStandardById(message.StandardId);
 

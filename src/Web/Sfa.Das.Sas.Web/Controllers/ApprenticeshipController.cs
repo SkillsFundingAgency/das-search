@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using System.Threading.Tasks;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -78,9 +80,9 @@
         }
 
         [HttpGet]
-        public ActionResult SearchResults(ApprenticeshipSearchQuery query)
+        public async Task<ActionResult> SearchResults(ApprenticeshipSearchQuery query)
         {
-            var response = _mediator.Send(query);
+            var response = await _mediator.Send(query);
 
             var viewModel = _mappingService.Map<ApprenticeshipSearchResponse, ApprenticeshipSearchResultViewModel>(response);
             viewModel.SearchViewModel = new ApprenticeshipSearchViewModel
@@ -102,10 +104,10 @@
         }
 
         // GET: Standard
-        public ActionResult Standard(string id, string keyword, string ukprn = null)
+        public async Task<ActionResult> Standard(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting standard {id}");
-            var response = _mediator.Send(new GetStandardQuery { Id = id, Keywords = keyword });
+            var response = await _mediator.Send(new GetStandardQuery { Id = id, Keywords = keyword });
 
             string message;
 
@@ -156,11 +158,11 @@
 
             return View(viewModel);
         }
-
-        public ActionResult Framework(string id, string keyword, string ukprn = null)
+        
+        public async Task<ActionResult> Framework(string id, string keyword, string ukprn = null)
         {
             _logger.Info($"Getting framework {id}");
-            var response = _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword });
+            var response = await _mediator.Send(new GetFrameworkQuery { Id = id, Keywords = keyword });
 
             string message;
 
@@ -197,7 +199,7 @@
             }
         }
 
-        public ActionResult SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
+        public async Task<ActionResult> SearchForStandardProviders(string standardId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords,string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetStandardProvidersQuery
             {
@@ -206,7 +208,7 @@
                 Keywords = keywords
             };
 
-            var response = _mediator.Send(query);
+            var response = await _mediator.Send(query);
 
             if (response.StatusCode.Equals(GetStandardProvidersResponse.ResponseCodes.NoStandardFound))
             {
@@ -224,7 +226,7 @@
             return View("SearchForProviders", viewModel);
         }
 
-        public ActionResult SearchForFrameworkProviders(string frameworkId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
+        public async Task<ActionResult> SearchForFrameworkProviders(string frameworkId, ProviderSearchResponseCodes? statusCode, string postcode, string keywords, string ukprn, string postcodeCountry, bool? isLevyPayingEmployer)
         {
             var query = new GetFrameworkProvidersQuery
             {
@@ -233,7 +235,7 @@
                 Keywords = keywords
             };
 
-            var response = _mediator.Send(query);
+            var response = await _mediator.Send(query);
 
             if (response.StatusCode.Equals(GetFrameworkProvidersResponse.ResponseCodes.NoFrameworkFound))
             {

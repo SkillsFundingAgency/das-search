@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Web.Controllers
+﻿using System.Threading.Tasks;
+
+namespace Sfa.Das.Sas.Web.Controllers
 {
     using System.Web.Mvc;
     using ApplicationServices.Queries;
@@ -34,13 +36,13 @@
         }
 
         // GET: Sitemap/Standards
-        public ActionResult Standards()
+        public async Task<ActionResult> Standards()
         {
             var baseUrl = GetBaseUrl();
 
             var urlPrefix = $"{baseUrl}{Url.Action("Standard", "Apprenticeship", new { id = "" })}/{{0}}";
 
-            var resp = _mediator.Send(new SitemapQuery
+            var resp = await _mediator.Send(new SitemapQuery
             {
                 UrlPlaceholder = urlPrefix,
                 SitemapRequest = SitemapType.Standards
@@ -50,13 +52,13 @@
         }
 
         // GET: Sitemap/Frameworks
-        public ActionResult Frameworks()
+        public async Task<ActionResult> Frameworks()
         {
             var baseUrl = GetBaseUrl();
 
             var urlPrefix = $"{baseUrl}{Url.Action("Framework", "Apprenticeship", new { id = "" })}/{{0}}";
 
-            var resp = _mediator.Send(new SitemapQuery
+            var resp = await _mediator.Send(new SitemapQuery
             {
                 UrlPlaceholder = urlPrefix,
                 SitemapRequest = SitemapType.Frameworks
@@ -65,14 +67,14 @@
             return Content(resp.Content, "text/xml");
         }
 
-        public ActionResult Providers()
+        public async Task<ActionResult> Providers()
         {
 
             var baseUrl = GetBaseUrl();
 
             var urlPrefix = $"{baseUrl}/provider/{{0}}";
 
-            var resp = _mediator.Send(new SitemapQuery
+            var resp = await _mediator.Send(new SitemapQuery
             {
                 UrlPlaceholder = urlPrefix,
                 SitemapRequest = SitemapType.Providers

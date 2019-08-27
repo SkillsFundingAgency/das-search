@@ -3,10 +3,8 @@
   <Role name="Sfa.Das.Sas.Web">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
       <Setting name="SurveyUrl" value="https://www.surveymonkey.co.uk/r/F3LCBG6" />
-      <Setting name="ElasticServerUrls" value="http://127.0.0.1:9200,http://192.168.99.100:9200,http://docker.local:9200" />
       <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/collections/fe-choices" />
       <Setting name="CookieGoogleUrl" value="https://tools.google.com/dlpage/gaoptout" />
       <Setting name="CookieImprovementUrl" value="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/" />
@@ -17,14 +15,11 @@
       <Setting name="EnvironmentName" value="local" />
       <Setting name="ApprenticeshipIndexAlias" value="localapprenticeshipindexalias" />
       <Setting name="ProviderIndexAlias" value="localproviderindexalias" />
-      <Setting name="ApprenticeshipApiBaseUrl" value="https://findapprenticeshiptraining-api.sfa.bis.gov.uk/" />
-      <Setting name="ElasticsearchUsername" value="" />
-      <Setting name="ElasticsearchPassword" value="" />
+      <Setting name="ApprenticeshipApiBaseUrl" value="https://localhost:44300" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="" />
-      <Setting name="FeatureToggle.Elk5Feature" value="" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="" />
-      <Setting name="FeatureToggle.ProviderFeedbackFeature" value="true"/>
+      <Setting name="FeatureToggle.ProviderFeedbackFeature" value="true" />
       <Setting name="BuildId" value="" />
       <Setting name="LoggingRedisConnectionString" value="" />
       <Setting name="LoggingRedisKey" value="" />

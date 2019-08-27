@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SFA.DAS.Apprenticeships.Api.Types.AssessmentOrgs;
+using Sfa.Das.Sas.Core.Domain;
 
 namespace Sfa.Das.Sas.Web.ViewModels
 {
@@ -32,7 +32,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public bool ReturnToApprenticeshipSearch { get; set; }
 
-        public List<Organisation> AssessmentOrganisations { get; set; }
+        public List<AssessmentOrganisation> AssessmentOrganisations { get; set; }
 
         public string StandardPageUri { get; set; }
 

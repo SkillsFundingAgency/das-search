@@ -114,22 +114,14 @@
         {
             var service = new MappingService(Mock.Of<ILog>());
 
-            var response = new StandardProviderSearchResultsItem
+            var response = new ProviderSearchResultItem
             {
-                StandardCode = 2,
-                TrainingLocations = new List<TrainingLocation>
-                {
-                    new TrainingLocation
-                    {
-                        Address = new Address { Address1 = "Address 1", Address2 = "Address 2" },
-                        LocationName = "Location Name",
-                        LocationId = 12345
-                    }
-                },
-                MatchingLocationId = 12345
+                Address = new Address { Address1 = "Address 1", Address2 = "Address 2" },
+                LocationName = "Location Name",
+                LocationId = 12345
             };
 
-            var viewModel = service.Map<StandardProviderSearchResultsItem, StandardProviderResultItemViewModel>(response);
+            var viewModel = service.Map<ProviderSearchResultItem, StandardProviderResultItemViewModel>(response);
 
             viewModel.Should().NotBeNull();
             viewModel.LocationAddressLine.Should().Be("Location Name, Address 1, Address 2");
@@ -141,23 +133,15 @@
         {
             var service = new MappingService(Mock.Of<ILog>());
 
-            var response = new FrameworkProviderSearchResultsItem
+            var response = new ProviderSearchResultItem
             {
-                FrameworkId = "123-45-6",
-                TrainingLocations = new List<TrainingLocation>
-                {
-                    new TrainingLocation
-                    {
-                        Address = new Address { Address1 = "Address 1", County = "Angleterre" },
-                        LocationName = "Location Name",
-                        LocationId = 12345
-                    }
-                },
-                DeliveryModes = new List<string> { "100PercentEmployer", "DayRelease"},
-                MatchingLocationId = 12345
+                Address = new Address { Address1 = "Address 1", County = "Angleterre" },
+                LocationName = "Location Name",
+                LocationId = 12345,
+                DeliveryModes = new List<string> { "100PercentEmployer", "DayRelease" }
             };
 
-            var viewModel = service.Map<FrameworkProviderSearchResultsItem, FrameworkProviderResultItemViewModel>(response);
+            var viewModel = service.Map<ProviderSearchResultItem, FrameworkProviderResultItemViewModel>(response);
 
             viewModel.Should().NotBeNull();
             viewModel.LocationAddressLine.Should().Be("Location Name, Address 1, Angleterre");

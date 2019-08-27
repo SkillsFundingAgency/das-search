@@ -1,7 +1,4 @@
-using System;
-using System.Configuration;
 using System.Diagnostics;
-using System.Reflection;
 using NUnit.Framework;
 using PactNet.Mocks.MockHttpService;
 
