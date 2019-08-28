@@ -3,7 +3,6 @@
   <Role name="Sfa.Das.Sas.Web">
     <Instances count="3" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="__StorageConnectionString__" />
       <Setting name="PostcodeUrl" value="http://api.postcodes.io/postcodes/" />
       <Setting name="SurveyUrl" value="__SurveyUrl__" />
       <Setting name="SatisfactionSourceUrl" value="https://www.gov.uk/government/collections/fe-choices" />
