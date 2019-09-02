@@ -344,7 +344,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 LocationAddressLine = "Address 1, Address 2, Town, County, PostCode",
                 UkPrn = 1,
                 LocationId = 2,
-                StandardCode = 12
+                StandardCode = 12,
+                Distance = 0
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -383,7 +384,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 },
                 UkPrn = 1,
                 LocationId = 2,
-                StandardCode = 12
+                StandardCode = 12,
+                Distance = 0
             };
 
             var model = new ProviderStandardSearchResultViewModel
@@ -472,8 +474,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-data-list dd", 3).Should().Be("87%");
-            GetPartial(html, ".result-data-list dd", 4).Should().Be("99.9%");
+            GetPartial(html, ".result-data-list dd", 2).Should().Be("87%");
+            GetPartial(html, ".result-data-list dd", 3).Should().Be("99.9%");
         }
 
         [Test]
@@ -504,8 +506,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             };
             var html = page.RenderAsHtml(model).ToAngleSharp();
 
-            GetPartial(html, ".result-data-list dt", 5).Should().Be("Achievement rate:");
-            GetPartial(html, ".result-data-list dd", 5).Should().Be("42.5%");
+            GetPartial(html, ".result-data-list dt", 4).Should().Be("Achievement rate:");
+            GetPartial(html, ".result-data-list dd", 4).Should().Be("42.5%");
         }
 
         [Test]
@@ -741,14 +743,12 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 PostCode = "Test postcode",
                 DeliveryModes = new List<DeliveryModeViewModel>
                 {
-                    new DeliveryModeViewModel
-                    {
-                        Count = 0
-                    }
+                    new DeliveryModeViewModel{ Value = "value" }
                 },
                 HasError = false,
                 TotalResultsForCountry = 3,
-                AbsolutePath = "www.abba.co.uk"
+                AbsolutePath = "www.abba.co.uk",
+                SortOrder = "0"
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -775,12 +775,14 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 {
                     new DeliveryModeViewModel
                     {
-                        Count = 10
+                        Count = 10,
+                        Value = "1"
                     }
                 },
                 HasError = false,
                 TotalResultsForCountry = 3,
-                AbsolutePath = "www.abba.co.uk"
+                AbsolutePath = "www.abba.co.uk",
+                SortOrder = "0"
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -803,13 +805,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 LastPage = 1,
                 ResultsToTake = 10,
                 PostCode = "Test postcode",
-                DeliveryModes = new List<DeliveryModeViewModel>
-                {
-                    new DeliveryModeViewModel()
-                },
+                DeliveryModes = new List<DeliveryModeViewModel>(),
                 HasError = false,
                 TotalResultsForCountry = 3,
-                AbsolutePath = "www.abba.co.uk"
+                AbsolutePath = "www.abba.co.uk",
+                SortOrder = "0"
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -835,13 +835,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 LastPage = 1,
                 ResultsToTake = 10,
                 PostCode = "Test postcode",
-                DeliveryModes = new List<DeliveryModeViewModel>
-                {
-                    new DeliveryModeViewModel()
-                },
+                DeliveryModes = new List<DeliveryModeViewModel>(),
                 HasError = false,
                 TotalResultsForCountry = 3,
-                AbsolutePath = "www.abba.co.uk"
+                AbsolutePath = "www.abba.co.uk",
+                SortOrder = "0"
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();
@@ -865,13 +863,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 LastPage = 1,
                 ResultsToTake = 10,
                 PostCode = "Test postcode",
-                DeliveryModes = new List<DeliveryModeViewModel>
-                {
-                    new DeliveryModeViewModel()
-                },
+                DeliveryModes = new List<DeliveryModeViewModel>(),
                 HasError = false,
                 TotalResultsForCountry = 3,
-                AbsolutePath = "www.abba.co.uk"
+                AbsolutePath = "www.abba.co.uk",
+                SortOrder = "0"
             };
 
             var html = detail.RenderAsHtml(model).ToAngleSharp();

@@ -338,6 +338,7 @@ namespace Sfa.Das.Sas.Web.Services
                 .ForMember(x => x.LastPage, opt => opt.ResolveUsing<LastPageValueResolver>().FromMember(z => z.Results))
                 .ForMember(x => x.IsLevyPayingEmployer, y => y.Ignore())
                 .ForMember(x => x.Ukprn, y => y.Ignore())
+                .ForMember(x => x.SortOrder, y => y.Ignore())
                 .ForMember(dest => dest.ManageApprenticeshipFunds, opt => opt.Ignore());
 
             // Provider Name Search
