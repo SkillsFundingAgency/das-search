@@ -920,7 +920,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
                 StandardName = nameOfStandard,
                 StandardLevel = level,
                 PostCode = postcode,
-                Hits = new StandardProviderResultItemViewModel [0]
+                Hits = new StandardProviderResultItemViewModel [0],
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                SortOrder = "0"
             };
 
             var html = searchPage.RenderAsHtml(model).ToAngleSharp();
@@ -936,13 +938,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views.Provider
             var modelWithResults = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
-                Hits = new[] { new StandardProviderResultItemViewModel() }
+                Hits = new[] { new StandardProviderResultItemViewModel() },
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                SortOrder = "0"
             };
 
             var modelWithoutResults = new ProviderStandardSearchResultViewModel
             {
                 TotalResults = 1,
-                Hits = new StandardProviderResultItemViewModel[0]
+                Hits = new StandardProviderResultItemViewModel[0],
+                DeliveryModes = new List<DeliveryModeViewModel>(),
+                SortOrder = "0"
             };
 
             var htmlWithResults = searchPage.RenderAsHtml(modelWithResults).ToAngleSharp();
