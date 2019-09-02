@@ -44,11 +44,7 @@
     <ServiceConfiguration Include="ServiceConfiguration.Release.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Sfa.Das.Sas.WebContent" />
     <Folder Include="Configuration" />
-  </ItemGroup>
-  <ItemGroup>
-    <DiagnosticsConfiguration Include="Sfa.Das.Sas.WebContent\diagnostics.wadcfgx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sfa.Das.Sas.Web\Sfa.Das.Sas.Web.csproj">
