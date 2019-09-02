@@ -48,12 +48,15 @@
 
 @helper  RenderProviderDetails(StandardProviderResultItemViewModel item)
 {
-    <dt><b>Distance:</b></dt>
-    <dd class="distance">@item.Distance @(item.Distance == 1 ? "mile" : "miles") away</dd>
-
+    if (item.Distance.HasValue)
+    {
+        <dt><b>Distance:</b></dt>
+        <dd class="distance">@item.Distance.Value @(item.Distance.Value == 1 ? "mile" : "miles") away</dd>
+    }
+       
     if (item.DeliveryModes != null && (item.DeliveryModes.Contains("BlockRelease") || item.DeliveryModes.Contains("DayRelease")))
     {
-            <dd class="address">@item.LocationAddressLine</dd>
+        <dd class="address">@item.LocationAddressLine</dd>
     }
 
     <dt><b>Training options:</b></dt>

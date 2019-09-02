@@ -39,7 +39,6 @@ namespace Sfa.Das.Sas.ApplicationServices
 
         private static ProviderSearchResults GetProviderSearchResultErrorResponse(string apprenticeshipId, string Title, string postCode, string responseCode)
         {
-
             var errorResponse = new ProviderSearchResults
             {
                 TotalResults = 0,
@@ -63,7 +62,7 @@ namespace Sfa.Das.Sas.ApplicationServices
         }
 
 
-        public async Task<ProviderSearchResults> SearchProviders(string apprenticeshipId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool hasNonLevyContract, bool showNationalOnly)
+        public async Task<ProviderSearchResults> SearchProviders(string apprenticeshipId, string postCode, Pagination pagination, IEnumerable<string> deliveryModes, bool hasNonLevyContract, bool showNationalOnly, int orderBy = 0)
         {
             if (string.IsNullOrEmpty(postCode))
             {
@@ -110,7 +109,7 @@ namespace Sfa.Das.Sas.ApplicationServices
                     ShowNationalOnly = showNationalOnly
                 };
 
-                var searchResults = await _providerSearchProvider.SearchProvidersByLocation(apprenticeshipId, coordinates, pagination.Page, takeElements, filter);
+                var searchResults = await _providerSearchProvider.SearchProvidersByLocation(apprenticeshipId, coordinates, pagination.Page, takeElements, filter, orderBy);
 
                 var result = new ProviderSearchResults
                 {

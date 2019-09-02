@@ -78,6 +78,7 @@ namespace Sfa.Das.Sas.Web.Controllers
                     dest.AbsolutePath = Request?.Url?.AbsolutePath;
                     dest.IsLevyPayingEmployer = criteria.IsLevyPayingEmployer;
                     dest.ManageApprenticeshipFunds = new ManageApprenticeshipFundsViewModel(dest.IsLevyPayingEmployer, _settings.ManageApprenticeshipFundsUrl);
+                    dest.SortOrder = criteria.Order.ToString();
                 }));
 
             return View(viewModel);
