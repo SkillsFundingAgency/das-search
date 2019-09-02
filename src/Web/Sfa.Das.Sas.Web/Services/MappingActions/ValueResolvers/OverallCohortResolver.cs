@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.ValueResolvers
 
             if (source.Equals("-", StringComparison.CurrentCultureIgnoreCase))
             {
-                return "5-29";
+                return null;
             }
 
             return source;

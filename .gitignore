@@ -214,3 +214,6 @@ spec/_Chutzpah*
 **/*/Tools/NUnit.Extension*
 **/*/Tools/NUnit.ConsoleRunner*
 **/*/*.fake/*
+
+# JetBrains Rider
+.idea/
