@@ -291,6 +291,8 @@ WriteLiteral(" class=\"govuk-button\"");
 
 WriteLiteral(" type=\"submit\"");
 
+WriteLiteral(" id=\"btn-save-cookie-settings\"");
+
 WriteLiteral(">Save changes</button>\r\n            </form>\r\n\r\n\r\n        </div>\r\n        </div>\r\n" +
 "</main>");
 
