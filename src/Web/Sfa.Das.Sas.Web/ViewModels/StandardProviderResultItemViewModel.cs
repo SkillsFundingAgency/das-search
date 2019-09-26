@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.ViewModels
 
         public Address Address { get; set; }
 
-        public double Distance { get; set; }
+        public double? Distance { get; set; }
 
         public string EmployerSatisfactionMessage { get; set; }
 

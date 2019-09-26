@@ -52,7 +52,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn, pageNumber);
         }
 
-        public async Task<SearchResult<ProviderSearchResultItem>> SearchProvidersByLocation(string apprenticeshipId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
+        public async Task<SearchResult<ProviderSearchResultItem>> SearchProvidersByLocation(string apprenticeshipId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter, int orderBy = 0)
         {
             var deliveryModes = new List<string>();
 
@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
                 }
             }
 
-            var result = await _providersV3Api.GetByApprenticeshipIdAndLocationAsync(apprenticeshipId, coordinates.Lat, coordinates.Lon, page, take, filter.HasNonLevyContract, filter.ShowNationalOnly, string.Join(",", deliveryModes));
+            var result = await _providersV3Api.GetByApprenticeshipIdAndLocationAsync(apprenticeshipId, coordinates.Lat, coordinates.Lon, page, take, filter.HasNonLevyContract, filter.ShowNationalOnly, string.Join(",", deliveryModes), orderBy);
 
             return _searchResultsMapping.Map(result);
         }

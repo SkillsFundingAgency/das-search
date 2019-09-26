@@ -41,7 +41,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             {
                 ResponseCode = LocationLookupResponse.Ok
             };
-            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerSearchResults));
+            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), 0)).Returns(Task.FromResult(providerSearchResults));
 
             _handler = new ProviderSearchHandler(
                 new ProviderSearchQueryValidator(new Validation()),
@@ -118,7 +118,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public async Task ShouldSignalFailureWhenApprenticeshipIsNotFound()
         {
             var providerStandardSearchResults = new ProviderSearchResults { ResponseCode = ProviderSearchResponseCodes.ApprenticeshipNotFound.ToString() };
-            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
+            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), 0)).Returns(Task.FromResult(providerStandardSearchResults));
             var message = new ProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
             var response = await _handler.Handle(message, default(CancellationToken));
@@ -173,7 +173,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public async Task ShouldReturnResultOfSearch()
         {
             var providerStandardSearchResults = new ProviderSearchResults();
-            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
+            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), 0)).Returns(Task.FromResult(providerStandardSearchResults));
             var message = new ProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 0 };
 
             var response = await _handler.Handle(message, default(CancellationToken));
@@ -186,7 +186,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             _mockPaginationSettings.Setup(x => x.DefaultResultsAmount).Returns(10);
             var providerStandardSearchResults = new ProviderSearchResults() { TotalResults = 42, Hits = new List<ProviderSearchResultItem>() };
-            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(providerStandardSearchResults));
+            _mockSearchService.Setup(x => x.SearchProviders(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Pagination>(), It.IsAny<IEnumerable<string>>(), It.IsAny<bool>(), It.IsAny<bool>(), 0)).Returns(Task.FromResult(providerStandardSearchResults));
 
             var message = new ProviderSearchQuery { ApprenticeshipId = "1", PostCode = "GU21 6DB", Page = 8 };
 

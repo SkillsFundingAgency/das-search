@@ -86,6 +86,33 @@
         </div>
 
         <div id="provider-results" class="column-two-thirds">
+            <form method="GET" id="search-results-order">
+                <input type="hidden" name="page" value="@Model.ActualPage" />
+                <input type="hidden" name="PostCode" value="@Model.PostCode.FormatPostcode()" />
+                <input type="hidden" name="apprenticeshipid" value="@Model.StandardId" />
+                <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()" />
+                <input type="hidden" name="isLevyPayingEmployer" value="@Model.IsLevyPayingEmployer.ToString()" />
+                <input type="hidden" name="keywords" value="@Model.SearchTerms" />
+                <input type="hidden" name="NationalProvidersOnly" value="@Model.ShowNationalProviders" />
+                
+
+                @foreach (var item in Model.DeliveryModes)
+                {
+                    <input type="hidden" name="DeliveryModes" value="@item.Value.ToLower()" />
+                }
+
+                <div class="form-block">
+                    <label for="select-order" class="form-label-bold">Sort by</label>
+                    <select name="order" id="select-order" class="form-control form-control-1-3">
+                        <option selected="@(Model.SortOrder == "0")" value="0">Distance (closest first)</option>
+                        <option selected="@(Model.SortOrder == "1")" value="1">Training provider (A-Z)</option>
+                        <option selected="@(Model.SortOrder == "2")" value="2">Training provider (Z-A)</option>
+                    </select>
+                    <button type="submit" value="Update" class="button">Update</button>
+                </div>
+            </form>
+
+            <p class="form-label-bold"> @Model.TotalResults results found</p>
             @{
                 Html.RenderPartial("_StandardProviderInformation");
             }
@@ -102,7 +129,7 @@
 if (Model.ActualPage > 1)
 {
     var previousPage = @Model.ActualPage - 1;
-    var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes), null);
+    var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(previousPage, Model.DeliveryModes, Model.SortOrder), null);
 
         <a href="@url" style="visibility: visible" class="page-navigation__btn prev">
             <i class="arrow-button fa fa-angle-left"></i>
@@ -118,7 +145,7 @@ if (Model.ActualPage < Model.LastPage)
 {
     var nextPage = @Model.ActualPage + 1;
 
-    var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes), null);
+    var url = @Url.Action("StandardResults", "Provider", GetNavigationRouteValues(nextPage, Model.DeliveryModes, Model.SortOrder), null);
         <a href="@url" style="visibility: visible" class="page-navigation__btn next">
             <i class="arrow-button fa fa-angle-right"></i>
             <span class="description">Next <span class="hide-mob">page</span></span>
@@ -142,6 +169,7 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
                     <input type="hidden" name="showAll" value="@Model.ShowAll.ToString()" />
                     <input type="hidden" name="isLevyPayingEmployer" value="@Model.IsLevyPayingEmployer.ToString()" />
                     <input type="hidden" name="keywords" value="@Model.SearchTerms" />
+                    <input type="hidden" name="order" value="@Model.SortOrder" />
 
                     @{
                         Html.RenderPartial("_FilterProviders", Model.DeliveryModes);
@@ -158,7 +186,7 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
 
 @functions
 {
-    RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes)
+    RouteValueDictionary GetNavigationRouteValues(int page, IEnumerable<DeliveryModeViewModel> deliveryModes, string order)
     {
 
         var rv = new RouteValueDictionary { { "apprenticeshipid", Model.StandardId }, { "postcode", Model.PostCode.FormatPostcode() }, { "page", page }, { "showall", Model.ShowAll }, { "isLevyPayingEmployer", Model.IsLevyPayingEmployer } };
@@ -173,6 +201,8 @@ if (!Model.DeliveryModes.IsNullOrEmpty())
         {
             rv.Add("NationalProvidersOnly", true);
         }
+
+        rv.Add("order", order);
 
         return rv;
     }

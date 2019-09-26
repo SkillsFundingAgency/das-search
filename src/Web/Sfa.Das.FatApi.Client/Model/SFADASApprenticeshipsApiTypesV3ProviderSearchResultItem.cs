@@ -42,7 +42,7 @@ namespace Sfa.Das.FatApi.Client.Model
         /// <param name="hasNonLevyContract">hasNonLevyContract.</param>
         /// <param name="isLevyPayerOnly">isLevyPayerOnly.</param>
         /// <param name="currentlyNotStartingNewApprentices">currentlyNotStartingNewApprentices.</param>
-        public SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem(int ukprn = default(int), SFADASApprenticeshipsApiTypesV3TrainingLocation location = default(SFADASApprenticeshipsApiTypesV3TrainingLocation), string providerName = default(string), double overallAchievementRate = default(double), bool nationalProvider = default(bool), List<string> deliveryModes = default(List<string>), double distance = default(double), double employerSatisfaction = default(double), double learnerSatisfaction = default(double), double nationalOverallAchievementRate = default(double), string overallCohort = default(string), bool hasNonLevyContract = default(bool), bool isLevyPayerOnly = default(bool), bool currentlyNotStartingNewApprentices = default(bool))
+        public SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem(int ukprn = default(int), SFADASApprenticeshipsApiTypesV3TrainingLocation location = default(SFADASApprenticeshipsApiTypesV3TrainingLocation), string providerName = default(string), double overallAchievementRate = default(double), bool nationalProvider = default(bool), List<string> deliveryModes = default(List<string>), double? distance = default(double), double employerSatisfaction = default(double), double learnerSatisfaction = default(double), double nationalOverallAchievementRate = default(double), string overallCohort = default(string), bool hasNonLevyContract = default(bool), bool isLevyPayerOnly = default(bool), bool currentlyNotStartingNewApprentices = default(bool))
         {
             this.Ukprn = ukprn;
             this.Location = location;
@@ -50,7 +50,7 @@ namespace Sfa.Das.FatApi.Client.Model
             this.OverallAchievementRate = overallAchievementRate;
             this.NationalProvider = nationalProvider;
             this.DeliveryModes = deliveryModes;
-            this.Distance = distance;
+            if (distance.HasValue) { this.Distance = distance;  };
             this.EmployerSatisfaction = employerSatisfaction;
             this.LearnerSatisfaction = learnerSatisfaction;
             this.NationalOverallAchievementRate = nationalOverallAchievementRate;
@@ -100,7 +100,7 @@ namespace Sfa.Das.FatApi.Client.Model
         /// Gets or Sets Distance
         /// </summary>
         [DataMember(Name="Distance", EmitDefaultValue=false)]
-        public double Distance { get; set; }
+        public double? Distance { get; set; }
 
         /// <summary>
         /// Gets or Sets EmployerSatisfaction
