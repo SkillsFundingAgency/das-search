@@ -15,7 +15,7 @@
       <Setting name="EnvironmentName" value="local" />
       <Setting name="ApprenticeshipIndexAlias" value="localapprenticeshipindexalias" />
       <Setting name="ProviderIndexAlias" value="localproviderindexalias" />
-      <Setting name="ApprenticeshipApiBaseUrl" value="https://localhost:44300" />
+      <Setting name="ApprenticeshipApiBaseUrl" value="https://findapprenticeshiptraining-api.apprenticeships.education.gov.uk/" />
       <Setting name="FeatureToggle.IgnoreSslCertificateFeature" value="" />
       <Setting name="FeatureToggle.ApprenticeshipServiceApiFeature" value="" />
       <Setting name="FeatureToggle.RoatpProviderFlagsFeature" value="" />
