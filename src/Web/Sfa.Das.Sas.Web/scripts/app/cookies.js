@@ -5,7 +5,7 @@
 
     var DEFAULT_COOKIE_CONSENT = {
         'AnalyticsConsent': true,
-        'MarketingConsent': true
+        'MarketingConsent': false
     }
 
     window.GOVUK.cookie = function (name, value, options) {
@@ -117,8 +117,14 @@
 function CookieSettings($module) {
     this.$module = $module;
     this.DEFAULT_COOKIE_CONSENT = [
-        'AnalyticsConsent',
-        'MarketingConsent'
+        {
+            name: 'AnalyticsConsent',
+            value: true
+        },
+        {
+            name: 'MarketingConsent',
+            value: false
+        }
     ]
     this.start()
 }
@@ -134,17 +140,17 @@ CookieSettings.prototype.start = function () {
 
 CookieSettings.prototype.setInitialFormValues = function () {
 
-    var cookieNames = this.DEFAULT_COOKIE_CONSENT
+    var cookieSettings = this.DEFAULT_COOKIE_CONSENT
 
-    cookieNames.forEach(function (cookieName) {
+    cookieSettings.forEach(function (cookieSetting) {
 
-        var currentConsentCookie = window.GOVUK.cookie(cookieName)
+        var currentConsentCookie = window.GOVUK.cookie(cookieSetting.name)
         var radioButton
 
-        if (currentConsentCookie === 'true' || currentConsentCookie === null) {
-            radioButton = document.querySelector('input[name=cookies-' + cookieName + '][value=on]')
+        if (currentConsentCookie === 'true' || cookieSetting.value === true) {
+            radioButton = document.querySelector('input[name=cookies-' + cookieSetting.name + '][value=on]')
         } else {
-            radioButton = document.querySelector('input[name=cookies-' + cookieName + '][value=off]')
+            radioButton = document.querySelector('input[name=cookies-' + cookieSetting.name + '][value=off]')
         }
 
         radioButton.checked = true
