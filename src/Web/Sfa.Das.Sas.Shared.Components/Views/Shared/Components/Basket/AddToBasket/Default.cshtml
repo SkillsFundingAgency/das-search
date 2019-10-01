@@ -5,7 +5,7 @@
 
 @{
     var buttonStatusClassSuffix = Model.IsInBasket ? "checked" : "unchecked";
-    var buttonText = Model.IsInBasket ? "Favourite Added" : "Add to Favourites";
+    var buttonText = Model.IsInBasket ? "Remove from Favourites" : "Add to Favourites";
 }
 
 <button type="submit" class="das-search-result__favourite-button--@buttonStatusClassSuffix" name="itemId" value="@Model.ItemId">

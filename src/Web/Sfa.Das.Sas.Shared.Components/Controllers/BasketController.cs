@@ -34,7 +34,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
-            await SaveApprenticeship(queryModel.ItemId);
+            await UpdateApprenticeship(queryModel.ItemId);
 
             return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
         }
@@ -43,7 +43,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
-            await SaveApprenticeship(queryModel.ItemId);
+            await UpdateApprenticeship(queryModel.ItemId);
 
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
@@ -52,7 +52,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
         {
-            await SaveApprenticeship(queryModel.ApprenticeshipId, queryModel.ItemId);
+            await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.ItemId);
 
             return RedirectToAction("Details", "TrainingProvider", queryModel);
         }
@@ -61,12 +61,21 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
         {
-            await SaveApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId);
+            await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId);
 
             return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
         }
 
-        private async Task SaveApprenticeship(string apprenticeshipId, int? ukprn = null)
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromBasket(DeleteFromBasketViewModel model)
+        {
+            await UpdateApprenticeship(model.ApprenticeshipId, model.Ukprn);
+
+            return RedirectToAction("View", "Basket");
+        }
+
+        private async Task UpdateApprenticeship(string apprenticeshipId, int? ukprn = null)
         {
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
             Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;

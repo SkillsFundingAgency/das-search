@@ -23,6 +23,14 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public async Task<Guid> Handle(AddFavouriteToBasketCommand request, CancellationToken cancellationToken)
         {
+
+            if (string.IsNullOrWhiteSpace(request.ApprenticeshipId))
+            {
+                var message = $"Apprenticeship id must be provided for {nameof(AddFavouriteToBasketCommandHandler)}";
+                _logger.LogWarning(message);
+                throw new ArgumentException(message);
+            }
+
             bool basketChanged;
             var basket = await GetBasket(request);
 
@@ -35,11 +43,27 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             {
                 if (request.Ukprn.HasValue)
                 {
-                    basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
+                    if (basket.IsInBasket(request.ApprenticeshipId,request.Ukprn.Value))
+                    {
+                        basket.Remove(request.ApprenticeshipId,request.Ukprn.Value);
+                        basketChanged = true;
+                    }
+                    else
+                    {
+                        basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
+                    }
                 }
                 else
                 {
-                    basketChanged = basket.Add(request.ApprenticeshipId);
+                    if (basket.IsInBasket(request.ApprenticeshipId))
+                    {
+                        basket.Remove(request.ApprenticeshipId);
+                        basketChanged = true;
+                    }
+                    else
+                    {
+                        basketChanged = basket.Add(request.ApprenticeshipId);
+                    }
                 }
             }
 
