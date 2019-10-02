@@ -11,9 +11,7 @@
     </h2>
     <form asp-controller="Basket" asp-action="RemoveFromBasket" method="post">
         <input type="hidden" id="apprenticeshipId" name="ApprenticeshipId" value="@Model.Id" />
-        <div class="das-basket__item-delete">
-            @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.Id })
-        </div>
+        @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Id })
     </form>
 </div>
 
@@ -38,13 +36,11 @@
                 <ul>
                     <li>
                         @*<a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn">@trainingProviderSearchResultsItem.Name</a>*@ @trainingProviderSearchResultsItem.Name
-                        <div class="das-basket__item-delete">
-                            <form asp-controller="Basket" asp-action="RemoveFromBasket" method="post">
+                        <form asp-controller="Basket" asp-action="RemoveFromBasket" method="post">
                                 <input type="hidden" id="apprenticeshipId" name="ApprenticeshipId" value="@Model.Id" />
                                 <input type="hidden" id="ukprn" name="Ukprn" value="@trainingProviderSearchResultsItem.Ukprn" />
-                                @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.Id, ukprn = trainingProviderSearchResultsItem.Ukprn })
+                                @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Id, ukprn = trainingProviderSearchResultsItem.Ukprn })
                             </form>
-                        </div>
                     </li>
                 </ul>
             }
