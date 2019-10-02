@@ -80,7 +80,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
             Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
 
-            var basketId = await _mediator.Send(new AddFavouriteToBasketCommand
+            var basketId = await _mediator.Send(new AddOrRemoveFavouriteInBasketCommand
             {
                 ApprenticeshipId = apprenticeshipId,
                 Ukprn = ukprn,

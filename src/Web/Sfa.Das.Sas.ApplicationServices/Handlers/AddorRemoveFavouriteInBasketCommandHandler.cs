@@ -10,23 +10,23 @@ using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class AddFavouriteToBasketCommandHandler : IRequestHandler<AddFavouriteToBasketCommand, Guid>
+    public class AddorRemoveFavouriteInBasketCommandHandler : IRequestHandler<AddOrRemoveFavouriteInBasketCommand, Guid>
     {
         private readonly IApprenticeshipFavouritesBasketStore _basketStore;
-        private readonly ILogger<AddFavouriteToBasketCommandHandler> _logger;
+        private readonly ILogger<AddorRemoveFavouriteInBasketCommandHandler> _logger;
 
-        public AddFavouriteToBasketCommandHandler(ILogger<AddFavouriteToBasketCommandHandler> logger, IApprenticeshipFavouritesBasketStore basketStore)
+        public AddorRemoveFavouriteInBasketCommandHandler(ILogger<AddorRemoveFavouriteInBasketCommandHandler> logger, IApprenticeshipFavouritesBasketStore basketStore)
         {
             _basketStore = basketStore;
             _logger = logger;
         }
 
-        public async Task<Guid> Handle(AddFavouriteToBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(AddOrRemoveFavouriteInBasketCommand request, CancellationToken cancellationToken)
         {
 
             if (string.IsNullOrWhiteSpace(request.ApprenticeshipId))
             {
-                var message = $"Apprenticeship id must be provided for {nameof(AddFavouriteToBasketCommandHandler)}";
+                var message = $"Apprenticeship id must be provided for {nameof(AddorRemoveFavouriteInBasketCommandHandler)}";
                 _logger.LogWarning(message);
                 throw new ArgumentException(message);
             }
@@ -77,7 +77,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return basket.Id;
         }
 
-        private static ApprenticeshipFavouritesBasket CreateNewBasket(AddFavouriteToBasketCommand request)
+        private static ApprenticeshipFavouritesBasket CreateNewBasket(AddOrRemoveFavouriteInBasketCommand request)
         {
             var basket = new ApprenticeshipFavouritesBasket();
 
@@ -93,7 +93,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return basket;
         }
 
-        private async Task<ApprenticeshipFavouritesBasket> GetBasket(AddFavouriteToBasketCommand request)
+        private async Task<ApprenticeshipFavouritesBasket> GetBasket(AddOrRemoveFavouriteInBasketCommand request)
         {
             if (request.BasketId.HasValue)
             {

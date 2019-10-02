@@ -17,22 +17,22 @@ using Sfa.Das.Sas.Shared.Basket.Models;
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     [TestFixture]
-    public class AddFavouriteToBasketHandlerTests
+    public class AddOrRemoveFavouriteInBasketHandlerTests
     {
-        private IRequestHandler<AddFavouriteToBasketCommand, Guid> _sut;
+        private IRequestHandler<AddOrRemoveFavouriteInBasketCommand, Guid> _sut;
         private Mock<IApprenticeshipFavouritesBasketStore> _mockBasket;
 
         [SetUp]
         public void Setup()
         {
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
-            _sut = new AddFavouriteToBasketCommandHandler(new NullLogger<AddFavouriteToBasketCommandHandler>(), _mockBasket.Object);
+            _sut = new AddorRemoveFavouriteInBasketCommandHandler(new NullLogger<AddorRemoveFavouriteInBasketCommandHandler>(), _mockBasket.Object);
         }
 
         [Test]
         public async Task Handle_CreatesBasketId_WhenNoBasketSpecified()
         {
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = null,
                 ApprenticeshipId = "123"
@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var expiredBasketId = Guid.NewGuid();
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = expiredBasketId,
                 ApprenticeshipId = "123"
@@ -66,7 +66,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = null,
                 ApprenticeshipId = "123"
@@ -91,7 +91,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.CompletedTask)
                 .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123"
@@ -116,7 +116,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123"
@@ -135,7 +135,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = null,
                 ApprenticeshipId = "123",
@@ -161,7 +161,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.CompletedTask)
                 .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123",
@@ -193,7 +193,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.CompletedTask)
                 .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123",
@@ -226,7 +226,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.CompletedTask)
                 .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123",

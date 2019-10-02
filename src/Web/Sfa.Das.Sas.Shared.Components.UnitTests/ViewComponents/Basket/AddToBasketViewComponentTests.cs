@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
         private const int UKPRN = 12345678;
         private Mock<ICookieManager> _mockCookieManager;
         private Mock<IMediator> _mockMediator;
-        private AddToBasketViewComponent _sut;
+        private AddOrRemoveFromBasketViewComponent _sut;
 
         [SetUp]
         public new void Setup()
@@ -44,7 +44,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             _mockMediator.Setup(x => x.Send(It.Is<GetBasketQuery>(a => a.BasketId == cookieBasketId), default(CancellationToken)))
                 .ReturnsAsync(new ApprenticeshipFavouritesBasketRead(basket));
 
-            _sut = new AddToBasketViewComponent(_mockMediator.Object, _mockCookieManager.Object)
+            _sut = new AddOrRemoveFromBasketViewComponent(_mockMediator.Object, _mockCookieManager.Object)
             {
                 ViewComponentContext = _viewComponentContext
             };
@@ -56,8 +56,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             var result = await _sut.InvokeAsync(APPRENTICESHIP_ID) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<AddToBasketViewModel>();
-            var model = result.ViewData.Model as AddToBasketViewModel;
+            result.ViewData.Model.Should().BeAssignableTo<AddOrRemoveFromBasketViewModel>();
+            var model = result.ViewData.Model as AddOrRemoveFromBasketViewModel;
             model.ItemId.Should().Be(APPRENTICESHIP_ID);
         }
 
@@ -67,8 +67,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             var result = await _sut.InvokeAsync(APPRENTICESHIP_ID, UKPRN) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<AddToBasketViewModel>();
-            var model = result.ViewData.Model as AddToBasketViewModel;
+            result.ViewData.Model.Should().BeAssignableTo<AddOrRemoveFromBasketViewModel>();
+            var model = result.ViewData.Model as AddOrRemoveFromBasketViewModel;
             model.ItemId.Should().Be(UKPRN.ToString());
         }
 
@@ -78,8 +78,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             var result = await _sut.InvokeAsync("420-2-1") as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<AddToBasketViewModel>();
-            (result.ViewData.Model as AddToBasketViewModel).IsInBasket.Should().BeTrue();
+            result.ViewData.Model.Should().BeAssignableTo<AddOrRemoveFromBasketViewModel>();
+            (result.ViewData.Model as AddOrRemoveFromBasketViewModel).IsInBasket.Should().BeTrue();
         }
 
         [Test]
@@ -88,8 +88,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             var result = await _sut.InvokeAsync("555-2-1") as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<AddToBasketViewModel>();
-            (result.ViewData.Model as AddToBasketViewModel).IsInBasket.Should().BeFalse();
+            result.ViewData.Model.Should().BeAssignableTo<AddOrRemoveFromBasketViewModel>();
+            (result.ViewData.Model as AddOrRemoveFromBasketViewModel).IsInBasket.Should().BeFalse();
         }
 
         [Test]
@@ -98,8 +98,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             var result = await _sut.InvokeAsync("420-2-1", UKPRN) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<AddToBasketViewModel>();
-            (result.ViewData.Model as AddToBasketViewModel).IsInBasket.Should().BeTrue();
+            result.ViewData.Model.Should().BeAssignableTo<AddOrRemoveFromBasketViewModel>();
+            (result.ViewData.Model as AddOrRemoveFromBasketViewModel).IsInBasket.Should().BeTrue();
         }
 
         [Test]
@@ -108,8 +108,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             var result = await _sut.InvokeAsync("420-2-1", 99999999) as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<AddToBasketViewModel>();
-            (result.ViewData.Model as AddToBasketViewModel).IsInBasket.Should().BeFalse();
+            result.ViewData.Model.Should().BeAssignableTo<AddOrRemoveFromBasketViewModel>();
+            (result.ViewData.Model as AddOrRemoveFromBasketViewModel).IsInBasket.Should().BeFalse();
         }
 
         [Test]
