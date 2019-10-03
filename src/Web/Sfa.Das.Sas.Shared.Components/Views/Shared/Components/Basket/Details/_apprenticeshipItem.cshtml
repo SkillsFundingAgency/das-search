@@ -7,7 +7,7 @@
 
 <div class="das-basket__item-header">
     <h2 class="basket__item-heading">
-        <a class="@CssViewModel.Link" asp-controller="Fat" asp-action="" asp-route-ApprenticeshipId="@Model.Id">@Model.Title</a>
+        <a class="@CssViewModel.Link" asp-controller="Fat" asp-action="Apprenticeship" asp-route-Id="@Model.Id">@Model.Title</a>
     </h2>
     <form asp-controller="Basket" asp-action="RemoveFromBasket" method="post">
         <input type="hidden" id="apprenticeshipId" name="ApprenticeshipId" value="@Model.Id" />
@@ -30,20 +30,24 @@
     <div class="@CssViewModel.GridCss.ColumnOneHalf">
         @if (Model.TrainingProvider.Count > 0)
         {
-            <h3>@Model.TrainingProvider.Count training @("provider".Pluralize(Model.TrainingProvider.Count)) </h3>
-            @foreach (var trainingProviderSearchResultsItem in Model.TrainingProvider)
-            {
-                <ul>
+
+
+            <h3 class="@CssViewModel.HeadingSmall das-basket__provider-heading"><span class="favourites-icon"></span> @Model.TrainingProvider.Count training @("provider".Pluralize(Model.TrainingProvider.Count))</h3>
+            <ul class="das-basket__provider-list">
+                @foreach (var trainingProviderSearchResultsItem in Model.TrainingProvider)
+                {
                     <li>
-                        @*<a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn">@trainingProviderSearchResultsItem.Name</a>*@ @trainingProviderSearchResultsItem.Name
+                        @*<a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn">@trainingProviderSearchResultsItem.Name</a>*@
+                        @trainingProviderSearchResultsItem.Name
                         <form asp-controller="Basket" asp-action="RemoveFromBasket" method="post">
-                                <input type="hidden" id="apprenticeshipId" name="ApprenticeshipId" value="@Model.Id" />
-                                <input type="hidden" id="ukprn" name="Ukprn" value="@trainingProviderSearchResultsItem.Ukprn" />
-                                @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Id, ukprn = trainingProviderSearchResultsItem.Ukprn })
-                            </form>
+                            <input type="hidden" id="apprenticeshipId" name="ApprenticeshipId" value="@Model.Id" />
+                            <input type="hidden" id="ukprn" name="Ukprn" value="@trainingProviderSearchResultsItem.Ukprn" />
+                            @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Id, ukprn = trainingProviderSearchResultsItem.Ukprn })
+                        </form>
                     </li>
-                </ul>
-            }
+                }
+            </ul>
+
         }
 
     </div>

@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
                 IsInBasket = await IsInBasket(apprenticeshipId, ukprn)
             };
 
-            if (RouteData.Values["Controller"].ToString() == "Basket")
+            if (RouteData.Values["Controller"].ToString().ToLower() == "basket")
             {
                 return View("../Basket/AddOrRemoveFromBasket/Basket", model);
             }
