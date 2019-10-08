@@ -9,7 +9,7 @@
             <div class="@(CssViewModel.FormCss.FormGroup)">
                 <p class="u-!-margin-top-0">Please enter the postcode for where the apprentice will work</p>
                 <label asp-for="Postcode" class="@(CssViewModel.VisuallyHidden)">Use the postcode for where the apprentice will work.</label>
-                <input class="@(CssViewModel.FormCss.Input)" asp-for="Postcode" type="search" placeholder="Enter Postcode...">
+                <input class="@(CssViewModel.FormCss.Input)" asp-for="Postcode" type="search" placeholder="Enter postcode" maxlength="8" autocomplete="postal-code" >
                 <span asp-validation-for="Postcode" class="error-message"></span>
             </div>
         </div>
