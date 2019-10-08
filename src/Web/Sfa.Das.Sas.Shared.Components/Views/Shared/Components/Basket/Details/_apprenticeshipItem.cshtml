@@ -35,6 +35,9 @@
                 </ul>
             }
         }
-        <a class="@CssViewModel.Link das-basket__provider-add" asp-controller="Fat" asp-action="Apprenticeship" asp-route-id="@Model.Id" asp-fragment="#FindProvider">Add a training provider to the <span class="@CssViewModel.VisuallyHidden">@Model.Title </span>apprenticeship</a>
+        <hr class="section-break--dashed">
+        <a class="das-basket__provider-add" asp-controller="Fat" asp-action="Apprenticeship" asp-route-id="@Model.Id" asp-fragment="#FindProvider">
+            Add a training provider to the<span class="@CssViewModel.VisuallyHidden">@Model.Title</span> apprenticeship
+        </a>
     </div>
 </div>
