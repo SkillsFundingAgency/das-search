@@ -6,8 +6,8 @@
 
 
 
-<div class="das-basket__itemd-header">
-    <h2 class="basket__item-heading">
+<div class="das-basket__item-header">
+    <h2 class="das-basket__item-heading">
         <a class="@CssViewModel.Link" asp-controller="Fat" asp-action="" asp-route-ApprenticeshipId="@Model.Id">@Model.Title</a>
     </h2>
 </div>
@@ -35,6 +35,9 @@
                 </ul>
             }
         }
-       
+        <hr class="section-break--dashed">
+        <a class="das-basket__provider-add" asp-controller="Fat" asp-action="Apprenticeship" asp-route-id="@Model.Id" asp-fragment="#FindProvider">
+            Add a training provider to the<span class="@CssViewModel.VisuallyHidden">@Model.Title</span> apprenticeship
+        </a>
     </div>
 </div>
