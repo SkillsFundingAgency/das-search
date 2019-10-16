@@ -3,5 +3,6 @@
     public class BasketIconViewModel
     {
         public int ItemCount { get; set; }
+        public string BasketUrl { get; set; }
     }
 }

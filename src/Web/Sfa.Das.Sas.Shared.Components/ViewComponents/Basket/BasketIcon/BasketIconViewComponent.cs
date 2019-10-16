@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
@@ -18,17 +20,18 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             _cookieManager = cookieManager;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int? ukprn = null)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var model = new BasketIconViewModel
             {
-                ItemCount = 0
+                ItemCount = await GetBasketItemCount(),
+                BasketUrl = Url.Link("BasketView", null)
             };
 
             return View("../Basket/BasketIcon/Default", model);
         }
 
-        private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn)
+        private async Task<int> GetBasketItemCount()
         {
             // Get cookie
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
@@ -38,10 +41,10 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             {
                 var basket = await _mediator.Send(new GetBasketQuery { BasketId = cookieBasketId.Value });
 
-                return basket.IsInBasket(apprenticeshipId, ukprn);
+                return basket?.Count() ?? 0;
             }
 
-            return false;
+            return 0;
         }
     }
 }

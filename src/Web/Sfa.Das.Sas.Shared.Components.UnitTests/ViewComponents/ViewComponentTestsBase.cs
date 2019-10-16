@@ -19,6 +19,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
             viewContext.HttpContext = httpContext;
             _viewComponentContext = new ViewComponentContext();
             _viewComponentContext.ViewContext = viewContext;
+       
 
             _cssClasses = new Mock<ICssViewModel>(MockBehavior.Strict);
             _cssClasses.Setup(s => s.ClassModifier).Returns("");
