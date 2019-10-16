@@ -1,10 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.Shared.Components.Cookies;
-using System;
-using System.Linq;
+using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
@@ -12,12 +8,12 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
     public class BasketIconViewComponent : ViewComponent
     {
         private readonly IMediator _mediator;
-        private readonly ICookieManager _cookieManager;
+        private readonly IBasketOrchestrator _orchestrator;
 
-        public BasketIconViewComponent(IMediator mediator, ICookieManager cookieManager)
+        public BasketIconViewComponent(IMediator mediator, IBasketOrchestrator orchestrator)
         {
             _mediator = mediator;
-            _cookieManager = cookieManager;
+            _orchestrator = orchestrator;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
@@ -33,18 +29,9 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
 
         private async Task<int> GetBasketItemCount()
         {
-            // Get cookie
-            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
-            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+            var basket = await _orchestrator.GetBasket();
 
-            if (cookieBasketId.HasValue)
-            {
-                var basket = await _mediator.Send(new GetBasketQuery { BasketId = cookieBasketId.Value });
-
-                return basket?.Count() ?? 0;
-            }
-
-            return 0;
+            return basket.Items.Count;
         }
     }
 }

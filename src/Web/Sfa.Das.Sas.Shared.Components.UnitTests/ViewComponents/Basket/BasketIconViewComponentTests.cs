@@ -1,17 +1,16 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Queries;
-using Sfa.Das.Sas.Shared.Basket.Models;
-using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Basket;
-using Sfa.Das.Sas.ApplicationServices.Models;
 using Microsoft.AspNetCore.Mvc;
+using Sfa.Das.Sas.Shared.Components.Orchestrators;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
+using System.Collections.Generic;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
 {
@@ -19,29 +18,28 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
     public class BasketIconViewComponentTests : ViewComponentTestsBase
     {
         private const string ExpectedBasketViewUrl = "url-of-basket-view";
-        private Mock<ICookieManager> _mockCookieManager;
+        private Mock<IBasketOrchestrator> _mockBasketOrchestrator;
         private Mock<IMediator> _mockMediator;
         private BasketIconViewComponent _sut;
-        private ApprenticeshipFavouritesBasket _basket;
-        private Guid _cookieBasketId = Guid.NewGuid();
+        private BasketViewModel<ApprenticeshipBasketItemViewModel> _basketViewModel;
 
         [SetUp]
         public new void Setup()
         {
             base.Setup();
 
-            _mockCookieManager = new Mock<ICookieManager>();
-            _mockCookieManager.Setup(x => x.Get(CookieNames.BasketCookie)).Returns(_cookieBasketId.ToString());
-
-            _basket = new ApprenticeshipFavouritesBasket();
+            _basketViewModel = new BasketViewModel<ApprenticeshipBasketItemViewModel> { Items = new List<ApprenticeshipBasketItemViewModel>() };
+            _mockBasketOrchestrator = new Mock<IBasketOrchestrator>();
+            _mockBasketOrchestrator.Setup(x => x.GetBasket()).ReturnsAsync(_basketViewModel);
 
             _mockMediator = new Mock<IMediator>();
 
-            _sut = new BasketIconViewComponent(_mockMediator.Object, _mockCookieManager.Object)
+            _sut = new BasketIconViewComponent(_mockMediator.Object, _mockBasketOrchestrator.Object)
             {
                 ViewComponentContext = _viewComponentContext
             };
 
+            // Setup url helper for link generation
             var urlHelper = new Mock<IUrlHelper>();
             urlHelper.Setup(x => x.Link(It.IsAny<string>(), It.IsAny<object>())).Returns(ExpectedBasketViewUrl);
             _sut.Url = urlHelper.Object;
@@ -50,22 +48,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
         [Test]
         public async Task Invoke_ReturnsModelContainingItemCountOfZero_WhenBasketIsEmpty()
         {
-            _mockMediator.Setup(x => x.Send(It.Is<GetBasketQuery>(a => a.BasketId == _cookieBasketId), default))
-                .ReturnsAsync(new ApprenticeshipFavouritesBasketRead(_basket));
-
-            var result = await _sut.InvokeAsync() as ViewViewComponentResult;
-
-            result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewData.Model.Should().BeAssignableTo<BasketIconViewModel>();
-            var model = result.ViewData.Model as BasketIconViewModel;
-            model.ItemCount.Should().Be(0);
-        }
-
-        [Test]
-        public async Task Invoke_ReturnsModelContainingItemCountOfZero_WhenNoCookieExists()
-        {
-            _mockCookieManager.Setup(x => x.Get(CookieNames.BasketCookie)).Returns((string)null);
-
             var result = await _sut.InvokeAsync() as ViewViewComponentResult;
 
             result.Should().BeOfType<ViewViewComponentResult>();
@@ -77,10 +59,9 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
         [Test]
         public async Task Invoke_ReturnsModelContainingItemCountInBasket_WhenBasketNotEmpty()
         {
-            _basket.Add("123");
-            _basket.Add("456");
-            _mockMediator.Setup(x => x.Send(It.Is<GetBasketQuery>(a => a.BasketId == _cookieBasketId), default))
-              .ReturnsAsync(new ApprenticeshipFavouritesBasketRead(_basket));
+            // Add a couple of items to the basket
+            _basketViewModel.Items.Add(new ApprenticeshipBasketItemViewModel());
+            _basketViewModel.Items.Add(new ApprenticeshipBasketItemViewModel());
 
             var result = await _sut.InvokeAsync() as ViewViewComponentResult;
 
