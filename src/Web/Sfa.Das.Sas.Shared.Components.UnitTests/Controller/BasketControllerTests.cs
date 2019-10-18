@@ -11,6 +11,8 @@ using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 {
@@ -36,6 +38,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             // Set cookie in http request
             _mockMediator = new Mock<IMediator>();
             _mockCookieManager = new Mock<ICookieManager>();
+
+            _mockMediator.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), default)).ReturnsAsync(new ApprenticeshipFavouritesBasketRead());
 
             _sut = new BasketController(_mockMediator.Object, _mockCookieManager.Object, Mock.Of<IApprenticehipFavouritesBasketStoreConfig>());
         }

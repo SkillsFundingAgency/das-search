@@ -6,6 +6,8 @@ using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Shared.Components.Orchestrators;
 
 namespace Sfa.Das.Sas.Shared.Components.Controllers
 {
@@ -14,6 +16,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         private readonly IMediator _mediator;
         private readonly ICookieManager _cookieManager;
         private readonly IApprenticehipFavouritesBasketStoreConfig _config;
+        private readonly IBasketOrchestrator _basketOrchestrator;
 
         public BasketController(
             IMediator mediator,
@@ -34,7 +37,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.ItemId);
+            if (!await IsInBasket(queryModel.ItemId, null))
+            {
+                await UpdateApprenticeship(queryModel.ItemId);
+            }
 
             return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
         }
@@ -43,7 +49,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.ItemId);
+            if (!await IsInBasket(queryModel.ItemId, null))
+            {
+                await UpdateApprenticeship(queryModel.ItemId);
+            }
 
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
@@ -52,8 +61,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.ItemId);
-
+            if (!await IsInBasket(queryModel.ApprenticeshipId, queryModel.ItemId))
+            {
+                await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.ItemId);
+            }
             return RedirectToAction("Details", "TrainingProvider", queryModel);
         }
 
@@ -61,7 +72,11 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId);
+            if (!await IsInBasket(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId))
+            {
+                await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId);
+            }
+            
 
             return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
         }
@@ -88,6 +103,22 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             });
 
             _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
+        }
+
+        private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn)
+        {
+            // Get cookie
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+
+            if (cookieBasketId.HasValue)
+            {
+                var basket = await _mediator.Send(new GetBasketQuery { BasketId = cookieBasketId.Value });
+
+                return basket.IsInBasket(apprenticeshipId, ukprn);
+            }
+
+            return false;
         }
     }
 }
