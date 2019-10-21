@@ -3,4 +3,20 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 
-<label>@Model.ItemCount Items</label>
+@if (Model.ItemCount > 0)
+{
+    <li class="navigation__list-item">
+        <a asp-controller="Basket" asp-action="View" class="favourites-link favourites-link--filled">
+            <span class="favourites-link__count">@Model.ItemCount</span>
+            <span class="favourites-link__text">Favourites</span>
+        </a>
+    </li>
+}
+else
+{
+    <li class="navigation__list-item">
+        <a asp-controller="Basket" asp-action="View" class="favourites-link">
+            <span class="favourites-link__text">Favourites</span>
+        </a>
+    </li>
+}

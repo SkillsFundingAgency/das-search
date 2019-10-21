@@ -71,6 +71,11 @@
 
         <main class="govuk-main-wrapper " id="main-content" role="main">
             <div class="govuk-grid-row">
+                <ul>
+                    @await Component.InvokeAsync("BasketIcon")
+                </ul>
+            </div>
+            <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
                     @RenderBody()
                 </div>
