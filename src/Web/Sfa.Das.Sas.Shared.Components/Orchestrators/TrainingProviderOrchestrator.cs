@@ -10,6 +10,7 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider;
+using Sfa.Das.Sas.Infrastructure.Services;
 
 namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 {
@@ -20,14 +21,18 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly ITrainingProviderDetailsViewModelMapper _trainingProviderDetailsViewModelMapper;
         private readonly ITrainingProviderSearchFilterViewModelMapper _trainingProviderSearchFilterViewModelMapper;
         private readonly ILog _logger;
+        private readonly ICacheStorageService _cacheService;
+        public TrainingProviderDetailQueryViewModel _trainingProviderDetailQueryViewModel;
 
-        public TrainingProviderOrchestrator(IMediator mediator, ISearchResultsViewModelMapper searchResultsViewModelMapper, ILog logger, ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper)
+        public TrainingProviderOrchestrator(IMediator mediator, ISearchResultsViewModelMapper searchResultsViewModelMapper, ILog logger, ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper, ICacheStorageService cacheService, TrainingProviderDetailQueryViewModel trainingProviderDetailQueryViewModel)
         {
             _mediator = mediator;
             _searchResultsViewModelMapper = searchResultsViewModelMapper;
             _logger = logger;
             _trainingProviderDetailsViewModelMapper = trainingProviderDetailsViewModelMapper;
             _trainingProviderSearchFilterViewModelMapper = trainingProviderSearchFilterViewModelMapper;
+            _cacheService = cacheService;
+            _trainingProviderDetailQueryViewModel = trainingProviderDetailQueryViewModel;
         }
 
         public async Task<SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>> GetSearchResults(TrainingProviderSearchViewModel searchQueryModel)
@@ -76,24 +81,37 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)
         {
 
-            var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
+            var cacheKey = detailsQueryModel.Ukprn + detailsQueryModel.LocationId + detailsQueryModel.ApprenticeshipId;
 
-            if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
+            var cacheEntry = await _cacheService.RetrieveFromCache<ApprenticeshipProviderDetailResponse>(cacheKey);
+
+            if (cacheEntry == null)
             {
-                var message = $"Cannot find provider: {detailsQueryModel.Ukprn}";
-                _logger.Warn($"404 - {message}");
-                throw new HttpRequestException(message);
+                cacheEntry = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
+
+                if (cacheEntry.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
+                {
+                    var message = $"Cannot find provider: {detailsQueryModel.Ukprn}";
+                    _logger.Warn($"404 - {message}");
+                    throw new HttpRequestException(message);
+                }
+
+                if (cacheEntry.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput)
+                {
+                    var message = $"Not able to call the apprenticeship service.";
+                    _logger.Warn($"{cacheEntry.StatusCode} - {message}");
+
+                    throw new HttpRequestException(message);
+                }
+
+                //_trainingProviderDetailQueryViewModel.SearchedCache = true;
+                //_trainingProviderDetailQueryViewModel.TrainingProviderDetails = _trainingProviderDetailsViewModelMapper.Map(cacheEntry);
+
+                await _cacheService.SaveToCache(cacheKey, cacheEntry, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+
             }
-
-            if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput)
-            {
-                var message = $"Not able to call the apprenticeship service.";
-                _logger.Warn($"{response.StatusCode} - {message}");
-
-                throw new HttpRequestException(message);
-            }
-
-            var model = _trainingProviderDetailsViewModelMapper.Map(response);
+            
+            var model = _trainingProviderDetailsViewModelMapper.Map(cacheEntry);
 
             return model;
         }

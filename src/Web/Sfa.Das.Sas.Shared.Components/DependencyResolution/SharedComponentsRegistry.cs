@@ -141,7 +141,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
         private static void AddOrchesratorServices(IServiceCollection services)
         {
-            services.AddTransient<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
+            services.AddScoped<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
             services.AddTransient<IFatOrchestrator, FatOrchestrator>();
             services.AddTransient<ITrainingProviderOrchestrator, TrainingProviderOrchestrator>();
         }

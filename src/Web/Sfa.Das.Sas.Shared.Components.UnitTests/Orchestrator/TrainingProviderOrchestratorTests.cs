@@ -12,6 +12,7 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
+using Sfa.Das.Sas.Infrastructure.Services;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 {
@@ -24,6 +25,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<ITrainingProviderDetailsViewModelMapper> _mockTrainingProviderDetailsViewModelMapper;
         private Mock<ITrainingProviderSearchFilterViewModelMapper> _mockTrainingProviderFilterViewModelMapper;
         private Mock<ILog> _mockLogger;
+        private Mock<ICacheStorageService> _mockCacheService;
+        private Mock<TrainingProviderDetailQueryViewModel> _mockTrainingProviderDetailQueryViewModel;
 
         private  TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
 
@@ -42,11 +45,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockTrainingProviderFilterViewModelMapper = new Mock<ITrainingProviderSearchFilterViewModelMapper>();
             _mockLogger = new Mock<ILog>();
 
+            _mockCacheService = new Mock<ICacheStorageService>();
+            _mockTrainingProviderDetailQueryViewModel = new Mock<TrainingProviderDetailQueryViewModel>();
+
             _mockMediator.Setup(s => s.Send<ProviderSearchResponse>(It.IsAny<ProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
             _mockSearchResultsViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchResultsViewModel);
             _mockTrainingProviderFilterViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchFilterViewModel);
 
-            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object);
+            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object, _mockTrainingProviderDetailQueryViewModel.Object);
         }
 
         [Test]

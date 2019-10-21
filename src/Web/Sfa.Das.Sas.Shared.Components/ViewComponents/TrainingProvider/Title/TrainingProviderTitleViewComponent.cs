@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
             _apprenticeshipOrchestrator = apprenticeshipOrchestrator;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(TrainingProviderDetailQueryViewModel searchQueryModel, bool inline = false)
+        public async Task<IViewComponentResult> InvokeAsync(TrainingProviderDetailQueryViewModel searchQueryModel)
         {
 
             searchQueryModel.ApprenticeshipType = _apprenticeshipOrchestrator.GetApprenticeshipType(searchQueryModel.ApprenticeshipId) ;

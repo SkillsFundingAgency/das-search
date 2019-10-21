@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
+using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.Shared.Components.ViewModels;
 
 namespace Sfa.Das.Sas.Shared.Components.Web
 {
@@ -29,15 +31,34 @@ namespace Sfa.Das.Sas.Shared.Components.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMemoryCache();
 
             var fatConfig = new FatSharedComponentsConfiguration();
             Configuration.Bind("fatSharedComponents", fatConfig);
             services.AddSingleton<IFatConfigurationSettings>(fs => fatConfig);
 
+            services.AddSingleton<ICacheStorageService, CacheStorageService>();
+            services.AddScoped<TrainingProviderDetailQueryViewModel>();
+
 
             services.AddFatSharedComponents(fatConfig);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            
+
+            if (Configuration["Environment"] == "LOCAL")
+            {
+                services.AddDistributedMemoryCache();
+            }
+            else
+            {
+                //services.AddStackExchangeRedisCache(options =>
+                //{
+                //    options.Configuration = connectionStrings.SharedRedis;
+                //});
+            }
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

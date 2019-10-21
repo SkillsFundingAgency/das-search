@@ -15,6 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         {
             return View("TrainingProvider/Details", model);
         }
-        
+ 
     }
+    
 }
