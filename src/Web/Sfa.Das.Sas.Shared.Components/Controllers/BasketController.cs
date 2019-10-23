@@ -85,7 +85,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromBasket(DeleteFromBasketViewModel model)
         {
-            await UpdateApprenticeship(model.ApprenticeshipId, model.Ukprn);
+            if (await IsInBasket(model.ApprenticeshipId, model.Ukprn))
+            {
+                await UpdateApprenticeship(model.ApprenticeshipId, model.Ukprn);
+            }
 
             return RedirectToAction("View", "Basket");
         }
