@@ -15,6 +15,7 @@
         string List { get; }
         string ListBullet { get; }
         string ListNumber { get; }
+        string ListNumbers { get; }
         string SearchList { get; }
         string WarningText { get; }
         string HeadingMedium { get; }

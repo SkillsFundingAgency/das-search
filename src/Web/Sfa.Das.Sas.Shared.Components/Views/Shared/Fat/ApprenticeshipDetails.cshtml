@@ -6,7 +6,7 @@
 
 <form asp-controller="Basket" asp-action="AddApprenticeshipFromDetails" method="post">
     <div class="@(CssViewModel.FormCss.FormGroup)">
-        @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.Id })
+        @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Id })
     </div>
 
 </form>

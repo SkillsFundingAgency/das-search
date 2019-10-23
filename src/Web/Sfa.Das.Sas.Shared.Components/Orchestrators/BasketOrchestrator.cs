@@ -28,13 +28,13 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             var basket = await _mediator.Send(new GetBasketQuery { BasketId = basketId });
 
             return _basketViewModelMapper.Map(basket, basketId);
-        }   
+        }
 
         public async Task<BasketViewModel<ApprenticeshipBasketItemViewModel>> GetBasket()
         {
             // Get cookie
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
-            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?) result : null;
 
             if (cookieBasketId.HasValue)
             {

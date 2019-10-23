@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Sfa.Das.Sas.ApplicationServices.Commands
 {
-    public class AddFavouriteToBasketCommand : IRequest<Guid>
+    public class AddOrRemoveFavouriteInBasketCommand : IRequest<Guid>
     {
         public Guid? BasketId { get; set; }
         public string ApprenticeshipId { get; set; }

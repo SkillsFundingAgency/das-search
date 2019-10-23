@@ -17,22 +17,22 @@ using Sfa.Das.Sas.Shared.Basket.Models;
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
     [TestFixture]
-    public class AddFavouriteToBasketHandlerTests
+    public class AddOrRemoveFavouriteInBasketHandlerTests
     {
-        private IRequestHandler<AddFavouriteToBasketCommand, Guid> _sut;
+        private IRequestHandler<AddOrRemoveFavouriteInBasketCommand, Guid> _sut;
         private Mock<IApprenticeshipFavouritesBasketStore> _mockBasket;
 
         [SetUp]
         public void Setup()
         {
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
-            _sut = new AddFavouriteToBasketCommandHandler(new NullLogger<AddFavouriteToBasketCommandHandler>(), _mockBasket.Object);
+            _sut = new AddorRemoveFavouriteInBasketCommandHandler(new NullLogger<AddorRemoveFavouriteInBasketCommandHandler>(), _mockBasket.Object);
         }
 
         [Test]
         public async Task Handle_CreatesBasketId_WhenNoBasketSpecified()
         {
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = null,
                 ApprenticeshipId = "123"
@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var expiredBasketId = Guid.NewGuid();
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = expiredBasketId,
                 ApprenticeshipId = "123"
@@ -66,7 +66,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = null,
                 ApprenticeshipId = "123"
@@ -91,7 +91,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.CompletedTask)
                 .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123"
@@ -106,15 +106,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
-        public async Task Handle_ShouldNotUpdateBasketForJustApprenticeship_IfApprenticeshipAlreadyInBasket()
+        public async Task Handle_ShouldRemoveApprenticeFromBasket_IfApprenticeshipAlreadyInBasket()
         {
             var basketId = Guid.NewGuid();
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
-            basket.Add("123");
+
+            basket.Add("123", 23456);
+            basket.Add("123", 12345);
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123"
@@ -122,7 +124,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             await _sut.Handle(request, default(CancellationToken));
 
-            _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<ApprenticeshipFavouritesBasket>()), Times.Never);
+            _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<ApprenticeshipFavouritesBasket>()), Times.Once);
+
+            basket.Should().NotBeNull();
+            basket.Should().BeEmpty();
         }
 
         [Test]
@@ -130,7 +135,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = null,
                 ApprenticeshipId = "123",
@@ -156,7 +161,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.CompletedTask)
                 .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123",
@@ -188,7 +193,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 .Returns(Task.CompletedTask)
                 .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
+            var request = new AddOrRemoveFavouriteInBasketCommand
             {
                 BasketId = basketId,
                 ApprenticeshipId = "123",
@@ -207,29 +212,35 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
-        public async Task Handle_ShouldNotUpdateTrainingProviderToExistingBasket_WhenProviderHasAlreadyBeenAddedForApprenticeship()
+        public async Task Handle_ShouldDeleteTrainingProviderFromExistingBasket_WhenProviderHasAlreadyBeenAddedForApprenticeship()
         {
             var basketId = Guid.NewGuid();
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
             basket.Add("123", 12345678);
+            basket.Add("123", 23456789);
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
-                ApprenticeshipFavouritesBasket savedBasket = null; // Setup callback so we can check contents of basket easier.
-                _mockBasket.Setup(x => x.UpdateAsync(It.IsAny<ApprenticeshipFavouritesBasket>()))
-                    .Returns(Task.CompletedTask)
-                    .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
+            ApprenticeshipFavouritesBasket savedBasket = null; // Setup callback so we can check contents of basket easier.
+            _mockBasket.Setup(x => x.UpdateAsync(It.IsAny<ApprenticeshipFavouritesBasket>()))
+                .Returns(Task.CompletedTask)
+                .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
 
-            var request = new AddFavouriteToBasketCommand
-                {
-                    BasketId = basketId,
-                    ApprenticeshipId = "123",
-                    Ukprn = 12345678
-                };
+            var request = new AddOrRemoveFavouriteInBasketCommand
+            {
+                BasketId = basketId,
+                ApprenticeshipId = "123",
+                Ukprn = 12345678
+            };
 
-                var response = await _sut.Handle(request, default(CancellationToken));
+            var response = await _sut.Handle(request, default(CancellationToken));
 
-                _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<ApprenticeshipFavouritesBasket>()), Times.Never);
+            _mockBasket.Verify(x => x.UpdateAsync(It.IsAny<ApprenticeshipFavouritesBasket>()), Times.Once);
+
+            var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
+            favourite.Should().NotBeNull();
+            favourite.Ukprns.Count.Should().Be(1);
+            favourite.Ukprns.Should().NotContain(12345678);
         }
     }
 }

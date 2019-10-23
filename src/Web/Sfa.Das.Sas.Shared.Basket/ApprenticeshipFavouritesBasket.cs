@@ -21,7 +21,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
         public Guid Id { get; set; }
 
-        public bool Add(string apprenticeshipId)
+        public bool Add(string apprenticeshipId)    
         {
             if (_items.Any(x => x.ApprenticeshipId == apprenticeshipId))
             {
@@ -75,7 +75,17 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
                 }
             }
         }
-        public IEnumerator<ApprenticeshipFavourite> GetEnumerator()
+
+        public void Remove(string apprenticeshipId)
+        {
+            _items.RemoveAll(w => w.ApprenticeshipId == apprenticeshipId);
+        }
+
+        public void Remove(string apprenticeshipId, int ukprn)
+        {
+            _items.FirstOrDefault(w => w.ApprenticeshipId == apprenticeshipId)?.Ukprns.Remove(ukprn);
+        }
+        public IEnumerator<ApprenticeshipFavourite> GetEnumerator() 
         {
             return _items.GetEnumerator();
         }
