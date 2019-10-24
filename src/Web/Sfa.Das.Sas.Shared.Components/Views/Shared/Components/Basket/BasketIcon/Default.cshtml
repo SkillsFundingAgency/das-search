@@ -6,7 +6,7 @@
 @if (Model.ItemCount > 0)
 {
     <li class="navigation__list-item">
-        <a asp-controller="Basket" asp-action="View" class="favourites-link favourites-link--filled">
+        <a asp-controller="Basket" asp-action="View" class="favourites-link favourites-link--filled navigation__link--top-level">
             <span class="favourites-link__count">@Model.ItemCount</span>
             <span class="favourites-link__text">Favourites</span>
         </a>
@@ -15,7 +15,7 @@
 else
 {
     <li class="navigation__list-item">
-        <a asp-controller="Basket" asp-action="View" class="favourites-link">
+        <a asp-controller="Basket" asp-action="View" class="favourites-link navigation__link--top-level">
             <span class="favourites-link__text">Favourites</span>
         </a>
     </li>
