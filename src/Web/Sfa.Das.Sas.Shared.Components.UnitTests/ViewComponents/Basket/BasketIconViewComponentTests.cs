@@ -57,6 +57,19 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
         }
 
         [Test]
+        public async Task Invoke_ReturnsModelContainingItemCountOfZero_WhenBasketDoesNotExist()
+        {
+            _basketViewModel.Items = null;
+
+            var result = await _sut.InvokeAsync() as ViewViewComponentResult;
+
+            result.Should().BeOfType<ViewViewComponentResult>();
+            result.ViewData.Model.Should().BeAssignableTo<BasketIconViewModel>();
+            var model = result.ViewData.Model as BasketIconViewModel;
+            model.ItemCount.Should().Be(0);
+        }
+
+        [Test]
         public async Task Invoke_ReturnsModelContainingItemCountInBasket_WhenBasketNotEmpty()
         {
             // Add a couple of items to the basket

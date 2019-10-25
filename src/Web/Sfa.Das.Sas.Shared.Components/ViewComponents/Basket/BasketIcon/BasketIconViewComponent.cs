@@ -31,7 +31,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
         {
             var basket = await _orchestrator.GetBasket();
 
-            return basket.Items.Count;
+            return basket.Items?.Count ?? 0;
         }
     }
 }
