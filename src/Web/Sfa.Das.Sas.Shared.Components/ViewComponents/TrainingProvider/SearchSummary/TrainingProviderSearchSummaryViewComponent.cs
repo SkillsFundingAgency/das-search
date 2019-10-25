@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.SearchSummary
 {
@@ -45,7 +47,21 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.SearchSu
                     break;
             }
 
-            return View("../TrainingProvider/SearchSummary/Default", model);
+            switch (result.Status)
+            {
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                    return View("../TrainingProvider/SearchSummary/Scotland", model);
+                case ProviderSearchResponseCodes.WalesPostcode:
+                    return View("../TrainingProvider/SearchSummary/Wales", model);
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                    return View("../TrainingProvider/SearchSummary/NorthernIreland", model);
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return View("../TrainingProvider/SearchSummary/NonUK", model);
+                default:
+                    return View("../TrainingProvider/SearchSummary/Default", model);
+            }
+
+    
         }
     }
 }

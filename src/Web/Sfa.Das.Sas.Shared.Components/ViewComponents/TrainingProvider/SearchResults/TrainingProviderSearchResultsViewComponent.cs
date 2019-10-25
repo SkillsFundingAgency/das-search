@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 
@@ -17,9 +18,17 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
         public async Task<IViewComponentResult> InvokeAsync(TrainingProviderSearchViewModel searchQueryModel, bool inline = false)
         {
 
-            var model = await _tpOrchestrator.GetSearchResults(searchQueryModel);   
+            var model = await _tpOrchestrator.GetSearchResults(searchQueryModel);
 
-            return View("../TrainingProvider/SearchResults/Default", model);
+
+            if (model.Status == ProviderSearchResponseCodes.Success)
+            {
+                return View("../TrainingProvider/SearchResults/Default", model);
+            }
+            else
+            {
+                return Content(string.Empty);
+            }
 
         }
     }

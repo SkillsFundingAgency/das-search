@@ -1,6 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Routing
+@using Sfa.Das.Sas.ApplicationServices.Responses
 @using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 @using  Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 @model Sfa.Das.Sas.Shared.Components.ViewModels.SearchResultsViewModel<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>
@@ -12,7 +13,7 @@
     @await Component.InvokeAsync("TrainingProviderSearch", new { apprenticeshipId = Model.SearchQuery.ApprenticeshipId })
 }
 
-@if (Model.TotalResults > 0)
+@if (Model.TotalResults > 0 && Model.Status == ProviderSearchResponseCodes.Success)
 {
     <p>There are @Model.TotalResults Training providers for '@Model.SearchQuery.Postcode'.</p>
     @*<form asp-controller="Basket" asp-action="AddProviderFromResults" method="post">
@@ -22,17 +23,17 @@
         <input type="hidden" asp-for="@Model.SearchQuery.Page" />
         <input type="hidden" asp-for="@Model.SearchQuery.Postcode" />
         <input type="hidden" asp-for="@Model.SearchQuery.SortOrder" />*@
-        @for (int i = 0; i < Model.SearchQuery.DeliveryModes.Count(); i++)
+    @for (int i = 0; i < Model.SearchQuery.DeliveryModes.Count(); i++)
+    {
+        <input type="hidden" asp-for="@Model.SearchQuery.DeliveryModes[i]" />
+    }
+    <ol class="@CssViewModel.SearchList">
+        @foreach (var result in Model.SearchResults)
         {
-            <input type="hidden" asp-for="@Model.SearchQuery.DeliveryModes[i]" />
+            var itemModel = Tuple.Create(result, Model.SearchQuery);
+            <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@itemModel" />
         }
-        <ol class="@CssViewModel.SearchList">
-            @foreach (var result in Model.SearchResults)
-            {
-                var itemModel = Tuple.Create(result, Model.SearchQuery);
-                <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@itemModel" />
-            }
-        </ol>
+    </ol>
     @*</form>*@
 }
 else
@@ -105,7 +106,7 @@ else
             {
                 href = href + $"&DeliveryModes={deliveryModes}";
             }
-           
+
         }
 
         return href;
