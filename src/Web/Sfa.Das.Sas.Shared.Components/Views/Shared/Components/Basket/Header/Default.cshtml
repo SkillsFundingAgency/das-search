@@ -8,13 +8,10 @@
     var providerCount = Model.Items?.SelectMany(w => w.TrainingProvider).Count() ?? 0;
 }
 
-<h1>Your favourite apprenticeships and training providers</h1>
-
 @if (Model.HasItems)
 {
-    <div>
-
-        <span>@(apprenticeshipCount)</span> @("Apprenticeship".Pluralize(apprenticeshipCount))
-        <span>@providerCount</span> Training @("provider".Pluralize(providerCount))
-    </div>
+    <ul class="@CssViewModel.ListNumbers">
+        <li><span class="vh">You have</span> <span class="@(CssViewModel.ListNumbers)__number">@(apprenticeshipCount)</span> @("Apprenticeship".Pluralize(apprenticeshipCount)) <span class="vh">in your basket</span></li>
+        <li><span class="vh">You have</span> <span class="@(CssViewModel.ListNumbers)__number">@providerCount</span> Training @("provider".Pluralize(providerCount)) <span class="vh">in your basket</span></li>
+    </ul>
 }

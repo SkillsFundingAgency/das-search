@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
 {
-    public class AddToBasketViewComponent : ViewComponent
+    public class AddOrRemoveFromBasketViewComponent : ViewComponent
     {
         private readonly IMediator _mediator;
         private readonly ICookieManager _cookieManager;
 
-        public AddToBasketViewComponent(IMediator mediator, ICookieManager cookieManager)
+        public AddOrRemoveFromBasketViewComponent(IMediator mediator, ICookieManager cookieManager)
         {
             _mediator = mediator;
             _cookieManager = cookieManager;
@@ -21,13 +21,18 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
 
         public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int? ukprn = null)
         {
-            var model = new AddToBasketViewModel
+            var model = new AddOrRemoveFromBasketViewModel
             {
                 ItemId = ukprn.HasValue ? ukprn.ToString() : apprenticeshipId,
                 IsInBasket = await IsInBasket(apprenticeshipId, ukprn)
             };
 
-            return View("../Basket/AddToBasket/Default", model);
+            if (RouteData?.Values["Controller"]?.ToString().ToLower() == "basket")
+            {
+                return View("../Basket/AddOrRemoveFromBasket/Basket", model);
+            }
+
+            return View("../Basket/AddOrRemoveFromBasket/Default", model);
         }
 
         private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn)
