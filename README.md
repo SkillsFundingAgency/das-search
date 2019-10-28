@@ -4,7 +4,7 @@
 | ------------- | ------------- |
 |![crest](https://assets.publishing.service.gov.uk/static/images/govuk-crest-bb9e22aff7881b895c2ceb41d9340804451c474b883f09fe1b4026e76456f44b.png) |Find Apprenticeship Training|
 | Build | <img alt="Build Status" src="https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_apis/build/status/What%20I%20Need/das-search" /> |
-| Web  | https://findapprenticeshiptraining.sfa.bis.gov.uk/ |
+| Web  | https://findapprenticeshiptraining.apprenticeships.education.gov.uk/ |
 | Source  | https://github.com/SkillsFundingAgency/das-search  |
 
 The [web application](https://www.findapprenticeship.service.gov.uk) provides a web interface to find apprenticeships and organisations that provide training for them.
