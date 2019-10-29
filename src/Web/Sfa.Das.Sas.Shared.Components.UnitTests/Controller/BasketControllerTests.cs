@@ -9,8 +9,12 @@ using Sfa.Das.Sas.Shared.Components.Controllers;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 {
@@ -29,6 +33,10 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         private readonly static SaveBasketFromApprenticeshipResultsViewModel _addFromApprenticeshipResultsModel = GetApprenticeshipResultsRequestModel();
         private readonly static SaveBasketFromProviderDetailsViewModel _addFromProviderDetailsModel = GetProviderDetailsRequestModel();
         private readonly static SaveBasketFromProviderSearchViewModel _addFromProviderSearchModel = GetProviderResultsRequestModel();
+        private readonly static DeleteFromBasketViewModel _deleteFromBasketViewModel = GetDeleteFromBasketViewModel();
+
+
+
 
         [SetUp]
         public void Setup()
@@ -36,6 +44,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             // Set cookie in http request
             _mockMediator = new Mock<IMediator>();
             _mockCookieManager = new Mock<ICookieManager>();
+
+            _mockMediator.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), default(CancellationToken))).ReturnsAsync(GetApprenticeshipFavouritesBasketRead());
 
             _sut = new BasketController(_mockMediator.Object, _mockCookieManager.Object, Mock.Of<IApprenticehipFavouritesBasketStoreConfig>());
         }
@@ -61,7 +71,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.ApprenticeshipId == "123"), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.ApprenticeshipId == "123"), default(CancellationToken)));
         }
 
         [Test]
@@ -72,7 +82,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
             var result = await _sut.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
         }
 
         [Test]
@@ -80,14 +90,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
         }
 
         [Test]
         public async Task AddApprenticeshipFromDetails_SavesBasketIdToCookie()
         {
             var newBasketId = Guid.NewGuid(); // Setup basket it to be returned by save logic
-            _mockMediator.Setup(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
+            _mockMediator.Setup(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
             _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTimeOffset?>()));
 
             var result = await _sut.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
@@ -122,7 +132,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.ApprenticeshipId == "123"), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.ApprenticeshipId == "123"), default(CancellationToken)));
         }
 
         [Test]
@@ -133,7 +143,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
             var result = await _sut.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
         }
 
         [Test]
@@ -141,14 +151,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
         }
 
         [Test]
         public async Task AddApprenticeshipFromResults_SavesBasketIdToCookie()
         {
             var newBasketId = Guid.NewGuid(); // Setup basket it to be returned by save logic
-            _mockMediator.Setup(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
+            _mockMediator.Setup(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
             _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTimeOffset?>()));
 
             var result = await _sut.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
@@ -181,7 +191,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.ApprenticeshipId == APPRENTICESHIP_ID && a.Ukprn == UKPRN), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.ApprenticeshipId == APPRENTICESHIP_ID && a.Ukprn == UKPRN), default(CancellationToken)));
         }
 
         [Test]
@@ -192,7 +202,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
             var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
         }
 
         [Test]
@@ -200,14 +210,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
         }
 
         [Test]
         public async Task AddProviderFromDetails_SavesBasketIdToCookie()
         {
             var newBasketId = Guid.NewGuid(); // Setup basket it to be returned by save logic
-            _mockMediator.Setup(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
+            _mockMediator.Setup(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
             _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTimeOffset?>()));
 
             var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
@@ -244,7 +254,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.ApprenticeshipId == APPRENTICESHIP_ID && a.Ukprn == UKPRN), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.ApprenticeshipId == APPRENTICESHIP_ID && a.Ukprn == UKPRN), default(CancellationToken)));
         }
 
         [Test]
@@ -255,7 +265,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
             var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
         }
 
         [Test]
@@ -263,14 +273,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
 
-            _mockMediator.Verify(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken)));
         }
 
         [Test]
         public async Task AddProviderFromResults_SavesBasketIdToCookie()
         {
             var newBasketId = Guid.NewGuid(); // Setup basket it to be returned by save logic
-            _mockMediator.Setup(x => x.Send(It.Is<AddFavouriteToBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
+            _mockMediator.Setup(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == null), default(CancellationToken))).ReturnsAsync(newBasketId);
             _mockCookieManager.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTimeOffset?>()));
 
             var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
@@ -280,6 +290,75 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
         #endregion
 
+
+        #region RemoveFromBasket
+
+        [Test]
+        public async Task RemoveFromBasket_ReturnsRedirectResult_ToBasketPage()
+        {
+            var BasketIdFromCookie = Guid.NewGuid();
+            _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
+
+            var result = await _sut.RemoveFromBasket(_deleteFromBasketViewModel);
+
+            result.Should().BeAssignableTo<RedirectToActionResult>();
+            var redirect = (RedirectToActionResult)result;
+
+            redirect.ControllerName.Should().Be("Basket");
+            redirect.ActionName.Should().Be("View");
+        }
+
+        [Test]
+        public async Task RemoveFromBasket_ParsesApprenticeshipIdAndUkprn_FromArgument()
+        {
+            var BasketIdFromCookie = Guid.NewGuid();
+            _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
+
+            var result = await _sut.RemoveFromBasket(_deleteFromBasketViewModel);
+
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.ApprenticeshipId == APPRENTICESHIP_ID && a.Ukprn == UKPRN), default(CancellationToken)));
+        }
+
+        [Test]
+        public async Task RemoveFromBasket_UsesBasketIdFromCookie_IfCookieExists()
+        {
+            var BasketIdFromCookie = Guid.NewGuid();
+            _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
+
+            var result = await _sut.RemoveFromBasket(_deleteFromBasketViewModel);
+
+            _mockMediator.Verify(x => x.Send(It.Is<AddOrRemoveFavouriteInBasketCommand>(a => a.BasketId == BasketIdFromCookie), default(CancellationToken)));
+        }
+
+        [Test]
+        public async Task RemoveFromBasket_RedirectToBasket_IfNoCookieExists()
+        {
+            var result = await _sut.RemoveFromBasket(_deleteFromBasketViewModel);
+
+            result.Should().BeAssignableTo<RedirectToActionResult>();
+            var redirect = (RedirectToActionResult)result;
+
+            redirect.ControllerName.Should().Be("Basket");
+            redirect.ActionName.Should().Be("View");
+        }
+
+        [Test]
+        public async Task RemoveFromBasket_RedirectToBasket_IfItemDoesntExistInBakset()
+        {
+            var removeViewModel = _deleteFromBasketViewModel;
+
+            removeViewModel.Ukprn = 456789012;
+
+            var result = await _sut.RemoveFromBasket(removeViewModel);
+
+            result.Should().BeAssignableTo<RedirectToActionResult>();
+            var redirect = (RedirectToActionResult)result;
+
+            redirect.ControllerName.Should().Be("Basket");
+            redirect.ActionName.Should().Be("View");
+        }
+
+        #endregion
         private static SaveBasketFromApprenticeshipDetailsViewModel GetApprenticeshipDetailsRequestModel() => new SaveBasketFromApprenticeshipDetailsViewModel
         {
             ItemId = APPRENTICESHIP_ID
@@ -322,5 +401,21 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
                 SortOrder = 1
             }
         };
+
+        private static DeleteFromBasketViewModel GetDeleteFromBasketViewModel() => new DeleteFromBasketViewModel()
+        {
+            ApprenticeshipId = APPRENTICESHIP_ID,
+            Ukprn = UKPRN
+        };
+
+        private static ApprenticeshipFavouritesBasketRead GetApprenticeshipFavouritesBasketRead()
+        {
+
+            var basket = new ApprenticeshipFavouritesBasket();
+
+            basket.Add(APPRENTICESHIP_ID, UKPRN);
+
+            return new ApprenticeshipFavouritesBasketRead(basket);
+        }
     }
 }

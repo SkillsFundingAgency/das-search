@@ -69,6 +69,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
         public string ListBullet => $"{ClassPrefix}list--bullet";
 
         public string ListNumber => $"{ClassPrefix}list--number";
+        public string ListNumbers => $"{ClassPrefix}list-numbers";
         public string SearchList
         {
             get
