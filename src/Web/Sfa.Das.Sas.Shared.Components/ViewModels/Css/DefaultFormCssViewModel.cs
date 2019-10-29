@@ -15,7 +15,6 @@
         public string InputWidth10 => $"{_classPrefix}input--width-10";
         public string InputWidth20 => $"{_classPrefix}input--width-20";
         public string InputWidth30 => $"{_classPrefix}input--width-30";
-        public string Input => $"{_classPrefix}input";
 
         public string FormGroup => $"{_classPrefix}form-group";
 
