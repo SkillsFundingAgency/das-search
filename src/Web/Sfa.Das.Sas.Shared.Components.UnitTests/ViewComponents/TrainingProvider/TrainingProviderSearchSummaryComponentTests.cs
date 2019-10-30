@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         }
 
         [Test]
-        public async Task When_ScotlandPostcode_Then_Wales_View_Is_Returned()
+        public async Task When_ScotlandPostcode_Then_Scotland_View_Is_Returned()
         {
             _mockTrainingProviderOrchestrator.Setup(s => s.GetSearchResults(It.IsAny<TrainingProviderSearchViewModel>()))
                 .ReturnsAsync(new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>() { Status = ProviderSearchResponseCodes.ScotlandPostcode });
@@ -87,7 +87,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         }
 
         [Test]
-        public async Task When_NorthernIrelandPostcode_Then_Wales_View_Is_Returned()
+        public async Task When_NorthernIrelandPostcode_Then_NorthernIreland_View_Is_Returned()
         {
             _mockTrainingProviderOrchestrator.Setup(s => s.GetSearchResults(It.IsAny<TrainingProviderSearchViewModel>()))
                 .ReturnsAsync(new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>() { Status = ProviderSearchResponseCodes.NorthernIrelandPostcode });
