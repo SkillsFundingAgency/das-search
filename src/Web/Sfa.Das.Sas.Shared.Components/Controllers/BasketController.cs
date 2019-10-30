@@ -28,7 +28,8 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             _config = config;
         }
 
-        public async Task<IActionResult> View()
+        [HttpGet(Name = "BasketView")]
+        public IActionResult View()
         {
             return View("Basket/View");
         }
