@@ -9,12 +9,17 @@
         @foreach (var apprenticeship in Model.Items)
         {
             <li>
-                <partial name="Components/Basket/Details/_apprenticeshipItem" for="@apprenticeship"/>
+                <partial name="Components/Basket/Details/_apprenticeshipItem" for="@apprenticeship" />
             </li>
         }
     </ol>
 }
 else
 {
-<p>You don't have any saved Preferences</p>
+    <div class="das-basket__empty">
+        <h2 class="heading-m">You haven't added any favourites yet</h2>
+        <p>Why not browse the available apprenticeships and start adding your favourites?</p>
+        <a asp-controller="Employer" asp-action="find-apprenticeship-training" class="button button--inverted button--sparks">View apprenticeships</a>
+    </div>
+    
 }
