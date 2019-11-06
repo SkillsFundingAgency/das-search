@@ -18,6 +18,16 @@
 
 <div class="@CssViewModel.GridCss.Row">
     <div class="@CssViewModel.GridCss.ColumnOneHalf">
+        @if (Model.EffectiveTo.HasValue && Model.EffectiveTo.Value > DateTime.Today)
+        {
+            <div class="@CssViewModel.WarningText">
+                <span class="@(CssViewModel.WarningText)__icon" aria-hidden="true"></span>
+                <strong class="@(CssViewModel.WarningText)__text">
+                    <span class="@(CssViewModel.WarningText)__assistive">Warning</span>
+                    This apprenticeship is closed to new starters from @Model.EffectiveTo.Value.ToLongDateString()
+                </strong>
+            </div>
+        }
         <dl class="@CssViewModel.List das-search-result__details">
             <dt class="das-search-result__details-title">Level:</dt>
             <dd class="das-search-result__details-definition">@Model.Level (Equivalent to @Model.EquivalentText)</dd>

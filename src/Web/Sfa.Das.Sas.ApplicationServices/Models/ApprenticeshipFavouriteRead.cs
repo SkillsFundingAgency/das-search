@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
@@ -18,5 +19,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public string Title { get; set; }
         public int Duration { get; set; }
         public int Level { get; set; }
+        public DateTime? EffectiveTo { get; set; }
     }
 }
