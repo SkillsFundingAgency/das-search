@@ -81,7 +81,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
-        public void When_Invalidostcode_Then_Return_False()
+        public void When_InvalidPostcode_Then_Return_False()
         {
             var response = _handler.Handle(new ValidatePostcodeQuery() { Postcode = invalidPostcode }, default(CancellationToken)).Result;
 

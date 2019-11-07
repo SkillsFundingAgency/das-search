@@ -16,30 +16,32 @@ using Sfa.Das.Sas.ApplicationServices.Queries;
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 {
     [TestFixture]
-    public class BasketControllerTests
+    public class TrainingProviderControllerTests
     {
         private const string POSTCODE = "PP1 2PP";
         private Mock<IMediator> _mockMediator;
         private TrainingProviderController _sut;
 
+        private bool validationResult = true;
+
         [SetUp]
         public void Setup()
         {
             _mockMediator = new Mock<IMediator>();
-            _mockMediator.Setup(s => s.Send(It.IsAny<ValidatePostcodeQuery>(),It.IsAny<CancellationToken>())).ReturnsAsync(true);
+            _mockMediator.Setup(s => s.Send(It.IsAny<ValidatePostcodeQuery>(),It.IsAny<CancellationToken>())).ReturnsAsync(validationResult);
             
             _sut = new TrainingProviderController(_mockMediator.Object);
         }
 
         [Test]
-        public async Task ValidatePostcode_ShouldReturnJson_ValueTrueIfValid()
+        public async Task ValidatePostcode_ShouldReturnJson_WithValueFromValidationResult()
         {
             var result = await _sut.ValidatePostcode(POSTCODE);
 
             result.Should().BeAssignableTo<JsonResult>();
             var json = (JsonResult)result;
 
-            json.Value.Should().Be(true);
+            json.Value.Should().Be(validationResult);
         }
     }
 }
