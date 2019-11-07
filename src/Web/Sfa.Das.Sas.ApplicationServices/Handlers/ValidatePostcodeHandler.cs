@@ -13,11 +13,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     public class ValidatePostcodeHandler : IRequestHandler<ValidatePostcodeQuery, bool>
     {
-        private readonly IPostcodeIoService _postcodeIoService;
+        private readonly IPostcodeService _postcodeService;
 
-        public ValidatePostcodeHandler(IPostcodeIoService postcodeIoService)
+        public ValidatePostcodeHandler(IPostcodeService postcodeService)
         {
-            _postcodeIoService = postcodeIoService;
+            _postcodeService = postcodeService;
         }
 
         public async Task<bool> Handle(ValidatePostcodeQuery request, CancellationToken cancellationToken)
@@ -27,7 +27,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 return false;
             }
 
-            var status = await _postcodeIoService.GetPostcodeStatus(request.Postcode);
+            var status = await _postcodeService.GetPostcodeStatus(request.Postcode);
             switch (status)
             {
                 case "England":

@@ -12,7 +12,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     [TestFixture]
     public class ValidatePostcodeHandlerTests
     {
-        private Mock<IPostcodeIoService> _mockPostcodeIOService;
+        private Mock<IPostcodeService> _mockPostcodeIOService;
         private ValidatePostcodeHandler _handler;
 
         private string englandPostcode => "EE1 2EE";
@@ -25,7 +25,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         [SetUp]
         public void Setup()
         {
-           _mockPostcodeIOService = new Mock<IPostcodeIoService>();
+           _mockPostcodeIOService = new Mock<IPostcodeService>();
 
            _mockPostcodeIOService.Setup(s => s.GetPostcodeStatus(englandPostcode)).ReturnsAsync("England");
            _mockPostcodeIOService.Setup(s => s.GetPostcodeStatus(walesPostcode)).ReturnsAsync("Wales");

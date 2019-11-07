@@ -9,7 +9,7 @@ using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.ApplicationServices.Services
 {
-    public class PostcodeIoService : IPostcodeIoService
+    public class PostcodeIoService : IPostcodeService
     {
         private readonly IRetryWebRequests _retryService;
         private readonly ILog _logger;
