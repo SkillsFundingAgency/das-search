@@ -173,6 +173,7 @@
     <Compile Include="Handlers\GetFrameworkProvidersHandler.cs" />
     <Compile Include="Handlers\GetStandardHandler.cs" />
     <Compile Include="Handlers\GetStandardProvidersHandler.cs" />
+    <Compile Include="Handlers\ValidatePostcodeHandler.cs" />
     <Compile Include="Handlers\XmlDocumentSerialiser.cs" />
     <Compile Include="Http\IHttpGet.cs" />
     <Compile Include="Http\HttpService.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Queries\ProviderDetailQuery.cs" />
     <Compile Include="Queries\ProviderNameSearchQuery.cs" />
     <Compile Include="Queries\SitemapQuery.cs" />
+    <Compile Include="Queries\ValidatePostcodeQuery.cs" />
     <Compile Include="Queries\StatsQuery.cs" />
     <Compile Include="Queries\ApprenticeshipSearchQuery.cs" />
     <Compile Include="Responses\ApprenticeshipSearchResponse.cs" />
@@ -244,7 +246,7 @@
     <Compile Include="Responses\StandardProviderSearchResponse.cs" />
     <Compile Include="Responses\StatsResponse.cs" />
     <Compile Include="Services\IPaginationOrientationService.cs" />
-    <Compile Include="Services\IPostcodeIoService.cs" />
+    <Compile Include="Services\IPostcodeService.cs" />
     <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
     <Compile Include="Services\PaginationOrientationService.cs" />
     <Compile Include="Services\PostcodeIoService.cs" />

@@ -27,13 +27,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         private Mock<IPaginationSettings> _mockPaginationSettings;
 
         private ProviderSearchHandler _handler;
-        private Mock<IPostcodeIoService> _mockPostcodeIoService;
+        private Mock<IPostcodeService> _mockPostcodeIoService;
 
         [SetUp]
         public void Setup()
         {
             _mockSearchService = new Mock<IProviderSearchService>();
-            _mockPostcodeIoService = new Mock<IPostcodeIoService>();
+            _mockPostcodeIoService = new Mock<IPostcodeService>();
             _mockLogger = new Mock<ILog>();
             _mockPaginationSettings = new Mock<IPaginationSettings>();
 
