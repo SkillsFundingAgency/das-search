@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.Services
 {
-    public interface IPostcodeIoService
+    public interface IPostcodeService
     {
         Task<string> GetPostcodeStatus(string postcode);
     }
