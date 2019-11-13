@@ -1,8 +1,9 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.SearchSummary
 @using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
-@model TrainingProviderSearchSummaryViewModel
+@using  Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
+@model Sfa.Das.Sas.Shared.Components.ViewModels.SearchResultsViewModel<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>
 @inject ICssViewModel cssViewModel
+
 
 <p>
     Sorry, we’re unable to provide results for locations outside the UK. You can use this website to find training providers in England,

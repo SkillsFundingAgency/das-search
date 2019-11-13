@@ -23,11 +23,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
             switch (model.Status)
             {
                 case ProviderSearchResponseCodes.Success:
-                case ProviderSearchResponseCodes.ScotlandPostcode:
-                case ProviderSearchResponseCodes.WalesPostcode:
-                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
-                case ProviderSearchResponseCodes.PostCodeTerminated:
-                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
                     return View("../TrainingProvider/SearchFilter/Default", model);
                 default:
                     return Content(string.Empty);

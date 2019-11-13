@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
@@ -21,15 +22,22 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
             var model = await _tpOrchestrator.GetSearchResults(searchQueryModel);
 
 
-            if (model.Status == ProviderSearchResponseCodes.Success)
+            switch (model.Status)
             {
-                return View("../TrainingProvider/SearchResults/Default", model);
+                case ProviderSearchResponseCodes.Success:
+                    return View("../TrainingProvider/SearchResults/Default", model);
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                    return View("../TrainingProvider/SearchResults/Scotland", model);
+                case ProviderSearchResponseCodes.WalesPostcode:
+                    return View("../TrainingProvider/SearchResults/Wales", model);
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                    return View("../TrainingProvider/SearchResults/NorthernIreland", model);
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                    return View("../TrainingProvider/SearchResults/NonUK", model);
+                default:
+                    return Content(string.Empty);
             }
-            else
-            {
-                return Content(string.Empty);
-            }
-
         }
     }
 }

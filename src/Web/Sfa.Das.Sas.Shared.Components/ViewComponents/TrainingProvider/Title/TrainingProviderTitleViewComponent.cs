@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
                     case ProviderSearchResponseCodes.PostCodeInvalidFormat:
                         return View("../TrainingProvider/Title/NonUK");
                     default:
-                        return Content(title);
+                        return Content(string.Empty);
                 }
             }
 

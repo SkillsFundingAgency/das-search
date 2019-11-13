@@ -50,13 +50,11 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.SearchSu
             switch (result.Status)
             {
                 case ProviderSearchResponseCodes.ScotlandPostcode:
-                    return View("../TrainingProvider/SearchSummary/Scotland", model);
+                   
                 case ProviderSearchResponseCodes.WalesPostcode:
-                    return View("../TrainingProvider/SearchSummary/Wales", model);
                 case ProviderSearchResponseCodes.NorthernIrelandPostcode:
-                    return View("../TrainingProvider/SearchSummary/NorthernIreland", model);
                 case ProviderSearchResponseCodes.PostCodeInvalidFormat:
-                    return View("../TrainingProvider/SearchSummary/NonUK", model);
+                    return Content(string.Empty);
                 default:
                     return View("../TrainingProvider/SearchSummary/Default", model);
             }
