@@ -23,7 +23,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
         public bool Add(string apprenticeshipId)    
         {
-            if (_items.Any(x => x.ApprenticeshipId == apprenticeshipId))
+            if (IsInBasket(apprenticeshipId))
             {
                 return false;
             }
@@ -37,24 +37,59 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
         public bool Add(string apprenticeshipId, int ukprn)
         {
-            var apprenticeship = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
-
-            if (apprenticeship == null)
+            if (!IsInBasket(apprenticeshipId))
             {
                 _items.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn));
                 return true;
             }
 
-            if (apprenticeship.Ukprns.Contains(ukprn))
+            if (IsInBasket(apprenticeshipId,ukprn))
             {
                 return false;
             }
-            else
-            {
-                apprenticeship.Ukprns.Add(ukprn);
 
+            _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Provider.Add(ukprn,new List<int>());
+
+            return true;
+        }
+
+        public bool Add(string apprenticeshipId, int ukprn, int location)
+        {
+            if (!IsInBasket(apprenticeshipId))
+            {
+                _items.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn, location));
                 return true;
             }
+
+            if (IsInBasket(apprenticeshipId, ukprn, location))
+            {
+                return false;
+            }
+
+            if (IsInBasket(apprenticeshipId,ukprn))
+            {
+                var item = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Provider[ukprn];
+
+                item.Add(location);
+            }
+            else
+            {
+                _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Provider.Add(ukprn, new List<int>(){location});
+            }
+
+            return true;
+        }
+
+        public bool IsInBasket(string apprenticeshipId, int ukprn, int location)
+        {
+            if (IsInBasket(apprenticeshipId, ukprn))
+            {
+                var provider = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Provider[ukprn];
+
+                return provider.Contains(location);
+            }
+
+            return false;
         }
 
         public bool IsInBasket(string apprenticeshipId, int? ukprn = null)
@@ -71,7 +106,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
                     return false;
                 else
                 {
-                    return ukprn.HasValue ? apprenticeship.Ukprns.Contains(ukprn.Value) : false;
+                    return apprenticeship.Provider.Any(w => w.Key == ukprn);
                 }
             }
         }
@@ -83,7 +118,13 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
         public void Remove(string apprenticeshipId, int ukprn)
         {
-            _items.FirstOrDefault(w => w.ApprenticeshipId == apprenticeshipId)?.Ukprns.Remove(ukprn);
+            _items.FirstOrDefault(w => w.ApprenticeshipId == apprenticeshipId)?.Provider.Remove(ukprn);
+        }
+
+        public void Remove(string apprenticeshipId, int ukprn, int location)
+        {
+            var provider = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Provider[ukprn];
+            provider?.Remove(location);
         }
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator() 
         {

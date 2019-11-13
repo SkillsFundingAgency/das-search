@@ -41,11 +41,24 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
             else
             {
-                if (request.Ukprn.HasValue)
+
+                if (request.Ukprn.HasValue && request.Location.HasValue)
                 {
-                    if (basket.IsInBasket(request.ApprenticeshipId,request.Ukprn.Value))
+                    if (basket.IsInBasket(request.ApprenticeshipId, request.Ukprn.Value, request.Location.Value))
                     {
-                        basket.Remove(request.ApprenticeshipId,request.Ukprn.Value);
+                        basket.Remove(request.ApprenticeshipId, request.Ukprn.Value, request.Location.Value);
+                        basketChanged = true;
+                    }
+                    else
+                    {
+                        basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value, request.Location.Value);
+                    }
+                }
+                else if (request.Ukprn.HasValue)
+                {
+                    if (basket.IsInBasket(request.ApprenticeshipId, request.Ukprn.Value))
+                    {
+                        basket.Remove(request.ApprenticeshipId, request.Ukprn.Value);
                         basketChanged = true;
                     }
                     else
