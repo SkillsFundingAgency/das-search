@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
             _apprenticeshipOrchestrator = apprenticeshipOrchestrator;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(TrainingProviderDetailQueryViewModel providerDetailsQueryModel, TrainingProviderSearchViewModel searchQueryModel, string title)
+        public async Task<IViewComponentResult> InvokeAsync(TrainingProviderDetailQueryViewModel providerDetailsQueryModel, TrainingProviderSearchViewModel searchQueryModel)
         {
             if (providerDetailsQueryModel != null)
             {
@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
                     case ProviderSearchResponseCodes.PostCodeInvalidFormat:
                         return View("../TrainingProvider/Title/NonUK");
                     default:
-                        return Content(string.Empty);
+                        return View("../TrainingProvider/Title/Default", "Training provider results");
                 }
             }
 
