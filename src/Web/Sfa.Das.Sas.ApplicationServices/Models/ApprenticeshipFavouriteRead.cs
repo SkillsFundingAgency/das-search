@@ -20,5 +20,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public int Duration { get; set; }
         public int Level { get; set; }
         public DateTime? EffectiveTo { get; set; }
+        public ApprenticeshipType ApprenticeshipType { get; set; }
     }
 }
