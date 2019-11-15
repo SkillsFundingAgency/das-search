@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         {
             _items.AddRange(basket.Select(s => new ApprenticeshipFavouriteRead(s.ApprenticeshipId)
             {
-                Providers = s.Provider.Select(t => new ApprenticeshipProviderFavourite(t.Key,t.Value)).ToList()
+                Providers = s.Providers.Select(t => new ApprenticeshipProviderFavourite(t.Key,t.Value)).ToList()
             }));
         }
 

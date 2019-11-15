@@ -144,7 +144,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             await _sut.Handle(request, default(CancellationToken));
 
-            _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123" && a[0].Provider.Keys.Contains(12345678))));
+            _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123" && a[0].Providers.Keys.Contains(12345678))));
         }
 
         [Test]
@@ -175,8 +175,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(1);
-            favourite.Provider.Keys.First().Should().Be(12345678);
+            favourite.Providers.Count.Should().Be(1);
+            favourite.Providers.Keys.First().Should().Be(12345678);
         }
 
         [Test]
@@ -207,8 +207,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(1);
-            favourite.Provider.Keys.First().Should().Be(12345678);
+            favourite.Providers.Count.Should().Be(1);
+            favourite.Providers.Keys.First().Should().Be(12345678);
         }
 
         [Test]
@@ -239,8 +239,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(1);
-            favourite.Provider.Keys.Should().NotContain(12345678);
+            favourite.Providers.Count.Should().Be(1);
+            favourite.Providers.Keys.Should().NotContain(12345678);
         }
 
 
@@ -275,11 +275,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(1);
-            favourite.Provider.Keys.First().Should().Be(12345678);
-            favourite.Provider.First().Value.Count().Should().Be(1);
-            favourite.Provider.First().Value.Contains(10000020);
+            favourite.Providers.Should().NotBeNull();
+            favourite.Providers.Count.Should().Be(1);
+            favourite.Providers.Keys.First().Should().Be(12345678);
+            favourite.Providers.First().Value.Count().Should().Be(1);
+            favourite.Providers.First().Value.Contains(10000020);
         }
 
         [Test]
@@ -311,11 +311,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(1);
-            favourite.Provider.Keys.First().Should().Be(12345678);
-            favourite.Provider.First().Value.Count().Should().Be(1);
-            favourite.Provider.First().Value.Contains(10000020);
+            favourite.Providers.Should().NotBeNull();
+            favourite.Providers.Count.Should().Be(1);
+            favourite.Providers.Keys.First().Should().Be(12345678);
+            favourite.Providers.First().Value.Count().Should().Be(1);
+            favourite.Providers.First().Value.Contains(10000020);
         }
 
         [Test]
@@ -347,11 +347,11 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(1);
-            favourite.Provider.Keys.First().Should().Be(12345678);
-            favourite.Provider.First().Value.Count().Should().Be(2);
-            favourite.Provider.First().Value.Contains(10000020);
+            favourite.Providers.Should().NotBeNull();
+            favourite.Providers.Count.Should().Be(1);
+            favourite.Providers.Keys.First().Should().Be(12345678);
+            favourite.Providers.First().Value.Count().Should().Be(2);
+            favourite.Providers.First().Value.Contains(10000020);
         }
 
         [Test]
@@ -382,8 +382,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(1);
-            favourite.Provider.Keys.First().Should().Be(12345678);
+            favourite.Providers.Count.Should().Be(1);
+            favourite.Providers.Keys.First().Should().Be(12345678);
         }
 
         [Test]
@@ -415,8 +415,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Provider.Count.Should().Be(2);
-            favourite.Provider[12345678].Should().NotContain(12345678);
+            favourite.Providers.Count.Should().Be(2);
+            favourite.Providers[12345678].Should().NotContain(12345678);
         }
     }
 }
