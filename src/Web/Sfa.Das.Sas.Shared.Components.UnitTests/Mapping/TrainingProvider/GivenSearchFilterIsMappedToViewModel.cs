@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
     public class GivenSearchFilterIsMappedToViewModel
     {
         private TrainingProviderSearchFilterViewModelMapper _sut;
-        private ProviderSearchResponse _resultsItemToMap;
+        private GroupedProviderSearchResponse _resultsItemToMap;
         private TrainingProviderSearchViewModel _queryItemToMap;
 
         [SetUp]
@@ -24,43 +24,29 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
 
             _sut = new TrainingProviderSearchFilterViewModelMapper();
 
-            _resultsItemToMap = new ProviderSearchResponse()
+            _resultsItemToMap = new GroupedProviderSearchResponse()
             {
                 CurrentPage = 1,
                 SearchTerms = "Terms",
                 ShowAllProviders = true,
                 ShowOnlyNationalProviders = true,
                 StatusCode = ProviderSearchResponseCodes.Success,
-                Results = new ProviderSearchResults()
+                Results = new GroupedProviderSearchResults()
                 {
                     ActualPage = 1,
-                    ApprenticeshipId = "157",
-                    Hits = new List<ProviderSearchResultItem>()
+                    Hits = new List<GroupedProviderSearchResultItem>()
                     {
 
                     },
                     PostCode = "Postcode",
                     PostCodeMissing = false,
                     ResultsToTake = 10,
-                    NationalProviders = new Dictionary<string, long?>()
-                    {
-                        {"true",100 },
-                        {"false",100 }
-                    } ,
-                    TrainingOptionsAggregation = new Dictionary<string, long?>()
-                    {
-                        { "blockrelease", 44},
-                        { "dayrelease", 28},
-                        { "100percentemployer", 31}
-                    }
-
-
+                    HasNationalProviders = true
                 }
             };
             _queryItemToMap = new TrainingProviderSearchViewModel()
             {
                 ApprenticeshipId = "157",
-                DeliveryModes = new List<string>() { "0", "1", "2" },
                 IsLevyPayer = false,
                 Keywords = "words",
                 NationalProvidersOnly = false,
@@ -77,7 +63,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
             var result = _sut.Map(_resultsItemToMap, _queryItemToMap);
 
             result.Should().BeOfType<TrainingProviderSearchFilterViewModel>();
-          result.Should().NotBeNull();
+            result.Should().NotBeNull();
         }
 
         [Test]
@@ -88,17 +74,12 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
             result.Page.Should().Be(_queryItemToMap.Page);
             result.Keywords.Should().Be(_queryItemToMap.Keywords);
             result.ResultsToTake.Should().Be(_queryItemToMap.ResultsToTake);
-            result.DeliveryModes.Should().BeEquivalentTo(_queryItemToMap.DeliveryModes);
             result.SortOrder.Should().Be(_queryItemToMap.SortOrder);
             result.IsLevyPayer.Should().Be(_queryItemToMap.IsLevyPayer);
             result.Postcode.Should().Be(_queryItemToMap.Postcode);
             result.NationalProvidersOnly.Should().Be(_queryItemToMap.NationalProvidersOnly);
-
+            result.HasNationalProviders.Should().Be(_resultsItemToMap.Results.HasNationalProviders);
             result.NationalProvidersOnly.Should().Be(_queryItemToMap.NationalProvidersOnly);
-            result.NationalProviders.Should().NotBeEmpty();
-            result.NationalProviders.Should().HaveCount(2);
-            result.TrainingOptions.Should().NotBeEmpty();
-            result.TrainingOptions.Should().HaveCount(_queryItemToMap.DeliveryModes.Count());
             result.Status.Should().Be(_resultsItemToMap.StatusCode);
         }
 
@@ -112,8 +93,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
             result.Page.Should().Be(_queryItemToMap.Page);
             result.Keywords.Should().Be(_queryItemToMap.Keywords);
             result.ResultsToTake.Should().Be(_queryItemToMap.ResultsToTake);
-            result.NationalProviders.Should().BeEmpty();
-            result.TrainingOptions.Should().BeEmpty();
+            result.HasNationalProviders.Should().Be(false);
         }
     }
 }

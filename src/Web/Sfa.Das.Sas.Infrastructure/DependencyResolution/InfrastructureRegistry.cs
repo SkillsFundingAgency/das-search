@@ -59,7 +59,8 @@ namespace Sfa.Das.Sas.Infrastructure.DependencyResolution
             For<IPaginationOrientationService>().Use<PaginationOrientationService>();
 
             For<ISearchApi>().Use(RestService.For<ISearchApi>(new FatSettings().FatApiBaseUrl)).Singleton();
-            For<ISearchVApi>().Use(RestService.For<ISearchVApi>(new FatSettings().FatApiBaseUrl)).Singleton();
+            For<ISearchV3Api>().Use(RestService.For<ISearchV3Api>(new FatSettings().FatApiBaseUrl)).Singleton();
+            For<ISearchV4Api>().Use(RestService.For<ISearchV4Api>(new FatSettings().FatApiBaseUrl)).Singleton();
             For<IProvidersVApi>().Use(RestService.For<IProvidersVApi>(new FatSettings().FatApiBaseUrl)).Singleton();
 
             For<IProviderApiClient>().Use(new ProviderApiClient(new FatSettings().FatApiBaseUrl));
