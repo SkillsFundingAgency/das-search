@@ -29,18 +29,21 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         private Mock<ICookieManager> _mockCookieManager;
         private BasketController _sut;
 
-        private readonly static SaveBasketFromApprenticeshipDetailsViewModel _addFromApprenticeshipDetailsModel = GetApprenticeshipDetailsRequestModel();
-        private readonly static SaveBasketFromApprenticeshipResultsViewModel _addFromApprenticeshipResultsModel = GetApprenticeshipResultsRequestModel();
-        private readonly static SaveBasketFromProviderDetailsViewModel _addFromProviderDetailsModel = GetProviderDetailsRequestModel();
-        private readonly static SaveBasketFromProviderSearchViewModel _addFromProviderSearchModel = GetProviderResultsRequestModel();
-        private readonly static DeleteFromBasketViewModel _deleteFromBasketViewModel = GetDeleteFromBasketViewModel();
-
-
-
+        private SaveBasketFromApprenticeshipDetailsViewModel _addFromApprenticeshipDetailsModel;
+        private SaveBasketFromApprenticeshipResultsViewModel _addFromApprenticeshipResultsModel;
+        private SaveBasketFromProviderDetailsViewModel _addFromProviderDetailsModel;
+        private SaveBasketFromProviderSearchViewModel _addFromProviderSearchModel;
+        private DeleteFromBasketViewModel _deleteFromBasketViewModel;
 
         [SetUp]
         public void Setup()
         {
+            _addFromApprenticeshipDetailsModel = GetApprenticeshipDetailsRequestModel();
+            _addFromApprenticeshipResultsModel = GetApprenticeshipResultsRequestModel();
+            _addFromProviderDetailsModel = GetProviderDetailsRequestModel();
+            _addFromProviderSearchModel = GetProviderResultsRequestModel();
+            _deleteFromBasketViewModel = GetDeleteFromBasketViewModel();
+
             // Set cookie in http request
             _mockMediator = new Mock<IMediator>();
             _mockCookieManager = new Mock<ICookieManager>();
@@ -75,10 +78,11 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         }
 
         [Test]
-        public async Task AddApprenticeshipFromDetails_UsesBasketIdFromCookie_IfCookieExists()
+        public async Task AddApprenticeshipFromDetails_UsesBasketIdFromCookieForUpdate_IfCookieExists()
         {
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
+            _addFromApprenticeshipDetailsModel.ItemId = "333"; // Set to a new apprenticeship value
 
             var result = await _sut.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
 
@@ -140,6 +144,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
+            _addFromApprenticeshipResultsModel.ItemId = "333"; // Set new apprenticeship value
 
             var result = await _sut.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
 
@@ -199,6 +204,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
+            _addFromProviderDetailsModel.ItemId = 33; // Set new apprenticeship value
 
             var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
 
@@ -262,6 +268,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
+            _addFromProviderSearchModel.ItemId = 33; // Set new apprenticeship value
 
             var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
 
