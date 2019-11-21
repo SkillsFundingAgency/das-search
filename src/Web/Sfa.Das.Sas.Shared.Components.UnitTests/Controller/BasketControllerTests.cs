@@ -268,7 +268,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
-            _addFromProviderSearchModel.ItemId = 33; // Set new apprenticeship value
+            _addFromProviderSearchModel.ItemId = "33,10"; // Set new apprenticeship value
 
             var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
 
@@ -396,7 +396,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
         private static SaveBasketFromProviderSearchViewModel GetProviderResultsRequestModel() => new SaveBasketFromProviderSearchViewModel
         {
-            ItemId = UKPRN,
+            ItemId = $"{UKPRN.ToString()},{LOCATION_ID}",
             SearchQuery = new Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel
             {
                 ApprenticeshipId = APPRENTICESHIP_ID,
@@ -419,7 +419,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
 
             var basket = new ApprenticeshipFavouritesBasket();
-
             basket.Add(APPRENTICESHIP_ID, UKPRN);
 
             return new ApprenticeshipFavouritesBasketRead(basket);

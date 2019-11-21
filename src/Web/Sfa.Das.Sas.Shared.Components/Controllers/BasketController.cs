@@ -73,11 +73,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
         {
-            if (!await IsInBasket(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId))
+            if (!await IsInBasket(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId))
             {
-                await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.ItemId);
+                await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId);
             }
-            
 
             return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
         }
@@ -94,7 +93,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             return RedirectToAction("View", "Basket");
         }
 
-        private async Task UpdateApprenticeship(string apprenticeshipId, int? ukprn = null)
+        private async Task UpdateApprenticeship(string apprenticeshipId, int? ukprn = null, int? locationId = null)
         {
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
             Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
@@ -103,13 +102,14 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             {
                 ApprenticeshipId = apprenticeshipId,
                 Ukprn = ukprn,
-                BasketId = cookieBasketId
+                BasketId = cookieBasketId,
+                Location = locationId
             });
 
             _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
         }
 
-        private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn)
+        private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn, int? locationId = null)
         {
             // Get cookie
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
@@ -119,6 +119,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             {
                 var basket = await _mediator.Send(new GetBasketQuery { BasketId = cookieBasketId.Value });
 
+                if (ukprn != null && locationId != null)
+                {
+                    return basket.IsInBasket(apprenticeshipId, ukprn.Value, locationId.Value);
+                }
                 return basket.IsInBasket(apprenticeshipId, ukprn);
             }
 

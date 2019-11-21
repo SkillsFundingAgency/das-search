@@ -41,6 +41,18 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
             }
         }
 
+        public bool IsInBasket(string apprenticeshipId, int ukprn, int locationId)
+        {
+            if (IsInBasket(apprenticeshipId, ukprn))
+            {
+                var provider = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers.SingleOrDefault(w => w.Ukprn == ukprn);
+
+                return provider.Locations.Any(a => a == locationId);
+            }
+
+            return false;
+        }
+
         public IEnumerator<ApprenticeshipFavouriteRead> GetEnumerator()
         {
             return _items.GetEnumerator();

@@ -19,11 +19,12 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             _cookieManager = cookieManager;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int? ukprn = null)
+        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int? ukprn = null, int? location = null)
         {
             var model = new AddOrRemoveFromBasketViewModel
             {
                 ItemId = ukprn.HasValue ? ukprn.ToString() : apprenticeshipId,
+                LocationId = location,
                 IsInBasket = await IsInBasket(apprenticeshipId, ukprn)
             };
 
