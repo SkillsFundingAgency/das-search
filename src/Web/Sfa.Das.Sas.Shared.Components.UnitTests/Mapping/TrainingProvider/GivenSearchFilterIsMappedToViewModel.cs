@@ -99,6 +99,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping.TrainingProvider
             result.NationalProviders.Should().HaveCount(2);
             result.TrainingOptions.Should().NotBeEmpty();
             result.TrainingOptions.Should().HaveCount(_queryItemToMap.DeliveryModes.Count());
+            result.Status.Should().Be(_resultsItemToMap.StatusCode);
         }
 
         [Test]

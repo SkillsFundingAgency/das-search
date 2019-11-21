@@ -44,12 +44,19 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
             var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);
 
-            if (results.Success == false)
+            switch (model.Status)
             {
-                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
-               
+                case ProviderSearchResponseCodes.Success:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return model;
+                default:
+                    throw new Exception($"Unable to get provider search response: {results.StatusCode}");
             }
-            return _searchResultsViewModelMapper.Map(results, searchQueryModel);
+
         }
 
         public async Task<TrainingProviderSearchFilterViewModel> GetSearchFilter(TrainingProviderSearchViewModel searchQueryModel)
@@ -58,19 +65,24 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             {
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
-                DeliveryModes =searchQueryModel.DeliveryModes,
+                DeliveryModes = searchQueryModel.DeliveryModes,
                 NationalProvidersOnly = searchQueryModel.NationalProvidersOnly
             });
 
             var model = _trainingProviderSearchFilterViewModelMapper.Map(results, searchQueryModel);
 
-            if (results.Success == false)
+            switch (model.Status)
             {
-                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
-
+                case ProviderSearchResponseCodes.Success:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return model;
+                default:
+                    throw new Exception($"Unable to get provider search response: {results.StatusCode}");
             }
-
-            return model;
         }
 
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)

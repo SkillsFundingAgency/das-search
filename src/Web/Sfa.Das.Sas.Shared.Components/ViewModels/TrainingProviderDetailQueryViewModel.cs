@@ -16,7 +16,8 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
     {
         Details = 0,
         Contact = 1,
-        Summary = 2
+        Summary = 2,
+        Search = 3
         
     }
 }

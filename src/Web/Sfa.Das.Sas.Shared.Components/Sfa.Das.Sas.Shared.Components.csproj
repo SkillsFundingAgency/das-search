@@ -30,4 +30,20 @@
     <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\Components\TrainingProvider\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\Components\TrainingProvider\SearchResults\NorthernIreland.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\Components\TrainingProvider\SearchResults\Scotland.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\Components\TrainingProvider\SearchResults\Wales.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
