@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
         {
             if (providerDetailsQueryModel != null)
             {
-                providerDetailsQueryModel.ApprenticeshipType = _apprenticeshipOrchestrator.GetApprenticeshipType(searchQueryModel.ApprenticeshipId);
+                providerDetailsQueryModel.ApprenticeshipType = _apprenticeshipOrchestrator.GetApprenticeshipType(providerDetailsQueryModel.ApprenticeshipId);
                 var model = await _tpOrchestrator.GetDetails(providerDetailsQueryModel);
 
                 model.SearchQuery = providerDetailsQueryModel;
