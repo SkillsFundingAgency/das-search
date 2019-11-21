@@ -92,6 +92,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             apprenticeship.Duration = framework.Duration;
             apprenticeship.Level = framework.Level;
             apprenticeship.EffectiveTo = framework.EffectiveTo;
+            apprenticeship.ApprenticeshipType = ApprenticeshipType.Framework;
         }
 
         private void EnrichStandard(ApprenticeshipFavouriteRead apprenticeship)
@@ -102,6 +103,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             apprenticeship.Duration = standard.Duration;
             apprenticeship.Level = standard.Level;
             apprenticeship.EffectiveTo = standard.EffectiveTo;
+            apprenticeship.ApprenticeshipType = ApprenticeshipType.Standard;
         }
 
         public bool IsFramework(string id)
