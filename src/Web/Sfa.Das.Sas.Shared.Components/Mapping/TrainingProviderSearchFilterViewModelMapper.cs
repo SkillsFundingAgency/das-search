@@ -17,6 +17,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             result.Keywords = searchQueryModel.Keywords;
             result.SortOrder = searchQueryModel.SortOrder;
             result.Postcode = searchQueryModel.Postcode;
+            result.Status = item.StatusCode;
 
             result.NationalProviders = new List<FilterViewModel>();
 

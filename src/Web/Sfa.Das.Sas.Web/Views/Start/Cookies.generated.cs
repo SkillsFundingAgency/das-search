@@ -229,7 +229,7 @@ WriteLiteral(" class=\"form-hint\"");
 
 WriteLiteral(@">
                             <p>These cookies help us improve the relevancy of advertising campaigns you receive from us. </p>
-                            <p>We also share information about your use of our site with our social media, advertising and analytics partners, who may combine it with other information that they’ve collected from your use of their services.</p>
+                            <p>We also share information about your use of our site with our social media, advertising and analytics partners, who may combine it with other information that they’ve collected from your use of their services to guide the advertising that you receive on their service.</p>
                         </div>
 
                         <label");
@@ -290,6 +290,8 @@ WriteLiteral(">Find out more about cookies on this service</a></p>\r\n\r\n\r\n  
 WriteLiteral(" class=\"govuk-button\"");
 
 WriteLiteral(" type=\"submit\"");
+
+WriteLiteral(" id=\"btn-save-cookie-settings\"");
 
 WriteLiteral(">Save changes</button>\r\n            </form>\r\n\r\n\r\n        </div>\r\n        </div>\r\n" +
 "</main>");

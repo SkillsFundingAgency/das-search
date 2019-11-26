@@ -121,7 +121,10 @@
                                 <summary><span class="summary">Explain achievement rate</span></summary>
                                 <div class="panel panel-border-narrow">
                                     <p>Percentage of apprentices who successfully achieved a similar apprenticeship with this training provider.</p>
-                                    <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
+                                    @if (Model.OverallCohort != null)
+                                    {
+                                        <p>Based on the latest data for @Model.OverallCohort apprentices.</p>
+                                    }
                                     <p class="font-small">
                                         Source: <a href="@Model.AchievementRateSourceUrl" target="_blank" rel="external">Skills Funding Agency apprenticeship achievement rates</a>
                                     </p>

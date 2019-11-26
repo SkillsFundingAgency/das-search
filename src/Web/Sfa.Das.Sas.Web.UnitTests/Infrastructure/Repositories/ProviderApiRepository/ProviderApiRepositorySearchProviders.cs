@@ -24,8 +24,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
                 DeliveryModes = new List<string>() { "0","1","2"}
             };
             _mockProviderV3ApiClient.Setup(s =>
-                    s.GetByApprenticeshipIdAndLocationAsync(It.IsAny<string>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<bool>(),
-                        It.IsAny<string>()))
+                    s.GetByApprenticeshipIdAndLocationAsync(It.IsAny<string>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<string>(), 0))
                 .ReturnsAsync(new SFADASApprenticeshipsApiTypesV3ProviderApprenticeshipLocationSearchResult() { });
             _mockSearchResultsMapping.Setup(s => s.Map(It.IsAny<SFADASApprenticeshipsApiTypesV3ProviderApprenticeshipLocationSearchResult>())).Returns(new SearchResult<ProviderSearchResultItem>());
         }
@@ -42,7 +41,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Repositories
         {
             var result = await _sut.SearchProvidersByLocation("apiId", new Coordinate(), 1, 20, _providerSearchFilter);
 
-            _mockProviderV3ApiClient.Verify(v => v.GetByApprenticeshipIdAndLocationAsync("apiId",It.IsAny<double>(),It.IsAny<double>(),It.IsAny<int>(),It.IsAny<int>(),It.IsAny<bool>(),It.IsAny<bool>(),It.IsAny<string>()),Times.Once);
+            _mockProviderV3ApiClient.Verify(v => v.GetByApprenticeshipIdAndLocationAsync("apiId",It.IsAny<double>(),It.IsAny<double>(),It.IsAny<int>(),It.IsAny<int>(),It.IsAny<bool>(),It.IsAny<bool>(),It.IsAny<string>(), 0),Times.Once);
         }
 
         [Test]

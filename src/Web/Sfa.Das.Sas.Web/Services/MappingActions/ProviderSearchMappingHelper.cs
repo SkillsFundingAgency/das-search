@@ -44,7 +44,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions
 
             foreach (var item in nationalProvidersAggregation)
             {
-                if (item.Key == "1")
+                if (item.Key == "true")
                 {
                     viewModel = new NationalProviderViewModel
                     {

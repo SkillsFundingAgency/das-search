@@ -89,7 +89,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddSingleton<IValidator<ProviderSearchQuery>, ProviderSearchQueryValidator>();
             services.AddTransient<AbstractValidator<ApprenticeshipProviderDetailQuery>, ApprenticeshipProviderDetailQueryValidator>();
             services.AddTransient<AbstractValidator<GetFrameworkQuery>, FrameworkQueryValidator>();
-            services.AddTransient<IPostcodeIoService, PostcodeIoService>();
+            services.AddTransient<IPostcodeService, PostcodeIoService>();
             services.AddTransient<IGetProviderDetails, ProviderApiRepository>();
         }
 

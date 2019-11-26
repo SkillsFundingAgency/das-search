@@ -351,8 +351,91 @@ WriteLiteral(">\r\n                            Expires\r\n                      
 "n>These help to deliver our advertising when you visit Facebook or a digital pla" +
 "tform powered by Facebook Advertising</span>\r\n                        </td>\r\n   " +
 "                     <td>\r\n                            2 years\r\n                " +
-"        </td>\r\n                    </tr>\r\n                </tbody>\r\n            " +
-"</table>\r\n\r\n            <h2");
+"        </td>\r\n                    </tr>\r\n                    <tr>\r\n            " +
+"            <td>\r\n                            _ga\r\n                        </td>" +
+"\r\n                        <td>\r\n                            <span> Snapchat uses" +
+" Google Analytics to help improve their services. For example, they can use thes" +
+"e cookies to learn more about which features are the most popular with their use" +
+"rs and which ones might need some tweaks.</span>\r\n                        </td>\r" +
+"\n                        <td>\r\n                            2 years\r\n            " +
+"            </td>\r\n                    </tr>\r\n                    <tr>\r\n        " +
+"                <td>\r\n                            sc_at\r\n                       " +
+" </td>\r\n                        <td>\r\n                            <span> Snapcha" +
+"t uses this cookie to deliver advertisements, to make them more relevant and mea" +
+"ningful to consumers, and to track the efficiency of advertising campaigns. </sp" +
+"an>\r\n                        </td>\r\n                        <td>\r\n              " +
+"              1 year\r\n                        </td>\r\n                    </tr>\r\n" +
+"                    <tr>\r\n                        <td>\r\n                        " +
+"    Personalization_id\r\n                        </td>\r\n                        <" +
+"td>\r\n                            <span> Twitter uses this cookie for integration" +
+" of its services and sharing capabilities from the website to social media, as w" +
+"ell as tracking and targeting. </span>\r\n                        </td>\r\n         " +
+"               <td>\r\n                            2 years\r\n                      " +
+"  </td>\r\n                    </tr>\r\n                    <tr>\r\n                  " +
+"      <td>\r\n                            i/adsct\r\n                        </td>\r\n" +
+"                        <td>\r\n                            <span> Twitter uses th" +
+"is cookie to allow tailored advertising based on our actions on this website.</s" +
+"pan>\r\n                        </td>\r\n                        <td>\r\n             " +
+"               Session\r\n                        </td>\r\n                    </tr>" +
+"\r\n                    <tr>\r\n                        <td>\r\n                      " +
+"      ad_id\r\n                        </td>\r\n                        <td>\r\n      " +
+"                      <span> Amazon uses this cookie to allow tailored advertisi" +
+"ng based on our actions on this website. </span>\r\n                        </td>\r" +
+"\n                        <td>\r\n                            9 months\r\n           " +
+"             </td>\r\n                    </tr>\r\n                    <tr>\r\n       " +
+"                 <td>\r\n                            ad_privacy\r\n                 " +
+"       </td>\r\n                        <td>\r\n                            <span> A" +
+"mazon uses this cookie to allow tailored advertising based on our actions on thi" +
+"s website</span>\r\n                        </td>\r\n                        <td>\r\n " +
+"                           9 months\r\n                        </td>\r\n            " +
+"        </tr>\r\n                    <tr>\r\n                        <td>\r\n         " +
+"                   _ppcMktoCmp\r\n                        </td>\r\n                 " +
+"       <td>\r\n                            <span> This cookie is set by Marketo wi" +
+"th an ID from the link that brought you to the page. </span>\r\n                  " +
+"      </td>\r\n                        <td>\r\n                            30 days\r\n" +
+"                        </td>\r\n                    </tr>\r\n                    Th" +
+"is cookie is set by Marketo. This allows a website to track visitor behavior on " +
+"the sites on which the cookie is installed and to link a visitor to the recipien" +
+"t of an email marketing campaign, to measure campaign effectiveness. Tracking is" +
+" performed anonymously until a user is identified by submitting a form.\r\n       " +
+"             <tr>\r\n                        <td>\r\n                            _mk" +
+"to_trk\r\n                        </td>\r\n                        <td>\r\n           " +
+"                 <span> This cookie is set by Marketo. This allows a website to " +
+"track visitor behavior on the sites on which the cookie is installed and to link" +
+" a visitor to the recipient of an email marketing campaign, to measure campaign " +
+"effectiveness. Tracking is performed anonymously until a user is identified by s" +
+"ubmitting a form. </span>\r\n                        </td>\r\n                      " +
+"  <td>\r\n                            2 years\r\n                        </td>\r\n    " +
+"                </tr>\r\n                    <tr>\r\n                        <td>\r\n " +
+"                           L1c\r\n                        </td>\r\n                 " +
+"       <td>\r\n                            <span>Linkedin uses this cookie to allo" +
+"w tailored advertising based on our actions on this website. </span>\r\n          " +
+"              </td>\r\n                        <td>\r\n                            S" +
+"ession\r\n                        </td>\r\n                    </tr>\r\n              " +
+"      <tr>\r\n                        <td>\r\n                            BizoID\r\n  " +
+"                      </td>\r\n                        <td>\r\n                     " +
+"       <span>Linkedin uses this cookie to allow tailored advertising based on ou" +
+"r actions on this website. </span>\r\n                        </td>\r\n             " +
+"           <td>\r\n                            6 months\r\n                        <" +
+"/td>\r\n                    </tr>\r\n                    <tr>\r\n                     " +
+"   <td>\r\n                            BizoData\r\n                        </td>\r\n  " +
+"                      <td>\r\n                            <span>Linkedin uses this" +
+" cookie to allow tailored advertising based on our actions on this website. </sp" +
+"an>\r\n                        </td>\r\n                        <td>\r\n              " +
+"              6 months\r\n                        </td>\r\n                    </tr>" +
+"\r\n                    <tr>\r\n                        <td>\r\n                      " +
+"      BizoUserMatchHistory\r\n                        </td>\r\n                     " +
+"   <td>\r\n                            <span> Linkedin uses this cookie to allow t" +
+"ailored advertising based on our actions on this website.</span>\r\n              " +
+"          </td>\r\n                        <td>\r\n                            6 mon" +
+"ths\r\n                        </td>\r\n                    </tr>\r\n                 " +
+"   <tr>\r\n                        <td>\r\n                            BizoNetworkPa" +
+"rtnerIndex\r\n                        </td>\r\n                        <td>\r\n       " +
+"                     <span> Linkedin uses this cookie to allow tailored advertis" +
+"ing based on our actions on this website.</span>\r\n                        </td>\r" +
+"\n                        <td>\r\n                            6 months\r\n           " +
+"             </td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n     " +
+"       </table>\r\n\r\n            <h2");
 
 WriteLiteral(" class=\"heading-medium\"");
 

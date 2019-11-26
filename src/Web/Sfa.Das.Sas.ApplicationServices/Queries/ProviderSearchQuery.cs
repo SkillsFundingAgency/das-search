@@ -18,6 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Queries
 
         public int Page { get; set; }
         public int Take { get; set; } = 20;
+        public int Order { get; set; }
 
         public bool NationalProvidersOnly { get; set; }
 

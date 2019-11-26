@@ -6,5 +6,6 @@
         public string Postcode { get; set; }
         public string ApprenticeshipTitle { get; set; }
         public int ApprenticeshipLevel { get; set; }
+        public string Country { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
             For<AbstractValidator<ProviderSearchQuery>>().Use<ProviderSearchQueryValidator>();
             For<AbstractValidator<ApprenticeshipProviderDetailQuery>>().Use<ApprenticeshipProviderDetailQueryValidator>();
             For<AbstractValidator<GetFrameworkQuery>>().Use<FrameworkQueryValidator>();
-            For<IPostcodeIoService>().Use<PostcodeIoService>();
+            For<IPostcodeService>().Use<PostcodeIoService>();
         }
     }
 }

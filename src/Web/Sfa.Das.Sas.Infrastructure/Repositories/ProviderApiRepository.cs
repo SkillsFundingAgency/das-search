@@ -52,10 +52,31 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
             return await _providerApiClient.GetActiveApprenticeshipTrainingByProviderAsync(ukprn, pageNumber);
         }
 
-        public async Task<SearchResult<ProviderSearchResultItem>> SearchProvidersByLocation(string apprenticeshipId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter)
+        public async Task<SearchResult<ProviderSearchResultItem>> SearchProvidersByLocation(string apprenticeshipId, Coordinate coordinates, int page, int take, ProviderSearchFilter filter, int orderBy = 0)
         {
-            var result = await _providersV3Api.GetByApprenticeshipIdAndLocationAsync(apprenticeshipId, coordinates.Lat, coordinates.Lon, page, take, filter.HasNonLevyContract, filter.ShowNationalOnly, string.Join(",", filter.DeliveryModes));
-            
+            var deliveryModes = new List<string>();
+
+            foreach (var filterDeliveryMode in filter.DeliveryModes)
+            {
+                switch (filterDeliveryMode)
+                {
+                    case "dayrelease":
+                        deliveryModes.Add("0");
+                        break;
+                    case "blockrelease":
+                        deliveryModes.Add("1");
+
+                        break;
+                    case "100percentemployer":
+                        deliveryModes.Add("2");
+                        break;
+                    default:
+                        deliveryModes.Add(filterDeliveryMode);
+                        break;
+                }
+            }
+
+            var result = await _providersV3Api.GetByApprenticeshipIdAndLocationAsync(apprenticeshipId, coordinates.Lat, coordinates.Lon, page, take, filter.HasNonLevyContract, filter.ShowNationalOnly, string.Join(",", deliveryModes), orderBy);
 
             return _searchResultsMapping.Map(result);
         }
@@ -70,7 +91,6 @@ namespace Sfa.Das.Sas.Infrastructure.Repositories
                     $"Search term causing SearchTermTooShort: [{searchTerm}]");
 
                 results.SearchTerm = searchTerm;
-                results.HasError = true;
                 results.ResponseCode = ProviderNameSearchResponseCodes.SearchTermTooShort;
 
                 return results;
