@@ -265,7 +265,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 BasketId = basketId,
                 ApprenticeshipId = "123",
                 Ukprn = 12345678,
-                Location = 10000020
+                LocationId = 10000020
             };
 
             var response = await _sut.Handle(request, default(CancellationToken));
@@ -301,7 +301,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 BasketId = basketId,
                 ApprenticeshipId = "123",
                 Ukprn = 12345678,
-                Location = 10000020
+                LocationId = 10000020
             };
 
             var response = await _sut.Handle(request, default(CancellationToken));
@@ -337,7 +337,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 BasketId = basketId,
                 ApprenticeshipId = "123",
                 Ukprn = 12345678,
-                Location = 10000020
+                LocationId = 10000020
             };
 
             var response = await _sut.Handle(request, default(CancellationToken));
@@ -406,7 +406,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 BasketId = basketId,
                 ApprenticeshipId = "123",
                 Ukprn = 12345678,
-                Location = 10000020
+                LocationId = 10000020
             };
 
             var response = await _sut.Handle(request, default(CancellationToken));

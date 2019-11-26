@@ -103,7 +103,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
                 ApprenticeshipId = apprenticeshipId,
                 Ukprn = ukprn,
                 BasketId = cookieBasketId,
-                Location = locationId
+                LocationId = locationId
             });
 
             _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
