@@ -62,9 +62,9 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
         {
-            if (!await IsInBasket(queryModel.ApprenticeshipId, queryModel.ItemId))
+            if (!await IsInBasket(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationId))
             {
-                await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.ItemId);
+                await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationId);
             }
             return RedirectToAction("Details", "TrainingProvider", queryModel);
         }
