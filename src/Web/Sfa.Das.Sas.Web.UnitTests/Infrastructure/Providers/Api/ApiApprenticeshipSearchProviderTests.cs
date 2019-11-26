@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
 
     public class ApiApprenticeshipSearchProviderTests
     {
-        private Mock<ISearchVApi> _apprenticeshipProgrammeApiClientMock;
+        private Mock<ISearchV3Api> _apprenticeshipProgrammeApiClientMock;
         private Mock<IApprenticeshipSearchResultsMapping> _apprenticeshipSearchResultsMappingMock;
 
         private ApprenticeshipsSearchApiProvider _sut;
@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Providers.Api
                     }
             };
 
-            _apprenticeshipProgrammeApiClientMock = new Mock<ISearchVApi>();
+            _apprenticeshipProgrammeApiClientMock = new Mock<ISearchV3Api>();
             _apprenticeshipSearchResultsMappingMock = new Mock<IApprenticeshipSearchResultsMapping>();
 
             _apprenticeshipProgrammeApiClientMock

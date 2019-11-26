@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public interface ITrainingProviderSearchResultsItemViewModelMapper
     {
-        TrainingProviderSearchResultsItem Map(ProviderSearchResultItem item);
+        TrainingProviderSearchResultsItem Map(GroupedProviderSearchResultItem item);
     }
 }

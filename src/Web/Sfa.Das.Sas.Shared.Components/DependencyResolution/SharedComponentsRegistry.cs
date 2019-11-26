@@ -71,6 +71,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<ISearchResultsViewModelMapper, SearchResultsViewModelMapper>();
             services.AddTransient<IFeedbackViewModelMapper, FeedbackViewModelMapper>();
             services.AddTransient<ITrainingProviderDetailsViewModelMapper, TrainingProviderDetailsViewModelMapper>();
+            services.AddTransient<ITrainingProviderClosestLocationsViewModelMapper, TrainingProviderClosestLocationsViewModelMapper>();
             services.AddTransient<IBasketViewModelMapper,BasketViewModelMapper>();
             services.AddTransient<IApprenticeshipBasketItemViewModelMapper, ApprenticeshipBasketItemViewModelMapper>();
 
@@ -87,6 +88,8 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
             services.AddTransient<IProviderSearchService, ProviderSearchService>();
             services.AddTransient<IPaginationSettings, PaginationSettings>();
             services.AddSingleton<IValidator<ProviderSearchQuery>, ProviderSearchQueryValidator>();
+            services.AddSingleton<IValidator<GroupedProviderSearchQuery>, GroupedProviderSearchQueryValidator>();
+            services.AddSingleton<IValidator<GetClosestLocationsQuery>, GetClosestLocationsQueryValidator>();
             services.AddTransient<AbstractValidator<ApprenticeshipProviderDetailQuery>, ApprenticeshipProviderDetailQueryValidator>();
             services.AddTransient<AbstractValidator<GetFrameworkQuery>, FrameworkQueryValidator>();
             services.AddTransient<IPostcodeService, PostcodeIoService>();
@@ -139,7 +142,9 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddRefitClient<IProvidersVApi>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
-            services.AddRefitClient<ISearchVApi>()
+            services.AddRefitClient<ISearchV3Api>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
+            services.AddRefitClient<ISearchV4Api>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(sharedComponentsConfiguration.FatApiBaseUrl));
         }
 

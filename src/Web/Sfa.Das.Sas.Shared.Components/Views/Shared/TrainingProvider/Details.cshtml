@@ -27,6 +27,10 @@
     <div class="grid-column-two-thirds grid-column-two-thirds-from-desktop">
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model, ViewType = ViewType.Summary })
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model })
+        @if (!string.IsNullOrEmpty(Model.PostCode))
+        {
+            @await Component.InvokeAsync("ClosestLocations", new { Model.ApprenticeshipId, Model.Ukprn, Model.PostCode })
+        }
     </div>
     <div class="grid-column-one-third">
 

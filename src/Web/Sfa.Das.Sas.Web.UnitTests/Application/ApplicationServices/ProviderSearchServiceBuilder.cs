@@ -68,7 +68,7 @@
             return this;
         }
 
-        internal ProviderSearchService SetupProviderSearchProvider<T>(Func<IProviderSearchProvider, object> instance, SearchResult<ProviderSearchResultItem> searchResults)
+        internal ProviderSearchService SetupProviderSearchProvider<T>(Func<IProviderSearchProvider, object> instance, ProviderSearchResult<ProviderSearchResultItem> searchResults)
         {
             throw new NotImplementedException();
         }
