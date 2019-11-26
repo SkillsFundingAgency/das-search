@@ -1,12 +1,17 @@
 ﻿@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
-@model Tuple<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem,Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel>
+@model Tuple<Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.TrainingProviderSearchResultsItem, Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel>
 @inject ICssViewModel CssViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    var defaultDistanceText = Model.Item1.Distance + " miles away";
+    var distanceText = Model.Item1.HasOtherLocations ? defaultDistanceText + " - Available at other locations" : defaultDistanceText;
+}
 
 <li id="@Model.Item1.Ukprn" class="das-search-results__list-item">
     <article class="das-search-result">
         <h2 class="@CssViewModel.HeadingMedium @CssViewModel.UtilitiesCss.Margin("bottom",0)">
-            <a class="@CssViewModel.Link" href="/TrainingProvider/Details?ukprn=@Model.Item1.Ukprn&apprenticeshipId=@Model.Item2.ApprenticeshipId&LocationId=@Model.Item1.LocationId">@Model.Item1.Name</a>
+            <a class="@CssViewModel.Link" href="/TrainingProvider/Details?ukprn=@Model.Item1.Ukprn&apprenticeshipId=@Model.Item2.ApprenticeshipId&LocationId=@Model.Item1.LocationId&postCode=@Model.Item2.Postcode">@Model.Item1.Name</a>
             @if (Model.Item1.NationalProvider)
             {
                 <span class="das-tag--national">National</span>
@@ -15,21 +20,22 @@
 
         <dl class="@CssViewModel.List  das-search-result__details">
             <dt class="das-search-result__details-title">Distance:</dt>
-            <dd class="das-search-result__details-definition">@Model.Item1.Distance miles away</dd>
-            <dt class="das-search-result__details-title">Training options:</dt>
-            <dd class="das-search-result__details-definition">
-                <div class="das-search-results__training-options">
-                    <span class="@GetTrainingOptionsStatusClass("dayrelease",Model.Item1.DeliveryModes)">day release</span>
-                    <span class="@GetTrainingOptionsStatusClass("blockrelease",Model.Item1.DeliveryModes)">block release</span>
-                    <span class="@GetTrainingOptionsStatusClass("100percentemployer",Model.Item1.DeliveryModes)">at your location</span>
-                </div>
-            </dd>
+            <dd class="das-search-result__details-definition">@distanceText</dd>
+            @if (!string.IsNullOrWhiteSpace(Model.Item1.LocationAddress.AddressWithoutPostCode))
+            {
+                <dt class="das-search-result__details-definition vh">Address</dt>
+                <dd class="das-search-result__details-definition">
+                    <div class="das-search-result__address">
+                        <span class="das-search-result__address-icon"></span>@Model.Item1.LocationAddress.AddressWithoutPostCode, <strong>@Model.Item1.LocationAddress.PostCode</strong>
+                    </div>
+                </dd>
+            }
             <dt class="das-search-result__details-title">Employer satisfaction:</dt>
-            <dd class="das-search-result__details-definition">@Model.Item1.EmployerSatisfaction%</dd>
+            <dd class="das-search-result__details-definition">@FormatPercentageValues(Model.Item1.EmployerSatisfaction)</dd>
             <dt class="das-search-result__details-title">Learner satisfaction:</dt>
-            <dd class="das-search-result__details-definition">@Model.Item1.LearnerSatisfaction%</dd>
+            <dd class="das-search-result__details-definition">@FormatPercentageValues(Model.Item1.LearnerSatisfaction)</dd>
             <dt class="das-search-result__details-title">Achievement rate:</dt>
-            <dd class="das-search-result__details-definition">@Model.Item1.OverallAchievementRate%</dd>
+            <dd class="das-search-result__details-definition">@FormatPercentageValues(Model.Item1.OverallAchievementRate)</dd>
         </dl>
 
         @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Item2.ApprenticeshipId, ukprn = Model.Item1.Ukprn, location = Model.Item1.LocationId })
@@ -37,25 +43,14 @@
 </li>
 
 
+
 @functions
 {
-
-    string GetTrainingOptionsStatusClass(string trainingOption, IList<string> options)
+    string FormatPercentageValues(double? value)
     {
-        var cssClass = "das-search-results__training-options";
-        var classSuffix = string.Empty;
+        if (!value.HasValue)
+            return "no data available";
 
-        if (options.Contains(trainingOption,StringComparer.OrdinalIgnoreCase))
-        {
-            classSuffix = "--tick";
-        }
-        else
-        {
-            classSuffix = "--cross";
-        }
-
-        return $"{cssClass}{classSuffix}";
+        return value.Value + "%";
     }
-
-
 }

@@ -247,7 +247,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             redirect.ActionName.Should().Be("Search");
             var routeValues = redirect.RouteValues;
             routeValues["ApprenticeshipId"].Should().Be(_addFromProviderSearchModel.SearchQuery.ApprenticeshipId);
-            routeValues["DeliveryModes"].Should().Be(_addFromProviderSearchModel.SearchQuery.DeliveryModes);
             routeValues["IsLevyPayer"].Should().Be(_addFromProviderSearchModel.SearchQuery.IsLevyPayer);
             routeValues["NationalProvidersOnly"].Should().Be(_addFromProviderSearchModel.SearchQuery.NationalProvidersOnly);
             routeValues["Page"].Should().Be(_addFromProviderSearchModel.SearchQuery.Page);

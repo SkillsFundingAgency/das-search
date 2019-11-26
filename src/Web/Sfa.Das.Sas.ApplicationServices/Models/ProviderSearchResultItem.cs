@@ -12,7 +12,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public double? LearnerSatisfaction { get; set; }
         public double? OverallAchievementRate { get; set; }
         public List<string> DeliveryModes { get; set; }
-        public double Distance { get; set; }
+        public double? Distance { get; set; }
         public int LocationId { get; set; }
         public string LocationName { get; set; }
         public Address Address { get; set; }

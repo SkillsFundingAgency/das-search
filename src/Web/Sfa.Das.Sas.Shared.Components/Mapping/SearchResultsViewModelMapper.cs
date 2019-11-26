@@ -16,15 +16,16 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
         }
 
 
-        public SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> Map(ProviderSearchResponse source, TrainingProviderSearchViewModel query)
+        public SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> Map(GroupedProviderSearchResponse source, TrainingProviderSearchViewModel query)
         {
             source.SearchTerms = query.Postcode;
 
             var item = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>()
             {
-               
-                LastPage = source.Results.LastPage,
-                SearchQuery = query
+
+                LastPage = source.Results?.LastPage ?? 0,
+                SearchQuery = query,
+                Status = source.StatusCode
 
             };
 

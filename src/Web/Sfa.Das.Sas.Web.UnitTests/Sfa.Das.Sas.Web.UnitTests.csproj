@@ -243,8 +243,10 @@
     <Compile Include="Application\Handlers\AddOrRemoveFavouriteInBasketHandlerTests.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipProviderDetailHandlerTest.cs" />
+    <Compile Include="Application\Handlers\ValidatePostcodeHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderDetailHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderNameSearchHandlerTests.cs" />
+    <Compile Include="Application\Handlers\GetClosestLocationsHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderSearchHandlerTests.cs" />
     <Compile Include="Application\Handlers\SitemapHandlerTest.cs" />
     <Compile Include="Application\Handlers\GetStandardHandlerTest.cs" />

@@ -4,7 +4,7 @@
 @model Sfa.Das.Sas.Shared.Components.ViewModels.TrainingProviderDetailQueryViewModel
 @inject ICssViewModel CssViewModel
 
-<h1 class="@CssViewModel.HeadingXLarge">@await Component.InvokeAsync("TrainingProviderTitle", new { searchQueryModel = Model })</h1>
+<h1 class="@CssViewModel.HeadingXLarge">@await Component.InvokeAsync("TrainingProviderTitle", new { providerDetailsQueryModel = Model })</h1>
 
 <div class="grid-row">
     <form asp-controller="Basket" asp-action="AddProviderFromDetails" method="post">
@@ -27,6 +27,10 @@
     <div class="grid-column-two-thirds grid-column-two-thirds-from-desktop">
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model, ViewType = ViewType.Summary })
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model })
+        @if (!string.IsNullOrEmpty(Model.PostCode))
+        {
+            @await Component.InvokeAsync("ClosestLocations", new { Model.ApprenticeshipId, Model.Ukprn, Model.PostCode })
+        }
     </div>
     <div class="grid-column-one-third">
 
