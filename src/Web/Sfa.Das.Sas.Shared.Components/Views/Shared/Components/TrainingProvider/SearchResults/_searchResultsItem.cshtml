@@ -38,7 +38,7 @@
             <dd class="das-search-result__details-definition">@FormatPercentageValues(Model.Item1.OverallAchievementRate)</dd>
         </dl>
 
-        @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Item2.ApprenticeshipId, ukprn = Model.Item1.Ukprn })
+        @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Item2.ApprenticeshipId, ukprn = Model.Item1.Ukprn, location = Model.Item1.LocationId })
     </article>
 </li>
 

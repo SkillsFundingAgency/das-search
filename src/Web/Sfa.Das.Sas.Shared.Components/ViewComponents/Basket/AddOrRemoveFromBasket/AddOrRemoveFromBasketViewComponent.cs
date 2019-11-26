@@ -19,12 +19,13 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             _cookieManager = cookieManager;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int? ukprn = null)
+        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int? ukprn = null, int? locationId = null)
         {
             var model = new AddOrRemoveFromBasketViewModel
             {
                 ItemId = ukprn.HasValue ? ukprn.ToString() : apprenticeshipId,
-                IsInBasket = await IsInBasket(apprenticeshipId, ukprn)
+                LocationId = locationId,
+                IsInBasket = await IsInBasket(apprenticeshipId, ukprn, locationId)
             };
 
             if (RouteData?.Values["Controller"]?.ToString().ToLower() == "basket")
@@ -35,7 +36,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             return View("../Basket/AddOrRemoveFromBasket/Default", model);
         }
 
-        private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn)
+        private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn, int? locationId)
         {
             // Get cookie
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);
@@ -45,7 +46,15 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             {
                 var basket = await _mediator.Send(new GetBasketQuery { BasketId = cookieBasketId.Value });
 
-                return basket.IsInBasket(apprenticeshipId, ukprn);
+                if (locationId != null && ukprn != null)
+                {
+                    return basket.IsInBasket(apprenticeshipId, ukprn.Value, locationId.Value);
+                }
+                else
+                {
+                    return basket.IsInBasket(apprenticeshipId, ukprn);
+                }
+                
             }
 
             return false;

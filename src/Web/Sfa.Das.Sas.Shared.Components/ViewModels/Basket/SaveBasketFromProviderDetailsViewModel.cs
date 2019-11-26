@@ -3,5 +3,6 @@
     public class SaveBasketFromProviderDetailsViewModel : TrainingProviderDetailQueryViewModel
     {
         public int ItemId { get; set; }
+        public int LocationId { get; set; }
     }
 }
