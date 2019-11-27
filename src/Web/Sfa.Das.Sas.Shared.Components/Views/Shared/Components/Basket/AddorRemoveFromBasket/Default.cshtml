@@ -8,7 +8,17 @@
     var buttonText = Model.IsInBasket ? "Remove from Favourites" : "Add to Favourites";
 }
 
-<button type="submit" class="das-search-result__favourite-button--@buttonStatusClassSuffix" name="itemId" value="@Model.ItemId,@Model.LocationId">
-    @buttonText
-</button>
+@if (Model.LocationId.HasValue)
+{
+    <button type="submit" class="das-search-result__favourite-button--@buttonStatusClassSuffix" name="itemId" value="@Model.ItemId,@Model.LocationId">
+        @buttonText
+    </button>
+}
+else
+{
+    <button type="submit" class="das-search-result__favourite-button--@buttonStatusClassSuffix" name="itemId" value="@Model.ItemId">
+        @buttonText
+    </button>
+}
+
 
