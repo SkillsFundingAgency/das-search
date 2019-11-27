@@ -49,7 +49,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockMediator.Setup(s => s.Send<GroupedProviderSearchResponse>(It.IsAny<GroupedProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
             _mockSearchResultsViewModelMapper.Setup(s => s.Map(It.IsAny<GroupedProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchResultsViewModel);
             _mockTrainingProviderFilterViewModelMapper.Setup(s => s.Map(It.IsAny<GroupedProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchFilterViewModel);
-            _mockTrainingProviderClosestLocationsViewModelMapper.Setup(s => s.Map(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<GetClosestLocationsResponse>())).Returns(_closestLocationsViewModel);
+            _mockTrainingProviderClosestLocationsViewModelMapper.Setup(s => s.Map(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<GetClosestLocationsResponse>())).Returns(_closestLocationsViewModel);
 
             _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockTrainingProviderClosestLocationsViewModelMapper.Object);
         }
@@ -123,7 +123,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public async Task When_ClosestLocationsRequested_Then_ClosestLocationsViewModel_Is_Returned()
         {
-            var result = await _sut.GetClosestLocations("123", 12345678, "AB12 3DF");
+            var result = await _sut.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
 
             result.Should().BeOfType<ClosestLocationsViewModel>();
         }
@@ -131,16 +131,16 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public void When_ClosestLocationsRequested_Then_Mediator_Is_Called()
         {
-            var result = _sut.GetClosestLocations("123", 12345678, "AB12 3DF");
+            var result = _sut.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
 
             _mockMediator.Verify(s => s.Send<GetClosestLocationsResponse>(It.IsAny<GetClosestLocationsQuery>(), It.IsAny<CancellationToken>()), Times.Once);
         }
         [Test]
         public async Task When_ClosestLocationsRequested_Then_Search_Results_Are_Mapped_To_ViewModel()
         {
-            var result = await _sut.GetClosestLocations("123", 12345678, "AB12 3DF");
+            var result = await _sut.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
 
-            _mockTrainingProviderClosestLocationsViewModelMapper.Verify(v => v.Map("123", 12345678, "AB12 3DF", It.IsAny<GetClosestLocationsResponse>()));
+            _mockTrainingProviderClosestLocationsViewModelMapper.Verify(v => v.Map("123", 12345678, 222, "AB12 3DF", It.IsAny<GetClosestLocationsResponse>()));
         }
     }
 }

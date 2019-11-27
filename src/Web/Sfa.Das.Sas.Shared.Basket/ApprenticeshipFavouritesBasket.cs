@@ -123,8 +123,12 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
         public void Remove(string apprenticeshipId, int ukprn, int location)
         {
-            var provider = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers[ukprn];
+            var apprenticeship = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
+            var provider = apprenticeship?.Providers[ukprn];
             provider?.Remove(location);
+            
+            if (provider.Count == 0)
+                apprenticeship.Providers.Remove(ukprn);
         }
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator() 
         {

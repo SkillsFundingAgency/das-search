@@ -114,11 +114,11 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             return model;
         }
 
-        public async Task<ClosestLocationsViewModel> GetClosestLocations(string apprenticeshipId, int ukprn, string postCode)
+        public async Task<ClosestLocationsViewModel> GetClosestLocations(string apprenticeshipId, int ukprn, int locationId, string postCode)
         {
             var response = await _mediator.Send(new GetClosestLocationsQuery() { ApprenticeshipId = apprenticeshipId, Ukprn = ukprn, PostCode = postCode });
 
-            var model = _trainingProviderClosestLocationsViewModelMapper.Map(apprenticeshipId, ukprn, postCode, response);
+            var model = _trainingProviderClosestLocationsViewModelMapper.Map(apprenticeshipId, ukprn, locationId, postCode, response);
             
             return model;
         }

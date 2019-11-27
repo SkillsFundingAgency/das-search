@@ -11,6 +11,6 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         Task<SearchResultsViewModel<TrainingProviderSearchResultsItem,TrainingProviderSearchViewModel>> GetSearchResults(TrainingProviderSearchViewModel searchQueryModel);
         Task<TrainingProviderSearchFilterViewModel> GetSearchFilter(TrainingProviderSearchViewModel searchQueryModel);
         Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel);
-        Task<ClosestLocationsViewModel> GetClosestLocations(string apprenticeshipId, int ukprn, string postCode);
+        Task<ClosestLocationsViewModel> GetClosestLocations(string apprenticeshipId, int ukprn, int locationId, string postCode);
     }
 }
