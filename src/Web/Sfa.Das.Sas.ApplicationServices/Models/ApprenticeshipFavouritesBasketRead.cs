@@ -18,7 +18,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         {
             _items.AddRange(basket.Select(s => new ApprenticeshipFavouriteRead(s.ApprenticeshipId)
             {
-                Providers = s.Ukprns.Select(t => new ApprenticeshipProviderFavourite(t)).ToList()
+                Providers = s.Providers.Select(t => new ApprenticeshipProviderFavourite(t.Key,t.Value)).ToList()
             }));
         }
 
@@ -39,6 +39,18 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
                     return ukprn.HasValue ? apprenticeship.Providers.Select(s => s.Ukprn).Contains(ukprn.Value) : false;
                 }
             }
+        }
+
+        public bool IsInBasket(string apprenticeshipId, int ukprn, int locationId)
+        {
+            if (IsInBasket(apprenticeshipId, ukprn))
+            {
+                var provider = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers.SingleOrDefault(w => w.Ukprn == ukprn);
+
+                return provider.Locations.Any(a => a == locationId);
+            }
+
+            return false;
         }
 
         public IEnumerator<ApprenticeshipFavouriteRead> GetEnumerator()

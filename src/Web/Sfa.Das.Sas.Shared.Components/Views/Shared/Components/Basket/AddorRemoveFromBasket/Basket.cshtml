@@ -8,7 +8,7 @@
     var buttonText = Model.IsInBasket ? "Remove from Favourites" : "Add to Favourites";
 }
 
-<button type="submit" class="das-basket__item-delete" name="itemId" value="@Model.ItemId">
+<button type="submit" class="das-basket__item-delete" name="itemId" value="@Model.ItemId,@Model.LocationId">
     @buttonText
 </button>
 

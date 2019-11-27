@@ -63,51 +63,51 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
         }
 
         [Test]
-        public async Task When_WalesPostcode_Then_Wales_View_Is_Returned()
+        public async Task When_WalesPostcode_Then_No_Content_Is_Returned()
         {
             _mockTrainingProviderOrchestrator.Setup(s => s.GetSearchResults(It.IsAny<TrainingProviderSearchViewModel>()))
                 .ReturnsAsync(new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>() { Status = ProviderSearchResponseCodes.WalesPostcode });
 
-            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ContentViewComponentResult;
 
-            result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewName.Should().Be("../TrainingProvider/SearchSummary/Wales");
+            result.Should().BeOfType<ContentViewComponentResult>();
+            result.Content.Should().BeEmpty();
         }
 
         [Test]
-        public async Task When_ScotlandPostcode_Then_Scotland_View_Is_Returned()
+        public async Task When_ScotlandPostcode_Then_No_Content_Is_Returned()
         {
             _mockTrainingProviderOrchestrator.Setup(s => s.GetSearchResults(It.IsAny<TrainingProviderSearchViewModel>()))
                 .ReturnsAsync(new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>() { Status = ProviderSearchResponseCodes.ScotlandPostcode });
 
-            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ContentViewComponentResult;
 
-            result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewName.Should().Be("../TrainingProvider/SearchSummary/Scotland");
+            result.Should().BeOfType<ContentViewComponentResult>();
+            result.Content.Should().BeEmpty();
         }
 
         [Test]
-        public async Task When_NorthernIrelandPostcode_Then_NorthernIreland_View_Is_Returned()
+        public async Task When_NorthernIrelandPostcode_Then_No_Content_Is_Returned()
         {
             _mockTrainingProviderOrchestrator.Setup(s => s.GetSearchResults(It.IsAny<TrainingProviderSearchViewModel>()))
                 .ReturnsAsync(new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>() { Status = ProviderSearchResponseCodes.NorthernIrelandPostcode });
 
-            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ContentViewComponentResult;
 
-            result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewName.Should().Be("../TrainingProvider/SearchSummary/NorthernIreland");
+            result.Should().BeOfType<ContentViewComponentResult>();
+            result.Content.Should().BeEmpty();
         }
 
         [Test]
-        public async Task When_PostcodeInvalidFormat_Then_NonUK_View_Is_Returned()
+        public async Task When_PostcodeInvalidFormat_Then_No_Content_Is_Returned()
         {
             _mockTrainingProviderOrchestrator.Setup(s => s.GetSearchResults(It.IsAny<TrainingProviderSearchViewModel>()))
                 .ReturnsAsync(new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>() { Status = ProviderSearchResponseCodes.PostCodeInvalidFormat });
 
-            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ViewViewComponentResult;
+            var result = await _sut.InvokeAsync(new TrainingProviderSearchViewModel()) as ContentViewComponentResult;
 
-            result.Should().BeOfType<ViewViewComponentResult>();
-            result.ViewName.Should().Be("../TrainingProvider/SearchSummary/NonUK");
+            result.Should().BeOfType<ContentViewComponentResult>();
+            result.Content.Should().BeEmpty();
         }
     }
 }

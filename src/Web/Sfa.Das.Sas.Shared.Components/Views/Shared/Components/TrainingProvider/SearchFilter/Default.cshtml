@@ -8,11 +8,9 @@
     <input type="hidden" asp-for="@Model.Postcode" />
     <input type="hidden" asp-for="@Model.ApprenticeshipId" />
     <input type="hidden" asp-for="@Model.IsLevyPayer" />
-
     <input type="hidden" asp-for="@Model.Keywords" />
 
-    <partial name="Components/TrainingProvider/SearchFilter/_FilterProviders" model="Model.TrainingOptions" />
-    <partial name="Components/TrainingProvider/SearchFilter/_FilterNationalProviders" model="Model.NationalProviders" />
+    <partial name="Components/TrainingProvider/SearchFilter/_FilterNationalProviders" model="Model" />
 
     <input type="submit" value="Update results" class="@CssViewModel.ButtonSecondary" />
 </form>

@@ -24,6 +24,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         private const string APPRENTICESHIP_ID = "123";
         private const int UKPRN = 12345678;
         private const int LOCATION_ID = 123123;
+        private const int LOCATION_ID_TO_ADD = 5555;
         private const string BasketCookieName = "ApprenticeshipBasket";
         private Mock<IMediator> _mockMediator;
         private Mock<ICookieManager> _mockCookieManager;
@@ -204,7 +205,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
-            _addFromProviderDetailsModel.ItemId = 33; // Set new apprenticeship value
+            _addFromProviderDetailsModel.ItemId = "33,1234"; // Set new apprenticeship value
 
             var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
 
@@ -247,7 +248,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             redirect.ActionName.Should().Be("Search");
             var routeValues = redirect.RouteValues;
             routeValues["ApprenticeshipId"].Should().Be(_addFromProviderSearchModel.SearchQuery.ApprenticeshipId);
-            routeValues["DeliveryModes"].Should().Be(_addFromProviderSearchModel.SearchQuery.DeliveryModes);
             routeValues["IsLevyPayer"].Should().Be(_addFromProviderSearchModel.SearchQuery.IsLevyPayer);
             routeValues["NationalProvidersOnly"].Should().Be(_addFromProviderSearchModel.SearchQuery.NationalProvidersOnly);
             routeValues["Page"].Should().Be(_addFromProviderSearchModel.SearchQuery.Page);
@@ -268,7 +268,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
-            _addFromProviderSearchModel.ItemId = 33; // Set new apprenticeship value
+            _addFromProviderSearchModel.ItemId = "33,10"; // Set new apprenticeship value
 
             var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
 
@@ -385,18 +385,18 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
         private static SaveBasketFromProviderDetailsViewModel GetProviderDetailsRequestModel() => new SaveBasketFromProviderDetailsViewModel
         {
-            ItemId = UKPRN,
+            ItemId = $"{UKPRN},{LOCATION_ID_TO_ADD}",
             ApprenticeshipId = APPRENTICESHIP_ID,
             ApprenticeshipType = ApplicationServices.Models.ApprenticeshipType.Standard,
-            LocationId = LOCATION_ID,
             Page = 1,
             Ukprn = UKPRN,
+            LocationId = LOCATION_ID,
             ViewType = ViewModels.ViewType.Details
         };
 
         private static SaveBasketFromProviderSearchViewModel GetProviderResultsRequestModel() => new SaveBasketFromProviderSearchViewModel
         {
-            ItemId = UKPRN,
+            ItemId = $"{UKPRN.ToString()},{LOCATION_ID_TO_ADD}",
             SearchQuery = new Components.ViewComponents.TrainingProvider.Search.TrainingProviderSearchViewModel
             {
                 ApprenticeshipId = APPRENTICESHIP_ID,
@@ -419,7 +419,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
 
             var basket = new ApprenticeshipFavouritesBasket();
-
             basket.Add(APPRENTICESHIP_ID, UKPRN);
 
             return new ApprenticeshipFavouritesBasketRead(basket);

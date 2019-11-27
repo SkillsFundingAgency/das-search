@@ -46,11 +46,11 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Fat
             _mockTrainingProviderOrchestrator.Setup(s => s.GetSearchResults(It.IsAny<TrainingProviderSearchViewModel>()))
                 .ReturnsAsync(new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>() {Status = ProviderSearchResponseCodes.Success});
 
-            var result = await _sut.InvokeAsync(null,new TrainingProviderSearchViewModel(), title) as ContentViewComponentResult;
+            var result = await _sut.InvokeAsync(null,new TrainingProviderSearchViewModel(), title) as ViewViewComponentResult;
 
-            result.Should().BeOfType<ContentViewComponentResult>();
+            result.Should().BeOfType<ViewViewComponentResult>();
 
-            result.Content.Should().Be(title);
+            result.ViewData.Model.Should().Be(title);
         }
 
         [Test]

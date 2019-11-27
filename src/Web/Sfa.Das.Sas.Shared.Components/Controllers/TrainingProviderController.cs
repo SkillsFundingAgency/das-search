@@ -25,7 +25,6 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         {
             return View("TrainingProvider/Details", model);
         }
-
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> ValidatePostcode(string postcode)
         {

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
@@ -22,7 +21,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search
         [Required]
         public bool IsLevyPayer { get; set; }
 
-        public List<string> DeliveryModes { get; set; } = new List<string>(){"0","1","2"};
         public bool NationalProvidersOnly { get; set; }
     }
 }
