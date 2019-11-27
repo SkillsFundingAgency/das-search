@@ -38,10 +38,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
-            if (!await IsInBasket(queryModel.ItemId, null))
-            {
-                await UpdateApprenticeship(queryModel.ItemId);
-            }
+            await UpdateApprenticeship(queryModel.ItemId);
 
             return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
         }
@@ -50,10 +47,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
-            if (!await IsInBasket(queryModel.ItemId, null))
-            {
-                await UpdateApprenticeship(queryModel.ItemId);
-            }
+            await UpdateApprenticeship(queryModel.ItemId);
 
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
@@ -62,10 +56,8 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
         {
-            if (!await IsInBasket(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationId))
-            {
-                await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationId);
-            }
+            await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationIdToAdd);
+
             return RedirectToAction("Details", "TrainingProvider", queryModel);
         }
 
@@ -73,10 +65,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
         {
-            if (!await IsInBasket(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId))
-            {
-                await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId);
-            }
+            await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId);
 
             return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
         }

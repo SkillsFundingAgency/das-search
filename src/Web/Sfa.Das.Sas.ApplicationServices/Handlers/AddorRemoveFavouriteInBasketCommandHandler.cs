@@ -41,7 +41,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             }
             else
             {
-
                 if (request.Ukprn.HasValue && request.LocationId.HasValue)
                 {
                     if (basket.IsInBasket(request.ApprenticeshipId, request.Ukprn.Value, request.LocationId.Value))
@@ -94,7 +93,12 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         {
             var basket = new ApprenticeshipFavouritesBasket();
 
-            if (request.Ukprn.HasValue)
+            if (request.Ukprn.HasValue && request.LocationId.HasValue)
+            {
+                basket.Add(request.ApprenticeshipId, request.Ukprn.Value, request.LocationId.Value);
+
+            }
+            else if (request.Ukprn.HasValue)
             {
                 basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
             }

@@ -13,7 +13,7 @@
         <input type="hidden" asp-for="@Model.Page" />
         <input type="hidden" asp-for="@Model.Ukprn" />
         <div class="@(CssViewModel.FormCss.FormGroup)">
-            @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.ApprenticeshipId, ukprn = Model.Ukprn })
+            @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.ApprenticeshipId, ukprn = Model.Ukprn, locationId = Model.LocationId })
         </div>
     </form>
 </div>
@@ -29,7 +29,7 @@
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model })
         @if (!string.IsNullOrEmpty(Model.PostCode))
         {
-            @await Component.InvokeAsync("ClosestLocations", new { Model.ApprenticeshipId, Model.Ukprn, Model.PostCode })
+            @await Component.InvokeAsync("ClosestLocations", new { Model.ApprenticeshipId, Model.Ukprn, Model.LocationId, Model.PostCode })
         }
     </div>
     <div class="grid-column-one-third">

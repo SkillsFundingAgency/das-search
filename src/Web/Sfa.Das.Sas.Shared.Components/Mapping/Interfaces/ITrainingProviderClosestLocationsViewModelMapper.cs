@@ -5,6 +5,6 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public interface ITrainingProviderClosestLocationsViewModelMapper
     {
-        ClosestLocationsViewModel Map(string apprenticeshipId, int ukprn, string postcode, GetClosestLocationsResponse source);
+        ClosestLocationsViewModel Map(string apprenticeshipId, int ukprn, int locationId, string postcode, GetClosestLocationsResponse source);
     }
 }

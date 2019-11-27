@@ -131,7 +131,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         }
 
         [Test]
-        public async Task Handle_AddsProviderToBasket_ForNewBasket()
+        public async Task Handle_AddsProviderLocationToBasket_ForNewBasket()
         {
             var basketId = Guid.NewGuid();
 
@@ -139,12 +139,13 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             {
                 BasketId = null,
                 ApprenticeshipId = "123",
+                LocationId = 12345,
                 Ukprn = 12345678
             };
 
             await _sut.Handle(request, default(CancellationToken));
 
-            _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123" && a[0].Providers.Keys.Contains(12345678))));
+            _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123" && a[0].Providers.Keys.Contains(12345678) && a[0].Providers[12345678].Contains(12345))));
         }
 
         [Test]

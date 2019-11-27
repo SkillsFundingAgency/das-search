@@ -13,9 +13,9 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
             _trainingProviderOrchestrator = trainingProviderOrchestrator;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int ukprn, string postCode)
+        public async Task<IViewComponentResult> InvokeAsync(string apprenticeshipId, int ukprn, int locationId, string postCode)
         {
-            var model = await _trainingProviderOrchestrator.GetClosestLocations(apprenticeshipId, ukprn, postCode);
+            var model = await _trainingProviderOrchestrator.GetClosestLocations(apprenticeshipId, ukprn, locationId, postCode);
             
             return View("../TrainingProvider/ClosestLocations/Default", model);
         }

@@ -1,8 +1,10 @@
-﻿namespace Sfa.Das.Sas.Shared.Components.ViewModels.Basket
+﻿using System;
+
+namespace Sfa.Das.Sas.Shared.Components.ViewModels.Basket
 {
     public class SaveBasketFromProviderDetailsViewModel : TrainingProviderDetailQueryViewModel
     {
-        public int ItemId { get; set; }
-        public int LocationId { get; set; }
+        public string ItemId { get; set; }
+        public int LocationIdToAdd => Int32.Parse(ItemId.Split(',')[1]);
     }
 }
