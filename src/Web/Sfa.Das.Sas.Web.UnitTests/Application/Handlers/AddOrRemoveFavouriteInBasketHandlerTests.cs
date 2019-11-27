@@ -416,8 +416,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
-            favourite.Providers.Count.Should().Be(2);
-            favourite.Providers[12345678].Should().NotContain(12345678);
+            favourite.Providers.Count.Should().Be(1);
         }
     }
 }
