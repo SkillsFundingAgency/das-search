@@ -4,7 +4,7 @@
 @model Sfa.Das.Sas.Shared.Components.ViewModels.ClosestLocationsViewModel
 @inject ICssViewModel CssViewModel
 
-<h2 class="heading-m"><span class="badge-round badge-round--employer">@Model.Locations.Count</span> nearest @("location".ToQuantity(Model.Locations.Count, ShowQuantityAs.None)) for Boom Training Ltd:</h2>
+<h2 class="heading-m"><span class="badge-round badge-round--employer">@Model.Locations.Count</span> nearest @("location".ToQuantity(Model.Locations.Count, ShowQuantityAs.None)) for @Model.ProviderName:</h2>
 <details class="details">
     <summary class="details__summary"><span class="details__summary-text">View locations</span></summary>
     <div class="details__text">
