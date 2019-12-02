@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
@@ -31,7 +32,12 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
         {
             var basket = await _orchestrator.GetBasket();
 
-            return basket.Items?.Count ?? 0;
+            if (basket.Items == null)
+            {
+                return 0;
+            }
+
+            return basket.Items.Count + basket.Items.Where(x => x.TrainingProvider != null).SelectMany(x => x.TrainingProvider).Count();
         }
     }
 }
