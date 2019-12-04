@@ -28,6 +28,7 @@ namespace Sfa.Das.Sas.ApplicationServices.DependencyResolution
             For<IProviderSearchService>().Use<ProviderSearchService>();
             For<IPaginationSettings>().Use<PaginationSettings>();
             For<AbstractValidator<ProviderSearchQuery>>().Use<ProviderSearchQueryValidator>();
+            For<AbstractValidator<GroupedProviderSearchQuery>>().Use<GroupedProviderSearchQueryValidator>();
             For<AbstractValidator<ApprenticeshipProviderDetailQuery>>().Use<ApprenticeshipProviderDetailQueryValidator>();
             For<AbstractValidator<GetFrameworkQuery>>().Use<FrameworkQueryValidator>();
             For<IPostcodeService>().Use<PostcodeIoService>();

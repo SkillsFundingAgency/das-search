@@ -10,6 +10,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
         public string ApprenticeshipId { get; set; }
         public ApprenticeshipType ApprenticeshipType { get; set; }
         public int LocationId { get; set; }
+        public string PostCode { get; set; }
     }
 
     public enum ViewType

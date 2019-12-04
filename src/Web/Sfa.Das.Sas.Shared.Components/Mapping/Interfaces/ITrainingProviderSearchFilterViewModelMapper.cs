@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
 {
     public interface ITrainingProviderSearchFilterViewModelMapper
     {
-        TrainingProviderSearchFilterViewModel Map(ProviderSearchResponse item, TrainingProviderSearchViewModel searchQueryModel);
+        TrainingProviderSearchFilterViewModel Map(GroupedProviderSearchResponse item, TrainingProviderSearchViewModel searchQueryModel);
 
     }
 }

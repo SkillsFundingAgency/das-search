@@ -4,16 +4,14 @@
 @inject ICssViewModel CssViewModel
 
 
-@*<form asp-controller="Basket" asp-action="AddApprenticeshipFromDetails" method="post">
+<form asp-controller="Basket" asp-action="AddApprenticeshipFromDetails" method="post">
     <div class="@(CssViewModel.FormCss.FormGroup)">
-        @await Component.InvokeAsync("AddToBasket", new { apprenticeshipId = Model.Id })
+        @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Id })
     </div>
 
-</form>*@
+</form>
 
 
 @await Component.InvokeAsync("ApprenticeshipDetails", new { queryModel = Model })
-
-@await Component.InvokeAsync("SaveApprenticeship", Model.Id)
 
 @await Component.InvokeAsync("TrainingProviderSearch", new { apprenticeshipId = Model.Id })

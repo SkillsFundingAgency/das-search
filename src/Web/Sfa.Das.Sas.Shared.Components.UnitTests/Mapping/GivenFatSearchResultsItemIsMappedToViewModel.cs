@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
@@ -12,14 +13,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
     [TestFixture]
     public class GivenFatSearchResultsItemIsMappedToViewModel
     {
-        private FatSearchResultsItemViewModelMapper _sut;
+        private ApprenticeshipItemViewModelMapper _sut;
         private ApprenticeshipSearchResultsItem _itemToMap;
         private Mock<ICssViewModel> _cssClassMock;
 
         [SetUp]
         public void Setup()
         {
-            _sut = new FatSearchResultsItemViewModelMapper();
+            _sut = new ApprenticeshipItemViewModelMapper();
 
             _cssClassMock = new Mock<ICssViewModel>();
 
@@ -39,7 +40,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         {
           var result =  _sut.Map(_itemToMap);
 
-          result.Should().BeOfType<FatSearchResultsItemViewModel>();
+          result.Should().BeOfType<ApprenticeshipItemViewModel>();
           result.Should().NotBeNull();
         }
 

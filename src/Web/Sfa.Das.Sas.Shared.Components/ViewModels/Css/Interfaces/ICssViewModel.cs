@@ -5,6 +5,7 @@
         ITableCssViewModel Table { get; }
         IUtilitiesCssViewModel UtilitiesCss { get; }
         IDefaultFormCssViewModel FormCss { get; }
+        ICssGridViewModel GridCss { get; }
         string ClassModifier { get; set; }
         string ClassPrefix { get; }
         string Button { get; }
@@ -14,6 +15,7 @@
         string List { get; }
         string ListBullet { get; }
         string ListNumber { get; }
+        string ListNumbers { get; }
         string SearchList { get; }
         string WarningText { get; }
         string HeadingMedium { get; }

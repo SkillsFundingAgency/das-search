@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
         }
 
 
-        public SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> Map(ProviderSearchResponse source, TrainingProviderSearchViewModel query)
+        public SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> Map(GroupedProviderSearchResponse source, TrainingProviderSearchViewModel query)
         {
             source.SearchTerms = query.Postcode;
 

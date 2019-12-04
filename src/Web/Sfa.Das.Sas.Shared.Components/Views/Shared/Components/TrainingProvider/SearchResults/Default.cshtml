@@ -15,17 +15,13 @@
 @if (Model.TotalResults > 0 && Model.Status == ProviderSearchResponseCodes.Success)
 {
     <p>There are @Model.TotalResults Training providers for '@Model.SearchQuery.Postcode'.</p>
-    @*<form asp-controller="Basket" asp-action="AddProviderFromResults" method="post">
+    <form asp-controller="Basket" asp-action="AddProviderFromResults" method="post">
         <input type="hidden" asp-for="@Model.SearchQuery.ApprenticeshipId" />
         <input type="hidden" asp-for="@Model.SearchQuery.IsLevyPayer" />
         <input type="hidden" asp-for="@Model.SearchQuery.NationalProvidersOnly" />
         <input type="hidden" asp-for="@Model.SearchQuery.Page" />
         <input type="hidden" asp-for="@Model.SearchQuery.Postcode" />
-        <input type="hidden" asp-for="@Model.SearchQuery.SortOrder" />*@
-    @for (int i = 0; i < Model.SearchQuery.DeliveryModes.Count(); i++)
-    {
-        <input type="hidden" asp-for="@Model.SearchQuery.DeliveryModes[i]" />
-    }
+        <input type="hidden" asp-for="@Model.SearchQuery.SortOrder" />
     <ol class="@CssViewModel.SearchList">
         @foreach (var result in Model.SearchResults)
         {
@@ -33,7 +29,7 @@
             <partial name="Components/TrainingProvider/SearchResults/_searchResultsItem" for="@itemModel" />
         }
     </ol>
-    @*</form>*@
+    </form>
 }
 else
 {
