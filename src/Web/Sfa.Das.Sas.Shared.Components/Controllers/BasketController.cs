@@ -82,6 +82,21 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             return RedirectToAction("View", "Basket");
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> ClearBasket()
+        {
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+
+            await _mediator.Send(new ClearBasketCommand
+            {
+                BasketId = cookieBasketId
+            });
+
+            return RedirectToAction("View", "Basket");
+        }
+
         private async Task UpdateApprenticeship(string apprenticeshipId, int? ukprn = null, int? locationId = null)
         {
             var cookie = _cookieManager.Get(CookieNames.BasketCookie);

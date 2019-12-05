@@ -30,13 +30,14 @@
     <CodeAnalysisRuleSet>..\SharedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\SharedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.6.41832, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -243,6 +244,7 @@
     <Compile Include="Application\Handlers\AddOrRemoveFavouriteInBasketHandlerTests.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipProviderDetailHandlerTest.cs" />
+    <Compile Include="Application\Handlers\ClearBasketHandlerTests.cs" />
     <Compile Include="Application\Handlers\ValidatePostcodeHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderDetailHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderNameSearchHandlerTests.cs" />

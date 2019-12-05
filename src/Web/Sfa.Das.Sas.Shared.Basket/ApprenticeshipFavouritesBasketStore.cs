@@ -13,7 +13,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
         private const string CacheItemPrefix = "EmpFav-";
         private readonly IDistributedCache _cache;
         private readonly ApprenticehipFavouritesBasketStoreConfig _config;
-
+        
         public ApprenticeshipFavouritesBasketStore(IDistributedCache cache, ApprenticehipFavouritesBasketStoreConfig config)
         {
             _cache = cache;
@@ -28,6 +28,11 @@ namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
         public Task UpdateAsync(ApprenticeshipFavouritesBasket basket)
         {
             return SaveToCache($"{CacheItemPrefix}{basket.Id}", basket, new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0));
+        }
+
+        public Task ClearBasketAsync(ApprenticeshipFavouritesBasket basket)
+        {
+            return SaveToCache($"{CacheItemPrefix}{basket.Id}", new ApprenticeshipFavouritesBasket(), new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0 ));
         }
 
         private static ApprenticeshipFavouritesBasket DeserializeBasket(string json, string key)

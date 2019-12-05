@@ -8,5 +8,6 @@ namespace Sfa.Das.Sas.Shared.Basket.Interfaces
     {
         Task<ApprenticeshipFavouritesBasket> GetAsync(Guid basketId);
         Task UpdateAsync(ApprenticeshipFavouritesBasket basket);
+        Task ClearBasketAsync(ApprenticeshipFavouritesBasket basket);
     }
 }
