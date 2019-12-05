@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
 using SFA.DAS.Providers.Api.Client;
 using Sfa.Das.Sas.ApplicationServices.Commands;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
@@ -28,6 +29,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         public void Setup()
         {
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
+            _mockProviderApiClient = new Mock<IProviderApiClient>();
+
+            _mockProviderApiClient.Setup(s => s.Get(It.IsAny<int>())).Returns(new SFA.DAS.Apprenticeships.Api.Types.Providers.Provider() {ProviderName = "TestProvider"});
+
             _sut = new AddorRemoveFavouriteInBasketCommandHandler(new NullLogger<AddorRemoveFavouriteInBasketCommandHandler>(), _mockBasket.Object,_mockProviderApiClient.Object);
         }
 
