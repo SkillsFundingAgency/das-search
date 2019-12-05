@@ -17,5 +17,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Css
 
         public string Row => $"{ClassPrefix}grid-row";
         public string ColumnOneHalf => $"{ClassPrefix}grid-column-one-half";
+        public string ColumnFull => $"{ClassPrefix}grid-column-full";
+
     }
 }

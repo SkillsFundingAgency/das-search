@@ -23,6 +23,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
     {
         private const string APPRENTICESHIP_ID = "100";
         private const int UKPRN = 12345678;
+        private const string PROVIDER_NAME = "TestProvider";
         private Mock<ICookieManager> _mockCookieManager;
         private Mock<IMediator> _mockMediator;
         private AddOrRemoveFromBasketViewComponent _sut;
@@ -38,7 +39,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             _mockCookieManager.Setup(x => x.Get(CookieNames.BasketCookie)).Returns(cookieBasketId.ToString());
 
             var basket = new ApprenticeshipFavouritesBasket();
-            basket.Add("420-2-1", UKPRN);
+            basket.Add("420-2-1", UKPRN,PROVIDER_NAME);
 
             _mockMediator = new Mock<IMediator>();
             _mockMediator.Setup(x => x.Send(It.Is<GetBasketQuery>(a => a.BasketId == cookieBasketId), default(CancellationToken)))

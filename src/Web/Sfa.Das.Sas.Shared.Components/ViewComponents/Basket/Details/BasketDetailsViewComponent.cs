@@ -25,6 +25,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
             // Get cookie
             var model = await _basketOrchestrator.GetBasket();
 
+
             return View("../Basket/Details/Default", model);
         }
     }

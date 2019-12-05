@@ -9,5 +9,6 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship
     public class ApprenticeshipBasketItemViewModel : ApprenticeshipItemViewModel
     {
         public IList<TrainingProviderSearchResultsItem> TrainingProvider { get; set; }
+        public bool Active { get; set; }
     }
 }
