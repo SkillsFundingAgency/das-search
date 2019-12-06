@@ -7,7 +7,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 {
     public class ApprenticeshipFavouritesBasket : IEnumerable<ApprenticeshipFavourite>
     {
-        private readonly List<ApprenticeshipFavourite> _items = new List<ApprenticeshipFavourite>();
+        private List<ApprenticeshipFavourite> _items = new List<ApprenticeshipFavourite>();
 
         public ApprenticeshipFavouritesBasket()
         {
@@ -129,6 +129,11 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             
             if (provider.Count == 0)
                 apprenticeship.Providers.Remove(ukprn);
+        }
+
+        public void ClearBasketItems()
+        {
+            _items = new List<ApprenticeshipFavourite>();
         }
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator() 
         {

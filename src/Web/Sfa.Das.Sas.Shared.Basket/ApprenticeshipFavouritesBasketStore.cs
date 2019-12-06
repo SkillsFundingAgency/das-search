@@ -32,7 +32,9 @@ namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
 
         public Task ClearBasketAsync(ApprenticeshipFavouritesBasket basket)
         {
-            return SaveToCache($"{CacheItemPrefix}{basket.Id}", new ApprenticeshipFavouritesBasket(), new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0 ));
+            basket.ClearBasketItems();
+           
+            return SaveToCache($"{CacheItemPrefix}{basket.Id}", basket, new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0 ));
         }
 
         private static ApprenticeshipFavouritesBasket DeserializeBasket(string json, string key)

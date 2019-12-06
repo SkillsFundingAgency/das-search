@@ -25,25 +25,36 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             _sut = new ClearBasketCommandHandler(_mockBasket.Object);
         }
 
-        [Test]
-        public async Task Handle_ClearBasket()
-        {
-            var basketId = Guid.NewGuid();
+        //[Test]
+        //public async Task Handle_ClearBasket()
+        //{
+        //    var basketId = Guid.NewGuid();
 
-            var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
+        //    var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
 
-            basket.Add("123", 12345678);
+        //    basket.Add("123", 12345678);
 
-            _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
+        //    _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
-            var request = new ClearBasketCommand
-            {
-                BasketId = basketId
-            };
+        //    ApprenticeshipFavouritesBasket savedBasket = null; // Setup callback so we can check contents of basket easier.
 
-            //var response = await _sut.Handle(request, default);
-            //Console.WriteLine("basket: " + basket[0].ApprenticeshipId);
-            //Assert.AreEqual(new ApprenticeshipFavouritesBasket {}, basket);
-        }
+        //    _mockBasket.Setup(x => x.ClearBasketAsync(It.IsAny<ApprenticeshipFavouritesBasket>()))
+        //        .Returns(Task.CompletedTask)
+        //        .Callback<ApprenticeshipFavouritesBasket>((a) => savedBasket = a);
+
+        //    var request = new ClearBasketCommand
+        //    {
+        //        BasketId = basketId
+        //    };
+
+        //    await _sut.Handle(request, default);
+            
+        //    var newBasket = await _mockBasket.Object.GetAsync(basketId);
+        //    //_mockBasket.Verify(x => x.ClearBasketAsync(It.IsAny<ApprenticeshipFavouritesBasket>()), Times.Once);
+
+        //    //var apprenticeshipsCount = savedBasket._items.Count;
+            
+        //    Assert.AreEqual(0, newBasket._items.Count);
+        //}
     }
 }

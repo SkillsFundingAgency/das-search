@@ -14,4 +14,8 @@
         <li><span class="vh">You have</span> <span class="@(CssViewModel.ListNumbers)__number">@(apprenticeshipCount)</span> @("Apprenticeship".Pluralize(apprenticeshipCount)) <span class="vh">in your basket</span></li>
         <li><span class="vh">You have</span> <span class="@(CssViewModel.ListNumbers)__number">@providerCount</span> Training @("provider".Pluralize(providerCount)) <span class="vh">in your basket</span></li>
     </ul>
+
+    @*<form asp-controller="Basket" asp-action="ClearBasket">
+        <button type="submit"> Clear Basket </button>
+    </form>*@
 }
