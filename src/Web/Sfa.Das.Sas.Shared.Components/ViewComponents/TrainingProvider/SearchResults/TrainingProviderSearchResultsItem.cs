@@ -14,6 +14,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
         public int LocationId { get; set; }
         public LocationAddress LocationAddress { get; set; }
         public bool HasOtherLocations { get; internal set; }
+        public bool Active { get; set; }
     }
 
     public class LocationAddress

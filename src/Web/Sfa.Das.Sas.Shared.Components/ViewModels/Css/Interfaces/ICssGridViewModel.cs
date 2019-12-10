@@ -4,5 +4,6 @@
     {
         string Row { get; }
         string ColumnOneHalf { get; }
+        string ColumnFull { get; }
     }
 }

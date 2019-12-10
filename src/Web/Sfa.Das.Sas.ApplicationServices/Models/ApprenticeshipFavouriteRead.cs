@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
@@ -21,5 +22,6 @@ namespace Sfa.Das.Sas.ApplicationServices.Models
         public int Level { get; set; }
         public DateTime? EffectiveTo { get; set; }
         public ApprenticeshipType ApprenticeshipType { get; set; }
+        public bool Active { get; set; }
     }
 }

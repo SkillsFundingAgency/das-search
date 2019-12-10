@@ -2,8 +2,45 @@
 @model Sfa.Das.Sas.Shared.Components.ViewModels.Basket.BasketViewModel<Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship.ApprenticeshipBasketItemViewModel>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
+@{
+
+    var inactiveProviders = Model.Items.SelectMany(w => w.TrainingProvider).Where(s => s.Active == false);
+
+}
+
 @if (Model.HasItems)
 {
+
+    @if (Model.Items.Any(s => s.Active == false) || inactiveProviders.Any())
+     {
+         <div class="@CssViewModel.GridCss.Row">
+             <div class="@CssViewModel.GridCss.ColumnFull">
+                 <div class="@CssViewModel.ErrorCss.Summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1">
+                     <h2 class="@CssViewModel.ErrorCss.SummaryTitle" id="error-summary-title">
+                         Unavailable apprenticeship
+                     </h2>
+                     <div class="@CssViewModel.ErrorCss.SummaryBody">
+                         <ul class="@CssViewModel.List @CssViewModel.ErrorCss.SummaryList">
+                             @foreach (var inactiveApprenticeship in Model.Items.Where(w => w.Active == false))
+                             {
+                                 <li>
+                                     <a href="#apprenticeship-@inactiveApprenticeship.Id">The @inactiveApprenticeship.Title apprenticeship is no longer available. You can remove it from your shortlist below.</a>
+                                 </li>
+                             }
+                             @foreach (var inactiveProvider in inactiveProviders)
+                             {
+                                 <li>
+                                     <a href="#apprenticeship-@inactiveProvider.Ukprn">The @inactiveProvider.Name Training provider is no longer available. You can remove it from your shortlist below.</a>
+                                 </li>
+                             }
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     }
+
+
     <ol class="@CssViewModel.List das-search-results__list das-search-results__list--employer das-basket">
 
         @foreach (var apprenticeship in Model.Items)
@@ -21,5 +58,4 @@ else
         <p>Why not browse the available apprenticeships and start adding your favourites?</p>
         <a asp-controller="Employer" asp-action="find-apprenticeship-training" class="button button--inverted button--sparks">View apprenticeships</a>
     </div>
-    
 }
