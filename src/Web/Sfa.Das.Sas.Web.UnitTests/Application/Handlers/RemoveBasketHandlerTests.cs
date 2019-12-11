@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -44,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
                 BasketId = basketId
             };
 
-            await _sut.Handle(request, default);
+            await _sut.Handle(request, default(CancellationToken));
 
             _mockBasket.Verify(x => x.RemoveAsync(basketId), Times.Once());
         }
