@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>3.0.4</Version>
+    <Version>3.1.0</Version>
     <Authors>GOV.UK Education and Skills Funding Agency (ESFA) Digital Apprenticeship Service (DAS)</Authors>
     <Description>Shared library employer favourites basket dastastore access.</Description>
     <License>https://github.com/SkillsFundingAgency/das-search/blob/master/LICENSE</License>
