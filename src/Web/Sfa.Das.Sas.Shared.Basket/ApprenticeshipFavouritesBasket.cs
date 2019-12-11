@@ -7,7 +7,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 {
     public class ApprenticeshipFavouritesBasket : IEnumerable<ApprenticeshipFavourite>
     {
-        private List<ApprenticeshipFavourite> _items = new List<ApprenticeshipFavourite>();
+        private readonly List<ApprenticeshipFavourite> _items = new List<ApprenticeshipFavourite>();
 
         public ApprenticeshipFavouritesBasket()
         {
@@ -17,11 +17,6 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
         internal ApprenticeshipFavouritesBasket(IList<ApprenticeshipFavourite> basketItems)
         {
             _items.AddRange(basketItems);
-        }
-
-        public ApprenticeshipFavouritesBasket(Guid id)
-        {
-            Id = id;
         }
 
         public Guid Id { get; set; }
