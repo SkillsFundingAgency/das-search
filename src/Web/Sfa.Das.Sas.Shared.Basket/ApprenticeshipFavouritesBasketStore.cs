@@ -30,11 +30,9 @@ namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
             return SaveToCache($"{CacheItemPrefix}{basket.Id}", basket, new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0));
         }
 
-        public Task ClearBasketAsync(ApprenticeshipFavouritesBasket basket)
+        public Task RemoveAsync(Guid basketId)
         {
-            basket.ClearBasketItems();
-           
-            return SaveToCache($"{CacheItemPrefix}{basket.Id}", basket, new TimeSpan(_config.BasketSlidingExpiryDays, 0, 0, 0 ));
+            return RemoveFromCache($"{CacheItemPrefix}{basketId}");
         }
 
         private static ApprenticeshipFavouritesBasket DeserializeBasket(string json, string key)
@@ -69,6 +67,11 @@ namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
             var json = await _cache.GetStringAsync(key);
 
             return DeserializeBasket(json, key);
+        }
+
+        private async Task RemoveFromCache(string key)
+        {
+           await _cache.RemoveAsync(key);
         }
     }
 }

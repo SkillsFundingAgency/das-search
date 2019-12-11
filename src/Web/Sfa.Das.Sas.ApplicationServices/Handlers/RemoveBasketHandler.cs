@@ -12,29 +12,29 @@ using Sfa.Das.Sas.Shared.Basket.Models;
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
     
-    public class ClearBasketCommandHandler : IRequestHandler<ClearBasketCommand, Guid>
+    public class RemoveBasketHandler : IRequestHandler<RemoveBasketCommand, Guid>
     {
 
         private readonly IApprenticeshipFavouritesBasketStore _basketStore;
 
-        public ClearBasketCommandHandler(IApprenticeshipFavouritesBasketStore basketStore)
+        public RemoveBasketHandler(IApprenticeshipFavouritesBasketStore basketStore)
         {
             _basketStore = basketStore;
         }
 
-        public async Task<Guid> Handle(ClearBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(RemoveBasketCommand request, CancellationToken cancellationToken)
         {
             var basket = await GetBasket(request);
 
             if (basket != null)
             {
-               await _basketStore.ClearBasketAsync(basket);
+               await _basketStore.RemoveAsync(request.BasketId.Value);
             }
 
             return Guid.Empty;
         }
 
-        private async Task<ApprenticeshipFavouritesBasket> GetBasket(ClearBasketCommand request)
+        private async Task<ApprenticeshipFavouritesBasket> GetBasket(RemoveBasketCommand request)
         {
             if (request.BasketId.HasValue)
             {

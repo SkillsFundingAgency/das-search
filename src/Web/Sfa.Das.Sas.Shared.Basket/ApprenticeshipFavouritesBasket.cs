@@ -19,6 +19,11 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             _items.AddRange(basketItems);
         }
 
+        public ApprenticeshipFavouritesBasket(Guid id)
+        {
+            Id = id;
+        }
+
         public Guid Id { get; set; }
 
         public bool Add(string apprenticeshipId)    
@@ -131,10 +136,6 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
                 apprenticeship.Providers.Remove(ukprn);
         }
 
-        public void ClearBasketItems()
-        {
-            _items = new List<ApprenticeshipFavourite>();
-        }
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator() 
         {
             return _items.GetEnumerator();
