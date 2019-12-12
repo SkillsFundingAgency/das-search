@@ -24,12 +24,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         public async Task<Guid> Handle(RemoveBasketCommand request, CancellationToken cancellationToken)
         {
-            var basket = await GetBasket(request);
-
-            if (basket != null)
-            {
-               await _basketStore.RemoveAsync(request.BasketId.Value);
-            }
+            await _basketStore.RemoveAsync(request.BasketId.Value);
 
             return Guid.Empty;
         }
