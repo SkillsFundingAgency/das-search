@@ -24,7 +24,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
 
             model.SearchQuery = searchQueryModel;
 
-           
+            model = await _tpOrchestrator.GetDetails(searchQueryModel);
             return View("../TrainingProvider/Title/Default", model.Name);
 
         }

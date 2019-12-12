@@ -50,13 +50,15 @@ namespace Sfa.Das.Sas.Shared.Components.Web
             if (Configuration["Environment"] == "LOCAL")
             {
                 services.AddDistributedMemoryCache();
+                services.AddMemoryCache();
             }
             else
             {
-                //services.AddStackExchangeRedisCache(options =>
-                //{
-                //    options.Configuration = connectionStrings.SharedRedis;
-                //});
+              
+                services.AddMemoryCache(x => {
+                    x.SizeLimit = 1024;
+                    x.CompactionPercentage = .33;
+                });
             }
 
         }

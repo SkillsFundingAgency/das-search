@@ -104,11 +104,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                     throw new HttpRequestException(message);
                 }
 
-                //_trainingProviderDetailQueryViewModel.SearchedCache = true;
-                //_trainingProviderDetailQueryViewModel.TrainingProviderDetails = _trainingProviderDetailsViewModelMapper.Map(cacheEntry);
-
                 await _cacheService.SaveToCache(cacheKey, cacheEntry, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
-
             }
             
             var model = _trainingProviderDetailsViewModelMapper.Map(cacheEntry);

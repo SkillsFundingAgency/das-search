@@ -13,6 +13,7 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using Sfa.Das.Sas.Infrastructure.Services;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 {
@@ -27,14 +28,16 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<ILog> _mockLogger;
         private Mock<ICacheStorageService> _mockCacheService;
         private Mock<TrainingProviderDetailQueryViewModel> _mockTrainingProviderDetailQueryViewModel;
+        private Mock<IMediator> _mockMediatorProviderDetail;
 
-        private  TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
+        private TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
+        private TrainingProviderDetailQueryViewModel _detailsQueryViewModel = new TrainingProviderDetailQueryViewModel();
 
         private ProviderSearchResponse _searchResults = new ProviderSearchResponse() { Success = true };
         private ProviderSearchResponse _searchResultsError = new ProviderSearchResponse(){Success = false,StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat};
         private SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> _searchResultsViewModel = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>();
         private TrainingProviderSearchFilterViewModel _searchFilterViewModel = new TrainingProviderSearchFilterViewModel();
-
+        private ApprenticeshipProviderDetailResponse _providerDetailResponse = new ApprenticeshipProviderDetailResponse() { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.Success };
         [SetUp]
         public void Setup()
         {
@@ -45,6 +48,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockTrainingProviderFilterViewModelMapper = new Mock<ITrainingProviderSearchFilterViewModelMapper>();
             _mockLogger = new Mock<ILog>();
 
+            _mockMediatorProviderDetail = new Mock<IMediator>();
+
             _mockCacheService = new Mock<ICacheStorageService>();
             _mockTrainingProviderDetailQueryViewModel = new Mock<TrainingProviderDetailQueryViewModel>();
 
@@ -52,6 +57,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockSearchResultsViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchResultsViewModel);
             _mockTrainingProviderFilterViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchFilterViewModel);
 
+            _mockMediatorProviderDetail.Setup(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_providerDetailResponse);
             _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object, _mockTrainingProviderDetailQueryViewModel.Object);
         }
 
@@ -120,5 +126,32 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _mockTrainingProviderFilterViewModelMapper.Verify(v => v.Map(_searchResults, _searchQueryViewModel));
         }
+
+        [Test]
+        public void When_SearchResultsRequested_Then_ChecksInMemoryCache()
+        {
+            _detailsQueryViewModel.ApprenticeshipId = "123";
+            _detailsQueryViewModel.Ukprn = 10000020;
+            _detailsQueryViewModel.LocationId = 100;
+
+            var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId; 
+
+            //_mockCacheService.Object.SaveToCache()
+            var result = _sut.GetDetails(_detailsQueryViewModel);
+
+            _mockMediatorProviderDetail.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Once);
+
+          //  Assert.AreEqual();
+         
+        }
+
+
+        //Test Scenarios
+        // completely new search - not in memory or redis cache
+            // calls the main get
+        // new search - not in memory but is in redis
+            // retrieves from redis and saves to inmemory
+        // existing inmemory and in redis
+            // retrieves from inmemory and doesn't call the main get
     }
 }
