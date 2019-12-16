@@ -1,4 +1,6 @@
-﻿namespace Sfa.Das.Sas.Infrastructure.Repositories
+﻿using SFA.DAS.Apprenticeships.Api.Types.Exceptions;
+
+namespace Sfa.Das.Sas.Infrastructure.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -38,8 +40,16 @@
 
         public async Task<SFA.DAS.Apprenticeships.Api.Types.Providers.Provider> GetProviderDetails(long ukPrn)
         {
-            var result = await _providerApiClient.GetAsync(ukPrn);
-            return result;
+            try
+            {
+                var result = await _providerApiClient.GetAsync(ukPrn);
+                return result;
+            }
+            catch (EntityNotFoundException ex)
+            {
+                _logger.Error(ex,$"Unable to get provider with ukprn: {ukPrn}");
+                return null;
+            }
         }
 
         public IEnumerable<ProviderSummary> GetAllProviders()
