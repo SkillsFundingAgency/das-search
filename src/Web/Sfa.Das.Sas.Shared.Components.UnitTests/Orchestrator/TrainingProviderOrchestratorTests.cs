@@ -14,6 +14,13 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using Sfa.Das.Sas.Infrastructure.Services;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
+using System;
+
+using System.Threading.Tasks;
+
+using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 {
@@ -28,7 +35,9 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<ILog> _mockLogger;
         private Mock<ICacheStorageService> _mockCacheService;
         private Mock<TrainingProviderDetailQueryViewModel> _mockTrainingProviderDetailQueryViewModel;
-        private Mock<IMediator> _mockMediatorProviderDetail;
+
+        private Mock<IMemoryCache> _mockMemoryCache;
+        private Mock<IDistributedCache> _mockDistributedCache;
 
         private TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
         private TrainingProviderDetailQueryViewModel _detailsQueryViewModel = new TrainingProviderDetailQueryViewModel();
@@ -48,7 +57,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockTrainingProviderFilterViewModelMapper = new Mock<ITrainingProviderSearchFilterViewModelMapper>();
             _mockLogger = new Mock<ILog>();
 
-            _mockMediatorProviderDetail = new Mock<IMediator>();
 
             _mockCacheService = new Mock<ICacheStorageService>();
             _mockTrainingProviderDetailQueryViewModel = new Mock<TrainingProviderDetailQueryViewModel>();
@@ -57,8 +65,13 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockSearchResultsViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchResultsViewModel);
             _mockTrainingProviderFilterViewModelMapper.Setup(s => s.Map(It.IsAny<ProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchFilterViewModel);
 
-            _mockMediatorProviderDetail.Setup(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_providerDetailResponse);
-            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object, _mockTrainingProviderDetailQueryViewModel.Object);
+            _detailsQueryViewModel.ApprenticeshipId = "123";
+            _detailsQueryViewModel.Ukprn = 10000020;
+            _detailsQueryViewModel.LocationId = 100;
+
+            var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId;
+
+            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object);
         }
 
         [Test]
@@ -128,30 +141,79 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         }
 
         [Test]
-        public void When_SearchResultsRequested_Then_ChecksInMemoryCache()
+        public void When_SearchResultsRequested_Then_CallsMediatrWhenCacheIsEmpty()
         {
-            _detailsQueryViewModel.ApprenticeshipId = "123";
-            _detailsQueryViewModel.Ukprn = 10000020;
-            _detailsQueryViewModel.LocationId = 100;
 
-            var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId; 
+            var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId;
 
-            //_mockCacheService.Object.SaveToCache()
+            _mockCacheService.Setup(s => s.RetrieveFromCache<ApprenticeshipProviderDetailResponse>(cacheKey)).Returns(GenerateNullCacheObject());
+
             var result = _sut.GetDetails(_detailsQueryViewModel);
 
-            _mockMediatorProviderDetail.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Once);
-
-          //  Assert.AreEqual();
-         
+            _mockMediator.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Once);
+            
         }
 
+        [Test]
+        public void When_SearchResultsRequested_Then_GetResultsFromCache()
+        {
+            var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId;
+
+            _mockCacheService.Setup(s => s.RetrieveFromCache<ApprenticeshipProviderDetailResponse>(cacheKey)).Returns(GenerateMockCacheObject());
+
+            var result = _sut.GetDetails(_detailsQueryViewModel);
+
+            _mockMediator.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Never());
+
+        }
+
+        //[Test]
+        //public void When_SearchResultsRequested_Then_SaveResultsFromRedisToInMemoryCache()
+        //{
+        //    var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId;
+        //    string json;
+
+        //    _mockMediator.Setup(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_providerDetailResponse);
+        //  //  _mockCacheService.Setup(s => s.RetrieveFromCache<ApprenticeshipProviderDetailResponse>(cacheKey)).Returns(GenerateMockCacheObject());
+        //    _mockMemoryCache.Setup(s => s.TryGetValue<string>(It.IsAny<string>(), out json)).Returns(false);
+
+        //    var result = _sut.GetDetails(_detailsQueryViewModel);
+
+        //    _mockMediator.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Never());
+        //   // _mockCacheService.Verify(s => s.SaveToCache(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
+        ////    _mockDistributedCache.Verify(s => s.GetStringAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once());
+        //}
+
+        private string GenerateMockCacheString()
+        {
+            var response = new ApprenticeshipProviderDetailResponse()
+            {
+                ApprenticeshipName = "Test Apprenticeship",
+                ApprenticeshipDetails = new Core.Domain.Model.ApprenticeshipDetails {
+                    Provider = new Core.Domain.Model.Provider { UkPrn = 10000020 },
+                    Location = new Core.Domain.Model.Location { LocationId = 100},
+                }
+            };
+            
+            return JsonConvert.SerializeObject(response);
+        }
+        private async Task<ApprenticeshipProviderDetailResponse> GenerateMockCacheObject()
+        {
+            return JsonConvert.DeserializeObject<ApprenticeshipProviderDetailResponse>(GenerateMockCacheString());
+        }
+
+        private async Task<ApprenticeshipProviderDetailResponse> GenerateNullCacheObject()
+        {
+            return null;
+        }
+       
 
         //Test Scenarios
         // completely new search - not in memory or redis cache
-            // calls the main get
+        // calls the main get
         // new search - not in memory but is in redis
-            // retrieves from redis and saves to inmemory
+        // retrieves from redis and saves to inmemory
         // existing inmemory and in redis
-            // retrieves from inmemory and doesn't call the main get
+        // retrieves from inmemory and doesn't call the main get
     }
 }

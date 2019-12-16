@@ -22,9 +22,8 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly ITrainingProviderSearchFilterViewModelMapper _trainingProviderSearchFilterViewModelMapper;
         private readonly ILog _logger;
         private readonly ICacheStorageService _cacheService;
-        public TrainingProviderDetailQueryViewModel _trainingProviderDetailQueryViewModel;
-
-        public TrainingProviderOrchestrator(IMediator mediator, ISearchResultsViewModelMapper searchResultsViewModelMapper, ILog logger, ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper, ICacheStorageService cacheService, TrainingProviderDetailQueryViewModel trainingProviderDetailQueryViewModel)
+        
+        public TrainingProviderOrchestrator(IMediator mediator, ISearchResultsViewModelMapper searchResultsViewModelMapper, ILog logger, ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper, ICacheStorageService cacheService)
         {
             _mediator = mediator;
             _searchResultsViewModelMapper = searchResultsViewModelMapper;
@@ -32,7 +31,6 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             _trainingProviderDetailsViewModelMapper = trainingProviderDetailsViewModelMapper;
             _trainingProviderSearchFilterViewModelMapper = trainingProviderSearchFilterViewModelMapper;
             _cacheService = cacheService;
-            _trainingProviderDetailQueryViewModel = trainingProviderDetailQueryViewModel;
         }
 
         public async Task<SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>> GetSearchResults(TrainingProviderSearchViewModel searchQueryModel)

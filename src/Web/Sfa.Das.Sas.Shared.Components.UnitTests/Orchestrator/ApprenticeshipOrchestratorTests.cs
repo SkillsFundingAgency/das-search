@@ -10,6 +10,7 @@ using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Model;
+using Sfa.Das.Sas.Infrastructure.Services;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
@@ -24,6 +25,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<ILog> _loggerMock;
         private Mock<IFrameworkDetailsViewModelMapper> _frameworkMapperMock;
         private Mock<IStandardDetailsViewModelMapper> _standardMapperMock;
+        private Mock<ICacheStorageService> _mockCacheService;
         private ApprenticeshipOrchestrator _sut;
         private string _frameworkId = "420-2-1";
 
@@ -37,7 +39,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _loggerMock = new Mock<ILog>();
             _frameworkMapperMock = new Mock<IFrameworkDetailsViewModelMapper>(MockBehavior.Strict);
             _standardMapperMock = new Mock<IStandardDetailsViewModelMapper>(MockBehavior.Strict);
-
+            _mockCacheService = new Mock<ICacheStorageService>();
 
             _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "420-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId });
             _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "530-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.FrameworkNotFound });
@@ -51,12 +53,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "234"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Gone });
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "123"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Success, Standard = new Standard() { StandardId = "123" } });
 
+            _mockCacheService.Setup(s => s.RetrieveFromCache<GetFrameworkResponse>("890-2-1")).ReturnsAsync(new GetFrameworkResponse() { Framework = new Framework() { FrameworkId = "890-2-1" } });
+            _mockCacheService.Setup(s => s.RetrieveFromCache<GetStandardResponse>("890")).ReturnsAsync(new GetStandardResponse() { Standard = new Standard() { StandardId = "890" } });
 
 
             _frameworkMapperMock.Setup(s => s.Map(It.IsAny<Framework>())).Returns(_framework);
             _standardMapperMock.Setup(s => s.Map(It.IsAny<Standard>(), It.IsAny<IList<AssessmentOrganisation>>())).Returns(_standard);
 
-            _sut = new ApprenticeshipOrchestrator(_mediatorMock.Object, _loggerMock.Object, _frameworkMapperMock.Object,_standardMapperMock.Object);
+            _sut = new ApprenticeshipOrchestrator(_mediatorMock.Object, _loggerMock.Object, _frameworkMapperMock.Object,_standardMapperMock.Object, _mockCacheService.Object);
         }
 
         #region FrameworkTests
@@ -66,7 +70,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             Action result = () => _sut.GetFramework(_frameworkId).Wait();
 
-           result.Should().Throw<ArgumentException>()
+            result.Should().Throw<ArgumentException>()
                .WithMessage("Framework id: 420-2-1 has wrong format");
         }
 
@@ -79,6 +83,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             result.Should().Throw<ArgumentException>()
                 .WithMessage("Cannot find framework: 530-2-1");
         }
+
         [Test]
         public async Task When_Getting_Framework_And_Response_StatusCode_Is_Gone_Then_Exception()
         {
@@ -175,5 +180,39 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _standardMapperMock.Verify(v => v.Map(It.IsAny<Standard>(),It.IsAny<IList<AssessmentOrganisation>>()), Times.Once);
         }
         #endregion
+
+        [Test]
+        public async Task When_Getting_Standard_And_It_Doesnt_Exist_in_The_Cache_Then_Save_To_Cache()
+        {
+            var result = await _sut.GetStandard("123");
+
+            _mockCacheService.Verify(s => s.SaveToCache<GetStandardResponse>(It.IsAny<string>(), It.IsAny<GetStandardResponse>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
+        }
+
+        [Test]
+        public async Task When_Getting_Framework_And_It_Doesnt_Exist_in_The_Cache_Then_Save_To_Cache()
+        {
+            var result = await _sut.GetFramework("230-2-1");
+
+            _mockCacheService.Verify(s => s.SaveToCache<GetFrameworkResponse>(It.IsAny<string>(), It.IsAny<GetFrameworkResponse>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
+        }
+
+        [Test]
+        public async Task When_Getting_Framework_Then_Retrieve_From_Cache()
+        {
+            var result = await _sut.GetFramework("890-2-1");
+
+            _mockCacheService.Verify(s => s.RetrieveFromCache<GetFrameworkResponse>(It.IsAny<string>()), Times.Once);
+            _mediatorMock.Verify(s => s.Send<GetFrameworkResponse>(It.IsAny<GetFrameworkQuery>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
+
+        [Test]
+        public async Task When_Getting_Standard_Then_Retrieve_From_Cache()
+        {
+            var result = await _sut.GetFramework("890-2-1");
+
+            _mockCacheService.Verify(s => s.RetrieveFromCache<GetFrameworkResponse>(It.IsAny<string>()), Times.Once);
+            _mediatorMock.Verify(s => s.Send<GetFrameworkResponse>(It.IsAny<GetFrameworkQuery>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
     }
 }
