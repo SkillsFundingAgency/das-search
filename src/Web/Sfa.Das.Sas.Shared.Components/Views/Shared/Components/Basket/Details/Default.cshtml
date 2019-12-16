@@ -4,7 +4,7 @@
 @inject ICssViewModel CssViewModel
 @{
 
-    var inactiveProviders = Model.Items.SelectMany(w => w.TrainingProvider).Where(s => s.Active == false);
+    var inactiveProviders = Model.Items.Where(w => w.Active).SelectMany(w => w.TrainingProvider).Where(s => s.Active == false);
 
 }
 
