@@ -20,11 +20,6 @@ namespace Sfa.Das.Sas.Infrastructure.Services
             _distributedCache = distributedCache;
         }
 
-        public Task DeleteFromCache(string key)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<T> RetrieveFromCache<T>(string key)
         {
             string json;
@@ -56,8 +51,6 @@ namespace Sfa.Das.Sas.Infrastructure.Services
                 SlidingExpiration = slidingExpiration
             });
         }
-
-     
 
         private Task SaveToMemoryCache(string key, string item)
         {

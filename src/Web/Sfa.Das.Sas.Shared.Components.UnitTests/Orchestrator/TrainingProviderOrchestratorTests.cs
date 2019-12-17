@@ -167,23 +167,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
         }
 
-        //[Test]
-        //public void When_SearchResultsRequested_Then_SaveResultsFromRedisToInMemoryCache()
-        //{
-        //    var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId;
-        //    string json;
-
-        //    _mockMediator.Setup(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_providerDetailResponse);
-        //  //  _mockCacheService.Setup(s => s.RetrieveFromCache<ApprenticeshipProviderDetailResponse>(cacheKey)).Returns(GenerateMockCacheObject());
-        //    _mockMemoryCache.Setup(s => s.TryGetValue<string>(It.IsAny<string>(), out json)).Returns(false);
-
-        //    var result = _sut.GetDetails(_detailsQueryViewModel);
-
-        //    _mockMediator.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Never());
-        //   // _mockCacheService.Verify(s => s.SaveToCache(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
-        ////    _mockDistributedCache.Verify(s => s.GetStringAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once());
-        //}
-
         private string GenerateMockCacheString()
         {
             var response = new ApprenticeshipProviderDetailResponse()
