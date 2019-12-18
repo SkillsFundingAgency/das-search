@@ -20,7 +20,10 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
          public GetBasketHandler(
             ILogger<GetBasketHandler> logger,
-            IApprenticeshipFavouritesBasketStore basketStore, IGetStandards getStandards, IGetFrameworks getFrameworks, IGetProviderDetails getProvider)
+            IApprenticeshipFavouritesBasketStore basketStore, 
+            IGetStandards getStandards,
+            IGetFrameworks getFrameworks,
+            IGetProviderDetails getProvider)
         {
             _logger = logger;
             _basketStore = basketStore;

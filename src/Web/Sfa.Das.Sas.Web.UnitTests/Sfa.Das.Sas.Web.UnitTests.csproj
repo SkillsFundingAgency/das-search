@@ -37,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\SharedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.6.41832, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -243,6 +244,7 @@
     <Compile Include="Application\Handlers\AddOrRemoveFavouriteInBasketHandlerTests.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipSearchHandlerTest.cs" />
     <Compile Include="Application\Handlers\ApprenticeshipProviderDetailHandlerTest.cs" />
+    <Compile Include="Application\Handlers\RemoveBasketHandlerTests.cs" />
     <Compile Include="Application\Handlers\ValidatePostcodeHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderDetailHandlerTests.cs" />
     <Compile Include="Application\Handlers\ProviderNameSearchHandlerTests.cs" />
@@ -342,7 +344,7 @@
       <Name>Sfa.Das.Sas.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj">
-      <Project>{83DBB4A0-6A9E-44BA-A172-D21EB707E508}</Project>
+      <Project>{83dbb4a0-6a9e-44ba-a172-d21eb707e508}</Project>
       <Name>Sfa.Das.Sas.Shared.Basket</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Components\Sfa.Das.Sas.Shared.Components.csproj">

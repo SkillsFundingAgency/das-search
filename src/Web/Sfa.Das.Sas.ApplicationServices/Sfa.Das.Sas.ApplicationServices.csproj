@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AddOrRemoveFavouriteInBasketCommand.cs" />
+    <Compile Include="Commands\RemoveBasketCommand.cs" />
     <Compile Include="DependencyResolution\ApplicationServicesRegistry.cs" />
     <Compile Include="Exceptions\SearchException.cs" />
     <Compile Include="FeatureToggles\ApprenticeshipServiceApiFeature.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="FeatureToggles\ProviderFeedbackFeature.cs" />
     <Compile Include="FeatureToggles\RoatpProviderFlagsFeature.cs" />
     <Compile Include="Handlers\AddorRemoveFavouriteInBasketCommandHandler.cs" />
+    <Compile Include="Handlers\RemoveBasketHandler.cs" />
     <Compile Include="Handlers\GetClosestLocationsHandler.cs" />
     <Compile Include="Handlers\GetBasketHandler.cs" />
     <Compile Include="Handlers\IXmlDocumentSerialiser.cs" />
@@ -286,7 +288,7 @@
       <Name>Sfa.Das.Sas.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj">
-      <Project>{83DBB4A0-6A9E-44BA-A172-D21EB707E508}</Project>
+      <Project>{83dbb4a0-6a9e-44ba-a172-d21eb707e508}</Project>
       <Name>Sfa.Das.Sas.Shared.Basket</Name>
     </ProjectReference>
   </ItemGroup>
