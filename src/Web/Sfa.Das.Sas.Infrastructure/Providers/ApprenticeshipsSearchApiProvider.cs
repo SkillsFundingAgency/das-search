@@ -12,9 +12,9 @@ namespace Sfa.Das.Sas.Infrastructure.Providers
 
     public class ApprenticeshipsSearchApiProvider : IApprenticeshipSearchProvider
     {
-        private readonly ISearchVApi _apprenticeshipProgrammeApiClient;
+        private readonly ISearchV3Api _apprenticeshipProgrammeApiClient;
         private readonly IApprenticeshipSearchResultsMapping _apprenticeshipSearchResultsMapping;
-        public ApprenticeshipsSearchApiProvider(ISearchVApi apprenticeshipProgrammeApiClient, IApprenticeshipSearchResultsMapping apprenticeshipSearchResultsMapping)
+        public ApprenticeshipsSearchApiProvider(ISearchV3Api apprenticeshipProgrammeApiClient, IApprenticeshipSearchResultsMapping apprenticeshipSearchResultsMapping)
         {
             _apprenticeshipProgrammeApiClient = apprenticeshipProgrammeApiClient;
             _apprenticeshipSearchResultsMapping = apprenticeshipSearchResultsMapping;

@@ -2,7 +2,7 @@
 
 namespace Sfa.Das.Sas.ApplicationServices.Models
 {
-    public sealed class ProviderSearchResults : BaseProviderSearchResults
+    public class ProviderSearchResults : BaseProviderSearchResults
     {
         public string ApprenticeshipId { get; set; }
         public int Level { get; internal set; }

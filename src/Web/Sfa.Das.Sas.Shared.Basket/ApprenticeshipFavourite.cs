@@ -6,7 +6,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
     {
         public ApprenticeshipFavourite()
         {
-            Ukprns = new List<int>();
+            Providers = new List<Provider>();
         }
 
         public ApprenticeshipFavourite(string apprenticeshipId) : this()
@@ -14,12 +14,16 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             ApprenticeshipId = apprenticeshipId;
         }
 
-        public ApprenticeshipFavourite(string apprenticeshipId, int ukprn) : this(apprenticeshipId)
+        public ApprenticeshipFavourite(string apprenticeshipId, int ukprn, string providerName) : this(apprenticeshipId)
         {
-            Ukprns.Add(ukprn);
+            Providers.Add(new Provider(ukprn, providerName));
+        }
+        public ApprenticeshipFavourite(string apprenticeshipId, int ukprn,string providerName, int location) : this(apprenticeshipId)
+        {
+            Providers.Add(new Provider(ukprn, providerName, location));
         }
 
         public string ApprenticeshipId { get; set; }
-        public IList<int> Ukprns { get; set; }
+        public IList<Provider> Providers { get; set; }
     }
 }

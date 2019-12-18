@@ -11,6 +11,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
         public ApprenticeshipType ApprenticeshipType { get; set; }
         public int LocationId { get; set; }
         public bool SearchedCache { get; set; }
+        public string PostCode { get; set; }
         public TrainingProviderDetailsViewModel TrainingProviderDetails { get; set; }
     }
 
@@ -18,7 +19,8 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
     {
         Details = 0,
         Contact = 1,
-        Summary = 2
+        Summary = 2,
+        Search = 3
         
     }
 }

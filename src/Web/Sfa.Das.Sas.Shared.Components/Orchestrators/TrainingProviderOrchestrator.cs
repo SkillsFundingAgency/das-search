@@ -20,10 +20,18 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly ISearchResultsViewModelMapper _searchResultsViewModelMapper;
         private readonly ITrainingProviderDetailsViewModelMapper _trainingProviderDetailsViewModelMapper;
         private readonly ITrainingProviderSearchFilterViewModelMapper _trainingProviderSearchFilterViewModelMapper;
+        private readonly ITrainingProviderClosestLocationsViewModelMapper _trainingProviderClosestLocationsViewModelMapper;
         private readonly ILog _logger;
         private readonly ICacheStorageService _cacheService;
         
-        public TrainingProviderOrchestrator(IMediator mediator, ISearchResultsViewModelMapper searchResultsViewModelMapper, ILog logger, ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper, ICacheStorageService cacheService)
+        public TrainingProviderOrchestrator(
+            IMediator mediator, 
+            ISearchResultsViewModelMapper searchResultsViewModelMapper, 
+            ILog logger, 
+            ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, 
+            ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper,
+            ICacheStorageService cacheService,
+            ITrainingProviderClosestLocationsViewModelMapper trainingProviderClosestLocationsViewModelMapper)
         {
             _mediator = mediator;
             _searchResultsViewModelMapper = searchResultsViewModelMapper;
@@ -31,49 +39,58 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             _trainingProviderDetailsViewModelMapper = trainingProviderDetailsViewModelMapper;
             _trainingProviderSearchFilterViewModelMapper = trainingProviderSearchFilterViewModelMapper;
             _cacheService = cacheService;
+            _trainingProviderClosestLocationsViewModelMapper = trainingProviderClosestLocationsViewModelMapper;
         }
 
         public async Task<SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>> GetSearchResults(TrainingProviderSearchViewModel searchQueryModel)
         {
-
-            var results = await _mediator.Send(new ProviderSearchQuery()
+            var results = await _mediator.Send(new GroupedProviderSearchQuery()
             {
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
-                DeliveryModes = searchQueryModel.DeliveryModes,
                 NationalProvidersOnly = searchQueryModel.NationalProvidersOnly,
                 Page = searchQueryModel.Page
             });
 
             var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);
 
-            if (results.Success == false)
+            switch (model.Status)
             {
-                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
-               
+                case ProviderSearchResponseCodes.Success:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return model;
+                default:
+                    throw new Exception($"Unable to get provider search response: {results.StatusCode}");
             }
-            return _searchResultsViewModelMapper.Map(results, searchQueryModel);
         }
 
         public async Task<TrainingProviderSearchFilterViewModel> GetSearchFilter(TrainingProviderSearchViewModel searchQueryModel)
         {
-            var results = await _mediator.Send(new ProviderSearchQuery()
+            var results = await _mediator.Send(new GroupedProviderSearchQuery()
             {
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
-                DeliveryModes =searchQueryModel.DeliveryModes,
                 NationalProvidersOnly = searchQueryModel.NationalProvidersOnly
             });
 
             var model = _trainingProviderSearchFilterViewModelMapper.Map(results, searchQueryModel);
 
-            if (results.Success == false)
+            switch (model.Status)
             {
-                throw new Exception($"Unable to get provider search response: {results.StatusCode}");
-
+                case ProviderSearchResponseCodes.Success:
+                case ProviderSearchResponseCodes.ScotlandPostcode:
+                case ProviderSearchResponseCodes.WalesPostcode:
+                case ProviderSearchResponseCodes.NorthernIrelandPostcode:
+                case ProviderSearchResponseCodes.PostCodeTerminated:
+                case ProviderSearchResponseCodes.PostCodeInvalidFormat:
+                    return model;
+                default:
+                    throw new Exception($"Unable to get provider search response: {results.StatusCode}");
             }
-
-            return model;
         }
 
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)
@@ -108,6 +125,14 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             }
 
             return cacheEntry;
+            }
+        public async Task<ClosestLocationsViewModel> GetClosestLocations(string apprenticeshipId, int ukprn, int locationId, string postCode)
+        {
+            var response = await _mediator.Send(new GetClosestLocationsQuery() { ApprenticeshipId = apprenticeshipId, Ukprn = ukprn, PostCode = postCode });
+
+            var model = _trainingProviderClosestLocationsViewModelMapper.Map(apprenticeshipId, ukprn, locationId, postCode, response);
+            
+            return model;
         }
     }
 }

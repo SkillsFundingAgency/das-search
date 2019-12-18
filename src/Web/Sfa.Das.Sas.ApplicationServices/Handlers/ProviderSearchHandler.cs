@@ -22,7 +22,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
         private readonly ILog _logger;
         private readonly IProviderSearchService _searchService;
         private readonly IPaginationSettings _paginationSettings;
-        private readonly IPostcodeIoService _postcodeIoService;
+        private readonly IPostcodeService _postcodeService;
         private readonly IValidator<ProviderSearchQuery> _validator;
 
         private readonly Dictionary<string, ProviderSearchResponseCodes> _searchResponseCodes =
@@ -40,13 +40,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             IValidator<ProviderSearchQuery> validator,
             IProviderSearchService searchService,
             IPaginationSettings paginationSettings,
-            IPostcodeIoService postcodeIoService,
+            IPostcodeService postcodeService,
             ILog logger)
         {
             _validator = validator;
             _searchService = searchService;
             _paginationSettings = paginationSettings;
-            _postcodeIoService = postcodeIoService;
+            _postcodeService = postcodeService;
             _logger = logger;
         }
 
@@ -94,7 +94,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
         private async Task<ProviderSearchResponseCodes> GetPostcodeStatus(string postcode)
         {
-            var status = await _postcodeIoService.GetPostcodeStatus(postcode);
+            var status = await _postcodeService.GetPostcodeStatus(postcode);
             switch (status)
             {
                 case "Wales":

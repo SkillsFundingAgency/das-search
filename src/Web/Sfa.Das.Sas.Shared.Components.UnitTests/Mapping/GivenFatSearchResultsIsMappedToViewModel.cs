@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
@@ -15,15 +16,15 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
         private FatSearchResultsViewModelMapper _sut;
         private ApprenticeshipSearchResults _itemToMap;
         private Mock<ICssViewModel> _cssClassMock;
-        private Mock<IFatSearchResultsItemViewModelMapper> _fatSearchItemMapperMock;
+        private Mock<IApprenticeshipItemViewModelMapper> _fatSearchItemMapperMock;
 
         [SetUp]
         public void Setup()
         {
 
-            _fatSearchItemMapperMock = new Mock<IFatSearchResultsItemViewModelMapper>(MockBehavior.Strict);
+            _fatSearchItemMapperMock = new Mock<IApprenticeshipItemViewModelMapper>(MockBehavior.Strict);
 
-            _fatSearchItemMapperMock.Setup(s => s.Map(It.IsAny<ApprenticeshipSearchResultsItem>())).Returns(new FatSearchResultsItemViewModel(){Title = "Apprenticeship"});
+            _fatSearchItemMapperMock.Setup(s => s.Map(It.IsAny<ApprenticeshipSearchResultsItem>())).Returns(new ApprenticeshipItemViewModel(){Title = "Apprenticeship"});
 
             _sut = new FatSearchResultsViewModelMapper(_fatSearchItemMapperMock.Object);
 
