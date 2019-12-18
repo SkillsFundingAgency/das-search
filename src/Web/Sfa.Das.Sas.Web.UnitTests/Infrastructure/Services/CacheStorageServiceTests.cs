@@ -4,6 +4,7 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.Shared.Components.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
         {
             memoryCache.Set("123456", "1234567889");
 
-            var response = _sut.RetrieveFromCache<ApprenticeshipProviderDetailResponse>("123456");
+            var response = _sut.RetrieveFromCache<TrainingProviderDetailsViewModel>("123456");
 
             _mockDistributedCache.Verify(s => s.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Never());
         }
@@ -44,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
         {
             _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
 
-            var response = _sut.RetrieveFromCache<ApprenticeshipProviderDetailResponse>("123456");
+            var response = _sut.RetrieveFromCache<TrainingProviderDetailsViewModel>("123456");
 
             _mockDistributedCache.Verify(s => s.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once());
         }

@@ -45,6 +45,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "530-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.FrameworkNotFound });
             _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "130-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.Gone });
             _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "230-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.Success, Framework = new Framework(){ FrameworkId = "230-2-1"}});
+            _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "890-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.Success, Framework = new Framework() { FrameworkId = "890-2-1" } });
 
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "678"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.HttpRequestException });
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "567"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.InvalidStandardId });
@@ -52,9 +53,10 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "345"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.AssessmentOrgsEntityNotFound, Standard = new Standard() { StandardId = "345" } });
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "234"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Gone });
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "123"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Success, Standard = new Standard() { StandardId = "123" } });
+            _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "890"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Success, Standard = new Standard() { StandardId = "890" } });
 
-            _mockCacheService.Setup(s => s.RetrieveFromCache<GetFrameworkResponse>("890-2-1")).ReturnsAsync(new GetFrameworkResponse() { Framework = new Framework() { FrameworkId = "890-2-1" } });
-            _mockCacheService.Setup(s => s.RetrieveFromCache<GetStandardResponse>("890")).ReturnsAsync(new GetStandardResponse() { Standard = new Standard() { StandardId = "890" } });
+            _mockCacheService.Setup(s => s.RetrieveFromCache<FrameworkDetailsViewModel>("890-2-1")).ReturnsAsync(new FrameworkDetailsViewModel() { Id = "890-2-1" } );
+            _mockCacheService.Setup(s => s.RetrieveFromCache<StandardDetailsViewModel>("890")).ReturnsAsync(new StandardDetailsViewModel() { Id = "980" });
 
 
             _frameworkMapperMock.Setup(s => s.Map(It.IsAny<Framework>())).Returns(_framework);
@@ -186,7 +188,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             var result = await _sut.GetStandard("123");
 
-            _mockCacheService.Verify(s => s.SaveToCache<GetStandardResponse>(It.IsAny<string>(), It.IsAny<GetStandardResponse>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
+            _mockCacheService.Verify(s => s.SaveToCache<StandardDetailsViewModel>(It.IsAny<string>(), It.IsAny<StandardDetailsViewModel>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
         }
 
         [Test]
@@ -194,7 +196,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             var result = await _sut.GetFramework("230-2-1");
 
-            _mockCacheService.Verify(s => s.SaveToCache<GetFrameworkResponse>(It.IsAny<string>(), It.IsAny<GetFrameworkResponse>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
+            _mockCacheService.Verify(s => s.SaveToCache<FrameworkDetailsViewModel>(It.IsAny<string>(), It.IsAny<FrameworkDetailsViewModel>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
         }
 
         [Test]
@@ -202,17 +204,17 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             var result = await _sut.GetFramework("890-2-1");
 
-            _mockCacheService.Verify(s => s.RetrieveFromCache<GetFrameworkResponse>(It.IsAny<string>()), Times.Once);
+            _mockCacheService.Verify(s => s.RetrieveFromCache<FrameworkDetailsViewModel>(It.IsAny<string>()), Times.Once);
             _mediatorMock.Verify(s => s.Send<GetFrameworkResponse>(It.IsAny<GetFrameworkQuery>(), It.IsAny<CancellationToken>()), Times.Never);
         }
 
         [Test]
         public async Task When_Getting_Standard_Then_Retrieve_From_Cache()
         {
-            var result = await _sut.GetFramework("890-2-1");
+            var result = await _sut.GetStandard("890");
 
-            _mockCacheService.Verify(s => s.RetrieveFromCache<GetFrameworkResponse>(It.IsAny<string>()), Times.Once);
-            _mediatorMock.Verify(s => s.Send<GetFrameworkResponse>(It.IsAny<GetFrameworkQuery>(), It.IsAny<CancellationToken>()), Times.Never);
+            _mockCacheService.Verify(s => s.RetrieveFromCache<StandardDetailsViewModel>(It.IsAny<string>()), Times.Once);
+            _mediatorMock.Verify(s => s.Send<GetStandardResponse>(It.IsAny<GetStandardQuery>(), It.IsAny<CancellationToken>()), Times.Never);
         }
     }
-}
+} 

@@ -81,33 +81,33 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
             var cacheKey = detailsQueryModel.Ukprn + detailsQueryModel.LocationId + detailsQueryModel.ApprenticeshipId;
 
-            var cacheEntry = await _cacheService.RetrieveFromCache<ApprenticeshipProviderDetailResponse>(cacheKey);
+            var cacheEntry = await _cacheService.RetrieveFromCache<TrainingProviderDetailsViewModel>(cacheKey);
 
             if (cacheEntry == null)
             {
-                cacheEntry = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
+                var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
 
-                if (cacheEntry.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
+                if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
                 {
                     var message = $"Cannot find provider: {detailsQueryModel.Ukprn}";
                     _logger.Warn($"404 - {message}");
                     throw new HttpRequestException(message);
                 }
 
-                if (cacheEntry.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput)
+                if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput)
                 {
                     var message = $"Not able to call the apprenticeship service.";
-                    _logger.Warn($"{cacheEntry.StatusCode} - {message}");
+                    _logger.Warn($"{response.StatusCode} - {message}");
 
                     throw new HttpRequestException(message);
                 }
 
+                cacheEntry = _trainingProviderDetailsViewModelMapper.Map(response);
+
                 await _cacheService.SaveToCache(cacheKey, cacheEntry, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
             }
-            
-            var model = _trainingProviderDetailsViewModelMapper.Map(cacheEntry);
 
-            return model;
+            return cacheEntry;
         }
     }
 }

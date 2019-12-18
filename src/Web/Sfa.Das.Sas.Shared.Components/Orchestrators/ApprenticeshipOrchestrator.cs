@@ -29,7 +29,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task<FrameworkDetailsViewModel> GetFramework(string id)
         {
-            var cacheEntry = await _cacheService.RetrieveFromCache<GetFrameworkResponse>(id);
+            var cacheEntry = await _cacheService.RetrieveFromCache<FrameworkDetailsViewModel>(id);
 
             if (cacheEntry == null)
             {
@@ -57,29 +57,28 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                         throw new ArgumentException(message);
 
                     case GetFrameworkResponse.ResponseCodes.Success:
-                        _logger.Info($"Saving to cache");
-                        await _cacheService.SaveToCache(id, response, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+                        _logger.Info($"mapping framework {id}");
+                        cacheEntry = _frameworkDetailsViewModelMapper.Map(response.Framework);
 
-                        var _viewModel = _frameworkDetailsViewModelMapper.Map(response.Framework);
-                        return _viewModel;
+                        _logger.Info($"Saving to cache");
+                        await _cacheService.SaveToCache(id, cacheEntry, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+
+                        break;
 
                     default:
                         _logger.Info($"Cannot handle GetFrameworkQuery response: {response.StatusCode.ToString()}");
                         throw new ArgumentOutOfRangeException();
                 }
-
+                
             }
-            _logger.Info($"Mapping Framework {id}");
-
-            var viewModel = _frameworkDetailsViewModelMapper.Map(cacheEntry.Framework);
-
-            return viewModel;
+            
+            return cacheEntry;
         }
 
         public async Task<StandardDetailsViewModel> GetStandard(string id)
         {
             _logger.Info($"Checking cache from standard {id}");
-            var cacheEntry = await _cacheService.RetrieveFromCache<GetStandardResponse>(id);
+            var cacheEntry = await _cacheService.RetrieveFromCache<StandardDetailsViewModel>(id);
 
             if (cacheEntry == null)
             {
@@ -127,21 +126,17 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
                             throw new Exception(message);
                         }
-                    case GetStandardResponse.ResponseCodes.Success:
-                        _logger.Info($"Saving to cache");
-                        await _cacheService.SaveToCache(id, response, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
-
-                        var _viewModel = _standardDetailsViewModelMapper.Map(response.Standard, response.AssessmentOrganisations);
-                        return _viewModel;
+                
                 }
 
+                _logger.Info($"Mapping Standard {id}");
+                cacheEntry = _standardDetailsViewModelMapper.Map(response.Standard, response.AssessmentOrganisations);
+
+                _logger.Info($"Saving to cache");
+                await _cacheService.SaveToCache(id, cacheEntry, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
             }
             
-
-            _logger.Info($"Mapping Standard {id}");
-            var viewModel = _standardDetailsViewModelMapper.Map(cacheEntry.Standard, cacheEntry.AssessmentOrganisations);
-
-            return viewModel;
+            return cacheEntry;
         }
 
         public ApprenticeshipType GetApprenticeshipType(string id)

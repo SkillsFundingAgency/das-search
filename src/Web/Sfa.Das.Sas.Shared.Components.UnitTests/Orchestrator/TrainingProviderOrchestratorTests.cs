@@ -189,14 +189,5 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             return null;
         }
-       
-
-        //Test Scenarios
-        // completely new search - not in memory or redis cache
-        // calls the main get
-        // new search - not in memory but is in redis
-        // retrieves from redis and saves to inmemory
-        // existing inmemory and in redis
-        // retrieves from inmemory and doesn't call the main get
     }
 }

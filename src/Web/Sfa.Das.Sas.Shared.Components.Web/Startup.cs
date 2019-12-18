@@ -45,21 +45,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            
-
-            if (Configuration["Environment"] == "LOCAL")
-            {
-                services.AddDistributedMemoryCache();
-                services.AddMemoryCache();
-            }
-            else
-            {
-              
-                services.AddMemoryCache(x => {
-                    x.SizeLimit = 1024;
-                    x.CompactionPercentage = .33;
-                });
-            }
+            services.AddFatSharedComponentsCaching("localhost");
 
         }
 
