@@ -344,7 +344,7 @@
       <Name>Sfa.Das.Sas.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Basket\Sfa.Das.Sas.Shared.Basket.csproj">
-      <Project>{83DBB4A0-6A9E-44BA-A172-D21EB707E508}</Project>
+      <Project>{83dbb4a0-6a9e-44ba-a172-d21eb707e508}</Project>
       <Name>Sfa.Das.Sas.Shared.Basket</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Components\Sfa.Das.Sas.Shared.Components.csproj">

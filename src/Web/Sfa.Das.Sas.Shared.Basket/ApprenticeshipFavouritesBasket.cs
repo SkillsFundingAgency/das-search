@@ -35,11 +35,11 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             }
         }
 
-        public bool Add(string apprenticeshipId, int ukprn)
+        public bool Add(string apprenticeshipId, int ukprn, string providerName)
         {
             if (!IsInBasket(apprenticeshipId))
             {
-                _items.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn));
+                _items.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn, providerName));
                 return true;
             }
 
@@ -48,16 +48,16 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
                 return false;
             }
 
-            _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers.Add(ukprn,new List<int>());
+            _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers.Add(new Provider(ukprn, providerName));
 
             return true;
         }
 
-        public bool Add(string apprenticeshipId, int ukprn, int location)
+        public bool Add(string apprenticeshipId, int ukprn, string providerName, int location)
         {
             if (!IsInBasket(apprenticeshipId))
             {
-                _items.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn, location));
+                _items.Add(new ApprenticeshipFavourite(apprenticeshipId, ukprn,providerName, location));
                 return true;
             }
 
@@ -68,13 +68,13 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
             if (IsInBasket(apprenticeshipId,ukprn))
             {
-                var item = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers[ukprn];
+                var item = (_items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers)?.SingleOrDefault(w => w.Ukprn == ukprn);
 
-                item.Add(location);
+                item.Locations.Add(location);
             }
             else
             {
-                _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers.Add(ukprn, new List<int>(){location});
+                _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers.Add(new Provider(ukprn, providerName, location));
             }
 
             return true;
@@ -84,9 +84,9 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
         {
             if (IsInBasket(apprenticeshipId, ukprn))
             {
-                var provider = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers[ukprn];
+                var provider = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId)?.Providers?.SingleOrDefault(w => w.Ukprn == ukprn);
 
-                return provider.Contains(location);
+                return provider.Locations.Contains(location);
             }
 
             return false;
@@ -106,7 +106,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
                     return false;
                 else
                 {
-                    return apprenticeship.Providers.Any(w => w.Key == ukprn);
+                    return apprenticeship.Providers.Any(w => w.Ukprn == ukprn);
                 }
             }
         }
@@ -118,17 +118,20 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
 
         public void Remove(string apprenticeshipId, int ukprn)
         {
-            _items.FirstOrDefault(w => w.ApprenticeshipId == apprenticeshipId)?.Providers.Remove(ukprn);
+            var apprenticeship = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
+            var provider = apprenticeship?.Providers.SingleOrDefault(w => w.Ukprn == ukprn);
+
+            apprenticeship?.Providers.Remove(provider);
         }
 
         public void Remove(string apprenticeshipId, int ukprn, int location)
         {
             var apprenticeship = _items.FirstOrDefault(x => x.ApprenticeshipId == apprenticeshipId);
-            var provider = apprenticeship?.Providers[ukprn];
-            provider?.Remove(location);
-            
-            if (provider.Count == 0)
-                apprenticeship.Providers.Remove(ukprn);
+            var provider = apprenticeship?.Providers.SingleOrDefault(w => w.Ukprn == ukprn);
+            provider?.Locations.Remove(location);
+
+            if (provider.Locations.Count == 0)
+                apprenticeship.Providers.Remove(provider);
         }
 
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator() 

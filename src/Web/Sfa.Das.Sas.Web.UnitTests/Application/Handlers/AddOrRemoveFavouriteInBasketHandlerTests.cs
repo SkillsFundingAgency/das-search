@@ -7,6 +7,8 @@ using MediatR;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using NUnit.Framework;
+using SFA.DAS.Apprenticeships.Api.Types.Providers;
+using SFA.DAS.Providers.Api.Client;
 using Sfa.Das.Sas.ApplicationServices.Commands;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.ApplicationServices.Interfaces;
@@ -21,12 +23,17 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     {
         private IRequestHandler<AddOrRemoveFavouriteInBasketCommand, Guid> _sut;
         private Mock<IApprenticeshipFavouritesBasketStore> _mockBasket;
+        private Mock<IProviderApiClient> _mockProviderApiClient;
 
         [SetUp]
         public void Setup()
         {
             _mockBasket = new Mock<IApprenticeshipFavouritesBasketStore>();
-            _sut = new AddorRemoveFavouriteInBasketCommandHandler(new NullLogger<AddorRemoveFavouriteInBasketCommandHandler>(), _mockBasket.Object);
+            _mockProviderApiClient = new Mock<IProviderApiClient>();
+
+            _mockProviderApiClient.Setup(s => s.Get(It.IsAny<int>())).Returns(new SFA.DAS.Apprenticeships.Api.Types.Providers.Provider() {ProviderName = "TestProvider"});
+
+            _sut = new AddorRemoveFavouriteInBasketCommandHandler(new NullLogger<AddorRemoveFavouriteInBasketCommandHandler>(), _mockBasket.Object,_mockProviderApiClient.Object);
         }
 
         [Test]
@@ -111,8 +118,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var basketId = Guid.NewGuid();
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
 
-            basket.Add("123", 23456);
-            basket.Add("123", 12345);
+            basket.Add("123", 23456, "TestProvider");
+            basket.Add("123", 12345, "TestProvider");
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
@@ -145,7 +152,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             await _sut.Handle(request, default(CancellationToken));
 
-            _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123" && a[0].Providers.Keys.Contains(12345678) && a[0].Providers[12345678].Contains(12345))));
+            _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a[0].ApprenticeshipId == "123" && a[0].Providers.Select(w => w.Ukprn).Contains(12345678) && a[0].Providers.SingleOrDefault(w => w.Ukprn == 12345678).Locations.Contains(12345))));
         }
 
         [Test]
@@ -177,7 +184,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
             favourite.Providers.Count.Should().Be(1);
-            favourite.Providers.Keys.First().Should().Be(12345678);
+            favourite.Providers.First().Ukprn.Should().Be(12345678);
         }
 
         [Test]
@@ -209,7 +216,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
             favourite.Providers.Count.Should().Be(1);
-            favourite.Providers.Keys.First().Should().Be(12345678);
+            favourite.Providers.First().Ukprn.Should().Be(12345678);
         }
 
         [Test]
@@ -217,8 +224,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
-            basket.Add("123", 12345678);
-            basket.Add("123", 23456789);
+            basket.Add("123", 12345678, "TestProvider");
+            basket.Add("123", 23456789, "TestProvider");
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
@@ -241,7 +248,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
             favourite.Providers.Count.Should().Be(1);
-            favourite.Providers.Keys.Should().NotContain(12345678);
+            favourite.Providers.Select(s => s.Ukprn).Should().NotContain(12345678);
         }
 
 
@@ -278,9 +285,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             favourite.Should().NotBeNull();
             favourite.Providers.Should().NotBeNull();
             favourite.Providers.Count.Should().Be(1);
-            favourite.Providers.Keys.First().Should().Be(12345678);
-            favourite.Providers.First().Value.Count().Should().Be(1);
-            favourite.Providers.First().Value.Contains(10000020);
+            favourite.Providers.First().Ukprn.Should().Be(12345678);
+            favourite.Providers.First().Locations.Count().Should().Be(1);
+            favourite.Providers.First().Locations.Contains(10000020);
         }
 
         [Test]
@@ -288,7 +295,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
-            basket.Add("123", 12345678);
+            basket.Add("123", 12345678, "TestProvider");
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
@@ -314,9 +321,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             favourite.Should().NotBeNull();
             favourite.Providers.Should().NotBeNull();
             favourite.Providers.Count.Should().Be(1);
-            favourite.Providers.Keys.First().Should().Be(12345678);
-            favourite.Providers.First().Value.Count().Should().Be(1);
-            favourite.Providers.First().Value.Contains(10000020);
+            favourite.Providers.First().Ukprn.Should().Be(12345678);
+            favourite.Providers.First().Locations.Count().Should().Be(1);
+            favourite.Providers.First().Locations.Contains(10000020);
+            favourite.Providers.First().Name.Should().Be("TestProvider");
         }
 
         [Test]
@@ -324,7 +332,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
-            basket.Add("123", 12345678, 10000030);
+            basket.Add("123", 12345678,"TestProvider", 10000030);
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 
@@ -350,9 +358,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             favourite.Should().NotBeNull();
             favourite.Providers.Should().NotBeNull();
             favourite.Providers.Count.Should().Be(1);
-            favourite.Providers.Keys.First().Should().Be(12345678);
-            favourite.Providers.First().Value.Count().Should().Be(2);
-            favourite.Providers.First().Value.Contains(10000020);
+            favourite.Providers.First().Ukprn.Should().Be(12345678);
+            favourite.Providers.First().Locations.Count().Should().Be(2);
+            favourite.Providers.First().Locations.Contains(10000020);
+            favourite.Providers.First().Name.Should().Be("TestProvider");
         }
 
         [Test]
@@ -384,7 +393,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
             favourite.Should().NotBeNull();
             favourite.Providers.Count.Should().Be(1);
-            favourite.Providers.Keys.First().Should().Be(12345678);
+            favourite.Providers.First().Ukprn.Should().Be(12345678);
         }
 
         [Test]
@@ -392,8 +401,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
         {
             var basketId = Guid.NewGuid();
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
-            basket.Add("123", 12345678, 10000020);
-            basket.Add("123", 23456789, 10000030);
+            basket.Add("123", 12345678,"TestProvider", 10000020);
+            basket.Add("123", 23456789, "TestProvider", 10000030);
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 

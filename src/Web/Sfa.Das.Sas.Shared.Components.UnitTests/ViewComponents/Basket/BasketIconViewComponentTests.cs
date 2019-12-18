@@ -11,6 +11,7 @@ using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 using System.Collections.Generic;
+using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
 {
@@ -70,7 +71,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
         }
 
         [Test]
-        public async Task Invoke_ReturnsModelContainingItemCountInBasket_WhenBasketNotEmpty()
+        public async Task Invoke_ReturnsModelContainingItemCountInBasket_WhenOnlyApprenticeshipsInBasket()
         {
             // Add a couple of items to the basket
             _basketViewModel.Items.Add(new ApprenticeshipBasketItemViewModel());
@@ -82,6 +83,28 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.ViewComponents.Basket
             result.ViewData.Model.Should().BeAssignableTo<BasketIconViewModel>();
             var model = result.ViewData.Model as BasketIconViewModel;
             model.ItemCount.Should().Be(2);
+        }
+
+        [Test]
+        public async Task Invoke_ReturnsModelContainingItemCountInBasket_WhenApprenticeshipWithProvidersInBasket()
+        {
+            // Add a couple of items to the basket
+            _basketViewModel.Items.Add(new ApprenticeshipBasketItemViewModel
+            {
+                TrainingProvider = new List<TrainingProviderSearchResultsItem>()
+                {
+                     new TrainingProviderSearchResultsItem(),
+                     new TrainingProviderSearchResultsItem(),
+                     new TrainingProviderSearchResultsItem()
+                }
+            });
+
+            var result = await _sut.InvokeAsync() as ViewViewComponentResult;
+
+            result.Should().BeOfType<ViewViewComponentResult>();
+            result.ViewData.Model.Should().BeAssignableTo<BasketIconViewModel>();
+            var model = result.ViewData.Model as BasketIconViewModel;
+            model.ItemCount.Should().Be(4);
         }
 
         [Test]

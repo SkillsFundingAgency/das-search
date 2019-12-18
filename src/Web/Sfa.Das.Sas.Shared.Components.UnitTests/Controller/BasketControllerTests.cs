@@ -23,6 +23,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
     {
         private const string APPRENTICESHIP_ID = "123";
         private const int UKPRN = 12345678;
+        private const string PROVIDER_NAME = "TestProvider";
         private const int LOCATION_ID = 123123;
         private const int LOCATION_ID_TO_ADD = 5555;
         private const string BasketCookieName = "ApprenticeshipBasket";
@@ -419,7 +420,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         {
 
             var basket = new ApprenticeshipFavouritesBasket();
-            basket.Add(APPRENTICESHIP_ID, UKPRN);
+            basket.Add(APPRENTICESHIP_ID, UKPRN, PROVIDER_NAME);
 
             return new ApprenticeshipFavouritesBasketRead(basket);
         }

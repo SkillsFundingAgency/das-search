@@ -33,7 +33,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var basket = new ApprenticeshipFavouritesBasket { Id = basketId };
 
-            basket.Add("123", 12345678);
+            basket.Add("123", 12345678,"Test Provider");
 
             _mockBasket.Setup(x => x.GetAsync(basketId)).ReturnsAsync(basket);
 

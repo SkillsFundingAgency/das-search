@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using SFA.DAS.Providers.Api.Client;
 using Sfa.Das.Sas.ApplicationServices.Commands;
 using Sfa.Das.Sas.Shared.Basket.Interfaces;
 using Sfa.Das.Sas.Shared.Basket.Models;
@@ -13,11 +14,13 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
     public class AddorRemoveFavouriteInBasketCommandHandler : IRequestHandler<AddOrRemoveFavouriteInBasketCommand, Guid>
     {
         private readonly IApprenticeshipFavouritesBasketStore _basketStore;
+        private IProviderApiClient _providerApiClient;
         private readonly ILogger<AddorRemoveFavouriteInBasketCommandHandler> _logger;
 
-        public AddorRemoveFavouriteInBasketCommandHandler(ILogger<AddorRemoveFavouriteInBasketCommandHandler> logger, IApprenticeshipFavouritesBasketStore basketStore)
+        public AddorRemoveFavouriteInBasketCommandHandler(ILogger<AddorRemoveFavouriteInBasketCommandHandler> logger, IApprenticeshipFavouritesBasketStore basketStore, IProviderApiClient providerApiClient)
         {
             _basketStore = basketStore;
+            _providerApiClient = providerApiClient;
             _logger = logger;
         }
 
@@ -50,7 +53,9 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     }
                     else
                     {
-                        basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value, request.LocationId.Value);
+                        var providerName = _providerApiClient.Get(request.Ukprn.Value).ProviderName;
+
+                        basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value, providerName, request.LocationId.Value);
                     }
                 }
                 else if (request.Ukprn.HasValue)
@@ -62,7 +67,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     }
                     else
                     {
-                        basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
+                        var providerName = _providerApiClient.Get(request.Ukprn.Value).ProviderName;
+                        basketChanged = basket.Add(request.ApprenticeshipId, request.Ukprn.Value, providerName);
                     }
                 }
                 else
@@ -89,18 +95,19 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             return basket.Id;
         }
 
-        private static ApprenticeshipFavouritesBasket CreateNewBasket(AddOrRemoveFavouriteInBasketCommand request)
+        private ApprenticeshipFavouritesBasket CreateNewBasket(AddOrRemoveFavouriteInBasketCommand request)
         {
             var basket = new ApprenticeshipFavouritesBasket();
 
             if (request.Ukprn.HasValue && request.LocationId.HasValue)
             {
-                basket.Add(request.ApprenticeshipId, request.Ukprn.Value, request.LocationId.Value);
-
+                var providerName = _providerApiClient.Get(request.Ukprn.Value).ProviderName;
+                basket.Add(request.ApprenticeshipId, request.Ukprn.Value, providerName, request.LocationId.Value);
             }
             else if (request.Ukprn.HasValue)
             {
-                basket.Add(request.ApprenticeshipId, request.Ukprn.Value);
+                var providerName = _providerApiClient.Get(request.Ukprn.Value).ProviderName;
+                basket.Add(request.ApprenticeshipId, request.Ukprn.Value, providerName);
             }
             else
             {

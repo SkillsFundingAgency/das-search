@@ -78,6 +78,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 if (providerResult != null)
                 {
                     providerItem.Name = providerResult.ProviderName;
+                    providerItem.Active = true;
                 }
             }
 
@@ -92,6 +93,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             apprenticeship.Level = framework.Level;
             apprenticeship.EffectiveTo = framework.EffectiveTo;
             apprenticeship.ApprenticeshipType = ApprenticeshipType.Framework;
+            apprenticeship.Active = framework.IsActiveFramework;
         }
 
         private void EnrichStandard(ApprenticeshipFavouriteRead apprenticeship)
@@ -103,6 +105,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
             apprenticeship.Level = standard.Level;
             apprenticeship.EffectiveTo = standard.EffectiveTo;
             apprenticeship.ApprenticeshipType = ApprenticeshipType.Standard;
+            apprenticeship.Active = standard.IsActiveStandard;
         }
 
         public bool IsFramework(string id)
