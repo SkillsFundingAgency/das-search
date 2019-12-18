@@ -16,7 +16,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
 {
     public class CacheStorageServiceTests
     {
-        private Mock<IMemoryCache> _mockMemoryCache;
         private Mock<IDistributedCache> _mockDistributedCache;
         private CacheStorageService _sut;
         private MemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions());
@@ -24,7 +23,6 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
         [SetUp]
         public void Setup()
         {
-            _mockMemoryCache = new Mock<IMemoryCache>();
             _mockDistributedCache = new Mock<IDistributedCache>();
 
             _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
