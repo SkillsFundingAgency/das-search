@@ -43,6 +43,8 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
         [Test]
         public void GetsFromDistributedCacheIfKeyDoesntExistInMemoryCache()
         {
+            memoryCache = new MemoryCache(new MemoryCacheOptions());
+
             _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
 
             var response = _sut.RetrieveFromCache<TrainingProviderDetailsViewModel>("123456");
