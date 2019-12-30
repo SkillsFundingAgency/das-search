@@ -268,6 +268,8 @@
     <Compile Include="Services\MappingActions\Helpers\ProviderMappingHelper.cs" />
     <Compile Include="Services\PaginationOrientationService.cs" />
     <Compile Include="Services\PostcodeIoService.cs" />
+    <Compile Include="Services\CacheStorageService.cs" />
+    <Compile Include="Services\ICacheStorageService.cs" />
     <Compile Include="Settings\ICookieSettings.cs" />
     <Compile Include="Settings\IPaginationSettings.cs" />
     <Compile Include="Settings\PaginationSettings.cs" />

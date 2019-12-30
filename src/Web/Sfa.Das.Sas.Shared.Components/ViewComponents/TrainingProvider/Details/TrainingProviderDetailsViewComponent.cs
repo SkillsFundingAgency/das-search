@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sfa.Das.Sas.ApplicationServices.Models;
-using Sfa.Das.Sas.Infrastructure.Services;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using System;
 using SFA.DAS.NLog.Logger;
+using Sfa.Das.Sas.ApplicationServices.Services;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
 {
@@ -13,14 +13,12 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Fat.SearchResults
     {
         private readonly ITrainingProviderOrchestrator _tpOrchestrator;
         private readonly IApprenticeshipOrchestrator _apprenticeshipOrchestrator;
-        private readonly ICacheStorageService _cacheService;
         private readonly ILog _logger;
 
         public TrainingProviderDetailsViewComponent(ITrainingProviderOrchestrator tpOrchestrator, IApprenticeshipOrchestrator apprenticeshipOrchestrator, ICacheStorageService cacheService, ILog logger)
         {
             _tpOrchestrator = tpOrchestrator;
             _apprenticeshipOrchestrator = apprenticeshipOrchestrator;
-            _cacheService = cacheService;
             _logger = logger;
         }
 

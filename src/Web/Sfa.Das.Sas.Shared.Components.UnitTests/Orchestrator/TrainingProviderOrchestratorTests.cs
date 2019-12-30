@@ -12,7 +12,7 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
-using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;

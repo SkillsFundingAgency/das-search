@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.ApplicationServices.Services;
 
 namespace Sfa.Das.Sas.Shared.Components
 {

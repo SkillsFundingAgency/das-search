@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
-using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 
 namespace Sfa.Das.Sas.Shared.Components.Web
@@ -31,14 +31,9 @@ namespace Sfa.Das.Sas.Shared.Components.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMemoryCache();
-
             var fatConfig = new FatSharedComponentsConfiguration();
             Configuration.Bind("fatSharedComponents", fatConfig);
             services.AddSingleton<IFatConfigurationSettings>(fs => fatConfig);
-
-            services.AddSingleton<ICacheStorageService, CacheStorageService>();
-            services.AddScoped<TrainingProviderDetailQueryViewModel>();
 
 
             services.AddFatSharedComponents(fatConfig);

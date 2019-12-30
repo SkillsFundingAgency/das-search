@@ -4,7 +4,7 @@ using MediatR;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
 using SFA.DAS.NLog.Logger;

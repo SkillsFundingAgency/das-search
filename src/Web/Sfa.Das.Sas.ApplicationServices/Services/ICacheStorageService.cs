@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sfa.Das.Sas.Infrastructure.Services
+namespace Sfa.Das.Sas.ApplicationServices.Services
 {
     public interface ICacheStorageService
     {

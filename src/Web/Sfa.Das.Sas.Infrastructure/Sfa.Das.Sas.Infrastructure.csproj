@@ -208,8 +208,6 @@
     <Compile Include="Repositories\AssessmentOrganisationApiRepository.cs" />
     <Compile Include="Logging\DependencyLogEntry.cs" />
     <Compile Include="Repositories\ProviderApiRepository.cs" />
-    <Compile Include="Services\CacheStorageService.cs" />
-    <Compile Include="Services\ICacheStorageService.cs" />
     <Compile Include="Settings\FatSettings.cs" />
     <Compile Include="Settings\ApplicationSettings.cs" />
     <Compile Include="DependencyResolution\InfrastructureRegistry.cs" />

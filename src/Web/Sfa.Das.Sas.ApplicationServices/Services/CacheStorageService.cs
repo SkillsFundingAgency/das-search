@@ -7,7 +7,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 
-namespace Sfa.Das.Sas.Infrastructure.Services
+namespace Sfa.Das.Sas.ApplicationServices.Services
 {
     public class CacheStorageService : ICacheStorageService
     {

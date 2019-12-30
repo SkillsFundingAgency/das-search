@@ -10,7 +10,7 @@ using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.Core.Domain;
 using Sfa.Das.Sas.Core.Domain.Model;
-using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;

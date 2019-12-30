@@ -54,8 +54,6 @@ namespace Sfa.Das.Sas.Shared.Basket.Infrastructure
                 SlidingExpiration = slidingExpiration
             };
 
-          
-
             return _cache.SetStringAsync(key, json, options);
         }
 

@@ -1,16 +1,11 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using System;
+using System.Threading;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using NUnit.Framework;
-using Sfa.Das.Sas.ApplicationServices.Responses;
-using Sfa.Das.Sas.Infrastructure.Services;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
 {
@@ -48,6 +43,27 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
             var response = _sut.RetrieveFromCache<TrainingProviderDetailsViewModel>("123456");
 
             _mockDistributedCache.Verify(s => s.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once());
+
+        }
+
+        [Test]
+        public void SavesToDistributedCache()
+        {
+            memoryCache = new MemoryCache(new MemoryCacheOptions());
+
+            _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
+
+            var response = _sut.SaveToCache<TrainingProviderDetailsViewModel>("testkey", GetTestTrainingProviderDetails(), new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+
+            _mockDistributedCache.Verify(s => s.SetAsync(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<DistributedCacheEntryOptions>(), It.IsAny<CancellationToken>()), Times.Once());
+        }
+
+        private TrainingProviderDetailsViewModel GetTestTrainingProviderDetails()
+        {
+            return new TrainingProviderDetailsViewModel()
+            {
+                Name = "Test Provider"
+            };
         }
     }
 }
