@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             framework.Level = item.Level;
             framework.Title = item.Title;
             framework.Duration = item.Duration;
-            framework.EffectiveTo = item.EffectiveTo;
+            framework.EffectiveTo = item.EffectiveTo.Value.AddDays(1);
             framework.CompletionQualifications = item.CompletionQualifications;
             framework.CombinedQualification = item.CombinedQualification;
             framework.CompetencyQualification = item.CompetencyQualification;
