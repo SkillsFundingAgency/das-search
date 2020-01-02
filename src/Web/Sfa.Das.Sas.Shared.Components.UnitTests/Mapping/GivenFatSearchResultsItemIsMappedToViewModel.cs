@@ -31,7 +31,9 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
                 Title = "Apprenticeship Title",
                 Level = 4,
                 LastDateForNewStarts = DateTime.Today.AddYears(1),
+                EffectiveTo = DateTime.Today.AddYears(1),
                 ApprenticeshipType = ApprenticeshipType.Framework
+                
             };
         }
 
