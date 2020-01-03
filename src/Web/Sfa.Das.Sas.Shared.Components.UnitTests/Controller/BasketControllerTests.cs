@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Basket.Models;
+using Sfa.Das.Sas.Shared.Components.Orchestrators;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 {
@@ -29,6 +30,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         private const string BasketCookieName = "ApprenticeshipBasket";
         private Mock<IMediator> _mockMediator;
         private Mock<ICookieManager> _mockCookieManager;
+        private Mock<IBasketOrchestrator> _mockBasketOrchestrator;
         private BasketController _sut;
 
         private SaveBasketFromApprenticeshipDetailsViewModel _addFromApprenticeshipDetailsModel;
@@ -49,10 +51,11 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             // Set cookie in http request
             _mockMediator = new Mock<IMediator>();
             _mockCookieManager = new Mock<ICookieManager>();
+            _mockBasketOrchestrator = new Mock<IBasketOrchestrator>();
 
             _mockMediator.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), default(CancellationToken))).ReturnsAsync(GetApprenticeshipFavouritesBasketRead());
 
-            _sut = new BasketController(_mockMediator.Object, _mockCookieManager.Object, Mock.Of<IApprenticehipFavouritesBasketStoreConfig>());
+            _sut = new BasketController(_mockMediator.Object, _mockCookieManager.Object, _mockBasketOrchestrator.Object);
         }
 
         #region AddApprenticeshipFromDetails

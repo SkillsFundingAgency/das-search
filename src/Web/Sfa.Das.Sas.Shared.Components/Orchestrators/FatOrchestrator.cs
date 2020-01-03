@@ -25,6 +25,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task<FatSearchResultsViewModel> GetSearchResults(SearchQueryViewModel searchQueryModel)
         {
+
             
             var cacheKey = $"searchresults-{searchQueryModel.Keywords}-{searchQueryModel.Page}-{searchQueryModel.ResultsToTake}-{searchQueryModel.SortOrder}";
 

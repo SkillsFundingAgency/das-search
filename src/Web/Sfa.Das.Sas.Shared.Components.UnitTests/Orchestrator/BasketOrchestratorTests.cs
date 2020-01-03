@@ -8,6 +8,7 @@ using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
+using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Shared.Basket.Models;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.Mapping;
@@ -26,6 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<IMediator> _mediatorMock;
         private Mock<IBasketViewModelMapper> _basketViewModelMapperMock;
         private Mock<ICookieManager> _cookieManagerMock;
+        private Mock<ICacheStorageService> _cacheStorageService;
 
         private string _basketId = "12345678-abcd-1234-abcd-0123456789ab";
 
@@ -52,11 +54,12 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mediatorMock = new Mock<IMediator>();
             _basketViewModelMapperMock = new Mock<IBasketViewModelMapper>();
             _cookieManagerMock = new Mock<ICookieManager>();
+            _cacheStorageService = new Mock<ICacheStorageService>();
 
             _basketViewModelMapperMock.Setup(s => s.Map(new ApprenticeshipFavouritesBasketRead(),It.IsAny<Guid>())).Returns(new BasketViewModel<ApprenticeshipBasketItemViewModel>());
             _basketViewModelMapperMock.Setup(s => s.Map(_apprenticeshipFavouritesBasketRead, It.IsAny<Guid>())).Returns(_basketViewModel);
 
-            _sut = new BasketOrchestrator(_mediatorMock.Object,_cookieManagerMock.Object,_basketViewModelMapperMock.Object);
+            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object, _cacheStorageService.Object);
         }
 
 
@@ -76,7 +79,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _cookieManagerMock.Setup(s => s.Get(It.IsAny<string>())).Returns(_basketId);
             _mediatorMock.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_apprenticeshipFavouritesBasketRead);
 
-            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object);
+            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object, _cacheStorageService.Object);
 
             var result = _sut.GetBasket().Result;
 
@@ -92,7 +95,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _cookieManagerMock.Setup(s => s.Get(It.IsAny<string>())).Returns(_basketId);
             _mediatorMock.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new ApprenticeshipFavouritesBasketRead());
 
-            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object);
+            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object, _cacheStorageService.Object);
 
             var result = _sut.GetBasket().Result;
 

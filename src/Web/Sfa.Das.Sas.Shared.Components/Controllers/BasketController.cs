@@ -37,7 +37,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
-            await _basketOrchestrator.UpdateApprenticeship(queryModel.ItemId);
+            await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
         }
@@ -46,7 +46,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
-            await _basketOrchestrator.UpdateApprenticeship(queryModel.ItemId);
+            await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
@@ -55,7 +55,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
         {
-            await _basketOrchestrator.UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationIdToAdd);
+            await _basketOrchestrator.UpdateBasket(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationIdToAdd);
 
             return RedirectToAction("Details", "TrainingProvider", queryModel);
         }
@@ -64,7 +64,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
         {
-            await _basketOrchestrator.UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId);
+            await _basketOrchestrator.UpdateBasket(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId);
 
             return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
         }
@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         {
             if (await IsInBasket(model.ApprenticeshipId, model.Ukprn))
             {
-                await _basketOrchestrator.UpdateApprenticeship(model.ApprenticeshipId, model.Ukprn);
+                await _basketOrchestrator.UpdateBasket(model.ApprenticeshipId, model.Ukprn);
             }
 
             return RedirectToAction("View", "Basket");

@@ -105,6 +105,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_Then_Retrieve_From_Cache()
         {
             _searchQueryViewModel.Keywords = "keyword";
+         //  var cacheKey = $"searchresults-{searchQueryModel.Keywords}-{searchQueryModel.Page}-{searchQueryModel.ResultsToTake}-{searchQueryModel.SortOrder}";
 
             var result = await _sut.GetSearchResults(_searchQueryViewModel);
 
