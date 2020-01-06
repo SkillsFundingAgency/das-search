@@ -105,17 +105,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_Then_Retrieve_From_Cache()
         {
             _searchQueryViewModel.Keywords = "keyword";
-         //  var cacheKey = $"searchresults-{searchQueryModel.Keywords}-{searchQueryModel.Page}-{searchQueryModel.ResultsToTake}-{searchQueryModel.SortOrder}";
-
-            var result = await _sut.GetSearchResults(_searchQueryViewModel);
-
-            _apprenticeshipSearchServicetMock.Verify(s => s.SearchByKeyword(_searchQueryViewModel.Keywords, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()), Times.Never);
-        }
-
-        [Test]
-        public async Task When_Getting_Standard_Then_Retrieve_From_Cach2e()
-        {
-            _searchQueryViewModel.Keywords = "keyword";
             _cacheServiceMock.Setup(c => c.RetrieveFromCache<FatSearchResultsViewModel>(It.IsAny<string>())).ReturnsAsync(new FatSearchResultsViewModel() { SearchResults = { } });
 
             var result = await _sut.GetSearchResults(_searchQueryViewModel);
