@@ -16,6 +16,7 @@ using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 {
@@ -27,7 +28,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<IBasketViewModelMapper> _basketViewModelMapperMock;
         private Mock<ICookieManager> _cookieManagerMock;
         private Mock<ICacheStorageService> _cacheStorageServiceMock;
-
+        private Mock<ICacheSettings> _cacheSettingsMock;
         
         private ApprenticeshipFavouritesBasket _apprenticeshipFavouritesBasket = new ApprenticeshipFavouritesBasket()
         {
@@ -68,6 +69,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _basketViewModelMapperMock = new Mock<IBasketViewModelMapper>();
             _cookieManagerMock = new Mock<ICookieManager>();
             _cacheStorageServiceMock = new Mock<ICacheStorageService>();
+            _cacheSettingsMock = new Mock<ICacheSettings>();
 
             _addFromApprenticeshipDetailsModel = GetApprenticeshipDetailsRequestModel();
             _addFromApprenticeshipResultsModel = GetApprenticeshipResultsRequestModel();
@@ -78,7 +80,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _basketViewModelMapperMock.Setup(s => s.Map(new ApprenticeshipFavouritesBasketRead(),It.IsAny<Guid>())).Returns(new BasketViewModel<ApprenticeshipBasketItemViewModel>());
             _basketViewModelMapperMock.Setup(s => s.Map(_apprenticeshipFavouritesBasketRead, It.IsAny<Guid>())).Returns(_basketViewModel);
 
-            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object, _cacheStorageServiceMock.Object);
+            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object, _cacheStorageServiceMock.Object, _cacheSettingsMock.Object);
         }
 
 

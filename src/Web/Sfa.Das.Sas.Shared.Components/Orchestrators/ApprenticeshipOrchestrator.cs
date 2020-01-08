@@ -5,6 +5,7 @@ using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Responses;
 using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
 using SFA.DAS.NLog.Logger;
@@ -18,13 +19,16 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly IFrameworkDetailsViewModelMapper _frameworkDetailsViewModelMapper;
         private readonly IStandardDetailsViewModelMapper _standardDetailsViewModelMapper;
         private readonly ICacheStorageService _cacheService;
-        public ApprenticeshipOrchestrator(IMediator mediator, ILog logger, IFrameworkDetailsViewModelMapper frameworkDetailsViewModelMapper, IStandardDetailsViewModelMapper standardDetailsViewModelMapper, ICacheStorageService cacheStorageService)
+        private readonly ICacheSettings _cacheSettings;
+
+        public ApprenticeshipOrchestrator(IMediator mediator, ILog logger, IFrameworkDetailsViewModelMapper frameworkDetailsViewModelMapper, IStandardDetailsViewModelMapper standardDetailsViewModelMapper, ICacheStorageService cacheStorageService, ICacheSettings cacheSettings)
         {
             _mediator = mediator;
             _logger = logger;
             _frameworkDetailsViewModelMapper = frameworkDetailsViewModelMapper;
             _standardDetailsViewModelMapper = standardDetailsViewModelMapper;
             _cacheService = cacheStorageService;
+            _cacheSettings = cacheSettings;
         }
 
         public async Task<FrameworkDetailsViewModel> GetFramework(string id)
@@ -61,7 +65,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                         cacheEntry = _frameworkDetailsViewModelMapper.Map(response.Framework);
 
                         _logger.Info($"Saving to cache");
-                        await _cacheService.SaveToCache(id, cacheEntry, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+                        await _cacheService.SaveToCache(id, cacheEntry, new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
 
                         break;
 
@@ -133,7 +137,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 cacheEntry = _standardDetailsViewModelMapper.Map(response.Standard, response.AssessmentOrganisations);
 
                 _logger.Info($"Saving to cache");
-                await _cacheService.SaveToCache(id, cacheEntry, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+                await _cacheService.SaveToCache(id, cacheEntry,  new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
             }
             
             return cacheEntry;

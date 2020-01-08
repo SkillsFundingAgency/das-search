@@ -15,6 +15,7 @@ using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.ApprenticeshipDetails;
 using SFA.DAS.NLog.Logger;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 {
@@ -26,6 +27,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<IFrameworkDetailsViewModelMapper> _frameworkMapperMock;
         private Mock<IStandardDetailsViewModelMapper> _standardMapperMock;
         private Mock<ICacheStorageService> _mockCacheService;
+        private Mock<ICacheSettings> _mockCacheSettings;
         private ApprenticeshipOrchestrator _sut;
         private string _frameworkId = "420-2-1";
 
@@ -40,6 +42,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _frameworkMapperMock = new Mock<IFrameworkDetailsViewModelMapper>(MockBehavior.Strict);
             _standardMapperMock = new Mock<IStandardDetailsViewModelMapper>(MockBehavior.Strict);
             _mockCacheService = new Mock<ICacheStorageService>();
+            _mockCacheSettings = new Mock<ICacheSettings>();
 
             _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "420-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.InvalidFrameworkId });
             _mediatorMock.Setup(s => s.Send<GetFrameworkResponse>(It.Is<GetFrameworkQuery>(request => request.Id == "530-2-1"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetFrameworkResponse() { StatusCode = GetFrameworkResponse.ResponseCodes.FrameworkNotFound });
@@ -62,7 +65,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _frameworkMapperMock.Setup(s => s.Map(It.IsAny<Framework>())).Returns(_framework);
             _standardMapperMock.Setup(s => s.Map(It.IsAny<Standard>(), It.IsAny<IList<AssessmentOrganisation>>())).Returns(_standard);
 
-            _sut = new ApprenticeshipOrchestrator(_mediatorMock.Object, _loggerMock.Object, _frameworkMapperMock.Object,_standardMapperMock.Object, _mockCacheService.Object);
+            _sut = new ApprenticeshipOrchestrator(_mediatorMock.Object, _loggerMock.Object, _frameworkMapperMock.Object,_standardMapperMock.Object, _mockCacheService.Object, _mockCacheSettings.Object);
         }
 
         #region FrameworkTests

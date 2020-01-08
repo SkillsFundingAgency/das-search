@@ -48,6 +48,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddSingleton<IPostcodeIOConfigurationSettings, FatSharedComponentsConfiguration>(s => configuration);
             services.AddSingleton<IApprenticehipFavouritesBasketStoreConfig, FatSharedComponentsConfiguration>(s => configuration);
+            services.AddSingleton<ICacheSettings, FatSharedComponentsConfiguration>(s => configuration);
             
             //Application DI
             AddApplicationServices(services);

@@ -5,6 +5,7 @@ using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 {
@@ -14,13 +15,15 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly IFatSearchResultsViewModelMapper _fatSearchResultsViewModelMapper;
         private readonly IFatSearchFilterViewModelMapper _fatSearchFilterViewModelMapper;
         private ICacheStorageService _cacheService;
+        private readonly ICacheSettings _cacheSettings;
 
-        public FatOrchestrator(IApprenticeshipSearchService apprenticeshipSearchService, IFatSearchResultsViewModelMapper fatSearchResultsViewModelMapper, IFatSearchFilterViewModelMapper fatSearchFilterViewModelMapper, ICacheStorageService cacheService)
+        public FatOrchestrator(IApprenticeshipSearchService apprenticeshipSearchService, IFatSearchResultsViewModelMapper fatSearchResultsViewModelMapper, IFatSearchFilterViewModelMapper fatSearchFilterViewModelMapper, ICacheStorageService cacheService, ICacheSettings cacheSettings)
         {
             _apprenticeshipSearchService = apprenticeshipSearchService;
             _fatSearchResultsViewModelMapper = fatSearchResultsViewModelMapper;
             _fatSearchFilterViewModelMapper = fatSearchFilterViewModelMapper;
             _cacheService = cacheService;
+            _cacheSettings = cacheSettings;
         }
 
         public async Task<FatSearchResultsViewModel> GetSearchResults(SearchQueryViewModel searchQueryModel)
@@ -42,7 +45,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
                 model = _fatSearchResultsViewModelMapper.Map(await results);
 
-                await _cacheService.SaveToCache(cacheKey, model, new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+                await _cacheService.SaveToCache(cacheKey, model, new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
             }
            
             return model;

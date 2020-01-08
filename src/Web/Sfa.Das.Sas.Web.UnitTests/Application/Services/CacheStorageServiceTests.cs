@@ -15,9 +15,15 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
         private CacheStorageService _sut;
         private MemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions());
 
+        private TimeSpan cacheAbsoluteExipration;
+        private TimeSpan cacheSlidingExpiration;
+
         [SetUp]
         public void Setup()
         {
+            cacheAbsoluteExipration = new TimeSpan(30, 0, 0, 0);
+            cacheSlidingExpiration = new TimeSpan(1, 0, 0, 0);
+
             _mockDistributedCache = new Mock<IDistributedCache>();
 
             _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
@@ -53,7 +59,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
 
             _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
 
-            var response = _sut.SaveToCache<TrainingProviderDetailsViewModel>("testkey", GetTestTrainingProviderDetails(), new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+            var response = _sut.SaveToCache<TrainingProviderDetailsViewModel>("testkey", GetTestTrainingProviderDetails(), cacheAbsoluteExipration, cacheSlidingExpiration);
 
             _mockDistributedCache.Verify(s => s.SetAsync(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<DistributedCacheEntryOptions>(), It.IsAny<CancellationToken>()), Times.Once());
         }

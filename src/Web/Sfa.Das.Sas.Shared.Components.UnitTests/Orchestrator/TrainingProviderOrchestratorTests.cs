@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 
 using System.Collections.Generic;
 using Microsoft.Extensions.Caching.Distributed;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 {
@@ -36,6 +37,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<ITrainingProviderClosestLocationsViewModelMapper> _mockTrainingProviderClosestLocationsViewModelMapper;
         private Mock<ILog> _mockLogger;
         private Mock<ICacheStorageService> _mockCacheService;
+        private Mock<ICacheSettings> _mockCacheSettings;
+
         private Mock<TrainingProviderDetailQueryViewModel> _mockTrainingProviderDetailQueryViewModel;
 
         private Mock<IMemoryCache> _mockMemoryCache;
@@ -63,6 +66,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
 
             _mockCacheService = new Mock<ICacheStorageService>();
+            _mockCacheSettings = new Mock<ICacheSettings>();
             _mockTrainingProviderDetailQueryViewModel = new Mock<TrainingProviderDetailQueryViewModel>();
 
             _mockMediator.Setup(s => s.Send<GroupedProviderSearchResponse>(It.IsAny<GroupedProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
@@ -76,7 +80,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId;
 
-            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object, _mockTrainingProviderClosestLocationsViewModelMapper.Object);
+            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object, _mockCacheSettings.Object, _mockTrainingProviderClosestLocationsViewModelMapper.Object);
         }
 
         [Test]

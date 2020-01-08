@@ -19,14 +19,15 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly ICookieManager _cookieManager;
         private readonly IBasketViewModelMapper _basketViewModelMapper;
         private readonly ICacheStorageService _cacheService;
-        private readonly IApprenticehipFavouritesBasketStoreConfig _config;
+        private readonly ICacheSettings _cacheSettings;
 
-        public BasketOrchestrator(IMediator mediator, ICookieManager cookieManager, IBasketViewModelMapper basketViewModelMapper, ICacheStorageService cacheService)
+        public BasketOrchestrator(IMediator mediator, ICookieManager cookieManager, IBasketViewModelMapper basketViewModelMapper, ICacheStorageService cacheService, ICacheSettings cacheSettings)
         {
             _mediator = mediator;
             _cookieManager = cookieManager;
             _basketViewModelMapper = basketViewModelMapper;
             _cacheService = cacheService;
+            _cacheSettings = cacheSettings;
         }
 
         public async Task<BasketViewModel<ApprenticeshipBasketItemViewModel>> GetBasket(Guid basketId)
@@ -84,7 +85,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
             _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(30));
 
-            await _cacheService.SaveToCache($"cachedBasket-{basketId.ToString()}", await GetBasket(basketId, false), new TimeSpan(30, 0, 0, 0), new TimeSpan(1, 0, 0, 0));
+            await _cacheService.SaveToCache($"cachedBasket-{basketId.ToString()}", await GetBasket(basketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
         }
     }
 }
