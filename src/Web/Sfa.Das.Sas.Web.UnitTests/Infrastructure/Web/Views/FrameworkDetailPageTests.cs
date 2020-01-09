@@ -20,7 +20,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Web.Views
             var viewModel = new FrameworkViewModel { Title = "title1", ExpiryDateString = date.ToString("d MMMM yyyy") };
 
             var html = detailPage.RenderAsHtml(viewModel).ToAngleSharp();
-            GetPartial(html, ".notice").Should().Contain("This apprenticeship is closed to new starters from 5 September 1882");
+            GetPartial(html, ".notice").Should().Contain("This apprenticeship is available to new starters until 5 September 1882");
         }
 
         [Test]
