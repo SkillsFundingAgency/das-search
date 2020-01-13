@@ -3,6 +3,19 @@
 @model Sfa.Das.Sas.Shared.Components.ViewModels.TrainingProviderDetailsViewModel
 @inject ICssViewModel CssViewModel
 
+
+@if (Model.CurrentlyNotStartingNewApprentices == true)
+{
+    <div class="notice">
+        <i class="icon icon-important">
+            <span class="">Warning</span>
+        </i>
+        <strong class="bold-small">
+            This provider is not currently accepting new starters
+        </strong>
+    </div>
+}
+
 <dl class="@CssViewModel.List das-provider__training-information-definition-list__results">
     <dt>Apprenticeship:</dt>
     <dd>@Model.Apprenticeship.Title</dd>
@@ -50,25 +63,25 @@
 </dl>
 
 
-    @functions
+@functions
 {
 
-        string GetTrainingOptionsStatusClass(string trainingOption, IList<string> options)
+    string GetTrainingOptionsStatusClass(string trainingOption, IList<string> options)
+    {
+        var cssClass = "das-search-results__training-options";
+        var classSuffix = string.Empty;
+
+        if (options.Contains(trainingOption, StringComparer.OrdinalIgnoreCase))
         {
-            var cssClass = "das-search-results__training-options";
-            var classSuffix = string.Empty;
-
-            if (options.Contains(trainingOption, StringComparer.OrdinalIgnoreCase))
-            {
-                classSuffix = "--tick";
-            }
-            else
-            {
-                classSuffix = "--cross";
-            }
-
-            return $"{cssClass}{classSuffix}";
+            classSuffix = "--tick";
+        }
+        else
+        {
+            classSuffix = "--cross";
         }
 
-
+        return $"{cssClass}{classSuffix}";
     }
+
+
+}
