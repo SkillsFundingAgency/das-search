@@ -5,6 +5,9 @@ using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices;
 using Sfa.Das.Sas.ApplicationServices.Models;
+using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat;
@@ -19,6 +22,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<IApprenticeshipSearchService> _apprenticeshipSearchServicetMock;
         private Mock<IFatSearchResultsViewModelMapper> _FatResultsViewModelMock;
         private Mock<IFatSearchFilterViewModelMapper> _fatSearchFilterViewModelMapper;
+        private Mock<ICacheStorageService> _cacheServiceMock;
+        private Mock<ICacheSettings> _cacheSettingsMock;
 
         private  SearchQueryViewModel _searchQueryViewModel = new SearchQueryViewModel();
 
@@ -33,6 +38,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _apprenticeshipSearchServicetMock = new Mock<IApprenticeshipSearchService>(MockBehavior.Strict);
             _FatResultsViewModelMock = new Mock<IFatSearchResultsViewModelMapper>(MockBehavior.Strict);
             _fatSearchFilterViewModelMapper = new Mock<IFatSearchFilterViewModelMapper>();
+            _cacheServiceMock = new Mock<ICacheStorageService>();
+            _cacheSettingsMock = new Mock<ICacheSettings>();
 
             _apprenticeshipSearchServicetMock.Setup(s => s.SearchByKeyword(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>())).ReturnsAsync(_searchResults);
 
@@ -40,7 +47,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _fatSearchFilterViewModelMapper.Setup(s => s.Map(_searchResults,_searchQueryViewModel)).Returns(_searchFilterViewModel);
 
-            _sut = new FatOrchestrator(_apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object, _fatSearchFilterViewModelMapper.Object);
+            _sut = new FatOrchestrator(_apprenticeshipSearchServicetMock.Object, _FatResultsViewModelMock.Object, _fatSearchFilterViewModelMapper.Object, _cacheServiceMock.Object, _cacheSettingsMock.Object);
         }
 
         [Test]
@@ -96,6 +103,17 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _fatSearchFilterViewModelMapper.Verify(v => v.Map(_searchResults,_searchQueryViewModel));
 
+        }
+
+        [Test]
+        public async Task When_Getting_Standard_Then_Retrieve_From_Cache()
+        {
+            _searchQueryViewModel.Keywords = "keyword";
+            _cacheServiceMock.Setup(c => c.RetrieveFromCache<FatSearchResultsViewModel>(It.IsAny<string>())).ReturnsAsync(new FatSearchResultsViewModel() { SearchResults = { } });
+
+            var result = await _sut.GetSearchResults(_searchQueryViewModel);
+
+            _apprenticeshipSearchServicetMock.Verify(s => s.SearchByKeyword(_searchQueryViewModel.Keywords, It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<List<int>>()), Times.Never);
         }
     }
 }
