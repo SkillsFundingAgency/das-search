@@ -10,6 +10,8 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using SFA.DAS.NLog.Logger;
 using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider;
+using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 {
@@ -21,13 +23,17 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly ITrainingProviderSearchFilterViewModelMapper _trainingProviderSearchFilterViewModelMapper;
         private readonly ITrainingProviderClosestLocationsViewModelMapper _trainingProviderClosestLocationsViewModelMapper;
         private readonly ILog _logger;
+        private readonly ICacheStorageService _cacheService;
+        private readonly ICacheSettings _cacheSettings;
 
         public TrainingProviderOrchestrator(
-            IMediator mediator, 
-            ISearchResultsViewModelMapper searchResultsViewModelMapper, 
-            ILog logger, 
-            ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper, 
+            IMediator mediator,
+            ISearchResultsViewModelMapper searchResultsViewModelMapper,
+            ILog logger,
+            ITrainingProviderDetailsViewModelMapper trainingProviderDetailsViewModelMapper,
             ITrainingProviderSearchFilterViewModelMapper trainingProviderSearchFilterViewModelMapper,
+            ICacheStorageService cacheService,
+            ICacheSettings cacheSettings,
             ITrainingProviderClosestLocationsViewModelMapper trainingProviderClosestLocationsViewModelMapper)
         {
             _mediator = mediator;
@@ -35,6 +41,8 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             _logger = logger;
             _trainingProviderDetailsViewModelMapper = trainingProviderDetailsViewModelMapper;
             _trainingProviderSearchFilterViewModelMapper = trainingProviderSearchFilterViewModelMapper;
+            _cacheService = cacheService;
+            _cacheSettings = cacheSettings;
             _trainingProviderClosestLocationsViewModelMapper = trainingProviderClosestLocationsViewModelMapper;
         }
 
@@ -92,28 +100,36 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)
         {
 
-            var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
+            var cacheKey = $"providerdetails-{detailsQueryModel.Ukprn}-{detailsQueryModel.LocationId}-{detailsQueryModel.ApprenticeshipId}";
 
-            if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
+            var cacheEntry = await _cacheService.RetrieveFromCache<TrainingProviderDetailsViewModel>(cacheKey);
+
+            if (cacheEntry == null)
             {
-                var message = $"Cannot find provider: {detailsQueryModel.Ukprn}";
-                _logger.Warn($"404 - {message}");
-                throw new HttpRequestException(message);
+                var response = await _mediator.Send(new ApprenticeshipProviderDetailQuery() { UkPrn = Convert.ToInt32(detailsQueryModel.Ukprn), ApprenticeshipId = detailsQueryModel.ApprenticeshipId, ApprenticeshipType = detailsQueryModel.ApprenticeshipType, LocationId = detailsQueryModel.LocationId });
+
+                if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.ApprenticeshipProviderNotFound)
+                {
+                    var message = $"Cannot find provider: {detailsQueryModel.Ukprn}";
+                    _logger.Warn($"404 - {message}");
+                    throw new HttpRequestException(message);
+                }
+
+                if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput)
+                {
+                    var message = $"Not able to call the apprenticeship service.";
+                    _logger.Warn($"{response.StatusCode} - {message}");
+
+                    throw new HttpRequestException(message);
+                }
+
+                cacheEntry = _trainingProviderDetailsViewModelMapper.Map(response);
+
+                await _cacheService.SaveToCache(cacheKey, cacheEntry, new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
             }
 
-            if (response.StatusCode == ApprenticeshipProviderDetailResponse.ResponseCodes.InvalidInput)
-            {
-                var message = $"Not able to call the apprenticeship service.";
-                _logger.Warn($"{response.StatusCode} - {message}");
-
-                throw new HttpRequestException(message);
+            return cacheEntry;
             }
-
-            var model = _trainingProviderDetailsViewModelMapper.Map(response);
-
-            return model;
-        }
-
         public async Task<ClosestLocationsViewModel> GetClosestLocations(string apprenticeshipId, int ukprn, int locationId, string postCode)
         {
             var response = await _mediator.Send(new GetClosestLocationsQuery() { ApprenticeshipId = apprenticeshipId, Ukprn = ukprn, PostCode = postCode });
