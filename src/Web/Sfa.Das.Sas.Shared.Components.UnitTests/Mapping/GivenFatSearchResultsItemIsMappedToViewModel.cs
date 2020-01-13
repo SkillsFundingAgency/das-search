@@ -31,7 +31,9 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
                 Title = "Apprenticeship Title",
                 Level = 4,
                 LastDateForNewStarts = DateTime.Today.AddYears(1),
+                EffectiveTo = DateTime.Today.AddYears(1),
                 ApprenticeshipType = ApprenticeshipType.Framework
+                
             };
         }
 
@@ -52,7 +54,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
             result.ApprenticeshipType.Should().Be(_itemToMap.ApprenticeshipType);
             result.Title.Should().Be(_itemToMap.Title);
             result.Duration.Should().Be(_itemToMap.Duration);
-            result.EffectiveTo.Should().Be(_itemToMap.EffectiveTo);
+            result.EffectiveTo.Should().Be(_itemToMap.EffectiveTo.Value.AddDays(1));
             result.Id.Should().Be(_itemToMap.Id);
             result.Level.Should().Be(_itemToMap.Level);
         }
