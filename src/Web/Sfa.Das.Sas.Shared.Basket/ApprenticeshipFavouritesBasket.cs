@@ -133,6 +133,7 @@ namespace Sfa.Das.Sas.Shared.Basket.Models
             if (provider.Locations.Count == 0)
                 apprenticeship.Providers.Remove(provider);
         }
+
         public IEnumerator<ApprenticeshipFavourite> GetEnumerator() 
         {
             return _items.GetEnumerator();
