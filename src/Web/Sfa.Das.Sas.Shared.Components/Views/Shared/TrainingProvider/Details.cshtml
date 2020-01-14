@@ -25,6 +25,9 @@
 
 <div class="grid-row">
     <div class="grid-column-two-thirds grid-column-two-thirds-from-desktop">
+
+        <h2 class="@CssViewModel.HeadingLarge @CssViewModel.UtilitiesCss.Margin("Top",0)">Training Information</h2>
+
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model, ViewType = ViewType.Summary })
         @await Component.InvokeAsync("TrainingProviderDetails", new { searchQueryModel = Model })
         @if (!string.IsNullOrEmpty(Model.PostCode))
