@@ -36,7 +36,6 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                     Website = source.ApprenticeshipDetails.Provider.ContactInformation.Website,
                     ContactUsUrl = source.ApprenticeshipDetails.Provider.ContactInformation.ContactUsUrl
                 },
-                 
                 CurrentlyNotStartingNewApprentices = source.ApprenticeshipDetails.Provider.CurrentlyNotStartingNewApprentices,
                 EmployerSatisfaction = Convert.ToInt32(source.ApprenticeshipDetails.Product.EmployerSatisfaction ?? 0.00),
                 EmployerSatisfactionMessage = employerSatisfationMessage,
@@ -55,7 +54,8 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 NationalAchievementRate = Convert.ToInt32(source.ApprenticeshipDetails.Product.NationalAchievementRate),
                 LocationAddressLine = ProviderMappingHelper.GetCommaList(source.ApprenticeshipDetails.Location.LocationName, source.ApprenticeshipDetails.Location.Address.Address1, source.ApprenticeshipDetails.Location.Address.Address2, source.ApprenticeshipDetails.Location.Address.Town, source.ApprenticeshipDetails.Location.Address.County, source.ApprenticeshipDetails.Location.Address.Postcode),
                 LegalName = source.ApprenticeshipDetails.Provider.LegalName,
-                Feedback = _feedbackMapper.Map(source.ApprenticeshipDetails.Provider.ProviderFeedback)
+                Feedback = _feedbackMapper.Map(source.ApprenticeshipDetails.Provider.ProviderFeedback),
+                AboutApprenticeshipInfo = source.ApprenticeshipDetails.Product.Apprenticeship.ApprenticeshipMarketingInfo
 
             };
 

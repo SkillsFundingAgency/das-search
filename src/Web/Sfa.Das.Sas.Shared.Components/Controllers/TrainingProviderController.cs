@@ -29,8 +29,8 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         public async Task<IActionResult> ValidatePostcode(string postcode)
         {
             var validPostcode = await _mediator.Send(new ValidatePostcodeQuery() {Postcode = postcode});
-
             return Json(validPostcode);
         }
     }
+    
 }
