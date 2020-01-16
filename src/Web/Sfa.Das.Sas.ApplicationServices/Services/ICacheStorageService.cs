@@ -10,6 +10,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
     {
         Task<T> RetrieveFromCache<T>(string key);
         Task SaveToCache<T>(string key, T item, TimeSpan absoluteExpiration, TimeSpan slidingExpiration);
+        Task DeleteFromCache<T>(string key);
 
     }
 }

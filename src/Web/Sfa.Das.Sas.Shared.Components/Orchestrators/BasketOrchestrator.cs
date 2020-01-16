@@ -84,8 +84,13 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             });
 
             _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(30));
-
+            
             await _cacheService.SaveToCache($"cachedBasket-{basketId.ToString()}", await GetBasket(basketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
+        }
+
+        public async Task DeleteBasketCache(string cacheKey)
+        {
+            await _cacheService.DeleteFromCache<string>(cacheKey);
         }
     }
 }

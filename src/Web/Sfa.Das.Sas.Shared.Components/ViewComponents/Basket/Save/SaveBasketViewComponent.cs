@@ -26,7 +26,8 @@ namespace Sfa.Das.Sas.Shared.Components.ViewComponents.Basket
 
             var model = new SaveBasketViewModel
             {
-                SaveBasketUrl = uriBuilder.GenerateSaveUrl(basketIdForQueryString).ToString()
+                SaveBasketUrl = uriBuilder.GenerateSaveUrl(basketIdForQueryString).ToString(),
+                BasketId = basketIdForQueryString
             };
 
             return View("../Basket/Save/Default", model);
