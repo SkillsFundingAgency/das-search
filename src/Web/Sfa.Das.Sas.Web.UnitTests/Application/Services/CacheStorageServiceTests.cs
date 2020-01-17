@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
@@ -26,7 +27,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
 
             _mockDistributedCache = new Mock<IDistributedCache>();
 
-            _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
+            _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache, new FatSharedComponentsConfiguration { CacheMemoryAbsoluteExpirySeconds = 5 });
         }
 
         [Test]
@@ -44,7 +45,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
         {
             memoryCache = new MemoryCache(new MemoryCacheOptions());
 
-            _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
+            _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache, new FatSharedComponentsConfiguration { CacheMemoryAbsoluteExpirySeconds = 5 });
 
             var response = _sut.RetrieveFromCache<TrainingProviderDetailsViewModel>("123456");
 
@@ -57,7 +58,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Infrastructure.Services
         {
             memoryCache = new MemoryCache(new MemoryCacheOptions());
 
-            _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache);
+            _sut = new CacheStorageService(_mockDistributedCache.Object, memoryCache, new FatSharedComponentsConfiguration { CacheMemoryAbsoluteExpirySeconds = 5 });
 
             var response = _sut.SaveToCache<TrainingProviderDetailsViewModel>("testkey", GetTestTrainingProviderDetails(), cacheAbsoluteExipration, cacheSlidingExpiration);
 
