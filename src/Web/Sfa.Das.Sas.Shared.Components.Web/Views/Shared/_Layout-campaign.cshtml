@@ -189,15 +189,17 @@
                     </li>
                     <!--
                     <li class="navigation__list-item navigation__list-item--with-button">
-                       <a class="button button--sparks button--shadow " id="btn-register-interest-header" href="/register-interest">Register Interest</a>
+                        <a class="button button--sparks button--shadow " id="btn-register-interest-header" href="/register-interest">Register Interest</a>
                     </li>
                     -->
                     <li class="navigation__list-item">
-                        <partial name="_LayoutSwitcher" model="@new LayoutViewModel()"/>
+
                         <a href="#" class="navigation__link--top-level favourites-link favourites-link--filled">
-                            <span class="favourites-link__count">3</span>
                             <span class="favourites-link__text">Favourites</span>
                         </a>
+                    </li>
+                    <li class="navigation__list-item">
+                        <partial name="_LayoutSwitcher" model="@new LayoutViewModel()" />
                     </li>
                 </ul>
             </nav>
