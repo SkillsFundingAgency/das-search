@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@using Sfa.Das.Sas.Shared.Components.Web.ViewModel
+@model Sfa.Das.Sas.Shared.Components.Web.ViewModel.LayoutViewModel
+@inject ILayoutService LayoutService;
+@inject ICssViewModel CssViewModel;
+@{
+    Model.Layout = LayoutService.Layout;
+    Model.ReturnUrl = Context.Request.Path;
+
+}
+
+<form asp-controller="Home" asp-action="Layout">
+    <select class="@CssViewModel.FormCss." asp-for="Layout">
+        <option value="_Layout">Gds</option>
+        <option value="_Layout-campaign">Campaign</option>
+    </select>
+    <input asp-for="ReturnUrl" type="hidden"/>
+    
+    <button class="@CssViewModel.Button" type="submit">Change</button>
+</form>
