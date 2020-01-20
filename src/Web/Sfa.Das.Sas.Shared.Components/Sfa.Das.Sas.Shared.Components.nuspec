@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SFA.DAS.SAS.Shared.Components</id>
-    <version>1.2.3-alpha-1</version>
+    <version>1.2.3</version>
     <authors>DAS</authors>
     <owners>sfanuget</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
