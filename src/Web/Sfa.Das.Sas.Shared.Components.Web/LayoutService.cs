@@ -10,7 +10,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web
         public string Layout { get; set; } = "_Layout";
         public string CssPrefix()
         {
-            return Layout == "_Layout" ? "gov-" : string.Empty;
+            return Layout == "_Layout" ? "govuk-" : string.Empty;
         }
 
         public string CssModifier()

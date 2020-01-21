@@ -6,7 +6,7 @@
 @inject ICssViewModel CssViewModel;
 @{
     Model.Layout = LayoutService.Layout;
-    Model.ReturnUrl = Context.Request.Path;
+    Model.ReturnUrl = Context.Request.Path + Context.Request.QueryString;
 
 }
 
