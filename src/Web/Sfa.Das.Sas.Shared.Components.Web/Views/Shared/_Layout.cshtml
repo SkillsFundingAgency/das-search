@@ -93,6 +93,11 @@
                 <div class="govuk-grid-column-full">
                     <h1 class="govuk-heading-l">Shared components</h1>
                     <h1 class="govuk-heading-m">Find apprenticeship training search</h1>
+                    @if (IsSectionDefined("Sidebar"))
+                    {
+                        @RenderSection("Sidebar", required: false)
+                    }
+
                     @RenderBody()
                 </div>
             </div>

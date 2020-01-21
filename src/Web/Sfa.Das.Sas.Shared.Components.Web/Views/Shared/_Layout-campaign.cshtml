@@ -206,7 +206,7 @@
         </header>
         <main id="main-content">
             <div class="hero" data-module="smoothScroll">
-        <div class="grid-row">
+                <div class="grid-row">
                     <div class="grid-column-one-half">
                         <div class="hero-heading">
                             <span class="caption-m hero-heading__caption hero-heading__caption--employer">Shared components</span>
@@ -217,10 +217,26 @@
                         </a>
                     </div>
                 </div>
-             
+
             </div>
             <div class="main-content">
-                @RenderBody()
+                <div class="grid-row">
+                    <div class="grid-column-two-thirds">
+                        <div class="page">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    <div class="grid-column-one-third">
+                        @if (IsSectionDefined("Sidebar"))
+                    {
+                        <div class="sidebar-panel sidebar-panel--employer">
+                            <div class="sidebar-panel__content">
+                                @RenderSection("Sidebar", required: false)
+                            </div>
+                        </div>
+                    }
+                    </div>
+                </div>
             </div>
         </main>
         <footer class="footer">
