@@ -29,7 +29,9 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<ICookieManager> _cookieManagerMock;
         private Mock<ICacheStorageService> _cacheStorageServiceMock;
         private Mock<ICacheSettings> _cacheSettingsMock;
-        
+        private Mock<IFatConfigurationSettings> _configMock;
+
+
         private ApprenticeshipFavouritesBasket _apprenticeshipFavouritesBasket = new ApprenticeshipFavouritesBasket()
         {
             {  "123"},
@@ -70,6 +72,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _cookieManagerMock = new Mock<ICookieManager>();
             _cacheStorageServiceMock = new Mock<ICacheStorageService>();
             _cacheSettingsMock = new Mock<ICacheSettings>();
+            _configMock = new Mock<IFatConfigurationSettings>();
 
             _addFromApprenticeshipDetailsModel = GetApprenticeshipDetailsRequestModel();
             _addFromApprenticeshipResultsModel = GetApprenticeshipResultsRequestModel();
@@ -80,7 +83,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _basketViewModelMapperMock.Setup(s => s.Map(new ApprenticeshipFavouritesBasketRead(),It.IsAny<Guid>())).Returns(new BasketViewModel<ApprenticeshipBasketItemViewModel>());
             _basketViewModelMapperMock.Setup(s => s.Map(_apprenticeshipFavouritesBasketRead, It.IsAny<Guid>())).Returns(_basketViewModel);
 
-            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object, _cacheStorageServiceMock.Object, _cacheSettingsMock.Object);
+            _sut = new BasketOrchestrator(_mediatorMock.Object, _cookieManagerMock.Object, _basketViewModelMapperMock.Object, _cacheStorageServiceMock.Object, _cacheSettingsMock.Object, _configMock.Object);
         }
 
 
