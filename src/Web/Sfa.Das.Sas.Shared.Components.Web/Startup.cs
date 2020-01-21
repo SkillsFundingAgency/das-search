@@ -9,6 +9,8 @@ using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
+using Sfa.Das.Sas.Shared.Components.Web.Models;
 
 namespace Sfa.Das.Sas.Shared.Components.Web
 {
@@ -41,6 +43,9 @@ namespace Sfa.Das.Sas.Shared.Components.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddFatSharedComponentsCaching("localhost");
+
+            services.AddSingleton<ILayoutService, LayoutService>();
+            services.AddTransient<ICssViewModel, CssSwitcherViewModel>();
 
         }
 
