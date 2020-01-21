@@ -6,6 +6,7 @@ using Sfa.Das.Sas.ApplicationServices.Commands;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using Sfa.Das.Sas.Core.Configuration;
+using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.Mapping;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
@@ -20,14 +21,21 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         private readonly IBasketViewModelMapper _basketViewModelMapper;
         private readonly ICacheStorageService _cacheService;
         private readonly ICacheSettings _cacheSettings;
+        private readonly IFatConfigurationSettings _config;
 
-        public BasketOrchestrator(IMediator mediator, ICookieManager cookieManager, IBasketViewModelMapper basketViewModelMapper, ICacheStorageService cacheService, ICacheSettings cacheSettings)
+        public BasketOrchestrator(IMediator mediator,
+            ICookieManager cookieManager, 
+            IBasketViewModelMapper basketViewModelMapper, 
+            ICacheStorageService cacheService, 
+            ICacheSettings cacheSettings,
+            IFatConfigurationSettings config)
         {
             _mediator = mediator;
             _cookieManager = cookieManager;
             _basketViewModelMapper = basketViewModelMapper;
             _cacheService = cacheService;
             _cacheSettings = cacheSettings;
+            _config = config;
         }
 
         public async Task<BasketViewModel<ApprenticeshipBasketItemViewModel>> GetBasket(Guid basketId)
@@ -55,10 +63,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task<BasketViewModel<ApprenticeshipBasketItemViewModel>> GetBasket()
         {
-            // Get cookie
-
-            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
-            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+            Guid? cookieBasketId = GetBasketCookieId();
 
             if (cookieBasketId.HasValue)
             {
@@ -72,8 +77,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task UpdateBasket(string apprenticeshipId, int? ukprn = null, int? locationId = null)
         {
-            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
-            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+            Guid? cookieBasketId = GetBasketCookieId();
 
             var basketId = await _mediator.Send(new AddOrRemoveFavouriteInBasketCommand
             {
@@ -88,9 +92,34 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             await _cacheService.SaveToCache($"cachedBasket-{basketId.ToString()}", await GetBasket(basketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
         }
 
-        public async Task DeleteBasketCache(string cacheKey)
+        public async Task DeleteBasketCache()
         {
+            Guid? cookieBasketId = GetBasketCookieId();
+
+            var cacheKey = $"cachedBasket-{cookieBasketId}";
+
             await _cacheService.DeleteFromCache<string>(cacheKey);
         }
+
+        public async Task<string> GetBasketSaveUrl()
+        {
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            var basketIdForQueryString = Guid.TryParse(cookie, out Guid result) ? result.ToString() : string.Empty;
+
+            var uriBuilder = new SaveApprenticeshipUrlBuilder(_config);
+
+            return uriBuilder.GenerateSaveUrl(basketIdForQueryString).ToString();
+        }
+
+        private Guid? GetBasketCookieId()
+        {
+            // Get cookie
+
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+
+            return cookieBasketId;
+        }
+
     }
 }

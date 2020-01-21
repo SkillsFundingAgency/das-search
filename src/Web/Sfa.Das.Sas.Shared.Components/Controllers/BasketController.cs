@@ -8,7 +8,6 @@ using System;
 using System.Threading.Tasks;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
-using Sfa.Das.Sas.Shared.Components.ViewComponents.Basket;
 
 namespace Sfa.Das.Sas.Shared.Components.Controllers
 {
@@ -102,15 +101,12 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             return false;
         }
 
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public async Task<IActionResult> DeleteBasketViewCache(SaveBasketViewModel model)
+        public async Task<IActionResult> Save()
         {
-            var cacheKey = $"cachedBasket-{model.BasketId}";
-           
-            await _basketOrchestrator.DeleteBasketCache(cacheKey);
+            await _basketOrchestrator.DeleteBasketCache();
 
-            return Redirect(model.SaveBasketUrl);
+            return Redirect(await _basketOrchestrator.GetBasketSaveUrl());
         }
+
     }
 }
