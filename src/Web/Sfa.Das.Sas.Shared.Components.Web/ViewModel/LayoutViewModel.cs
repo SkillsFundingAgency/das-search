@@ -4,5 +4,6 @@
     {
         public string Layout { get; set; }
         public string ReturnUrl { get; set; }
+        public string Host { get; set; }
     }
 }

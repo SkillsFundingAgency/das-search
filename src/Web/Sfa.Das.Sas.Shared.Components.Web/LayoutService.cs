@@ -22,6 +22,8 @@ namespace Sfa.Das.Sas.Shared.Components.Web
         {
             return Layout == "_Layout" ? Web.LayoutType.Gds : Web.LayoutType.Campaign;
         }
+
+        public string Host { get; set; } = "https://das-prd-frnt-end.azureedge.net";
     }
 
     public interface ILayoutService
@@ -31,6 +33,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web
         string CssPrefix();
         string CssModifier();
         LayoutType LayoutType();
+        string Host { get; set; }
 
     }
 

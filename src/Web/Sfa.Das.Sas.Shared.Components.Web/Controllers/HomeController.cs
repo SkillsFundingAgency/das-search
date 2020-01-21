@@ -33,6 +33,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web.Controllers
         public IActionResult Layout(LayoutViewModel model)
         {
             _layoutService.Layout = model.Layout;
+            _layoutService.Host = model.Host;
             return LocalRedirect(model.ReturnUrl);
         }
     }
