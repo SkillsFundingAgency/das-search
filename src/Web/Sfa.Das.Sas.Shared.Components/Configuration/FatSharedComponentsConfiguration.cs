@@ -13,5 +13,6 @@ namespace Sfa.Das.Sas.Shared.Components.Configuration
         public int BasketSlidingExpiryDays { get; set; }
         public int CacheAbsoluteExpirationDays { get; set; }
         public int CacheSlidingExpirationDays { get; set; }
+        public int CacheMemoryAbsoluteExpirySeconds { get; set;  }
     }
 }

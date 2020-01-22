@@ -2,14 +2,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Sfa.Das.Sas.ApplicationServices.Commands;
 using Sfa.Das.Sas.ApplicationServices.Handlers;
 using Sfa.Das.Sas.Shared.Basket.Interfaces;
 using Sfa.Das.Sas.Shared.Basket.Models;
-using Assert = NUnit.Framework.Assert;
 
 namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 {
