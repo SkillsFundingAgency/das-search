@@ -4,38 +4,28 @@
 @inject ICssViewModel CssViewModel;
 
 <form action="@Model.SearchRoute">
-    <div class="grid-row grid-row--align-bottom">
-        <div class="grid-column-two-fifths">
-            <div class="@(CssViewModel.FormCss.FormGroup)">
-                <label asp-for="Postcode" class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.LabelLarge)">Please enter the postcode for where the apprentice will work</label>
-                <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.InputWidth10)" asp-for="Postcode" type="search" placeholder="Enter postcode" maxlength="8" autocomplete="postal-code" >
-                <span asp-validation-for="Postcode" class="error-message"></span>
+    <div class="@(CssViewModel.FormCss.FormGroup)">
+        <label asp-for="Postcode" class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.LabelLarge)">Please enter the postcode for where the apprentice will work</label>
+        <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.InputWidth10)" asp-for="Postcode" type="search" placeholder="Enter postcode" maxlength="8" autocomplete="postal-code" >
+        <span asp-validation-for="Postcode" class="error-message"></span>
+    </div>
+    <fieldset class="@(CssViewModel.FormCss.Fieldset) @(CssViewModel.FormCss.FormGroup)">
+        <legend class="@(CssViewModel.FormCss.Legend) @(CssViewModel.FormCss.LegendLarge)">As an employer, is your pay bill more than &pound;3 million per year? </legend>
+        <p class="u-!-margin-top-0">If you’re receiving a transfer of apprenticeship funds from another employer, please choose ‘Yes’</p>
+        <div class="@CssViewModel.FormCss.RadioGroupInline">
+            <div class="@(CssViewModel.FormCss.RadioItem)">
+                <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
+                <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerYes">Yes</label>
+            </div>
+            <div class="@(CssViewModel.FormCss.RadioItem)">
+                <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
+                <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerNo">No</label>
             </div>
         </div>
-        <div class="grid-column-two-fifths">
-
-	        <fieldset class="@(CssViewModel.FormCss.Fieldset) @(CssViewModel.FormCss.FormGroup)">
-		        <legend class="@(CssViewModel.FormCss.Legend) @(CssViewModel.FormCss.LegendLarge)">As an employer, is your pay bill more than &pound;3 million per year? </legend>
-		        <p class="u-!-margin-top-0">If you’re receiving a transfer of apprenticeship funds from another employer, please choose ‘Yes’</p>
-	            <div class="@CssViewModel.FormCss.RadioGroupInline">
-                    <div class="@(CssViewModel.FormCss.RadioItem)">
-                        <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="true" id="LevyPayerYes">
-                        <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerYes">Yes</label>
-                    </div>
-                    <div class="@(CssViewModel.FormCss.RadioItem)">
-                        <input class="@(CssViewModel.FormCss.Input) @(CssViewModel.FormCss.RadioInput)" type="radio" asp-for="IsLevyPayer" value="false" id="LevyPayerNo">
-                        <label class="@(CssViewModel.FormCss.Label) @(CssViewModel.FormCss.RadioLabel)" for="LevyPayerNo">No</label>
-                    </div>
-                </div>
-	        </fieldset>
-
-        </div>
-        <div class="grid-column-one-fifth">
-            <div class="@(CssViewModel.FormCss.FormGroup)">
-                <input type="hidden" asp-for="ApprenticeshipId" />
-                <input type="hidden" asp-for="Keywords" />
-                <button class="@(CssViewModel.Button)" type="submit" id="employer-provider-search">Search</button>
-            </div>
-        </div>
+    </fieldset>
+    <div class="@(CssViewModel.FormCss.FormGroup)">
+        <input type="hidden" asp-for="ApprenticeshipId" />
+        <input type="hidden" asp-for="Keywords" />
+        <button class="@(CssViewModel.Button)" type="submit" id="employer-provider-search">Search</button>
     </div>
 </form>

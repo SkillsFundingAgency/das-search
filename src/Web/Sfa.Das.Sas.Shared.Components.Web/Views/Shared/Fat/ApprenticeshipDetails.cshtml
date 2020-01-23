@@ -1,0 +1,26 @@
+﻿@model Sfa.Das.Sas.Shared.Components.ViewModels.ApprenticeshipDetailQueryViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
+@inject ICssViewModel CssViewModel
+
+
+<form asp-controller="Basket" asp-action="AddApprenticeshipFromDetails" method="post">
+    <div class="@(CssViewModel.FormCss.FormGroup)">
+        @await Component.InvokeAsync("AddOrRemoveFromBasket", new { apprenticeshipId = Model.Id })
+    </div>
+
+</form>
+
+
+@await Component.InvokeAsync("ApprenticeshipDetails", new { queryModel = Model })
+
+
+@section Sidebar {
+    <div class="sidebar-panel sidebar-panel--employer sidebar-panel--provider-search">
+        <div class="sidebar-panel__content">
+            <h2 class="heading-m u-!-margin-top-0">Find a training provider for this apprenticeship</h2>
+            @await Component.InvokeAsync("TrainingProviderSearch", new { apprenticeshipId = Model.Id })
+
+        </div>
+    </div>
+}

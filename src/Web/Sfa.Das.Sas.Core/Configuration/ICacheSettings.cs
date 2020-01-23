@@ -4,5 +4,6 @@
     {
         int CacheAbsoluteExpirationDays { get; }
         int CacheSlidingExpirationDays { get;  }
+        int CacheMemoryAbsoluteExpirySeconds { get; }
     }
 }

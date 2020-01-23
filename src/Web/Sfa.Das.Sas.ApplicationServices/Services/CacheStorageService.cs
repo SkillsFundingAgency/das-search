@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
+using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.ApplicationServices.Services
 {
     public class CacheStorageService : ICacheStorageService
     {
         private readonly IMemoryCache _memoryCache;
+        private readonly ICacheSettings _cacheSettings;
         private readonly IDistributedCache _distributedCache;
 
-        public CacheStorageService(IDistributedCache distributedCache, IMemoryCache memoryCache)
+        public CacheStorageService(IDistributedCache distributedCache, IMemoryCache memoryCache, ICacheSettings cacheSettings)
         {
             _memoryCache = memoryCache;
+            _cacheSettings = cacheSettings;
             _distributedCache = distributedCache;
         }
 
@@ -62,7 +65,8 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             _memoryCache.Set(key, item, new MemoryCacheEntryOptions()
             {
                 Size = 1,
-                AbsoluteExpirationRelativeToNow = new TimeSpan(0, 1, 0)
+                AbsoluteExpirationRelativeToNow = new TimeSpan(0,0,_cacheSettings.CacheMemoryAbsoluteExpirySeconds)
+                //AbsoluteExpirationRelativeToNow = new TimeSpan(0, 1, 0)
             });
 
             return Task.CompletedTask;
