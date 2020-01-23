@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewComponents\Basket\Save\" />
     <Folder Include="Views\Shared\Components\TrainingProvider\NewFolder\" />
   </ItemGroup>
 

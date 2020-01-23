@@ -46,6 +46,11 @@ namespace Sfa.Das.Sas.ApplicationServices.Services
             await SaveToMemoryCache(key, json);
         }
 
+        public async Task DeleteFromCache<T>(string key)
+        {
+            await _distributedCache.RemoveAsync(key);
+        }
+
         private async Task SaveToDistributedCache(string key, string item, TimeSpan absoluteExpiration, TimeSpan slidingExpiration)
         {
             await _distributedCache.SetStringAsync(key, item, new DistributedCacheEntryOptions
