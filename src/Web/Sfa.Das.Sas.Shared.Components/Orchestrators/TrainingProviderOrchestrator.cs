@@ -53,7 +53,8 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
                 NationalProvidersOnly = searchQueryModel.NationalProvidersOnly,
-                Page = searchQueryModel.Page
+                Page = searchQueryModel.Page,
+                IsLevyPayingEmployer = searchQueryModel.IsLevyPayer
             });
 
             var model = _searchResultsViewModelMapper.Map(results, searchQueryModel);
@@ -78,12 +79,13 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             {
                 ApprenticeshipId = searchQueryModel.ApprenticeshipId,
                 PostCode = searchQueryModel.Postcode,
-                NationalProvidersOnly = searchQueryModel.NationalProvidersOnly
+                NationalProvidersOnly = searchQueryModel.NationalProvidersOnly,
+                IsLevyPayingEmployer = searchQueryModel.IsLevyPayer
             });
 
             var model = _trainingProviderSearchFilterViewModelMapper.Map(results, searchQueryModel);
 
-            switch (model.Status)
+             switch (model.Status)
             {
                 case ProviderSearchResponseCodes.Success:
                 case ProviderSearchResponseCodes.ScotlandPostcode:

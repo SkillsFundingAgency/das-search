@@ -46,7 +46,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
         private TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
         private TrainingProviderDetailQueryViewModel _detailsQueryViewModel = new TrainingProviderDetailQueryViewModel();
-
+ 
         private GroupedProviderSearchResponse _searchResults = new GroupedProviderSearchResponse() { Success = true };
         private ProviderSearchResponse _searchResultsError = new ProviderSearchResponse(){Success = false,StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat};
         private SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> _searchResultsViewModel = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>();
@@ -116,6 +116,18 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockSearchResultsViewModelMapper.Verify(v => v.Map(_searchResults, _searchQueryViewModel));
         }
 
+        
+        [Test]
+        public void When_SearchResultsRequested_With_LevyPayerOnly_Then_Query_Is_Mapped_To_Handler()
+        {
+            _searchQueryViewModel.IsLevyPayer = true;
+
+            var result = _sut.GetSearchResults(_searchQueryViewModel);
+
+            _mockMediator.Verify(s => s.Send<GroupedProviderSearchResponse>(It.Is<GroupedProviderSearchQuery>(x => x.IsLevyPayingEmployer == true), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+
         [Test]
         public void When_SearchFilterRequested_Then_TrainingProiderSearchResultsViewModel_Is_Returned()
         {
@@ -127,7 +139,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             result.Should().BeOfType<TrainingProviderSearchFilterViewModel>();
         }
-
+       
         [Test]
         public void When_SearchFilterRequested_Then_TrainingProvider_Are_Searched_By_Apprenticeship_And_Location()
         {
