@@ -265,6 +265,7 @@
     <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositorySearchProviders.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositoryGetProviderDetailTests.cs" />
     <Compile Include="Infrastructure\Resources\EquivalenceLevelTest.cs" />
+    <Compile Include="Application\Services\CacheStorageServiceTests.cs" />
     <Compile Include="Infrastructure\Web\Common\ValidationTest.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ControllerBuilders\ProviderControllerBuilder.cs" />
     <Compile Include="Infrastructure\Web\Controllers\ErrorControllerTests.cs" />
@@ -358,6 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Application\Mapping\" />
+    <Folder Include="Infrastructure\Services\" />
     <Folder Include="Infrastructure\Web\Views\Web\" />
   </ItemGroup>
   <ItemGroup>

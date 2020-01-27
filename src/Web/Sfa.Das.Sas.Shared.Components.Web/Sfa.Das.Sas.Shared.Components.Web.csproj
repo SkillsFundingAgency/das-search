@@ -22,5 +22,4 @@
     <ProjectReference Include="..\Sfa.Das.Sas.Resources\Sfa.Das.Sas.Resources.csproj" />
     <ProjectReference Include="..\Sfa.Das.Sas.Shared.Components\Sfa.Das.Sas.Shared.Components.csproj" />
   </ItemGroup>
-
 </Project>

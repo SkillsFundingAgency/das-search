@@ -9,5 +9,8 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
     public interface IBasketOrchestrator
     {
         Task<BasketViewModel<ApprenticeshipBasketItemViewModel>> GetBasket();
+        Task UpdateBasket(string apprenticeshipId, int? ukprn = null, int? locationId = null);
+        Task DeleteBasketCache();
+        Task<string> GetBasketSaveUrl();
     }
 }

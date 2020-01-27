@@ -15,17 +15,16 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ICookieManager _cookieManager;
-        private readonly IApprenticehipFavouritesBasketStoreConfig _config;
         private readonly IBasketOrchestrator _basketOrchestrator;
 
         public BasketController(
             IMediator mediator,
             ICookieManager cookieManager,
-            IApprenticehipFavouritesBasketStoreConfig config)
+            IBasketOrchestrator basketOrchestrator)
         {
             _mediator = mediator;
             _cookieManager = cookieManager;
-            _config = config;
+            _basketOrchestrator = basketOrchestrator;
         }
 
         [HttpGet(Name = "BasketView")]
@@ -38,7 +37,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.ItemId);
+            await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
         }
@@ -47,7 +46,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.ItemId);
+            await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
@@ -56,7 +55,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromDetails(SaveBasketFromProviderDetailsViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationIdToAdd);
+            await _basketOrchestrator.UpdateBasket(queryModel.ApprenticeshipId, queryModel.Ukprn, queryModel.LocationIdToAdd);
 
             return RedirectToAction("Details", "TrainingProvider", queryModel);
         }
@@ -65,7 +64,7 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProviderFromResults(SaveBasketFromProviderSearchViewModel queryModel)
         {
-            await UpdateApprenticeship(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId);
+            await _basketOrchestrator.UpdateBasket(queryModel.SearchQuery.ApprenticeshipId, queryModel.Ukprn,queryModel.LocationId);
 
             return RedirectToAction("Search", "TrainingProvider", queryModel.SearchQuery);
         }
@@ -76,26 +75,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         {
             if (await IsInBasket(model.ApprenticeshipId, model.Ukprn))
             {
-                await UpdateApprenticeship(model.ApprenticeshipId, model.Ukprn);
+                await _basketOrchestrator.UpdateBasket(model.ApprenticeshipId, model.Ukprn);
             }
 
             return RedirectToAction("View", "Basket");
-        }
-
-        private async Task UpdateApprenticeship(string apprenticeshipId, int? ukprn = null, int? locationId = null)
-        {
-            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
-            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
-
-            var basketId = await _mediator.Send(new AddOrRemoveFavouriteInBasketCommand
-            {
-                ApprenticeshipId = apprenticeshipId,
-                Ukprn = ukprn,
-                BasketId = cookieBasketId,
-                LocationId = locationId
-            });
-
-            _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(_config.BasketSlidingExpiryDays));
         }
 
         private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn, int? locationId = null)
@@ -117,5 +100,13 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
 
             return false;
         }
+
+        public async Task<IActionResult> Save()
+        {
+            await _basketOrchestrator.DeleteBasketCache();
+
+            return Redirect(await _basketOrchestrator.GetBasketSaveUrl());
+        }
+
     }
 }

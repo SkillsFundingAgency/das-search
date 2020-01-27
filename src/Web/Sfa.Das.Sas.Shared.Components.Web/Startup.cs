@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Configuration;
 using Sfa.Das.Sas.Shared.Components.DependencyResolution;
+using Sfa.Das.Sas.ApplicationServices.Services;
+using Sfa.Das.Sas.Shared.Components.ViewModels;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces;
+using Sfa.Das.Sas.Shared.Components.Web.Models;
 
 namespace Sfa.Das.Sas.Shared.Components.Web
 {
@@ -29,7 +33,6 @@ namespace Sfa.Das.Sas.Shared.Components.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             var fatConfig = new FatSharedComponentsConfiguration();
             Configuration.Bind("fatSharedComponents", fatConfig);
             services.AddSingleton<IFatConfigurationSettings>(fs => fatConfig);
@@ -38,6 +41,12 @@ namespace Sfa.Das.Sas.Shared.Components.Web
             services.AddFatSharedComponents(fatConfig);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddFatSharedComponentsCaching("localhost");
+
+            services.AddSingleton<ILayoutService, LayoutService>();
+            services.AddTransient<ICssViewModel, CssSwitcherViewModel>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

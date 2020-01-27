@@ -4,6 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="CommonMark.NET" Version="0.15.1" />
     <PackageReference Include="FluentValidation" Version="6.2.1" />
@@ -33,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewComponents\Basket\Save\" />
     <Folder Include="Views\Shared\Components\TrainingProvider\NewFolder\" />
   </ItemGroup>
 

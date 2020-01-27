@@ -1,3 +1,6 @@
-﻿@{
-    Layout = "_Layout";
+﻿@using Sfa.Das.Sas.Shared.Components.Web
+@inject ILayoutService LayoutService;
+
+@{
+    Layout = LayoutService.Layout;
 }

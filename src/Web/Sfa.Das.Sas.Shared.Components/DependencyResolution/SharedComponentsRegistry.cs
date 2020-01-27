@@ -48,6 +48,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
             services.AddSingleton<IPostcodeIOConfigurationSettings, FatSharedComponentsConfiguration>(s => configuration);
             services.AddSingleton<IApprenticehipFavouritesBasketStoreConfig, FatSharedComponentsConfiguration>(s => configuration);
+            services.AddSingleton<ICacheSettings, FatSharedComponentsConfiguration>(s => configuration);
             
             //Application DI
             AddApplicationServices(services);
@@ -150,7 +151,7 @@ namespace Sfa.Das.Sas.Shared.Components.DependencyResolution
 
         private static void AddOrchesratorServices(IServiceCollection services)
         {
-            services.AddTransient<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
+            services.AddScoped<IApprenticeshipOrchestrator, ApprenticeshipOrchestrator>();
             services.AddTransient<IFatOrchestrator, FatOrchestrator>();
             services.AddTransient<ITrainingProviderOrchestrator, TrainingProviderOrchestrator>();
             services.AddTransient<IBasketOrchestrator, BasketOrchestrator>();
