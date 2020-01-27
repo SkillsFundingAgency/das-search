@@ -85,7 +85,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
             var model = _trainingProviderSearchFilterViewModelMapper.Map(results, searchQueryModel);
 
-             switch (model.Status)
+            switch (model.Status)
             {
                 case ProviderSearchResponseCodes.Success:
                 case ProviderSearchResponseCodes.ScotlandPostcode:
