@@ -1,10 +1,11 @@
+@using Sfa.Das.Sas.Shared.Components.ViewComponents.Fat
 @using Sfa.Das.Sas.Shared.Components.ViewModels.Css.Interfaces
 @model Sfa.Das.Sas.Shared.Components.ViewModels.Basket.BasketViewModel<Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship.ApprenticeshipBasketItemViewModel>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject ICssViewModel CssViewModel
 @{
 
-    var inactiveProviders = Model.Items.Where(w => w.Active).SelectMany(w => w.TrainingProvider).Where(s => s.Active == false);
+    var inactiveProviders = Model.HasItems ? Model.Items.Where(w => w.Active).SelectMany(w => w.TrainingProvider).Where(s => s.Active == false).ToList() : new List<TrainingProviderSearchResultsItem>();
 
 }
 
