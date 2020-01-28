@@ -117,6 +117,16 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         }
 
         [Test]
+        public void When_SearchResultsRequested_With_LevyPayerOnly_Then_Query_Is_Mapped_To_Handler()
+        {
+            _searchQueryViewModel.IsLevyPayer = true;
+
+            var result = _sut.GetSearchResults(_searchQueryViewModel);
+
+            _mockMediator.Verify(s => s.Send<GroupedProviderSearchResponse>(It.Is<GroupedProviderSearchQuery>(x => x.IsLevyPayingEmployer == true), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Test]
         public void When_SearchFilterRequested_Then_TrainingProiderSearchResultsViewModel_Is_Returned()
         {
             _searchQueryViewModel.Keywords = "keyword";
