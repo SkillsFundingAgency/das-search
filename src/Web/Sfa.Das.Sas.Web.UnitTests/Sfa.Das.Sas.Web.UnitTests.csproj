@@ -259,6 +259,7 @@
     <Compile Include="Application\Validators\ProviderSearchQueryValidatorTests.cs" />
     <Compile Include="Infrastructure\Mapping\ApprenticeshipSearchResultsItemMappingTests.cs" />
     <Compile Include="Infrastructure\Mapping\ApprenticeshipSearchResultsMappingTests.cs" />
+    <Compile Include="Infrastructure\Mapping\FrameworkMappingTests.cs" />
     <Compile Include="Infrastructure\Providers\Api\ApiApprenticeshipSearchProviderTests.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositoryBase.cs" />
     <Compile Include="Infrastructure\Repositories\ProviderApiRepository\ProviderApiRepositorySearchProviderNameTest.cs" />
