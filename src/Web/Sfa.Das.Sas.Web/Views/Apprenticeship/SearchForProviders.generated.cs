@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     using System.Web.UI;
     using System.Web.WebPages;
     
-    #line 3 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+    #line 2 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     using SFA.DAS.Apprenticeships.Api.Types;
     
     #line default
@@ -37,12 +37,6 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
     
     #line 1 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     using Sfa.Das.Sas.Web.Extensions;
-    
-    #line default
-    #line hidden
-    
-    #line 2 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-    using Sfa.Das.Sas.Web.ViewModels;
     
     #line default
     #line hidden
@@ -57,7 +51,7 @@ namespace Sfa.Das.Sas.Web.Views.Apprenticeship
         public override void Execute()
         {
             
-            #line 5 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 4 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
   
     ViewBag.Title = "Search for providers";
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
@@ -72,13 +66,13 @@ WriteLiteral(" id=\"content\"");
 WriteLiteral(">\r\n");
 
             
-            #line 11 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 10 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 10 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
      switch (Model.ApprenticeshipType)
     {
         case ApprenticeshipTrainingType.Framework:
@@ -87,14 +81,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 14 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 13 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
        Write(Html.ActionLink("Back", "Framework", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" }));
 
             
             #line default
             #line hidden
             
-            #line 14 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 13 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                                                                                                                                                                           
             break;
         case ApprenticeshipTrainingType.Standard:
@@ -103,14 +97,14 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 16 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
        Write(Html.ActionLink("Back", "Standard", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" }));
 
             
             #line default
             #line hidden
             
-            #line 17 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+            #line 16 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
                                                                                                                                                                          
             break;
     }
@@ -122,20 +116,20 @@ WriteLiteral("    <h1");
 
 WriteLiteral(" class=\"heading-xlarge\"");
 
-WriteLiteral(">\r\n        Find a training provider\r\n    </h1>\r\n    <p");
+WriteLiteral(">\r\n        <span");
 
-WriteLiteral(" class=\"lede\"");
+WriteLiteral(" class=\"heading-secondary\"");
 
-WriteLiteral(">\r\n        For <strong>");
+WriteLiteral(">");
 
             
-            #line 24 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-               Write(Model.Title);
+            #line 20 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                                   Write(Model.Title);
 
             
             #line default
             #line hidden
-WriteLiteral("</strong>:\r\n    </p>\r\n\r\n    <div");
+WriteLiteral("</span>\r\n        Find a training provider\r\n    </h1>\r\n\r\n    <div");
 
 WriteLiteral(" class=\"grid-row\"");
 
@@ -143,16 +137,16 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"column-two-thirds\"");
 
-WriteLiteral(">\r\n\r\n\r\n            <form");
+WriteLiteral(">\r\n            <form");
 
-WriteAttribute("action", Tuple.Create(" action=\"", 1222), Tuple.Create("\"", 1245)
+WriteAttribute("action", Tuple.Create(" action=\"", 1168), Tuple.Create("\"", 1191)
             
-            #line 31 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 1231), Tuple.Create<System.Object, System.Int32>(Model.PostUrl
+            #line 26 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 1177), Tuple.Create<System.Object, System.Int32>(Model.PostUrl
             
             #line default
             #line hidden
-, 1231), false)
+, 1177), false)
 );
 
 WriteLiteral(" method=\"get\"");
@@ -161,75 +155,66 @@ WriteLiteral(" class=\"postcode-form\"");
 
 WriteLiteral(">\r\n                <div");
 
-WriteLiteral(" class=\"postcode-search-form\"");
-
-WriteLiteral(">\r\n                    <h2");
-
-WriteLiteral(" class=\"heading-medium\"");
-
-WriteLiteral(">\r\n                        Enter a postcode\r\n                    </h2>\r\n         " +
-"           <div");
-
-WriteAttribute("class", Tuple.Create(" class=\"", 1478), Tuple.Create("\"", 1529)
-, Tuple.Create(Tuple.Create("", 1486), Tuple.Create("form-group", 1486), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1250), Tuple.Create("\"", 1301)
+, Tuple.Create(Tuple.Create("", 1258), Tuple.Create("form-group", 1258), true)
             
-            #line 36 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1496), Tuple.Create<System.Object, System.Int32>(Model.HasError ? "error" : ""
+            #line 27 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+, Tuple.Create(Tuple.Create(" ", 1268), Tuple.Create<System.Object, System.Int32>(Model.HasError ? "error" : ""
             
             #line default
             #line hidden
-, 1497), false)
+, 1269), false)
 );
 
 WriteLiteral(" data-validation=\"You must enter a full and valid postcode\"");
 
-WriteLiteral(">\r\n                        <label");
+WriteLiteral(">\r\n                    <label");
 
 WriteLiteral(" for=\"search-box\"");
 
-WriteLiteral(">\r\n                            <span");
+WriteLiteral(">\r\n                        <span");
 
 WriteLiteral(" class=\"form-label-bold\"");
 
-WriteLiteral(">Enter the full postcode of your apprentice\'s workplace</span>\r\n                 " +
-"           <span");
+WriteLiteral(">Please enter the postcode for where the apprentice will work</span>\r\n           " +
+"             <span");
 
 WriteLiteral(" class=\"form-hint\"");
 
-WriteLiteral(">For example: \'SW1A 2AA\'</span>\r\n\r\n                            <span");
+WriteLiteral(">For example: \'SW1A 2AA\'</span>\r\n\r\n                        <span");
 
 WriteLiteral(" class=\"error-message\"");
 
-WriteLiteral(">\r\n                                <span");
+WriteLiteral(">\r\n                            <span");
 
 WriteLiteral(" id=\"error-postcode-service\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                                    ");
+WriteLiteral("                                ");
 
             
-            #line 43 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                               Write(Html.Raw(@Model.ErrorMessage));
+            #line 34 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                           Write(Html.Raw(@Model.ErrorMessage));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                </span>\r\n                            </span>\r\n\r" +
-"\n                        </label>\r\n                        <input");
+WriteLiteral("\r\n                            </span>\r\n                        </span>\r\n\r\n       " +
+"             </label>\r\n                    <input");
 
 WriteLiteral(" type=\"search\"");
 
 WriteLiteral(" name=\"PostCode\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2217), Tuple.Create("\"", 2257)
+WriteAttribute("value", Tuple.Create(" value=\"", 1955), Tuple.Create("\"", 1995)
             
-            #line 48 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-, Tuple.Create(Tuple.Create("", 2225), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
+            #line 39 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+, Tuple.Create(Tuple.Create("", 1963), Tuple.Create<System.Object, System.Int32>(Model.PostCode.FormatPostcode()
             
             #line default
             #line hidden
-, 2225), false)
+, 1963), false)
 );
 
 WriteLiteral(" id=\"search-box\"");
@@ -240,98 +225,11 @@ WriteLiteral(" maxlength=\"200\"");
 
 WriteLiteral(" placeholder=\"\"");
 
-WriteLiteral(" />\r\n                    </div>\r\n\r\n                    <div>\r\n                   " +
-"     <div");
+WriteLiteral(" />\r\n                </div>\r\n\r\n                <div");
 
 WriteLiteral(" class=\"form-group\"");
 
-WriteLiteral(" data-validation=\"Select an option\"");
-
-WriteLiteral(">\r\n                            <fieldset");
-
-WriteLiteral(" class=\"inline\"");
-
-WriteLiteral(">\r\n                                <legend>\r\n                                    " +
-"<span");
-
-WriteLiteral(" class=\"form-label-bold\"");
-
-WriteLiteral(">Is your organisation a <a");
-
-WriteLiteral(" href=\"https://www.gov.uk/government/publications/apprenticeship-levy-how-it-will" +
-"-work/apprenticeship-levy-how-it-will-work#pay-apprenticeship-levy\"");
-
-WriteLiteral(" target=\"_blank\"");
-
-WriteLiteral(">levy-payer</a> or are you going to receive a transfer of funds from another empl" +
-"oyer to pay for this apprenticeship?</span>\r\n                                   " +
-" <span");
-
-WriteLiteral(" class=\"form-hint\"");
-
-WriteLiteral(">\r\n                                        We use this information to show you ap" +
-"proved training providers that can work with organisations of your size\r\n       " +
-"                             </span>\r\n                                    <span");
-
-WriteLiteral(" class=\"error-message\"");
-
-WriteLiteral("></span>\r\n                                </legend>\r\n                            " +
-"    <label");
-
-WriteLiteral(" class=\"block-label selection-button-radio\"");
-
-WriteLiteral(" id=\"levyPaying\"");
-
-WriteLiteral(">\r\n                                    <input");
-
-WriteLiteral(" type=\"radio\"");
-
-WriteLiteral(" name=\"IsLevyPayingEmployer\"");
-
-WriteAttribute("checked", Tuple.Create(" checked=\"", 3528), Tuple.Create("\"", 3612)
-            
-            #line 62 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-              , Tuple.Create(Tuple.Create("", 3538), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value
-            
-            #line default
-            #line hidden
-, 3538), false)
-);
-
-WriteLiteral(" value=\"true\"");
-
-WriteLiteral(" />\r\n                                    Yes\r\n                                </l" +
-"abel>\r\n                                <label");
-
-WriteLiteral(" class=\"block-label selection-button-radio\"");
-
-WriteLiteral(" id=\"notLevyPaying\"");
-
-WriteLiteral(">\r\n                                    <input");
-
-WriteLiteral(" type=\"radio\"");
-
-WriteLiteral(" name=\"IsLevyPayingEmployer\"");
-
-WriteAttribute("checked", Tuple.Create(" checked=\"", 3900), Tuple.Create("\"", 3993)
-            
-            #line 66 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-              , Tuple.Create(Tuple.Create("", 3910), Tuple.Create<System.Object, System.Int32>(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false
-            
-            #line default
-            #line hidden
-, 3910), false)
-);
-
-WriteLiteral(" value=\"false\"");
-
-WriteLiteral(" />\r\n                                    No\r\n                                </la" +
-"bel>\r\n                            </fieldset>\r\n                        </div>\r\n " +
-"                   </div>\r\n\r\n                    <div");
-
-WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n                        <input");
+WriteLiteral(">\r\n                    <input");
 
 WriteLiteral(" type=\"hidden\"");
 
@@ -339,17 +237,17 @@ WriteLiteral(" name=\"apprenticeshipid\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 4342), Tuple.Create("\"", 4373)
+WriteAttribute("value", Tuple.Create(" value=\"", 2251), Tuple.Create("\"", 2282)
             
-            #line 74 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                          , Tuple.Create(Tuple.Create("", 4350), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
+            #line 43 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+                      , Tuple.Create(Tuple.Create("", 2259), Tuple.Create<System.Object, System.Int32>(Model.ApprenticeshipId
             
             #line default
             #line hidden
-, 4350), false)
+, 2259), false)
 );
 
-WriteLiteral(">\r\n                        <input");
+WriteLiteral(">\r\n                    <input");
 
 WriteLiteral(" type=\"hidden\"");
 
@@ -357,17 +255,17 @@ WriteLiteral(" name=\"keywords\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 4467), Tuple.Create("\"", 4493)
+WriteAttribute("value", Tuple.Create(" value=\"", 2372), Tuple.Create("\"", 2398)
             
-            #line 75 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-                  , Tuple.Create(Tuple.Create("", 4475), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
+            #line 44 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+              , Tuple.Create(Tuple.Create("", 2380), Tuple.Create<System.Object, System.Int32>(Model.SearchTerms
             
             #line default
             #line hidden
-, 4475), false)
+, 2380), false)
 );
 
-WriteLiteral(">\r\n                        <input");
+WriteLiteral(">\r\n                    <input");
 
 WriteLiteral(" type=\"hidden\"");
 
@@ -375,17 +273,25 @@ WriteLiteral(" name=\"ukprn\"");
 
 WriteLiteral(" class=\"text-box form-control\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 4584), Tuple.Create("\"", 4604)
+WriteAttribute("value", Tuple.Create(" value=\"", 2485), Tuple.Create("\"", 2505)
             
-            #line 76 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
-               , Tuple.Create(Tuple.Create("", 4592), Tuple.Create<System.Object, System.Int32>(Model.Ukprn
+            #line 45 "..\..\Views\Apprenticeship\SearchForProviders.cshtml"
+           , Tuple.Create(Tuple.Create("", 2493), Tuple.Create<System.Object, System.Int32>(Model.Ukprn
             
             #line default
             #line hidden
-, 4592), false)
+, 2493), false)
 );
 
-WriteLiteral(">\r\n                        <input");
+WriteLiteral(">\r\n                    <input");
+
+WriteLiteral(" type=\"hidden\"");
+
+WriteLiteral(" name=\"IsLevyPayingEmployer\"");
+
+WriteLiteral(" value=\"false\"");
+
+WriteLiteral(">\r\n                    <input");
 
 WriteLiteral(" class=\"button postcode-search-button\"");
 
@@ -393,8 +299,8 @@ WriteLiteral(" type=\"submit\"");
 
 WriteLiteral(" value=\"Search\"");
 
-WriteLiteral(">\r\n                    </div>\r\n                </div>\r\n            </form>\r\n     " +
-"   </div>\r\n    </div>\r\n</main>");
+WriteLiteral(">\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</mai" +
+"n>");
 
         }
     }
