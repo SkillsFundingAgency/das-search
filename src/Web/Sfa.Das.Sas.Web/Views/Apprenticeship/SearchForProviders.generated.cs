@@ -289,7 +289,7 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" name=\"IsLevyPayingEmployer\"");
 
-WriteLiteral(" value=\"false\"");
+WriteLiteral(" value=\"true\"");
 
 WriteLiteral(">\r\n                    <input");
 
