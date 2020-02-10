@@ -17,18 +17,15 @@
                 break;
         }
 
-        @if (Model.HasError)
-        {
-            <div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
-                <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
-                    There is a problem
-                </h2>
+        <div class="error-summary @(Model.HasError ? "" : "hidden")" id="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+            <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+                There is a problem
+            </h2>
 
-                <ul class="error-summary-list">
-                    <li><a href="#example-postcode-service"@Model.ErrorMessage</a></li>
-                </ul>
-            </div>
-        }
+            <ul class="error-summary-list">
+                <li><a href="#error-postcode-service" id="error-postcode-link">@Html.Raw(@Model.ErrorMessage)</a></li>
+            </ul>
+        </div>
 
         <h1 class="heading-xlarge">
             <span class="heading-secondary">@Model.Title</span>
@@ -38,7 +35,7 @@
         <div class="grid-row">
             <div class="column-two-thirds">
                 <form action="@Model.PostUrl" method="get" class="postcode-form">
-                    <div class="form-group @(Model.HasError ? "error" : "")" data-validation="You must enter a full and valid postcode">
+                    <div class="form-group @(Model.HasError ? "error" : "")" data-validation="Enter the postcode of your apprentice’s workplace">
                         <label for="search-box">
                             <span class="form-label-bold">Please enter the postcode for where the apprentice will work</span>
                             <span class="form-hint">For example: 'SW1A 2AA'</span>
