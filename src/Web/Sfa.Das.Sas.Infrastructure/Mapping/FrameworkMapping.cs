@@ -61,7 +61,7 @@
                 KnowledgeQualification = document.KnowledgeQualification?.OrderBy(x => x),
                 CombinedQualification = document.CombinedQualification?.OrderBy(x => x),
                 EffectiveFrom = document.EffectiveFrom,
-                EffectiveTo = document.EffectiveTo,
+                EffectiveTo = document.EffectiveTo.Value.AddDays(1),
                 IsActiveFramework = document.IsActiveFramework,
                 FundingPeriods = document.FundingPeriods
             };
