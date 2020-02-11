@@ -14,7 +14,7 @@ namespace Sfa.Das.Sas.Web.Services.MappingActions.Helpers
                 case ProviderSearchResponseCodes.PostCodeTerminated:
                     return "This postcode is no longer valid; please search again";
                 case ProviderSearchResponseCodes.PostCodeInvalidFormat:
-                    return "You must enter a full and valid postcode";
+                    return "Enter the postcode of your apprentice’s workplace";
                 case ProviderSearchResponseCodes.WalesPostcode:
                     return $"{postCodeNotInEngland} <a href=\"https://businesswales.gov.wales/skillsgateway/apprenticeships\">Wales</a>";
                 case ProviderSearchResponseCodes.NorthernIrelandPostcode:

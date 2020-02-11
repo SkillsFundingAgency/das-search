@@ -10,14 +10,14 @@
         $('form.postcode-form').on('submit', function (e) {
             var pcField = $('#search-box'),
                 postCode = pcField.val().trim(),
-                rbLevyPayer = $('#levyPaying input'),
-                rbNonLevyPayer = $('#notLevyPaying input');
+                errorSummary = $('#error-summary'),
+                errorLink = $('#error-postcode-link');
 
             // Remove any errors
             $('.form-group').removeClass('error');
+            errorSummary.addClass('hidden');
 
-            if ( !validation.validatePostcode(postCode) ||
-                (rbLevyPayer.length === 1 && rbNonLevyPayer.length === 1) && (!rbLevyPayer.prop('checked') && !rbNonLevyPayer.prop('checked'))) {
+            if ( !validation.validatePostcode(postCode)) {
 
                 // Prevent form submitting
                 e.preventDefault();
@@ -30,6 +30,9 @@
                     var $errorContainer = pcFieldGroup.find('.error-message');
                     $errorContainer.empty().append('<span id="error-js-postcode-invalid">' + pcFieldGroup.data('validation') + '</span>');
 
+                    errorSummary.removeClass('hidden');
+                    errorLink.text(pcFieldGroup.data('validation'));
+
                     postCode = postCode.toUpperCase().trim().replace(/\s/g, "");
 
                     if (postCode.length > 4 && postCode.length < 8) {
@@ -38,13 +41,6 @@
                     }
 
                     pcField.val(postCode);
-                }
-
-                // Radio Buttons
-                if (!rbLevyPayer.prop('checked') && !rbNonLevyPayer.prop('checked')) {
-                    var rbFieldGroup = rbLevyPayer.closest('.form-group');
-                    rbFieldGroup.closest('.form-group').addClass('error');
-                    rbFieldGroup.find('.error-message').text(rbFieldGroup.data('validation'));
                 }
             }
 
