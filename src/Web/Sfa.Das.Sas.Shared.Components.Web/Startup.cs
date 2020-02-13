@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Shared.Components.Web
                     new { controller = "Fat", action = "Search" });
                 routes.MapRoute(
                     "Fat",
-                    "employer/find-apprenticeships/{action=Search}/{keywords?}",
+                    "employer/find-apprenticeships/{action=Search}",
                     new { controller = "Fat" });
                 routes.MapRoute(
                     name: "default",
