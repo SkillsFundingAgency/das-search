@@ -6,35 +6,38 @@
     ViewBag.Description = "The Find Apprenticeship Training service is for employers in England who want to find training courses for their apprentices and search for training providers.";
 }
 
-<main id="content">
-    @switch (Model.ApprenticeshipType)
-    {
-        case ApprenticeshipTrainingType.Framework:
-            @Html.ActionLink("Back", "Framework", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" })
-            break;
-        case ApprenticeshipTrainingType.Standard:
-            @Html.ActionLink("Back", "Standard", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" })
-            break;
-    }
-    <h1 class="heading-xlarge">
-        Find a training provider
-    </h1>
-    <p class="lede">
-        For <strong>@Model.Title</strong>:
-    </p>
+    <main id="content">
+        @switch (Model.ApprenticeshipType)
+        {
+            case ApprenticeshipTrainingType.Framework:
+                @Html.ActionLink("Back", "Framework", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" })
+                break;
+            case ApprenticeshipTrainingType.Standard:
+                @Html.ActionLink("Back", "Standard", new { @keywords = Model.SearchTerms, @id = Model.ApprenticeshipId, @ukprn = Model.Ukprn }, new { @class = "link-back" })
+                break;
+        }
 
-    <div class="grid-row">
-        <div class="column-two-thirds">
+        <div class="error-summary @(Model.HasError ? "" : "hidden")" id="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+            <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+                There is a problem
+            </h2>
 
+            <ul class="error-summary-list">
+                <li><a href="#error-postcode-service" id="error-postcode-link">@Html.Raw(@Model.ErrorMessage)</a></li>
+            </ul>
+        </div>
 
-            <form action="@Model.PostUrl" method="get" class="postcode-form">
-                <div class="postcode-search-form">
-                    <h2 class="heading-medium">
-                        Enter a postcode
-                    </h2>
-                    <div class="form-group @(Model.HasError ? "error" : "")" data-validation="You must enter a full and valid postcode">
+        <h1 class="heading-xlarge">
+            <span class="heading-secondary">@Model.Title</span>
+            Find a training provider
+        </h1>
+
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <form action="@Model.PostUrl" method="get" class="postcode-form">
+                    <div class="form-group @(Model.HasError ? "error" : "")" data-validation="Enter the postcode of your apprentice’s workplace">
                         <label for="search-box">
-                            <span class="form-label-bold">Please enter the postcode for where the apprentice will work</span>
+                            <span class="form-label-bold">Enter the postcode of your apprentice’s workplace</span>
                             <span class="form-hint">For example: 'SW1A 2AA'</span>
 
                             <span class="error-message">
@@ -47,36 +50,14 @@
                         <input type="search" name="PostCode" value="@Model.PostCode.FormatPostcode()" id="search-box" class="form-control postcode-search-box" maxlength="200" placeholder="" />
                     </div>
 
-                    <div>
-                        <div class="form-group" data-validation="Select an option">
-                            <fieldset class="inline">
-                                <legend>
-                                    <span class="form-label-bold">As an employer, is your pay bill more than £3 million per year?</span>
-                                    <span class="form-hint">
-                                        If you are receiving a transfer of apprenticeship funds from another employer, please choose ‘Yes’
-                                    </span>
-                                    <span class="error-message"></span>
-                                </legend>
-                                <label class="block-label selection-button-radio" id="levyPaying">
-                                    <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value)" value="true" />
-                                    Yes
-                                </label>
-                                <label class="block-label selection-button-radio" id="notLevyPaying">
-                                    <input type="radio" name="IsLevyPayingEmployer" checked="@(Model.IsLevyPayingEmployer.HasValue && Model.IsLevyPayingEmployer.Value == false)" value="false" />
-                                    No
-                                </label>
-                            </fieldset>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <input type="hidden" name="apprenticeshipid" class="text-box form-control" value="@Model.ApprenticeshipId">
                         <input type="hidden" name="keywords" class="text-box form-control" value="@Model.SearchTerms">
                         <input type="hidden" name="ukprn" class="text-box form-control" value="@Model.Ukprn">
+                        <input type="hidden" name="IsLevyPayingEmployer" value="true">
                         <input class="button postcode-search-button" type="submit" value="Search">
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
