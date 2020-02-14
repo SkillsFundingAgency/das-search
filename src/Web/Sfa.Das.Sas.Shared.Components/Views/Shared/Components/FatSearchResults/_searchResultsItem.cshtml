@@ -15,7 +15,7 @@
                 <span class="@(CssViewModel.WarningText)__icon" aria-hidden="true"></span>
                 <strong class="@(CssViewModel.WarningText)__text">
                     <span class="@(CssViewModel.WarningText)__assistive">Warning</span>
-                    This apprenticeship is available to new starters until @Model.EffectiveTo.Value.ToLongDateString()
+                    This apprenticeship is available to new starters until @Model.EffectiveTo.Value.AddDays(1).ToLongDateString()
                 </strong>
             </div>
         }
