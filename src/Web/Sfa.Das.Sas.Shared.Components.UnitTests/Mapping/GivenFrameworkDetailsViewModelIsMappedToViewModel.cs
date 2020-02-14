@@ -23,7 +23,6 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
             _itemToMap = new Framework()
             {
                 FrameworkId = "230-2-1",
-                Title = "Test Title",
                 FrameworkOverview = "overview",
                 Level = 3,
                 Duration = 24,
@@ -61,7 +60,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
        
             result.Title.Should().Be(_itemToMap.Title);
             result.Duration.Should().Be(_itemToMap.Duration);
-            result.EffectiveTo.Should().Be(_itemToMap.EffectiveTo);
+            result.EffectiveTo.Should().Be(_itemToMap.EffectiveTo.Value.AddDays(1));
             result.Id.Should().Be(_itemToMap.FrameworkId);
             result.Level.Should().Be(_itemToMap.Level);
             result.Overview.Should().Be(_itemToMap.FrameworkOverview);
