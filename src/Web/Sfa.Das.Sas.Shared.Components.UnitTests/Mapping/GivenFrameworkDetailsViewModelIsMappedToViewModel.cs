@@ -60,7 +60,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Mapping
        
             result.Title.Should().Be(_itemToMap.Title);
             result.Duration.Should().Be(_itemToMap.Duration);
-            result.EffectiveTo.Should().Be(_itemToMap.EffectiveTo.Value.AddDays(1));
+            result.EffectiveTo.Should().Be(_itemToMap.EffectiveTo);
             result.Id.Should().Be(_itemToMap.FrameworkId);
             result.Level.Should().Be(_itemToMap.Level);
             result.Overview.Should().Be(_itemToMap.FrameworkOverview);

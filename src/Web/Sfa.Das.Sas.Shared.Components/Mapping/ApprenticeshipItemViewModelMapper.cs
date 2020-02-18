@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 Title = source.Title,
                 Level = source.Level,
                 Duration = source.Duration,
-                EffectiveTo = source.EffectiveTo.Value.AddDays(1),
+                EffectiveTo = source.EffectiveTo,
                 ApprenticeshipType = source.ApprenticeshipType
             };
             return item;
