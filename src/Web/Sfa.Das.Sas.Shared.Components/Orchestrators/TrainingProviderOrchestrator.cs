@@ -102,7 +102,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         public async Task<TrainingProviderDetailsViewModel> GetDetails(TrainingProviderDetailQueryViewModel detailsQueryModel)
         {
 
-            var cacheKey = $"providerdetails-{detailsQueryModel.Ukprn}-{detailsQueryModel.LocationId}-{detailsQueryModel.ApprenticeshipId}";
+            var cacheKey = $"FatComponentsCache-providerdetails-{detailsQueryModel.Ukprn}-{detailsQueryModel.LocationId}-{detailsQueryModel.ApprenticeshipId}";
 
             var cacheEntry = await _cacheService.RetrieveFromCache<TrainingProviderDetailsViewModel>(cacheKey);
 

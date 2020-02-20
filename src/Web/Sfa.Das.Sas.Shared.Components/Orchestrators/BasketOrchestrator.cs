@@ -47,7 +47,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         {
             if (fromCache)
             {
-                var cacheKey = $"cachedBasket-{basketId.ToString()}";
+                var cacheKey = $"FatComponentsCache-Basket-{basketId.ToString()}";
                 var cachedBasket = await _cacheService.RetrieveFromCache<BasketViewModel<ApprenticeshipBasketItemViewModel>>(cacheKey);
 
                 if (cachedBasket != null)
@@ -89,14 +89,14 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
             _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(30));
             
-            await _cacheService.SaveToCache($"cachedBasket-{basketId.ToString()}", await GetBasket(basketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
+            await _cacheService.SaveToCache($"FatComponentsCache-Basket-{basketId.ToString()}", await GetBasket(basketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
         }
 
         public async Task DeleteBasketCache()
         {
             Guid? cookieBasketId = GetBasketCookieId();
 
-            var cacheKey = $"cachedBasket-{cookieBasketId}";
+            var cacheKey = $"FatComponentsCache-Basket-{cookieBasketId}";
 
             await _cacheService.DeleteFromCache<string>(cacheKey);
         }

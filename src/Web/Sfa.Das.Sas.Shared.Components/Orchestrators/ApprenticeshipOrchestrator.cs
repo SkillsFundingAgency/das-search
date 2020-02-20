@@ -33,7 +33,9 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
         public async Task<FrameworkDetailsViewModel> GetFramework(string id)
         {
-            var cacheEntry = await _cacheService.RetrieveFromCache<FrameworkDetailsViewModel>(id);
+            var cacheKey = $"FatComponentsCache-Apprenticeship_details-{id}";
+
+            var cacheEntry = await _cacheService.RetrieveFromCache<FrameworkDetailsViewModel>(cacheKey);
 
             if (cacheEntry == null)
             {
@@ -65,7 +67,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                         cacheEntry = _frameworkDetailsViewModelMapper.Map(response.Framework);
 
                         _logger.Info($"Saving to cache");
-                        await _cacheService.SaveToCache(id, cacheEntry, new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
+                        await _cacheService.SaveToCache(cacheKey, cacheEntry, new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
 
                         break;
 
@@ -82,7 +84,10 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         public async Task<StandardDetailsViewModel> GetStandard(string id)
         {
             _logger.Info($"Checking cache from standard {id}");
-            var cacheEntry = await _cacheService.RetrieveFromCache<StandardDetailsViewModel>(id);
+
+            var cacheKey = $"FatComponentsCache-Apprenticeship_details-{id}";
+
+            var cacheEntry = await _cacheService.RetrieveFromCache<StandardDetailsViewModel>(cacheKey);
 
             if (cacheEntry == null)
             {
@@ -137,7 +142,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 cacheEntry = _standardDetailsViewModelMapper.Map(response.Standard, response.AssessmentOrganisations);
 
                 _logger.Info($"Saving to cache");
-                await _cacheService.SaveToCache(id, cacheEntry,  new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
+                await _cacheService.SaveToCache(cacheKey, cacheEntry,  new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
             }
             
             return cacheEntry;

@@ -30,7 +30,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
         {
 
             
-            var cacheKey = $"searchresults-{searchQueryModel.Keywords}-{searchQueryModel.Page}-{searchQueryModel.ResultsToTake}-{searchQueryModel.SortOrder}";
+            var cacheKey = $"FatComponentsCache-searchresults-{searchQueryModel.Keywords}-{searchQueryModel.Page}-{searchQueryModel.ResultsToTake}-{searchQueryModel.SortOrder}";
 
             foreach (var level in searchQueryModel.SelectedLevels)
             {
