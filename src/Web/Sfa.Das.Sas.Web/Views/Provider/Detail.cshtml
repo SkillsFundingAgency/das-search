@@ -154,12 +154,6 @@
 
                 @if (Is<RoatpProviderFlagsFeature>.Enabled)
                 {
-                    if (Model.IsLevyPayerOnly)
-                    {
-                        <p class="detail-highlight">
-                            Only levy paying employers can work with this provider
-                        </p>
-                    }
                     if (Model.HasParentCompanyGuarantee)
                     {
                         <p class="detail-highlight">
