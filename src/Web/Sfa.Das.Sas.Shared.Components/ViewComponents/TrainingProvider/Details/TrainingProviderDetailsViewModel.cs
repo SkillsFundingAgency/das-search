@@ -76,7 +76,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
 
         public string Postcode { get; internal set; }
 
-        public FeedbackViewModel Feedback { get; internal set; }
+        public FeedbackViewModel Feedback { get; set; }
 
         public string AboutApprenticeshipInfo { get; set; }
     }
