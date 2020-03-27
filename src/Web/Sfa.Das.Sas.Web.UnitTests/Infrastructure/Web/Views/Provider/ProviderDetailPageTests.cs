@@ -26,7 +26,6 @@
         internal const string SatisfactionScoreMessage = "15.9%";
         internal const string ParentCompanyGuaranteeMessage = "Provider is supported by a parent company guarantee";
         internal const string IsNewProviderMessage = "New organisation with no financial track record";
-        internal const string IsLevyPayerOnlyMessage = "Only levy paying employers can work with this provider";
         private static FeedbackViewModel _providerFeedback;
 
         [SetUp]
@@ -162,7 +161,6 @@
             model.IsNew = false;
 
             var html = providerDetails.RenderAsHtml(model).ToAngleSharp();
-            GetPartial(html, "#levy-payer-only").Should().Contain(IsLevyPayerOnlyMessage);
             GetPartial(html, "#parent-company-guarantee").Should().Be(string.Empty);
             GetPartial(html, "#is-new-provider").Should().Be(string.Empty);
         }
