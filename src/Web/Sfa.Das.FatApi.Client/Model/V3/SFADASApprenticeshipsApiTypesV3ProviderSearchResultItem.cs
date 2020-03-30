@@ -42,7 +42,7 @@ namespace Sfa.Das.FatApi.Client.Model
         /// <param name="hasNonLevyContract">hasNonLevyContract.</param>
         /// <param name="isLevyPayerOnly">isLevyPayerOnly.</param>
         /// <param name="currentlyNotStartingNewApprentices">currentlyNotStartingNewApprentices.</param>
-        public SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem(int ukprn = default(int), SFADASApprenticeshipsApiTypesV3TrainingLocation location = default(SFADASApprenticeshipsApiTypesV3TrainingLocation), string providerName = default(string), double overallAchievementRate = default(double), bool nationalProvider = default(bool), List<string> deliveryModes = default(List<string>), double? distance = default(double), double employerSatisfaction = default(double), double learnerSatisfaction = default(double), double nationalOverallAchievementRate = default(double), string overallCohort = default(string), bool hasNonLevyContract = default(bool), bool isLevyPayerOnly = default(bool), bool currentlyNotStartingNewApprentices = default(bool))
+        public SFADASApprenticeshipsApiTypesV3ProviderSearchResultItem(int ukprn = default(int), SFADASApprenticeshipsApiTypesV3TrainingLocation location = default(SFADASApprenticeshipsApiTypesV3TrainingLocation), string providerName = default(string), double? overallAchievementRate = null, bool nationalProvider = default(bool), List<string> deliveryModes = default(List<string>), double? distance = default(double), double employerSatisfaction = default(double), double learnerSatisfaction = default(double), double nationalOverallAchievementRate = default(double), string overallCohort = default(string), bool hasNonLevyContract = default(bool), bool isLevyPayerOnly = default(bool), bool currentlyNotStartingNewApprentices = default(bool))
         {
             this.Ukprn = ukprn;
             this.Location = location;
@@ -82,7 +82,7 @@ namespace Sfa.Das.FatApi.Client.Model
         /// Gets or Sets OverallAchievementRate
         /// </summary>
         [DataMember(Name="OverallAchievementRate", EmitDefaultValue=false)]
-        public double OverallAchievementRate { get; set; }
+        public double? OverallAchievementRate { get; set; }
 
         /// <summary>
         /// Gets or Sets NationalProvider
