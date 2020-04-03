@@ -6,33 +6,37 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.Providers.Api.Client;
 using Sfa.Das.Sas.ApplicationServices.Commands;
+using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Basket.Interfaces;
 using Sfa.Das.Sas.Shared.Basket.Models;
 
 namespace Sfa.Das.Sas.ApplicationServices.Handlers
 {
-    public class AddorRemoveFavouriteInBasketCommandHandler : IRequestHandler<AddOrRemoveFavouriteInBasketCommand, Guid>
+    public class AddorRemoveFavouriteInBasketCommandHandler : IRequestHandler<AddOrRemoveFavouriteInBasketCommand, AddOrRemoveFavouriteInBasketResponse>
     {
         private readonly IApprenticeshipFavouritesBasketStore _basketStore;
         private IProviderApiClient _providerApiClient;
+        private readonly IMediator _mediator;
         private readonly ILogger<AddorRemoveFavouriteInBasketCommandHandler> _logger;
 
-        public AddorRemoveFavouriteInBasketCommandHandler(ILogger<AddorRemoveFavouriteInBasketCommandHandler> logger, IApprenticeshipFavouritesBasketStore basketStore, IProviderApiClient providerApiClient)
+        public AddorRemoveFavouriteInBasketCommandHandler(ILogger<AddorRemoveFavouriteInBasketCommandHandler> logger, IApprenticeshipFavouritesBasketStore basketStore, IProviderApiClient providerApiClient, IMediator mediator)
         {
             _basketStore = basketStore;
             _providerApiClient = providerApiClient;
+            _mediator = mediator;
             _logger = logger;
         }
 
-        public async Task<Guid> Handle(AddOrRemoveFavouriteInBasketCommand request, CancellationToken cancellationToken)
+        public async Task<AddOrRemoveFavouriteInBasketResponse> Handle(AddOrRemoveFavouriteInBasketCommand request, CancellationToken cancellationToken)
         {
-
             if (string.IsNullOrWhiteSpace(request.ApprenticeshipId))
             {
                 var message = $"Apprenticeship id must be provided for {nameof(AddorRemoveFavouriteInBasketCommandHandler)}";
                 _logger.LogWarning(message);
                 throw new ArgumentException(message);
             }
+
+            var standard = await _mediator.Send(new GetStandardQuery { Id = request.ApprenticeshipId.Split('-')[0] }, cancellationToken);
 
             bool basketChanged;
             var basket = await GetBasket(request);
@@ -92,7 +96,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             _logger.LogDebug("Updated apprenticeship basket: {basketId}", basket.Id);
 
-            return basket.Id;
+            return new AddOrRemoveFavouriteInBasketResponse { BasketId = basket.Id };
         }
 
         private ApprenticeshipFavouritesBasket CreateNewBasket(AddOrRemoveFavouriteInBasketCommand request)

@@ -6,6 +6,7 @@ using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using SFA.DAS.Apprenticeships.Api.Types.Providers;
 using SFA.DAS.Providers.Api.Client;
@@ -21,7 +22,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
     [TestFixture]
     public class AddOrRemoveFavouriteInBasketHandlerTests
     {
-        private IRequestHandler<AddOrRemoveFavouriteInBasketCommand, Guid> _sut;
+        private IRequestHandler<AddOrRemoveFavouriteInBasketCommand, AddOrRemoveFavouriteInBasketResponse> _sut;
         private Mock<IApprenticeshipFavouritesBasketStore> _mockBasket;
         private Mock<IProviderApiClient> _mockProviderApiClient;
 
@@ -33,7 +34,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             _mockProviderApiClient.Setup(s => s.Get(It.IsAny<int>())).Returns(new SFA.DAS.Apprenticeships.Api.Types.Providers.Provider() {ProviderName = "TestProvider"});
 
-            _sut = new AddorRemoveFavouriteInBasketCommandHandler(new NullLogger<AddorRemoveFavouriteInBasketCommandHandler>(), _mockBasket.Object,_mockProviderApiClient.Object);
+            _sut = new AddorRemoveFavouriteInBasketCommandHandler(new NullLogger<AddorRemoveFavouriteInBasketCommandHandler>(), _mockBasket.Object,_mockProviderApiClient.Object, Substitute.For<IMediator>());
         }
 
         [Test]
@@ -47,7 +48,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().NotBeEmpty();
+            response.BasketId.Should().NotBeEmpty();
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a.Id != Guid.Empty)));
         }
 
@@ -64,7 +65,7 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().NotBeEmpty();
+            response.BasketId.Should().NotBeEmpty();
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(a => a.Id != Guid.Empty && a.Id != expiredBasketId)));
         }
 
