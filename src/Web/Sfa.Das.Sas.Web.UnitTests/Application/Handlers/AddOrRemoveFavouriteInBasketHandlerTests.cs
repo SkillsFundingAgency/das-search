@@ -117,7 +117,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().ShouldBeEquivalentTo(new AddOrRemoveFavouriteInBasketResponse(){ BasketId = basketId, ApprenticeshipName = "Standard 1", BasketOperation = BasketOperation.Added });
+            response.ApprenticeshipName.Should().Be("Standard 1");
+            response.BasketId.Should().Be(basketId);
+            response.BasketOperation.Should().Be(BasketOperation.Added);
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(b => b.Count() == 2)));
 
             savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123").Should().NotBeNull();
@@ -189,7 +191,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().ShouldBeEquivalentTo(new AddOrRemoveFavouriteInBasketResponse(){ BasketId = basketId, ApprenticeshipName = "Standard 1", BasketOperation = BasketOperation.Added });
+            response.ApprenticeshipName.Should().Be("Standard 1");
+            response.BasketId.Should().Be(basketId);
+            response.BasketOperation.Should().Be(BasketOperation.Added);
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(b => b.Count() == 1)));
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
@@ -221,7 +225,10 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().ShouldBeEquivalentTo(new AddOrRemoveFavouriteInBasketResponse(){ BasketId = basketId, ApprenticeshipName = "Standard 1", BasketOperation = BasketOperation.Added });
+            response.ApprenticeshipName.Should().Be("Standard 1");
+            response.BasketId.Should().Be(basketId);
+            response.BasketOperation.Should().Be(BasketOperation.Added);
+
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(b => b.Count() == 2)));
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
@@ -289,7 +296,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().Be(basketId);
+            response.ApprenticeshipName.Should().Be("Standard 1");
+            response.BasketId.Should().Be(basketId);
+            response.BasketOperation.Should().Be(BasketOperation.Added);
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(b => b.Count() == 1)));
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
@@ -325,7 +334,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().ShouldBeEquivalentTo(new AddOrRemoveFavouriteInBasketResponse(){ BasketId = basketId, ApprenticeshipName = "Standard 1", BasketOperation = BasketOperation.Added });
+            response.ApprenticeshipName.Should().Be("Standard 1");
+            response.BasketId.Should().Be(basketId);
+            response.BasketOperation.Should().Be(BasketOperation.Added);
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(b => b.Count() == 1)));
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
@@ -362,7 +373,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().ShouldBeEquivalentTo(new AddOrRemoveFavouriteInBasketResponse(){ BasketId = basketId, ApprenticeshipName = "Standard 1", BasketOperation = BasketOperation.Added });
+            response.ApprenticeshipName.Should().Be("Standard 1");
+            response.BasketId.Should().Be(basketId);
+            response.BasketOperation.Should().Be(BasketOperation.Added);
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(b => b.Count() == 1)));
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
@@ -398,7 +411,9 @@ namespace Sfa.Das.Sas.Web.UnitTests.Application.Handlers
 
             var response = await _sut.Handle(request, default(CancellationToken));
 
-            response.Should().Be(basketId);
+            response.ApprenticeshipName.Should().Be("Standard 1");
+            response.BasketId.Should().Be(basketId);
+            response.BasketOperation.Should().Be(BasketOperation.Added);
             _mockBasket.Verify(x => x.UpdateAsync(It.Is<ApprenticeshipFavouritesBasket>(b => b.Count() == 2)));
 
             var favourite = savedBasket.SingleOrDefault(x => x.ApprenticeshipId == "123");
