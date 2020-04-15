@@ -36,7 +36,19 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                 throw new ArgumentException(message);
             }
 
-            var standard = await _mediator.Send(new GetStandardQuery { Id = request.ApprenticeshipId.Split('-')[0] }, cancellationToken);
+            string apprenticeshipName;
+            if (request.ApprenticeshipId.Contains("-"))
+            {
+                var framework = await _mediator.Send(new GetFrameworkQuery { Id = request.ApprenticeshipId }, cancellationToken);
+                apprenticeshipName = framework.Framework.Title;
+            }
+            else
+            {
+                var standard = await _mediator.Send(new GetStandardQuery { Id = request.ApprenticeshipId }, cancellationToken);
+                apprenticeshipName = standard.Standard.Title;
+            }
+
+            var basketOperation = BasketOperation.Added;
 
             bool basketChanged;
             var basket = await GetBasket(request);
@@ -54,6 +66,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     {
                         basket.Remove(request.ApprenticeshipId, request.Ukprn.Value, request.LocationId.Value);
                         basketChanged = true;
+                        basketOperation = BasketOperation.Removed;
                     }
                     else
                     {
@@ -68,6 +81,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     {
                         basket.Remove(request.ApprenticeshipId, request.Ukprn.Value);
                         basketChanged = true;
+                        basketOperation = BasketOperation.Removed;
                     }
                     else
                     {
@@ -81,6 +95,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
                     {
                         basket.Remove(request.ApprenticeshipId);
                         basketChanged = true;
+                        basketOperation = BasketOperation.Removed;
                     }
                     else
                     {
@@ -96,7 +111,7 @@ namespace Sfa.Das.Sas.ApplicationServices.Handlers
 
             _logger.LogDebug("Updated apprenticeship basket: {basketId}", basket.Id);
 
-            return new AddOrRemoveFavouriteInBasketResponse { BasketId = basket.Id };
+            return new AddOrRemoveFavouriteInBasketResponse { BasketId = basket.Id, ApprenticeshipName = apprenticeshipName, BasketOperation = basketOperation };
         }
 
         private ApprenticeshipFavouritesBasket CreateNewBasket(AddOrRemoveFavouriteInBasketCommand request)

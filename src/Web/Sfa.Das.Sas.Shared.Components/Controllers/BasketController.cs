@@ -6,6 +6,7 @@ using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
 
@@ -46,8 +47,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
-            await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
+            var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
+            TempData.Add("AddRemoveResponse", JsonConvert.SerializeObject(response));
+            
             return RedirectToAction("Search", "Fat", queryModel.SearchQuery);
         }
 

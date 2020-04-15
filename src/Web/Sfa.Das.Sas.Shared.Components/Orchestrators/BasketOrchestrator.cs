@@ -75,7 +75,7 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             }
         }
 
-        public async Task UpdateBasket(string apprenticeshipId, int? ukprn = null, int? locationId = null)
+        public async Task<AddOrRemoveFavouriteInBasketResponse> UpdateBasket(string apprenticeshipId, int? ukprn = null, int? locationId = null)
         {
             var cookieBasketId = GetBasketCookieId();
 
@@ -90,6 +90,8 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             _cookieManager.Set(CookieNames.BasketCookie, basketResponse.BasketId.ToString(), DateTime.Now.AddDays(30));
             
             await _cacheService.SaveToCache($"FatComponentsCache-Basket-{basketResponse.BasketId.ToString()}", await GetBasket(basketResponse.BasketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
+
+            return basketResponse;
         }
 
         public async Task DeleteBasketCache()
