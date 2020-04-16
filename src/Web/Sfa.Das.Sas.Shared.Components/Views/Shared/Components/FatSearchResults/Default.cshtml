@@ -10,18 +10,24 @@
     
     @if (Model.SearchQuery.AddRemoveBasketResponse != null)
     {
-        <div class="addRemoveNotification_I_Guess">
             @if (Model.SearchQuery.AddRemoveBasketResponse.BasketOperation == BasketOperation.Added)
             {
-                <div>Green tick!</div>
-                <div>You've added <strong>@Model.SearchQuery.AddRemoveBasketResponse.ApprenticeshipName</strong> to your shortlist</div>
+                <div class="toast">
+                    <span class="toast__icon toast__icon--success"></span>
+                    <div class="toast__content">
+                        You've added <strong>@Model.SearchQuery.AddRemoveBasketResponse.ApprenticeshipName</strong> to your shortlist
+                    </div>
+                </div>
             }
             else
             {
-                <div>Red bin!</div>
-                <div>You've removed <strong>@Model.SearchQuery.AddRemoveBasketResponse.ApprenticeshipName</strong> from your shortlist</div>
+                <div class="toast">
+                    <span class="toast__icon toast__icon--error"></span>
+                    <div class="toast__content">
+                        You've removed <strong>@Model.SearchQuery.AddRemoveBasketResponse.ApprenticeshipName</strong> from your shortlist
+                    </div>
+                </div>
             }
-        </div>
     }
     
     <div class="das-search-results__header">
