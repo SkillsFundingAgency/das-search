@@ -72,7 +72,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
 
         public bool RegulatedApprenticeship { get; set; }
 
-        public string ApprenticeshipId { get; internal set; }
+        public string ApprenticeshipId { get; set; }
 
         public string Postcode { get; internal set; }
 

@@ -15,7 +15,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
             _feedbackMapper = feedbackMapper;
         }
 
-        public TrainingProviderDetailsViewModel Map(ApprenticeshipProviderDetailResponse source)
+        public TrainingProviderDetailsViewModel Map(ApprenticeshipProviderDetailResponse source, string apprenticeshipId)
         {
             var employerSatisfationMessage =
               (source.ApprenticeshipDetails.Product.EmployerSatisfaction > 0)
@@ -55,8 +55,11 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 LocationAddressLine = ProviderMappingHelper.GetCommaList(source.ApprenticeshipDetails.Location.LocationName, source.ApprenticeshipDetails.Location.Address.Address1, source.ApprenticeshipDetails.Location.Address.Address2, source.ApprenticeshipDetails.Location.Address.Town, source.ApprenticeshipDetails.Location.Address.County, source.ApprenticeshipDetails.Location.Address.Postcode),
                 LegalName = source.ApprenticeshipDetails.Provider.LegalName,
                 Feedback = _feedbackMapper.Map(source.ApprenticeshipDetails.Provider.ProviderFeedback),
-                AboutApprenticeshipInfo = source.ApprenticeshipDetails.Product.Apprenticeship.ApprenticeshipMarketingInfo
-
+                AboutApprenticeshipInfo = source.ApprenticeshipDetails.Product.Apprenticeship.ApprenticeshipMarketingInfo,
+                Postcode = source.ApprenticeshipDetails.Location.Address.Postcode,
+                Location = source.ApprenticeshipDetails.Location,
+                ApprenticeshipId = apprenticeshipId
+                
             };
 
             return item;

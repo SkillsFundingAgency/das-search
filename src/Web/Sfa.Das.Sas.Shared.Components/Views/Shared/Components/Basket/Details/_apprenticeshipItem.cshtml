@@ -48,8 +48,7 @@
                     @foreach (var trainingProviderSearchResultsItem in Model.TrainingProvider)
                     {
                         <li id="provider-@trainingProviderSearchResultsItem.Ukprn" class="das-basket__provider--@(trainingProviderSearchResultsItem.Active ? "active" : "inactive")">
-                            @*<a asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn">@trainingProviderSearchResultsItem.Name</a>*@
-                            @trainingProviderSearchResultsItem.Name
+                            <a class="@CssViewModel.Link" asp-controller="TrainingProvider" asp-action="Details" asp-route-ukprn="@trainingProviderSearchResultsItem.Ukprn" asp-route-apprenticeshipId="@Model.Id" asp-route-LocationId="@trainingProviderSearchResultsItem.LocationId"> @trainingProviderSearchResultsItem.Name</a>
                             <form asp-controller="Basket" asp-action="RemoveFromBasket" method="post">
                                 <input type="hidden" id="apprenticeshipId" name="ApprenticeshipId" value="@Model.Id" />
                                 <input type="hidden" id="ukprn" name="Ukprn" value="@trainingProviderSearchResultsItem.Ukprn" />

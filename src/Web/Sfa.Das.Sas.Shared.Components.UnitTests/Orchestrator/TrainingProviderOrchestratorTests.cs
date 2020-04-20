@@ -203,7 +203,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public void When_SearchResultsRequested_Then_GetResultsFromCache()
         {
            
-            var cacheKey = $"providerdetails-{_detailsQueryViewModel.Ukprn}-{_detailsQueryViewModel.LocationId}-{_detailsQueryViewModel.ApprenticeshipId}";
+            var cacheKey = $"FatComponentsCache-providerdetails-{_detailsQueryViewModel.Ukprn}-{_detailsQueryViewModel.LocationId}-{_detailsQueryViewModel.ApprenticeshipId}";
 
             _mockCacheService.Setup(s => s.RetrieveFromCache<TrainingProviderDetailsViewModel>(cacheKey)).Returns(GenerateMockCachedProviderViewModel());
 

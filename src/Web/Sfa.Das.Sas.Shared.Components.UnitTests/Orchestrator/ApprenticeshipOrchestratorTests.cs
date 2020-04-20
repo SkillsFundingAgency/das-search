@@ -58,8 +58,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "123"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Success, Standard = new Standard() { StandardId = "123" } });
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "890"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Success, Standard = new Standard() { StandardId = "890" } });
 
-            _mockCacheService.Setup(s => s.RetrieveFromCache<FrameworkDetailsViewModel>("890-2-1")).ReturnsAsync(new FrameworkDetailsViewModel() { Id = "890-2-1" } );
-            _mockCacheService.Setup(s => s.RetrieveFromCache<StandardDetailsViewModel>("890")).ReturnsAsync(new StandardDetailsViewModel() { Id = "980" });
+            _mockCacheService.Setup(s => s.RetrieveFromCache<FrameworkDetailsViewModel>("FatComponentsCache-Apprenticeship_details-890-2-1")).ReturnsAsync(new FrameworkDetailsViewModel() { Id = "890-2-1" } );
+            _mockCacheService.Setup(s => s.RetrieveFromCache<StandardDetailsViewModel>("FatComponentsCache-Apprenticeship_details-890")).ReturnsAsync(new StandardDetailsViewModel() { Id = "980" });
 
 
             _frameworkMapperMock.Setup(s => s.Map(It.IsAny<Framework>())).Returns(_framework);
@@ -219,5 +219,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mockCacheService.Verify(s => s.RetrieveFromCache<StandardDetailsViewModel>(It.IsAny<string>()), Times.Once);
             _mediatorMock.Verify(s => s.Send<GetStandardResponse>(It.IsAny<GetStandardQuery>(), It.IsAny<CancellationToken>()), Times.Never);
         }
+
+      
     }
 } 
