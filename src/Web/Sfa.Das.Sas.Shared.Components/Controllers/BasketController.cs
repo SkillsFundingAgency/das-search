@@ -38,8 +38,10 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
-            await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
+            var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
+            TempData.Add("AddRemoveResponse", JsonConvert.SerializeObject(response));
+            
             return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
         }
 

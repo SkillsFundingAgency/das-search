@@ -23,6 +23,13 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         public IActionResult Apprenticeship(string id)
         {
             var model = new ApprenticeshipDetailQueryViewModel(){Id = id};
+            
+            if (TempData.ContainsKey("AddRemoveResponse"))
+            {
+                model.AddRemoveBasketResponse = 
+                    JsonConvert.DeserializeObject<AddOrRemoveFavouriteInBasketResponse>((string)TempData["AddRemoveResponse"]);
+            }
+            
             return View("Fat/ApprenticeshipDetails", model);
         }
 
