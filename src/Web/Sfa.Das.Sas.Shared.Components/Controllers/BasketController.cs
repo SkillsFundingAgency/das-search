@@ -40,6 +40,11 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         {
             var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
+            if (TempData.ContainsKey("AddRemoveResponse"))
+            {
+                TempData.Remove("AddRemoveResponse");
+            }
+            
             TempData.Add("AddRemoveResponse", JsonConvert.SerializeObject(response));
             
             return RedirectToAction("Apprenticeship", "Fat", new { id = queryModel.ItemId });
@@ -50,6 +55,11 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
             var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
+
+            if (TempData.ContainsKey("AddRemoveResponse"))
+            {
+                TempData.Remove("AddRemoveResponse");
+            }
 
             TempData.Add("AddRemoveResponse", JsonConvert.SerializeObject(response));
             
