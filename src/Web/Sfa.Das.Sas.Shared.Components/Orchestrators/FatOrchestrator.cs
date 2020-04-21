@@ -47,7 +47,9 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
 
                 await _cacheService.SaveToCache(cacheKey, model, new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
             }
-           
+
+            model.SearchQuery.AddRemoveBasketResponse = searchQueryModel.AddRemoveBasketResponse;
+            
             return model;
         }
 

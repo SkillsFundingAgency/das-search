@@ -75,11 +75,11 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
             }
         }
 
-        public async Task UpdateBasket(string apprenticeshipId, int? ukprn = null, int? locationId = null)
+        public async Task<AddOrRemoveFavouriteInBasketResponse> UpdateBasket(string apprenticeshipId, int? ukprn = null, int? locationId = null)
         {
-            Guid? cookieBasketId = GetBasketCookieId();
+            var cookieBasketId = GetBasketCookieId();
 
-            var basketId = await _mediator.Send(new AddOrRemoveFavouriteInBasketCommand
+            var basketResponse = await _mediator.Send(new AddOrRemoveFavouriteInBasketCommand
             {
                 ApprenticeshipId = apprenticeshipId,
                 Ukprn = ukprn,
@@ -87,9 +87,11 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                 LocationId = locationId
             });
 
-            _cookieManager.Set(CookieNames.BasketCookie, basketId.ToString(), DateTime.Now.AddDays(30));
+            _cookieManager.Set(CookieNames.BasketCookie, basketResponse.BasketId.ToString(), DateTime.Now.AddDays(30));
             
-            await _cacheService.SaveToCache($"FatComponentsCache-Basket-{basketId.ToString()}", await GetBasket(basketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
+            await _cacheService.SaveToCache($"FatComponentsCache-Basket-{basketResponse.BasketId.ToString()}", await GetBasket(basketResponse.BasketId, false), new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
+
+            return basketResponse;
         }
 
         public async Task DeleteBasketCache()

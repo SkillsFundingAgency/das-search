@@ -28,7 +28,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<IStandardDetailsViewModelMapper> _standardMapperMock;
         private Mock<ICacheStorageService> _mockCacheService;
         private Mock<ICacheSettings> _mockCacheSettings;
-        private ApprenticeshipOrchestrator _sut;
+        private ApprenticeshipOrchestrator _apprenticeshipOrchestrator;
         private string _frameworkId = "420-2-1";
 
         private FrameworkDetailsViewModel _framework = new FrameworkDetailsViewModel();
@@ -58,14 +58,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "123"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Success, Standard = new Standard() { StandardId = "123" } });
             _mediatorMock.Setup(s => s.Send(It.Is<GetStandardQuery>(request => request.Id == "890"), It.IsAny<CancellationToken>())).ReturnsAsync(new GetStandardResponse() { StatusCode = GetStandardResponse.ResponseCodes.Success, Standard = new Standard() { StandardId = "890" } });
 
-            _mockCacheService.Setup(s => s.RetrieveFromCache<FrameworkDetailsViewModel>("890-2-1")).ReturnsAsync(new FrameworkDetailsViewModel() { Id = "890-2-1" } );
-            _mockCacheService.Setup(s => s.RetrieveFromCache<StandardDetailsViewModel>("890")).ReturnsAsync(new StandardDetailsViewModel() { Id = "980" });
+            _mockCacheService.Setup(s => s.RetrieveFromCache<FrameworkDetailsViewModel>("FatComponentsCache-Apprenticeship_details-890-2-1")).ReturnsAsync(new FrameworkDetailsViewModel() { Id = "890-2-1" } );
+            _mockCacheService.Setup(s => s.RetrieveFromCache<StandardDetailsViewModel>("FatComponentsCache-Apprenticeship_details-890")).ReturnsAsync(new StandardDetailsViewModel() { Id = "980" });
 
 
             _frameworkMapperMock.Setup(s => s.Map(It.IsAny<Framework>())).Returns(_framework);
             _standardMapperMock.Setup(s => s.Map(It.IsAny<Standard>(), It.IsAny<IList<AssessmentOrganisation>>())).Returns(_standard);
 
-            _sut = new ApprenticeshipOrchestrator(_mediatorMock.Object, _loggerMock.Object, _frameworkMapperMock.Object,_standardMapperMock.Object, _mockCacheService.Object, _mockCacheSettings.Object);
+            _apprenticeshipOrchestrator = new ApprenticeshipOrchestrator(_mediatorMock.Object, _loggerMock.Object, _frameworkMapperMock.Object,_standardMapperMock.Object, _mockCacheService.Object, _mockCacheSettings.Object);
         }
 
         #region FrameworkTests
@@ -73,7 +73,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Framework_And_Response_StatusCode_Is_InvalidFrameworkId_Then_Exception()
         {
 
-            Action result = () => _sut.GetFramework(_frameworkId).Wait();
+            Action result = () => _apprenticeshipOrchestrator.GetFramework(_frameworkId).Wait();
 
             result.Should().Throw<ArgumentException>()
                .WithMessage("Framework id: 420-2-1 has wrong format");
@@ -83,7 +83,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Framework_And_Response_StatusCode_Is_FrameworkNotFound_Then_Exception()
         {
 
-            Action result = () => _sut.GetFramework("530-2-1").Wait();
+            Action result = () => _apprenticeshipOrchestrator.GetFramework("530-2-1").Wait();
 
             result.Should().Throw<ArgumentException>()
                 .WithMessage("Cannot find framework: 530-2-1");
@@ -93,7 +93,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Framework_And_Response_StatusCode_Is_Gone_Then_Exception()
         {
 
-            Action result = () => _sut.GetFramework("130-2-1").Wait();
+            Action result = () => _apprenticeshipOrchestrator.GetFramework("130-2-1").Wait();
 
             result.Should().Throw<ArgumentException>()
                 .WithMessage("Expired framework request: 130-2-1");
@@ -103,7 +103,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Framework_And_Response_StatusCode_Is_Success_Then_Return_Viewmodel()
         {
 
-            var result = await _sut.GetFramework("230-2-1");
+            var result = await _apprenticeshipOrchestrator.GetFramework("230-2-1");
 
             result.Should().BeOfType<FrameworkDetailsViewModel>();
         }
@@ -112,7 +112,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Framework_And_Response_StatusCode_Is_Success_Then_Map_Results()
         {
 
-            var result = await _sut.GetFramework("230-2-1");
+            var result = await _apprenticeshipOrchestrator.GetFramework("230-2-1");
 
             _frameworkMapperMock.Verify(v => v.Map(It.IsAny<Framework>()),Times.Once);
         }
@@ -123,7 +123,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_And_Response_StatusCode_Is_HttpRequestException_Then_Exception()
         {
 
-            Action result = () => _sut.GetStandard("678").Wait();
+            Action result = () => _apprenticeshipOrchestrator.GetStandard("678").Wait();
 
             result.Should().Throw<Exception>()
                 .WithMessage("Request error when requesting assessment orgs for standard: 678");
@@ -132,7 +132,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_And_Response_StatusCode_Is_InvalidStandardId_Then_Exception()
         {
 
-            Action result = () => _sut.GetStandard("567").Wait();
+            Action result = () => _apprenticeshipOrchestrator.GetStandard("567").Wait();
 
             result.Should().Throw<Exception>()
                 .WithMessage("Cannot find any standards with an ID below zero");
@@ -142,7 +142,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_And_Response_StatusCode_Is_StandardNotFound_Then_Exception()
         {
 
-            Action result = () => _sut.GetStandard("456").Wait();
+            Action result = () => _apprenticeshipOrchestrator.GetStandard("456").Wait();
 
             result.Should().Throw<Exception>()
                 .WithMessage("Cannot find standard: 456");
@@ -151,7 +151,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_And_Response_StatusCode_Is_AssessmentOrgNotFound_Then_Return_ViewModel()
         {
 
-            var result = await _sut.GetStandard("345");
+            var result = await _apprenticeshipOrchestrator.GetStandard("345");
 
             result.Should().BeOfType<StandardDetailsViewModel>();
             result.Should().NotBeNull();
@@ -160,7 +160,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_And_Response_StatusCode_Is_Gone_Then_Exception()
         {
 
-            Action result = () => _sut.GetStandard("234").Wait();
+            Action result = () => _apprenticeshipOrchestrator.GetStandard("234").Wait();
 
             result.Should().Throw<Exception>()
                 .WithMessage("Expired standard request: 234");
@@ -170,7 +170,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_And_Response_StatusCode_Is_Success_Then_Return_Viewmodel()
         {
 
-            var result = await _sut.GetStandard("123");
+            var result = await _apprenticeshipOrchestrator.GetStandard("123");
 
             result.Should().BeOfType<StandardDetailsViewModel>();
             result.Should().NotBeNull();
@@ -180,7 +180,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         public async Task When_Getting_Standard_And_Response_StatusCode_Is_Success_Then_Map_Results()
         {
 
-            var result = await _sut.GetStandard("123");
+            var result = await _apprenticeshipOrchestrator.GetStandard("123");
 
             _standardMapperMock.Verify(v => v.Map(It.IsAny<Standard>(),It.IsAny<IList<AssessmentOrganisation>>()), Times.Once);
         }
@@ -189,7 +189,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public async Task When_Getting_Standard_And_It_Doesnt_Exist_in_The_Cache_Then_Save_To_Cache()
         {
-            var result = await _sut.GetStandard("123");
+            var result = await _apprenticeshipOrchestrator.GetStandard("123");
 
             _mockCacheService.Verify(s => s.SaveToCache<StandardDetailsViewModel>(It.IsAny<string>(), It.IsAny<StandardDetailsViewModel>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
         }
@@ -197,7 +197,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public async Task When_Getting_Framework_And_It_Doesnt_Exist_in_The_Cache_Then_Save_To_Cache()
         {
-            var result = await _sut.GetFramework("230-2-1");
+            var result = await _apprenticeshipOrchestrator.GetFramework("230-2-1");
 
             _mockCacheService.Verify(s => s.SaveToCache<FrameworkDetailsViewModel>(It.IsAny<string>(), It.IsAny<FrameworkDetailsViewModel>(), It.IsAny<TimeSpan>(), It.IsAny<TimeSpan>()), Times.Once());
         }
@@ -205,7 +205,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public async Task When_Getting_Framework_Then_Retrieve_From_Cache()
         {
-            var result = await _sut.GetFramework("890-2-1");
+            var result = await _apprenticeshipOrchestrator.GetFramework("890-2-1");
 
             _mockCacheService.Verify(s => s.RetrieveFromCache<FrameworkDetailsViewModel>(It.IsAny<string>()), Times.Once);
             _mediatorMock.Verify(s => s.Send<GetFrameworkResponse>(It.IsAny<GetFrameworkQuery>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -214,7 +214,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public async Task When_Getting_Standard_Then_Retrieve_From_Cache()
         {
-            var result = await _sut.GetStandard("890");
+            var result = await _apprenticeshipOrchestrator.GetStandard("890");
 
             _mockCacheService.Verify(s => s.RetrieveFromCache<StandardDetailsViewModel>(It.IsAny<string>()), Times.Once);
             _mediatorMock.Verify(s => s.Send<GetStandardResponse>(It.IsAny<GetStandardQuery>(), It.IsAny<CancellationToken>()), Times.Never);
