@@ -15,7 +15,7 @@
 <div class="das-provider-information">
 
     <h2 class="@CssViewModel.HeadingMedium">Provider information</h2>
-    
+
     @Html.MarkdownToHtml(Model.MarketingInfo)
 
 
@@ -30,45 +30,43 @@
 </div>
 
 <div class="das-provider-employers">
-    
-    
     @if (Model.Feedback != null)
     {
 
-    <h2 class="@CssViewModel.HeadingMedium">What employers are saying</h2>
+        <h2 class="@CssViewModel.HeadingMedium">What employers are saying</h2>
 
-    <p>Based on <strong>@Model.Feedback.TotalFeedbackCount reviews from employers</strong> that work with this training provider.</p>
+        <p>Based on <strong>@Model.Feedback.TotalFeedbackCount reviews from employers</strong> that work with this training provider.</p>
 
-    <p><a class="@CssViewModel.Link" href="https://sfadigital.blog.gov.uk/2018/09/26/new-feedback-feature-for-the-apprenticeship-service/" target="_blank" rel="external">Find out how these reviews work</a></p>
+        <p><a class="@CssViewModel.Link" href="https://sfadigital.blog.gov.uk/2018/09/26/new-feedback-feature-for-the-apprenticeship-service/" target="_blank" rel="external">Find out how these reviews work</a></p>
 
-    <h2 class="@CssViewModel.HeadingXSmall">Overall rating from October 2018 to now</h2>
+        <h2 class="@CssViewModel.HeadingXSmall">Overall rating from October 2018 to now</h2>
 
-    <div class="das-provider-rating-reviews">
+        <div class="das-provider-rating-reviews">
 
-        <dl class="@CssViewModel.List">
-            <dt class="das-provider-rating-reviews__definition-list--title">Excellent</dt>
-            <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--excellent" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.ExcellentFeedbackCount"></progress>
-                <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.ExcellentFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
-            </dd>
-            <dt class="das-provider-rating-reviews__definition-list--title">Good</dt>
-            <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--good" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.GoodFeedbackCount"></progress>
-                <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.GoodFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
-            </dd>
-            <dt class="das-provider-rating-reviews__definition-list--title">Poor</dt>
-            <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--poor" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.PoorFeedbackCount"></progress>
-                <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.PoorFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
-            </dd>
-            <dt class="das-provider-rating-reviews__definition-list--title">Very poor</dt>
-            <dd class="das-provider-rating-reviews__definition-list--details">
-                <progress class="das-provider__progress-bar das-provider__progress-bar--very-poor" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.VeryPoorFeedbackCount"></progress>
-                <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.VeryPoorFeedbackCount review <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
-            </dd>
-        </dl>
+            <dl class="@CssViewModel.List">
+                <dt class="das-provider-rating-reviews__definition-list--title">Excellent</dt>
+                <dd class="das-provider-rating-reviews__definition-list--details">
+                    <progress class="das-provider__progress-bar das-provider__progress-bar--excellent" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.ExcellentFeedbackCount"></progress>
+                    <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.ExcellentFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
+                </dd>
+                <dt class="das-provider-rating-reviews__definition-list--title">Good</dt>
+                <dd class="das-provider-rating-reviews__definition-list--details">
+                    <progress class="das-provider__progress-bar das-provider__progress-bar--good" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.GoodFeedbackCount"></progress>
+                    <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.GoodFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
+                </dd>
+                <dt class="das-provider-rating-reviews__definition-list--title">Poor</dt>
+                <dd class="das-provider-rating-reviews__definition-list--details">
+                    <progress class="das-provider__progress-bar das-provider__progress-bar--poor" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.PoorFeedbackCount"></progress>
+                    <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.PoorFeedbackCount reviews <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
+                </dd>
+                <dt class="das-provider-rating-reviews__definition-list--title">Very poor</dt>
+                <dd class="das-provider-rating-reviews__definition-list--details">
+                    <progress class="das-provider__progress-bar das-provider__progress-bar--very-poor" max="@Model.Feedback.TotalFeedbackCount" value="@Model.Feedback.VeryPoorFeedbackCount"></progress>
+                    <span class="das-provider-rating-reviews__reviews-no">@Model.Feedback.VeryPoorFeedbackCount review <span class="visually-hidden">out of @Model.Feedback.TotalFeedbackCount</span></span>
+                </dd>
+            </dl>
 
-    </div>
+        </div>
 
         <div class="grid-row">
             <div class="grid-column-one-half">
@@ -115,7 +113,7 @@
                 Source: <a class="@CssViewModel.Link" rel="external" href="https://www.gov.uk/government/collections/fe-choices" target="_blank">Skills Funding Agency FE Choices</a>
             </div>
         </dd>
-        
+
         @if (string.IsNullOrWhiteSpace(Model.LegalName))
         {
             <dt>Legal name:</dt>
@@ -137,6 +135,11 @@
         relying on the course information provided.
     </p>
 </div>
+
+@if (string.IsNullOrEmpty(Model.SearchQuery.PostCode) && !string.IsNullOrWhiteSpace(Model.Location.Address.Postcode))
+{
+    @await Component.InvokeAsync("ClosestLocations", new { Model.ApprenticeshipId, Model.Ukprn, Model.Location.LocationId, Model.Location.Address.Postcode })
+}
 
 @functions
 {

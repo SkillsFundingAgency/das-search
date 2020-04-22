@@ -16,7 +16,7 @@ namespace Sfa.Das.Sas.Shared.Components.Mapping
                 Level = source.Level,
                 Duration = source.Duration,
                 EffectiveTo = source.EffectiveTo,
-                TrainingProvider = source.Providers.Select(s => new TrainingProviderSearchResultsItem(){Ukprn = s.Ukprn, Name = s.Name, Active = s.Active}).ToList(),
+                TrainingProvider = source.Providers.Select(s => new TrainingProviderSearchResultsItem(){Ukprn = s.Ukprn, Name = s.Name, Active = s.Active, LocationId = s.Locations.FirstOrDefault() }).ToList(),
                 ApprenticeshipType = source.ApprenticeshipType,
                 Active = source.Active
             };

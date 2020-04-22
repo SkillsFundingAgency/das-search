@@ -125,13 +125,13 @@ namespace Sfa.Das.Sas.Shared.Components.Orchestrators
                     throw new HttpRequestException(message);
                 }
 
-                cacheEntry = _trainingProviderDetailsViewModelMapper.Map(response);
+                cacheEntry = _trainingProviderDetailsViewModelMapper.Map(response, detailsQueryModel.ApprenticeshipId);
 
                 await _cacheService.SaveToCache(cacheKey, cacheEntry, new TimeSpan(_cacheSettings.CacheAbsoluteExpirationDays, 0, 0, 0), new TimeSpan(_cacheSettings.CacheSlidingExpirationDays, 0, 0, 0));
             }
 
             return cacheEntry;
-            }
+        }
         public async Task<ClosestLocationsViewModel> GetClosestLocations(string apprenticeshipId, int ukprn, int locationId, string postCode)
         {
             var response = await _mediator.Send(new GetClosestLocationsQuery() { ApprenticeshipId = apprenticeshipId, Ukprn = ukprn, PostCode = postCode });

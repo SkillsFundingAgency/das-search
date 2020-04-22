@@ -47,6 +47,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private const string PROVIDER_NAME = "TestProvider";
         private const int LOCATION_ID = 123123;
         private const int LOCATION_ID_TO_ADD = 5555;
+       
         private const string BasketCookieName = "ApprenticeshipBasket";
         private string _basketId = "12345678-abcd-1234-abcd-0123456789ab";
 
