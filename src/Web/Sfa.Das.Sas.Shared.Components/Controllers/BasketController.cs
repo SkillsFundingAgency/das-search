@@ -5,10 +5,13 @@ using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 
 namespace Sfa.Das.Sas.Shared.Components.Controllers
 {
@@ -34,10 +37,29 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             return View("Basket/View");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> RemoveConfirmation(string apprenticeshipId, string returnAction, string returnController, string returnId = null)
+        {
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+            
+            var basket = await _mediator.Send(new GetBasketQuery {BasketId = cookieBasketId.Value});
+            var apprenticeshipItem = basket.SingleOrDefault(b => b.ApprenticeshipId == apprenticeshipId);
+            
+            return View("Basket/RemoveConfirmation", new RemoveConfirmationViewModel(returnAction, returnController, returnId, apprenticeshipItem));
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
+            // Check here if item being removed had TPs and is not a TP itself. If it has redirect to confirmation page.
+            // else continue here as before.
+            if (await HasLinkedTrainingProviders(queryModel.ItemId))
+            {
+                var a = 1;
+            }
+            
             var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             if (TempData.ContainsKey("AddRemoveResponse"))
@@ -54,6 +76,13 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
+            // Check here if item being removed had TPs and is not a TP itself. If it has redirect to confirmation page.
+            // else continue here as before.
+            if (await HasLinkedTrainingProviders(queryModel.ItemId))
+            {
+                var a = 1;
+            }
+
             var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             if (TempData.ContainsKey("AddRemoveResponse"))
@@ -88,12 +117,34 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromBasket(DeleteFromBasketViewModel model)
         {
+            // Check here if item being removed had TPs and is not a TP itself. If it has redirect to confirmation page.
+            // else continue here as before.
+            if (model.Ukprn == null)
+            {
+                if (await HasLinkedTrainingProviders(model.ApprenticeshipId))
+                {
+                    return RedirectToAction("RemoveConfirmation", "Basket", new { returnAction = "View", returnController = "Basket" });
+                }
+            }
+
             if (await IsInBasket(model.ApprenticeshipId, model.Ukprn))
             {
                 await _basketOrchestrator.UpdateBasket(model.ApprenticeshipId, model.Ukprn);
             }
 
             return RedirectToAction("View", "Basket");
+        }
+
+        private async Task<bool> HasLinkedTrainingProviders(string apprenticeshipId)
+        {
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+
+            if (!cookieBasketId.HasValue) return false;
+            
+            var basket = await _mediator.Send(new GetBasketQuery {BasketId = cookieBasketId.Value});
+            var apprenticeshipItem = basket.SingleOrDefault(b => b.ApprenticeshipId == apprenticeshipId);
+            return apprenticeshipItem != null && apprenticeshipItem.Providers.Any();
         }
 
         private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn, int? locationId = null)
@@ -123,5 +174,21 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
             return Redirect(await _basketOrchestrator.GetBasketSaveUrl());
         }
 
+    }
+
+    public class RemoveConfirmationViewModel 
+    {
+        public string ReturnAction { get; }
+        public string ReturnController { get; }
+        public string ReturnId { get; }
+        public ApprenticeshipFavouriteRead ApprenticeshipItem { get; }
+
+        public RemoveConfirmationViewModel(string returnAction, string returnController, string returnId, ApprenticeshipFavouriteRead apprenticeshipItem)
+        {
+            ReturnAction = returnAction;
+            ReturnController = returnController;
+            ReturnId = returnId;
+            ApprenticeshipItem = apprenticeshipItem;
+        }
     }
 }

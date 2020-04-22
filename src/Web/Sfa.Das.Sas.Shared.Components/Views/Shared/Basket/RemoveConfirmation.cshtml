@@ -1,0 +1,11 @@
+﻿@model Sfa.Das.Sas.Shared.Components.Controllers.RemoveConfirmationViewModel
+
+@if (Model.ReturnId == null)
+{
+    <a asp-action="@Model.ReturnAction" asp-controller="@Model.ReturnController">&lt; Back</a>
+}
+else
+{
+    <a asp-action="@Model.ReturnAction" asp-controller="@Model.ReturnController" asp-route-id="@Model.ReturnId">&lt; Back</a>
+}
+

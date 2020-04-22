@@ -39,6 +39,5 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
 
             return RedirectToAction("View", "Basket");
         }
-
     }
 }
