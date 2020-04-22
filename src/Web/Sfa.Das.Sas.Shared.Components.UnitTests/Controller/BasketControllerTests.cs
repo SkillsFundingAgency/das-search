@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Sfa.Das.Sas.ApplicationServices.Models;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Basket.Models;
@@ -31,7 +33,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         private Mock<IMediator> _mockMediator;
         private Mock<ICookieManager> _mockCookieManager;
         private Mock<IBasketOrchestrator> _mockBasketOrchestrator;
-        private BasketController _sut;
+        private BasketController _basketController;
 
         private SaveBasketFromApprenticeshipDetailsViewModel _addFromApprenticeshipDetailsModel;
         private SaveBasketFromApprenticeshipResultsViewModel _addFromApprenticeshipResultsModel;
@@ -53,9 +55,18 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             _mockCookieManager = new Mock<ICookieManager>();
             _mockBasketOrchestrator = new Mock<IBasketOrchestrator>();
 
+            _mockBasketOrchestrator
+                .Setup(orchestrator => 
+                    orchestrator.UpdateBasket(It.IsAny<string>(),null,null))
+                .ReturnsAsync(new AddOrRemoveFavouriteInBasketResponse());
+            
             _mockMediator.Setup(s => s.Send(It.IsAny<GetBasketQuery>(), default(CancellationToken))).ReturnsAsync(GetApprenticeshipFavouritesBasketRead());
 
-            _sut = new BasketController(_mockMediator.Object, _mockCookieManager.Object, _mockBasketOrchestrator.Object);
+            _basketController = new BasketController(_mockMediator.Object, _mockCookieManager.Object, _mockBasketOrchestrator.Object);
+            
+            var httpContext = new DefaultHttpContext();
+            var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
+            _basketController.TempData = tempData;
         }
 
         #region AddApprenticeshipFromDetails
@@ -63,7 +74,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddApprenticeshipFromDetails_ReturnsRedirectResult_ToApprenticeshipDetailsPage()
         {
-            var result = await _sut.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
+            var result = await _basketController.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
 
             result.Should().BeAssignableTo<RedirectToActionResult>();
             var redirect = (RedirectToActionResult)result;
@@ -77,7 +88,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddApprenticeshipFromDetails_InvokesUpdateBasket_WithApprenticeshipIdFromArgument()
         {
-            var result = await _sut.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
+            var result = await _basketController.AddApprenticeshipFromDetails(_addFromApprenticeshipDetailsModel);
 
             _mockBasketOrchestrator.Verify(x => x.UpdateBasket(APPRENTICESHIP_ID, null, null));
         }
@@ -89,7 +100,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddApprenticeshipFromResults_ReturnsRedirectResult_ToApprenticeshipDetailsPage()
         {
-            var result = await _sut.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
+            var result = await _basketController.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
 
             result.Should().BeAssignableTo<RedirectToActionResult>();
             var redirect = (RedirectToActionResult)result;
@@ -107,7 +118,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddApprenticeshipFromResults_InvokesUpdateBasket_WithApprenticeshipIdFromArgument()
         {
-            var result = await _sut.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
+            var result = await _basketController.AddApprenticeshipFromResults(_addFromApprenticeshipResultsModel);
 
             _mockBasketOrchestrator.Verify(x => x.UpdateBasket(APPRENTICESHIP_ID, null, null));
         }
@@ -120,7 +131,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddProviderFromDetails_ReturnsRedirectResult_ToProviderDetailsPage()
         {
-            var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
+            var result = await _basketController.AddProviderFromDetails(_addFromProviderDetailsModel);
 
             result.Should().BeAssignableTo<RedirectToActionResult>();
             var redirect = (RedirectToActionResult)result;
@@ -136,7 +147,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddProviderFromDetails_InvokesUpdateBasket_WithApprenticeshipIdUkprnAndLocationIdFromArgument()
         {
-            var result = await _sut.AddProviderFromDetails(_addFromProviderDetailsModel);
+            var result = await _basketController.AddProviderFromDetails(_addFromProviderDetailsModel);
 
             _mockBasketOrchestrator.Verify(x => x.UpdateBasket(APPRENTICESHIP_ID, UKPRN, LOCATION_ID_TO_ADD));
         }
@@ -147,7 +158,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddProviderFromResults_ReturnsRedirectResult_ToApprenticeshipDetailsPage()
         {
-            var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
+            var result = await _basketController.AddProviderFromResults(_addFromProviderSearchModel);
 
             result.Should().BeAssignableTo<RedirectToActionResult>();
             var redirect = (RedirectToActionResult)result;
@@ -166,7 +177,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
         [Test]
         public async Task AddProviderFromResults_ParsesApprenticeshipIdAndUkprn_FromArgument()
         {
-            var result = await _sut.AddProviderFromResults(_addFromProviderSearchModel);
+            var result = await _basketController.AddProviderFromResults(_addFromProviderSearchModel);
 
             _mockBasketOrchestrator.Verify(x => x.UpdateBasket(APPRENTICESHIP_ID, UKPRN, LOCATION_ID_TO_ADD));
         }
@@ -182,7 +193,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
 
-            var result = await _sut.RemoveFromBasket(_deleteFromBasketViewModel);
+            var result = await _basketController.RemoveFromBasket(_deleteFromBasketViewModel);
 
             result.Should().BeAssignableTo<RedirectToActionResult>();
             var redirect = (RedirectToActionResult)result;
@@ -197,14 +208,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
             var BasketIdFromCookie = Guid.NewGuid();
             _mockCookieManager.Setup(x => x.Get(BasketCookieName)).Returns(BasketIdFromCookie.ToString());
 
-            var result = await _sut.RemoveFromBasket(_deleteFromBasketViewModel);
+            var result = await _basketController.RemoveFromBasket(_deleteFromBasketViewModel);
 
             _mockBasketOrchestrator.Verify(x => x.UpdateBasket(APPRENTICESHIP_ID, UKPRN, null));
         }
         [Test]
         public async Task RemoveFromBasket_RedirectToBasket_IfNoCookieExists()
         {
-            var result = await _sut.RemoveFromBasket(_deleteFromBasketViewModel);
+            var result = await _basketController.RemoveFromBasket(_deleteFromBasketViewModel);
 
             result.Should().BeAssignableTo<RedirectToActionResult>();
             var redirect = (RedirectToActionResult)result;
@@ -220,7 +231,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Controller
 
             removeViewModel.Ukprn = 456789012;
 
-            var result = await _sut.RemoveFromBasket(removeViewModel);
+            var result = await _basketController.RemoveFromBasket(removeViewModel);
 
             result.Should().BeAssignableTo<RedirectToActionResult>();
             var redirect = (RedirectToActionResult)result;

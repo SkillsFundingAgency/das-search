@@ -14,14 +14,6 @@ using Sfa.Das.Sas.Shared.Components.ViewComponents.TrainingProvider.Search;
 using Sfa.Das.Sas.Shared.Components.ViewModels;
 using Sfa.Das.Sas.ApplicationServices.Services;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
-using Newtonsoft.Json;
-using System;
-
-using System.Threading.Tasks;
-
-using System.Collections.Generic;
-using Microsoft.Extensions.Caching.Distributed;
 using Sfa.Das.Sas.Core.Configuration;
 
 namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
@@ -29,7 +21,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
     [TestFixture]
     public class TrainingProviderOrchestratorTests
     {
-        private TrainingProviderOrchestrator _sut;
+        private TrainingProviderOrchestrator _trainingProviderOrchestrator;
         private Mock<IMediator> _mockMediator;
         private Mock<ISearchResultsViewModelMapper> _mockSearchResultsViewModelMapper;
         private Mock<ITrainingProviderDetailsViewModelMapper> _mockTrainingProviderDetailsViewModelMapper;
@@ -39,20 +31,13 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         private Mock<ICacheStorageService> _mockCacheService;
         private Mock<ICacheSettings> _mockCacheSettings;
 
-        private Mock<TrainingProviderDetailQueryViewModel> _mockTrainingProviderDetailQueryViewModel;
+        private readonly TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
+        private readonly TrainingProviderDetailQueryViewModel _detailsQueryViewModel = new TrainingProviderDetailQueryViewModel();
 
-        private Mock<IMemoryCache> _mockMemoryCache;
-        private Mock<IDistributedCache> _mockDistributedCache;
-
-        private TrainingProviderSearchViewModel _searchQueryViewModel = new TrainingProviderSearchViewModel();
-        private TrainingProviderDetailQueryViewModel _detailsQueryViewModel = new TrainingProviderDetailQueryViewModel();
-
-        private GroupedProviderSearchResponse _searchResults = new GroupedProviderSearchResponse() { Success = true };
-        private ProviderSearchResponse _searchResultsError = new ProviderSearchResponse(){Success = false,StatusCode = ProviderSearchResponseCodes.PostCodeInvalidFormat};
-        private SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> _searchResultsViewModel = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>();
-        private TrainingProviderSearchFilterViewModel _searchFilterViewModel = new TrainingProviderSearchFilterViewModel();
-        private ApprenticeshipProviderDetailResponse _providerDetailResponse = new ApprenticeshipProviderDetailResponse() { StatusCode = ApprenticeshipProviderDetailResponse.ResponseCodes.Success };
-        private ClosestLocationsViewModel _closestLocationsViewModel = new ClosestLocationsViewModel();
+        private readonly GroupedProviderSearchResponse _searchResults = new GroupedProviderSearchResponse() { Success = true };
+        private readonly SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel> _searchResultsViewModel = new SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>();
+        private readonly TrainingProviderSearchFilterViewModel _searchFilterViewModel = new TrainingProviderSearchFilterViewModel();
+        private readonly ClosestLocationsViewModel _closestLocationsViewModel = new ClosestLocationsViewModel();
         [SetUp]
         public void Setup()
         {
@@ -67,9 +52,8 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _mockCacheService = new Mock<ICacheStorageService>();
             _mockCacheSettings = new Mock<ICacheSettings>();
-            _mockTrainingProviderDetailQueryViewModel = new Mock<TrainingProviderDetailQueryViewModel>();
 
-            _mockMediator.Setup(s => s.Send<GroupedProviderSearchResponse>(It.IsAny<GroupedProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
+            _mockMediator.Setup(s => s.Send(It.IsAny<GroupedProviderSearchQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(_searchResults);
             _mockSearchResultsViewModelMapper.Setup(s => s.Map(It.IsAny<GroupedProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchResultsViewModel);
             _mockTrainingProviderFilterViewModelMapper.Setup(s => s.Map(It.IsAny<GroupedProviderSearchResponse>(), It.IsAny<TrainingProviderSearchViewModel>())).Returns(_searchFilterViewModel);
             _mockTrainingProviderClosestLocationsViewModelMapper.Setup(s => s.Map(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<GetClosestLocationsResponse>())).Returns(_closestLocationsViewModel);
@@ -78,19 +62,17 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
             _detailsQueryViewModel.Ukprn = 10000020;
             _detailsQueryViewModel.LocationId = 100;
 
-            var cacheKey = _detailsQueryViewModel.Ukprn + _detailsQueryViewModel.LocationId + _detailsQueryViewModel.ApprenticeshipId;
-
-            _sut = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object, _mockCacheSettings.Object, _mockTrainingProviderClosestLocationsViewModelMapper.Object);
+            _trainingProviderOrchestrator = new TrainingProviderOrchestrator(_mockMediator.Object, _mockSearchResultsViewModelMapper.Object,_mockLogger.Object,_mockTrainingProviderDetailsViewModelMapper.Object,_mockTrainingProviderFilterViewModelMapper.Object, _mockCacheService.Object, _mockCacheSettings.Object, _mockTrainingProviderClosestLocationsViewModelMapper.Object);
         }
 
         [Test]
-        public void When_SearchResultsRequested_Then_TrainingProiderSearchResultsViewModel_Is_Returned()
+        public void When_SearchResultsRequested_Then_TrainingProviderSearchResultsViewModel_Is_Returned()
         {
             _searchQueryViewModel.Keywords = "keyword";
             _searchQueryViewModel.ApprenticeshipId = "123";
             _searchQueryViewModel.Postcode = "NN123NN";
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel).Result;
+            var result = _trainingProviderOrchestrator.GetSearchResults(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>>();
         }
@@ -100,7 +82,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel);
+            _trainingProviderOrchestrator.GetSearchResults(_searchQueryViewModel);
 
             _mockMediator.Verify(s => s.Send<GroupedProviderSearchResponse>(It.IsAny<GroupedProviderSearchQuery>(), It.IsAny<CancellationToken>()), Times.Once);
         }
@@ -109,7 +91,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel).Result;
+            var result = _trainingProviderOrchestrator.GetSearchResults(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<SearchResultsViewModel<TrainingProviderSearchResultsItem, TrainingProviderSearchViewModel>>();
 
@@ -121,19 +103,19 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.IsLevyPayer = true;
 
-            var result = _sut.GetSearchResults(_searchQueryViewModel);
+            _trainingProviderOrchestrator.GetSearchResults(_searchQueryViewModel);
 
             _mockMediator.Verify(s => s.Send<GroupedProviderSearchResponse>(It.Is<GroupedProviderSearchQuery>(x => x.IsLevyPayingEmployer == true), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
-        public void When_SearchFilterRequested_Then_TrainingProiderSearchResultsViewModel_Is_Returned()
+        public void When_SearchFilterRequested_Then_TrainingProviderSearchResultsViewModel_Is_Returned()
         {
             _searchQueryViewModel.Keywords = "keyword";
             _searchQueryViewModel.ApprenticeshipId = "123";
             _searchQueryViewModel.Postcode = "NN123NN";
 
-            var result = _sut.GetSearchFilter(_searchQueryViewModel).Result;
+            var result = _trainingProviderOrchestrator.GetSearchFilter(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<TrainingProviderSearchFilterViewModel>();
         }
@@ -143,7 +125,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchFilter(_searchQueryViewModel);
+            _trainingProviderOrchestrator.GetSearchFilter(_searchQueryViewModel);
 
             _mockMediator.Verify(s => s.Send<GroupedProviderSearchResponse>(It.IsAny<GroupedProviderSearchQuery>(), It.IsAny<CancellationToken>()), Times.Once);
         }
@@ -152,7 +134,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         {
             _searchQueryViewModel.Keywords = "keyword";
 
-            var result = _sut.GetSearchFilter(_searchQueryViewModel).Result;
+            var result = _trainingProviderOrchestrator.GetSearchFilter(_searchQueryViewModel).Result;
 
             result.Should().BeOfType<TrainingProviderSearchFilterViewModel>();
 
@@ -162,7 +144,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public async Task When_ClosestLocationsRequested_Then_ClosestLocationsViewModel_Is_Returned()
         {
-            var result = await _sut.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
+            var result = await _trainingProviderOrchestrator.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
 
             result.Should().BeOfType<ClosestLocationsViewModel>();
         }
@@ -170,14 +152,14 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
         [Test]
         public void When_ClosestLocationsRequested_Then_Mediator_Is_Called()
         {
-            var result = _sut.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
+            _trainingProviderOrchestrator.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
 
             _mockMediator.Verify(s => s.Send<GetClosestLocationsResponse>(It.IsAny<GetClosestLocationsQuery>(), It.IsAny<CancellationToken>()), Times.Once);
         }
         [Test]
         public async Task When_ClosestLocationsRequested_Then_Search_Results_Are_Mapped_To_ViewModel()
         {
-            var result = await _sut.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
+            await _trainingProviderOrchestrator.GetClosestLocations("123", 12345678, 222, "AB12 3DF");
 
             _mockTrainingProviderClosestLocationsViewModelMapper.Verify(v => v.Map("123", 12345678, 222, "AB12 3DF", It.IsAny<GetClosestLocationsResponse>()));
             
@@ -193,7 +175,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _mockCacheService.Setup(s => s.RetrieveFromCache<TrainingProviderDetailsViewModel>(cacheKey)).Returns(GenerateNullCachedProviderViewModel());
 
-            var result = _sut.GetDetails(_detailsQueryViewModel);
+            _trainingProviderOrchestrator.GetDetails(_detailsQueryViewModel);
 
             _mockMediator.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Once);
             
@@ -207,7 +189,7 @@ namespace Sfa.Das.Sas.Shared.Components.UnitTests.Orchestrator
 
             _mockCacheService.Setup(s => s.RetrieveFromCache<TrainingProviderDetailsViewModel>(cacheKey)).Returns(GenerateMockCachedProviderViewModel());
 
-            var result = _sut.GetDetails(_detailsQueryViewModel);
+            _trainingProviderOrchestrator.GetDetails(_detailsQueryViewModel);
 
             _mockMediator.Verify(s => s.Send<ApprenticeshipProviderDetailResponse>(It.IsAny<ApprenticeshipProviderDetailQuery>(), It.IsAny<CancellationToken>()), Times.Never());
 

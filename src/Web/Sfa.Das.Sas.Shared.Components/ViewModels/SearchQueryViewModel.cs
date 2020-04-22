@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sfa.Das.Sas.ApplicationServices.Commands;
 
 namespace Sfa.Das.Sas.Shared.Components.ViewModels
 {
@@ -10,5 +11,7 @@ namespace Sfa.Das.Sas.Shared.Components.ViewModels
         public int SortOrder { get; set; } = 0;
 
         public List<int> SelectedLevels { get; set; } = new List<int>() { 2, 3, 4, 5, 6, 7, 8};
+        
+        public AddOrRemoveFavouriteInBasketResponse AddRemoveBasketResponse { get; set; }
     }
 }
