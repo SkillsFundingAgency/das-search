@@ -114,7 +114,7 @@
             </div>
         </dd>
 
-        @if (string.IsNullOrWhiteSpace(Model.LegalName))
+        @if (!string.IsNullOrWhiteSpace(Model.LegalName))
         {
             <dt>Legal name:</dt>
             <dd>@Model.LegalName</dd>
