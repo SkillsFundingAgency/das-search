@@ -34,12 +34,11 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpGet(Name = "BasketView")]
         public IActionResult View()
         {
-            BasketViewModel<ApprenticeshipBasketItemViewModel> vm = null;
+            var vm = new BasketViewModel<ApprenticeshipBasketItemViewModel>();
             
             if (TempData.ContainsKey("AddRemoveResponse"))
             {
-                vm = new BasketViewModel<ApprenticeshipBasketItemViewModel>
-                    {AddRemoveBasketResponse = JsonConvert.DeserializeObject<AddOrRemoveFavouriteInBasketResponse>((string) TempData["AddRemoveResponse"])};
+                vm.AddRemoveBasketResponse = JsonConvert.DeserializeObject<AddOrRemoveFavouriteInBasketResponse>((string) TempData["AddRemoveResponse"]);
             }
             
             return View("Basket/View", vm);
