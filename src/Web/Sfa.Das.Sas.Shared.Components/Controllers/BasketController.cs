@@ -5,10 +5,13 @@ using Sfa.Das.Sas.Core.Configuration;
 using Sfa.Das.Sas.Shared.Components.Cookies;
 using Sfa.Das.Sas.Shared.Components.ViewModels.Basket;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Sfa.Das.Sas.ApplicationServices.Queries;
 using Sfa.Das.Sas.Shared.Components.Orchestrators;
+using Sfa.Das.Sas.Shared.Components.ViewModels;
+using Sfa.Das.Sas.Shared.Components.ViewModels.Apprenticeship;
 
 namespace Sfa.Das.Sas.Shared.Components.Controllers
 {
@@ -31,13 +34,57 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpGet(Name = "BasketView")]
         public IActionResult View()
         {
-            return View("Basket/View");
+            var vm = new BasketViewModel<ApprenticeshipBasketItemViewModel>();
+            
+            if (TempData.ContainsKey("AddRemoveResponse"))
+            {
+                vm.AddRemoveBasketResponse = JsonConvert.DeserializeObject<AddOrRemoveFavouriteInBasketResponse>((string) TempData["AddRemoveResponse"]);
+            }
+            
+            return View("Basket/View", vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveConfirmation(string apprenticeshipId, string returnPath)
+        {
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+            
+            var basket = await _mediator.Send(new GetBasketQuery {BasketId = cookieBasketId.Value});
+            var apprenticeshipItem = basket.SingleOrDefault(b => b.ApprenticeshipId == apprenticeshipId);
+            
+            return View("Basket/RemoveConfirmation", new RemoveConfirmationViewModel(apprenticeshipItem, returnPath));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveConfirmation(RemoveConfirmationViewModel vm)
+        {
+            var response = await _basketOrchestrator.UpdateBasket(vm.ApprenticeshipId);
+
+            if (TempData.ContainsKey("AddRemoveResponse"))
+            {
+                TempData.Remove("AddRemoveResponse");
+            }
+            
+            TempData.Add("AddRemoveResponse", JsonConvert.SerializeObject(response));
+
+            return Redirect(vm.ReturnPath);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromDetails(SaveBasketFromApprenticeshipDetailsViewModel queryModel)
         {
+            if (await HasLinkedTrainingProviders(queryModel.ItemId))
+            {
+                var returnPath = new Uri(Request.Headers["Referer"].ToString()).PathAndQuery;
+                return RedirectToAction("RemoveConfirmation", "Basket", 
+                    new
+                    {
+                        apprenticeshipId = queryModel.ItemId, returnPath
+                    });
+            }
+            
             var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             if (TempData.ContainsKey("AddRemoveResponse"))
@@ -54,6 +101,16 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> AddApprenticeshipFromResults(SaveBasketFromApprenticeshipResultsViewModel queryModel)
         {
+            if (await HasLinkedTrainingProviders(queryModel.ItemId))
+            {
+                var returnPath = new Uri(Request.Headers["Referer"].ToString()).PathAndQuery;
+                return RedirectToAction("RemoveConfirmation", "Basket", 
+                    new
+                    {
+                        apprenticeshipId = queryModel.ItemId, returnPath
+                    });
+            }
+
             var response = await _basketOrchestrator.UpdateBasket(queryModel.ItemId);
 
             if (TempData.ContainsKey("AddRemoveResponse"))
@@ -88,12 +145,39 @@ namespace Sfa.Das.Sas.Shared.Components.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromBasket(DeleteFromBasketViewModel model)
         {
+            // Check here if item being removed had TPs and is not a TP itself. If it has redirect to confirmation page.
+            // else continue here as before.
+            if (model.Ukprn == null)
+            {
+                if (await HasLinkedTrainingProviders(model.ApprenticeshipId))
+                {
+                    var returnPath = new Uri(Request.Headers["Referer"].ToString()).PathAndQuery;
+                    return RedirectToAction("RemoveConfirmation", "Basket", 
+                        new
+                        {
+                            apprenticeshipId = model.ApprenticeshipId, returnPath
+                        });
+                }
+            }
+
             if (await IsInBasket(model.ApprenticeshipId, model.Ukprn))
             {
                 await _basketOrchestrator.UpdateBasket(model.ApprenticeshipId, model.Ukprn);
             }
 
             return RedirectToAction("View", "Basket");
+        }
+
+        private async Task<bool> HasLinkedTrainingProviders(string apprenticeshipId)
+        {
+            var cookie = _cookieManager.Get(CookieNames.BasketCookie);
+            Guid? cookieBasketId = Guid.TryParse(cookie, out Guid result) ? (Guid?)result : null;
+
+            if (!cookieBasketId.HasValue) return false;
+            
+            var basket = await _mediator.Send(new GetBasketQuery {BasketId = cookieBasketId.Value});
+            var apprenticeshipItem = basket.SingleOrDefault(b => b.ApprenticeshipId == apprenticeshipId);
+            return apprenticeshipItem != null && apprenticeshipItem.Providers.Any();
         }
 
         private async Task<bool> IsInBasket(string apprenticeshipId, int? ukprn, int? locationId = null)
