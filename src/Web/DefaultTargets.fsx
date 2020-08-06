@@ -495,7 +495,7 @@ Target "Build Projects" (fun _ ->
     trace "Building Projects"
 
     !! (@".\**\*.csproj")
-    -- @"**\*Components.UnitTests.csproj"
+    -- @"**\Sfa.Das.Sas.Shared.Components.*.csproj"
       |> myBuildConfig "" "Rebuild"
       |> Log "AppBuild-Output: "
 
